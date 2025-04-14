@@ -1,0 +1,108 @@
+[
+  {
+    "id": "cold-iron",
+    "name": "Cold Iron",
+    "point_cost": 15,
+    "dice_cost": 0,
+    "effect": "Strikes cause target to be unable to teleport until end of their next turn."
+  },
+  {
+    "id": "silver",
+    "name": "Silver",
+    "point_cost": 20,
+    "dice_cost": 0,
+    "effect": "Disables Regeneration of Fiends until start of your next turn."
+  },
+  {
+    "id": "electrum",
+    "name": "Electrum",
+    "point_cost": 30,
+    "dice_cost": 0,
+    "effect": "+2 Electrum Power bonus against Divines Summons or Otherworlders."
+  },
+  {
+    "id": "feathersteel",
+    "name": "Feathersteel",
+    "point_cost": 15,
+    "dice_cost": 0,
+    "effect": "Incurs 1 less burden (min 0.5)."
+  },
+  {
+    "id": "mycelite",
+    "name": "Mycelite",
+    "point_cost": 20,
+    "dice_cost": 0,
+    "effect": "Incurs 1.5 less burden (min 0.5)."
+  },
+  {
+    "id": "titanium",
+    "name": "Titanium",
+    "point_cost": 0,
+    "dice_cost": 0,
+    "effect": "Gain +30 Crafting Points.",
+    "special_effect": "titanium_points"
+  },
+  {
+    "id": "obsidian-steel",
+    "name": "Obsidian Steel",
+    "point_cost": 0,
+    "dice_cost": 0,
+    "effect": "Cannot be targeted by magical effects."
+  },
+  {
+    "id": "adamantite",
+    "name": "Adamantite",
+    "point_cost": 0,
+    "dice_cost": 0,
+    "effect": "Cannot be destroyed by non-adamantite tools or weapons."
+  },
+  {
+    "id": "luxaeterna",
+    "name": "Luxaeterna",
+    "point_cost": 15,
+    "dice_cost": 0,
+    "effect": "Changes physical damage to Holy."
+  },
+  {
+    "id": "corvuskite",
+    "name": "Corvuskite",
+    "point_cost": 15,
+    "dice_cost": 0,
+    "effect": "Changes physical damage to Dark."
+  },
+  {
+    "id": "arcanium",
+    "name": "Arcanium",
+    "point_cost": 15,
+    "dice_cost": 0,
+    "effect": "Changes physical damage to Arcane."
+  },
+  {
+    "id": "vivinthal",
+    "name": "Vivinthal",
+    "point_cost": 15,
+    "dice_cost": 0,
+    "effect": "Changes physical damage to Water."
+  },
+  {
+    "id": "salachar",
+    "name": "Salachar",
+    "point_cost": 15,
+    "dice_cost": 0,
+    "effect": "Changes physical damage to Fire."
+  },
+  {
+    "id": "sylphsteel",
+    "name": "Sylphsteel",
+    "point_cost": 15,
+    "dice_cost": 0,
+    "effect": "Changes physical damage to Wind."
+  },
+  {
+    "id": "ghimslag",
+    "name": "Ghimslag",
+    "point_cost": 15,
+    "dice_cost": 0,
+    "effect": "Changes physical damage to Earth."
+  }
+]
