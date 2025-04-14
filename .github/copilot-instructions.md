@@ -10,7 +10,6 @@ This project is a SvelteKit application designed to provide tools for the Lyrian
 *   **Language:** TypeScript
 *   **Svelte Version:** Svelte 5 (utilize Runes for reactivity)
 *   **Package Manager:** pnpm
-*   **Styling:** Tailwind CSS
 *   **Hosting:** Vercel
 
 ## Best Practices & Guidelines
@@ -18,7 +17,6 @@ This project is a SvelteKit application designed to provide tools for the Lyrian
 1.  **Svelte 5 Syntax:** Always use the latest Svelte 5 syntax, including Runes (`$state`, `$derived`, `$effect`, etc.) for managing component state and reactivity. Avoid legacy Svelte reactivity patterns unless absolutely necessary.
 2.  **TypeScript:** Use TypeScript for all Svelte components (`.svelte` files) and utility modules (`.ts` files). Ensure strong typing wherever possible.
 3.  **Componentization:** Break down UI elements into small, reusable Svelte components. Favor creating new components over adding complexity to existing ones. This improves readability and maintainability.
-4.  **Tailwind CSS:** Utilize Tailwind CSS utility classes for styling. Avoid writing custom CSS files unless there's a specific need that utilities cannot cover (e.g., complex animations). Keep Tailwind class strings organized and readable, potentially using Prettier plugins for Tailwind if configured.
 5.  **Data Handling:**
     *   Do **not** inline data directly within Svelte components or TypeScript code.
     *   Load data required for tools (e.g., item lists, character options) from external JSON files located appropriately within the project structure (e.g., `/src/lib/data/`).
