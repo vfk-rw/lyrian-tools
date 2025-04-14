@@ -1,3 +1,37 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
+/* Basic styling only */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+input, select, button {
+  padding: 5px;
+  margin: 3px 0;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #4a86e8;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+button:hover {
+  background-color: #3a76d8;
+}
+
+button[disabled] {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.container {
+  width: 95%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
