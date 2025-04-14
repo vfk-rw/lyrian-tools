@@ -55,6 +55,8 @@
         <li><a href="/craftsim-blacksmithing" class:active={$page.url.pathname === '/craftsim-blacksmithing'}>Craftsim Blacksmithing</a></li>
         <li><a href="/map" class:active={$page.url.pathname === '/map'}>Map</a></li>
         <li><a href="/character-sheet" class:active={$page.url.pathname === '/character-sheet'}>Character Sheet</a></li>
+        <li><a href="https://www.github.com/vfk-rw/lyrian-tools" target="_blank" class="external-link">GitHub</a></li>
+        <li><a href="https://rpg.angelssword.com" target="_blank" class="external-link">TTRPG Manual</a></li>
       </ul>
     </div>
   </nav>
@@ -122,6 +124,7 @@
     margin: 0;
     padding: 0;
     gap: 1.5rem;
+    align-items: center;
   }
   
   .nav-links a {
@@ -156,6 +159,32 @@
   
   :global(.dark-theme) .nav-links a.active::after {
     background-color: #60a5fa;
+  }
+  
+  .nav-links a.external-link {
+    color: #3b82f6;
+    font-weight: 500;
+    padding: 0.4rem 0.75rem;
+    border-radius: 0.25rem;
+    border: 1px solid #3b82f6;
+    transition: background-color 0.2s, color 0.2s;
+    display: inline-block;
+    line-height: 1.2;
+  }
+  
+  .nav-links a.external-link:hover {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  :global(.dark-theme) .nav-links a.external-link {
+    color: #60a5fa;
+    border-color: #60a5fa;
+  }
+  
+  :global(.dark-theme) .nav-links a.external-link:hover {
+    background-color: #60a5fa;
+    color: #111827;
   }
   
   .content-container {

@@ -185,7 +185,6 @@ onMount(() => {
 <main class="container">
   <div class="title-row">
     <h1>Lyrian Crafting Simulator - Blacksmithing</h1>
-    <a href="https://www.github.com/vfk-rw/lyrian-tools" target="_blank" class="github-link">GitHub</a>
   </div>
 
   <div class="section">

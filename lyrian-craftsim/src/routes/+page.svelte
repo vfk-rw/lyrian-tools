@@ -46,12 +46,6 @@
     </div>
   </div>
 
-  <footer class="site-footer">
-    <div class="footer-content">
-      <p>Lyrian Tools is a collection of utilities for use with the Lyrian tabletop role-playing game.</p>
-      <a href="https://www.github.com/vfk-rw/lyrian-tools" target="_blank" class="github-link">GitHub Repository</a>
-    </div>
-  </footer>
 </div>
 
 <style>
