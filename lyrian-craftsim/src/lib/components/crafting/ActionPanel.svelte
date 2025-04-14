@@ -23,39 +23,15 @@
     };
 
     // Reactive value for available/filtered actions using derived
+    // Only filter actions based on isCrafting state and level requirements
     let availableActions = $derived(Object.values(craftingActions).filter((action) => {
         if (!isCrafting) return false; // No actions if not crafting
-
-        // Check dice cost first
-        if (state.diceRemaining < action.diceCost) return false;
-
-        // Prerequisites and duplicate checks
-        if (action.requiresPrerequisite && action.prerequisite && !action.prerequisite(state)) return false;
-        if (!action.isRapid && action.id !== 'basic-craft' && state.usedActions.includes(action.id)) {
-            // Allow multiple uses of artisan bonus actions unless the upgrade is used
-            if (action.id === 'blacksmiths-design' && state.usedActions.includes('blacksmiths-ergonomics')) return false;
-            if (action.id === 'sharpening-reinforcing' && state.usedActions.includes('tempering')) return false;
-            if (action.id === 'weight-balancing' && state.usedActions.includes('grip-ergonomics')) return false;
-            // Block other non-rapid actions from being used multiple times
-            if (!['blacksmiths-design', 'sharpening-reinforcing', 'weight-balancing'].includes(action.id)) return false;
-        }
-
-        // For points-based abilities, they should be allowed to show up if you have the level
-        // The button color will indicate if you have enough points
-        if (action.id === 'weapon-alloy') {
-            const alloyData = specialMaterials[selectedAlloy];
-            if (!alloyData || state.alloys.length > 0) return false;
-            // Allow button to show if you have level, points check is handled by CSS
-            const hasForgeLevel = state.forgemasterLevel >= action.classLevel;
-            return hasForgeLevel;
-        }
-
-        // We always want to return true if we have the level
-        // Button color will handle showing if we can afford the cost
+        
+        // Show all actions where player has the required class level
         const hasRequiredLevel = action.className === null || 
             (action.className === 'blacksmith' && state.blacksmithLevel >= action.classLevel) ||
             (action.className === 'forgemaster' && state.forgemasterLevel >= action.classLevel);
-
+        
         return hasRequiredLevel;
     }));
 
