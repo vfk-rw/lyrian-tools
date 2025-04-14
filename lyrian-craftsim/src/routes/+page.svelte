@@ -183,126 +183,126 @@ onMount(() => {
 </script>
 
 <main class="container">
-  <h1>Lyrian Crafting Simulator</h1>
+  <div class="title-row">
+    <h1>Lyrian Crafting Simulator</h1>
+    <a href="https://www.github.com/vfk-rrw/lyrian-tools" target="_blank" class="github-link">GitHub</a>
+  </div>
 
   <div class="section">
     <h2>Setup</h2>
-    <div class="form-grid">
-      <div class="form-group">
-        <label for="itemValue">Item Value:</label>
-        <input 
-          id="itemValue" 
-          type="number" 
-          bind:value={state.itemValue} 
-          min="1" 
-          disabled={isCrafting}
-        >
+    <div class="compact-form-grid">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="itemValue">Value:</label>
+          <input 
+            id="itemValue" 
+            type="number" 
+            bind:value={state.itemValue} 
+            min="1" 
+            disabled={isCrafting}
+            class="narrow-input"
+          >
+        </div>
+        <div class="form-group">
+          <label for="craftingHP">HP:</label>
+          <input 
+            id="craftingHP" 
+            type="number" 
+            bind:value={state.craftingHP} 
+            min="1" 
+            disabled={isCrafting}
+            class="narrow-input"
+          >
+        </div>
+        <div class="form-group material-group">
+          <label for="baseMaterial">Material:</label>
+          <select 
+            id="baseMaterial" 
+            bind:value={state.baseMaterial} 
+            disabled={isCrafting}
+            class="material-select"
+          >
+            {#each Object.entries(baseMaterials) as [key, material]}
+              <option value={key}>{material.name} ({material.effectText})</option>
+            {/each}
+          </select>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="craftingHP">Crafting HP:</label>
-        <input 
-          id="craftingHP" 
-          type="number" 
-          bind:value={state.craftingHP} 
-          min="1" 
-          disabled={isCrafting}
-        >
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="craftingSkill">Skill:</label>
+          <input 
+            id="craftingSkill" 
+            type="number" 
+            bind:value={state.craftingSkill} 
+            min="0" 
+            disabled={isCrafting}
+            class="very-narrow-input"
+          >
+        </div>
+        <div class="form-group">
+          <label for="expertise">Expertise:</label>
+          <input 
+            id="expertise" 
+            type="number" 
+            bind:value={state.expertise} 
+            min="0" 
+            disabled={isCrafting}
+            class="very-narrow-input"
+          >
+        </div>
+        <div class="form-group">
+          <label for="blacksmithLevel">BS Lvl:</label>
+          <input 
+            id="blacksmithLevel" 
+            type="number" 
+            bind:value={state.blacksmithLevel} 
+            min="0" 
+            max="10" 
+            disabled={isCrafting}
+            class="very-narrow-input"
+          >
+        </div>
+        <div class="form-group">
+          <label for="forgemasterLevel">FM Lvl:</label>
+          <input 
+            id="forgemasterLevel" 
+            type="number" 
+            bind:value={state.forgemasterLevel} 
+            min="0" 
+            max="10" 
+            disabled={isCrafting}
+            class="very-narrow-input"
+          >
+        </div>
+        
+        <div class="button-group form-group">
+          {#if !isCrafting}
+            <button class="primary-button" on:click={initializeState}>Start Crafting</button>
+          {:else}
+            <button class="primary-button" on:click={resetSimulator}>Start New</button>
+          {/if}
+        </div>
       </div>
-      <div class="form-group">
-        <label for="baseMaterial">Base Material:</label>
-        <select 
-          id="baseMaterial" 
-          bind:value={state.baseMaterial} 
-          disabled={isCrafting}
-        >
-          {#each Object.entries(baseMaterials) as [key, material]}
-            <option value={key}>{material.name} ({material.effectText})</option>
-          {/each}
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="craftingSkill">Crafting Skill:</label>
-        <input 
-          id="craftingSkill" 
-          type="number" 
-          bind:value={state.craftingSkill} 
-          min="0" 
-          disabled={isCrafting}
-        >
-      </div>
-      <div class="form-group">
-        <label for="expertise">Expertise:</label>
-        <input 
-          id="expertise" 
-          type="number" 
-          bind:value={state.expertise} 
-          min="0" 
-          disabled={isCrafting}
-        >
-      </div>
-      <div class="form-group">
-        <label for="blacksmithLevel">Blacksmith Level:</label>
-        <input 
-          id="blacksmithLevel" 
-          type="number" 
-          bind:value={state.blacksmithLevel} 
-          min="0" 
-          max="10" 
-          disabled={isCrafting}
-        >
-      </div>
-      <div class="form-group">
-        <label for="forgemasterLevel">Forgemaster Level:</label>
-        <input 
-          id="forgemasterLevel" 
-          type="number" 
-          bind:value={state.forgemasterLevel} 
-          min="0" 
-          max="10" 
-          disabled={isCrafting}
-        >
-      </div>
-    </div>
-    <div class="button-group">
-      {#if !isCrafting}
-        <button class="primary-button" on:click={initializeState}>Start Crafting</button>
-      {:else}
-        <button class="danger-button" on:click={resetSimulator}>Reset Simulator</button>
-      {/if}
     </div>
   </div>
 
   {#if isCrafting || craftResult}
-    <div class="section">
-      <h2>Button Colors</h2>
-      <div class="legend-grid">
-        <div class="legend-item">
-          <div class="color-sample primary-bg"></div>
-          <span>Available to use</span>
-        </div>
-        <div class="legend-item">
-          <div class="color-sample danger-bg"></div>
-          <span>Already used (non-rapid skills)</span>
-        </div>
-        <div class="legend-item">
-          <div class="color-sample warning-bg"></div>
-          <span>Has level but missing points/dice</span>
-        </div>
-        <div class="legend-item">
-          <div class="color-sample disabled-bg"></div>
-          <span>Missing required class level</span>
-        </div>
-      </div>
-    </div>
 
     <div class="section">
-      <h2>Current Status</h2>
-      <div class="status-grid">
-        <div class="status-item">
+      <div class="status-header">
+        <h2>Current Status</h2>
+        {#if isCrafting}
+          <button class="danger-button reset-button" on:click={resetSimulator}>Reset</button>
+        {/if}
+      </div>
+      <div class="status-row">
+        <div class="status-item narrow-status">
           <div class="status-label">Dice</div>
           <div class="status-value">{state.diceRemaining} / {state.initialDice}</div>
         </div>
-        <div class="status-item">
+        <div class="status-item narrow-status">
           <div class="status-label">Crafting Points</div>
           <div class="status-value">{state.craftingPoints} / {state.craftingHP}</div>
         </div>
@@ -320,6 +320,20 @@ onMount(() => {
           <span class="result-text">Result: {craftResult}!</span>
         </div>
       {/if}
+    </div>
+
+    <div class="section">
+      <h2>Log</h2>
+      <div 
+        class="log-box"
+        bind:this={logBoxElement}
+      >
+        {#each state.log as entry, i (i)}
+          <p class="log-entry {entry.startsWith('Error:') ? 'error' : entry.includes('SUCCESS!') ? 'success' : entry.includes('FAILURE!') ? 'failure' : ''}">
+            {entry}
+          </p>
+        {/each}
+      </div>
     </div>
 
     <div class="section">
@@ -378,16 +392,24 @@ onMount(() => {
     </div>
 
     <div class="section">
-      <h2>Log</h2>
-      <div 
-        class="log-box"
-        bind:this={logBoxElement}
-      >
-        {#each state.log as entry, i (i)}
-          <p class="log-entry {entry.startsWith('Error:') ? 'error' : entry.includes('SUCCESS!') ? 'success' : entry.includes('FAILURE!') ? 'failure' : ''}">
-            {entry}
-          </p>
-        {/each}
+      <h2>Button Colors</h2>
+      <div class="legend-grid">
+        <div class="legend-item">
+          <div class="color-sample primary-bg"></div>
+          <span>Available to use</span>
+        </div>
+        <div class="legend-item">
+          <div class="color-sample danger-bg"></div>
+          <span>Already used (non-rapid skills)</span>
+        </div>
+        <div class="legend-item">
+          <div class="color-sample warning-bg"></div>
+          <span>Has level but missing points/dice</span>
+        </div>
+        <div class="legend-item">
+          <div class="color-sample disabled-bg"></div>
+          <span>Missing required class level</span>
+        </div>
       </div>
     </div>
   {/if}
@@ -401,10 +423,31 @@ onMount(() => {
     padding: 20px;
   }
   
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  
+  .github-link {
+    font-size: 1rem;
+    color: #3b82f6;
+    text-decoration: none;
+    border: 1px solid #3b82f6;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.75rem;
+  }
+  
+  .github-link:hover {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
   h1 {
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 1.5rem;
+    margin: 0;
   }
   
   h2 {
@@ -421,32 +464,38 @@ onMount(() => {
     background-color: white;
   }
   
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+  .compact-form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
-  }
-  
-  @media (min-width: 640px) {
-    .form-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .form-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    align-items: flex-end;
   }
   
   .form-group {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+  
+  .material-group {
+    flex-grow: 1;
+    min-width: 200px;
+  }
+  
+  .material-select {
+    width: 100%;
   }
   
   .form-group label {
     display: block;
     font-weight: 500;
     margin-bottom: 0.25rem;
+    font-size: 0.875rem;
   }
   
   input, select {
@@ -506,7 +555,9 @@ onMount(() => {
   }
   
   .button-group {
-    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0;
   }
   
   .legend-grid {
@@ -547,6 +598,24 @@ onMount(() => {
   
   .disabled-bg {
     background-color: #e5e7eb;
+  }
+  
+  .status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .reset-button {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .status-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
   
   .status-grid {
@@ -678,6 +747,22 @@ onMount(() => {
   .log-entry.failure {
     color: #ef4444;
     font-weight: 500;
+  }
+  
+  /* Input width adjustments */
+  .narrow-input {
+    width: 80px;
+    max-width: 150px;
+  }
+  
+  .very-narrow-input {
+    width: 60px;
+    max-width: 80px;
+  }
+  
+  /* Status item width adjustment */
+  .narrow-status {
+    max-width: 180px;
   }
   
   /* Dark theme styles */
