@@ -36,11 +36,14 @@
     }));
 
     // Create a local copy to track changes before updating global
-    let localSelectedAlloy = $state(selectedAlloy);
+    // Initialize with the getter function to get the current value
+    let localSelectedAlloy = $state(getSelectedAlloy());
     
     // Effect to sync local to global
     $effect(() => {
-        if (localSelectedAlloy !== selectedAlloy) {
+        // Use the getter function directly to get the latest value
+        const currentSelectedAlloy = getSelectedAlloy();
+        if (localSelectedAlloy !== currentSelectedAlloy) {
             // Don't directly assign to imported variable
             performAction('update-alloy-selection', localSelectedAlloy);
         }

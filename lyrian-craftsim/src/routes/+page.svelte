@@ -207,44 +207,4 @@
     color: #e5e7eb;
   }
   
-  .site-footer {
-    margin-top: auto;
-    padding-top: 2rem;
-    border-top: 1px solid #e5e7eb;
-  }
-  
-  :global(.dark-theme) .site-footer {
-    border-top-color: #374151;
-  }
-  
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1rem;
-  }
-  
-  .footer-content p {
-    color: #6b7280;
-  }
-  
-  :global(.dark-theme) .footer-content p {
-    color: #9ca3af;
-  }
-  
-  .github-link {
-    display: inline-block;
-    color: #3b82f6;
-    text-decoration: none;
-    border: 1px solid #3b82f6;
-    border-radius: 0.25rem;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.2s, color 0.2s;
-  }
-  
-  .github-link:hover {
-    background-color: #3b82f6;
-    color: white;
-  }
 </style>
