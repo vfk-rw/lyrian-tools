@@ -1,8 +1,30 @@
 .container {
   width: 95%;
-  max-width: 900px;
+  max-width: 1200px; /* Increased from 900px to allow more horizontal space */
   margin: 0 auto;
   padding: 20px;
+}
+
+/* Two-column grid layout */
+.two-column-grid {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  gap: 1rem;
+}
+
+/* Full width span for setup and other components that need to span both columns */
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Class for components in the left column */
+.left-column {
+  grid-column: 1;
+}
+
+/* Class for components in the right column */
+.right-column {
+  grid-column: 2;
 }
 
 .title-row {
@@ -144,14 +166,28 @@ button:disabled {
 
 .legend-grid {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 0.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25rem;
 }
 
-@media (min-width: 640px) {
-  .legend-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Compact legend styles */
+.compact-legend .section {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.compact-legend h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.compact-legend .legend-item {
+  font-size: 0.8rem;
+}
+
+.compact-legend .color-sample {
+  width: 0.8rem;
+  height: 0.8rem;
 }
 
 .legend-item {
@@ -256,15 +292,30 @@ button:disabled {
   gap: 1rem;
 }
 
+/* Adjust action grid columns for the two-column layout */
+.right-column .action-grid {
+  grid-template-columns: repeat(1, 1fr);
+}
+
 @media (min-width: 640px) {
   .action-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* In the two-column layout, we have less space, so only go to 2 columns for actions */
+  .right-column .action-grid {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
   .action-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* In the two-column layout, we have less space, so only go to 2 columns for actions */
+  .right-column .action-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -294,7 +345,7 @@ button:disabled {
 }
 
 .log-box {
-  height: 200px;
+  height: 250px; /* Increased height for more log content */
   overflow-y: auto;
   padding: 1rem;
   border: 1px solid #e5e7eb;

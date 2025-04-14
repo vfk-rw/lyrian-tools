@@ -2,7 +2,7 @@
     // Simple component to display the button color legend
 </script>
 
-<div class="section">
+<div class="section compact-legend">
     <h2>Button Colors</h2>
     <div class="legend-grid">
         <div class="legend-item">

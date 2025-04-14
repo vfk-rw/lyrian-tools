@@ -9,7 +9,7 @@
 
 <div class="section">
     <h2>Crafting Log</h2>
-    <div class="log-container">
+    <div class="log-box">
         {#each state.log as message}
             <div class="log-entry">
                 {message}

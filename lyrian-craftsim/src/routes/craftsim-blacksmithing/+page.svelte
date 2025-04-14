@@ -34,22 +34,30 @@ let craftResult = $derived(getCraftResult());
         <h1>Lyrian Crafting Simulator - Blacksmithing</h1>
     </div>
 
-    <SetupForm
-        onStartCrafting={initializeState}
-        onReset={resetSimulator}
-    />
-
-    {#if isCrafting || craftResult}
-        <StatusDisplay
+    <div class="full-width">
+        <SetupForm
+            onStartCrafting={initializeState}
             onReset={resetSimulator}
         />
+    </div>
 
-        <CraftingLog />
-
-        <ActionPanel
-            onPerformAction={performAction}
-        />
-
-        <ButtonLegend />
+    {#if isCrafting || craftResult}
+        <div class="two-column-grid">
+            <div class="left-column">
+                <StatusDisplay
+                    onReset={resetSimulator}
+                />
+                
+                <CraftingLog />
+            </div>
+            
+            <div class="right-column">
+                <ActionPanel
+                    onPerformAction={performAction}
+                />
+                
+                <ButtonLegend />
+            </div>
+        </div>
     {/if}
 </main>
