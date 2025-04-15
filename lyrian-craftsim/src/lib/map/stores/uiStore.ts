@@ -35,7 +35,12 @@ export interface RegionModalParams {
   regionId?: string;
 }
 
-export type ModalParams = POIModalParams | RegionModalParams;
+export interface ResizeModalParams {
+  type: 'resize';
+  title?: string;
+}
+
+export type ModalParams = POIModalParams | RegionModalParams | ResizeModalParams;
 
 // POI hover info
 export interface POIHoverInfo {

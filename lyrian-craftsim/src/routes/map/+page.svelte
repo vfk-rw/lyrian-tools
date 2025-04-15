@@ -3,6 +3,7 @@
   import Toolbar from './components/Toolbar.svelte';
   import POIModal from './components/POIModal.svelte';
   import RegionModal from './components/RegionModal.svelte';
+  import ResizeModal from './components/ResizeModal.svelte';
   import { mapData, exportMapJSON, importMapJSON, setMapName } from '$lib/map/stores/mapStore';
   
   // Handle export to JSON
@@ -123,6 +124,7 @@
   <!-- Modals -->
   <POIModal />
   <RegionModal />
+  <ResizeModal />
 </div>
 
 <style>

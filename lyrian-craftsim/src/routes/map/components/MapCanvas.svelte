@@ -167,18 +167,10 @@ function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: 
         break;
       
       case 'resize':
-        // Expand the map (simplified for now)
-        if (!$mapData.tiles.has(hexKey)) {
-          const coords = getHexCoordinatesFromKey(hexKey);
-          $mapData.tiles.set(hexKey, {
-            q: coords[0],
-            r: coords[1],
-            biome: $uiStore.selectedBiome,
-            height: 0,
-            pois: []
-          });
-          $mapData = $mapData; // Trigger reactivity
-        }
+        // Show the resize modal
+        showModal({
+          type: 'resize'
+        });
         break;
     }
   }
