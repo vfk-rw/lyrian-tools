@@ -324,14 +324,8 @@ import RegionModal from './RegionModal.svelte';
       <div class="info-content route-content" style="border-left: 4px solid {$uiStore.hoveredRoute.color}">
         <div class="info-title">
           <span class="info-icon route-icon">🧭</span>
-          <h3>{$uiStore.hoveredRoute.name}</h3>
+          <h3>{$uiStore.hoveredRoute.name} {$uiStore.hoveredRoute.lengthInDays > 0 ? `(${$uiStore.hoveredRoute.lengthInDays} days)` : ''}</h3>
         </div>
-        {#if $uiStore.hoveredRoute.lengthInDays > 0}
-          <div class="route-detail">
-            <span class="detail-label">Journey Length:</span>
-            <span class="detail-value">{$uiStore.hoveredRoute.lengthInDays} days</span>
-          </div>
-        {/if}
       </div>
     </div>
   {/if}
@@ -339,21 +333,16 @@ import RegionModal from './RegionModal.svelte';
   <!-- Waypoint Info Display -->
   {#if $uiStore.hoveredWaypoint && $uiStore.hoveredWaypoint.routeId}
     {@const route = $routesData.routes.get($uiStore.hoveredWaypoint.routeId)}
+    {@const waypointIndex = route && $uiStore.hoveredWaypoint?.waypointId 
+      ? route.waypoints.findIndex(w => w.id === $uiStore.hoveredWaypoint?.waypointId)
+      : -1}
     <div class="info-display">
       <div class="info-content waypoint-content" style="border-left: 4px solid {
         route?.color || '#888'
       }">
         <div class="info-title">
           <span class="info-icon waypoint-icon">🧭</span>
-          <h3>Waypoint {
-            (() => {
-              if (route && $uiStore.hoveredWaypoint && $uiStore.hoveredWaypoint?.waypointId) {
-                const index = route.waypoints.findIndex(w => w.id === $uiStore.hoveredWaypoint?.waypointId);
-                return index >= 0 ? index + 1 : '?';
-              }
-              return '?';
-            })()
-          }</h3>
+          <h3>From {route?.name || 'Unknown'}</h3>
         </div>
         {#if $uiStore.hoveredWaypoint?.date}
           <div class="waypoint-detail">
@@ -364,10 +353,15 @@ import RegionModal from './RegionModal.svelte';
         {#if $uiStore.hoveredWaypoint?.notes}
           <p class="info-description">{$uiStore.hoveredWaypoint.notes}</p>
         {/if}
-        <div class="waypoint-route">
-          <span class="route-label">Route:</span>
-          <span class="route-name">{route?.name || 'Unknown'}</span>
-        </div>
+        
+        {#if waypointIndex > 0 && route}
+          <div class="waypoint-days">
+            <span class="detail-label">Days traveled:</span>
+            <span class="detail-value">
+              {waypointIndex} {waypointIndex === 1 ? 'day' : 'days'}
+            </span>
+          </div>
+        {/if}
       </div>
     </div>
   {/if}

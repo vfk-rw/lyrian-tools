@@ -49,8 +49,23 @@ export function validateDate(date: string | undefined): string | undefined {
   return date;
 }
 
+// Debug function to help diagnose date handling issues
+function debugDateValidation(date: string | undefined): void {
+  console.log(`Date validation for: ${date}`);
+  if (!date) {
+    console.log(' - Date is undefined, returning undefined');
+    return;
+  }
+  
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  console.log(` - Regex test: ${dateRegex.test(date)}`);
+  
+  const parsedDate = new Date(date);
+  console.log(` - Parsed date: ${parsedDate}, isValid: ${!isNaN(parsedDate.getTime())}`);
+}
+
 /**
- * Validates a single Waypoint object
+ * Validates a Waypoint object
  */
 export function validateWaypoint(waypoint: any): Waypoint | null {
   if (!waypoint || typeof waypoint !== 'object') return null;
@@ -66,12 +81,15 @@ export function validateWaypoint(waypoint: any): Waypoint | null {
     r: validateCoordinate(waypoint.r)
   };
   
-  // Optional fields
-  if (waypoint.date !== undefined) {
+  // Optional fields - explicitly check for existence to handle both null and undefined
+  if ('date' in waypoint) {
     validatedWaypoint.date = validateDate(waypoint.date);
+    if (waypoint.date && !validatedWaypoint.date) {
+      console.warn(`Invalid date format in waypoint ${waypoint.id}: "${waypoint.date}"`);
+    }
   }
   
-  if (waypoint.notes !== undefined) {
+  if ('notes' in waypoint) {
     validatedWaypoint.notes = validateDescription(waypoint.notes);
   }
   

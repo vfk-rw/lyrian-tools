@@ -231,13 +231,25 @@ function createRoutesStore() {
           name: route.name,
           color: route.color,
           visible: route.visible,
-          waypoints: route.waypoints.map(wp => ({
-            id: wp.id,
-            q: wp.q,
-            r: wp.r,
-            date: wp.date,
-            notes: wp.notes
-          }))
+          waypoints: route.waypoints.map(wp => {
+            // Create a base waypoint object with required fields
+            const waypointData: any = {
+              id: wp.id,
+              q: wp.q,
+              r: wp.r
+            };
+            
+            // Only include optional fields if they exist
+            if (wp.date !== undefined) {
+              waypointData.date = wp.date;
+            }
+            
+            if (wp.notes !== undefined) {
+              waypointData.notes = wp.notes;
+            }
+            
+            return waypointData;
+          })
         }))
       };
       

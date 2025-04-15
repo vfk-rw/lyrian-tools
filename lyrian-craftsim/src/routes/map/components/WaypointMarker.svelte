@@ -1,6 +1,7 @@
 <script lang="ts">
   import { hexToIsometric } from '$lib/map/utils/hexlib';
   import { uiStore, setHoveredWaypoint, showModal } from '$lib/map/stores/uiStore';
+  import { routesData } from '$lib/map/stores/routeStore';
   
   // Props
   export let routeId: string;
@@ -48,6 +49,45 @@
       });
     }
   }
+  
+  // Calculate cumulative days for this waypoint
+  function calculateCumulativeDays(): number {
+    const route = $routesData.routes.get(routeId);
+    if (!route) return 0;
+    
+    // If this is the first waypoint, it's day 0
+    if (index === 0) return 0;
+    
+    // If we have dates, use them to calculate days
+    if (date) {
+      // Get waypoints up to and including this one
+      const relevantWaypoints = route.waypoints.slice(0, index + 1);
+      
+      // Filter to only waypoints with dates
+      const waypointsWithDates = relevantWaypoints.filter(wp => wp.date);
+      
+      // If we have waypoints with dates, calculate a real difference
+      if (waypointsWithDates.length >= 2) {
+        // Get the first waypoint with a date
+        const firstWaypointWithDate = waypointsWithDates[0];
+        
+        if (firstWaypointWithDate.date) {
+          // Calculate days difference
+          const firstDate = new Date(firstWaypointWithDate.date);
+          const currentDate = new Date(date);
+          
+          const diffTime = Math.abs(currentDate.getTime() - firstDate.getTime());
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          
+          return diffDays;
+        }
+      }
+    }
+    
+    // If no dates available, just use the index as a fallback
+    // This treats each waypoint as 1 day apart
+    return index;
+  }
 </script>
 
 <g 
@@ -69,8 +109,9 @@
     class="waypoint-circle"
   />
   
-  <!-- Waypoint index (if labels are enabled) -->
+  <!-- Waypoint cumulative days (if labels are enabled) -->
   {#if $uiStore.showRouteLabels}
+    {@const daysCount = calculateCumulativeDays()}
     <text 
       x="0" 
       y="0" 
@@ -81,7 +122,7 @@
       font-weight="bold"
       class="waypoint-index"
     >
-      {index + 1}
+      {daysCount}
     </text>
   {/if}
   
