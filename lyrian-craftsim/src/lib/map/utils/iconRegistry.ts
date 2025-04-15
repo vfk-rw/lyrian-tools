@@ -78,7 +78,7 @@ export function buildIconRegistry(): IconRegistry {
         'turtle.svg',
         'wolf-head.svg'
       ].map(file => ({
-        path: `/src/assets/icons/animal/${file}`,
+        path: `/icons/animal/${file}`,
         name: formatIconName(file)
       }))
     },
@@ -114,7 +114,7 @@ export function buildIconRegistry(): IconRegistry {
         'well.svg',
         'windmill.svg'
       ].map(file => ({
-        path: `/src/assets/icons/building/${file}`,
+        path: `/icons/building/${file}`,
         name: formatIconName(file)
       }))
     },
@@ -144,7 +144,7 @@ export function buildIconRegistry(): IconRegistry {
         'volcano.svg',
         'waterfall.svg'
       ].map(file => ({
-        path: `/src/assets/icons/nature/${file}`,
+        path: `/icons/nature/${file}`,
         name: formatIconName(file)
       }))
     },
@@ -166,7 +166,7 @@ export function buildIconRegistry(): IconRegistry {
         'viking-church.svg',
         'village.svg'
       ].map(file => ({
-        path: `/src/assets/icons/civilization/${file}`,
+        path: `/icons/civilization/${file}`,
         name: formatIconName(file)
       }))
     }

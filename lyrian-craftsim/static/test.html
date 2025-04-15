@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SVG Icon Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #1a1a1a;
+      color: white;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .icon-card {
+      background-color: #2a2a2a;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-img {
+      width: 50px;
+      height: 50px;
+      filter: invert(1);
+    }
+    .icon-name {
+      margin-top: 10px;
+      font-size: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Static SVG Icon Test</h1>
+  
+  <div class="icon-grid">
+    <div class="icon-card">
+      <img class="icon-img" src="/icons/animal/animal-skull.svg" alt="Animal Skull">
+      <div class="icon-name">animal-skull.svg</div>
+    </div>
+
+    <div class="icon-card">
+      <img class="icon-img" src="/icons/nature/mountains.svg" alt="Mountains">
+      <div class="icon-name">mountains.svg</div>
+    </div>
+
+    <div class="icon-card">
+      <img class="icon-img" src="/icons/building/village.svg" alt="Village">
+      <div class="icon-name">village.svg</div>
+    </div>
+
+    <div class="icon-card">
+      <img class="icon-img" src="/icons/nature/trail.svg" alt="Trail">
+      <div class="icon-name">trail.svg</div>
+    </div>
+
+    <div class="icon-card">
+      <img class="icon-img" src="/icons/animal/big-egg.svg" alt="Big Egg">
+      <div class="icon-name">big-egg.svg</div>
+    </div>
+
+    <div class="icon-card">
+      <img class="icon-img" src="/icons/nature/forest.svg" alt="Forest">
+      <div class="icon-name">forest.svg</div>
+    </div>
+
+    <div class="icon-card">
+      <img class="icon-img" src="/icons/animal/fish.svg" alt="Fish">
+      <div class="icon-name">fish.svg</div>
+    </div>
+
+    <div class="icon-card">
+      <img class="icon-img" src="/icons/nature/pine-tree.svg" alt="Pine Tree">
+      <div class="icon-name">pine-tree.svg</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 30px; text-align: center;">
+    These icons are loaded from the static directory at <code>/icons/...</code> paths
+  </div>
+</body>
+</html>
