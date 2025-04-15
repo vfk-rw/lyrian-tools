@@ -23,7 +23,7 @@
           </div>
         </a>
         
-        <a href="/craftsim-blacksmithing" class="tool-card" role="button" on:click|preventDefault={() => goto('/craftsim-blacksmithing')} on:keydown={e => e.key === 'Enter' && goto('/craftsim-blacksmithing')}>
+        <a href="/craftingsimulator" class="tool-card" role="button" on:click|preventDefault={() => goto('/craftingsimulator')} on:keydown={e => e.key === 'Enter' && goto('/craftingsimulator')}>
           <div class="card-icon">⚒️</div>
           <h2 class="card-title">Crafting Simulator</h2>
           <p class="card-description">

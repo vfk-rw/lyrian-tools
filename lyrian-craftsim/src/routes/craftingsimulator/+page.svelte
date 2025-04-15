@@ -31,7 +31,7 @@ let craftResult = $derived(getCraftResult());
 
 <main class="container">
     <div class="title-row">
-        <h1>Lyrian Crafting Simulator - Blacksmithing</h1>
+        <h1>Lyrian Crafting Simulator</h1>
     </div>
 
     <div class="full-width">
