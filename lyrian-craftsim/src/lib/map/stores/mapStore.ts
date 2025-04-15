@@ -224,7 +224,7 @@ const createMapStore = () => {
           // Create the tile
           const key = getHexKey(q, r);
           data.tiles.set(key, {
-            q, r, biome, height, pois: []
+            q, r, biome, height, icon: null, pois: []
           });
         });
         
@@ -269,6 +269,7 @@ const createMapStore = () => {
               r: tile.r,
               biome: tile.biome || 'plains',
               height: tile.height,
+              icon: tile.icon || null, 
               pois: Array.isArray(tile.pois) ? [...tile.pois] : []
             });
           }
