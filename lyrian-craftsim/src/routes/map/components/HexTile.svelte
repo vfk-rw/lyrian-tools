@@ -19,8 +19,13 @@
   $: vertices = getHexVertices(q, r);
   $: hexPoints = vertices.map(point => `${point.x},${point.y}`).join(' ');
   
-  // Get position for the tile and any POIs
+  // Get position for the tile
   $: position = hexToIsometric(q, r);
+  
+  // Calculate vertices once for the polygon
+  $: polygonPoints = getHexVertices(q, r)
+    .map(v => `${v.x},${v.y}`)
+    .join(' ');
   
   // Biome colors
   const biomeColors = {
@@ -116,30 +121,32 @@
   class="hex-tile"
   class:selected={isSelected}
   class:hovered={isHovered}
-  transform="translate({position.x},{position.y - elevationOffset})"
   on:click={handleClick}
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
 >
-  <!-- Hex background with relative coordinates -->
+  <!-- Hex background as exact coordinates (no translation) -->
   <polygon 
-    points={vertices.map(v => `${v.x - position.x},${v.y - position.y}`).join(' ')}
+    points={polygonPoints}
     fill={fillColor}
     stroke={strokeColor}
     stroke-width={strokeWidth}
     stroke-opacity={strokeOpacity}
     vector-effect="non-scaling-stroke"
+    transform="translate(0,{-elevationOffset})"
   />
   
   <!-- Height indicator at center of hex -->
   {#if height > 0 && $uiStore.showLabels}
     <text
-      x="0"
-      y="5"
+      x={position.x}
+      y={position.y}
       text-anchor="middle"
+      dominant-baseline="middle"
       fill="rgba(0,0,0,0.7)"
       font-size="10"
       pointer-events="none"
+      transform="translate(0,{-elevationOffset})"
     >
       {height}
     </text>

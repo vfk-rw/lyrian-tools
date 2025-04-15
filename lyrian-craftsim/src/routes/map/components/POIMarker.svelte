@@ -1,5 +1,7 @@
 <script lang="ts">
   import { uiStore, showModal } from '$lib/map/stores/uiStore';
+  import { mapData } from '$lib/map/stores/mapStore';
+  import { hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
   
   // Props
   export let poiId: string;
@@ -10,6 +12,11 @@
   
   // Show tooltip state
   let showTooltip = false;
+  
+  // Get tile coordinates from the key
+  $: tileCoords = getHexCoordinatesFromKey(tileKey);
+  // Calculate position based on tile coordinates
+  $: position = hexToIsometric(tileCoords[0], tileCoords[1]);
   
   // Icon display helpers
   const POI_ICONS: Record<string, string> = {
@@ -61,14 +68,13 @@
   }
   
   // Position offsets (may be used to place multiple POIs on one tile)
-  const offsetX = 0;
   const offsetY = -15; // Slightly above center
 </script>
 
-<!-- POI marker in SVG -->
+<!-- POI marker in SVG - with absolute positioning -->
 <g 
   class="poi-marker"
-  transform="translate({offsetX}, {offsetY})"
+  transform="translate({position.x}, {position.y + offsetY})"
   on:click={handleClick}
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}

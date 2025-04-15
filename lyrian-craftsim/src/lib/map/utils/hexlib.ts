@@ -4,36 +4,34 @@
  */
 
 // Constants for hex grid dimensions
-const HEX_SIZE = 50; // Size of a hex (from center to corner)
-const HEX_WIDTH = HEX_SIZE * Math.sqrt(3);
-const HEX_HEIGHT = HEX_SIZE * 2;
-const HEX_VERTICAL_SPACING = HEX_HEIGHT * 0.75;
-const HEX_HORIZONTAL_SPACING = HEX_WIDTH;
+const HEX_SIZE = 50; // Size from center to corner
+const HEX_WIDTH = HEX_SIZE * 2; // Full width of a hex
+const HEX_HEIGHT = Math.sqrt(3) * HEX_SIZE; // Height for flat-topped hex
 
-// Isometric projection factors
-const ISO_SCALE_X = 0.866; // cos(30°)
-const ISO_SCALE_Y = 0.5;   // sin(30°)
-const ISO_SKEW = 0.577;    // tan(30°)
+// 60-degree projection factor
+const PROJECTION_FACTOR = 0.5; // cos(60°) = 0.5
 
 /**
  * Convert hex coordinates (q,r) to pixel position in flat-top orientation
  */
 export function hexToPixel(q: number, r: number): { x: number, y: number } {
-  const x = HEX_SIZE * (Math.sqrt(3) * q + Math.sqrt(3) / 2 * r);
-  const y = HEX_SIZE * (3/2 * r);
+  // Coordinates for flat-topped hex
+  const x = HEX_SIZE * (3/2 * q);
+  const y = HEX_SIZE * (Math.sqrt(3)/2 * q + Math.sqrt(3) * r);
   
   return { x, y };
 }
 
 /**
  * Convert hex coordinates to isometric pixel position for rendering
+ * with proper 60° projection
  */
 export function hexToIsometric(q: number, r: number): { x: number, y: number } {
-  const { x: flatX, y: flatY } = hexToPixel(q, r);
+  const { x, y } = hexToPixel(q, r);
   
-  // Apply isometric transformation
-  const isoX = flatX * ISO_SCALE_X - flatY * ISO_SCALE_X;
-  const isoY = flatX * ISO_SCALE_Y + flatY * ISO_SCALE_Y;
+  // Apply 60° projection by squashing the y coordinate
+  const isoX = x;
+  const isoY = y * PROJECTION_FACTOR;
   
   return { x: isoX, y: isoY };
 }
@@ -42,8 +40,12 @@ export function hexToIsometric(q: number, r: number): { x: number, y: number } {
  * Convert pixel position to hex coordinates (cube coordinates)
  */
 export function pixelToHex(x: number, y: number): { q: number, r: number, s: number } {
-  const q = (x * Math.sqrt(3)/3 - y/3) / HEX_SIZE;
-  const r = y * 2/3 / HEX_SIZE;
+  // First adjust for the 60° projection
+  const yAdjusted = y / PROJECTION_FACTOR;
+  
+  // Now do the inverse of hexToPixel
+  const q = (2/3) * x / HEX_SIZE;
+  const r = (-1/3 * x + Math.sqrt(3)/3 * yAdjusted) / HEX_SIZE;
   const s = -q - r; // Cube coordinate constraint: q + r + s = 0
   
   return cubeRound(q, r, s);
@@ -53,13 +55,12 @@ export function pixelToHex(x: number, y: number): { q: number, r: number, s: num
  * Convert isometric pixel position to hex coordinates
  */
 export function isometricToHex(x: number, y: number): { q: number, r: number } {
-  // Convert isometric coordinates back to flat coordinates
-  const flatX = (x / ISO_SCALE_X + y / ISO_SCALE_Y) / 2;
-  const flatY = (y / ISO_SCALE_Y - x / ISO_SCALE_X) / 2;
+  // Adjust y for the 60° projection
+  const yAdjusted = y / PROJECTION_FACTOR;
   
-  // Now convert flat coordinates to hex
-  const { q, r } = pixelToHex(flatX, flatY);
-  return { q, r };
+  // Use the adjusted y in the conversion
+  const cube = pixelToHex(x, yAdjusted);
+  return { q: cube.q, r: cube.r };
 }
 
 /**
@@ -70,6 +71,15 @@ export function isometricPointToHexKey(x: number, y: number): string {
   const roundedQ = Math.round(q);
   const roundedR = Math.round(r);
   return `${roundedQ},${roundedR}`;
+}
+
+/**
+ * Parse a hex key string back into coordinates
+ * @param key String in format "q,r"
+ */
+export function getHexCoordinatesFromKey(key: string): [number, number] {
+  const [q, r] = key.split(',').map(Number);
+  return [q, r];
 }
 
 /**
@@ -114,6 +124,27 @@ export function getHexNeighbors(q: number, r: number): Array<[number, number]> {
 }
 
 /**
+ * Get the vertices of a hex at a specific coordinate
+ * with proper 60° projection
+ */
+export function getHexVertices(q: number, r: number): Array<{ x: number, y: number }> {
+  const { x, y } = hexToIsometric(q, r);
+  const vertices = [];
+  
+  // Calculate corners of a flat-topped hex with 60° projection
+  for (let i = 0; i < 6; i++) {
+    const angle = Math.PI / 3 * i;
+    // Standard hex corner
+    const cornerX = x + HEX_SIZE * Math.cos(angle);
+    // Apply 60° projection to the y-component
+    const cornerY = y + HEX_SIZE * Math.sin(angle) * PROJECTION_FACTOR;
+    vertices.push({ x: cornerX, y: cornerY });
+  }
+  
+  return vertices;
+}
+
+/**
  * Calculate the boundary points of a region for drawing an outline
  */
 export function calculateRegionBoundary(tiles: Array<[number, number]>): Array<{ x: number, y: number }> {
@@ -140,11 +171,11 @@ export function calculateRegionBoundary(tiles: Array<[number, number]>): Array<{
   for (const [q, r] of sortedTiles) {
     const { x, y } = hexToIsometric(q, r);
     
-    // Add hex vertex points
+    // Add hex vertex points with 60° projection
     for (let i = 0; i < 6; i++) {
-      const angle = (Math.PI / 3) * i;
+      const angle = Math.PI / 3 * i;
       const vx = x + HEX_SIZE * Math.cos(angle);
-      const vy = y + HEX_SIZE * Math.sin(angle);
+      const vy = y + HEX_SIZE * Math.sin(angle) * PROJECTION_FACTOR;
       
       // Only add points that are on the boundary
       // (This is a simplification, a real implementation would
@@ -176,23 +207,6 @@ export function generatePathFromPoints(points: Array<{ x: number, y: number }>):
 }
 
 /**
- * Get the vertices of a hex at a specific coordinate
- */
-export function getHexVertices(q: number, r: number): Array<{ x: number, y: number }> {
-  const { x, y } = hexToIsometric(q, r);
-  const vertices = [];
-  
-  for (let i = 0; i < 6; i++) {
-    const angle = (Math.PI / 3) * i;
-    const vx = x + HEX_SIZE * Math.cos(angle);
-    const vy = y + HEX_SIZE * Math.sin(angle);
-    vertices.push({ x: vx, y: vy });
-  }
-  
-  return vertices;
-}
-
-/**
  * Calculate the points of a hex for SVG drawing
  */
 export function calculateHexPoints(q: number, r: number): string {
@@ -201,26 +215,10 @@ export function calculateHexPoints(q: number, r: number): string {
 }
 
 /**
- * Alias for hexToPixel for consistency
- */
-export function axialToPixel(q: number, r: number): { x: number, y: number } {
-  return hexToPixel(q, r);
-}
-
-/**
- * Generate a key string from hex coordinates
+ * Generate a hex key string from hex coordinates
  */
 export function getHexKey(q: number, r: number): string {
   return `${q},${r}`;
-}
-
-/**
- * Parse a hex key string back into coordinates
- * @param key String in format "q,r"
- */
-export function getHexCoordinatesFromKey(key: string): [number, number] {
-  const [q, r] = key.split(',').map(Number);
-  return [q, r];
 }
 
 /**

@@ -180,7 +180,7 @@
     );
   };
   
-  // Determine if a region is hovered
+  // Determine if a region is hovered, ensuring we return a boolean
   function isRegionHovered(regionId: string): boolean {
     return $uiStore.hoveredRegion === regionId ? true : false;
   }

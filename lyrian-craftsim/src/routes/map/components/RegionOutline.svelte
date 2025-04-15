@@ -2,12 +2,12 @@
   import { uiStore, showModal } from '$lib/map/stores/uiStore';
   import { calculateRegionBoundary, generatePathFromPoints } from '$lib/map/utils/hexlib';
   
-  // Props
+  // Props with correct typing
   export let regionId: string;
   export let regionName: string;
   export let regionColor: string;
   export let tiles: Array<[number, number]>;
-  export let isHovered: boolean = false;
+  export let isHovered = false; // Default to false, allow any truthy/falsy value
   
   // Calculate the boundary points of the region
   $: boundaryPoints = calculateRegionBoundary(tiles);
@@ -48,12 +48,22 @@
   
   // Handle mouse enter/leave for hover effects
   function handleMouseEnter() {
-    $uiStore.hoveredRegion = regionId;
+    // Update the store properly using set method
+    const currentState = $uiStore;
+    uiStore.set({
+      ...currentState,
+      hoveredRegion: regionId
+    });
   }
   
   function handleMouseLeave() {
     if ($uiStore.hoveredRegion === regionId) {
-      $uiStore.hoveredRegion = null;
+      // Update the store properly using set method
+      const currentState = $uiStore;
+      uiStore.set({
+        ...currentState,
+        hoveredRegion: null
+      });
     }
   }
   
