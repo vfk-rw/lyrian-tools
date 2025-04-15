@@ -10,6 +10,8 @@
   export let strokeWidth: number = 3;
   export let isEditable: boolean = false;
   export let lengthInDays: number = 0;
+  export let participants: string[] = [];
+  export let gm: string | undefined = undefined;
   
   // Calculate the SVG path string for the route
   $: pathString = generateRoutePath(waypoints);
@@ -39,7 +41,9 @@
       id: routeId,
       name: routeName,
       color: color,
-      lengthInDays: lengthInDays
+      lengthInDays: lengthInDays,
+      participants: participants,
+      gm: gm
     });
   }
   

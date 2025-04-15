@@ -17,6 +17,8 @@ export interface Route {
   visible: boolean;
   editable: boolean;
   waypoints: Waypoint[];
+  participants: string[]; // Array of adventurer names (0-5)
+  gm?: string; // Optional GM (player name)
 }
 
 // State interface
@@ -37,7 +39,7 @@ function createRoutesStore() {
     subscribe,
     
     // Add a new route
-    addRoute: (routeData: Omit<Route, 'id' | 'visible' | 'editable' | 'waypoints'>) => {
+    addRoute: (routeData: Omit<Route, 'id' | 'visible' | 'editable' | 'waypoints' | 'participants'> & { participants?: string[] }) => {
       const id = uuidv4();
       
       update(state => {
@@ -49,7 +51,9 @@ function createRoutesStore() {
           color: routeData.color,
           visible: true,
           editable: false,
-          waypoints: []
+          waypoints: [],
+          participants: routeData.participants || [],
+          gm: routeData.gm
         });
         
         return { routes };
@@ -290,31 +294,42 @@ function createRoutesStore() {
       const exportData = {
         version: '1.0',
         timestamp: new Date().toISOString(),
-        routes: Array.from(state.routes.values()).map(route => ({
-          id: route.id,
-          name: route.name,
-          color: route.color,
-          visible: route.visible,
-          waypoints: route.waypoints.map(wp => {
-            // Create a base waypoint object with required fields
-            const waypointData: any = {
-              id: wp.id,
-              q: wp.q,
-              r: wp.r
-            };
-            
-            // Only include optional fields if they exist
-            if (wp.date !== undefined) {
-              waypointData.date = wp.date;
-            }
-            
-            if (wp.notes !== undefined) {
-              waypointData.notes = wp.notes;
-            }
-            
-            return waypointData;
-          })
-        }))
+        routes: Array.from(state.routes.values()).map(route => {
+          // Create route object with required fields
+          const routeData: any = {
+            id: route.id,
+            name: route.name,
+            color: route.color,
+            visible: route.visible,
+            waypoints: route.waypoints.map(wp => {
+              // Create a base waypoint object with required fields
+              const waypointData: any = {
+                id: wp.id,
+                q: wp.q,
+                r: wp.r
+              };
+              
+              // Only include optional fields if they exist
+              if (wp.date !== undefined) {
+                waypointData.date = wp.date;
+              }
+              
+              if (wp.notes !== undefined) {
+                waypointData.notes = wp.notes;
+              }
+              
+              return waypointData;
+            }),
+            participants: route.participants || []
+          };
+          
+          // Only include GM if it exists
+          if (route.gm) {
+            routeData.gm = route.gm;
+          }
+          
+          return routeData;
+        })
       };
       
       return exportData;

@@ -19,13 +19,20 @@
   
   // Handle hover
   function handleMouseEnter() {
+    // Get route to access participants and GM info
+    const route = $routesData.routes.get(routeId);
+    
     setHoveredWaypoint({
       routeId,
       waypointId,
       q,
       r,
       date,
-      notes
+      notes,
+      routeName: route?.name || '',
+      routeColor: route?.color || color,
+      participants: route?.participants || [],
+      gm: route?.gm
     });
   }
   

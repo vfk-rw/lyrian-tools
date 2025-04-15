@@ -85,6 +85,10 @@ export interface WaypointHoverInfo {
   r: number;
   date?: string;
   notes?: string;
+  routeName?: string;
+  routeColor?: string;
+  participants?: string[]; // Array of adventurer names from the route
+  gm?: string; // Optional GM (player name) from the route
 }
 
 // Route hover info
@@ -93,6 +97,8 @@ export interface RouteHoverInfo {
   name: string;
   color: string;
   lengthInDays: number;
+  participants: string[]; // Array of adventurer names
+  gm?: string; // Optional GM (player name)
 }
 
 // UI State interface

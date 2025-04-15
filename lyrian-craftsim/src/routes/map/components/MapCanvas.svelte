@@ -326,6 +326,26 @@ import RegionModal from './RegionModal.svelte';
           <span class="info-icon route-icon">🧭</span>
           <h3>{$uiStore.hoveredRoute.name} {$uiStore.hoveredRoute.lengthInDays > 0 ? `(${$uiStore.hoveredRoute.lengthInDays} days)` : ''}</h3>
         </div>
+        
+        <!-- Participants Section -->
+        {#if $uiStore.hoveredRoute.participants && $uiStore.hoveredRoute.participants.length > 0}
+          <div class="route-participants">
+            <div class="participants-title">Participants:</div>
+            <ul class="participants-list">
+              {#each $uiStore.hoveredRoute.participants as participant}
+                <li>{participant}</li>
+              {/each}
+            </ul>
+          </div>
+        {/if}
+        
+        <!-- GM Section -->
+        {#if $uiStore.hoveredRoute.gm}
+          <div class="route-gm">
+            <div class="gm-title">Game Master:</div>
+            <div class="gm-name">{$uiStore.hoveredRoute.gm}</div>
+          </div>
+        {/if}
       </div>
     </div>
   {/if}
@@ -338,11 +358,11 @@ import RegionModal from './RegionModal.svelte';
       : -1}
     <div class="info-display">
       <div class="info-content waypoint-content" style="border-left: 4px solid {
-        route?.color || '#888'
+        $uiStore.hoveredWaypoint.routeColor || route?.color || '#888'
       }">
         <div class="info-title">
           <span class="info-icon waypoint-icon">🧭</span>
-          <h3>From {route?.name || 'Unknown'}</h3>
+          <h3>From {$uiStore.hoveredWaypoint.routeName || route?.name || 'Unknown'}</h3>
         </div>
         {#if $uiStore.hoveredWaypoint?.date}
           <div class="waypoint-detail">
@@ -360,6 +380,26 @@ import RegionModal from './RegionModal.svelte';
             <span class="detail-value">
               {waypointIndex} {waypointIndex === 1 ? 'day' : 'days'}
             </span>
+          </div>
+        {/if}
+        
+        <!-- Participants Section -->
+        {#if $uiStore.hoveredWaypoint.participants && $uiStore.hoveredWaypoint.participants.length > 0}
+          <div class="route-participants">
+            <div class="participants-title">Participants:</div>
+            <ul class="participants-list">
+              {#each $uiStore.hoveredWaypoint.participants as participant}
+                <li>{participant}</li>
+              {/each}
+            </ul>
+          </div>
+        {/if}
+        
+        <!-- GM Section -->
+        {#if $uiStore.hoveredWaypoint.gm}
+          <div class="route-gm">
+            <div class="gm-title">Game Master:</div>
+            <div class="gm-name">{$uiStore.hoveredWaypoint.gm}</div>
           </div>
         {/if}
       </div>
@@ -414,6 +454,8 @@ import RegionModal from './RegionModal.svelte';
           color={route.color}
           isEditable={route.editable}
           lengthInDays={getRouteLengthInDays(route.id)}
+          participants={route.participants || []}
+          gm={route.gm}
         />
         
         <!-- Waypoint markers -->
@@ -532,6 +574,36 @@ import RegionModal from './RegionModal.svelte';
     background-color: rgba(255, 255, 255, 0.1);
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
+  }
+  
+  /* Route participants and GM styles */
+  .route-participants, .route-gm {
+    margin-top: 10px;
+    padding: 6px 8px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+  }
+  
+  .participants-title, .gm-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #aaa;
+    margin-bottom: 4px;
+  }
+  
+  .participants-list {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.85rem;
+  }
+  
+  .participants-list li {
+    margin-bottom: 2px;
+  }
+  
+  .gm-name {
+    font-size: 0.85rem;
+    padding-left: 8px;
   }
   
   .detail-label {

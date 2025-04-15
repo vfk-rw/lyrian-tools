@@ -102,8 +102,30 @@ export function validateRoute(route: any): Route | null {
     color: validateColor(route.color),
     visible: route.visible !== false, // Default to true if not specified
     editable: false, // Always import as non-editable
-    waypoints: []
+    waypoints: [],
+    participants: []
   };
+  
+  // Validate participants (optional array of strings)
+  if (Array.isArray(route.participants)) {
+    // Limit to 5 participants
+    const participantsToProcess = route.participants.slice(0, 5);
+    
+    for (const participant of participantsToProcess) {
+      if (typeof participant === 'string') {
+        // Sanitize participant name (limit length and validate content)
+        const sanitizedName = validateName(participant);
+        if (sanitizedName) {
+          validatedRoute.participants.push(sanitizedName);
+        }
+      }
+    }
+  }
+  
+  // Validate GM (optional string)
+  if (route.gm !== undefined && typeof route.gm === 'string') {
+    validatedRoute.gm = validateName(route.gm);
+  }
   
   // Validate waypoints
   if (Array.isArray(route.waypoints)) {
