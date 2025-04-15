@@ -8,6 +8,25 @@
   import { uiStore, updateCameraOffset, updateCameraZoom, showModal } from '$lib/map/stores/uiStore';
   import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
   
+  // POI icons dictionary for displaying in the info panel
+  const POI_ICONS: Record<string, string> = {
+    town: '🏘️',
+    city: '🏙️',
+    castle: '🏰',
+    dungeon: '🏛️',
+    cave: '🗻',
+    temple: '⛩️',
+    camp: '⛺',
+    ruins: '🏚️',
+    port: '⚓',
+    mountain: '⛰️',
+    forest: '🌲',
+    landmark: '🗿',
+    quest: '❗',
+    treasure: '💰',
+    default: '📍'
+  };
+  
   // Canvas reference
   let canvasContainer: HTMLDivElement;
   // SVG reference
@@ -228,6 +247,20 @@
   class="map-canvas-container" 
   bind:this={canvasContainer}
 >
+  <!-- POI Info Display -->
+  {#if $uiStore.hoveredPOI}
+    <div class="poi-info-display">
+      <div class="poi-info-content">
+        <div class="poi-info-title">
+          <span class="poi-info-icon">{$uiStore.hoveredPOI.icon in POI_ICONS ? POI_ICONS[$uiStore.hoveredPOI.icon] : POI_ICONS.default}</span>
+          <h3>{$uiStore.hoveredPOI.name}</h3>
+        </div>
+        {#if $uiStore.hoveredPOI.description}
+          <p class="poi-info-description">{$uiStore.hoveredPOI.description}</p>
+        {/if}
+      </div>
+    </div>
+  {/if}
   <!-- SVG canvas for hex map -->
   <svg
     bind:this={svgElement} 
@@ -290,5 +323,54 @@
     bottom: 0;
     width: 100%;
     height: 100%;
+  }
+  
+  /* POI Info Display Styles */
+  .poi-info-display {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 400px;
+    z-index: 100;
+    pointer-events: none; /* Allow clicks to pass through */
+  }
+  
+  .poi-info-content {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: opacity 0.2s ease-in-out;
+    font-family: sans-serif;
+  }
+  
+  .poi-info-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  
+  .poi-info-title h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .poi-info-icon {
+    font-size: 1.5rem;
+  }
+  
+  .poi-info-description {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
   }
 </style>

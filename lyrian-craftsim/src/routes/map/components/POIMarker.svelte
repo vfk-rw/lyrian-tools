@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { uiStore, showModal } from '$lib/map/stores/uiStore';
+  import { uiStore, showModal, setHoveredPOI } from '$lib/map/stores/uiStore';
   import { mapData } from '$lib/map/stores/mapStore';
   import { hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
   
@@ -72,11 +72,19 @@
   
   // Handle mouse events for tooltip
   function handleMouseEnter() {
-    showTooltip = true;
+    // Update the global hovered POI state
+    setHoveredPOI({
+      id: poiId,
+      name: poiName,
+      icon: poiIcon,
+      description: poiDescription,
+      tileKey: tileKey
+    });
   }
   
   function handleMouseLeave() {
-    showTooltip = false;
+    // Clear the global hovered POI state
+    setHoveredPOI(null);
   }
   
   // Position offsets (may be used to place multiple POIs on one tile)
@@ -95,42 +103,36 @@
   tabindex="0"
   aria-label="{poiName} - Click to edit"
 >
-  <!-- Icon background circle -->
-  <circle 
-    cx="0" 
-    cy="0" 
-    r="12" 
-    fill="rgba(0, 0, 0, 0.6)" 
-    stroke="white" 
-    stroke-width="1"
-    class="poi-icon-bg"
-  />
-  
-  <!-- Icon text -->
+  <!-- Icon text (no background circle) -->
   <text 
     x="0" 
     y="0" 
     text-anchor="middle" 
     dominant-baseline="middle" 
-    font-size="14"
+    font-size="16"
     fill="white"
+    stroke="rgba(0, 0, 0, 0.5)"
+    stroke-width="0.5"
     class="poi-icon-text"
   >
     {displayIcon}
   </text>
   
-  <!-- Tooltip shown on hover -->
-  {#if showTooltip}
-    <foreignObject x="-100" y="-80" width="200" height="80" class="tooltip-container">
-      <div class="poi-tooltip">
-        <h3>{poiName}</h3>
-        {#if poiDescription}
-          <p>{poiDescription}</p>
-        {/if}
-        <span class="tooltip-hint">Click to edit</span>
-      </div>
-    </foreignObject>
-  {/if}
+  <!-- POI name text below the icon -->
+  <text 
+    x="0" 
+    y="14" 
+    text-anchor="middle" 
+    dominant-baseline="middle" 
+    font-size="10"
+    fill="white"
+    stroke="rgba(0, 0, 0, 0.8)"
+    stroke-width="1"
+    paint-order="stroke"
+    class="poi-name-text"
+  >
+    {poiName}
+  </text>
 </g>
 
 <style>

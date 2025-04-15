@@ -37,6 +37,15 @@ export interface RegionModalParams {
 
 export type ModalParams = POIModalParams | RegionModalParams;
 
+// POI hover info
+export interface POIHoverInfo {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  tileKey: string;
+}
+
 // UI State interface
 export interface UIState {
   // Current tool selection
@@ -56,6 +65,7 @@ export interface UIState {
   selectedTiles: Array<{q: number, r: number}>;
   hoveredTile: {q: number, r: number} | null;
   hoveredRegion: string | null;
+  hoveredPOI: POIHoverInfo | null;
   
   // Camera control
   cameraOffset: { x: number, y: number };
@@ -77,9 +87,10 @@ const initialState: UIState = {
   selectedTiles: [],
   hoveredTile: null,
   hoveredRegion: null,
+  hoveredPOI: null,
   
   cameraOffset: { x: 0, y: 0 },
-  cameraZoom: 1
+  cameraZoom: 1.5 // 50% more zoom for better readability
 };
 
 // Create the store
@@ -164,7 +175,13 @@ const createUIStore = () => {
         // Clear the selection
         update(state => ({ ...state, selectedTiles: [] }));
       }
-    }
+    },
+    
+    // POI hover management
+    setHoveredPOI: (poiInfo: POIHoverInfo | null) => update(state => ({
+      ...state,
+      hoveredPOI: poiInfo
+    }))
   };
 };
 
@@ -193,5 +210,6 @@ export const {
   toggleTileSelection,
   updateCameraOffset,
   updateCameraZoom,
-  createRegion
+  createRegion,
+  setHoveredPOI
 } = uiStore;
