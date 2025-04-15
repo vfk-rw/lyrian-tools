@@ -88,20 +88,12 @@ function createRoutesStore() {
     addWaypoint: (routeId: string, waypointData: Omit<Waypoint, 'id'>) => {
       const id = uuidv4();
       
-      console.group(`[DEBUG] routeStore.addWaypoint`);
-      console.log(`Route ID: ${routeId}`);
-      console.log(`Waypoint data:`, JSON.stringify(waypointData, null, 2));
-      console.log(`Generated ID: ${id}`);
-      
       // Make sure date is properly handled
       if ('date' in waypointData) {
-        console.log(`Date provided: ${waypointData.date || 'empty string or undefined'}`);
-        
         // Make a copy of the waypoint data to ensure we don't lose the date
         const processedData = { ...waypointData };
         if (processedData.date === '') {
           processedData.date = undefined;
-          console.log(`Date converted from empty string to undefined`);
         }
         
         // Create the waypoint with modified data
@@ -116,10 +108,6 @@ function createRoutesStore() {
               ...route,
               waypoints
             });
-            
-            console.log(`Waypoint added to route with ${waypoints.length} total waypoints`);
-          } else {
-            console.warn(`Route ${routeId} not found`);
           }
           
           return { routes };
@@ -143,35 +131,17 @@ function createRoutesStore() {
         });
       }
       
-      // Double-check the waypoint was added with the correct date
-      const state = get(routesData);
-      const route = state.routes.get(routeId);
-      if (route) {
-        const addedWaypoint = route.waypoints.find(wp => wp.id === id);
-        if (addedWaypoint) {
-          console.log(`✅ Verified waypoint added with date: ${addedWaypoint.date || 'undefined'}`);
-        }
-      }
-      
-      console.groupEnd();
       return id;
     },
     
     // Update a waypoint
     updateWaypoint: (routeId: string, waypointId: string, waypointData: Partial<Omit<Waypoint, 'id' | 'q' | 'r'>>) => {
-      console.group(`[DEBUG] routeStore.updateWaypoint`);
-      console.log(`Route ID: ${routeId}, Waypoint ID: ${waypointId}`);
-      console.log(`Update data:`, JSON.stringify(waypointData, null, 2));
-      
       // Make sure date is properly handled
       if ('date' in waypointData) {
-        console.log(`Date provided: ${waypointData.date || 'empty string or undefined'}`);
-        
         // Make a copy of the waypoint data to ensure we don't lose the date
         const processedData = { ...waypointData };
         if (processedData.date === '') {
           processedData.date = undefined;
-          console.log(`Date converted from empty string to undefined`);
         }
         
         // Update with the processed data
@@ -191,18 +161,11 @@ function createRoutesStore() {
                 ...processedData
               };
               
-              console.log(`Waypoint being updated from:`, originalWaypoint);
-              console.log(`To:`, waypoints[waypointIndex]);
-              
               routes.set(routeId, {
                 ...route,
                 waypoints
               });
-            } else {
-              console.warn(`Waypoint ${waypointId} not found in route`);
             }
-          } else {
-            console.warn(`Route ${routeId} not found`);
           }
           
           return { routes };
@@ -233,18 +196,6 @@ function createRoutesStore() {
           return { routes };
         });
       }
-      
-      // Verify the waypoint was updated correctly
-      const state = get(routesData);
-      const route = state.routes.get(routeId);
-      if (route) {
-        const updatedWaypoint = route.waypoints.find(wp => wp.id === waypointId);
-        if (updatedWaypoint) {
-          console.log(`✅ Verified waypoint updated with date: ${updatedWaypoint.date || 'undefined'}`);
-        }
-      }
-      
-      console.groupEnd();
     },
     
     // Remove a waypoint
@@ -372,38 +323,13 @@ function createRoutesStore() {
     // Import routes from JSON with security validation
     importRoutesJSON: (jsonData: any, fileSize: number = 0) => {
       try {
-        console.group('[DEBUG] importRoutesJSON');
-        console.log('Input data:', JSON.stringify(jsonData, null, 2));
-        
         // Import validateAndSanitizeRoutesJSON dynamically to prevent circular dependencies
         import('../utils/secureRouteImport').then(({ validateAndSanitizeRoutesJSON }) => {
-          console.log('Starting validation of route data');
-          
           // Validate and sanitize the routes JSON
           const validationResult = validateAndSanitizeRoutesJSON(jsonData, fileSize);
           
           if (!validationResult.isValid || !validationResult.sanitizedData) {
-            console.error('Failed to import routes:', validationResult.error);
-            console.groupEnd();
             return false;
-          }
-          
-          console.log('Routes validation successful', validationResult);
-          
-          // Debug - check each route for waypoints with dates
-          for (const route of validationResult.sanitizedData) {
-            console.group(`Route: ${route.name} (${route.id})`);
-            console.log(`${route.waypoints.length} waypoints`);
-            
-            const waypointsWithDates = route.waypoints.filter(wp => wp.date);
-            console.log(`${waypointsWithDates.length} waypoints have dates`);
-            
-            // Log each waypoint
-            route.waypoints.forEach((wp, idx) => {
-              console.log(`Waypoint ${idx}: id=${wp.id}, q=${wp.q}, r=${wp.r}, date=${wp.date || 'no date'}`);
-            });
-            
-            console.groupEnd();
           }
           
           // Convert the sanitized array to a Map
@@ -414,15 +340,11 @@ function createRoutesStore() {
           
           // Update the store
           set({ routes: routesMap });
-          console.log('Routes store updated successfully');
-          console.groupEnd();
           return true;
         });
         
         return true; // Return true initially, actual validation happens asynchronously
       } catch (error) {
-        console.error('Error importing routes:', error);
-        console.groupEnd();
         return false;
       }
     },
