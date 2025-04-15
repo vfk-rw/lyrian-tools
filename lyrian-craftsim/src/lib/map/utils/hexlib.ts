@@ -64,13 +64,48 @@ export function isometricToHex(x: number, y: number): { q: number, r: number } {
 }
 
 /**
- * Convert isometric pixel position to hex key string
+ * More accurate check if a point is inside a specific hex
+ */
+export function isPointInHexPrecise(x: number, y: number, q: number, r: number): boolean {
+  // Get the vertices of this hex
+  const vertices = getHexVertices(q, r);
+  
+  // Use ray casting algorithm to determine if point is in polygon
+  let inside = false;
+  for (let i = 0, j = vertices.length - 1; i < vertices.length; j = i++) {
+    const xi = vertices[i].x, yi = vertices[i].y;
+    const xj = vertices[j].x, yj = vertices[j].y;
+    
+    const intersect = ((yi > y) !== (yj > y))
+        && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+    if (intersect) inside = !inside;
+  }
+  
+  return inside;
+}
+
+/**
+ * Convert isometric pixel position to hex key string with better precision
  */
 export function isometricPointToHexKey(x: number, y: number): string {
+  // First approximate with cube coordinates
   const { q, r } = isometricToHex(x, y);
-  const roundedQ = Math.round(q);
-  const roundedR = Math.round(r);
-  return `${roundedQ},${roundedR}`;
+  const approxQ = Math.round(q);
+  const approxR = Math.round(r);
+  
+  // Check the candidate hex and its neighbors
+  const neighbors = getHexNeighbors(approxQ, approxR);
+  neighbors.unshift([approxQ, approxR]); // Add the approximate hex itself
+  
+  // Find the first hex that contains the point
+  for (const [checkQ, checkR] of neighbors) {
+    if (isPointInHexPrecise(x, y, checkQ, checkR)) {
+      return `${checkQ},${checkR}`;
+    }
+  }
+  
+  // Fall back to the approximate hex if no precise match found
+  return `${approxQ},${approxR}`;
 }
 
 /**

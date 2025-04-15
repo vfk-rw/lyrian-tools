@@ -60,7 +60,17 @@
   
   // Handle canvas click for tile selection
   function handleCanvasClick(e: MouseEvent) {
+    // Don't handle if we're dragging
     if (isDragging) return;
+    
+    // Check if the click was directly on the canvas (not on a hex)
+    // If e.target is the SVG element or the main transform group, proceed
+    // Otherwise, the click was handled by a hex tile and shouldn't be processed here
+    if (e.target !== svgElement && 
+        !(e.target instanceof SVGGElement && e.target.classList.contains('map-transform-group'))) {
+      console.log('Click handled by a hex tile, ignoring in canvas handler');
+      return;
+    }
     
     const rect = canvasContainer.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -73,6 +83,10 @@
     // Find hex at click position
     const hexKey = isometricPointToHexKey(worldX, worldY);
     
+    // Debug what hex was clicked
+    console.log(`Canvas click at world coords (${worldX.toFixed(2)}, ${worldY.toFixed(2)}) mapped to hex: ${hexKey}`);
+    
+    // Only process this click if the hex exists in our map
     if (hexKey && $mapData.tiles.has(hexKey)) {
       // Handle click based on current tool
       handleHexClick(hexKey);
@@ -133,12 +147,31 @@
     }
   }
   
+  // Center the map in the viewport
+  function centerMapInViewport() {
+    if (!canvasContainer) return;
+    
+    // Get container dimensions
+    const containerRect = canvasContainer.getBoundingClientRect();
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+    
+    // Update camera offset to center the map
+    updateCameraOffset(
+      containerWidth / 2,
+      containerHeight / 2
+    );
+  }
+  
   // Setup event listeners
   onMount(() => {
     // Initialize map if needed
     if ($mapData.tiles.size === 0) {
       generateHexGrid(5);
     }
+    
+    // Center the map after generation
+    centerMapInViewport();
     
     // Add event listeners
     canvasContainer.addEventListener('mousedown', handleMouseDown);
@@ -147,6 +180,9 @@
     canvasContainer.addEventListener('wheel', handleWheel);
     canvasContainer.addEventListener('click', handleCanvasClick);
     
+    // Also center the map when window resizes
+    window.addEventListener('resize', centerMapInViewport);
+    
     return () => {
       // Clean up event listeners
       canvasContainer.removeEventListener('mousedown', handleMouseDown);
@@ -154,6 +190,7 @@
       window.removeEventListener('mouseup', handleMouseUp);
       canvasContainer.removeEventListener('wheel', handleWheel);
       canvasContainer.removeEventListener('click', handleCanvasClick);
+      window.removeEventListener('resize', centerMapInViewport);
     };
   });
   
@@ -201,6 +238,7 @@
   >
     <!-- Main transformation group for pan/zoom -->
     <g
+      class="map-transform-group"
       transform="translate({$uiStore.cameraOffset.x} {$uiStore.cameraOffset.y}) scale({$uiStore.cameraZoom})"
     >
       <!-- Region outlines -->

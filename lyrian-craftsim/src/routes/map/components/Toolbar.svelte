@@ -135,6 +135,7 @@
             style:background-color={BIOME_COLORS[biome]}
             on:click={() => handleBiomeSelect(biome)}
             title={biome.charAt(0).toUpperCase() + biome.slice(1)}
+            aria-label={biome.charAt(0).toUpperCase() + biome.slice(1)}
           >
           </button>
         {/each}

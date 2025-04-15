@@ -45,7 +45,19 @@
     // Stop event propagation to prevent triggering the tile click event
     event.stopPropagation();
     
-    // Open edit modal for this POI
+    openEditModal();
+  }
+  
+  // Handle keyboard events
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openEditModal();
+    }
+  }
+  
+  // Common function to open the edit modal
+  function openEditModal() {
     showModal({
       type: 'poi',
       tileKey,
@@ -76,8 +88,12 @@
   class="poi-marker"
   transform="translate({position.x}, {position.y + offsetY})"
   on:click={handleClick}
+  on:keydown={handleKeyDown}
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
+  role="button"
+  tabindex="0"
+  aria-label="{poiName} - Click to edit"
 >
   <!-- Icon background circle -->
   <circle 

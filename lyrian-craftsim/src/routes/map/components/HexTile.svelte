@@ -40,12 +40,19 @@
   };
   
   // Handle click based on selected tool
-  function handleClick() {
+  function handleClick(event: MouseEvent) {
+    // Stop event propagation to prevent the canvas click handler from also triggering
+    event.stopPropagation();
+    
+    // Log the tile being clicked
+    console.log(`Hex tile clicked: (${q},${r})`);
+    
     const currentTool = $uiStore.currentTool;
     
     switch (currentTool) {
       case 'select':
         // Select this tile
+        toggleTileSelection(q, r);
         break;
         
       case 'biome':
@@ -122,7 +129,18 @@
   class:selected={isSelected}
   class:hovered={isHovered}
   on:click={handleClick}
-  on:keydown={(e) => e.key === 'Enter' && handleClick()}
+  on:keydown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      // Create a synthetic click event
+      const syntheticEvent = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+      handleClick(syntheticEvent);
+      e.preventDefault();
+    }
+  }}
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   role="button"

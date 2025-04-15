@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { uiStore, closeModal, createRegion } from '$lib/map/stores/uiStore';
+  import { uiStore, closeModal, createRegion, type RegionModalParams } from '$lib/map/stores/uiStore';
   import { addRegion, updateRegion, removeRegion } from '$lib/map/stores/mapStore';
   import { v4 as uuidv4 } from 'uuid';
   
@@ -22,17 +22,18 @@
   ];
   
   // Computed properties
-  $: isEditing = $uiStore.modalParams?.regionId !== undefined;
+  $: isEditing = $uiStore.modalParams?.type === 'region' && ($uiStore.modalParams as RegionModalParams).regionId !== undefined;
   $: modalTitle = isEditing ? 'Edit Region' : 'Create New Region';
-  $: regionId = $uiStore.modalParams?.regionId || '';
+  $: regionId = $uiStore.modalParams?.type === 'region' ? ($uiStore.modalParams as RegionModalParams).regionId || '' : '';
   $: selectedTiles = $uiStore.selectedTiles || [];
   
   // Initialize form when the modal is shown
   $: if ($uiStore.showModal && $uiStore.modalParams?.type === 'region') {
     if (isEditing) {
       // Find the region by ID
-      const region = $uiStore.modalParams?.regionId ? 
-        getRegionById($uiStore.modalParams.regionId) : null;
+      const modalParams = $uiStore.modalParams as RegionModalParams;
+      const regionId = modalParams.regionId;
+      const region = regionId ? getRegionById(regionId) : null;
       
       if (region) {
         // Populate form with existing region data
@@ -48,8 +49,7 @@
   
   // Helper function to get a region by ID
   function getRegionById(id: string) {
-    const regions = $mapData?.regions || [];
-    return regions.find(r => r.id === id);
+    return $mapData?.regions.get(id) || null;
   }
   
   // Handle form submission
@@ -100,8 +100,8 @@
 
 <!-- Modal backdrop -->
 {#if $uiStore.showModal && $uiStore.modalParams?.type === 'region'}
-  <div class="modal-backdrop" on:click={handleCancel}>
-    <div class="modal-content" on:click|stopPropagation>
+  <div class="modal-backdrop" on:click={handleCancel} on:keydown={e => e.key === 'Escape' && handleCancel()} role="dialog" aria-modal="true">
+    <div class="modal-content" on:click|stopPropagation role="document">
       <div class="modal-header">
         <h2>{modalTitle}</h2>
         <button class="close-button" on:click={handleCancel}>×</button>
@@ -120,9 +120,9 @@
         </div>
         
         <div class="form-group">
-          <label>Region Color</label>
+          <label for="region-color">Region Color</label>
           <div class="color-input-row">
-            <input type="color" bind:value={regionColor} />
+            <input type="color" id="region-color" bind:value={regionColor} />
             <span class="current-color" style:background-color={regionColor}></span>
           </div>
           
@@ -134,6 +134,7 @@
                 class:active={regionColor === color}
                 style:background-color={color}
                 on:click={() => regionColor = color}
+                aria-label={`Select color ${color}`}
               ></button>
             {/each}
           </div>
