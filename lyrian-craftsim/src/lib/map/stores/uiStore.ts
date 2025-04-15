@@ -4,7 +4,7 @@ import { mapData, addRegion } from './mapStore';
 import { v4 as uuidv4 } from 'uuid';
 
 // Tool types
-export type ToolType = 'select' | 'biome' | 'height' | 'poi' | 'region' | 'resize';
+export type ToolType = 'select' | 'biome' | 'height' | 'poi' | 'region';
 
 // Biome types
 export const BIOME_TYPES = ['plains', 'forest', 'mountain', 'water', 'desert', 'swamp', 'tundra', 'unexplored'];

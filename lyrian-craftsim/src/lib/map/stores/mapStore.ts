@@ -192,37 +192,22 @@ const createMapStore = () => {
       });
     },
     
-    // Generate a grid of hexagons
-    generateHexGrid: (size: number, centerBiome = 'plains') => {
+    // Generate a 30x30 grid of hexagons with unexplored biome and flat height 0
+    generateHexGrid: () => {
       update(data => {
         // Clear existing data
         data.tiles.clear();
         data.regions.clear();
         
-        // Generate grid
-        const hexes = getHexesInRange(0, 0, size);
+        // Generate a grid that's approximately 30x30
+        // For a hex grid, we'll create a radius 15 grid from center which should give us about 30x30
+        const hexes = getHexesInRange(0, 0, 15);
         
-        // Create tiles for each hex
+        // Create tiles for each hex with unexplored biome and height 0
         hexes.forEach(([q, r]) => {
-          // Determine biome type based on distance from center
-          const distance = Math.max(Math.abs(q), Math.abs(r), Math.abs(-q-r));
-          let biome = centerBiome;
-          
-          // Simple biome distribution for testing
-          if (distance > size * 0.8) {
-            biome = 'mountain';
-          } else if (distance > size * 0.6) {
-            biome = 'forest';
-          } else if (distance > size * 0.4) {
-            biome = 'plains';
-          } else if (distance > size * 0.2) {
-            biome = 'desert';
-          } else {
-            biome = 'water';
-          }
-          
-          // Calculate a simple height based on distance from center
-          const height = Math.floor((size - distance) / size * 10);
+          // All tiles are unexplored and flat
+          const biome = 'unexplored';
+          const height = 0;
           
           // Create the tile
           const key = getHexKey(q, r);

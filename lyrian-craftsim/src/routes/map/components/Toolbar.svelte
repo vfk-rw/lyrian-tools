@@ -23,8 +23,7 @@
     biome: 'Paint different terrain types',
     height: 'Adjust elevation of tiles',
     poi: 'Add points of interest',
-    region: 'Select tiles then create or edit regions',
-    resize: 'Add or remove tiles from the map'
+    region: 'Select tiles then create or edit regions'
   };
   
   // Get current tool description
@@ -100,15 +99,6 @@
         <span class="tool-label">Region</span>
       </button>
       
-      <button 
-        class="tool-button" 
-        class:active={$uiStore.currentTool === 'resize'}
-        on:click={() => handleToolSelect('resize')}
-        title="Resize Tool"
-      >
-        <span class="tool-icon">↔️</span>
-        <span class="tool-label">Resize</span>
-      </button>
     </div>
     
     <div class="tool-description">

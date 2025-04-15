@@ -48,8 +48,8 @@
       }
     });
     
-    // Trigger reactivity
-    $mapData = $mapData;
+    // No need to use $mapData = $mapData as mapData is not a writable store that has a .set() method
+    // The mutations to the Map object inside $mapData.tiles are already reactive
     
     closeModal();
   }
@@ -74,8 +74,7 @@
       });
     });
     
-    // Trigger reactivity
-    $mapData = $mapData;
+    // No need to force reactivity as the Map operations are already tracked by Svelte
     
     closeModal();
   }

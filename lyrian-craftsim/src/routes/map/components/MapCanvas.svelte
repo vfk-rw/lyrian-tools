@@ -8,22 +8,22 @@
   import { uiStore, updateCameraOffset, updateCameraZoom, showModal, type RegionHoverInfo } from '$lib/map/stores/uiStore';
   import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
 
-// Helper function to calculate region center for labels
-function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: number } {
-  if (tiles.length === 0) {
-    return { x: 0, y: 0 };
+  // Helper function to calculate region center for labels
+  function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: number } {
+    if (tiles.length === 0) {
+      return { x: 0, y: 0 };
+    }
+    
+    // Calculate the center based on the average of all tile positions
+    const sumQ = tiles.reduce((sum, [q]) => sum + q, 0);
+    const sumR = tiles.reduce((sum, [_, r]) => sum + r, 0);
+    
+    const centerQ = sumQ / tiles.length;
+    const centerR = sumR / tiles.length;
+    
+    // Convert to pixel coordinates
+    return hexToIsometric(centerQ, centerR);
   }
-  
-  // Calculate the center based on the average of all tile positions
-  const sumQ = tiles.reduce((sum, [q]) => sum + q, 0);
-  const sumR = tiles.reduce((sum, [_, r]) => sum + r, 0);
-  
-  const centerQ = sumQ / tiles.length;
-  const centerR = sumR / tiles.length;
-  
-  // Convert to pixel coordinates
-  return hexToIsometric(centerQ, centerR);
-}
   
   // POI icons dictionary for displaying in the info panel
   const POI_ICONS: Record<string, string> = {
@@ -165,13 +165,6 @@ function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: 
       case 'region':
         // Already handled by HexTile component
         break;
-      
-      case 'resize':
-        // Show the resize modal
-        showModal({
-          type: 'resize'
-        });
-        break;
     }
   }
   
@@ -195,7 +188,7 @@ function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: 
   onMount(() => {
     // Initialize map if needed
     if ($mapData.tiles.size === 0) {
-      generateHexGrid(5);
+      generateHexGrid();
     }
     
     // Center the map after generation
@@ -309,6 +302,7 @@ function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: 
       </div>
     </div>
   {/if}
+  
   <!-- SVG canvas for hex map -->
   <svg
     bind:this={svgElement} 
