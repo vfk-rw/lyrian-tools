@@ -4,8 +4,8 @@
   import POIMarker from './POIMarker.svelte';
   import RegionOutline from './RegionOutline.svelte';
   import { mapData, exportMapJSON, importMapJSON, generateHexGrid } from '$lib/map/stores/mapStore';
-  import type { Tile } from '$lib/map/stores/mapStore';
-  import { uiStore, updateCameraOffset, updateCameraZoom, showModal } from '$lib/map/stores/uiStore';
+  import type { Tile, Region } from '$lib/map/stores/mapStore';
+  import { uiStore, updateCameraOffset, updateCameraZoom, showModal, type RegionHoverInfo } from '$lib/map/stores/uiStore';
   import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
   
   // POI icons dictionary for displaying in the info panel
@@ -236,6 +236,29 @@
     );
   };
   
+  // Get information for the currently hovered region
+  $: hoveredRegion = $uiStore.hoveredRegion ? 
+    Array.from($mapData.regions.values()).find(r => r.id === $uiStore.hoveredRegion) : 
+    null;
+    
+  // Set hover information for the region
+  $: if (hoveredRegion) {
+    uiStore.set({
+      ...$uiStore,
+      hoveredRegionInfo: {
+        id: hoveredRegion.id,
+        name: hoveredRegion.name,
+        color: hoveredRegion.color,
+        description: hoveredRegion.description || ''
+      }
+    });
+  } else {
+    uiStore.set({
+      ...$uiStore,
+      hoveredRegionInfo: null
+    });
+  }
+  
   // Determine if a region is hovered, ensuring we return a boolean
   function isRegionHovered(regionId: string): boolean {
     return $uiStore.hoveredRegion === regionId ? true : false;
@@ -247,16 +270,32 @@
   class="map-canvas-container" 
   bind:this={canvasContainer}
 >
+  <!-- Info Displays -->
   <!-- POI Info Display -->
   {#if $uiStore.hoveredPOI}
-    <div class="poi-info-display">
-      <div class="poi-info-content">
-        <div class="poi-info-title">
-          <span class="poi-info-icon">{$uiStore.hoveredPOI.icon in POI_ICONS ? POI_ICONS[$uiStore.hoveredPOI.icon] : POI_ICONS.default}</span>
+    <div class="info-display">
+      <div class="info-content">
+        <div class="info-title">
+          <span class="info-icon">{$uiStore.hoveredPOI.icon in POI_ICONS ? POI_ICONS[$uiStore.hoveredPOI.icon] : POI_ICONS.default}</span>
           <h3>{$uiStore.hoveredPOI.name}</h3>
         </div>
         {#if $uiStore.hoveredPOI.description}
-          <p class="poi-info-description">{$uiStore.hoveredPOI.description}</p>
+          <p class="info-description">{$uiStore.hoveredPOI.description}</p>
+        {/if}
+      </div>
+    </div>
+  {/if}
+  
+  <!-- Region Info Display -->
+  {#if $uiStore.hoveredRegionInfo}
+    <div class="info-display">
+      <div class="info-content" style="border-left: 4px solid {$uiStore.hoveredRegionInfo.color}">
+        <div class="info-title">
+          <span class="info-icon region-icon">🔷</span>
+          <h3>{$uiStore.hoveredRegionInfo.name}</h3>
+        </div>
+        {#if $uiStore.hoveredRegionInfo.description}
+          <p class="info-description">{$uiStore.hoveredRegionInfo.description}</p>
         {/if}
       </div>
     </div>
@@ -279,7 +318,8 @@
         <RegionOutline 
           regionId={region.id} 
           regionName={region.name} 
-          regionColor={region.color} 
+          regionColor={region.color}
+          regionDescription={region.description}
           tiles={region.tiles} 
           isHovered={isRegionHovered(region.id)}
         />
@@ -325,8 +365,8 @@
     height: 100%;
   }
   
-  /* POI Info Display Styles */
-  .poi-info-display {
+  /* Info Display Styles */
+  .info-display {
     position: absolute;
     top: 10px;
     left: 0;
@@ -338,7 +378,7 @@
     pointer-events: none; /* Allow clicks to pass through */
   }
   
-  .poi-info-content {
+  .info-content {
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     border-radius: 8px;
@@ -350,24 +390,28 @@
     font-family: sans-serif;
   }
   
-  .poi-info-title {
+  .info-title {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 6px;
   }
   
-  .poi-info-title h3 {
+  .info-title h3 {
     margin: 0;
     font-size: 1.2rem;
     font-weight: 600;
   }
   
-  .poi-info-icon {
+  .info-icon {
     font-size: 1.5rem;
   }
   
-  .poi-info-description {
+  .region-icon {
+    color: #4CAF50;
+  }
+  
+  .info-description {
     margin: 0;
     font-size: 0.9rem;
     line-height: 1.4;

@@ -23,6 +23,7 @@ export interface Region {
   id: string;
   name: string;
   color: string;
+  description?: string;
   tiles: Array<[number, number]>; // Array of [q, r] coordinates
 }
 
@@ -152,6 +153,7 @@ const createMapStore = () => {
           id: regionId,
           name: region.name,
           color: region.color,
+          description: region.description,
           tiles: [...region.tiles]
         });
         return data;
@@ -167,6 +169,7 @@ const createMapStore = () => {
         if (region) {
           if (updates.name) region.name = updates.name;
           if (updates.color) region.color = updates.color;
+          if (updates.description !== undefined) region.description = updates.description;
           if (updates.tiles) region.tiles = [...updates.tiles];
         }
         return data;
@@ -282,6 +285,7 @@ const createMapStore = () => {
                 id: region.id,
                 name: region.name,
                 color: region.color || '#ff0000',
+                description: region.description,
                 tiles: [...region.tiles]
               });
             }

@@ -5,6 +5,7 @@
   
   // Form state
   let regionName = '';
+  let regionDescription = '';
   let regionColor = '#4CAF50'; // Default to green
   
   // Predefined color options
@@ -39,11 +40,13 @@
         // Populate form with existing region data
         regionName = region.name;
         regionColor = region.color;
+        regionDescription = region.description || '';
       }
     } else {
       // Default values for new region
       regionName = `Region ${Math.floor(Math.random() * 1000)}`;
       regionColor = REGION_COLORS[Math.floor(Math.random() * REGION_COLORS.length)];
+      regionDescription = '';
     }
   }
   
@@ -60,18 +63,20 @@
       // Update existing region
       updateRegion(regionId, {
         name: regionName,
-        color: regionColor
+        color: regionColor,
+        description: regionDescription
       });
     } else {
       // Create a new region
       if (selectedTiles.length > 0) {
-        createRegion(regionName, regionColor);
+        createRegion(regionName, regionColor, regionDescription);
       } else {
         // If no tiles selected, create an empty region
         addRegion({
           id: uuidv4(),
           name: regionName,
           color: regionColor,
+          description: regionDescription,
           tiles: []
         });
       }
@@ -119,6 +124,16 @@
           />
         </div>
         
+        <div class="form-group">
+          <label for="region-description">Region Description</label>
+          <textarea
+            id="region-description"
+            bind:value={regionDescription}
+            placeholder="Enter region description (optional)"
+            rows="3"
+          ></textarea>
+        </div>
+
         <div class="form-group">
           <label for="region-color">Region Color</label>
           <div class="color-input-row">
@@ -242,9 +257,22 @@
     font-size: 1rem;
   }
   
-  input[type="text"]:focus {
+  input[type="text"]:focus,
+  textarea:focus {
     outline: none;
     border-color: #666;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 80px;
   }
   
   .color-input-row {

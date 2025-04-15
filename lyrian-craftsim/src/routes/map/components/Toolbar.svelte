@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { uiStore, selectTool, selectBiome, selectHeight, toggleLabels, toggleGrid, BIOME_TYPES } from '$lib/map/stores/uiStore';
+  import { uiStore, selectTool, selectBiome, selectHeight, toggleLabels, toggleGrid, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
   
   // Color mapping for biomes
   const BIOME_COLORS: Record<string, string> = {
@@ -22,7 +22,7 @@
     biome: 'Paint different terrain types',
     height: 'Adjust elevation of tiles',
     poi: 'Add points of interest',
-    region: 'Create and edit regions',
+    region: 'Select tiles then create or edit regions',
     resize: 'Add or remove tiles from the map'
   };
   
@@ -164,6 +164,31 @@
       </div>
       <div class="selected-height">
         Selected Height: {$uiStore.selectedHeight}
+      </div>
+    </section>
+  {/if}
+  
+  {#if $uiStore.currentTool === 'region'}
+    <section class="toolbar-section">
+      <h3>Region Tool</h3>
+      <div class="region-actions">
+        <button 
+          class="action-button" 
+          disabled={$uiStore.selectedTiles.length === 0}
+          on:click={() => showModal({ type: 'region' })}
+          title="Create a new region with selected tiles"
+        >
+          <span class="action-icon">➕</span>
+          <span class="action-label">Create Region</span>
+        </button>
+        
+        <div class="selected-count">
+          {$uiStore.selectedTiles.length} tiles selected
+        </div>
+        
+        <div class="help-text">
+          Select tiles then create a region, or click an existing region to edit.
+        </div>
       </div>
     </section>
   {/if}

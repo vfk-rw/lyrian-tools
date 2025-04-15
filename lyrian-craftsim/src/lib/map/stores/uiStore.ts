@@ -46,6 +46,14 @@ export interface POIHoverInfo {
   tileKey: string;
 }
 
+// Region hover info
+export interface RegionHoverInfo {
+  id: string;
+  name: string;
+  color: string;
+  description: string;
+}
+
 // UI State interface
 export interface UIState {
   // Current tool selection
@@ -66,6 +74,7 @@ export interface UIState {
   hoveredTile: {q: number, r: number} | null;
   hoveredRegion: string | null;
   hoveredPOI: POIHoverInfo | null;
+  hoveredRegionInfo: RegionHoverInfo | null;
   
   // Camera control
   cameraOffset: { x: number, y: number };
@@ -88,6 +97,7 @@ const initialState: UIState = {
   hoveredTile: null,
   hoveredRegion: null,
   hoveredPOI: null,
+  hoveredRegionInfo: null,
   
   cameraOffset: { x: 0, y: 0 },
   cameraZoom: 1.5 // 50% more zoom for better readability
@@ -159,7 +169,7 @@ const createUIStore = () => {
     })),
     
     // Create a region from the selected tiles
-    createRegion: (name: string, color: string) => {
+    createRegion: (name: string, color: string, description?: string) => {
       const currentState = get(uiStore);
       const tiles = currentState.selectedTiles.map(tile => [tile.q, tile.r] as [number, number]);
       
@@ -169,6 +179,7 @@ const createUIStore = () => {
           id: uuidv4(),
           name,
           color,
+          description,
           tiles
         });
         

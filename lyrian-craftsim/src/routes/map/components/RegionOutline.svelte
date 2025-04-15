@@ -6,6 +6,7 @@
   export let regionId: string;
   export let regionName: string;
   export let regionColor: string;
+  export let regionDescription: string | undefined = undefined;
   export let tiles: Array<[number, number]>;
   export let isHovered = false; // Default to false, allow any truthy/falsy value
   
