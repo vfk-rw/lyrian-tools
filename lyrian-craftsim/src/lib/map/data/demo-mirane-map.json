@@ -1,0 +1,5954 @@
+{
+  "mapName": "Demo Mirane Map",
+  "tiles": [
+    {
+      "q": -15,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -15,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -14,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -13,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -12,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -11,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -10,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -9,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -8,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 7,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 8,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 9,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -7,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 6,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 7,
+      "biome": "water",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 8,
+      "biome": "water",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 9,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -6,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 5,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 6,
+      "biome": "water",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 7,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 8,
+      "biome": "water",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 9,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -5,
+      "r": 15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 3,
+      "biome": "desert",
+      "height": 0,
+      "icon": "/src/assets/icons/animal/animal-skull.svg",
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 4,
+      "biome": "desert",
+      "height": 0,
+      "icon": "/src/assets/icons/animal/animal-skull.svg",
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 5,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 6,
+      "biome": "water",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 7,
+      "biome": "water",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 8,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 13,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -4,
+      "r": 15,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 3,
+      "biome": "desert",
+      "height": 0,
+      "icon": "/src/assets/icons/animal/animal-skull.svg",
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 4,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 5,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 6,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 7,
+      "biome": "mountain",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 8,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 9,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 10,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 11,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 12,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 13,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 14,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -3,
+      "r": 15,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 2,
+      "biome": "desert",
+      "height": 0,
+      "icon": "/src/assets/icons/animal/animal-skull.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 3,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 4,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 5,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 6,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": [
+        {
+          "id": "afd1e671-a2f2-4e4b-a0b6-b46afbc2a8ca",
+          "name": "Pandora's Church",
+          "icon": "temple",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "q": -2,
+      "r": 7,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 8,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 9,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 10,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 11,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 12,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 13,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 14,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 15,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 2,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 3,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 4,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 5,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 6,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 7,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 8,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 9,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 10,
+      "biome": "plains",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 11,
+      "biome": "plains",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 12,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 13,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 14,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": -1,
+      "r": 15,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 2,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 3,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 4,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 5,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/trail.svg",
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/trail.svg",
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/trail.svg",
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 9,
+      "biome": "plains",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 10,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/civilization/village.svg",
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 11,
+      "biome": "plains",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 12,
+      "biome": "plains",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 13,
+      "biome": "plains",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 14,
+      "biome": "plains",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 0,
+      "r": 15,
+      "biome": "plains",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 2,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 3,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 4,
+      "biome": "plains",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/pine-tree.svg",
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 5,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 6,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 7,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 8,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 9,
+      "biome": "plains",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 10,
+      "biome": "plains",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 11,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 12,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 13,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 1,
+      "r": 14,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 2,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 3,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 4,
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 5,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 6,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 7,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/trail.svg",
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 9,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 10,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 11,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 12,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 2,
+      "r": 13,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 1,
+      "biome": "forest",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 2,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 3,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 4,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 5,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 6,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/trail.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 8,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 9,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 10,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 11,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 3,
+      "r": 12,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 1,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 2,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 3,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/trail.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/trail.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 2,
+      "icon": "/src/assets/icons/nature/trail.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 7,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 8,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 9,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 10,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 4,
+      "r": 11,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 0,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 1,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 2,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 3,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 4,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 5,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 6,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 8,
+      "biome": "tundra",
+      "height": 1,
+      "icon": "/src/assets/icons/nature/mountains.svg",
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 5,
+      "r": 10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": -1,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 0,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 1,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 2,
+      "biome": "forest",
+      "height": 0,
+      "icon": "/src/assets/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 1,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": 4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": 3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 13,
+      "r": 2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 14,
+      "r": 1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 15,
+      "r": 0,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    }
+  ],
+  "regions": [
+    {
+      "id": "685f6434-02d7-4ba6-bf6f-2ee4063afa5a",
+      "name": "Lake Voltaire",
+      "color": "#2196F3",
+      "description": "",
+      "tiles": [
+        [
+          -5,
+          6
+        ],
+        [
+          -6,
+          7
+        ],
+        [
+          -6,
+          8
+        ],
+        [
+          -5,
+          8
+        ],
+        [
+          -5,
+          7
+        ],
+        [
+          -4,
+          6
+        ],
+        [
+          -4,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "259029ad-d661-4374-a3d2-cc92c096db62",
+      "name": "Corewood",
+      "color": "#607D8B",
+      "description": "",
+      "tiles": [
+        [
+          -1,
+          6
+        ],
+        [
+          -2,
+          6
+        ],
+        [
+          -1,
+          5
+        ],
+        [
+          -1,
+          7
+        ],
+        [
+          -2,
+          7
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -2,
+          5
+        ],
+        [
+          -3,
+          5
+        ],
+        [
+          -2,
+          4
+        ],
+        [
+          -1,
+          4
+        ],
+        [
+          -1,
+          3
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -3,
+          4
+        ],
+        [
+          -2,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "d1003a83-4c67-417d-b6fc-fd8e7b3d7575",
+      "name": "Mirane",
+      "color": "#2196F3",
+      "description": "",
+      "tiles": [
+        [
+          0,
+          9
+        ],
+        [
+          -1,
+          10
+        ],
+        [
+          -1,
+          11
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          11
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          1,
+          9
+        ]
+      ]
+    }
+  ]
+}

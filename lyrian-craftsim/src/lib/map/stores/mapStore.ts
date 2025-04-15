@@ -318,6 +318,19 @@ export const regionsList = derived(mapData, $mapData =>
   Array.from($mapData.regions.values())
 );
 
+// Load demo map from file
+import demoMapData from '../data/demo-mirane-map.json';
+
+// Function to load the demo map
+const loadDemoMap = () => {
+  try {
+    importMapJSON(demoMapData);
+    console.log('Demo map loaded successfully');
+  } catch (error) {
+    console.error('Error loading demo map:', error);
+  }
+};
+
 // Export specific actions for convenience
 export const { 
   addTile, 
@@ -336,3 +349,6 @@ export const {
   exportMapJSON, 
   importMapJSON 
 } = mapStore;
+
+// Export the loadDemoMap function
+export { loadDemoMap };

@@ -97,7 +97,7 @@ const initialState: UIState = {
   
   showRegionLabels: true,
   showPOILabels: true,
-  showHeightLabels: true,
+  showHeightLabels: false,
   
   showModal: false,
   modalParams: null,

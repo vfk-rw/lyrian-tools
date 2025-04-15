@@ -3,7 +3,12 @@
   import Toolbar from './components/Toolbar.svelte';
   import POIModal from './components/POIModal.svelte';
   import RegionModal from './components/RegionModal.svelte';
-  import { mapData, exportMapJSON, importMapJSON, setMapName } from '$lib/map/stores/mapStore';
+  import { mapData, exportMapJSON, importMapJSON, setMapName, loadDemoMap, generateHexGrid } from '$lib/map/stores/mapStore';
+  
+  // Handle demo map loading
+  function handleLoadDemo() {
+    loadDemoMap();
+  }
   
   // Handle export to JSON
   function handleExport() {
@@ -78,6 +83,13 @@
     }
   });
   
+  // Generate empty grid on first load if no map exists
+  $effect(() => {
+    if ($mapData.tiles.size === 0) {
+      generateHexGrid();
+    }
+  });
+  
   // Handle map name change
   function handleMapNameChange(e: Event) {
     const input = e.target as HTMLInputElement;
@@ -106,6 +118,11 @@
       <button class="header-button" onclick={handleExport}>
         <span class="button-icon">💾</span>
         <span class="button-text">Export</span>
+      </button>
+      
+      <button class="header-button" onclick={handleLoadDemo}>
+        <span class="button-icon">🗺️</span>
+        <span class="button-text">Load Demo</span>
       </button>
     </div>
   </header>
