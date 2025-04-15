@@ -4,7 +4,7 @@ import { mapData, addRegion } from './mapStore';
 import { v4 as uuidv4 } from 'uuid';
 
 // Tool types
-export type ToolType = 'select' | 'biome' | 'height' | 'poi' | 'region' | 'icon';
+export type ToolType = 'select' | 'biome' | 'height' | 'poi' | 'region' | 'icon' | 'route';
 
 // Biome types
 export const BIOME_TYPES = ['plains', 'forest', 'mountain', 'water', 'desert', 'swamp', 'tundra', 'unexplored'];
@@ -40,7 +40,24 @@ export interface ResizeModalParams {
   title?: string;
 }
 
-export type ModalParams = POIModalParams | RegionModalParams | ResizeModalParams;
+// Route modal parameters
+export interface RouteModalParams {
+  type: 'route';
+  title?: string;
+  routeId?: string;
+}
+
+// Waypoint modal parameters
+export interface WaypointModalParams {
+  type: 'waypoint';
+  title?: string;
+  routeId: string;
+  waypointId?: string;
+  q: number;
+  r: number;
+}
+
+export type ModalParams = POIModalParams | RegionModalParams | ResizeModalParams | RouteModalParams | WaypointModalParams;
 
 // POI hover info
 export interface POIHoverInfo {
@@ -59,6 +76,16 @@ export interface RegionHoverInfo {
   description: string;
 }
 
+// Waypoint hover info
+export interface WaypointHoverInfo {
+  routeId: string;
+  waypointId: string;
+  q: number;
+  r: number;
+  date?: string;
+  notes?: string;
+}
+
 // UI State interface
 export interface UIState {
   // Current tool selection
@@ -71,6 +98,7 @@ export interface UIState {
   showRegionLabels: boolean;
   showPOILabels: boolean;
   showHeightLabels: boolean;
+  showRouteLabels: boolean;
   
   // Modal state
   showModal: boolean;
@@ -82,6 +110,7 @@ export interface UIState {
   hoveredRegion: string | null;
   hoveredPOI: POIHoverInfo | null;
   hoveredRegionInfo: RegionHoverInfo | null;
+  hoveredWaypoint: WaypointHoverInfo | null;
   
   // Camera control
   cameraOffset: { x: number, y: number };
@@ -98,6 +127,7 @@ const initialState: UIState = {
   showRegionLabels: true,
   showPOILabels: true,
   showHeightLabels: false,
+  showRouteLabels: true,
   
   showModal: false,
   modalParams: null,
@@ -107,6 +137,7 @@ const initialState: UIState = {
   hoveredRegion: null,
   hoveredPOI: null,
   hoveredRegionInfo: null,
+  hoveredWaypoint: null,
   
   cameraOffset: { x: 0, y: 0 },
   cameraZoom: 1.5 // 50% more zoom for better readability
@@ -130,6 +161,7 @@ const createUIStore = () => {
     toggleRegionLabels: () => update(state => ({ ...state, showRegionLabels: !state.showRegionLabels })),
     togglePOILabels: () => update(state => ({ ...state, showPOILabels: !state.showPOILabels })),
     toggleHeightLabels: () => update(state => ({ ...state, showHeightLabels: !state.showHeightLabels })),
+    toggleRouteLabels: () => update(state => ({ ...state, showRouteLabels: !state.showRouteLabels })),
     
     // Modal management
     showModal: (params: ModalParams) => update(state => ({ 
@@ -203,6 +235,12 @@ const createUIStore = () => {
     setHoveredPOI: (poiInfo: POIHoverInfo | null) => update(state => ({
       ...state,
       hoveredPOI: poiInfo
+    })),
+    
+    // Waypoint hover management
+    setHoveredWaypoint: (waypointInfo: WaypointHoverInfo | null) => update(state => ({
+      ...state,
+      hoveredWaypoint: waypointInfo
     }))
   };
 };
@@ -227,7 +265,8 @@ export const {
   selectIcon,
   toggleRegionLabels, 
   togglePOILabels, 
-  toggleHeightLabels, 
+  toggleHeightLabels,
+  toggleRouteLabels,
   showModal, 
   closeModal,
   clearSelection,
@@ -235,5 +274,6 @@ export const {
   updateCameraOffset,
   updateCameraZoom,
   createRegion,
-  setHoveredPOI
+  setHoveredPOI,
+  setHoveredWaypoint
 } = uiStore;

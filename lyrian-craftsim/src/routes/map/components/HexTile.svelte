@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { uiStore, selectTool, selectBiome, toggleTileSelection } from '$lib/map/stores/uiStore';
+  import { uiStore, selectTool, selectBiome, toggleTileSelection, showModal } from '$lib/map/stores/uiStore';
   import { mapData, updateBiome, updateHeight, addPOI, updateTileIcon } from '$lib/map/stores/mapStore';
+  import { activeEditRoute, addWaypoint } from '$lib/map/stores/routeStore';
   import type { POI } from '$lib/map/stores/mapStore';
   import { hexToIsometric, getHexVertices } from '$lib/map/utils/hexlib';
   import POIMarker from './POIMarker.svelte';
@@ -84,6 +85,28 @@
       case 'icon':
         // Apply the selected icon to this tile
         updateTileIcon(tileKey, $uiStore.selectedIcon);
+        break;
+        
+      case 'route':
+        // Only add waypoint if a route is in edit mode
+        if ($activeEditRoute) {
+          // Add waypoint to the active route
+          addWaypoint($activeEditRoute.id, {
+            q, r
+          });
+          
+          // Open waypoint modal for this new waypoint
+          showModal({
+            type: 'waypoint',
+            routeId: $activeEditRoute.id,
+            q, r
+          });
+        } else {
+          // If no route is in edit mode, show route creation modal
+          showModal({
+            type: 'route'
+          });
+        }
         break;
         
       default:

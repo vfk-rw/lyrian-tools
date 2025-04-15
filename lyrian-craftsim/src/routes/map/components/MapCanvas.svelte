@@ -1,9 +1,16 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
-  import HexTile from './HexTile.svelte';
-  import POIMarker from './POIMarker.svelte';
-  import RegionOutline from './RegionOutline.svelte';
+import { onMount, onDestroy } from 'svelte';
+import HexTile from './HexTile.svelte';
+import POIMarker from './POIMarker.svelte';
+import RegionOutline from './RegionOutline.svelte';
+import RouteRenderer from './RouteRenderer.svelte';
+import WaypointMarker from './WaypointMarker.svelte';
+import RouteModal from './RouteModal.svelte';
+import WaypointModal from './WaypointModal.svelte';
+import POIModal from './POIModal.svelte';
+import RegionModal from './RegionModal.svelte';
   import { mapData, exportMapJSON, importMapJSON, generateHexGrid, updateTileIcon } from '$lib/map/stores/mapStore';
+  import { routesData, activeEditRoute } from '$lib/map/stores/routeStore';
   import type { Tile, Region } from '$lib/map/stores/mapStore';
   import { uiStore, updateCameraOffset, updateCameraZoom, showModal, type RegionHoverInfo } from '$lib/map/stores/uiStore';
   import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
@@ -311,6 +318,48 @@
     </div>
   {/if}
   
+  <!-- Waypoint Info Display -->
+  {#if $uiStore.hoveredWaypoint && $uiStore.hoveredWaypoint.routeId}
+    {@const route = $routesData.routes.get($uiStore.hoveredWaypoint.routeId)}
+    <div class="info-display">
+      <div class="info-content waypoint-content" style="border-left: 4px solid {
+        route?.color || '#888'
+      }">
+        <div class="info-title">
+          <span class="info-icon waypoint-icon">🧭</span>
+          <h3>Waypoint {
+            (() => {
+              if (route && $uiStore.hoveredWaypoint && $uiStore.hoveredWaypoint.waypointId) {
+                const index = route.waypoints.findIndex(w => w.id === $uiStore.hoveredWaypoint.waypointId);
+                return index >= 0 ? index + 1 : '?';
+              }
+              return '?';
+            })()
+          }</h3>
+        </div>
+        {#if $uiStore.hoveredWaypoint?.date}
+          <div class="waypoint-detail">
+            <span class="detail-label">Date:</span>
+            <span class="detail-value">{new Date($uiStore.hoveredWaypoint.date).toLocaleDateString()}</span>
+          </div>
+        {/if}
+        {#if $uiStore.hoveredWaypoint?.notes}
+          <p class="info-description">{$uiStore.hoveredWaypoint.notes}</p>
+        {/if}
+        <div class="waypoint-route">
+          <span class="route-label">Route:</span>
+          <span class="route-name">{route?.name || 'Unknown'}</span>
+        </div>
+      </div>
+    </div>
+  {/if}
+  
+  <!-- Modals -->
+  <RouteModal />
+  <WaypointModal />
+  <POIModal />
+  <RegionModal />
+  
   <!-- SVG canvas for hex map -->
   <svg
     bind:this={svgElement} 
@@ -343,7 +392,32 @@
         />
       {/each}
       
-      <!-- Only Region labels, rendered last to appear on top of everything -->
+      <!-- Routes (draw before regions but after tiles) -->
+      {#each Array.from($routesData.routes.values()).filter(route => route.visible) as route (route.id)}
+        <!-- Route path -->
+        <RouteRenderer 
+          waypoints={route.waypoints}
+          color={route.color}
+          isEditable={route.editable}
+        />
+        
+        <!-- Waypoint markers -->
+        {#each route.waypoints as waypoint, i (waypoint.id)}
+          <WaypointMarker
+            routeId={route.id}
+            waypointId={waypoint.id}
+            q={waypoint.q}
+            r={waypoint.r}
+            date={waypoint.date}
+            notes={waypoint.notes}
+            color={route.color}
+            index={i}
+            isEditable={route.editable}
+          />
+        {/each}
+      {/each}
+      
+      <!-- Region outlines, rendered last to appear on top -->
       {#each Array.from($mapData.regions.values()) as region}
         <RegionOutline 
           regionId={region.id} 
@@ -428,5 +502,47 @@
     font-size: 0.9rem;
     line-height: 1.4;
     color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Waypoint info styles */
+  .waypoint-icon {
+    color: #ff9800;
+  }
+  
+  .waypoint-detail {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+  }
+  
+  .detail-label {
+    color: #aaa;
+    margin-right: 0.5rem;
+  }
+  
+  .detail-value {
+    color: white;
+    font-weight: 500;
+  }
+  
+  .waypoint-route {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+  }
+  
+  .route-label {
+    margin-right: 0.5rem;
+  }
+  
+  .route-name {
+    color: white;
+    font-weight: 500;
   }
 </style>

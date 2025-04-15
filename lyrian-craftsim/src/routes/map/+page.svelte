@@ -1,9 +1,8 @@
 <script lang="ts">
   import MapCanvas from './components/MapCanvas.svelte';
   import Toolbar from './components/Toolbar.svelte';
-  import POIModal from './components/POIModal.svelte';
-  import RegionModal from './components/RegionModal.svelte';
   import { mapData, exportMapJSON, importMapJSON, setMapName, loadDemoMap, generateHexGrid } from '$lib/map/stores/mapStore';
+  import { routesData, exportRoutesJSON, importRoutesJSON } from '$lib/map/stores/routeStore';
   import { validateAndSanitizeMapJSON, VALIDATION_LIMITS } from '$lib/map/utils/secureImport';
   
   // Handle demo map loading
@@ -168,9 +167,7 @@
     </div>
   </main>
   
-  <!-- Modals -->
-  <POIModal />
-  <RegionModal />
+  <!-- No Modals here - they're now included in MapCanvas -->
 </div>
 
 <style>

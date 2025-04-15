@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { uiStore, selectTool, selectBiome, selectHeight, selectIcon, toggleRegionLabels, togglePOILabels, toggleHeightLabels, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
+  import { uiStore, selectTool, selectBiome, selectHeight, selectIcon, toggleRegionLabels, togglePOILabels, toggleHeightLabels, toggleRouteLabels, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
   import { mapData, removeRegion } from '$lib/map/stores/mapStore';
+  import { routesData, removeRoute, toggleRouteVisibility, toggleRouteEditMode, exitAllEditModes, getRouteLengthInDays, exportRoutesJSON, importRoutesJSON } from '$lib/map/stores/routeStore';
   import { iconRegistry, filterIcons, filterIconsByCategory } from '$lib/map/utils/iconRegistry';
   import type { IconInfo } from '$lib/map/utils/iconRegistry';
   
@@ -26,7 +27,8 @@
     height: 'Adjust elevation of tiles',
     poi: 'Add points of interest',
     region: 'Select tiles then create or edit regions',
-    icon: 'Add map icons to tiles'
+    icon: 'Add map icons to tiles',
+    route: 'Create routes with waypoints on the map'
   };
   
   // Icon search and filtering
@@ -131,6 +133,16 @@
       >
         <span class="tool-icon">🏷️</span>
         <span class="tool-label">Icon</span>
+      </button>
+      
+      <button 
+        class="tool-button" 
+        class:active={$uiStore.currentTool === 'route'}
+        on:click={() => handleToolSelect('route')}
+        title="Route Tool"
+      >
+        <span class="tool-icon">🧭</span>
+        <span class="tool-label">Route</span>
       </button>
       
     </div>
@@ -259,6 +271,157 @@
     </section>
   {/if}
   
+  {#if $uiStore.currentTool === 'route'}
+    <section class="toolbar-section">
+      <h3>Route Tool</h3>
+      <div class="route-actions">
+        <button 
+          class="action-button" 
+          on:click={() => showModal({ type: 'route' })}
+          title="Create a new route"
+        >
+          <span class="action-icon">➕</span>
+          <span class="action-label">Create Route</span>
+        </button>
+        
+        <button 
+          class="action-button secondary" 
+          on:click={() => exitAllEditModes()}
+          title="Exit edit mode"
+          disabled={!Array.from($routesData.routes.values()).some(r => r.editable)}
+        >
+          <span class="action-icon">✓</span>
+          <span class="action-label">Exit Edit Mode</span>
+        </button>
+        
+        <div class="help-text">
+          Create a route, then click on tiles to add waypoints
+        </div>
+      </div>
+    </section>
+    
+    <!-- Route List -->
+    <section class="toolbar-section">
+      <h3>Routes</h3>
+      <div class="route-list">
+        {#if $routesData.routes.size === 0}
+          <div class="no-routes">No routes created yet</div>
+        {:else}
+          {#each Array.from($routesData.routes.values()) as route (route.id)}
+            <div class="route-list-item" class:editing={route.editable}>
+              <div class="route-color" style:background-color={route.color}></div>
+              <div class="route-info">
+                <div class="route-name">{route.name}</div>
+                <div class="route-stats">
+                  {route.waypoints.length} waypoints
+                  {#if getRouteLengthInDays(route.id) > 0}
+                    | {getRouteLengthInDays(route.id)} days
+                  {/if}
+                </div>
+              </div>
+              <button 
+                class="route-toggle" 
+                on:click={() => toggleRouteVisibility(route.id)}
+                title={route.visible ? "Hide route" : "Show route"}
+              >
+                {route.visible ? '👁️' : '👁️‍🗨️'}
+              </button>
+              <button 
+                class="route-edit" 
+                on:click={() => toggleRouteEditMode(route.id)}
+                title={route.editable ? "Stop editing" : "Edit route"}
+                class:active={route.editable}
+              >
+                ✏️
+              </button>
+              <button 
+                class="route-delete" 
+                on:click={() => removeRoute(route.id)}
+                title="Delete route"
+              >
+                🗑️
+              </button>
+            </div>
+          {/each}
+        {/if}
+      </div>
+      
+      <div class="import-export-buttons">
+        <button 
+          class="action-button secondary small" 
+          on:click={() => {
+            // Create a JSON representation of the routes
+            const jsonData = exportRoutesJSON();
+            const jsonString = JSON.stringify(jsonData, null, 2);
+            
+            // Create a blob and download it
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            // Create a temporary link and trigger download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `routes.json`;
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up
+            URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+          }}
+          title="Export routes"
+          disabled={$routesData.routes.size === 0}
+        >
+          Export Routes
+        </button>
+        
+        <button 
+          class="action-button secondary small" 
+          on:click={() => {
+            // Create a file input
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'application/json';
+            
+            input.onchange = (e) => {
+              const file = (e.target as HTMLInputElement)?.files?.[0];
+              if (!file) return;
+              
+              // Read the file
+              const reader = new FileReader();
+              reader.onload = (readerEvent) => {
+                try {
+                  // Parse the JSON
+                  const jsonData = JSON.parse(readerEvent.target?.result as string);
+                  
+                  // Import the routes
+                  const success = importRoutesJSON(jsonData);
+                  
+                  if (success) {
+                    alert('Routes imported successfully');
+                  } else {
+                    alert('Failed to import routes - invalid format');
+                  }
+                } catch (error) {
+                  console.error('Error importing routes:', error);
+                  alert('Failed to import routes - invalid JSON');
+                }
+              };
+              
+              reader.readAsText(file);
+            };
+            
+            // Trigger the file input
+            input.click();
+          }}
+          title="Import routes"
+        >
+          Import Routes
+        </button>
+      </div>
+    </section>
+  {/if}
+  
   {#if $uiStore.currentTool === 'region'}
     <section class="toolbar-section">
       <h3>Region Tool</h3>
@@ -346,6 +509,16 @@
       >
         <span class="option-icon">⛰️</span>
         <span class="option-label">Height Labels</span>
+      </button>
+      
+      <button 
+        class="option-button" 
+        class:active={$uiStore.showRouteLabels}
+        on:click={() => toggleRouteLabels()}
+        title="Show/Hide Route Date Labels"
+      >
+        <span class="option-icon">🧭</span>
+        <span class="option-label">Route Labels</span>
       </button>
     </div>
   </section>
@@ -661,7 +834,7 @@
     flex-shrink: 0;
   }
   
-  .region-name {
+  .region-name, .route-name {
     flex-grow: 1;
     font-size: 0.9rem;
     white-space: nowrap;
@@ -669,7 +842,7 @@
     text-overflow: ellipsis;
   }
   
-  .region-delete, .region-edit {
+  .region-delete, .region-edit, .route-delete, .route-edit, .route-toggle {
     background: none;
     border: none;
     padding: 0.25rem;
@@ -746,5 +919,77 @@
   
   .option-label {
     font-size: 0.9rem;
+  }
+  
+  /* Route Styles */
+  .route-list {
+    margin-top: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .no-routes {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  
+  .route-list-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #333;
+    margin-bottom: 0.5rem;
+    gap: 0.5rem;
+  }
+  
+  .route-list-item.editing {
+    background-color: #444;
+    box-shadow: 0 0 0 2px #aaa;
+  }
+  
+  .route-color {
+    width: 0.5rem;
+    height: 100%;
+    border-radius: 0.25rem;
+    flex-shrink: 0;
+  }
+  
+  .route-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .route-stats {
+    font-size: 0.7rem;
+    color: #888;
+  }
+  
+  .route-edit.active {
+    color: #ffcc00;
+    background-color: rgba(255, 204, 0, 0.1);
+  }
+  
+  .action-button.secondary {
+    background-color: #555;
+  }
+  
+  .action-button.secondary:not(:disabled):hover {
+    background-color: #666;
+  }
+  
+  .action-button.small {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: normal;
+  }
+  
+  .import-export-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
   }
 </style>
