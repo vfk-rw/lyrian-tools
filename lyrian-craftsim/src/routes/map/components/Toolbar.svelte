@@ -4,6 +4,7 @@
   import { routesData, removeRoute, toggleRouteVisibility, toggleRouteEditMode, exitAllEditModes, getRouteLengthInDays, exportRoutesJSON, importRoutesJSON } from '$lib/map/stores/routeStore';
   import { iconRegistry, filterIcons, filterIconsByCategory } from '$lib/map/utils/iconRegistry';
   import type { IconInfo } from '$lib/map/utils/iconRegistry';
+  import '$lib/styles/toolbar.css';
   
   // Color mapping for biomes
   const BIOME_COLORS: Record<string, string> = {
@@ -71,9 +72,6 @@
   }
 </script>
 
-<svelte:head>
-  <link rel="stylesheet" href="/src/lib/styles/toolbar.css">
-</svelte:head>
 
 <div class="toolbar">
   <section class="toolbar-section">
