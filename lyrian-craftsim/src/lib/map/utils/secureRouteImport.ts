@@ -29,39 +29,65 @@ export function validateColor(color: string | undefined): string {
  * Validates a date string in ISO format (YYYY-MM-DD)
  */
 export function validateDate(date: string | undefined): string | undefined {
+  debugDateValidation(date);
+  
   if (!date) return undefined;
   
   // Validate ISO date format (YYYY-MM-DD)
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-  if (!dateRegex.test(date)) return undefined;
+  if (!dateRegex.test(date)) {
+    console.warn(`Invalid date format: "${date}" - must be YYYY-MM-DD`);
+    return undefined;
+  }
   
   // Validate it's a valid date by parsing it
   const parsedDate = new Date(date);
-  if (isNaN(parsedDate.getTime())) return undefined;
+  if (isNaN(parsedDate.getTime())) {
+    console.warn(`Invalid date: "${date}" - could not be parsed`);
+    return undefined;
+  }
   
   // Check if the date is within a reasonable range (e.g., not too far in the past or future)
   const now = new Date();
   const minDate = new Date(now.getFullYear() - 100, 0, 1); // 100 years ago
   const maxDate = new Date(now.getFullYear() + 100, 11, 31); // 100 years in future
   
-  if (parsedDate < minDate || parsedDate > maxDate) return undefined;
+  if (parsedDate < minDate || parsedDate > maxDate) {
+    console.warn(`Date out of reasonable range: "${date}"`);
+    return undefined;
+  }
   
+  console.log(`Date successfully validated: "${date}"`);
   return date;
 }
 
 // Debug function to help diagnose date handling issues
 function debugDateValidation(date: string | undefined): void {
-  console.log(`Date validation for: ${date}`);
+  console.group(`[DEBUG] Date validation for: ${date}`);
   if (!date) {
     console.log(' - Date is undefined, returning undefined');
+    console.groupEnd();
     return;
   }
   
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-  console.log(` - Regex test: ${dateRegex.test(date)}`);
+  const regexResult = dateRegex.test(date);
+  console.log(` - Regex test (YYYY-MM-DD): ${regexResult}`);
   
   const parsedDate = new Date(date);
-  console.log(` - Parsed date: ${parsedDate}, isValid: ${!isNaN(parsedDate.getTime())}`);
+  const dateIsValid = !isNaN(parsedDate.getTime());
+  console.log(` - Parsed date: ${parsedDate.toISOString()}, isValid: ${dateIsValid}`);
+  
+  if (dateIsValid) {
+    const now = new Date();
+    const minDate = new Date(now.getFullYear() - 100, 0, 1); // 100 years ago
+    const maxDate = new Date(now.getFullYear() + 100, 11, 31); // 100 years in future
+    
+    console.log(` - Date range check: ${minDate.toISOString()} <= ${parsedDate.toISOString()} <= ${maxDate.toISOString()}`);
+    console.log(` - In range: ${parsedDate >= minDate && parsedDate <= maxDate}`);
+  }
+  
+  console.groupEnd();
 }
 
 /**

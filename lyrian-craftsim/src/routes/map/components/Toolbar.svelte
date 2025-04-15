@@ -1,7 +1,7 @@
 <script lang="ts">
   import { uiStore, selectTool, selectBiome, selectHeight, selectIcon, toggleRegionLabels, togglePOILabels, toggleHeightLabels, toggleRouteLabels, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
   import { mapData, removeRegion } from '$lib/map/stores/mapStore';
-  import { routesData, removeRoute, toggleRouteVisibility, toggleRouteEditMode, exitAllEditModes, getRouteLengthInDays, exportRoutesJSON, importRoutesJSON } from '$lib/map/stores/routeStore';
+  import { routesData, removeRoute, toggleRouteVisibility, toggleRouteEditMode, exitAllEditModes, getRouteLengthInDays, exportRoutesJSON, importRoutesJSON, createTestRouteWithDates } from '$lib/map/stores/routeStore';
   import { iconRegistry, filterIcons, filterIconsByCategory } from '$lib/map/utils/iconRegistry';
   import type { IconInfo } from '$lib/map/utils/iconRegistry';
   
@@ -375,68 +375,80 @@
           Export Routes
         </button>
         
-        <button 
-          class="action-button secondary small" 
-          on:click={() => {
-            // Create a file input
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'application/json';
-            
-            input.onchange = (e) => {
-              const file = (e.target as HTMLInputElement)?.files?.[0];
-              if (!file) return;
+          <button 
+            class="action-button secondary small" 
+            on:click={() => {
+              // Create a file input
+              const input = document.createElement('input');
+              input.type = 'file';
+              input.accept = 'application/json';
               
-              // Check file size limit before processing
-              const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB - same as map validation
-              if (file.size > MAX_FILE_SIZE) {
-                alert(`File too large. Maximum allowed size is ${MAX_FILE_SIZE / (1024 * 1024)}MB`);
-                return;
-              }
-              
-              // Check MIME type to ensure it's a text file
-              if (!file.type.match('application/json') && 
-                  !file.type.match('text/plain') && 
-                  !file.type.match('text/')) {
-                alert('Invalid file type. Only JSON and text files are supported.');
-                return;
-              }
-              
-              // Read the file
-              const reader = new FileReader();
-              reader.onload = (readerEvent) => {
-                try {
-                  // Parse the JSON
-                  const jsonData = JSON.parse(readerEvent.target?.result as string);
-                  
-                  // Import the routes with file size for validation
-                  const success = importRoutesJSON(jsonData, file.size);
-                  
-                  if (success) {
-                    alert('Routes imported successfully');
-                  } else {
-                    alert('Failed to import routes - invalid format');
-                  }
-                } catch (error) {
-                  console.error('Error importing routes:', error);
-                  alert('Failed to import routes - invalid JSON');
+              input.onchange = (e) => {
+                const file = (e.target as HTMLInputElement)?.files?.[0];
+                if (!file) return;
+                
+                // Check file size limit before processing
+                const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB - same as map validation
+                if (file.size > MAX_FILE_SIZE) {
+                  alert(`File too large. Maximum allowed size is ${MAX_FILE_SIZE / (1024 * 1024)}MB`);
+                  return;
                 }
+                
+                // Check MIME type to ensure it's a text file
+                if (!file.type.match('application/json') && 
+                    !file.type.match('text/plain') && 
+                    !file.type.match('text/')) {
+                  alert('Invalid file type. Only JSON and text files are supported.');
+                  return;
+                }
+                
+                // Read the file
+                const reader = new FileReader();
+                reader.onload = (readerEvent) => {
+                  try {
+                    // Parse the JSON
+                    const jsonData = JSON.parse(readerEvent.target?.result as string);
+                    
+                    // Import the routes with file size for validation
+                    const success = importRoutesJSON(jsonData, file.size);
+                    
+                    if (success) {
+                      alert('Routes imported successfully');
+                    } else {
+                      alert('Failed to import routes - invalid format');
+                    }
+                  } catch (error) {
+                    console.error('Error importing routes:', error);
+                    alert('Failed to import routes - invalid JSON');
+                  }
+                };
+                
+                reader.onerror = () => {
+                  alert('Error reading file. Please try again with a different file.');
+                };
+                
+                reader.readAsText(file);
               };
               
-              reader.onerror = () => {
-                alert('Error reading file. Please try again with a different file.');
-              };
-              
-              reader.readAsText(file);
-            };
-            
-            // Trigger the file input
-            input.click();
-          }}
-          title="Import routes"
-        >
-          Import Routes
-        </button>
+              // Trigger the file input
+              input.click();
+            }}
+            title="Import routes"
+          >
+            Import Routes
+          </button>
+          
+          <!-- Debug button to create test route with dates -->
+          <button 
+            class="action-button secondary small debug-button" 
+            on:click={() => {
+              const routeId = createTestRouteWithDates();
+              alert(`Test route created with ID: ${routeId}`);
+            }}
+            title="Create a test route with dates for debugging"
+          >
+            Create Test Route
+          </button>
       </div>
     </section>
   {/if}

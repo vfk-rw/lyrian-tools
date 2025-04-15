@@ -90,10 +90,16 @@
       case 'route':
         // Only add waypoint if a route is in edit mode
         if ($activeEditRoute) {
+          console.group('[DEBUG] HexTile - Adding waypoint to active route');
+          console.log(`Tile coordinates: q=${q}, r=${r}`);
+          console.log(`Active route: ${$activeEditRoute.id} (${$activeEditRoute.name})`);
+          
           // Add waypoint to the active route
-          addWaypoint($activeEditRoute.id, {
+          const waypointId = addWaypoint($activeEditRoute.id, {
             q, r
           });
+          
+          console.log(`Added waypoint with ID: ${waypointId}`);
           
           // Open waypoint modal for this new waypoint
           showModal({
@@ -101,11 +107,27 @@
             routeId: $activeEditRoute.id,
             q, r
           });
+          
+          console.groupEnd();
         } else {
+          console.group('[DEBUG] HexTile - No active route, opening route modal');
+          console.log(`Tile coordinates: q=${q}, r=${r}`);
+          console.log('Will store coordinates for after route creation');
+          
+          // Store coordinates in uiStore temporarily for after route creation
+          uiStore.set({
+            ...$uiStore,
+            pendingWaypointQ: q,
+            pendingWaypointR: r
+          });
+          
           // If no route is in edit mode, show route creation modal
           showModal({
-            type: 'route'
+            type: 'route',
+            pendingWaypoint: true // Indicate this is for a pending waypoint
           });
+          
+          console.groupEnd();
         }
         break;
         

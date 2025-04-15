@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { uiStore, closeModal } from '$lib/map/stores/uiStore';
-  import { addWaypoint, updateWaypoint, routesData } from '$lib/map/stores/routeStore';
+  import { uiStore, closeModal, type WaypointModalParams } from '$lib/map/stores/uiStore';
+  import { addWaypoint, updateWaypoint, routesData, activeEditRoute, type Waypoint } from '$lib/map/stores/routeStore';
   import { onMount } from 'svelte';
+  import { get } from 'svelte/store';
   
   // Form state
   let waypointDate = '';
@@ -11,6 +12,12 @@
   let routeId = '';
   let hexQ = 0;
   let hexR = 0;
+  let errorMessage = '';
+  let saveAttempted = false;
+  let lastModalId = '';
+  
+  // Track if route and waypoint info have been loaded
+  let initialized = false;
   
   // Format today's date as YYYY-MM-DD for the date input
   const today = new Date();
@@ -19,14 +26,39 @@
   const day = String(today.getDate()).padStart(2, '0');
   const todayFormatted = `${year}-${month}-${day}`;
   
-  // Initialize form when modal opens
-  onMount(() => {
-    if ($uiStore.modalParams?.type === 'waypoint') {
-      const params = $uiStore.modalParams;
+  // Initialize form when a modal is shown
+  $: {
+    if ($uiStore.showModal && $uiStore.modalParams?.type === 'waypoint') {
+      // Extract a unique identifier for this modal instance
+      const modalId = JSON.stringify($uiStore.modalParams);
       
+      // Only reinitialize if the modal has changed (prevents reinitialization during renders)
+      if (modalId !== lastModalId) {
+        initializeModal();
+        lastModalId = modalId;
+      }
+    }
+  }
+  
+  // Function to initialize modal data
+  function initializeModal() {
+    if ($uiStore.modalParams?.type !== 'waypoint') return;
+    
+    const params = $uiStore.modalParams as WaypointModalParams;
+    console.group('[DEBUG] WaypointModal.initializeModal');
+    console.log('Modal params:', params);
+    
+    // Clear any previous error state
+    errorMessage = '';
+    saveAttempted = false;
+    
+    // Store essential parameters
+    if (params.routeId) {
       routeId = params.routeId;
       hexQ = params.q;
       hexR = params.r;
+      
+      console.log(`Initialized with routeId: ${routeId}, q: ${hexQ}, r: ${hexR}`);
       
       if (params.waypointId) {
         // Editing existing waypoint
@@ -40,12 +72,20 @@
           if (waypoint) {
             waypointDate = waypoint.date || '';
             waypointNotes = waypoint.notes || '';
+            console.log(`Editing waypoint ${editingWaypointId} with date: ${waypointDate}`);
+          } else {
+            console.warn(`Waypoint ${editingWaypointId} not found in route ${routeId}`);
+            errorMessage = 'Waypoint not found';
           }
+        } else {
+          console.warn(`Route ${routeId} not found when editing waypoint`);
+          errorMessage = 'Route not found';
         }
       } else {
         // Creating new waypoint - set default date to today
         editingWaypoint = false;
         waypointDate = todayFormatted;
+        console.log(`Creating new waypoint with default date: ${waypointDate}`);
         
         // If there are already waypoints in the route, use the date of the last one
         const route = $routesData.routes.get(routeId);
@@ -53,31 +93,148 @@
           const lastWaypoint = route.waypoints[route.waypoints.length - 1];
           if (lastWaypoint.date) {
             waypointDate = lastWaypoint.date;
+            console.log(`Using last waypoint's date: ${waypointDate}`);
           }
         }
       }
+      
+      // Mark as successfully initialized
+      initialized = true;
+    } else {
+      // If we don't have a routeId, try to use the active edit route as a fallback
+      if ($activeEditRoute) {
+        routeId = $activeEditRoute.id;
+        console.log(`No routeId in params, but found active route: ${routeId}`);
+        initialized = true;
+      } else {
+        console.error('No routeId provided in modal params and no active route available');
+        errorMessage = 'No route selected';
+        initialized = false;
+      }
+    }
+    
+    console.groupEnd();
+  }
+  
+  // Ensure we run initialization on mount for the first time
+  onMount(() => {
+    if ($uiStore.showModal && $uiStore.modalParams?.type === 'waypoint') {
+      initializeModal();
     }
   });
   
   // Handle form submission
   function handleSubmit() {
-    if (editingWaypoint) {
-      // Update existing waypoint
-      updateWaypoint(routeId, editingWaypointId, {
-        date: waypointDate || undefined,
-        notes: waypointNotes || undefined
-      });
-    } else {
-      // Create new waypoint
-      addWaypoint(routeId, {
-        q: hexQ,
-        r: hexR,
-        date: waypointDate || undefined,
-        notes: waypointNotes || undefined
-      });
+    console.group('[DEBUG] WaypointModal.handleSubmit');
+    saveAttempted = true;
+    
+    // Validate route ID exists
+    if (!routeId) {
+      errorMessage = 'No route selected - cannot save waypoint';
+      console.error(errorMessage);
+      console.groupEnd();
+      return;
     }
     
-    // Close the modal
+    // Check route exists
+    const route = $routesData.routes.get(routeId);
+    if (!route) {
+      errorMessage = `Route with ID ${routeId} not found`;
+      console.error(errorMessage);
+      console.groupEnd();
+      return;
+    }
+    
+    console.log(`Route ID: ${routeId} (Found: ${Boolean(route)})`);
+    console.log(`Editing: ${editingWaypoint}, ID: ${editingWaypointId}`);
+    console.log(`Location: q=${hexQ}, r=${hexR}`);
+    console.log(`Input date value: ${waypointDate}`);
+    console.log(`Notes: ${waypointNotes}`);
+    
+    // Ensure the date is properly formatted and not empty
+    const formattedDate = waypointDate ? waypointDate.trim() : '';
+    console.log(`Formatted date: ${formattedDate}`);
+    
+    // Check if the date is valid
+    let dateFormatValid = false;
+    if (formattedDate) {
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      dateFormatValid = dateRegex.test(formattedDate);
+      console.log(`Date format valid: ${dateFormatValid}`);
+      
+      // Parse date to check validity
+      const parsedDate = new Date(formattedDate);
+      const dateIsValid = !isNaN(parsedDate.getTime());
+      console.log(`Parsed date: ${parsedDate}, is valid: ${dateIsValid}`);
+      
+      if (!dateFormatValid || !dateIsValid) {
+        errorMessage = 'Invalid date format';
+        console.error(errorMessage);
+        console.groupEnd();
+        return;
+      }
+    }
+    
+    let waypointId = '';
+    
+    try {
+      if (editingWaypoint) {
+        // Update existing waypoint
+        console.log(`Updating waypoint ${editingWaypointId} with date: ${formattedDate || 'undefined'}`);
+        updateWaypoint(routeId, editingWaypointId, {
+          date: formattedDate || undefined,
+          notes: waypointNotes || undefined
+        });
+        waypointId = editingWaypointId;
+      } else {
+        // Create new waypoint or find already created one
+        const existingWaypoint = route.waypoints.find((wp: Waypoint) => wp.q === hexQ && wp.r === hexR);
+        
+        if (existingWaypoint) {
+          // If a waypoint already exists at these coordinates, update it instead
+          console.log(`Waypoint already exists at (${hexQ},${hexR}), updating: ${existingWaypoint.id}`);
+          updateWaypoint(routeId, existingWaypoint.id, {
+            date: formattedDate || undefined,
+            notes: waypointNotes || undefined
+          });
+          waypointId = existingWaypoint.id;
+        } else {
+          // Create new waypoint
+          console.log(`Creating new waypoint with date: ${formattedDate || 'undefined'}`);
+          waypointId = addWaypoint(routeId, {
+            q: hexQ,
+            r: hexR,
+            date: formattedDate || undefined,
+            notes: waypointNotes || undefined
+          });
+          console.log(`Created waypoint with ID: ${waypointId}`);
+        }
+      }
+    } catch (error) {
+      console.error('Error saving waypoint:', error);
+      errorMessage = 'Failed to save waypoint';
+      console.groupEnd();
+      return;
+    }
+    
+    // Verify immediately with subscription
+    const state = get(routesData);
+    const currentRoute = state.routes.get(routeId);
+    
+    if (!currentRoute) {
+      console.warn(`Could not find route ${routeId} after saving waypoint`);
+    } else {
+      const waypoint = currentRoute.waypoints.find((wp: Waypoint) => wp.id === waypointId);
+      if (waypoint) {
+        console.log(`✅ Verified waypoint saved - id: ${waypoint.id}, date: ${waypoint.date || 'none'}`);
+      } else {
+        console.warn(`❌ Could not find waypoint ${waypointId} after saving`);
+      }
+    }
+    
+    console.groupEnd();
+    
+    // Close the modal on success
     closeModal();
   }
 </script>
@@ -89,6 +246,12 @@
         <h2>{editingWaypoint ? 'Edit Waypoint' : 'New Waypoint'}</h2>
         <button class="close-button" on:click={closeModal}>×</button>
       </div>
+      
+      {#if errorMessage}
+        <div class="error-message">
+          {errorMessage}
+        </div>
+      {/if}
       
       <form on:submit|preventDefault={handleSubmit}>
         <div class="form-group">
@@ -179,6 +342,15 @@
   
   .close-button:hover {
     color: white;
+  }
+  
+  .error-message {
+    background-color: rgba(255, 87, 87, 0.2);
+    color: #ff5757;
+    padding: 0.75rem;
+    margin: 1rem;
+    border-radius: 0.25rem;
+    border-left: 4px solid #ff5757;
   }
   
   form {

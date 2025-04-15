@@ -45,6 +45,7 @@ export interface RouteModalParams {
   type: 'route';
   title?: string;
   routeId?: string;
+  pendingWaypoint?: boolean; // Indicates route is being created for a pending waypoint
 }
 
 // Waypoint modal parameters
@@ -120,6 +121,10 @@ export interface UIState {
   hoveredRegionInfo: RegionHoverInfo | null;
   hoveredWaypoint: WaypointHoverInfo | null;
   hoveredRoute: RouteHoverInfo | null;
+  
+  // Pending waypoint coordinates (used when creating a route)
+  pendingWaypointQ?: number;
+  pendingWaypointR?: number;
   
   // Camera control
   cameraOffset: { x: number, y: number };

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { uiStore, closeModal } from '$lib/map/stores/uiStore';
-  import { addRoute, updateRoute, routesData } from '$lib/map/stores/routeStore';
+  import { uiStore, closeModal, showModal, type RouteModalParams } from '$lib/map/stores/uiStore';
+  import { addRoute, updateRoute, routesData, addWaypoint } from '$lib/map/stores/routeStore';
   import { onMount } from 'svelte';
   
   // Form state
@@ -50,8 +50,15 @@
   
   // Handle form submission
   function handleSubmit() {
+    console.group('[DEBUG] RouteModal.handleSubmit');
+    console.log(`Route name: ${routeName}, color: ${routeColor}`);
+    console.log(`Editing: ${editingRoute}, ID: ${editingRouteId}`);
+    console.log(`Has pending waypoint: ${$uiStore.modalParams?.type === 'route' && ($uiStore.modalParams as RouteModalParams).pendingWaypoint ? 'yes' : 'no'}`);
+    
     if (!routeName.trim()) {
       alert('Please enter a route name');
+      console.warn('No route name provided');
+      console.groupEnd();
       return;
     }
     
@@ -61,6 +68,7 @@
         name: routeName,
         color: routeColor
       });
+      console.log(`Updated route ${editingRouteId}`);
     } else {
       // Create new route
       const newRouteId = addRoute({
@@ -68,12 +76,56 @@
         color: routeColor
       });
       
+      console.log(`Created new route with ID: ${newRouteId}`);
+      
       // Set the new route to edit mode
       updateRoute(newRouteId, { editable: true });
+      
+      // Check if this was created for a pending waypoint
+      if ($uiStore.modalParams?.type === 'route' && 
+          ($uiStore.modalParams as RouteModalParams).pendingWaypoint && 
+          $uiStore.pendingWaypointQ !== undefined && 
+          $uiStore.pendingWaypointR !== undefined) {
+        
+        console.log(`Adding pending waypoint at q=${$uiStore.pendingWaypointQ}, r=${$uiStore.pendingWaypointR}`);
+        
+        // Add the pending waypoint to this new route
+        const waypointId = addWaypoint(newRouteId, {
+          q: $uiStore.pendingWaypointQ,
+          r: $uiStore.pendingWaypointR
+        });
+        
+        console.log(`Added pending waypoint with ID: ${waypointId}`);
+        
+        // Close this modal first
+        closeModal();
+        
+        // Then immediately open the waypoint modal for the new waypoint
+        setTimeout(() => {
+          showModal({
+            type: 'waypoint',
+            routeId: newRouteId,
+            q: $uiStore.pendingWaypointQ!,
+            r: $uiStore.pendingWaypointR!
+          });
+        }, 100);
+        
+        // Clear the pending waypoint data
+        uiStore.set({
+          ...$uiStore,
+          pendingWaypointQ: undefined,
+          pendingWaypointR: undefined
+        });
+        
+        console.log('Scheduled waypoint modal to open');
+        console.groupEnd();
+        return;
+      }
     }
     
     // Close the modal
     closeModal();
+    console.groupEnd();
   }
   
   // Handle color selection

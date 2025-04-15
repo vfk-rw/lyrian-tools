@@ -52,40 +52,75 @@
   
   // Calculate cumulative days for this waypoint
   function calculateCumulativeDays(): number {
+    console.group(`[DEBUG] calculateCumulativeDays for waypoint ${waypointId} (index: ${index})`);
+    console.log(`Waypoint data: q=${q}, r=${r}, date=${date}, routeId=${routeId}`);
+    
     const route = $routesData.routes.get(routeId);
-    if (!route) return 0;
+    console.log(`Found route: ${route ? 'yes' : 'no'}`);
+    
+    if (!route) {
+      console.groupEnd();
+      return 0;
+    }
+    
+    console.log(`Route has ${route.waypoints.length} waypoints`);
     
     // If this is the first waypoint, it's day 0
-    if (index === 0) return 0;
+    if (index === 0) {
+      console.log('First waypoint, returning 0');
+      console.groupEnd();
+      return 0;
+    }
     
     // If we have dates, use them to calculate days
     if (date) {
+      console.log(`This waypoint has date: ${date}`);
+      
       // Get waypoints up to and including this one
       const relevantWaypoints = route.waypoints.slice(0, index + 1);
+      console.log(`Relevant waypoints: ${relevantWaypoints.length}`);
       
       // Filter to only waypoints with dates
       const waypointsWithDates = relevantWaypoints.filter(wp => wp.date);
+      console.log(`Waypoints with dates: ${waypointsWithDates.length}`);
+      if (waypointsWithDates.length > 0) {
+        console.log('Dates found:', waypointsWithDates.map(wp => wp.date));
+      }
       
       // If we have waypoints with dates, calculate a real difference
       if (waypointsWithDates.length >= 2) {
         // Get the first waypoint with a date
         const firstWaypointWithDate = waypointsWithDates[0];
+        console.log(`First waypoint with date: ${firstWaypointWithDate.id}, date: ${firstWaypointWithDate.date}`);
         
         if (firstWaypointWithDate.date) {
           // Calculate days difference
           const firstDate = new Date(firstWaypointWithDate.date);
           const currentDate = new Date(date);
+          console.log(`Comparing dates: ${firstDate.toISOString()} vs ${currentDate.toISOString()}`);
           
           const diffTime = Math.abs(currentDate.getTime() - firstDate.getTime());
           const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          console.log(`Calculated diff: ${diffDays} days`);
           
+          console.groupEnd();
           return diffDays;
         }
       }
+    } else {
+      console.log('This waypoint has no date');
     }
+    
+    // Debug route waypoints
+    console.log('All waypoint dates in route:');
+    route.waypoints.forEach((wp, i) => {
+      console.log(`  [${i}] ${wp.id}: ${wp.date || 'no date'}`);
+    });
     
     // If no dates available, just use the index as a fallback
     // This treats each waypoint as 1 day apart
+    console.log(`Falling back to index: ${index}`);
+    console.groupEnd();
     return index;
   }
 </script>
