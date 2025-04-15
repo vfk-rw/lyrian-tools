@@ -4,6 +4,7 @@
   import { mapData, exportMapJSON, importMapJSON, setMapName, loadDemoMap, generateHexGrid } from '$lib/map/stores/mapStore';
   import { routesData, exportRoutesJSON, importRoutesJSON } from '$lib/map/stores/routeStore';
   import { validateAndSanitizeMapJSON, VALIDATION_LIMITS } from '$lib/map/utils/secureImport';
+  import '$lib/styles/buttons.css';
   
   // Handle demo map loading
   function handleLoadDemo() {

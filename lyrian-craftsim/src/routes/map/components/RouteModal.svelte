@@ -2,6 +2,7 @@
   import { uiStore, closeModal, showModal, type RouteModalParams } from '$lib/map/stores/uiStore';
   import { addRoute, updateRoute, routesData, addWaypoint } from '$lib/map/stores/routeStore';
   import { onMount } from 'svelte';
+  import '$lib/styles/modal.css';
   
   // Form state
   let routeName = '';
@@ -190,157 +191,10 @@
 {/if}
 
 <style>
-  .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background-color: #2a2a2a;
-    color: white;
-    border-radius: 0.5rem;
-    width: 100%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #444;
-  }
-  
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 500;
-  }
-  
-  .close-button {
-    background: none;
-    border: none;
-    color: #aaa;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  
-  .close-button:hover {
-    color: white;
-  }
-  
-  form {
-    padding: 1rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    color: #ccc;
-  }
-  
-  input[type="text"] {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #333;
-    border: 1px solid #444;
-    border-radius: 0.25rem;
-    color: white;
-    font-size: 1rem;
-  }
-  
-  input:focus {
-    outline: none;
-    border-color: #666;
-  }
-  
-  .color-picker {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
+  /* Route-specific modifications */
   .color-input {
     width: 50px;
     height: 50px;
-    padding: 0;
-    border: none;
     border-radius: 4px;
-    background: none;
-    cursor: pointer;
-  }
-  
-  .color-presets {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-  
-  .color-preset {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: transform 0.1s;
-  }
-  
-  .color-preset:hover {
-    transform: scale(1.1);
-  }
-  
-  .color-preset.selected {
-    border-color: white;
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
-  }
-  
-  .button-row {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
-  
-  button {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 0.25rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .submit-button {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .submit-button:hover {
-    background-color: #3e8e41;
-  }
-  
-  .cancel-button {
-    background-color: #555;
-    color: white;
-  }
-  
-  .cancel-button:hover {
-    background-color: #666;
   }
 </style>

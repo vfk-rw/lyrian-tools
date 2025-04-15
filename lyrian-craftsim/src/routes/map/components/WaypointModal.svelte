@@ -3,6 +3,7 @@
   import { addWaypoint, updateWaypoint, routesData, activeEditRoute, type Waypoint } from '$lib/map/stores/routeStore';
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
+  import '$lib/styles/modal.css';
   
   // Form state
   let waypointDate = '';
@@ -242,103 +243,7 @@
 {/if}
 
 <style>
-  .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background-color: #2a2a2a;
-    color: white;
-    border-radius: 0.5rem;
-    width: 100%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #444;
-  }
-  
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 500;
-  }
-  
-  .close-button {
-    background: none;
-    border: none;
-    color: #aaa;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  
-  .close-button:hover {
-    color: white;
-  }
-  
-  .error-message {
-    background-color: rgba(255, 87, 87, 0.2);
-    color: #ff5757;
-    padding: 0.75rem;
-    margin: 1rem;
-    border-radius: 0.25rem;
-    border-left: 4px solid #ff5757;
-  }
-  
-  form {
-    padding: 1rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    color: #ccc;
-  }
-  
-  input[type="date"], textarea {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #333;
-    border: 1px solid #444;
-    border-radius: 0.25rem;
-    color: white;
-    font-size: 1rem;
-    font-family: inherit;
-  }
-  
-  input:focus, textarea:focus {
-    outline: none;
-    border-color: #666;
-  }
-  
-  .helper-text {
-    font-size: 0.8rem;
-    color: #888;
-    margin-top: 0.25rem;
-    margin-bottom: 0;
-  }
-  
+  /* Waypoint-specific modifications */
   .coordinates {
     display: flex;
     align-items: center;
@@ -356,39 +261,5 @@
   .coord-value {
     color: white;
     font-family: monospace;
-  }
-  
-  .button-row {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
-  
-  button {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 0.25rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .submit-button {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .submit-button:hover {
-    background-color: #3e8e41;
-  }
-  
-  .cancel-button {
-    background-color: #555;
-    color: white;
-  }
-  
-  .cancel-button:hover {
-    background-color: #666;
   }
 </style>

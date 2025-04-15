@@ -2,6 +2,7 @@
   import { uiStore, closeModal, createRegion, type RegionModalParams } from '$lib/map/stores/uiStore';
   import { addRegion, updateRegion, removeRegion } from '$lib/map/stores/mapStore';
   import { v4 as uuidv4 } from 'uuid';
+  import '$lib/styles/modal.css';
   
   // Form state
   let regionName = '';
@@ -182,146 +183,7 @@
 {/if}
 
 <style>
-  .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background-color: #2a2a2a;
-    color: white;
-    border-radius: 0.5rem;
-    width: 100%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #444;
-  }
-  
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 500;
-  }
-  
-  .close-button {
-    background: none;
-    border: none;
-    color: #aaa;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  
-  .close-button:hover {
-    color: white;
-  }
-  
-  form {
-    padding: 1rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    color: #ccc;
-  }
-  
-  input[type="text"] {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #333;
-    border: 1px solid #444;
-    border-radius: 0.25rem;
-    color: white;
-    font-size: 1rem;
-  }
-  
-  input[type="text"]:focus,
-  textarea:focus {
-    outline: none;
-    border-color: #666;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #333;
-    border: 1px solid #444;
-    border-radius: 0.25rem;
-    color: white;
-    font-size: 1rem;
-    resize: vertical;
-    min-height: 80px;
-  }
-  
-  .color-input-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.75rem;
-  }
-  
-  input[type="color"] {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
-  }
-  
-  .current-color {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border-radius: 0.25rem;
-    border: 1px solid #444;
-  }
-  
-  .color-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.5rem;
-  }
-  
-  .color-button {
-    height: 30px;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  
-  .color-button:hover {
-    transform: scale(1.05);
-  }
-  
-  .color-button.active {
-    box-shadow: 0 0 0 3px #fff;
-    transform: scale(1.1);
-  }
-  
+  /* Region-specific modifications */
   .selected-tiles-info {
     margin: 1rem 0;
     padding: 0.75rem;
@@ -329,54 +191,5 @@
     border-radius: 0.25rem;
     font-size: 0.9rem;
     text-align: center;
-  }
-  
-  .button-row {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
-  
-  button {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 0.25rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .submit-button {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .submit-button:hover {
-    background-color: #3e8e41;
-  }
-  
-  .submit-button:disabled {
-    background-color: #888;
-    cursor: not-allowed;
-  }
-  
-  .cancel-button {
-    background-color: #555;
-    color: white;
-  }
-  
-  .cancel-button:hover {
-    background-color: #666;
-  }
-  
-  .delete-button {
-    background-color: #f44336;
-    color: white;
-    margin-right: auto;
-  }
-  
-  .delete-button:hover {
-    background-color: #d32f2f;
   }
 </style>

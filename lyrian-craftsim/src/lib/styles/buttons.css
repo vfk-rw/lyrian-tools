@@ -1,0 +1,137 @@
+/* Common Button Styles */
+
+.button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+/* Button Variants */
+
+.button-primary {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button-primary:hover {
+  background-color: #3e8e41;
+}
+
+.button-secondary {
+  background-color: #555;
+  color: white;
+}
+
+.button-secondary:hover {
+  background-color: #666;
+}
+
+.button-danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.button-danger:hover {
+  background-color: #d32f2f;
+}
+
+.button-icon {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Button States */
+
+.button:disabled {
+  background-color: #888;
+  color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button:disabled:hover {
+  background-color: #888;
+  transform: none;
+}
+
+/* Button Sizing */
+
+.button-small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.button-large {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Button Layouts */
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.button-group .button {
+  border-radius: 0;
+}
+
+.button-group .button:first-child {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.button-group .button:last-child {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+/* Header Buttons (For App Header) */
+
+.header-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #333;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.header-button:hover {
+  background-color: #444;
+}
+
+.button-icon {
+  font-size: 1.25rem;
+}
+
+.button-text {
+  font-size: 0.9rem;
+}
