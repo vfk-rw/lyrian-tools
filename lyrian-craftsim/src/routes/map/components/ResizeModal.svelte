@@ -29,10 +29,28 @@
   let newHeight = currentHeight;
   let newRadius = currentRadius;
   
-  // Handle map resize
-  function handleResize() {
-    // Generate new map with updated radius
-    generateHexGrid(newRadius);
+  // Handle map resize by expanding with new tiles
+  function handleExpand() {
+    // Get all tiles within the new radius
+    const validTiles = getHexesInRange(0, 0, newRadius);
+    const existingTileKeys = new Set(Array.from($mapData.tiles.keys()));
+    
+    // Add only the tiles that don't already exist
+    validTiles.forEach(([q, r]) => {
+      const key = `${q},${r}`;
+      if (!existingTileKeys.has(key)) {
+        $mapData.tiles.set(key, {
+          q, r,
+          biome: 'unexplored',
+          height: 0,
+          pois: []
+        });
+      }
+    });
+    
+    // Trigger reactivity
+    $mapData = $mapData;
+    
     closeModal();
   }
   
@@ -90,22 +108,22 @@
         </div>
         
         <div class="actions">
-          <button class="action-button grow" on:click={handleResize}>
-            <span class="icon">↔️</span>
-            <span>Regenerate Map</span>
+          <button class="action-button grow" on:click={handleExpand}>
+            <span class="icon">➕</span>
+            <span>Expand Map</span>
           </button>
           
           <button class="action-button trim" on:click={handleTrim}>
             <span class="icon">✂️</span>
-            <span>Trim to Radius</span>
+            <span>Trim Map</span>
           </button>
         </div>
         
         <div class="info-message">
           <p><strong>Note:</strong></p>
           <ul>
-            <li>"Regenerate Map" will create a new map with the specified radius, replacing the current one.</li>
-            <li>"Trim to Radius" will remove tiles outside the specified radius, keeping the existing tiles inside that radius.</li>
+            <li>"Expand Map" will add new unexplored tiles to reach the specified radius, preserving your existing map.</li>
+            <li>"Trim Map" will remove tiles outside the specified radius, keeping the existing tiles inside that radius.</li>
           </ul>
         </div>
       </div>
