@@ -67,6 +67,7 @@
         <li><a href="/" class:active={$page.url.pathname === '/'}>Home</a></li>
         <li><a href="/craftsim-blacksmithing" class:active={$page.url.pathname === '/craftsim-blacksmithing'}>Craftsim Blacksmithing</a></li>
         <li><a href="/map" class:active={$page.url.pathname === '/map'}>Map</a></li>
+        <li><a href="/calendar" class:active={$page.url.pathname === '/calendar'}>Calendar</a></li>
         <li><a href="/character-sheet" class:active={$page.url.pathname === '/character-sheet'}>Character Sheet</a></li>
         <li><a href="https://www.github.com/vfk-rw/lyrian-tools" target="_blank" class="external-link">GitHub</a></li>
         <li><a href="https://rpg.angelssword.com" target="_blank" class="external-link">TTRPG Manual</a></li>
