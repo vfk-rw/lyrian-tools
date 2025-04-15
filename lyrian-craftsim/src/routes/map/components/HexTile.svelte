@@ -193,14 +193,16 @@
     <TileIcon iconPath={icon} {q} {r} />
   {/if}
   
-  <!-- POI markers -->
-  {#each pois as poi}
+  <!-- POI markers with grouping information -->
+  {#each pois as poi, index}
     <POIMarker
       poiId={poi.id}
       poiName={poi.name}
       poiIcon={poi.icon}
       poiDescription={poi.description || ''}
       tileKey={tileKey}
+      groupIndex={index}
+      groupSize={pois.length}
     />
   {/each}
 </g>
