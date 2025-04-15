@@ -17,6 +17,5 @@
   },
   "buildCommand": "pnpm run build",
   "installCommand": "pnpm install",
-  "devCommand": "pnpm run dev",
-  "nodeVersion": "18.x"
+  "devCommand": "pnpm run dev"
 }
