@@ -1,165 +1,162 @@
 <script lang="ts">
-  import { T } from '@threlte/core';
-  // We still need some THREE.js classes for vector calculations
-  import { Vector3, DoubleSide } from 'three';
-  import type { Region } from '$lib/map/stores/mapStore';
-  import { mapData } from '$lib/map/stores/mapStore';
-  import { writable } from 'svelte/store';
+  import { uiStore, showModal } from '$lib/map/stores/uiStore';
+  import { calculateRegionBoundary, generatePathFromPoints } from '$lib/map/utils/hexlib';
   
-  // Props - use traditional export syntax
-  export let region: Region;
-  export let tileHeights: Map<string, number> | any; // Accept either Map or writable store
+  // Props
+  export let regionId: string;
+  export let regionName: string;
+  export let regionColor: string;
+  export let tiles: Array<[number, number]>;
+  export let isHovered: boolean | null = false;
   
-  // Create userData for interaction
-  const userData = {
-    id: region.id,
-    name: region.name
-  };
+  // Calculate the boundary points of the region
+  $: boundaryPoints = calculateRegionBoundary(tiles);
+  $: outlinePath = generatePathFromPoints(boundaryPoints);
   
-  // Store to hold the calculated outline points
-  const outlinePoints = writable<[number, number, number][]>([]);
+  // Calculate center position for the label
+  $: center = calculateRegionCenter(boundaryPoints);
   
-  // Calculate outline points whenever data changes
-  function calculateOutlinePoints() {
-    if (!region.tiles || region.tiles.length === 0) {
-      outlinePoints.set([]);
-      return;
+  // Calculate a central position for the region name
+  function calculateRegionCenter(points: Array<{ x: number; y: number }>): { x: number; y: number } {
+    if (points.length === 0) {
+      return { x: 0, y: 0 };
     }
     
-    try {
-      // Handle the case where tileHeights might be a store or a Map
-      const heights = tileHeights instanceof Map ? tileHeights : 
-                     tileHeights?.subscribe ? get(tileHeights) : new Map<string, number>();
-                     
-      if (!heights) {
-        outlinePoints.set([]);
-        return;
-      }
-      
-      // Create vectors for perimeter calculation
-      const points: Vector3[] = [];
-      const perimeter: Vector3[] = [];
-      const tiles = new Map<string, [number, number]>();
-      
-      // Collect all tiles in the region
-      region.tiles.forEach((tileKey: string) => {
-        // Parse coordinates from the key string (format: "q,r")
-        const [q, r] = tileKey.split(',').map(Number);
-        tiles.set(tileKey, [q, r]);
-        
-        // Get tile from mapData
-        const tileData = $mapData.tiles.get(tileKey);
-        if (tileData) {
-          const height = heights.get(tileKey) || 0;
-          // Add center point for convex hull calculation
-          points.push(new Vector3(tileData.x, height + 0.1, tileData.y));
-        }
-      });
-      
-      // Basic perimeter detection - find edge tiles
-      for (const [tileKey, [q, r]] of tiles.entries()) {
-        const tileData = $mapData.tiles.get(tileKey);
-        if (!tileData) continue;
-        
-        // Check all 6 neighbor directions
-        const directions = [
-          [1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]
-        ];
-        
-        for (const [dq, dr] of directions) {
-          const neighborKey = `${q + dq},${r + dr}`;
-          // If neighbor is not in the region, this is an edge
-          if (!tiles.has(neighborKey)) {
-            const height = heights.get(tileKey) || 0;
-            perimeter.push(new Vector3(tileData.x, height + 0.1, tileData.y));
-            break;
-          }
-        }
-      }
-      
-      // If we have perimeter points, use those for the outline
-      const usePoints = perimeter.length > 0 ? perimeter : points;
-      
-      // Convert the Vector3 points to simple tuples for Threlte
-      const outlinePositions = usePoints.map(p => [p.x, p.y, p.z] as [number, number, number]);
-      
-      if (outlinePositions.length >= 3) {
-        outlinePoints.set(outlinePositions);
-      } else {
-        outlinePoints.set([]);
-      }
-    } catch (error) {
-      console.error("Error creating region outline:", error);
-      outlinePoints.set([]);
+    // Simple average of all points
+    const sumX = points.reduce((sum, point) => sum + point.x, 0);
+    const sumY = points.reduce((sum, point) => sum + point.y, 0);
+    
+    return {
+      x: sumX / points.length,
+      y: sumY / points.length
+    };
+  }
+  
+  // Handle click on the region
+  function handleRegionClick(event: MouseEvent | KeyboardEvent) {
+    // Stop propagation to prevent tile clicks (only for MouseEvent)
+    if (event instanceof MouseEvent) {
+      event.stopPropagation();
+    }
+    
+    // Open edit modal for this region
+    showModal({
+      type: 'region',
+      regionId
+    });
+  }
+  
+  // Handle mouse enter/leave for hover effects
+  function handleMouseEnter() {
+    $uiStore.hoveredRegion = regionId;
+  }
+  
+  function handleMouseLeave() {
+    if ($uiStore.hoveredRegion === regionId) {
+      $uiStore.hoveredRegion = null;
     }
   }
   
-  // Extract color from region
-  $: regionColor = region.color || '#ffffff';
-  
-  // Trigger calculation when mapData or region changes
-  $: if ($mapData && region) {
-    calculateOutlinePoints();
-  }
-  
-  // Need to get a reference to the store value
-  function get(store: any) {
-    let value;
-    store.subscribe((v: any) => {
-      value = v;
-    })();
-    return value;
+  // Handle keyboard events for accessibility
+  function handleKeyDown(event: KeyboardEvent) {
+    // Activate on Enter or Space key
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleRegionClick(event);
+    }
   }
 </script>
 
-{#if $outlinePoints.length >= 3}
-  <!-- Line for the region outline - one per point -->
-  {#each $outlinePoints as point, i}
-    {#if i < $outlinePoints.length - 1}
-      <T.Line {userData}>
-        <T.BufferGeometry>
-          <T.LineCurve3 
-            start={$outlinePoints[i]} 
-            end={$outlinePoints[i+1]} 
-          />
-        </T.BufferGeometry>
-        <T.LineBasicMaterial
-          color={regionColor}
-          linewidth={2}
-          transparent={true}
-          opacity={0.8}
+<div 
+  class="region-outline-container"
+  class:hovered={isHovered}
+  role="button"
+  tabindex="0"
+  aria-label={`Region: ${regionName}`}
+  on:mouseenter={handleMouseEnter}
+  on:mouseleave={handleMouseLeave}
+  on:click={handleRegionClick}
+  on:keydown={handleKeyDown}
+>
+  <!-- SVG for the region outline -->
+  <svg class="region-outline" width="100%" height="100%" overflow="visible">
+    <path 
+      d={outlinePath} 
+      fill="none" 
+      stroke={regionColor} 
+      stroke-width={isHovered ? 3 : 2}
+      stroke-opacity={isHovered ? 0.9 : 0.7}
+      vector-effect="non-scaling-stroke"
+    />
+    
+    <!-- Background fill with low opacity -->
+    <path 
+      d={outlinePath} 
+      fill={regionColor} 
+      fill-opacity={isHovered ? 0.2 : 0.1}
+      stroke="none"
+    />
+    
+    <!-- Region label -->
+    {#if $uiStore.showLabels && center}
+      <g class="region-label" transform={`translate(${center.x}, ${center.y})`}>
+        <rect 
+          x="-60" 
+          y="-15" 
+          width="120" 
+          height="30" 
+          rx="5" 
+          fill={regionColor} 
+          fill-opacity="0.7" 
         />
-      </T.Line>
+        <text 
+          x="0" 
+          y="5" 
+          text-anchor="middle" 
+          dominant-baseline="middle"
+          fill="white"
+          font-weight="bold"
+          font-size="14"
+          pointer-events="none"
+        >
+          {regionName}
+        </text>
+      </g>
     {/if}
-  {/each}
-  
-  <!-- Connect the last point to the first to close the loop -->
-  <T.Line {userData}>
-    <T.BufferGeometry>
-      <T.LineCurve3 
-        start={$outlinePoints[$outlinePoints.length-1]} 
-        end={$outlinePoints[0]} 
-      />
-    </T.BufferGeometry>
-    <T.LineBasicMaterial
-      color={regionColor}
-      linewidth={2}
-      transparent={true}
-      opacity={0.8}
-    />
-  </T.Line>
+  </svg>
+</div>
 
-  <!-- Plane for region highlighting -->
-  <T.Mesh position={[0, 0.2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-    <T.PlaneGeometry args={[500, 500]} />
-    <T.MeshBasicMaterial
-      color={regionColor}
-      transparent={true}
-      opacity={0.15}
-      side={DoubleSide}
-      polygonOffset={true}
-      polygonOffsetFactor={1}
-      polygonOffsetUnits={1}
-    />
-  </T.Mesh>
-{/if}
+<style>
+  .region-outline-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: all;
+    cursor: pointer;
+    z-index: 5; /* Above tiles but below POIs */
+  }
+  
+  .region-outline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .region-label {
+    cursor: pointer;
+    pointer-events: all;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+    opacity: 0.9;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  
+  .hovered .region-label {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+</style>

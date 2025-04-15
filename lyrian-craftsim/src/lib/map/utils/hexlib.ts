@@ -1,195 +1,264 @@
-import { defineHex, Grid, Orientation, rectangle } from 'honeycomb-grid';
-import type { Point, HexCoordinates } from 'honeycomb-grid';
-import { mapData, getTileKey, type TileHex } from '../stores/mapStore';
-import { get } from 'svelte/store';
+/**
+ * Utility functions for hexagonal grid operations
+ * Based on the concepts from https://www.redblobgames.com/grids/hexagons/
+ */
 
-// Define the hex size and orientation
-const HEX_SIZE = 10;
+// Constants for hex grid dimensions
+const HEX_SIZE = 50; // Size of a hex (from center to corner)
+const HEX_WIDTH = HEX_SIZE * Math.sqrt(3);
+const HEX_HEIGHT = HEX_SIZE * 2;
+const HEX_VERTICAL_SPACING = HEX_HEIGHT * 0.75;
+const HEX_HORIZONTAL_SPACING = HEX_WIDTH;
 
-// Define our custom hex class with additional properties
-const BaseHex = defineHex({
-  dimensions: { xRadius: HEX_SIZE, yRadius: HEX_SIZE },
-  orientation: Orientation.POINTY
-});
+// Isometric projection factors
+const ISO_SCALE_X = 0.866; // cos(30°)
+const ISO_SCALE_Y = 0.5;   // sin(30°)
+const ISO_SKEW = 0.577;    // tan(30°)
 
-export class MapHex extends BaseHex {
-  biome: string;
-  elevation: number;
-  pois: any[];
-  regionId: string | null;
+/**
+ * Convert hex coordinates (q,r) to pixel position in flat-top orientation
+ */
+export function hexToPixel(q: number, r: number): { x: number, y: number } {
+  const x = HEX_SIZE * (Math.sqrt(3) * q + Math.sqrt(3) / 2 * r);
+  const y = HEX_SIZE * (3/2 * r);
   
-  constructor(coordinates?: HexCoordinates) {
-    super(coordinates);
-    this.biome = 'plains';
-    this.elevation = 0;
-    this.pois = [];
-    this.regionId = null;
+  return { x, y };
+}
+
+/**
+ * Convert hex coordinates to isometric pixel position for rendering
+ */
+export function hexToIsometric(q: number, r: number): { x: number, y: number } {
+  const { x: flatX, y: flatY } = hexToPixel(q, r);
+  
+  // Apply isometric transformation
+  const isoX = flatX * ISO_SCALE_X - flatY * ISO_SCALE_X;
+  const isoY = flatX * ISO_SCALE_Y + flatY * ISO_SCALE_Y;
+  
+  return { x: isoX, y: isoY };
+}
+
+/**
+ * Convert pixel position to hex coordinates (cube coordinates)
+ */
+export function pixelToHex(x: number, y: number): { q: number, r: number, s: number } {
+  const q = (x * Math.sqrt(3)/3 - y/3) / HEX_SIZE;
+  const r = y * 2/3 / HEX_SIZE;
+  const s = -q - r; // Cube coordinate constraint: q + r + s = 0
+  
+  return cubeRound(q, r, s);
+}
+
+/**
+ * Convert isometric pixel position to hex coordinates
+ */
+export function isometricToHex(x: number, y: number): { q: number, r: number } {
+  // Convert isometric coordinates back to flat coordinates
+  const flatX = (x / ISO_SCALE_X + y / ISO_SCALE_Y) / 2;
+  const flatY = (y / ISO_SCALE_Y - x / ISO_SCALE_X) / 2;
+  
+  // Now convert flat coordinates to hex
+  const { q, r } = pixelToHex(flatX, flatY);
+  return { q, r };
+}
+
+/**
+ * Convert isometric pixel position to hex key string
+ */
+export function isometricPointToHexKey(x: number, y: number): string {
+  const { q, r } = isometricToHex(x, y);
+  const roundedQ = Math.round(q);
+  const roundedR = Math.round(r);
+  return `${roundedQ},${roundedR}`;
+}
+
+/**
+ * Round floating point cube coordinates to integer cube coordinates
+ */
+function cubeRound(q: number, r: number, s: number): { q: number, r: number, s: number } {
+  let roundQ = Math.round(q);
+  let roundR = Math.round(r);
+  let roundS = Math.round(s);
+  
+  const qDiff = Math.abs(roundQ - q);
+  const rDiff = Math.abs(roundR - r);
+  const sDiff = Math.abs(roundS - s);
+  
+  // Adjust to maintain q + r + s = 0
+  if (qDiff > rDiff && qDiff > sDiff) {
+    roundQ = -roundR - roundS;
+  } else if (rDiff > sDiff) {
+    roundR = -roundQ - roundS;
+  } else {
+    roundS = -roundQ - roundR;
   }
+  
+  return { q: roundQ, r: roundR, s: roundS };
 }
 
-// Our grid instance
-let hexGrid: Grid<MapHex>;
-
-// Initialize the map with a rectangle of hexes
-export function initializeMap(width: number = 10, height: number = 10): void {
-  // Create a new grid with the specified dimensions
-  hexGrid = new Grid(MapHex, rectangle({ width, height }));
-  
-  // Update the mapData store with the new grid
-  const mapDataValue = get(mapData);
-  const newTiles = new Map<string, TileHex>();
-  
-  hexGrid.forEach(hex => {
-    const center = hex.center;
-    const key = getTileKey(hex.q, hex.r);
-    
-    // Create a tile with calculated x,y coordinates
-    const tile: TileHex = {
-      q: hex.q,
-      r: hex.r,
-      s: hex.s,
-      x: center.x,
-      y: center.y,
-      biome: 'plains',
-      height: 0,
-      pois: [],
-      regionId: null
-    };
-    
-    newTiles.set(key, tile);
-  });
-  
-  // Update the store
-  mapData.update(state => ({
-    ...state,
-    tiles: newTiles
-  }));
-}
-
-// Convert hex coordinates to screen coordinates
-export function hexToScreen(q: number, r: number): Point {
-  if (!hexGrid) {
-    // If grid isn't initialized, create a temporary hex to get coordinates
-    const tempHex = new MapHex({ q, r });
-    return tempHex.center;
-  }
-  
-  // Find the hex in the grid
-  const hex = hexGrid.getHex({ q, r }) || new MapHex({ q, r });
-  return hex.center;
-}
-
-// Get the corners of a hex for rendering
-export function getHexCorners(q: number, r: number): { x: number, y: number }[] {
-  if (!hexGrid) {
-    // If grid isn't initialized, create a temporary hex
-    const tempHex = new MapHex({ q, r });
-    const corners = tempHex.corners;
-    return corners.map((corner: Point) => ({ x: corner.x, y: corner.y }));
-  }
-  
-  // Find the hex in the grid
-  const hex = hexGrid.getHex({ q, r }) || new MapHex({ q, r });
-  const corners = hex.corners;
-  
-  // Map the corners to a simple format
-  return corners.map((corner: Point) => ({ x: corner.x, y: corner.y }));
-}
-
-// Find a hex at screen coordinates
-export function screenToHex(x: number, y: number): MapHex | undefined {
-  if (!hexGrid) return undefined;
-  
-  const point = { x, y };
-  return hexGrid.pointToHex(point);
-}
-
-// Get all neighboring hexes
-export function getNeighbors(q: number, r: number): MapHex[] {
-  if (!hexGrid) return [];
-  
-  const hex = hexGrid.getHex({ q, r });
-  if (!hex) return [];
-  
-  // Get all 6 neighboring coordinates
+/**
+ * Get all neighboring hex coordinates for a given hex
+ */
+export function getHexNeighbors(q: number, r: number): Array<[number, number]> {
+  // Directions for flat-top hexagons (q, r directions)
   const directions = [
-    { q: 1, r: 0 }, { q: 1, r: -1 }, { q: 0, r: -1 },
-    { q: -1, r: 0 }, { q: -1, r: 1 }, { q: 0, r: 1 }
+    [1, 0],   // East
+    [1, -1],  // Northeast
+    [0, -1],  // Northwest
+    [-1, 0],  // West
+    [-1, 1],  // Southwest
+    [0, 1]    // Southeast
   ];
   
-  const neighbors: MapHex[] = [];
-  for (const dir of directions) {
-    const neighborCoord = { q: hex.q + dir.q, r: hex.r + dir.r };
-    const neighbor = hexGrid.getHex(neighborCoord);
-    if (neighbor) {
-      neighbors.push(neighbor);
+  return directions.map(([dq, dr]) => [q + dq, r + dr] as [number, number]);
+}
+
+/**
+ * Calculate the boundary points of a region for drawing an outline
+ */
+export function calculateRegionBoundary(tiles: Array<[number, number]>): Array<{ x: number, y: number }> {
+  if (tiles.length === 0) return [];
+  
+  // Initialize with the first tile's vertices
+  const boundary: Array<{ x: number, y: number }> = [];
+  
+  // Implementation of a convex hull algorithm would go here
+  // For simplicity, we'll just create a boundary by connecting 
+  // the centers of the outermost hexes
+  const sortedTiles = [...tiles].sort((a, b) => {
+    // Sort by angle from the center of the region
+    const centerQ = tiles.reduce((sum, [q]) => sum + q, 0) / tiles.length;
+    const centerR = tiles.reduce((sum, [, r]) => sum + r, 0) / tiles.length;
+    
+    const angleA = Math.atan2(a[1] - centerR, a[0] - centerQ);
+    const angleB = Math.atan2(b[1] - centerR, b[0] - centerQ);
+    
+    return angleA - angleB;
+  });
+  
+  // Convert the sorted boundary tiles to pixel coordinates
+  for (const [q, r] of sortedTiles) {
+    const { x, y } = hexToIsometric(q, r);
+    
+    // Add hex vertex points
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI / 3) * i;
+      const vx = x + HEX_SIZE * Math.cos(angle);
+      const vy = y + HEX_SIZE * Math.sin(angle);
+      
+      // Only add points that are on the boundary
+      // (This is a simplification, a real implementation would
+      // need to check if a vertex is shared between hexes)
+      boundary.push({ x: vx, y: vy });
     }
   }
   
-  return neighbors;
+  return boundary;
 }
 
-// Function to calculate distance between two hexes
-export function hexDistance(q1: number, r1: number, q2: number, r2: number): number {
-  return Math.max(Math.abs(q1 - q2), Math.abs(r1 - r2), Math.abs(-q1 - r1 + q2 + r2)) / 2;
+/**
+ * Generate an SVG path string from boundary points
+ */
+export function generatePathFromPoints(points: Array<{ x: number, y: number }>): string {
+  if (points.length === 0) return '';
+  
+  const firstPoint = points[0];
+  let path = `M ${firstPoint.x},${firstPoint.y}`;
+  
+  for (let i = 1; i < points.length; i++) {
+    path += ` L ${points[i].x},${points[i].y}`;
+  }
+  
+  // Close the path
+  path += ' Z';
+  
+  return path;
 }
 
-// Convert screen coordinates to a serialized hex key
-export function pointToHexKey(x: number, y: number): string | null {
-  const hex = screenToHex(x, y);
-  if (!hex) return null;
+/**
+ * Get the vertices of a hex at a specific coordinate
+ */
+export function getHexVertices(q: number, r: number): Array<{ x: number, y: number }> {
+  const { x, y } = hexToIsometric(q, r);
+  const vertices = [];
   
-  return getTileKey(hex.q, hex.r);
+  for (let i = 0; i < 6; i++) {
+    const angle = (Math.PI / 3) * i;
+    const vx = x + HEX_SIZE * Math.cos(angle);
+    const vy = y + HEX_SIZE * Math.sin(angle);
+    vertices.push({ x: vx, y: vy });
+  }
+  
+  return vertices;
 }
 
-// Calculate the center point of a hex for positioning
-export function getHexCenter(q: number, r: number): { x: number, y: number, z: number } {
-  const point = hexToScreen(q, r);
-  return { x: point.x, y: 0, z: point.y };
+/**
+ * Calculate the points of a hex for SVG drawing
+ */
+export function calculateHexPoints(q: number, r: number): string {
+  const vertices = getHexVertices(q, r);
+  return vertices.map(v => `${v.x},${v.y}`).join(' ');
 }
 
-// Resize the grid (add/remove hexes)
-export function resizeGrid(newWidth: number, newHeight: number): void {
-  // Create a new grid with the specified dimensions
-  const newGrid = new Grid(MapHex, rectangle({ width: newWidth, height: newHeight }));
+/**
+ * Alias for hexToPixel for consistency
+ */
+export function axialToPixel(q: number, r: number): { x: number, y: number } {
+  return hexToPixel(q, r);
+}
+
+/**
+ * Generate a key string from hex coordinates
+ */
+export function getHexKey(q: number, r: number): string {
+  return `${q},${r}`;
+}
+
+/**
+ * Parse a hex key string back into coordinates
+ * @param key String in format "q,r"
+ */
+export function getHexCoordinatesFromKey(key: string): [number, number] {
+  const [q, r] = key.split(',').map(Number);
+  return [q, r];
+}
+
+/**
+ * Get all hex coordinates within a certain range
+ * @param centerQ Center hex Q coordinate
+ * @param centerR Center hex R coordinate
+ * @param range Range (distance from center)
+ */
+export function getHexesInRange(centerQ: number, centerR: number, range: number): Array<[number, number]> {
+  const results: Array<[number, number]> = [];
   
-  // Update the hexGrid reference
-  hexGrid = newGrid;
-  
-  // Update the mapData store with the new grid
-  const mapDataValue = get(mapData);
-  const newTiles = new Map<string, TileHex>();
-  
-  // Preserve existing tiles when possible
-  newGrid.forEach(hex => {
-    const center = hex.center;
-    const key = getTileKey(hex.q, hex.r);
-    const existingTile = mapDataValue.tiles.get(key);
-    
-    if (existingTile) {
-      // Keep the existing tile data
-      newTiles.set(key, existingTile);
-    } else {
-      // Create a new tile
-      const tile: TileHex = {
-        q: hex.q,
-        r: hex.r,
-        s: hex.s,
-        x: center.x,
-        y: center.y,
-        biome: 'plains',
-        height: 0,
-        pois: [],
-        regionId: null
-      };
+  for (let q = centerQ - range; q <= centerQ + range; q++) {
+    for (let r = centerR - range; r <= centerR + range; r++) {
+      // Convert to cube coordinates to check distance
+      const s = -q - r;
+      // Calculate cube distance
+      const distance = Math.max(Math.abs(q - centerQ), Math.abs(r - centerR), Math.abs(s - (-centerQ - centerR)));
       
-      newTiles.set(key, tile);
+      if (distance <= range) {
+        results.push([q, r]);
+      }
     }
-  });
+  }
   
-  // Update the store
-  mapData.update(state => ({
-    ...state,
-    tiles: newTiles
-  }));
+  return results;
+}
+
+/**
+ * Check if a point is inside a hex
+ */
+export function isPointInHex(x: number, y: number, hexQ: number, hexR: number): boolean {
+  const hexCenter = hexToIsometric(hexQ, hexR);
+  
+  // Calculate the distance from the center
+  const dx = x - hexCenter.x;
+  const dy = y - hexCenter.y;
+  
+  // Check if the point is within the hex boundaries
+  // Simplified check using distance from center
+  return Math.sqrt(dx * dx + dy * dy) <= HEX_SIZE;
 }

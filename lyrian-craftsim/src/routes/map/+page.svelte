@@ -3,7 +3,7 @@
   import Toolbar from './components/Toolbar.svelte';
   import POIModal from './components/POIModal.svelte';
   import RegionModal from './components/RegionModal.svelte';
-  import { mapData, exportMapJSON, importMapJSON } from '$lib/map/stores/mapStore';
+  import { mapData, exportMapJSON, importMapJSON, setMapName } from '$lib/map/stores/mapStore';
   
   // Handle export to JSON
   function handleExport() {
@@ -74,14 +74,14 @@
         month: 'short', 
         day: 'numeric' 
       });
-      $mapData.mapName = `Hex Map - ${date}`;
+      setMapName(`Hex Map - ${date}`);
     }
   });
   
   // Handle map name change
   function handleMapNameChange(e: Event) {
     const input = e.target as HTMLInputElement;
-    $mapData.mapName = input.value;
+    setMapName(input.value);
   }
 </script>
 

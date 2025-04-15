@@ -16,7 +16,6 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "8.56.0",
-		"@types/three": "^0.161.0",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.16",
@@ -37,11 +36,8 @@
 	"type": "module",
 	"dependencies": {
 		"@sveltejs/adapter-vercel": "^4.0.5",
-		"@threlte/core": "^7.0.12",
-		"@threlte/extras": "^8.5.1",
-		"@threlte/flex": "^2.0.1",
-		"@threlte/rapier": "^1.1.5",
+		"glixy": "^0.0.11",
 		"honeycomb-grid": "^4.1.5",
-		"three": "^0.161.0"
+		"pixi.js": "^8.9.1"
 	}
 }
