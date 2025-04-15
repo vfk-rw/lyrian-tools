@@ -35,9 +35,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-vercel": "^4.0.5",
-		"glixy": "^0.0.11",
-		"honeycomb-grid": "^4.1.5",
-		"pixi.js": "^8.9.1"
+		"@sveltejs/adapter-vercel": "^4.0.5"
 	}
 }
