@@ -118,21 +118,23 @@
     {displayIcon}
   </text>
   
-  <!-- POI name text below the icon -->
-  <text 
-    x="0" 
-    y="14" 
-    text-anchor="middle" 
-    dominant-baseline="middle" 
-    font-size="10"
-    fill="white"
-    stroke="rgba(0, 0, 0, 0.8)"
-    stroke-width="1"
-    paint-order="stroke"
-    class="poi-name-text"
-  >
-    {poiName}
-  </text>
+  <!-- POI name text below the icon (conditionally shown) -->
+  {#if $uiStore.showPOILabels}
+    <text 
+      x="0" 
+      y="14" 
+      text-anchor="middle" 
+      dominant-baseline="middle" 
+      font-size="10"
+      fill="white"
+      stroke="rgba(0, 0, 0, 0.8)"
+      stroke-width="1"
+      paint-order="stroke"
+      class="poi-name-text"
+    >
+      {poiName}
+    </text>
+  {/if}
 </g>
 
 <style>

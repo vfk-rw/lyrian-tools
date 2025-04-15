@@ -166,7 +166,7 @@
   />
   
   <!-- Height indicator at center of hex -->
-  {#if height > 0 && $uiStore.showLabels}
+  {#if height > 0 && $uiStore.showHeightLabels}
     <text
       x={position.x}
       y={position.y}

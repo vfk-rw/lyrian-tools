@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { uiStore, selectTool, selectBiome, selectHeight, toggleLabels, toggleGrid, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
+  import { uiStore, selectTool, selectBiome, selectHeight, toggleRegionLabels, togglePOILabels, toggleHeightLabels, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
   import { mapData, removeRegion } from '$lib/map/stores/mapStore';
   
   // Color mapping for biomes
@@ -43,16 +43,6 @@
   // Handle height selection
   function handleHeightSelect(height: number): void {
     selectHeight(height);
-  }
-  
-  // Handle labels toggle
-  function handleToggleLabels(): void {
-    toggleLabels();
-  }
-  
-  // Handle grid toggle
-  function handleToggleGrid(): void {
-    toggleGrid();
   }
 </script>
 
@@ -227,25 +217,35 @@
   
   <section class="toolbar-section">
     <h3>Display Options</h3>
-    <div class="option-grid">
+    <div class="display-options">
       <button 
         class="option-button" 
-        class:active={$uiStore.showLabels}
-        on:click={handleToggleLabels}
-        title="Show/Hide Tile Labels"
+        class:active={$uiStore.showRegionLabels}
+        on:click={() => toggleRegionLabels()}
+        title="Show/Hide Region Labels"
       >
         <span class="option-icon">🏷️</span>
-        <span class="option-label">Labels</span>
+        <span class="option-label">Region Labels</span>
       </button>
       
       <button 
         class="option-button" 
-        class:active={$uiStore.showGrid}
-        on:click={handleToggleGrid}
-        title="Show/Hide Grid"
+        class:active={$uiStore.showPOILabels}
+        on:click={() => togglePOILabels()}
+        title="Show/Hide POI Labels"
       >
-        <span class="option-icon">📊</span>
-        <span class="option-label">Grid</span>
+        <span class="option-icon">📍</span>
+        <span class="option-label">POI Labels</span>
+      </button>
+      
+      <button 
+        class="option-button" 
+        class:active={$uiStore.showHeightLabels}
+        on:click={() => toggleHeightLabels()}
+        title="Show/Hide Height Labels"
+      >
+        <span class="option-icon">⛰️</span>
+        <span class="option-label">Height Labels</span>
       </button>
     </div>
   </section>
@@ -290,7 +290,7 @@
     color: #ccc;
   }
   
-  .tools-grid, .biome-grid, .height-grid, .option-grid {
+  .tools-grid, .biome-grid, .height-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
@@ -299,6 +299,12 @@
   
   .biome-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .display-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
   
   .tool-button, .option-button {
@@ -450,5 +456,60 @@
   .region-edit:hover {
     color: #ffffff;
     background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .action-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .action-button:disabled {
+    background-color: #555;
+    color: #888;
+    cursor: not-allowed;
+  }
+  
+  .action-button:not(:disabled):hover {
+    background-color: #3e8e41;
+  }
+  
+  .selected-count, .help-text {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-bottom: 0.25rem;
+  }
+  
+  .help-text {
+    font-style: italic;
+    color: #888;
+  }
+  
+  .option-button {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .option-icon {
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+  }
+  
+  .option-label {
+    font-size: 0.9rem;
   }
 </style>

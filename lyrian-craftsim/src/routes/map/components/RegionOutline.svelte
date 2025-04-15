@@ -90,7 +90,7 @@
   <!-- No region borders shown anymore -->
   
   <!-- Region label (visible if showLabel is true) -->
-  {#if $uiStore.showLabels && center && showLabel}
+  {#if $uiStore.showRegionLabels && center && showLabel}
     <g class="region-label" transform={`translate(${center.x}, ${center.y})`}>
       <text 
         x="0" 

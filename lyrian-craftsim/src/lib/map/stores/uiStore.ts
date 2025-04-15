@@ -62,8 +62,9 @@ export interface UIState {
   selectedHeight: number;
   
   // Display options
-  showLabels: boolean;
-  showGrid: boolean;
+  showRegionLabels: boolean;
+  showPOILabels: boolean;
+  showHeightLabels: boolean;
   
   // Modal state
   showModal: boolean;
@@ -87,8 +88,9 @@ const initialState: UIState = {
   selectedBiome: 'plains',
   selectedHeight: 0,
   
-  showLabels: true,
-  showGrid: true,
+  showRegionLabels: true,
+  showPOILabels: true,
+  showHeightLabels: true,
   
   showModal: false,
   modalParams: null,
@@ -117,8 +119,9 @@ const createUIStore = () => {
     selectHeight: (height: number) => update(state => ({ ...state, selectedHeight: height })),
     
     // Display options
-    toggleLabels: () => update(state => ({ ...state, showLabels: !state.showLabels })),
-    toggleGrid: () => update(state => ({ ...state, showGrid: !state.showGrid })),
+    toggleRegionLabels: () => update(state => ({ ...state, showRegionLabels: !state.showRegionLabels })),
+    togglePOILabels: () => update(state => ({ ...state, showPOILabels: !state.showPOILabels })),
+    toggleHeightLabels: () => update(state => ({ ...state, showHeightLabels: !state.showHeightLabels })),
     
     // Modal management
     showModal: (params: ModalParams) => update(state => ({ 
@@ -213,8 +216,9 @@ export const {
   selectTool, 
   selectBiome, 
   selectHeight, 
-  toggleLabels, 
-  toggleGrid, 
+  toggleRegionLabels, 
+  togglePOILabels, 
+  toggleHeightLabels, 
   showModal, 
   closeModal,
   clearSelection,
