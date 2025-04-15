@@ -2,6 +2,7 @@
   import CalendarGrid from './components/CalendarGrid.svelte';
   import RouteToggle from './components/RouteToggle.svelte';
   import AdventurerStatus from './components/AdventurerStatus.svelte';
+  import AdventurerSearch from './components/AdventurerSearch.svelte';
   import { routesData, exportRoutesJSON, importRoutesJSON } from '$lib/map/stores/routeStore';
   import type { Route } from '$lib/map/stores/routeStore';
   import { v4 as uuidv4 } from 'uuid';
@@ -277,7 +278,7 @@
   </header>
   
   <main class="main-content">
-    <aside class="sidebar">
+    <aside class="sidebar left-sidebar">
       <RouteToggle />
     </aside>
     
@@ -289,6 +290,10 @@
         <AdventurerStatus />
       </div>
     </div>
+
+    <aside class="sidebar right-sidebar">
+      <AdventurerSearch />
+    </aside>
   </main>
 </div>
 
@@ -376,11 +381,18 @@
   }
   
   .sidebar {
-    width: 500px;
+    width: 300px;
     background-color: #383838;
     padding: 1rem;
     overflow-y: auto;
+  }
+  
+  .left-sidebar {
     border-right: 1px solid #444;
+  }
+  
+  .right-sidebar {
+    border-left: 1px solid #444;
   }
   
   .adventurer-status-container {

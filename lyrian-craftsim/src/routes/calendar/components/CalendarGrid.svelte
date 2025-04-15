@@ -393,7 +393,7 @@
 
 <script context="module">
   // Helper function to determine if black or white text should be used for contrast against a background color
-  function getContrastColor(hexColor: string) {
+  function getContrastColor(hexColor: string): string {
     // Convert hex to RGB
     const r = parseInt(hexColor.substr(1, 2), 16);
     const g = parseInt(hexColor.substr(3, 2), 16);

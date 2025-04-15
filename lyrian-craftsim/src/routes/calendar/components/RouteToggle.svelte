@@ -217,7 +217,7 @@
     if (!waypoints || waypoints.length === 0) return null;
     
     // Filter waypoints with dates
-    const waypointsWithDates = waypoints.filter(wp => wp.date);
+    const waypointsWithDates = waypoints.filter((wp: {date?: string, q: number, r: number}) => wp.date);
     
     if (waypointsWithDates.length === 0) return null;
     

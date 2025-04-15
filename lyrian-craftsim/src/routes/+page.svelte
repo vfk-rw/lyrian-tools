@@ -11,7 +11,7 @@
         A collection of tools for tabletop role-playing games. Craft items, design maps, and manage your campaigns with ease.
       </p>
       
-      <div class="tools-grid">
+      <div class="tools-row">
         <a href="/map" class="tool-card" role="button" on:click|preventDefault={() => goto('/map')} on:keydown={e => e.key === 'Enter' && goto('/map')}>
           <div class="card-icon">🗺️</div>
           <h2 class="card-title">Hex Map Editor</h2>
@@ -31,6 +31,17 @@
           </p>
           <div class="card-footer">
             <button class="btn btn-primary">Open Crafting Simulator</button>
+          </div>
+        </a>
+        
+        <a href="/calendar" class="tool-card" role="button" on:click|preventDefault={() => goto('/calendar')} on:keydown={e => e.key === 'Enter' && goto('/calendar')}>
+          <div class="card-icon">📅</div>
+          <h2 class="card-title">Adventure Calendar</h2>
+          <p class="card-description">
+            View and manage adventure routes on a calendar. Track adventurers, play history, and upcoming events.
+          </p>
+          <div class="card-footer">
+            <button class="btn btn-primary">Open Calendar</button>
           </div>
         </a>
         
@@ -71,11 +82,12 @@
     color: #4361ee;
   }
   
-  .tools-grid {
+  .tools-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: 1.5rem;
     margin-top: 2rem;
+    padding-bottom: 1rem;
   }
   
   .tool-card {
