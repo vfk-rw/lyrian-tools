@@ -261,7 +261,7 @@ const createMapStore = () => {
         };
         
         // Import tiles
-        json.tiles.forEach((tile: any) => {
+        json.tiles.forEach((tile: Tile) => {
           if (typeof tile.q === 'number' && typeof tile.r === 'number') {
             const key = getHexKey(tile.q, tile.r);
             newData.tiles.set(key, {
@@ -269,7 +269,7 @@ const createMapStore = () => {
               r: tile.r,
               biome: tile.biome || 'plains',
               height: tile.height,
-              icon: tile.icon || null, 
+              icon: tile.icon, 
               pois: Array.isArray(tile.pois) ? [...tile.pois] : []
             });
           }
@@ -277,7 +277,7 @@ const createMapStore = () => {
         
         // Import regions
         if (Array.isArray(json.regions)) {
-          json.regions.forEach((region: any) => {
+          json.regions.forEach((region: Region) => {
             if (region.id && region.name && Array.isArray(region.tiles)) {
               newData.regions.set(region.id, {
                 id: region.id,
@@ -320,14 +320,26 @@ export const regionsList = derived(mapData, $mapData =>
 
 // Load demo map from file
 import demoMapData from '../data/demo-mirane-map.json';
+import { validateAndSanitizeMapJSON } from '../utils/secureImport';
 
 // Function to load the demo map
 const loadDemoMap = () => {
   try {
-    importMapJSON(demoMapData);
-    console.log('Demo map loaded successfully');
+    // Validate and sanitize the demo map data
+    // Using a reasonable file size since it's a static file
+    const demoMapSize = JSON.stringify(demoMapData).length;
+    const validationResult = validateAndSanitizeMapJSON(demoMapData, demoMapSize);
+    
+    if (validationResult.isValid) {
+      importMapJSON(validationResult.sanitizedData);
+      console.log('Demo map loaded successfully');
+    } else {
+      console.error('Demo map validation failed:', validationResult.error);
+      alert('Failed to load demo map: ' + validationResult.error);
+    }
   } catch (error) {
     console.error('Error loading demo map:', error);
+    alert('Error loading demo map. Please try again.');
   }
 };
 

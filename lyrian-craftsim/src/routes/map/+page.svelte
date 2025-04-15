@@ -4,6 +4,7 @@
   import POIModal from './components/POIModal.svelte';
   import RegionModal from './components/RegionModal.svelte';
   import { mapData, exportMapJSON, importMapJSON, setMapName, loadDemoMap, generateHexGrid } from '$lib/map/stores/mapStore';
+  import { validateAndSanitizeMapJSON, VALIDATION_LIMITS } from '$lib/map/utils/secureImport';
   
   // Handle demo map loading
   function handleLoadDemo() {
@@ -43,12 +44,37 @@
       const file = (e.target as HTMLInputElement)?.files?.[0];
       if (!file) return;
       
+      // Check file size limit before processing
+      if (file.size > VALIDATION_LIMITS.MAX_FILE_SIZE_BYTES) {
+        alert(`File too large. Maximum allowed size is ${VALIDATION_LIMITS.MAX_FILE_SIZE_BYTES / (1024 * 1024)}MB`);
+        return;
+      }
+      
+      // Check MIME type to ensure it's a text file
+      if (!file.type.match('application/json') && 
+          !file.type.match('text/plain') && 
+          !file.type.match('text/')) {
+        alert('Invalid file type. Only JSON and text files are supported.');
+        return;
+      }
+      
       // Read the file
       const reader = new FileReader();
       reader.onload = (readerEvent) => {
         try {
-          const jsonData = JSON.parse(readerEvent.target?.result as string);
-          const success = importMapJSON(jsonData);
+          // Parse the JSON
+          const rawJsonData = JSON.parse(readerEvent.target?.result as string);
+          
+          // Validate and sanitize the data
+          const validationResult = validateAndSanitizeMapJSON(rawJsonData, file.size);
+          
+          if (!validationResult.isValid) {
+            alert(`Failed to import map: ${validationResult.error}`);
+            return;
+          }
+          
+          // Import the sanitized data
+          const success = importMapJSON(validationResult.sanitizedData);
           
           if (success) {
             alert('Map imported successfully');
@@ -60,6 +86,11 @@
           alert('Failed to import map - invalid JSON');
         }
       };
+      
+      reader.onerror = () => {
+        alert('Error reading file. Please try again with a different file.');
+      };
+      
       reader.readAsText(file);
     };
     
