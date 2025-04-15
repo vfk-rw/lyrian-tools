@@ -127,38 +127,57 @@ export function validateBiome(biome: string | undefined): string {
 
 /**
  * Validates and sanitizes an icon path
- * Using a registry approach to prevent path traversal
+ * Using a strict registry approach to prevent path traversal
  */
 export function validateIconPath(iconPath: string | null | undefined): string | null {
   if (!iconPath) return null;
   
-  // Remove any potential path traversal attempts
-  const cleanPath = iconPath.replace(/\.\.\//g, '');
+  // Very strict path format validation with regex
+  // Format must be exactly: /icons/category/filename.svg
+  // where:
+  // - category must be one of the valid categories
+  // - filename can only contain alphanumeric chars, hyphens and underscores
+  // - the only period allowed is the one before "svg"
+  const validPathRegex = new RegExp(
+    `^/icons/(${VALIDATION_LIMITS.VALID_ICON_CATEGORIES.join('|')})/([a-zA-Z0-9_-]+)\.svg$`
+  );
   
-  // If the path doesn't start with /icons/, reject it
-  if (!cleanPath.startsWith('/icons/')) {
+  if (!validPathRegex.test(iconPath)) {
     return null;
   }
   
-  // Validate against our allowed categories
-  const parts = cleanPath.split('/');
-  if (parts.length !== 4) { // Should be [empty, "icons", category, filename.svg]
+  // Validate path depth (should be exactly 3 levels: /icons/category/file.svg)
+  const parts = iconPath.split('/');
+  if (parts.length !== 4) { // [empty string, "icons", category, filename.svg]
     return null;
   }
   
-  const category = parts[2];
-  if (!VALIDATION_LIMITS.VALID_ICON_CATEGORIES.includes(category)) {
+  // Additional checks for security
+  
+  // Check for any directory traversal attempts
+  if (iconPath.includes('..') || iconPath.includes('./') || iconPath.includes('/.')) {
     return null;
   }
   
-  // Validate the filename - only allow SVG files 
+  // Check for wrong slash types (backslashes not allowed)
+  if (iconPath.includes('\\')) {
+    return null;
+  }
+  
+  // Check that we only have one period and it's right before "svg"
+  const periodCount = (iconPath.match(/\./g) || []).length;
+  if (periodCount !== 1 || !iconPath.endsWith('.svg')) {
+    return null;
+  }
+  
+  // Ensure filename isn't too long to prevent buffer overflow attacks
   const filename = parts[3];
-  if (!filename.endsWith('.svg')) {
+  if (filename.length > 50) { // 50 chars should be plenty for a filename
     return null;
   }
   
-  // Return the validated path
-  return cleanPath;
+  // Return the validated path - it's already "clean" due to strict regex
+  return iconPath;
 }
 
 /**
