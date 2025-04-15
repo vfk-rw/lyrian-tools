@@ -59,91 +59,94 @@
   function handleMouseLeave() {
     showTooltip = false;
   }
+  
+  // Position offsets (may be used to place multiple POIs on one tile)
+  const offsetX = 0;
+  const offsetY = -15; // Slightly above center
 </script>
 
-<div 
+<!-- POI marker in SVG -->
+<g 
   class="poi-marker"
+  transform="translate({offsetX}, {offsetY})"
   on:click={handleClick}
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
 >
-  <div class="poi-icon">
-    {displayIcon}
-  </div>
+  <!-- Icon background circle -->
+  <circle 
+    cx="0" 
+    cy="0" 
+    r="12" 
+    fill="rgba(0, 0, 0, 0.6)" 
+    stroke="white" 
+    stroke-width="1"
+    class="poi-icon-bg"
+  />
   
+  <!-- Icon text -->
+  <text 
+    x="0" 
+    y="0" 
+    text-anchor="middle" 
+    dominant-baseline="middle" 
+    font-size="14"
+    fill="white"
+    class="poi-icon-text"
+  >
+    {displayIcon}
+  </text>
+  
+  <!-- Tooltip shown on hover -->
   {#if showTooltip}
-    <div class="poi-tooltip">
-      <h3>{poiName}</h3>
-      {#if poiDescription}
-        <p>{poiDescription}</p>
-      {/if}
-      <span class="tooltip-hint">Click to edit</span>
-    </div>
+    <foreignObject x="-100" y="-80" width="200" height="80" class="tooltip-container">
+      <div class="poi-tooltip">
+        <h3>{poiName}</h3>
+        {#if poiDescription}
+          <p>{poiDescription}</p>
+        {/if}
+        <span class="tooltip-hint">Click to edit</span>
+      </div>
+    </foreignObject>
   {/if}
-</div>
+</g>
 
 <style>
   .poi-marker {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    z-index: 10;
     cursor: pointer;
   }
   
-  .poi-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    font-size: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
-    transition: transform 0.2s, box-shadow 0.2s;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+  .poi-icon-bg {
+    transition: transform 0.2s, filter 0.2s;
+    transform-origin: center;
   }
   
-  .poi-icon:hover {
+  .poi-marker:hover .poi-icon-bg {
     transform: scale(1.2);
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
   }
   
   .poi-tooltip {
-    position: absolute;
-    bottom: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: max-content;
-    max-width: 200px;
     background-color: rgba(0, 0, 0, 0.85);
     color: white;
     border-radius: 4px;
-    padding: 0.5rem;
+    padding: 8px;
     font-size: 0.85rem;
-    z-index: 20;
-    pointer-events: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  }
-  
-  .poi-tooltip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+    pointer-events: none;
+    width: 100%;
+    max-height: 100%;
+    overflow: hidden;
   }
   
   .poi-tooltip h3 {
-    margin: 0 0 0.25rem;
+    margin: 0 0 4px;
     font-size: 1rem;
     font-weight: 500;
   }
   
   .poi-tooltip p {
-    margin: 0 0 0.5rem;
+    margin: 0 0 6px;
     opacity: 0.9;
   }
   
@@ -153,6 +156,9 @@
     opacity: 0.7;
     font-style: italic;
     text-align: right;
-    margin-top: 0.25rem;
+  }
+  
+  .tooltip-container {
+    overflow: visible;
   }
 </style>

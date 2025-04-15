@@ -116,14 +116,14 @@
   class="hex-tile"
   class:selected={isSelected}
   class:hovered={isHovered}
-  transform="translate(0,{-elevationOffset})"
+  transform="translate({position.x},{position.y - elevationOffset})"
   on:click={handleClick}
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
 >
-  <!-- Hex background -->
+  <!-- Hex background with relative coordinates -->
   <polygon 
-    points={hexPoints} 
+    points={vertices.map(v => `${v.x - position.x},${v.y - position.y}`).join(' ')}
     fill={fillColor}
     stroke={strokeColor}
     stroke-width={strokeWidth}
@@ -131,11 +131,11 @@
     vector-effect="non-scaling-stroke"
   />
   
-  <!-- Height indicator (optional) -->
+  <!-- Height indicator at center of hex -->
   {#if height > 0 && $uiStore.showLabels}
     <text
-      x={position.x}
-      y={position.y + 5}
+      x="0"
+      y="5"
       text-anchor="middle"
       fill="rgba(0,0,0,0.7)"
       font-size="10"

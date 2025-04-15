@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { Container } from 'glixy';
   import HexTile from './HexTile.svelte';
   import POIMarker from './POIMarker.svelte';
   import RegionOutline from './RegionOutline.svelte';
@@ -9,8 +8,10 @@
   import { uiStore, updateCameraOffset, updateCameraZoom, showModal } from '$lib/map/stores/uiStore';
   import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
   
-  // Canvas and container references
+  // Canvas reference
   let canvasContainer: HTMLDivElement;
+  // SVG reference
+  let svgElement: SVGSVGElement;
   let isDragging = false;
   let lastPos = { x: 0, y: 0 };
   
@@ -190,40 +191,48 @@
   class="map-canvas-container" 
   bind:this={canvasContainer}
 >
-  <!-- Transform container for pan/zoom -->
-  <div 
-    class="transform-container"
-    style:transform="translate({$uiStore.cameraOffset.x}px, {$uiStore.cameraOffset.y}px) scale({$uiStore.cameraZoom})"
+  <!-- SVG canvas for hex map -->
+  <svg
+    bind:this={svgElement} 
+    class="hex-map-svg"
+    width="100%"
+    height="100%"
+    overflow="visible"
   >
-    <!-- Region outlines -->
-    {#each Array.from($mapData.regions.values()) as region}
-      <RegionOutline 
-        regionId={region.id} 
-        regionName={region.name} 
-        regionColor={region.color} 
-        tiles={region.tiles} 
-        isHovered={isRegionHovered(region.id)}
-      />
-    {/each}
-    
-    <!-- Render tiles with visual sorting for isometric view -->
-    {#each tileArray.sort((a, b) => {
-      // Back to front rendering (sort by r then q)
-      if (a.r !== b.r) return a.r - b.r;
-      return a.q - b.q;
-    }) as tile (tile.key)}
-      <HexTile
-        q={tile.q}
-        r={tile.r}
-        biome={tile.biome}
-        height={tile.height}
-        pois={tile.pois}
-        tileKey={tile.key}
-        isSelected={getSelectedState(tile.q, tile.r)}
-        isHovered={getHoveredState(tile.q, tile.r)}
-      />
-    {/each}
-  </div>
+    <!-- Main transformation group for pan/zoom -->
+    <g
+      transform="translate({$uiStore.cameraOffset.x} {$uiStore.cameraOffset.y}) scale({$uiStore.cameraZoom})"
+    >
+      <!-- Region outlines -->
+      {#each Array.from($mapData.regions.values()) as region}
+        <RegionOutline 
+          regionId={region.id} 
+          regionName={region.name} 
+          regionColor={region.color} 
+          tiles={region.tiles} 
+          isHovered={isRegionHovered(region.id)}
+        />
+      {/each}
+      
+      <!-- Render tiles with visual sorting for isometric view -->
+      {#each tileArray.sort((a, b) => {
+        // Back to front rendering (sort by r then q)
+        if (a.r !== b.r) return a.r - b.r;
+        return a.q - b.q;
+      }) as tile (tile.key)}
+        <HexTile
+          q={tile.q}
+          r={tile.r}
+          biome={tile.biome}
+          height={tile.height}
+          pois={tile.pois}
+          tileKey={tile.key}
+          isSelected={getSelectedState(tile.q, tile.r)}
+          isHovered={getHoveredState(tile.q, tile.r)}
+        />
+      {/each}
+    </g>
+  </svg>
 </div>
 
 <style>
@@ -235,11 +244,13 @@
     background-color: #222;
   }
   
-  .transform-container {
+  .hex-map-svg {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform-origin: center;
-    will-change: transform;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
   }
 </style>
