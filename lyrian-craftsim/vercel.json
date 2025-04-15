@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "pnpm run build",
+        "outputDirectory": ".svelte-kit",
+        "installCommand": "pnpm install"
+      }
+    }
+  ],
+  "framework": "sveltekit",
+  "github": {
+    "silent": true
+  },
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install",
+  "devCommand": "pnpm run dev",
+  "nodeVersion": "18.x"
+}
