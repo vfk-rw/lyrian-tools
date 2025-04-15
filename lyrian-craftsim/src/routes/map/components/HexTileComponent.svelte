@@ -14,7 +14,7 @@
   export let tileKey: string;
   export let isSelected: boolean = false;
   export let isHovered: boolean = false;
-  
+
   // Calculate SVG points for the hex
   $: vertices = getHexVertices(q, r);
   $: hexPoints = vertices.map(point => `${point.x},${point.y}`).join(' ');
@@ -36,6 +36,8 @@
     desert: '#f4d27a',
     swamp: '#614126',
     tundra: '#e0ffff',
+    'dense-forest': '#1a4731', // Dark green for dense forest
+    'sparse-forest': '#7d8f6f', // Lighter green-gray for sparse forest/tundra
     default: '#cccccc'
   };
   
@@ -115,6 +117,13 @@
   
   // Calculate elevation visual effect
   $: elevationOffset = height * 2; // 2px per elevation level
+
+  // Handle keydown for accessibility
+  function handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleClick();
+    }
+  }
 </script>
 
 <g 
@@ -122,11 +131,12 @@
   class:selected={isSelected}
   class:hovered={isHovered}
   on:click={handleClick}
-  on:keydown={(e) => e.key === 'Enter' && handleClick()}
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
+  on:keydown={handleKeydown}
   role="button"
   tabindex="0"
+  aria-label={`Hex tile at ${q}, ${r}`}
 >
   <!-- Hex background as exact coordinates (no translation) -->
   <polygon 
@@ -143,27 +153,29 @@
   {#if height > 0 && $uiStore.showLabels}
     <text
       x={position.x}
-      y={position.y}
+      y={position.y - elevationOffset}
       text-anchor="middle"
       dominant-baseline="middle"
-      fill="rgba(0,0,0,0.7)"
+      fill="#333"
       font-size="10"
       pointer-events="none"
-      transform="translate(0,{-elevationOffset})"
     >
       {height}
     </text>
   {/if}
-  
+
   <!-- POI markers -->
-  {#each pois as poi}
-    <POIMarker
-      poiId={poi.id}
-      poiName={poi.name}
-      poiIcon={poi.icon}
-      poiDescription={poi.description || ''}
-      tileKey={tileKey}
-    />
+  {#each pois as poi, i}
+    <!-- Position POI markers relative to the hex center, adjusted for elevation -->
+    <g transform="translate({position.x}, {position.y - elevationOffset})">
+      <POIMarker
+        poiId={poi.id}
+        poiName={poi.name || ''}
+        poiIcon={poi.icon}
+        poiDescription={poi.description || ''}
+        tileKey={tileKey}
+      />
+    </g>
   {/each}
 </g>
 

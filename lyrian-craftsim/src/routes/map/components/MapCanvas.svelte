@@ -163,10 +163,10 @@
   });
   
   // Find current hovered/selected states
-  $: getHoveredState = (q: number, r: number) => {
-    return $uiStore.hoveredTile && 
+  $: getHoveredState = (q: number, r: number): boolean => {
+    return Boolean($uiStore.hoveredTile && 
            $uiStore.hoveredTile.q === q && 
-           $uiStore.hoveredTile.r === r;
+           $uiStore.hoveredTile.r === r);
   };
   
   $: getSelectedState = (q: number, r: number) => {
