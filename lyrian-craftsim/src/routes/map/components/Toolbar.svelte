@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { uiStore, selectTool, selectBiome, selectHeight, toggleRegionLabels, togglePOILabels, toggleHeightLabels, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
+  import { uiStore, selectTool, selectBiome, selectHeight, selectIcon, toggleRegionLabels, togglePOILabels, toggleHeightLabels, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
   import { mapData, removeRegion } from '$lib/map/stores/mapStore';
+  import { iconRegistry, filterIcons, filterIconsByCategory } from '$lib/map/utils/iconRegistry';
+  import type { IconInfo } from '$lib/map/utils/iconRegistry';
   
   // Color mapping for biomes
   const BIOME_COLORS: Record<string, string> = {
@@ -23,8 +25,30 @@
     biome: 'Paint different terrain types',
     height: 'Adjust elevation of tiles',
     poi: 'Add points of interest',
-    region: 'Select tiles then create or edit regions'
+    region: 'Select tiles then create or edit regions',
+    icon: 'Add map icons to tiles'
   };
+  
+  // Icon search and filtering
+  let iconSearchTerm = '';
+  let filteredIcons: IconInfo[] = [];
+  
+  // Category selection for icons
+  let activeIconCategory = 'animal';
+  
+  // Update filtered icons when search term or category changes
+  $: {
+    if (iconSearchTerm) {
+      filteredIcons = filterIcons(iconRegistry, iconSearchTerm);
+    } else {
+      filteredIcons = filterIconsByCategory(iconRegistry, activeIconCategory);
+    }
+  }
+  
+  // Clear an icon selection
+  function clearIconSelection() {
+    selectIcon(null);
+  }
   
   // Get current tool description
   $: toolDescription = TOOL_DESCRIPTIONS[$uiStore.currentTool] || '';
@@ -99,6 +123,16 @@
         <span class="tool-label">Region</span>
       </button>
       
+      <button 
+        class="tool-button" 
+        class:active={$uiStore.currentTool === 'icon'}
+        on:click={() => handleToolSelect('icon')}
+        title="Icon Tool"
+      >
+        <span class="tool-icon">🏷️</span>
+        <span class="tool-label">Icon</span>
+      </button>
+      
     </div>
     
     <div class="tool-description">
@@ -146,6 +180,82 @@
       <div class="selected-height">
         Selected Height: {$uiStore.selectedHeight}
       </div>
+    </section>
+  {/if}
+  
+  {#if $uiStore.currentTool === 'icon'}
+    <section class="toolbar-section">
+      <h3>Icon Tool</h3>
+      
+      <!-- Search bar -->
+      <div class="search-container">
+        <input 
+          type="text" 
+          bind:value={iconSearchTerm} 
+          placeholder="Search icons..." 
+          class="search-input"
+        />
+      </div>
+      
+      <!-- Category tabs -->
+      <div class="category-tabs">
+        {#each iconRegistry.categories as category}
+          <button 
+            class="category-tab"
+            class:active={activeIconCategory === category.name}
+            on:click={() => {
+              activeIconCategory = category.name;
+              iconSearchTerm = '';
+            }}
+          >
+            {category.name}
+          </button>
+        {/each}
+      </div>
+      
+      <!-- Icon grid -->
+      <div class="icon-grid">
+        <!-- Clear icon button -->
+        <button 
+          class="icon-button clear-icon"
+          class:active={$uiStore.selectedIcon === null}
+          on:click={clearIconSelection}
+          title="No icon"
+        >
+          <span class="clear-icon-text">✕</span>
+        </button>
+        
+        {#each filteredIcons as icon}
+          <button 
+            class="icon-button"
+            class:active={$uiStore.selectedIcon === icon.path}
+            on:click={() => selectIcon(icon.path)}
+            title={icon.name}
+          >
+            <img src={icon.path} alt={icon.name} class="icon-preview" />
+          </button>
+        {/each}
+      </div>
+      
+      {#if filteredIcons.length === 0 && iconSearchTerm}
+        <div class="no-results">No icons found matching "{iconSearchTerm}"</div>
+      {/if}
+      
+      {#if $uiStore.selectedIcon}
+        <div class="selected-icon">
+          <div class="selected-icon-label">Selected icon:</div>
+          <div class="selected-icon-preview">
+            <img src={$uiStore.selectedIcon} alt="Selected icon" class="icon-preview-large" />
+          </div>
+        </div>
+      {:else}
+        <div class="selected-icon">
+          <div class="selected-icon-label">No icon selected</div>
+          <div class="selected-icon-preview empty">
+            <span class="no-icon">✕</span>
+          </div>
+        </div>
+      {/if}
     </section>
   {/if}
   
@@ -364,10 +474,11 @@
     box-shadow: inset 0 0 0 2px #aaa;
   }
   
-  .tool-description, .selected-biome, .selected-height {
+  .tool-description, .selected-biome, .selected-height, .selected-icon {
     font-size: 0.8rem;
     color: #aaa;
     text-align: center;
+    margin-top: 0.5rem;
   }
   
   .instructions {
@@ -383,6 +494,140 @@
   
   .instruction-list li {
     margin-bottom: 0.25rem;
+  }
+  
+  /* Icon Styles */
+  .search-container {
+    margin-bottom: 0.5rem;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 0.25rem;
+    color: white;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #666;
+  }
+  
+  .category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .category-tab {
+    flex: 1;
+    min-width: 40px;
+    padding: 0.4rem 0.2rem;
+    text-align: center;
+    background-color: #333;
+    border: none;
+    border-radius: 0.25rem;
+    color: #aaa;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .category-tab.active, .category-tab:hover {
+    background-color: #444;
+    color: white;
+  }
+  
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.25rem;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 0.5rem;
+    padding-right: 0.25rem;
+  }
+  
+  .icon-button {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0.25rem;
+  }
+  
+  .icon-button:hover {
+    background-color: #444;
+  }
+  
+  .icon-button.active {
+    background-color: #555;
+    border-color: #aaa;
+    box-shadow: 0 0 0 2px #aaa;
+  }
+  
+  .icon-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: invert(1);
+  }
+  
+  .clear-icon-text {
+    font-size: 1.2rem;
+    color: #f44336;
+  }
+  
+  .no-results {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    margin: 1rem 0;
+  }
+  
+  .selected-icon {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .selected-icon-label {
+    margin-bottom: 0.25rem;
+  }
+  
+  .selected-icon-preview {
+    width: 32px;
+    height: 32px;
+    background-color: #333;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .selected-icon-preview.empty {
+    border: 1px dashed #555;
+  }
+  
+  .icon-preview-large {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: invert(1);
+  }
+  
+  .no-icon {
+    color: #aaa;
+    font-size: 1.2rem;
   }
   
   /* Region List Styles */

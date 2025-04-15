@@ -3,7 +3,7 @@
   import HexTile from './HexTile.svelte';
   import POIMarker from './POIMarker.svelte';
   import RegionOutline from './RegionOutline.svelte';
-  import { mapData, exportMapJSON, importMapJSON, generateHexGrid } from '$lib/map/stores/mapStore';
+  import { mapData, exportMapJSON, importMapJSON, generateHexGrid, updateTileIcon } from '$lib/map/stores/mapStore';
   import type { Tile, Region } from '$lib/map/stores/mapStore';
   import { uiStore, updateCameraOffset, updateCameraZoom, showModal, type RegionHoverInfo } from '$lib/map/stores/uiStore';
   import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
@@ -164,6 +164,14 @@
       
       case 'region':
         // Already handled by HexTile component
+        break;
+        
+      case 'icon':
+        // Apply the selected icon to this tile
+        if ($mapData.tiles.has(hexKey)) {
+          updateTileIcon(hexKey, $uiStore.selectedIcon);
+          $mapData = $mapData; // Trigger reactivity
+        }
         break;
     }
   }
@@ -331,6 +339,7 @@
           tileKey={tile.key}
           isSelected={getSelectedState(tile.q, tile.r)}
           isHovered={getHoveredState(tile.q, tile.r)}
+          icon={tile.icon}
         />
       {/each}
       

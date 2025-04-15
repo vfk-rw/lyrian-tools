@@ -1,9 +1,10 @@
 <script lang="ts">
   import { uiStore, selectTool, selectBiome, toggleTileSelection } from '$lib/map/stores/uiStore';
-  import { mapData, updateBiome, updateHeight, addPOI } from '$lib/map/stores/mapStore';
+  import { mapData, updateBiome, updateHeight, addPOI, updateTileIcon } from '$lib/map/stores/mapStore';
   import type { POI } from '$lib/map/stores/mapStore';
   import { hexToIsometric, getHexVertices } from '$lib/map/utils/hexlib';
   import POIMarker from './POIMarker.svelte';
+  import TileIcon from './TileIcon.svelte';
   
   // Props for the hex tile
   export let q: number;
@@ -14,6 +15,7 @@
   export let tileKey: string;
   export let isSelected: boolean = false;
   export let isHovered: boolean = false;
+  export let icon: string | null = null;
   
   // Calculate SVG points for the hex
   $: vertices = getHexVertices(q, r);
@@ -77,6 +79,11 @@
       case 'region':
         // Toggle tile selection for region creation
         toggleTileSelection(q, r);
+        break;
+        
+      case 'icon':
+        // Apply the selected icon to this tile
+        updateTileIcon(tileKey, $uiStore.selectedIcon);
         break;
         
       default:
@@ -179,6 +186,11 @@
     >
       {height}
     </text>
+  {/if}
+  
+  <!-- Tile Icon (if present) -->
+  {#if icon}
+    <TileIcon iconPath={icon} {q} {r} />
   {/if}
   
   <!-- POI markers -->

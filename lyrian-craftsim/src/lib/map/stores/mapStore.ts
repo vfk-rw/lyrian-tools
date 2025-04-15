@@ -17,6 +17,7 @@ export interface Tile {
   biome: string;
   height?: number;
   pois: POI[];
+  icon?: string | null; // Path to the icon SVG file or null if no icon
 }
 
 export interface Region {
@@ -139,6 +140,17 @@ const createMapStore = () => {
         const tile = data.tiles.get(tileKey);
         if (tile) {
           tile.height = height;
+        }
+        return data;
+      });
+    },
+    
+    // Update a tile's icon
+    updateTileIcon: (tileKey: string, iconPath: string | null) => {
+      update(data => {
+        const tile = data.tiles.get(tileKey);
+        if (tile) {
+          tile.icon = iconPath;
         }
         return data;
       });
@@ -314,6 +326,7 @@ export const {
   removePOI, 
   updateBiome, 
   updateHeight, 
+  updateTileIcon,
   addRegion, 
   updateRegion, 
   removeRegion, 

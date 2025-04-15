@@ -4,7 +4,7 @@ import { mapData, addRegion } from './mapStore';
 import { v4 as uuidv4 } from 'uuid';
 
 // Tool types
-export type ToolType = 'select' | 'biome' | 'height' | 'poi' | 'region';
+export type ToolType = 'select' | 'biome' | 'height' | 'poi' | 'region' | 'icon';
 
 // Biome types
 export const BIOME_TYPES = ['plains', 'forest', 'mountain', 'water', 'desert', 'swamp', 'tundra', 'unexplored'];
@@ -65,6 +65,7 @@ export interface UIState {
   currentTool: ToolType;
   selectedBiome: string;
   selectedHeight: number;
+  selectedIcon: string | null;
   
   // Display options
   showRegionLabels: boolean;
@@ -92,6 +93,7 @@ const initialState: UIState = {
   currentTool: 'select',
   selectedBiome: 'plains',
   selectedHeight: 0,
+  selectedIcon: null,
   
   showRegionLabels: true,
   showPOILabels: true,
@@ -122,6 +124,7 @@ const createUIStore = () => {
     selectTool: (tool: ToolType) => update(state => ({ ...state, currentTool: tool })),
     selectBiome: (biome: string) => update(state => ({ ...state, selectedBiome: biome })),
     selectHeight: (height: number) => update(state => ({ ...state, selectedHeight: height })),
+    selectIcon: (icon: string | null) => update(state => ({ ...state, selectedIcon: icon })),
     
     // Display options
     toggleRegionLabels: () => update(state => ({ ...state, showRegionLabels: !state.showRegionLabels })),
@@ -221,6 +224,7 @@ export const {
   selectTool, 
   selectBiome, 
   selectHeight, 
+  selectIcon,
   toggleRegionLabels, 
   togglePOILabels, 
   toggleHeightLabels, 
