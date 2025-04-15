@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 export type ToolType = 'select' | 'biome' | 'height' | 'poi' | 'region' | 'resize';
 
 // Biome types
-export const BIOME_TYPES = ['plains', 'forest', 'mountain', 'water', 'desert', 'swamp', 'tundra'];
+export const BIOME_TYPES = ['plains', 'forest', 'mountain', 'water', 'desert', 'swamp', 'tundra', 'unexplored'];
 
 // POI types
 export const POI_TYPES = [

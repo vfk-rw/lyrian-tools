@@ -27,15 +27,16 @@
     .map(v => `${v.x},${v.y}`)
     .join(' ');
   
-  // Biome colors
+  // Biome colors - matching the Toolbar colors
   const biomeColors = {
-    plains: '#c1d37f',
-    forest: '#2d6d4b',
-    mountain: '#8b8878',
-    water: '#1e90ff',
-    desert: '#f4d27a',
-    swamp: '#614126',
-    tundra: '#e0ffff',
+    plains: '#91C13D',    // light green
+    forest: '#2C7C30',    // dark green
+    mountain: '#8B4513',  // brown
+    water: '#1E90FF',     // blue
+    desert: '#F4D03F',    // yellow
+    swamp: '#556B2F',     // olive
+    tundra: '#F0F0F0',    // white
+    unexplored: '#cccccc', // gray/unexplored
     default: '#cccccc'
   };
   

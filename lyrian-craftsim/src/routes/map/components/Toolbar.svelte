@@ -10,6 +10,7 @@
     desert: '#F4D03F',    // yellow
     swamp: '#556B2F',     // olive
     tundra: '#F0F0F0',    // white
+    unexplored: '#cccccc', // gray/unexplored
   };
   
   // Height values
