@@ -92,18 +92,18 @@
         type="text" 
         class="map-name-input" 
         value={$mapData.mapName} 
-        on:change={handleMapNameChange}
+        onchange={handleMapNameChange}
         placeholder="Untitled Map"
       />
     </div>
     
     <div class="header-buttons">
-      <button class="header-button" on:click={handleImport}>
+      <button class="header-button" onclick={handleImport}>
         <span class="button-icon">📂</span>
         <span class="button-text">Import</span>
       </button>
       
-      <button class="header-button" on:click={handleExport}>
+      <button class="header-button" onclick={handleExport}>
         <span class="button-icon">💾</span>
         <span class="button-text">Export</span>
       </button>
