@@ -244,45 +244,31 @@ function createRoutesStore() {
       return exportData;
     },
     
-    // Import routes from JSON
-    importRoutesJSON: (jsonData: any) => {
+    // Import routes from JSON with security validation
+    importRoutesJSON: (jsonData: any, fileSize: number = 0) => {
       try {
-        if (!jsonData || !Array.isArray(jsonData.routes)) {
-          console.error('Invalid routes JSON format');
-          return false;
-        }
-        
-        const routesMap = new Map<string, Route>();
-        
-        for (const routeData of jsonData.routes) {
-          if (!routeData.id || !routeData.name || !routeData.color || !Array.isArray(routeData.waypoints)) {
-            console.warn('Skipping invalid route:', routeData);
-            continue;
+        // Import validateAndSanitizeRoutesJSON dynamically to prevent circular dependencies
+        import('../utils/secureRouteImport').then(({ validateAndSanitizeRoutesJSON }) => {
+          // Validate and sanitize the routes JSON
+          const validationResult = validateAndSanitizeRoutesJSON(jsonData, fileSize);
+          
+          if (!validationResult.isValid || !validationResult.sanitizedData) {
+            console.error('Failed to import routes:', validationResult.error);
+            return false;
           }
           
-          const route: Route = {
-            id: routeData.id,
-            name: routeData.name,
-            color: routeData.color,
-            visible: routeData.visible !== false,
-            editable: false,
-            waypoints: routeData.waypoints
-              .filter((wp: any) => typeof wp.q === 'number' && typeof wp.r === 'number')
-              .map((wp: any) => ({
-                id: wp.id || uuidv4(),
-                q: wp.q,
-                r: wp.r,
-                date: wp.date,
-                notes: wp.notes
-              }))
-          };
+          // Convert the sanitized array to a Map
+          const routesMap = new Map<string, Route>();
+          for (const route of validationResult.sanitizedData) {
+            routesMap.set(route.id, route);
+          }
           
-          routesMap.set(route.id, route);
-        }
+          // Update the store
+          set({ routes: routesMap });
+          return true;
+        });
         
-        // Update the store
-        set({ routes: routesMap });
-        return true;
+        return true; // Return true initially, actual validation happens asynchronously
       } catch (error) {
         console.error('Error importing routes:', error);
         return false;

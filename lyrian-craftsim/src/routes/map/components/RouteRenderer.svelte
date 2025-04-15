@@ -1,11 +1,15 @@
 <script lang="ts">
   import { hexToIsometric } from '$lib/map/utils/hexlib';
+  import { uiStore, setHoveredRoute } from '$lib/map/stores/uiStore';
   
   // Props
+  export let routeId: string;
+  export let routeName: string;
   export let waypoints: Array<{q: number, r: number}> = [];
   export let color: string;
   export let strokeWidth: number = 3;
   export let isEditable: boolean = false;
+  export let lengthInDays: number = 0;
   
   // Calculate the SVG path string for the route
   $: pathString = generateRoutePath(waypoints);
@@ -28,19 +32,40 @@
     
     return path;
   }
+  
+  // Handle hover events to show route name
+  function handleMouseEnter() {
+    setHoveredRoute({
+      id: routeId,
+      name: routeName,
+      color: color,
+      lengthInDays: lengthInDays
+    });
+  }
+  
+  function handleMouseLeave() {
+    setHoveredRoute(null);
+  }
 </script>
 
-<!-- Route path between waypoints -->
-<path 
-  d={pathString}
-  stroke={color}
-  stroke-width={strokeWidth}
-  fill="none"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  class:editable={isEditable}
-  class="route-line"
-/>
+<!-- Each route gets its own group to ensure separation -->
+<g 
+  class="route-container"
+  on:mouseenter={handleMouseEnter}
+  on:mouseleave={handleMouseLeave}
+>
+  <!-- Route path between waypoints -->
+  <path 
+    d={pathString}
+    stroke={color}
+    stroke-width={strokeWidth}
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class:editable={isEditable}
+    class="route-line"
+  />
+</g>
 
 <style>
   .route-line {

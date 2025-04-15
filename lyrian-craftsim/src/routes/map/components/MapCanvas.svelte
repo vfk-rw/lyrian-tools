@@ -10,7 +10,7 @@ import WaypointModal from './WaypointModal.svelte';
 import POIModal from './POIModal.svelte';
 import RegionModal from './RegionModal.svelte';
   import { mapData, exportMapJSON, importMapJSON, generateHexGrid, updateTileIcon } from '$lib/map/stores/mapStore';
-  import { routesData, activeEditRoute } from '$lib/map/stores/routeStore';
+  import { routesData, activeEditRoute, getRouteLengthInDays } from '$lib/map/stores/routeStore';
   import type { Tile, Region } from '$lib/map/stores/mapStore';
   import { uiStore, updateCameraOffset, updateCameraZoom, showModal, type RegionHoverInfo } from '$lib/map/stores/uiStore';
   import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
@@ -318,6 +318,24 @@ import RegionModal from './RegionModal.svelte';
     </div>
   {/if}
   
+  <!-- Route Info Display -->
+  {#if $uiStore.hoveredRoute}
+    <div class="info-display">
+      <div class="info-content route-content" style="border-left: 4px solid {$uiStore.hoveredRoute.color}">
+        <div class="info-title">
+          <span class="info-icon route-icon">🧭</span>
+          <h3>{$uiStore.hoveredRoute.name}</h3>
+        </div>
+        {#if $uiStore.hoveredRoute.lengthInDays > 0}
+          <div class="route-detail">
+            <span class="detail-label">Journey Length:</span>
+            <span class="detail-value">{$uiStore.hoveredRoute.lengthInDays} days</span>
+          </div>
+        {/if}
+      </div>
+    </div>
+  {/if}
+  
   <!-- Waypoint Info Display -->
   {#if $uiStore.hoveredWaypoint && $uiStore.hoveredWaypoint.routeId}
     {@const route = $routesData.routes.get($uiStore.hoveredWaypoint.routeId)}
@@ -329,8 +347,8 @@ import RegionModal from './RegionModal.svelte';
           <span class="info-icon waypoint-icon">🧭</span>
           <h3>Waypoint {
             (() => {
-              if (route && $uiStore.hoveredWaypoint && $uiStore.hoveredWaypoint.waypointId) {
-                const index = route.waypoints.findIndex(w => w.id === $uiStore.hoveredWaypoint.waypointId);
+              if (route && $uiStore.hoveredWaypoint && $uiStore.hoveredWaypoint?.waypointId) {
+                const index = route.waypoints.findIndex(w => w.id === $uiStore.hoveredWaypoint?.waypointId);
                 return index >= 0 ? index + 1 : '?';
               }
               return '?';
@@ -394,11 +412,14 @@ import RegionModal from './RegionModal.svelte';
       
       <!-- Routes (draw before regions but after tiles) -->
       {#each Array.from($routesData.routes.values()).filter(route => route.visible) as route (route.id)}
-        <!-- Route path -->
+        <!-- Route path with unique identifier -->
         <RouteRenderer 
+          routeId={route.id}
+          routeName={route.name}
           waypoints={route.waypoints}
           color={route.color}
           isEditable={route.editable}
+          lengthInDays={getRouteLengthInDays(route.id)}
         />
         
         <!-- Waypoint markers -->
@@ -504,12 +525,12 @@ import RegionModal from './RegionModal.svelte';
     color: rgba(255, 255, 255, 0.9);
   }
   
-  /* Waypoint info styles */
-  .waypoint-icon {
+  /* Route and Waypoint info styles */
+  .route-icon, .waypoint-icon {
     color: #ff9800;
   }
   
-  .waypoint-detail {
+  .route-detail, .waypoint-detail {
     display: flex;
     align-items: center;
     font-size: 0.85rem;

@@ -243,7 +243,7 @@
   }
   
   .sidebar {
-    width: 250px;
+    width: 300px;
     padding: 1rem;
     overflow-y: auto;
     border-right: 1px solid #333;

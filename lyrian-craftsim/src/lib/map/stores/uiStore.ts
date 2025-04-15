@@ -86,6 +86,14 @@ export interface WaypointHoverInfo {
   notes?: string;
 }
 
+// Route hover info
+export interface RouteHoverInfo {
+  id: string;
+  name: string;
+  color: string;
+  lengthInDays: number;
+}
+
 // UI State interface
 export interface UIState {
   // Current tool selection
@@ -111,6 +119,7 @@ export interface UIState {
   hoveredPOI: POIHoverInfo | null;
   hoveredRegionInfo: RegionHoverInfo | null;
   hoveredWaypoint: WaypointHoverInfo | null;
+  hoveredRoute: RouteHoverInfo | null;
   
   // Camera control
   cameraOffset: { x: number, y: number };
@@ -138,6 +147,7 @@ const initialState: UIState = {
   hoveredPOI: null,
   hoveredRegionInfo: null,
   hoveredWaypoint: null,
+  hoveredRoute: null,
   
   cameraOffset: { x: 0, y: 0 },
   cameraZoom: 1.5 // 50% more zoom for better readability
@@ -241,6 +251,12 @@ const createUIStore = () => {
     setHoveredWaypoint: (waypointInfo: WaypointHoverInfo | null) => update(state => ({
       ...state,
       hoveredWaypoint: waypointInfo
+    })),
+    
+    // Route hover management
+    setHoveredRoute: (routeInfo: RouteHoverInfo | null) => update(state => ({
+      ...state,
+      hoveredRoute: routeInfo
     }))
   };
 };
@@ -275,5 +291,6 @@ export const {
   updateCameraZoom,
   createRegion,
   setHoveredPOI,
-  setHoveredWaypoint
+  setHoveredWaypoint,
+  setHoveredRoute
 } = uiStore;

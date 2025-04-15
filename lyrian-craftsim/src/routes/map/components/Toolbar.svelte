@@ -387,6 +387,21 @@
               const file = (e.target as HTMLInputElement)?.files?.[0];
               if (!file) return;
               
+              // Check file size limit before processing
+              const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB - same as map validation
+              if (file.size > MAX_FILE_SIZE) {
+                alert(`File too large. Maximum allowed size is ${MAX_FILE_SIZE / (1024 * 1024)}MB`);
+                return;
+              }
+              
+              // Check MIME type to ensure it's a text file
+              if (!file.type.match('application/json') && 
+                  !file.type.match('text/plain') && 
+                  !file.type.match('text/')) {
+                alert('Invalid file type. Only JSON and text files are supported.');
+                return;
+              }
+              
               // Read the file
               const reader = new FileReader();
               reader.onload = (readerEvent) => {
@@ -394,8 +409,8 @@
                   // Parse the JSON
                   const jsonData = JSON.parse(readerEvent.target?.result as string);
                   
-                  // Import the routes
-                  const success = importRoutesJSON(jsonData);
+                  // Import the routes with file size for validation
+                  const success = importRoutesJSON(jsonData, file.size);
                   
                   if (success) {
                     alert('Routes imported successfully');
@@ -406,6 +421,10 @@
                   console.error('Error importing routes:', error);
                   alert('Failed to import routes - invalid JSON');
                 }
+              };
+              
+              reader.onerror = () => {
+                alert('Error reading file. Please try again with a different file.');
               };
               
               reader.readAsText(file);
@@ -563,15 +582,18 @@
     color: #ccc;
   }
   
-  .tools-grid, .biome-grid, .height-grid {
+  .tools-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
     margin-bottom: 0.75rem;
   }
   
-  .biome-grid {
+  .biome-grid, .height-grid {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
   }
   
   .display-options {
