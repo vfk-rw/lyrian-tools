@@ -1,7 +1,7 @@
 <script lang="ts">
   import { uiStore, selectTool, selectBiome, selectHeight, selectIcon, toggleRegionLabels, togglePOILabels, toggleHeightLabels, toggleRouteLabels, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
   import { mapData, removeRegion } from '$lib/map/stores/mapStore';
-  import { routesData, removeRoute, toggleRouteVisibility, toggleRouteEditMode, exitAllEditModes, getRouteLengthInDays, exportRoutesJSON, importRoutesJSON, createTestRouteWithDates } from '$lib/map/stores/routeStore';
+  import { routesData, removeRoute, toggleRouteVisibility, toggleRouteEditMode, exitAllEditModes, getRouteLengthInDays, exportRoutesJSON, importRoutesJSON } from '$lib/map/stores/routeStore';
   import { iconRegistry, filterIcons, filterIconsByCategory } from '$lib/map/utils/iconRegistry';
   import type { IconInfo } from '$lib/map/utils/iconRegistry';
   
@@ -70,6 +70,10 @@
     selectHeight(height);
   }
 </script>
+
+<svelte:head>
+  <link rel="stylesheet" href="/src/lib/styles/toolbar.css">
+</svelte:head>
 
 <div class="toolbar">
   <section class="toolbar-section">
@@ -375,80 +379,68 @@
           Export Routes
         </button>
         
-          <button 
-            class="action-button secondary small" 
-            on:click={() => {
-              // Create a file input
-              const input = document.createElement('input');
-              input.type = 'file';
-              input.accept = 'application/json';
+        <button 
+          class="action-button secondary small" 
+          on:click={() => {
+            // Create a file input
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'application/json';
+            
+            input.onchange = (e) => {
+              const file = (e.target as HTMLInputElement)?.files?.[0];
+              if (!file) return;
               
-              input.onchange = (e) => {
-                const file = (e.target as HTMLInputElement)?.files?.[0];
-                if (!file) return;
-                
-                // Check file size limit before processing
-                const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB - same as map validation
-                if (file.size > MAX_FILE_SIZE) {
-                  alert(`File too large. Maximum allowed size is ${MAX_FILE_SIZE / (1024 * 1024)}MB`);
-                  return;
-                }
-                
-                // Check MIME type to ensure it's a text file
-                if (!file.type.match('application/json') && 
-                    !file.type.match('text/plain') && 
-                    !file.type.match('text/')) {
-                  alert('Invalid file type. Only JSON and text files are supported.');
-                  return;
-                }
-                
-                // Read the file
-                const reader = new FileReader();
-                reader.onload = (readerEvent) => {
-                  try {
-                    // Parse the JSON
-                    const jsonData = JSON.parse(readerEvent.target?.result as string);
-                    
-                    // Import the routes with file size for validation
-                    const success = importRoutesJSON(jsonData, file.size);
-                    
-                    if (success) {
-                      alert('Routes imported successfully');
-                    } else {
-                      alert('Failed to import routes - invalid format');
-                    }
-                  } catch (error) {
-                    console.error('Error importing routes:', error);
-                    alert('Failed to import routes - invalid JSON');
+              // Check file size limit before processing
+              const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB - same as map validation
+              if (file.size > MAX_FILE_SIZE) {
+                alert(`File too large. Maximum allowed size is ${MAX_FILE_SIZE / (1024 * 1024)}MB`);
+                return;
+              }
+              
+              // Check MIME type to ensure it's a text file
+              if (!file.type.match('application/json') && 
+                  !file.type.match('text/plain') && 
+                  !file.type.match('text/')) {
+                alert('Invalid file type. Only JSON and text files are supported.');
+                return;
+              }
+              
+              // Read the file
+              const reader = new FileReader();
+              reader.onload = (readerEvent) => {
+                try {
+                  // Parse the JSON
+                  const jsonData = JSON.parse(readerEvent.target?.result as string);
+                  
+                  // Import the routes with file size for validation
+                  const success = importRoutesJSON(jsonData, file.size);
+                  
+                  if (success) {
+                    alert('Routes imported successfully');
+                  } else {
+                    alert('Failed to import routes - invalid format');
                   }
-                };
-                
-                reader.onerror = () => {
-                  alert('Error reading file. Please try again with a different file.');
-                };
-                
-                reader.readAsText(file);
+                } catch (error) {
+                  console.error('Error importing routes:', error);
+                  alert('Failed to import routes - invalid JSON');
+                }
               };
               
-              // Trigger the file input
-              input.click();
-            }}
-            title="Import routes"
-          >
-            Import Routes
-          </button>
-          
-          <!-- Debug button to create test route with dates -->
-          <button 
-            class="action-button secondary small debug-button" 
-            on:click={() => {
-              const routeId = createTestRouteWithDates();
-              alert(`Test route created with ID: ${routeId}`);
-            }}
-            title="Create a test route with dates for debugging"
-          >
-            Create Test Route
-          </button>
+              reader.onerror = () => {
+                alert('Error reading file. Please try again with a different file.');
+              };
+              
+              reader.readAsText(file);
+            };
+            
+            // Trigger the file input
+            input.click();
+          }}
+          title="Import routes"
+        >
+          Import Routes
+        </button>
       </div>
     </section>
   {/if}
@@ -564,466 +556,3 @@
     </ul>
   </section>
 </div>
-
-<style>
-  .toolbar {
-    background-color: #2a2a2a;
-    color: white;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    height: 100%;
-    overflow-y: auto;
-  }
-  
-  .toolbar-section {
-    border-bottom: 1px solid #444;
-    padding-bottom: 1rem;
-  }
-  
-  .toolbar-section:last-child {
-    border-bottom: none;
-  }
-  
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0.75rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #ccc;
-  }
-  
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-  }
-  
-  .biome-grid, .height-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-  }
-  
-  .display-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .tool-button, .option-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    background-color: #333;
-    border: none;
-    border-radius: 0.25rem;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .tool-button:hover, .option-button:hover {
-    background-color: #444;
-  }
-  
-  .tool-button.active, .option-button.active {
-    background-color: #555;
-    box-shadow: inset 0 0 0 2px #aaa;
-  }
-  
-  .tool-icon, .option-icon {
-    font-size: 1.25rem;
-    margin-bottom: 0.25rem;
-  }
-  
-  .tool-label, .option-label {
-    font-size: 0.75rem;
-  }
-  
-  .biome-button {
-    height: 2rem;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  
-  .biome-button:hover {
-    transform: scale(1.05);
-  }
-  
-  .biome-button.active {
-    box-shadow: inset 0 0 0 3px white;
-  }
-  
-  .height-button {
-    height: 2rem;
-    border: none;
-    border-radius: 0.25rem;
-    background-color: #333;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .height-button:hover {
-    background-color: #444;
-  }
-  
-  .height-button.active {
-    background-color: #555;
-    box-shadow: inset 0 0 0 2px #aaa;
-  }
-  
-  .tool-description, .selected-biome, .selected-height, .selected-icon {
-    font-size: 0.8rem;
-    color: #aaa;
-    text-align: center;
-    margin-top: 0.5rem;
-  }
-  
-  .instructions {
-    margin-top: auto;
-  }
-  
-  .instruction-list {
-    margin: 0;
-    padding-left: 1.25rem;
-    font-size: 0.8rem;
-    color: #aaa;
-  }
-  
-  .instruction-list li {
-    margin-bottom: 0.25rem;
-  }
-  
-  /* Icon Styles */
-  .search-container {
-    margin-bottom: 0.5rem;
-  }
-  
-  .search-input {
-    width: 100%;
-    padding: 0.5rem;
-    background-color: #333;
-    border: 1px solid #444;
-    border-radius: 0.25rem;
-    color: white;
-  }
-  
-  .search-input:focus {
-    outline: none;
-    border-color: #666;
-  }
-  
-  .category-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .category-tab {
-    flex: 1;
-    min-width: 40px;
-    padding: 0.4rem 0.2rem;
-    text-align: center;
-    background-color: #333;
-    border: none;
-    border-radius: 0.25rem;
-    color: #aaa;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  
-  .category-tab.active, .category-tab:hover {
-    background-color: #444;
-    color: white;
-  }
-  
-  .icon-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.25rem;
-    max-height: 200px;
-    overflow-y: auto;
-    margin-bottom: 0.5rem;
-    padding-right: 0.25rem;
-  }
-  
-  .icon-button {
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #333;
-    border: 1px solid #444;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    padding: 0.25rem;
-  }
-  
-  .icon-button:hover {
-    background-color: #444;
-  }
-  
-  .icon-button.active {
-    background-color: #555;
-    border-color: #aaa;
-    box-shadow: 0 0 0 2px #aaa;
-  }
-  
-  .icon-preview {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: invert(1);
-  }
-  
-  .clear-icon-text {
-    font-size: 1.2rem;
-    color: #f44336;
-  }
-  
-  .no-results {
-    text-align: center;
-    font-style: italic;
-    color: #888;
-    margin: 1rem 0;
-  }
-  
-  .selected-icon {
-    margin-top: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .selected-icon-label {
-    margin-bottom: 0.25rem;
-  }
-  
-  .selected-icon-preview {
-    width: 32px;
-    height: 32px;
-    background-color: #333;
-    border-radius: 0.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .selected-icon-preview.empty {
-    border: 1px dashed #555;
-  }
-  
-  .icon-preview-large {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    filter: invert(1);
-  }
-  
-  .no-icon {
-    color: #aaa;
-    font-size: 1.2rem;
-  }
-  
-  /* Region List Styles */
-  .region-list {
-    margin-top: 0.5rem;
-    max-height: 200px;
-    overflow-y: auto;
-  }
-  
-  .no-regions {
-    text-align: center;
-    color: #aaa;
-    font-size: 0.9rem;
-    padding: 0.5rem;
-  }
-  
-  .region-list-item {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    background-color: #333;
-    margin-bottom: 0.5rem;
-    gap: 0.5rem;
-  }
-  
-  .region-color {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 0.25rem;
-    flex-shrink: 0;
-  }
-  
-  .region-name, .route-name {
-    flex-grow: 1;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .region-delete, .region-edit, .route-delete, .route-edit, .route-toggle {
-    background: none;
-    border: none;
-    padding: 0.25rem;
-    cursor: pointer;
-    font-size: 1rem;
-    color: #aaa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.25rem;
-    transition: all 0.2s;
-  }
-  
-  .region-delete:hover {
-    color: #f44336;
-    background-color: rgba(244, 67, 54, 0.1);
-  }
-  
-  .region-edit:hover {
-    color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .action-button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 0.25rem;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .action-button:disabled {
-    background-color: #555;
-    color: #888;
-    cursor: not-allowed;
-  }
-  
-  .action-button:not(:disabled):hover {
-    background-color: #3e8e41;
-  }
-  
-  .selected-count, .help-text {
-    text-align: center;
-    font-size: 0.85rem;
-    color: #aaa;
-    margin-bottom: 0.25rem;
-  }
-  
-  .help-text {
-    font-style: italic;
-    color: #888;
-  }
-  
-  .option-button {
-    flex-direction: row;
-    justify-content: flex-start;
-    text-align: left;
-    padding: 0.75rem;
-    margin-bottom: 0.25rem;
-  }
-  
-  .option-icon {
-    margin-right: 0.5rem;
-    margin-bottom: 0;
-  }
-  
-  .option-label {
-    font-size: 0.9rem;
-  }
-  
-  /* Route Styles */
-  .route-list {
-    margin-top: 0.5rem;
-    max-height: 200px;
-    overflow-y: auto;
-  }
-  
-  .no-routes {
-    text-align: center;
-    color: #aaa;
-    font-size: 0.9rem;
-    padding: 0.5rem;
-  }
-  
-  .route-list-item {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    background-color: #333;
-    margin-bottom: 0.5rem;
-    gap: 0.5rem;
-  }
-  
-  .route-list-item.editing {
-    background-color: #444;
-    box-shadow: 0 0 0 2px #aaa;
-  }
-  
-  .route-color {
-    width: 0.5rem;
-    height: 100%;
-    border-radius: 0.25rem;
-    flex-shrink: 0;
-  }
-  
-  .route-info {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .route-stats {
-    font-size: 0.7rem;
-    color: #888;
-  }
-  
-  .route-edit.active {
-    color: #ffcc00;
-    background-color: rgba(255, 204, 0, 0.1);
-  }
-  
-  .action-button.secondary {
-    background-color: #555;
-  }
-  
-  .action-button.secondary:not(:disabled):hover {
-    background-color: #666;
-  }
-  
-  .action-button.small {
-    padding: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: normal;
-  }
-  
-  .import-export-buttons {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-  }
-</style>

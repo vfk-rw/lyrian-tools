@@ -474,71 +474,7 @@ export const activeEditRoute = derived(routesData, $routesData => {
   return null;
 });
 
-// DEBUG: Create a test route with dates
-export function createTestRouteWithDates() {
-  console.group('[DEBUG] Creating test route with dates');
-  
-  const today = new Date();
-  
-  // Create some dates, 3 days apart
-  const day1 = new Date(today);
-  const day2 = new Date(today);
-  day2.setDate(day2.getDate() + 3);
-  const day3 = new Date(today);
-  day3.setDate(day3.getDate() + 6);
-  
-  // Format dates as YYYY-MM-DD
-  const formatDate = (date: Date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
-  
-  const date1 = formatDate(day1);
-  const date2 = formatDate(day2);
-  const date3 = formatDate(day3);
-  
-  console.log(`Test dates: ${date1}, ${date2}, ${date3}`);
-  
-  // Create the route
-  const routeId = routesData.addRoute({
-    name: "Test Route With Dates",
-    color: "#ff0000"
-  });
-  
-  // Add waypoints with dates
-  console.log('Adding waypoints with dates...');
-  const wp1Id = routesData.addWaypoint(routeId, { q: 0, r: 0, date: date1 });
-  console.log(`Added waypoint 1: ${wp1Id} with date ${date1}`);
-  
-  const wp2Id = routesData.addWaypoint(routeId, { q: 1, r: 0, date: date2 });
-  console.log(`Added waypoint 2: ${wp2Id} with date ${date2}`);
-  
-  const wp3Id = routesData.addWaypoint(routeId, { q: 2, r: 0, date: date3 });
-  console.log(`Added waypoint 3: ${wp3Id} with date ${date3}`);
-  
-  console.log(`Route created with ID: ${routeId}`);
-  
-  // Verify the route data
-  const state = get(routesData);
-  const route = state.routes.get(routeId);
-  if (route) {
-    console.log(`Route name: ${route.name}`);
-    console.log(`Route has ${route.waypoints.length} waypoints`);
-    
-    route.waypoints.forEach((wp, i) => {
-      console.log(`  [${i}] id=${wp.id}, q=${wp.q}, r=${wp.r}, date=${wp.date || 'no date'}`);
-    });
-    
-    // Test the export
-    const exported = routesData.exportRoutesJSON();
-    console.log('Exported JSON:', JSON.stringify(exported, null, 2));
-  }
-  
-  console.groupEnd();
-  return routeId;
-}
+// (removed debug test route function)
 
 // Export specific actions for convenience
 export const {
