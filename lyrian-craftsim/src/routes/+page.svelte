@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import '$lib/styles/components.css';
 </script>
 
 <div class="hero">
@@ -11,7 +12,7 @@
       </p>
       
       <div class="tools-grid">
-        <div class="tool-card" on:click={() => goto('/map')}>
+        <a href="/map" class="tool-card" role="button" on:click|preventDefault={() => goto('/map')} on:keydown={e => e.key === 'Enter' && goto('/map')}>
           <div class="card-icon">🗺️</div>
           <h2 class="card-title">Hex Map Editor</h2>
           <p class="card-description">
@@ -20,20 +21,20 @@
           <div class="card-footer">
             <button class="btn btn-primary">Open Map Editor</button>
           </div>
-        </div>
+        </a>
         
-        <div class="tool-card">
+        <a href="/craftsim-blacksmithing" class="tool-card" role="button" on:click|preventDefault={() => goto('/craftsim-blacksmithing')} on:keydown={e => e.key === 'Enter' && goto('/craftsim-blacksmithing')}>
           <div class="card-icon">⚒️</div>
           <h2 class="card-title">Crafting Simulator</h2>
           <p class="card-description">
             Simulate crafting items using different materials and techniques. Calculate success chances and material requirements.
           </p>
           <div class="card-footer">
-            <button class="btn btn-primary" disabled>Coming Soon</button>
+            <button class="btn btn-primary">Open Crafting Simulator</button>
           </div>
-        </div>
+        </a>
         
-        <div class="tool-card">
+        <a href="/character-sheet" class="tool-card future" role="button" tabindex="0">
           <div class="card-icon">📝</div>
           <h2 class="card-title">Character Sheet</h2>
           <p class="card-description">
@@ -42,7 +43,7 @@
           <div class="card-footer">
             <button class="btn btn-primary" disabled>Coming Soon</button>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -54,9 +55,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #1a1a1a;
-    color: white;
+    background-color: var(--background-color, #1a1a1a);
+    color: var(--text-color, white);
     padding: 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   .hero-content {
@@ -84,8 +86,37 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s ease;
     cursor: pointer;
+  }
+  
+  /* Dark mode styles */
+  :global(.dark-theme) .hero {
+    background-color: var(--background-color, #1a1a1a);
+    color: var(--text-color, white);
+  }
+  
+  :global(.dark-theme) .tool-card {
+    background-color: #2a2a2a;
+  }
+  
+  :global(.dark-theme) .card-description {
+    color: #ccc;
+  }
+  
+  /* Light mode overrides */
+  :global(body:not(.dark-theme)) .hero {
+    background-color: var(--background-color, #f8f9fa);
+    color: var(--text-color, #333);
+  }
+  
+  :global(body:not(.dark-theme)) .tool-card {
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  :global(body:not(.dark-theme)) .card-description {
+    color: #555;
   }
   
   .tool-card:hover {
@@ -108,7 +139,6 @@
   .card-description {
     flex-grow: 1;
     margin-bottom: 1.5rem;
-    color: #ccc;
   }
   
   .card-footer {

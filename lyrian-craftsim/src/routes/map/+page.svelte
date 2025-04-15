@@ -4,7 +4,7 @@
   import { mapData, exportMapJSON, importMapJSON, setMapName, loadDemoMap, generateHexGrid } from '$lib/map/stores/mapStore';
   import { routesData, exportRoutesJSON, importRoutesJSON } from '$lib/map/stores/routeStore';
   import { validateAndSanitizeMapJSON, VALIDATION_LIMITS } from '$lib/map/utils/secureImport';
-  import '$lib/styles/buttons.css';
+  import '$lib/styles/map-specific.css';
   
   // Handle demo map loading
   function handleLoadDemo() {
@@ -172,86 +172,9 @@
 </div>
 
 <style>
-  .map-editor {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #1a1a1a;
-    color: white;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: #2a2a2a;
-    border-bottom: 1px solid #333;
-  }
-  
-  .map-title {
-    display: flex;
-    align-items: center;
-  }
-  
-  .map-name-input {
-    background-color: transparent;
-    border: 1px solid transparent;
-    color: white;
-    font-size: 1.25rem;
-    font-weight: bold;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-  }
-  
-  .map-name-input:hover, .map-name-input:focus {
-    background-color: #333;
-    border-color: #444;
-    outline: none;
-  }
-  
+  /* Additional map styles can go here if needed */
   .header-buttons {
     display: flex;
     gap: 0.5rem;
-  }
-  
-  .header-button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: #333;
-    border: none;
-    border-radius: 0.25rem;
-    color: white;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .header-button:hover {
-    background-color: #444;
-  }
-  
-  .button-icon {
-    font-size: 1.25rem;
-  }
-  
-  .main-content {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
-  
-  .sidebar {
-    width: 300px;
-    padding: 1rem;
-    overflow-y: auto;
-    border-right: 1px solid #333;
-  }
-  
-  .map-container {
-    flex: 1;
-    overflow: hidden;
   }
 </style>

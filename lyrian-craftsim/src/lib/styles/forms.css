@@ -1,0 +1,125 @@
+/* Common Form Styles */
+
+/* Form containers */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.material-group {
+  flex-grow: 1;
+  min-width: 200px;
+}
+
+.compact-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Form labels */
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.dark-theme label {
+  color: #d1d5db;
+}
+
+/* Form inputs */
+input, 
+select, 
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+input:focus, 
+select:focus, 
+textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Special inputs */
+.material-select,
+.alloy-select {
+  width: 100%;
+}
+
+.narrow-input {
+  width: 80px;
+  max-width: 150px;
+}
+
+.very-narrow-input {
+  width: 60px;
+  max-width: 80px;
+}
+
+/* Helper text */
+.helper-text {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.dark-theme .helper-text {
+  color: #9ca3af;
+}
+
+/* Focus and error states */
+input.error,
+select.error,
+textarea.error {
+  border-color: #ef4444;
+}
+
+input.error:focus,
+select.error:focus,
+textarea.error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Map-specific input styles */
+.map-name-input {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.map-name-input:hover, 
+.map-name-input:focus {
+  background-color: #333;
+  border-color: #444;
+  outline: none;
+}
+
+/* Dark theme styles */
+.dark-theme input,
+.dark-theme select,
+.dark-theme textarea {
+  background-color: #374151;
+  border-color: #4b5563;
+  color: #f9fafb;
+}
+
+.dark-theme input:focus,
+.dark-theme select:focus,
+.dark-theme textarea:focus {
+  border-color: #60a5fa;
+}

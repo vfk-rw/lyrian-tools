@@ -25,8 +25,8 @@ let selectedAlloy = $derived(getSelectedAlloy());
 let isCrafting = $derived(getIsCrafting());
 let craftResult = $derived(getCraftResult());
 
-    // Import CSS
-    import '$lib/styles/crafting.css';
+    // Import CSS - using new modular system
+    import '$lib/styles/crafting-specific.css';
 </script>
 
 <main class="container">

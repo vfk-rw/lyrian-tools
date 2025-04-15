@@ -1,37 +1,74 @@
-/* Basic styling only */
+/* Root styles and theme handling */
+
+:root {
+  /* Light mode colors */
+  --background-color: #f8f9fa;
+  --text-color: #333;
+  --border-color: #ccc;
+  --button-bg: #4a86e8;
+  --button-hover-bg: #3a76d8;
+  --button-text: white;
+  --disabled-bg: #cccccc;
+}
+
+/* Basic styling */
 body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Dark theme variables */
+body.dark-theme {
+  --background-color: #222;
+  --text-color: #eee;
+  --border-color: #444;
+  --button-bg: #3b82f6;
+  --button-hover-bg: #2563eb;
+  --button-text: white;
+  --disabled-bg: #555;
+}
+
+/* This ensures the dark theme is properly applied to all content */
+body.dark-theme #svelteapp,
+body.dark-theme .app-container,
+body.dark-theme .content-container {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Basic input styles */
 input, select, button {
   padding: 5px;
   margin: 3px 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Basic button styles */
 button {
-  background-color: #4a86e8;
-  color: white;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   cursor: pointer;
   padding: 5px 10px;
 }
 
 button:hover {
-  background-color: #3a76d8;
+  background-color: var(--button-hover-bg);
 }
 
 button[disabled] {
-  background-color: #cccccc;
+  background-color: var(--disabled-bg);
   cursor: not-allowed;
 }
 
+/* Container style - moving to layouts.css but keeping it here for backward compatibility */
 .container {
   width: 95%;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }

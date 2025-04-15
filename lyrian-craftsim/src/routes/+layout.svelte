@@ -1,43 +1,55 @@
-<script>
+<script lang="ts">
   import '../app.css';
   import '../lib/styles/common.css';
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
+  import { onMount } from 'svelte';
   
   // Simple theme toggling without Tailwind/shadcn dependencies
   let theme = 'light';
   
-  if (browser) {
-    // Check for system preference
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      theme = 'dark';
+  // Initialize theme on mount to ensure proper initial rendering
+  onMount(() => {
+    if (browser) {
+      // Check for system preference
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme = 'dark';
+      }
+      
+      // Check for stored preference (overrides system preference)
+      const stored = localStorage.getItem('theme');
+      if (stored) {
+        theme = stored;
+      }
+      
+      // Apply theme immediately on mount
+      applyTheme(theme);
     }
-    
-    // Check for stored preference
-    const stored = localStorage.getItem('theme');
-    if (stored) {
-      theme = stored;
-    }
-  }
+  });
   
   function toggleTheme() {
     theme = theme === 'dark' ? 'light' : 'dark';
     if (browser) {
       localStorage.setItem('theme', theme);
-      if (theme === 'dark') {
-        document.body.classList.add('dark-theme');
-      } else {
-        document.body.classList.remove('dark-theme');
-      }
+      applyTheme(theme);
     }
   }
   
-  $: if (browser && theme) {
-    if (theme === 'dark') {
+  // Function to apply theme to document body
+  function applyTheme(currentTheme: string): void {
+    if (currentTheme === 'dark') {
       document.body.classList.add('dark-theme');
     } else {
       document.body.classList.remove('dark-theme');
     }
+    
+    // Add a data attribute to the html element for potential CSS targeting
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  }
+  
+  // Watch for theme changes and apply them
+  $: if (browser && theme) {
+    applyTheme(theme);
   }
 </script>
 

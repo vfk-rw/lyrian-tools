@@ -1,0 +1,144 @@
+/* Common Layout Styles */
+
+/* Container layouts */
+.container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 100px);
+}
+
+/* Grid layouts */
+.two-column-grid {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  gap: 1rem;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+}
+
+/* Grid spans */
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.left-column {
+  grid-column: 1;
+}
+
+.right-column {
+  grid-column: 2;
+}
+
+/* Row layouts */
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.status-row {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Section containers */
+.section {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+/* Status layouts */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+}
+
+.status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* Card layouts */
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25rem;
+}
+
+/* Responsive layouts */
+@media (min-width: 640px) {
+  .status-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .action-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .action-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .right-column .action-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .tools-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .two-column-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .left-column, .right-column {
+    grid-column: 1;
+  }
+}
+
+/* Dark theme styles */
+.dark-theme .section {
+  background-color: #1f2937;
+  border-color: #374151;
+}

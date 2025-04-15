@@ -1,0 +1,75 @@
+/* Crafting-Specific Styles */
+
+/* Import shared styles */
+@import './layouts.css';
+@import './forms.css';
+@import './components.css';
+@import './buttons.css';
+
+/* Crafting-specific button colors */
+.primary-button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+}
+
+.primary-button:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.danger-button {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+}
+
+.danger-button:hover:not(:disabled) {
+  background-color: #dc2626;
+}
+
+.warning-button {
+  background-color: #f59e0b;
+  color: white;
+  border: none;
+}
+
+.warning-button:hover:not(:disabled) {
+  background-color: #d97706;
+}
+
+/* Compact legend styles */
+.compact-legend .section {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.compact-legend h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.compact-legend .legend-item {
+  font-size: 0.8rem;
+}
+
+.compact-legend .color-sample {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+/* Action item styles */
+.action-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.action-item button {
+  width: 100%;
+}
+
+/* Reset button styles */
+.reset-button {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
