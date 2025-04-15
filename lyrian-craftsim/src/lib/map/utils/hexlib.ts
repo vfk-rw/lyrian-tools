@@ -180,7 +180,89 @@ export function getHexVertices(q: number, r: number): Array<{ x: number, y: numb
 }
 
 /**
+ * Find the outer edges of a region for drawing the border
+ * Returns an array of edge segments where each segment is represented by its two endpoints
+ */
+export function findRegionOuterEdges(tiles: Array<[number, number]>): Array<{
+  start: { x: number, y: number },
+  end: { x: number, y: number }
+}> {
+  if (tiles.length === 0) return [];
+  
+  // Convert tiles array to a Set for faster lookups
+  const tileSet = new Set<string>(tiles.map(([q, r]) => `${q},${r}`));
+  
+  // Store the edges as segments (pairs of points)
+  const edges: Array<{
+    start: { x: number, y: number },
+    end: { x: number, y: number }
+  }> = [];
+  
+  // This mapping connects each neighbor direction to the correct vertex indices
+  // For flat-top hexes with clockwise vertex order (from east)
+  const directionToEdgeMap = [
+    [0, 5], // East: vertices 0-5
+    [5, 4], // Northeast: vertices 5-4 
+    [4, 3], // Northwest: vertices 4-3
+    [3, 2], // West: vertices 3-2
+    [2, 1], // Southwest: vertices 2-1
+    [1, 0]  // Southeast: vertices 1-0
+  ];
+  
+  // Check each tile in the region
+  for (const [q, r] of tiles) {
+    // Get all neighbors
+    const neighbors = getHexNeighbors(q, r);
+    
+    // Get the hex's vertices with proper isometric projection
+    const vertices = getHexVertices(q, r);
+    
+    // For each of the 6 edges of the hex
+    for (let i = 0; i < 6; i++) {
+      // Calculate the neighbor's coordinates in this direction
+      const [nq, nr] = neighbors[i];
+      const neighborKey = `${nq},${nr}`;
+      
+      // If the neighbor is not in the region, this is an outer edge
+      if (!tileSet.has(neighborKey)) {
+        // Get the correct vertices using our mapping
+        const [startIdx, endIdx] = directionToEdgeMap[i];
+        const startVertex = vertices[startIdx];
+        const endVertex = vertices[endIdx];
+        
+        edges.push({
+          start: startVertex,
+          end: endVertex
+        });
+      }
+    }
+  }
+  
+  return edges;
+}
+
+/**
+ * Generate an SVG path string from a list of edge segments
+ */
+export function generateEdgePathFromSegments(edges: Array<{
+  start: { x: number, y: number },
+  end: { x: number, y: number }
+}>): string {
+  if (edges.length === 0) return '';
+  
+  let path = '';
+  
+  // Add each edge as a separate path segment
+  for (const edge of edges) {
+    path += `M ${edge.start.x},${edge.start.y} L ${edge.end.x},${edge.end.y} `;
+  }
+  
+  return path;
+}
+
+/**
  * Calculate the boundary points of a region for drawing an outline
+ * @deprecated Use findRegionOuterEdges instead for better edge detection
  */
 export function calculateRegionBoundary(tiles: Array<[number, number]>): Array<{ x: number, y: number }> {
   if (tiles.length === 0) return [];

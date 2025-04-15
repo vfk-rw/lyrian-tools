@@ -1,5 +1,6 @@
 <script lang="ts">
   import { uiStore, selectTool, selectBiome, selectHeight, toggleLabels, toggleGrid, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
+  import { mapData, removeRegion } from '$lib/map/stores/mapStore';
   
   // Color mapping for biomes
   const BIOME_COLORS: Record<string, string> = {
@@ -187,8 +188,39 @@
         </div>
         
         <div class="help-text">
-          Select tiles then create a region, or click an existing region to edit.
+          Select tiles then create a region
         </div>
+      </div>
+    </section>
+    
+    <!-- Region List -->
+    <section class="toolbar-section">
+      <h3>Existing Regions</h3>
+      <div class="region-list">
+        {#if $mapData.regions.size === 0}
+          <div class="no-regions">No regions created yet</div>
+        {:else}
+          {#each Array.from($mapData.regions.values()) as region (region.id)}
+            <div class="region-list-item">
+              <div class="region-color" style:background-color={region.color}></div>
+              <div class="region-name">{region.name}</div>
+              <button 
+                class="region-delete" 
+                on:click={() => removeRegion(region.id)}
+                title="Delete region"
+              >
+                🗑️
+              </button>
+              <button 
+                class="region-edit" 
+                on:click={() => showModal({ type: 'region', regionId: region.id })}
+                title="Edit region"
+              >
+                ✏️
+              </button>
+            </div>
+          {/each}
+        {/if}
       </div>
     </section>
   {/if}
@@ -355,5 +387,68 @@
   
   .instruction-list li {
     margin-bottom: 0.25rem;
+  }
+  
+  /* Region List Styles */
+  .region-list {
+    margin-top: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .no-regions {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  
+  .region-list-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #333;
+    margin-bottom: 0.5rem;
+    gap: 0.5rem;
+  }
+  
+  .region-color {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    flex-shrink: 0;
+  }
+  
+  .region-name {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .region-delete, .region-edit {
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+  }
+  
+  .region-delete:hover {
+    color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+  }
+  
+  .region-edit:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
   }
 </style>

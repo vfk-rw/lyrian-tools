@@ -7,6 +7,23 @@
   import type { Tile, Region } from '$lib/map/stores/mapStore';
   import { uiStore, updateCameraOffset, updateCameraZoom, showModal, type RegionHoverInfo } from '$lib/map/stores/uiStore';
   import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
+
+// Helper function to calculate region center for labels
+function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: number } {
+  if (tiles.length === 0) {
+    return { x: 0, y: 0 };
+  }
+  
+  // Calculate the center based on the average of all tile positions
+  const sumQ = tiles.reduce((sum, [q]) => sum + q, 0);
+  const sumR = tiles.reduce((sum, [_, r]) => sum + r, 0);
+  
+  const centerQ = sumQ / tiles.length;
+  const centerR = sumR / tiles.length;
+  
+  // Convert to pixel coordinates
+  return hexToIsometric(centerQ, centerR);
+}
   
   // POI icons dictionary for displaying in the info panel
   const POI_ICONS: Record<string, string> = {
@@ -313,18 +330,6 @@
       class="map-transform-group"
       transform="translate({$uiStore.cameraOffset.x} {$uiStore.cameraOffset.y}) scale({$uiStore.cameraZoom})"
     >
-      <!-- Region outlines -->
-      {#each Array.from($mapData.regions.values()) as region}
-        <RegionOutline 
-          regionId={region.id} 
-          regionName={region.name} 
-          regionColor={region.color}
-          regionDescription={region.description}
-          tiles={region.tiles} 
-          isHovered={isRegionHovered(region.id)}
-        />
-      {/each}
-      
       <!-- Render tiles with visual sorting for isometric view -->
       {#each tileArray.sort((a, b) => {
         // Back to front rendering (sort by r then q)
@@ -340,6 +345,18 @@
           tileKey={tile.key}
           isSelected={getSelectedState(tile.q, tile.r)}
           isHovered={getHoveredState(tile.q, tile.r)}
+        />
+      {/each}
+      
+      <!-- Only Region labels, rendered last to appear on top of everything -->
+      {#each Array.from($mapData.regions.values()) as region}
+        <RegionOutline 
+          regionId={region.id} 
+          regionName={region.name} 
+          regionColor={region.color}
+          regionDescription={region.description}
+          tiles={region.tiles} 
+          isHovered={isRegionHovered(region.id)}
         />
       {/each}
     </g>

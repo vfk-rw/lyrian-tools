@@ -86,11 +86,17 @@
   
   // Handle hover events
   function handleMouseEnter() {
-    // Update the hovered tile in the store
+    // Check if this tile belongs to a region
+    const region = Array.from($mapData.regions.values()).find(region => 
+      region.tiles.some(([rq, rr]) => rq === q && rr === r)
+    );
+    
+    // Update the hovered tile in the store and set hoveredRegion if this tile belongs to a region
     const currentState = $uiStore;
     uiStore.set({
       ...currentState,
-      hoveredTile: { q, r }
+      hoveredTile: { q, r },
+      hoveredRegion: region ? region.id : null
     });
   }
   
@@ -100,7 +106,8 @@
     if (currentState.hoveredTile && currentState.hoveredTile.q === q && currentState.hoveredTile.r === r) {
       uiStore.set({
         ...currentState,
-        hoveredTile: null
+        hoveredTile: null,
+        hoveredRegion: null
       });
     }
   }

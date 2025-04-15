@@ -1,6 +1,6 @@
 <script lang="ts">
   import { uiStore, showModal } from '$lib/map/stores/uiStore';
-  import { calculateRegionBoundary, generatePathFromPoints } from '$lib/map/utils/hexlib';
+  import { hexToIsometric } from '$lib/map/utils/hexlib';
   
   // Props with correct typing
   export let regionId: string;
@@ -8,29 +8,27 @@
   export let regionColor: string;
   export let regionDescription: string | undefined = undefined;
   export let tiles: Array<[number, number]>;
-  export let isHovered = false; // Default to false, allow any truthy/falsy value
-  
-  // Calculate the boundary points of the region
-  $: boundaryPoints = calculateRegionBoundary(tiles);
-  $: outlinePath = generatePathFromPoints(boundaryPoints);
+  export let isHovered = false; // Default to false, allow any truthy/falsy value 
+  export let showLabel = true; // Whether to show the region label
   
   // Calculate center position for the label
-  $: center = calculateRegionCenter(boundaryPoints);
+  $: center = calculateRegionCenter(tiles);
   
-  // Calculate a central position for the region name
-  function calculateRegionCenter(points: Array<{ x: number; y: number }>): { x: number; y: number } {
-    if (points.length === 0) {
+  // Calculate a better central position for the region name
+  function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: number } {
+    if (tiles.length === 0) {
       return { x: 0, y: 0 };
     }
     
-    // Simple average of all points
-    const sumX = points.reduce((sum, point) => sum + point.x, 0);
-    const sumY = points.reduce((sum, point) => sum + point.y, 0);
+    // Calculate the center based on the average of all tile positions
+    const sumQ = tiles.reduce((sum, [q]) => sum + q, 0);
+    const sumR = tiles.reduce((sum, [_, r]) => sum + r, 0);
     
-    return {
-      x: sumX / points.length,
-      y: sumY / points.length
-    };
+    const centerQ = sumQ / tiles.length;
+    const centerR = sumR / tiles.length;
+    
+    // Convert to pixel coordinates
+    return hexToIsometric(centerQ, centerR);
   }
   
   // Handle click on the region
@@ -89,44 +87,22 @@
   on:click={handleRegionClick}
   on:keydown={handleKeyDown}
 >
-  <!-- Region outline path -->
-  <path 
-    d={outlinePath} 
-    fill="none" 
-    stroke={regionColor} 
-    stroke-width={isHovered ? 3 : 2}
-    stroke-opacity={isHovered ? 0.9 : 0.7}
-    vector-effect="non-scaling-stroke"
-  />
+  <!-- No region borders shown anymore -->
   
-  <!-- Background fill with low opacity -->
-  <path 
-    d={outlinePath} 
-    fill={regionColor} 
-    fill-opacity={isHovered ? 0.2 : 0.1}
-    stroke="none"
-  />
-  
-  <!-- Region label -->
-  {#if $uiStore.showLabels && center}
+  <!-- Region label (visible if showLabel is true) -->
+  {#if $uiStore.showLabels && center && showLabel}
     <g class="region-label" transform={`translate(${center.x}, ${center.y})`}>
-      <rect 
-        x="-60" 
-        y="-15" 
-        width="120" 
-        height="30" 
-        rx="5" 
-        fill={regionColor} 
-        fill-opacity="0.7" 
-      />
       <text 
         x="0" 
         y="5" 
         text-anchor="middle" 
         dominant-baseline="middle"
-        fill="white"
+        fill={regionColor}
+        stroke="white"
+        stroke-width="2"
+        paint-order="stroke fill"
         font-weight="bold"
-        font-size="14"
+        font-size="18"
         pointer-events="none"
       >
         {regionName}
@@ -142,10 +118,12 @@
   
   .region-label {
     cursor: pointer;
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+    pointer-events: none;
+    z-index: 20; /* Ensure it's above hex tiles */
   }
   
   .hovered .region-label text {
-    font-weight: bold;
+    font-weight: 800;
   }
 </style>
