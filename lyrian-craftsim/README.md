@@ -80,9 +80,6 @@ pnpm build
 ## Technologies Used
 
 - [SvelteKit 5](https://kit.svelte.dev/)
-- [Threlte](https://threlte.xyz/) (Svelte components for Three.js)
-- [Three.js](https://threejs.org/) (3D rendering)
-- [Honeycomb](https://github.com/flauwekeul/honeycomb) (Hex grid utilities)
 
 ## Project Structure
 
