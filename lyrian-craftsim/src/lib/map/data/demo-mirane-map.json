@@ -1,5 +1,5 @@
 {
-  "mapName": "Demo Mirane Map",
+  "mapName": "Hex Map - Apr 17, 2025",
   "tiles": [
     {
       "q": -15,
@@ -708,7 +708,7 @@
     {
       "q": -11,
       "r": 14,
-      "biome": "unexplored",
+      "biome": "tundra",
       "height": 0,
       "icon": null,
       "pois": []
@@ -716,7 +716,7 @@
     {
       "q": -11,
       "r": 15,
-      "biome": "unexplored",
+      "biome": "tundra",
       "height": 0,
       "icon": null,
       "pois": []
@@ -861,32 +861,32 @@
       "q": -10,
       "r": 12,
       "biome": "unexplored",
-      "height": 0,
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -10,
       "r": 13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -10,
       "r": 14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -10,
       "r": 15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -1028,41 +1028,41 @@
     {
       "q": -9,
       "r": 11,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "tundra",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -9,
       "r": 12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -9,
       "r": 13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -9,
       "r": 14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -9,
       "r": 15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -1204,49 +1204,49 @@
     {
       "q": -8,
       "r": 10,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "tundra",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -8,
       "r": 11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -8,
       "r": 12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -8,
       "r": 13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -8,
       "r": 14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -8,
       "r": 15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -1356,16 +1356,16 @@
     {
       "q": -7,
       "r": 5,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "mountain",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -7,
       "r": 6,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "mountain",
+      "height": 2,
       "icon": null,
       "pois": []
     },
@@ -1373,72 +1373,72 @@
       "q": -7,
       "r": 7,
       "biome": "mountain",
-      "height": 1,
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -7,
       "r": 8,
-      "biome": "mountain",
-      "height": 1,
+      "biome": "unexplored",
+      "height": 0,
       "icon": null,
       "pois": []
     },
     {
       "q": -7,
       "r": 9,
-      "biome": "mountain",
-      "height": 1,
+      "biome": "tundra",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -7,
       "r": 10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -7,
       "r": 11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -7,
       "r": 12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -7,
       "r": 13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -7,
       "r": 14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -7,
       "r": 15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -1548,15 +1548,15 @@
     {
       "q": -6,
       "r": 4,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "mountain",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -6,
       "r": 5,
-      "biome": "unexplored",
+      "biome": "water",
       "height": 0,
       "icon": null,
       "pois": []
@@ -1564,81 +1564,81 @@
     {
       "q": -6,
       "r": 6,
-      "biome": "mountain",
-      "height": 1,
+      "biome": "water",
+      "height": 0,
       "icon": null,
       "pois": []
     },
     {
       "q": -6,
       "r": 7,
-      "biome": "water",
-      "height": 0,
+      "biome": "mountain",
+      "height": 3,
       "icon": null,
       "pois": []
     },
     {
       "q": -6,
       "r": 8,
-      "biome": "water",
-      "height": 0,
+      "biome": "tundra",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -6,
       "r": 9,
-      "biome": "mountain",
-      "height": 1,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -6,
       "r": 10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -6,
       "r": 11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -6,
       "r": 12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -6,
       "r": 13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -6,
       "r": 14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -6,
       "r": 15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -1748,15 +1748,15 @@
     {
       "q": -5,
       "r": 3,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "mountain",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -5,
       "r": 4,
-      "biome": "unexplored",
+      "biome": "water",
       "height": 0,
       "icon": null,
       "pois": []
@@ -1764,9 +1764,9 @@
     {
       "q": -5,
       "r": 5,
-      "biome": "mountain",
+      "biome": "forest",
       "height": 1,
-      "icon": null,
+      "icon": "/icons/nature/forest.svg",
       "pois": []
     },
     {
@@ -1780,73 +1780,73 @@
     {
       "q": -5,
       "r": 7,
-      "biome": "forest",
-      "height": 0,
-      "icon": "/icons/nature/forest.svg",
+      "biome": "mountain",
+      "height": 3,
+      "icon": null,
       "pois": []
     },
     {
       "q": -5,
       "r": 8,
-      "biome": "water",
-      "height": 0,
+      "biome": "tundra",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -5,
       "r": 9,
-      "biome": "mountain",
-      "height": 1,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -5,
       "r": 10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -5,
       "r": 11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -5,
       "r": 12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -5,
       "r": 13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -5,
       "r": 14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -5,
       "r": 15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -1940,16 +1940,16 @@
     {
       "q": -4,
       "r": 0,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "desert",
+      "height": 1,
       "icon": null,
       "pois": []
     },
     {
       "q": -4,
       "r": 1,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "desert",
+      "height": 1,
       "icon": null,
       "pois": []
     },
@@ -1964,105 +1964,105 @@
     {
       "q": -4,
       "r": 3,
-      "biome": "desert",
-      "height": 0,
-      "icon": "/icons/animal/animal-skull.svg",
+      "biome": "mountain",
+      "height": 2,
+      "icon": null,
       "pois": []
     },
     {
       "q": -4,
       "r": 4,
-      "biome": "desert",
+      "biome": "water",
       "height": 0,
-      "icon": "/icons/animal/animal-skull.svg",
+      "icon": null,
       "pois": []
     },
     {
       "q": -4,
       "r": 5,
-      "biome": "mountain",
-      "height": 1,
+      "biome": "water",
+      "height": 0,
       "icon": null,
       "pois": []
     },
     {
       "q": -4,
       "r": 6,
-      "biome": "water",
-      "height": 0,
+      "biome": "mountain",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -4,
       "r": 7,
-      "biome": "water",
-      "height": 0,
+      "biome": "tundra",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -4,
       "r": 8,
-      "biome": "mountain",
-      "height": 1,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -4,
       "r": 9,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -4,
       "r": 10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -4,
       "r": 11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -4,
       "r": 12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -4,
       "r": 13,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -4,
       "r": 14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -4,
       "r": 15,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -2156,31 +2156,31 @@
     {
       "q": -3,
       "r": -1,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "desert",
+      "height": 1,
       "icon": null,
       "pois": []
     },
     {
       "q": -3,
       "r": 0,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "desert",
+      "height": 1,
+      "icon": "/icons/nature/wind-hole.svg",
       "pois": []
     },
     {
       "q": -3,
       "r": 1,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "desert",
+      "height": 1,
       "icon": null,
       "pois": []
     },
     {
       "q": -3,
       "r": 2,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
@@ -2188,40 +2188,40 @@
     {
       "q": -3,
       "r": 3,
-      "biome": "desert",
-      "height": 0,
-      "icon": "/icons/animal/animal-skull.svg",
+      "biome": "mountain",
+      "height": 2,
+      "icon": null,
       "pois": []
     },
     {
       "q": -3,
       "r": 4,
-      "biome": "plains",
-      "height": 0,
+      "biome": "mountain",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": -3,
       "r": 5,
-      "biome": "plains",
-      "height": 0,
-      "icon": "/icons/nature/pine-tree.svg",
+      "biome": "mountain",
+      "height": 2,
+      "icon": null,
       "pois": []
     },
     {
       "q": -3,
       "r": 6,
-      "biome": "mountain",
-      "height": 1,
+      "biome": "forest",
+      "height": 0,
       "icon": null,
       "pois": []
     },
     {
       "q": -3,
       "r": 7,
-      "biome": "mountain",
-      "height": 1,
+      "biome": "tundra",
+      "height": 2,
       "icon": null,
       "pois": []
     },
@@ -2229,64 +2229,64 @@
       "q": -3,
       "r": 8,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -3,
       "r": 9,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -3,
       "r": 10,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -3,
       "r": 11,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -3,
       "r": 12,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -3,
       "r": 13,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -3,
       "r": 14,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -3,
       "r": 15,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -2388,96 +2388,96 @@
     {
       "q": -2,
       "r": -1,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "desert",
+      "height": 1,
       "icon": null,
       "pois": []
     },
     {
       "q": -2,
       "r": 0,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "desert",
+      "height": 1,
       "icon": null,
       "pois": []
     },
     {
       "q": -2,
       "r": 1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "forest",
+      "height": 1,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": -2,
       "r": 2,
-      "biome": "desert",
+      "biome": "forest",
       "height": 0,
-      "icon": "/icons/animal/animal-skull.svg",
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": -2,
       "r": 3,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": -2,
       "r": 4,
-      "biome": "plains",
-      "height": 0,
-      "icon": "/icons/nature/pine-tree.svg",
-      "pois": []
-    },
-    {
-      "q": -2,
-      "r": 5,
-      "biome": "plains",
-      "height": 0,
-      "icon": "/icons/nature/pine-tree.svg",
-      "pois": []
-    },
-    {
-      "q": -2,
-      "r": 6,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": [
         {
-          "id": "afd1e671-a2f2-4e4b-a0b6-b46afbc2a8ca",
-          "name": "Pandora's Church",
-          "icon": "temple",
+          "id": "4f7bccec-a8ba-4396-9221-623b15cd6179",
+          "name": "Temple of Pandora",
+          "icon": "dungeon",
           "description": ""
         }
       ]
     },
     {
       "q": -2,
-      "r": 7,
-      "biome": "plains",
+      "r": 5,
+      "biome": "forest",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
+      "r": 6,
+      "biome": "forest",
       "height": 0,
       "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": -2,
+      "r": 7,
+      "biome": "tundra",
+      "height": 2,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": -2,
       "r": 8,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 0,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -2,
       "r": 9,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -2485,7 +2485,7 @@
       "r": 10,
       "biome": "tundra",
       "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -2493,39 +2493,39 @@
       "r": 11,
       "biome": "tundra",
       "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -2,
       "r": 12,
-      "biome": "tundra",
-      "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": -2,
       "r": 13,
-      "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": -2,
       "r": 14,
-      "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": -2,
       "r": 15,
-      "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
@@ -2643,23 +2643,23 @@
     {
       "q": -1,
       "r": 0,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": -1,
       "r": 1,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": -1,
       "r": 2,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
       "icon": "/icons/nature/pine-tree.svg",
       "pois": []
@@ -2667,23 +2667,23 @@
     {
       "q": -1,
       "r": 3,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": -1,
       "r": 4,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": -1,
       "r": 5,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
       "icon": "/icons/nature/pine-tree.svg",
       "pois": []
@@ -2691,7 +2691,7 @@
     {
       "q": -1,
       "r": 6,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
@@ -2699,17 +2699,17 @@
     {
       "q": -1,
       "r": 7,
-      "biome": "plains",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -1,
       "r": 8,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -2717,55 +2717,55 @@
       "r": 9,
       "biome": "tundra",
       "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -1,
       "r": 10,
-      "biome": "plains",
-      "height": 1,
-      "icon": null,
+      "biome": "tundra",
+      "height": 0,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": -1,
       "r": 11,
       "biome": "plains",
-      "height": 1,
+      "height": 0,
       "icon": null,
       "pois": []
     },
     {
       "q": -1,
       "r": 12,
-      "biome": "tundra",
-      "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": -1,
       "r": 13,
-      "biome": "tundra",
-      "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": -1,
       "r": 14,
-      "biome": "tundra",
-      "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": -1,
       "r": 15,
-      "biome": "tundra",
-      "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
@@ -2883,7 +2883,7 @@
     {
       "q": 0,
       "r": -1,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
@@ -2891,39 +2891,46 @@
     {
       "q": 0,
       "r": 0,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": 0,
       "r": 1,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": 0,
       "r": 2,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
-      "pois": []
+      "icon": "/icons/nature/pine-tree.svg",
+      "pois": [
+        {
+          "id": "8ab6ba8e-7439-47c3-8aff-8d6f3f9bf4e2",
+          "name": "Forest Glade 005",
+          "icon": "forest",
+          "description": ""
+        }
+      ]
     },
     {
       "q": 0,
       "r": 3,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": 0,
       "r": 4,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
       "icon": "/icons/nature/pine-tree.svg",
       "pois": []
@@ -2931,41 +2938,41 @@
     {
       "q": 0,
       "r": 5,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
-      "icon": "/icons/nature/pine-tree.svg",
+      "icon": null,
       "pois": []
     },
     {
       "q": 0,
       "r": 6,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": "/icons/nature/trail.svg",
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 0,
       "r": 7,
-      "biome": "unexplored",
+      "biome": "tundra",
       "height": 2,
-      "icon": "/icons/nature/trail.svg",
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 0,
       "r": 8,
       "biome": "unexplored",
-      "height": 2,
-      "icon": "/icons/nature/trail.svg",
+      "height": 0,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
       "q": 0,
       "r": 9,
-      "biome": "plains",
-      "height": 1,
-      "icon": null,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
@@ -2973,47 +2980,54 @@
       "r": 10,
       "biome": "plains",
       "height": 0,
-      "icon": "/icons/civilization/village.svg",
+      "icon": "/icons/building/gate.svg",
       "pois": []
     },
     {
       "q": 0,
       "r": 11,
       "biome": "plains",
-      "height": 1,
-      "icon": null,
+      "height": 0,
+      "icon": "/icons/nature/trail.svg",
       "pois": []
     },
     {
       "q": 0,
       "r": 12,
       "biome": "plains",
-      "height": 1,
+      "height": 0,
       "icon": null,
-      "pois": []
+      "pois": [
+        {
+          "id": "4a5a66c1-04b7-435c-a57b-ebce392ffd44",
+          "name": "Mirane Outpost",
+          "icon": "town",
+          "description": ""
+        }
+      ]
     },
     {
       "q": 0,
       "r": 13,
       "biome": "plains",
-      "height": 1,
-      "icon": null,
+      "height": 0,
+      "icon": "/icons/nature/trail.svg",
       "pois": []
     },
     {
       "q": 0,
       "r": 14,
       "biome": "plains",
-      "height": 1,
-      "icon": null,
+      "height": 0,
+      "icon": "/icons/nature/trail.svg",
       "pois": []
     },
     {
       "q": 0,
       "r": 15,
       "biome": "plains",
-      "height": 1,
-      "icon": null,
+      "height": 0,
+      "icon": "/icons/nature/trail.svg",
       "pois": []
     },
     {
@@ -3131,7 +3145,7 @@
     {
       "q": 1,
       "r": -1,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
@@ -3139,7 +3153,7 @@
     {
       "q": 1,
       "r": 0,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
@@ -3147,15 +3161,15 @@
     {
       "q": 1,
       "r": 1,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": 1,
       "r": 2,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
       "icon": "/icons/nature/pine-tree.svg",
       "pois": []
@@ -3163,7 +3177,7 @@
     {
       "q": 1,
       "r": 3,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
       "icon": "/icons/nature/pine-tree.svg",
       "pois": []
@@ -3171,33 +3185,33 @@
     {
       "q": 1,
       "r": 4,
-      "biome": "plains",
-      "height": 0,
-      "icon": "/icons/nature/pine-tree.svg",
-      "pois": []
-    },
-    {
-      "q": 1,
-      "r": 5,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
     },
     {
       "q": 1,
+      "r": 5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": "/icons/nature/mountain-road.svg",
+      "pois": []
+    },
+    {
+      "q": 1,
       "r": 6,
-      "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "unexplored",
+      "height": 0,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
       "q": 1,
       "r": 7,
-      "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "unexplored",
+      "height": 0,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
@@ -3205,55 +3219,55 @@
       "r": 8,
       "biome": "tundra",
       "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 1,
       "r": 9,
-      "biome": "plains",
-      "height": 1,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 1,
       "r": 10,
       "biome": "plains",
-      "height": 1,
+      "height": 0,
       "icon": null,
       "pois": []
     },
     {
       "q": 1,
       "r": 11,
-      "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": 1,
       "r": 12,
-      "biome": "tundra",
-      "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": 1,
       "r": 13,
-      "biome": "tundra",
-      "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": 1,
       "r": 14,
-      "biome": "tundra",
-      "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
@@ -3371,7 +3385,7 @@
     {
       "q": 2,
       "r": -1,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
@@ -3379,31 +3393,31 @@
     {
       "q": 2,
       "r": 0,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": 2,
       "r": 1,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": 2,
       "r": 2,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": 2,
       "r": 3,
-      "biome": "plains",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
@@ -3411,41 +3425,48 @@
     {
       "q": 2,
       "r": 4,
-      "biome": "plains",
+      "biome": "unexplored",
       "height": 0,
       "icon": null,
-      "pois": []
+      "pois": [
+        {
+          "id": "1553c60f-cc29-484b-8c75-4a66fe545540",
+          "name": "Mossy Spring",
+          "icon": "cave",
+          "description": ""
+        }
+      ]
     },
     {
       "q": 2,
       "r": 5,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 0,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 2,
       "r": 6,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 2,
       "r": 7,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 2,
       "r": 8,
-      "biome": "unexplored",
+      "biome": "tundra",
       "height": 2,
-      "icon": "/icons/nature/trail.svg",
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -3453,39 +3474,39 @@
       "r": 9,
       "biome": "tundra",
       "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 2,
       "r": 10,
-      "biome": "tundra",
-      "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": 2,
       "r": 11,
-      "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": 2,
       "r": 12,
-      "biome": "tundra",
-      "height": 2,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
       "q": 2,
       "r": 13,
-      "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "plains",
+      "height": 0,
+      "icon": null,
       "pois": []
     },
     {
@@ -3595,7 +3616,7 @@
     {
       "q": 3,
       "r": -2,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
@@ -3603,18 +3624,25 @@
     {
       "q": 3,
       "r": -1,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": 3,
       "r": 0,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
       "icon": null,
-      "pois": []
+      "pois": [
+        {
+          "id": "e086b1e3-9da1-4a03-96a9-ec7ccfe79339",
+          "name": "Future Site of Kari's Hope Outpost",
+          "icon": "camp",
+          "description": ""
+        }
+      ]
     },
     {
       "q": 3,
@@ -3629,7 +3657,7 @@
       "r": 2,
       "biome": "forest",
       "height": 0,
-      "icon": "/icons/nature/forest.svg",
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
@@ -3637,79 +3665,79 @@
       "r": 3,
       "biome": "forest",
       "height": 0,
-      "icon": "/icons/nature/forest.svg",
+      "icon": null,
       "pois": []
     },
     {
       "q": 3,
       "r": 4,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 3,
       "r": 5,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 3,
       "r": 6,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 3,
       "r": 7,
-      "biome": "unexplored",
+      "biome": "tundra",
       "height": 2,
-      "icon": "/icons/nature/trail.svg",
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 3,
       "r": 8,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 3,
       "r": 9,
-      "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "unexplored",
+      "height": 0,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
       "q": 3,
       "r": 10,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 0,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 3,
       "r": 11,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 0,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 3,
       "r": 12,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 0,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -3819,7 +3847,7 @@
     {
       "q": 4,
       "r": -2,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
@@ -3827,15 +3855,15 @@
     {
       "q": 4,
       "r": -1,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
       "q": 4,
       "r": 0,
-      "biome": "unexplored",
+      "biome": "forest",
       "height": 0,
       "icon": null,
       "pois": []
@@ -3845,7 +3873,7 @@
       "r": 1,
       "biome": "forest",
       "height": 0,
-      "icon": "/icons/nature/forest.svg",
+      "icon": "/icons/nature/pine-tree.svg",
       "pois": []
     },
     {
@@ -3853,79 +3881,79 @@
       "r": 2,
       "biome": "forest",
       "height": 0,
-      "icon": "/icons/nature/forest.svg",
+      "icon": null,
       "pois": []
     },
     {
       "q": 4,
       "r": 3,
-      "biome": "forest",
-      "height": 0,
-      "icon": "/icons/nature/forest.svg",
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 4,
       "r": 4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": "/icons/nature/trail.svg",
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 4,
       "r": 5,
-      "biome": "unexplored",
+      "biome": "tundra",
       "height": 2,
-      "icon": "/icons/nature/trail.svg",
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 4,
       "r": 6,
-      "biome": "unexplored",
+      "biome": "tundra",
       "height": 2,
-      "icon": "/icons/nature/trail.svg",
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 4,
       "r": 7,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 0,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 4,
       "r": 8,
-      "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "unexplored",
+      "height": 0,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
       "q": 4,
       "r": 9,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 4,
       "r": 10,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 4,
       "r": 11,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -4027,31 +4055,31 @@
     {
       "q": 5,
       "r": -3,
-      "biome": "unexplored",
+      "biome": "swamp",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/forest.svg",
       "pois": []
     },
     {
       "q": 5,
       "r": -2,
-      "biome": "unexplored",
+      "biome": "swamp",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/forest.svg",
       "pois": []
     },
     {
       "q": 5,
       "r": -1,
-      "biome": "unexplored",
+      "biome": "swamp",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/forest.svg",
       "pois": []
     },
     {
       "q": 5,
       "r": 0,
-      "biome": "forest",
+      "biome": "swamp",
       "height": 0,
       "icon": "/icons/nature/forest.svg",
       "pois": []
@@ -4059,7 +4087,7 @@
     {
       "q": 5,
       "r": 1,
-      "biome": "forest",
+      "biome": "swamp",
       "height": 0,
       "icon": "/icons/nature/forest.svg",
       "pois": []
@@ -4067,41 +4095,41 @@
     {
       "q": 5,
       "r": 2,
-      "biome": "forest",
+      "biome": "tundra",
       "height": 0,
-      "icon": "/icons/nature/forest.svg",
+      "icon": null,
       "pois": []
     },
     {
       "q": 5,
       "r": 3,
-      "biome": "forest",
-      "height": 0,
-      "icon": "/icons/nature/forest.svg",
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 5,
       "r": 4,
       "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": null,
       "pois": []
     },
     {
       "q": 5,
       "r": 5,
-      "biome": "tundra",
-      "height": 3,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "unexplored",
+      "height": 0,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
       "q": 5,
       "r": 6,
-      "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "biome": "unexplored",
+      "height": 0,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
@@ -4109,31 +4137,31 @@
       "r": 7,
       "biome": "unexplored",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
       "q": 5,
       "r": 8,
       "biome": "tundra",
-      "height": 1,
-      "icon": "/icons/nature/mountains.svg",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 5,
       "r": 9,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 5,
       "r": 10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -4227,31 +4255,31 @@
     {
       "q": 6,
       "r": -4,
-      "biome": "unexplored",
+      "biome": "swamp",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/forest.svg",
       "pois": []
     },
     {
       "q": 6,
       "r": -3,
-      "biome": "unexplored",
+      "biome": "swamp",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/forest.svg",
       "pois": []
     },
     {
       "q": 6,
       "r": -2,
-      "biome": "unexplored",
+      "biome": "swamp",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/forest.svg",
       "pois": []
     },
     {
       "q": 6,
       "r": -1,
-      "biome": "forest",
+      "biome": "swamp",
       "height": 0,
       "icon": "/icons/nature/forest.svg",
       "pois": []
@@ -4259,7 +4287,7 @@
     {
       "q": 6,
       "r": 0,
-      "biome": "forest",
+      "biome": "swamp",
       "height": 0,
       "icon": "/icons/nature/forest.svg",
       "pois": []
@@ -4267,7 +4295,7 @@
     {
       "q": 6,
       "r": 1,
-      "biome": "forest",
+      "biome": "swamp",
       "height": 0,
       "icon": "/icons/nature/forest.svg",
       "pois": []
@@ -4275,9 +4303,9 @@
     {
       "q": 6,
       "r": 2,
-      "biome": "forest",
+      "biome": "unexplored",
       "height": 0,
-      "icon": "/icons/nature/forest.svg",
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
@@ -4285,7 +4313,7 @@
       "r": 3,
       "biome": "unexplored",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
@@ -4293,13 +4321,13 @@
       "r": 4,
       "biome": "unexplored",
       "height": 0,
-      "icon": null,
+      "icon": "/icons/nature/mountain-road.svg",
       "pois": []
     },
     {
       "q": 6,
       "r": 5,
-      "biome": "unexplored",
+      "biome": "tundra",
       "height": 0,
       "icon": null,
       "pois": []
@@ -4307,1012 +4335,1019 @@
     {
       "q": 6,
       "r": 6,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 7,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 8,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 6,
+      "r": 9,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -4,
+      "biome": "swamp",
+      "height": 0,
+      "icon": "/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -3,
+      "biome": "swamp",
+      "height": 1,
+      "icon": null,
+      "pois": [
+        {
+          "id": "992c072c-ca5e-4053-b11c-fbc608a35cb4",
+          "name": "???",
+          "icon": "castle",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "q": 7,
+      "r": -2,
+      "biome": "swamp",
+      "height": 0,
+      "icon": "/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": -1,
+      "biome": "swamp",
+      "height": 0,
+      "icon": "/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 0,
+      "biome": "swamp",
+      "height": 0,
+      "icon": "/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 1,
+      "biome": "tundra",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 2,
+      "biome": "tundra",
+      "height": 0,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 3,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 4,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 5,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 6,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 7,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 7,
+      "r": 8,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -4,
+      "biome": "swamp",
+      "height": 0,
+      "icon": "/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -3,
+      "biome": "swamp",
+      "height": 0,
+      "icon": "/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -2,
+      "biome": "swamp",
+      "height": 0,
+      "icon": "/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": -1,
+      "biome": "swamp",
+      "height": 0,
+      "icon": "/icons/nature/forest.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 0,
+      "biome": "tundra",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 1,
+      "biome": "tundra",
+      "height": 0,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 2,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 3,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 4,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 5,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 6,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 8,
+      "r": 7,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -4,
+      "biome": "swamp",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -3,
+      "biome": "swamp",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -2,
+      "biome": "swamp",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 0,
+      "biome": "tundra",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 1,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 2,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 3,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 4,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 5,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 9,
+      "r": 6,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 0,
+      "biome": "tundra",
+      "height": 3,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 1,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 2,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 3,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 4,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 10,
+      "r": 5,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -4,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -3,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -2,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": -1,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": 0,
+      "biome": "tundra",
+      "height": 3,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": 1,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": 2,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": 3,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 11,
+      "r": 4,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -15,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -14,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -13,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -12,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -11,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -10,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -9,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -8,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -7,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -6,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -5,
+      "biome": "unexplored",
+      "height": 0,
+      "icon": null,
+      "pois": []
+    },
+    {
+      "q": 12,
+      "r": -4,
       "biome": "unexplored",
       "height": 1,
       "icon": null,
       "pois": []
     },
     {
-      "q": 6,
-      "r": 7,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 6,
-      "r": 8,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 6,
-      "r": 9,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -9,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -8,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -7,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -6,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -5,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": -1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": 0,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": 1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": 2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": 3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": 4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": 5,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": 6,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": 7,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 7,
-      "r": 8,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -9,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -8,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -7,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -6,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -5,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": -1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": 0,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": 1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": 2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": 3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": 4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": 5,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": 6,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 8,
-      "r": 7,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -9,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -8,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -7,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -6,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -5,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": -1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": 0,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": 1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": 2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": 3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": 4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": 5,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 9,
-      "r": 6,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -9,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -8,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -7,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -6,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -5,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": -1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": 0,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": 1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": 2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": 3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": 4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 10,
-      "r": 5,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -9,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -8,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -7,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -6,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -5,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": -1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": 0,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": 1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": 2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": 3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 11,
-      "r": 4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -15,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -14,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -13,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -12,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -11,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -10,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -9,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -8,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -7,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -6,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -5,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
-      "q": 12,
-      "r": -4,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
-      "pois": []
-    },
-    {
       "q": 12,
       "r": -3,
       "biome": "unexplored",
@@ -5339,33 +5374,33 @@
     {
       "q": 12,
       "r": 0,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "tundra",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": 12,
       "r": 1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 12,
       "r": 2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 12,
       "r": 3,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -5491,25 +5526,25 @@
     {
       "q": 13,
       "r": 0,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "tundra",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": 13,
       "r": 1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
       "q": 13,
       "r": 2,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 3,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -5635,17 +5670,17 @@
     {
       "q": 14,
       "r": 0,
-      "biome": "unexplored",
-      "height": 0,
+      "biome": "tundra",
+      "height": 2,
       "icon": null,
       "pois": []
     },
     {
       "q": 14,
       "r": 1,
-      "biome": "unexplored",
-      "height": 0,
-      "icon": null,
+      "biome": "tundra",
+      "height": 2,
+      "icon": "/icons/nature/peaks.svg",
       "pois": []
     },
     {
@@ -5771,7 +5806,7 @@
     {
       "q": 15,
       "r": 0,
-      "biome": "unexplored",
+      "biome": "tundra",
       "height": 0,
       "icon": null,
       "pois": []
@@ -5779,145 +5814,337 @@
   ],
   "regions": [
     {
-      "id": "685f6434-02d7-4ba6-bf6f-2ee4063afa5a",
-      "name": "Lake Voltaire",
-      "color": "#2196F3",
-      "description": "",
-      "tiles": [
-        [
-          -5,
-          6
-        ],
-        [
-          -6,
-          7
-        ],
-        [
-          -6,
-          8
-        ],
-        [
-          -5,
-          8
-        ],
-        [
-          -5,
-          7
-        ],
-        [
-          -4,
-          6
-        ],
-        [
-          -4,
-          7
-        ]
-      ]
-    },
-    {
-      "id": "259029ad-d661-4374-a3d2-cc92c096db62",
-      "name": "Corewood",
-      "color": "#607D8B",
-      "description": "",
-      "tiles": [
-        [
-          -1,
-          6
-        ],
-        [
-          -2,
-          6
-        ],
-        [
-          -1,
-          5
-        ],
-        [
-          -1,
-          7
-        ],
-        [
-          -2,
-          7
-        ],
-        [
-          0,
-          5
-        ],
-        [
-          0,
-          4
-        ],
-        [
-          1,
-          5
-        ],
-        [
-          2,
-          3
-        ],
-        [
-          1,
-          4
-        ],
-        [
-          2,
-          4
-        ],
-        [
-          2,
-          2
-        ],
-        [
-          1,
-          2
-        ],
-        [
-          0,
-          3
-        ],
-        [
-          0,
-          2
-        ],
-        [
-          -2,
-          5
-        ],
-        [
-          -3,
-          5
-        ],
-        [
-          -2,
-          4
-        ],
-        [
-          -1,
-          4
-        ],
-        [
-          -1,
-          3
-        ],
-        [
-          -1,
-          2
-        ],
-        [
-          -3,
-          4
-        ],
-        [
-          -2,
-          3
-        ]
-      ]
-    },
-    {
-      "id": "d1003a83-4c67-417d-b6fc-fd8e7b3d7575",
+      "id": "ca723ec0-eb98-4cdf-849c-9ca052699680",
       "name": "Mirane",
+      "color": "#4CAF50",
+      "description": "",
+      "tiles": [
+        [
+          -1,
+          13
+        ],
+        [
+          -1,
+          14
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          0,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "8a3071ac-5c45-48f5-95fa-2484b246280b",
+      "name": "Corwood",
+      "color": "#795548",
+      "description": "",
+      "tiles": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          -1,
+          4
+        ],
+        [
+          -1,
+          5
+        ],
+        [
+          -1,
+          3
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -2,
+          5
+        ],
+        [
+          -2,
+          4
+        ],
+        [
+          -2,
+          3
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "f657593b-da1f-4d37-bd97-2cb42bb98463",
+      "name": "Voltaire's Fall",
       "color": "#2196F3",
+      "description": "",
+      "tiles": [
+        [
+          -6,
+          7
+        ],
+        [
+          -5,
+          7
+        ],
+        [
+          -4,
+          6
+        ],
+        [
+          -3,
+          5
+        ],
+        [
+          -3,
+          4
+        ],
+        [
+          -3,
+          3
+        ],
+        [
+          -4,
+          3
+        ],
+        [
+          -5,
+          3
+        ],
+        [
+          -5,
+          4
+        ],
+        [
+          -6,
+          4
+        ],
+        [
+          -7,
+          5
+        ],
+        [
+          -7,
+          6
+        ],
+        [
+          -7,
+          7
+        ],
+        [
+          -5,
+          6
+        ],
+        [
+          -5,
+          5
+        ],
+        [
+          -6,
+          6
+        ],
+        [
+          -6,
+          5
+        ],
+        [
+          -4,
+          4
+        ],
+        [
+          -4,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "130c54ae-a062-4216-8368-b88bdddf10e0",
+      "name": "Malignance Rift",
+      "color": "#9C27B0",
+      "description": "",
+      "tiles": [
+        [
+          -3,
+          1
+        ],
+        [
+          -2,
+          0
+        ],
+        [
+          -2,
+          -1
+        ],
+        [
+          -3,
+          -1
+        ],
+        [
+          -3,
+          0
+        ],
+        [
+          -4,
+          1
+        ],
+        [
+          -4,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "0b5d30b8-1d78-4e78-b500-027c96c2a189",
+      "name": "The Heartwood",
+      "color": "#FF9800",
+      "description": "",
+      "tiles": [
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          7,
+          -1
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          8,
+          -1
+        ],
+        [
+          8,
+          -3
+        ],
+        [
+          8,
+          -4
+        ],
+        [
+          8,
+          -2
+        ],
+        [
+          7,
+          -2
+        ],
+        [
+          7,
+          -3
+        ],
+        [
+          6,
+          -1
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          -1
+        ],
+        [
+          6,
+          -2
+        ],
+        [
+          6,
+          -3
+        ],
+        [
+          7,
+          -4
+        ],
+        [
+          5,
+          -2
+        ],
+        [
+          5,
+          -3
+        ],
+        [
+          6,
+          -4
+        ]
+      ]
+    },
+    {
+      "id": "ee0d1c17-06a8-4747-8d7f-d7541d7e3903",
+      "name": "Sarjes Pass",
+      "color": "#E91E63",
       "description": "",
       "tiles": [
         [
@@ -5925,28 +6152,20 @@
           9
         ],
         [
-          -1,
-          10
-        ],
-        [
-          -1,
-          11
-        ],
-        [
           0,
-          10
-        ],
-        [
-          0,
-          11
+          8
         ],
         [
           1,
-          10
+          7
         ],
         [
           1,
-          9
+          6
+        ],
+        [
+          1,
+          5
         ]
       ]
     }
