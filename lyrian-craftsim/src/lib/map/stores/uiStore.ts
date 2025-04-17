@@ -135,6 +135,8 @@ export interface UIState {
   // Camera control
   cameraOffset: { x: number, y: number };
   cameraZoom: number;
+  // Brush size for painting tools
+  brushRadius?: number;
 }
 
 // Initialize UI store with default values
@@ -161,7 +163,8 @@ const initialState: UIState = {
   hoveredRoute: null,
   
   cameraOffset: { x: 0, y: 0 },
-  cameraZoom: 1.5 // 50% more zoom for better readability
+  cameraZoom: 1.5, // 50% more zoom for better readability
+  brushRadius: 1 // Default brush size
 };
 
 // Create the store
@@ -268,7 +271,9 @@ const createUIStore = () => {
     setHoveredRoute: (routeInfo: RouteHoverInfo | null) => update(state => ({
       ...state,
       hoveredRoute: routeInfo
-    }))
+    })),
+    
+    setBrushRadius: (radius: number) => update(state => ({ ...state, brushRadius: radius }))
   };
 };
 
@@ -303,5 +308,6 @@ export const {
   createRegion,
   setHoveredPOI,
   setHoveredWaypoint,
-  setHoveredRoute
+  setHoveredRoute,
+  setBrushRadius
 } = uiStore;

@@ -13,7 +13,7 @@ import RegionModal from './RegionModal.svelte';
   import { routesData, activeEditRoute, getRouteLengthInDays } from '$lib/map/stores/routeStore';
   import type { Tile, Region } from '$lib/map/stores/mapStore';
   import { uiStore, updateCameraOffset, updateCameraZoom, showModal, type RegionHoverInfo } from '$lib/map/stores/uiStore';
-  import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
+  import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey, getHexesInRange } from '$lib/map/utils/hexlib';
 
   // Helper function to calculate region center for labels
   function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: number } {
@@ -136,49 +136,33 @@ import RegionModal from './RegionModal.svelte';
     }
   }
   
-  // Handle click on a hex tile
+  // Helper: get all tile keys in brush area for a given center
+  function getBrushTileKeys(centerQ: number, centerR: number, radius: number) {
+    const brushTiles = getHexesInRange(centerQ, centerR, radius - 1);
+    console.log('[BRUSH PAINT] center', { q: centerQ, r: centerR }, 'radius', radius, 'brushTiles', brushTiles);
+    return brushTiles.map(([q, r]) => `${q},${r}`);
+  }
+
+  // Remove brush logic from handleHexClick, only keep for canvas background actions
   function handleHexClick(hexKey: string) {
     const tile = $mapData.tiles.get(hexKey);
     if (!tile) return;
-    
     const { q, r } = tile;
-    
+    // Only handle non-brush tools here (e.g., POI, region, select, route)
     switch ($uiStore.currentTool) {
-      case 'biome':
-        // Update biome to the selected biome
-        $mapData.tiles.get(hexKey)!.biome = $uiStore.selectedBiome;
-        $mapData = $mapData; // Trigger reactivity
-        break;
-      
-      case 'height':
-        // Update height to the selected height
-        $mapData.tiles.get(hexKey)!.height = $uiStore.selectedHeight;
-        $mapData = $mapData; // Trigger reactivity
-        break;
-      
       case 'poi':
-        // Show POI modal for this tile
         showModal({
           type: 'poi',
           tileKey: hexKey,
           editingPOI: tile.pois.length > 0 ? tile.pois[0] : undefined
         });
         break;
-      
       case 'select':
-        // Already handled by HexTile component
-        break;
-      
       case 'region':
+      case 'route':
         // Already handled by HexTile component
         break;
-        
-      case 'icon':
-        // Apply the selected icon to this tile
-        if ($mapData.tiles.has(hexKey)) {
-          updateTileIcon(hexKey, $uiStore.selectedIcon);
-          $mapData = $mapData; // Trigger reactivity
-        }
+      default:
         break;
     }
   }

@@ -3,7 +3,7 @@
   import { mapData, updateBiome, updateHeight, addPOI, updateTileIcon } from '$lib/map/stores/mapStore';
   import { activeEditRoute, addWaypoint } from '$lib/map/stores/routeStore';
   import type { POI } from '$lib/map/stores/mapStore';
-  import { hexToIsometric, getHexVertices } from '$lib/map/utils/hexlib';
+  import { hexToIsometric, getHexVertices, getHexesInRange, getHexKey } from '$lib/map/utils/hexlib';
   import POIMarker from './POIMarker.svelte';
   import TileIcon from './TileIcon.svelte';
   
@@ -51,9 +51,11 @@
     // Log the tile being clicked
     console.log(`Hex tile clicked: (${q},${r})`);
     
-    const currentTool = $uiStore.currentTool;
+    const radius = $uiStore.brushRadius || 1;
+    const brushTiles = getHexesInRange(q, r, radius - 1);
+    const tool = $uiStore.currentTool;
     
-    switch (currentTool) {
+    switch (tool) {
       case 'select':
         // Select this tile
         toggleTileSelection(q, r);
@@ -61,12 +63,18 @@
         
       case 'biome':
         // Change the biome
-        updateBiome(tileKey, $uiStore.selectedBiome);
+        brushTiles.forEach(([bq, br]) => {
+          const key = getHexKey(bq, br);
+          updateBiome(key, $uiStore.selectedBiome);
+        });
         break;
         
       case 'height':
         // Change the height
-        updateHeight(tileKey, $uiStore.selectedHeight);
+        brushTiles.forEach(([bq, br]) => {
+          const key = getHexKey(bq, br);
+          updateHeight(key, $uiStore.selectedHeight);
+        });
         break;
         
       case 'poi':
@@ -84,7 +92,10 @@
         
       case 'icon':
         // Apply the selected icon to this tile
-        updateTileIcon(tileKey, $uiStore.selectedIcon);
+        brushTiles.forEach(([bq, br]) => {
+          const key = getHexKey(bq, br);
+          updateTileIcon(key, $uiStore.selectedIcon);
+        });
         break;
         
       case 'route':
@@ -134,6 +145,8 @@
       default:
         break;
     }
+    
+    console.log(`Hex tile clicked: (${q},${r}) [BRUSH]`, { tool, radius, brushTiles });
   }
   
   // Handle hover events
@@ -182,12 +195,26 @@
   
   // Calculate elevation visual effect
   $: elevationOffset = height * 2; // 2px per elevation level
+
+  // Helper: is this tile in the brush preview area?
+  $: isBrushPreview = false;
+  if ($uiStore.hoveredTile && ['biome','height','icon'].includes($uiStore.currentTool)) {
+    const { q: hq, r: hr } = $uiStore.hoveredTile;
+    const radius = $uiStore.brushRadius || 1;
+    const brushTiles = getHexesInRange(hq, hr, radius - 1);
+    isBrushPreview = brushTiles.some(([bq, br]) => bq === q && br === r);
+    if (isHovered) {
+      // Debug: log brush preview info
+      console.log('[BRUSH PREVIEW]', { center: { q: hq, r: hr }, radius, brushTiles });
+    }
+  }
 </script>
 
 <g 
   class="hex-tile"
   class:selected={isSelected}
   class:hovered={isHovered}
+  class:brush-preview={isBrushPreview}
   on:click={handleClick}
   on:keydown={(e) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -215,6 +242,7 @@
     stroke-opacity={strokeOpacity}
     vector-effect="non-scaling-stroke"
     transform="translate(0,{-elevationOffset})"
+    class:brush-preview={isBrushPreview}
   />
   
   <!-- Height indicator at center of hex -->
@@ -264,5 +292,12 @@
   
   .hex-tile.selected {
     z-index: 15;
+  }
+
+  .hex-tile.brush-preview polygon,
+  .hex-tile .brush-preview {
+    filter: brightness(1.3) drop-shadow(0 0 6px #00e0ffcc);
+    opacity: 0.7;
+    pointer-events: none;
   }
 </style>

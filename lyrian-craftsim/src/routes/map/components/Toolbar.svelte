@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { uiStore, selectTool, selectBiome, selectHeight, selectIcon, toggleRegionLabels, togglePOILabels, toggleHeightLabels, toggleRouteLabels, showModal, BIOME_TYPES } from '$lib/map/stores/uiStore';
+  import { uiStore, selectTool, selectBiome, selectHeight, selectIcon, toggleRegionLabels, togglePOILabels, toggleHeightLabels, toggleRouteLabels, showModal, BIOME_TYPES, setBrushRadius } from '$lib/map/stores/uiStore';
   import { mapData, removeRegion } from '$lib/map/stores/mapStore';
   import { routesData, removeRoute, toggleRouteVisibility, toggleRouteEditMode, exitAllEditModes, getRouteLengthInDays, exportRoutesJSON, importRoutesJSON } from '$lib/map/stores/routeStore';
   import { iconRegistry, filterIcons, filterIconsByCategory } from '$lib/map/utils/iconRegistry';
@@ -70,6 +70,10 @@
   function handleHeightSelect(height: number): void {
     selectHeight(height);
   }
+
+  // Brush size options
+  const MIN_BRUSH_RADIUS = 1;
+  const MAX_BRUSH_RADIUS = 8;
 </script>
 
 
@@ -496,6 +500,17 @@
           {/each}
         {/if}
       </div>
+    </section>
+  {/if}
+  
+  {#if ['biome','height','icon'].includes($uiStore.currentTool)}
+    <section class="toolbar-section">
+      <h3>Brush Size</h3>
+      <div class="brush-size-slider">
+        <input type="range" min={MIN_BRUSH_RADIUS} max={MAX_BRUSH_RADIUS} step="1" bind:value={$uiStore.brushRadius} on:input={e => setBrushRadius(+e.target.value)} />
+        <span class="brush-size-label">Radius: {$uiStore.brushRadius}</span>
+      </div>
+      <div class="help-text">Larger brush paints a bigger area. Hover a tile to preview the affected area.</div>
     </section>
   {/if}
   
