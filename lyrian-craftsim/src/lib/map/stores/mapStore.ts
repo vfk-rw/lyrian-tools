@@ -18,6 +18,7 @@ export interface Tile {
   height?: number;
   pois: POI[];
   icon?: string | null; // Path to the icon SVG file or null if no icon
+  hexPngPath?: string | null; // Path to the hex PNG tile or null if none
 }
 
 export interface Region {
@@ -156,6 +157,17 @@ const createMapStore = () => {
       });
     },
     
+    // Update a tile's hex PNG path
+    updateTileHexPng: (tileKey: string, hexPngPath: string | null) => {
+      update(data => {
+        const tile = data.tiles.get(tileKey);
+        if (tile) {
+          tile.hexPngPath = hexPngPath;
+        }
+        return data;
+      });
+    },
+    
     // Add a new region
     addRegion: (region: Omit<Region, 'id'> & { id?: string }) => {
       const regionId = region.id || uuidv4();
@@ -270,6 +282,7 @@ const createMapStore = () => {
               biome: tile.biome || 'plains',
               height: tile.height,
               icon: tile.icon, 
+              hexPngPath: tile.hexPngPath || null,
               pois: Array.isArray(tile.pois) ? [...tile.pois] : []
             });
           }
@@ -343,7 +356,6 @@ const loadDemoMap = () => {
   }
 };
 
-// Export specific actions for convenience
 export const { 
   addTile, 
   removeTile, 
@@ -353,6 +365,7 @@ export const {
   updateBiome, 
   updateHeight, 
   updateTileIcon,
+  updateTileHexPng,
   addRegion, 
   updateRegion, 
   removeRegion, 

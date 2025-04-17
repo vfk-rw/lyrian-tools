@@ -3,6 +3,8 @@
  * Based on the concepts from https://www.redblobgames.com/grids/hexagons/
  */
 
+const PROJECTION_FACTOR = Math.sqrt(3) / 2; // Factor for 60° isometric projection (cos 30°)
+
 // Constants for hex grid dimensions
 const HEX_SIZE = 50; // Size from center to corner
 const HEX_WIDTH = HEX_SIZE * 2; // Full width of a hex

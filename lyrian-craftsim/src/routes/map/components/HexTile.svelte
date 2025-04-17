@@ -257,6 +257,22 @@
   {#if icon}
     <TileIcon iconPath={icon} {q} {r} />
   {/if}
+
+  <!-- Hex PNG tile (if present) -->
+  {#if $mapData.tiles.get(tileKey)?.hexPngPath}
+    {@const hexPngPath = $mapData.tiles.get(tileKey)?.hexPngPath}
+    {#if hexPngPath}
+      <image
+        href={hexPngPath}
+        width="256"
+        height="384"
+        x={position.x - 128}
+        y={position.y - 384 + 256}
+        preserveAspectRatio="xMidYMid meet"
+        pointer-events="none"
+      />
+    {/if}
+  {/if}
   
   <!-- POI markers with grouping information -->
   {#each pois as poi, index}

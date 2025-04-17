@@ -4,7 +4,7 @@ import { mapData, addRegion } from './mapStore';
 import { v4 as uuidv4 } from 'uuid';
 
 // Tool types
-export type ToolType = 'select' | 'biome' | 'height' | 'poi' | 'region' | 'icon' | 'route';
+export type ToolType = 'select' | 'biome' | 'height' | 'poi' | 'region' | 'icon' | 'route' | 'hexpng';
 
 // Biome types
 export const BIOME_TYPES = ['plains', 'forest', 'mountain', 'water', 'desert', 'swamp', 'tundra', 'unexplored'];
@@ -108,7 +108,8 @@ export interface UIState {
   selectedBiome: string;
   selectedHeight: number;
   selectedIcon: string | null;
-  
+  selectedHexPng: string | null;
+
   // Display options
   showRegionLabels: boolean;
   showPOILabels: boolean;
@@ -145,6 +146,7 @@ const initialState: UIState = {
   selectedBiome: 'plains',
   selectedHeight: 0,
   selectedIcon: null,
+  selectedHexPng: null,
   
   showRegionLabels: true,
   showPOILabels: true,
@@ -180,6 +182,7 @@ const createUIStore = () => {
     selectBiome: (biome: string) => update(state => ({ ...state, selectedBiome: biome })),
     selectHeight: (height: number) => update(state => ({ ...state, selectedHeight: height })),
     selectIcon: (icon: string | null) => update(state => ({ ...state, selectedIcon: icon })),
+    selectHexPng: (hexPngPath: string | null) => update(state => ({ ...state, selectedHexPng: hexPngPath })),
     
     // Display options
     toggleRegionLabels: () => update(state => ({ ...state, showRegionLabels: !state.showRegionLabels })),
@@ -295,6 +298,7 @@ export const {
   selectBiome, 
   selectHeight, 
   selectIcon,
+  selectHexPng,
   toggleRegionLabels, 
   togglePOILabels, 
   toggleHeightLabels,

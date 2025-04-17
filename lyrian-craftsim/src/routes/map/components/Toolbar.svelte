@@ -1,9 +1,11 @@
 <script lang="ts">
-  import { uiStore, selectTool, selectBiome, selectHeight, selectIcon, toggleRegionLabels, togglePOILabels, toggleHeightLabels, toggleRouteLabels, showModal, BIOME_TYPES, setBrushRadius } from '$lib/map/stores/uiStore';
+  import { uiStore, selectTool, selectBiome, selectHeight, selectIcon, selectHexPng, toggleRegionLabels, togglePOILabels, toggleHeightLabels, toggleRouteLabels, showModal, BIOME_TYPES, setBrushRadius } from '$lib/map/stores/uiStore';
   import { mapData, removeRegion } from '$lib/map/stores/mapStore';
   import { routesData, removeRoute, toggleRouteVisibility, toggleRouteEditMode, exitAllEditModes, getRouteLengthInDays, exportRoutesJSON, importRoutesJSON } from '$lib/map/stores/routeStore';
   import { iconRegistry, filterIcons, filterIconsByCategory } from '$lib/map/utils/iconRegistry';
   import type { IconInfo } from '$lib/map/utils/iconRegistry';
+  import { artRegistry, artCategories, filterArt, filterArtByCategory } from '$lib/map/utils/artRegistry';
+  import type { ArtInfo } from '$lib/map/utils/artRegistry';
   import '$lib/styles/toolbar.css';
   
   // Color mapping for biomes
@@ -29,7 +31,8 @@
     poi: 'Add points of interest',
     region: 'Select tiles then create or edit regions',
     icon: 'Add map icons to tiles',
-    route: 'Create routes with waypoints on the map'
+    route: 'Create routes with waypoints on the map',
+    hexpng: 'Paint hex PNG tiles on the map'
   };
   
   // Icon search and filtering
@@ -53,6 +56,25 @@
     selectIcon(null);
   }
   
+  // Hex PNG tile search and filtering
+  let hexPngSearchTerm = '';
+  let filteredHexPngs: ArtInfo[] = [];
+  let activeHexPngCategory = artCategories.length > 0 ? artCategories[0] : '';
+  
+  // Update filtered hex PNG tiles when search term or category changes
+  $: {
+    if (hexPngSearchTerm) {
+      filteredHexPngs = filterArt(artRegistry, hexPngSearchTerm);
+    } else {
+      filteredHexPngs = filterArtByCategory(artRegistry, activeHexPngCategory);
+    }
+  }
+  
+  // Clear hex PNG selection
+  function clearHexPngSelection() {
+    selectHexPng(null);
+  }
+  
   // Get current tool description
   $: toolDescription = TOOL_DESCRIPTIONS[$uiStore.currentTool] || '';
   
@@ -70,12 +92,7 @@
   function handleHeightSelect(height: number): void {
     selectHeight(height);
   }
-
-  // Brush size options
-  const MIN_BRUSH_RADIUS = 1;
-  const MAX_BRUSH_RADIUS = 8;
 </script>
-
 
 <div class="toolbar">
   <section class="toolbar-section">
@@ -150,6 +167,19 @@
         <span class="tool-icon">🧭</span>
         <span class="tool-label">Route</span>
       </button>
+
+      <!-- Hex PNG Tool button removed as per user request -->
+      <!--
+      <button 
+        class="tool-button" 
+        class:active={$uiStore.currentTool === 'hexpng'}
+        on:click={() => handleToolSelect('hexpng')}
+        title="Hex PNG Tile Tool"
+      >
+        <span class="tool-icon">🟪</span>
+        <span class="tool-label">Hex PNG</span>
+      </button>
+      -->
       
     </div>
     
@@ -275,6 +305,10 @@
         </div>
       {/if}
     </section>
+  {/if}
+
+  {#if $uiStore.currentTool === 'hexpng'}
+    <!-- Hex PNG Tile Tool removed as per user request -->
   {/if}
   
   {#if $uiStore.currentTool === 'route'}
@@ -503,11 +537,11 @@
     </section>
   {/if}
   
-  {#if ['biome','height','icon'].includes($uiStore.currentTool)}
+  {#if ['biome','height','icon','hexpng'].includes($uiStore.currentTool)}
     <section class="toolbar-section">
       <h3>Brush Size</h3>
       <div class="brush-size-slider">
-        <input type="range" min={MIN_BRUSH_RADIUS} max={MAX_BRUSH_RADIUS} step="1" bind:value={$uiStore.brushRadius} on:input={e => setBrushRadius(+e.target.value)} />
+        <input type="range" min="1" max="8" step="1" bind:value={$uiStore.brushRadius} on:input={e => setBrushRadius(+(e.target as HTMLInputElement).value)} />
         <span class="brush-size-label">Radius: {$uiStore.brushRadius}</span>
       </div>
       <div class="help-text">Larger brush paints a bigger area. Hover a tile to preview the affected area.</div>
