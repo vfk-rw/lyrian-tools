@@ -34,6 +34,9 @@
     route: 'Create routes with waypoints on the map',
     hexpng: 'Paint hex PNG tiles on the map'
   };
+
+  // Add hex PNG tool button to tools grid
+  // We'll add it after the icon tool button
   
   // Icon search and filtering
   let iconSearchTerm = '';

@@ -9,11 +9,12 @@ import RouteModal from './RouteModal.svelte';
 import WaypointModal from './WaypointModal.svelte';
 import POIModal from './POIModal.svelte';
 import RegionModal from './RegionModal.svelte';
-import { mapData, exportMapJSON, importMapJSON, generateHexGrid, updateTileIcon } from '$lib/map/stores/mapStore';
+import { mapData, exportMapJSON, importMapJSON, generateHexGrid, updateTileIcon, updateTileHexPng } from '$lib/map/stores/mapStore';
 import { routesData, activeEditRoute, getRouteLengthInDays } from '$lib/map/stores/routeStore';
 import type { Tile, Region } from '$lib/map/stores/mapStore';
 import { uiStore, updateCameraOffset, updateCameraZoom, showModal, type RegionHoverInfo } from '$lib/map/stores/uiStore';
 import { hexToPixel, getHexesInRange, pixelToHexKey } from '$lib/map/utils/hexlib';
+import TileIcon from './TileIcon.svelte';
 
 // Helper function to calculate region center for labels
 function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: number } {
@@ -104,7 +105,6 @@ function handleWheel(e: WheelEvent) {
 // Helper: get all tile keys in brush area for a given center
 function getBrushTileKeys(centerQ: number, centerR: number, radius: number) {
   const brushTiles = getHexesInRange(centerQ, centerR, radius - 1);
-  console.log('[BRUSH PAINT] center', { q: centerQ, r: centerR }, 'radius', radius, 'brushTiles', brushTiles);
   return brushTiles.map(([q, r]) => `${q},${r}`);
 }
 
@@ -141,10 +141,14 @@ function centerMapInViewport() {
   const containerWidth = containerRect.width;
   const containerHeight = containerRect.height;
   
+  // Adjust offset to center map considering hex tile size and zoom
+  const offsetX = containerWidth / 2 - (256 * 15); // exact tile width * half grid width
+  const offsetY = containerHeight / 2 - (221.7 * 15) + 64; // exact vertical spacing * half grid height + 64px adjustment
+  
   // Update camera offset to center the map
   updateCameraOffset(
-    containerWidth / 2,
-    containerHeight / 2
+    offsetX,
+    offsetY
   );
 }
 
@@ -157,16 +161,14 @@ function handleCanvasMouseLeave() {
   });
 }
 
-  // Handle painting hex PNG tiles
-  import { updateTileHexPng } from '$lib/map/stores/mapStore';
-
-  function paintHexPngTiles(centerQ: number, centerR: number, radius: number, hexPngPath: string | null) {
-    const brushTiles = getHexesInRange(centerQ, centerR, radius - 1);
-    brushTiles.forEach(([q, r]) => {
-      const key = `${q},${r}`;
-      updateTileHexPng(key, hexPngPath);
-    });
-  }
+// Handle painting hex PNG tiles
+function paintHexPngTiles(centerQ: number, centerR: number, radius: number, hexPngPath: string | null) {
+  const brushTiles = getHexesInRange(centerQ, centerR, radius - 1);
+  brushTiles.forEach(([q, r]) => {
+    const key = `${q},${r}`;
+    updateTileHexPng(key, hexPngPath);
+  });
+}
 
 function handleCanvasClick(e: MouseEvent) {
   if (isDragging) return;
@@ -308,6 +310,12 @@ function isRegionHovered(regionId: string): boolean {
           isHovered={getHoveredState(tile.q, tile.r)}
         />
       {/each}
+
+      {#each tileArray as tile (tile.key)}
+        {#if tile.hexPngPath}
+          <TileIcon iconPath={tile.hexPngPath} q={tile.q} r={tile.r} />
+        {/if}
+      {/each}
     </g>
   </svg>
-</div>
+  </div>

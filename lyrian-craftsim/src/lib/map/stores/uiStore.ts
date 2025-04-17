@@ -1,5 +1,4 @@
 import { writable, derived, get } from 'svelte/store';
-import { type Writable } from 'svelte/store';
 import { mapData, addRegion } from './mapStore';
 import { v4 as uuidv4 } from 'uuid';
 

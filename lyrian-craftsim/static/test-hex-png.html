@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hex PNG Tile Alignment Test</title>
+  <style>
+    body {
+      background-color: #222;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    #canvas-container {
+      position: relative;
+      width: 1024px;
+      height: 768px;
+      margin: 0 auto;
+      background-color: #444;
+      border: 1px solid #666;
+    }
+    canvas {
+      background-color: #222;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hex PNG Tile Alignment Test</h1>
+  <p>Rendering hex PNG tiles (256x384) with bottom 256x256 aligned to hex grid cells.</p>
+  <div id="canvas-container">
+    <canvas id="hexCanvas" width="1024" height="768"></canvas>
+  </div>
+
+  <script>
+    // Canvas setup
+    const canvas = document.getElementById('hexCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Hex tile size and layout constants
+    const hexWidth = 256;
+    const hexHeight = 256; // The hex portion height (bottom part of PNG)
+    const pngHeight = 384; // Full PNG height
+    // Adjust horizontal spacing to reduce overlap (increase spacing)
+    const hexHorizontalSpacing = hexWidth - 32; // increased from 0.75 to 0.85
+    const hexVerticalSpacing = hexHeight - 64; // vertical spacing between hex centers (sqrt(3)/2)
+
+    // Sample hex PNG tile image path (adjust path as needed)
+    const sampleImagePath = '/hex_png_256x256/Hex%20Basic%20Terrain%20Set/hexBase00.png';
+
+    // Load image
+    const hexImage = new Image();
+    hexImage.src = sampleImagePath;
+
+    hexImage.onload = () => {
+      drawGrid();
+    };
+
+    function drawGrid() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw a grid of hex tiles (5 columns x 4 rows)
+      const cols = 5;
+      const rows = 4;
+
+      for (let r = 0; r < rows; r++) {
+        for (let q = 0; q < cols; q++) {
+    // Calculate pixel position for pointy-topped hex
+    // Offset every other row horizontally by half hex width (exact tile width)
+    const x = q * hexWidth + (r % 2) * (hexWidth / 2);
+    // Adjust y to align bottom 256x256 of PNG with hex center
+    // Since bottom 256px is the hex tile, align y to hex center + 128px (top part)
+    const y = r * hexVerticalSpacing + hexHeight / 2 - 64; // reduce vertical gap by 64px
+
+    // Draw the hex PNG image so that the bottom 256x256 aligns with (x, y)
+    // The PNG is 256x384, so offset y by full height minus hexHeight (384 - 256 = 128)
+    const drawX = x;
+    const drawY = y - pngHeight + hexHeight / 2;
+
+    ctx.drawImage(hexImage, drawX, drawY, hexWidth, pngHeight);
+
+    // Optional: draw a small circle at the hex center for reference
+    ctx.fillStyle = 'red';
+    ctx.beginPath();
+    ctx.arc(x + hexWidth / 2, y + hexHeight / 2, 5, 0, 2 * Math.PI);
+    ctx.fill();
+
+    // Draw blue rectangle around entire 256x384 PNG tile
+    ctx.strokeStyle = 'blue';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x, y - pngHeight + hexHeight / 2, hexWidth, pngHeight);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
