@@ -183,6 +183,15 @@ import RegionModal from './RegionModal.svelte';
     );
   }
   
+  // Add a mouseleave handler to clear hoveredTile when the mouse leaves the map area
+  function handleCanvasMouseLeave() {
+    uiStore.set({
+      ...$uiStore,
+      hoveredTile: null,
+      hoveredRegion: null
+    });
+  }
+
   // Setup event listeners
   onMount(() => {
     // Initialize map if needed
@@ -326,6 +335,7 @@ import RegionModal from './RegionModal.svelte';
 <div 
   class="map-canvas-container" 
   bind:this={canvasContainer}
+  on:mouseleave={handleCanvasMouseLeave}
 >
   <!-- Overlay Image Tool UI and Image -->
   <div class="overlay-controls">

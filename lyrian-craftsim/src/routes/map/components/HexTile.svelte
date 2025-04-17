@@ -166,15 +166,7 @@
   }
   
   function handleMouseLeave() {
-    // Clear the hover state if it's this tile
-    const currentState = $uiStore;
-    if (currentState.hoveredTile && currentState.hoveredTile.q === q && currentState.hoveredTile.r === r) {
-      uiStore.set({
-        ...currentState,
-        hoveredTile: null,
-        hoveredRegion: null
-      });
-    }
+    // Do not clear hoveredTile here; let MapCanvas handle clearing on canvas mouseleave
   }
   
   // Get the appropriate fill color
