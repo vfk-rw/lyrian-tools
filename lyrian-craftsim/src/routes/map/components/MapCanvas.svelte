@@ -280,6 +280,62 @@ import RegionModal from './RegionModal.svelte';
   function isRegionHovered(regionId: string): boolean {
     return $uiStore.hoveredRegion === regionId ? true : false;
   }
+
+  // Overlay image state
+  let overlayImage: string | null = null;
+  let overlayX = 0; // px
+  let overlayY = 0; // px
+  let overlayScale = 1;
+  let overlayOpacity = 0.5;
+  let overlayDragging = false;
+  let overlayDragOffset = { x: 0, y: 0 };
+  let overlayLocked = false;
+
+  function handleOverlayUpload(e: Event) {
+    const input = e.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        overlayImage = ev.target?.result as string;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  function startOverlayDrag(e: MouseEvent) {
+    if (!overlayImage) return;
+    overlayDragging = true;
+    overlayDragOffset = {
+      x: e.clientX - overlayX,
+      y: e.clientY - overlayY
+    };
+    window.addEventListener('mousemove', onOverlayDrag);
+    window.addEventListener('mouseup', stopOverlayDrag);
+  }
+
+  function onOverlayDrag(e: MouseEvent) {
+    if (!overlayDragging) return;
+    overlayX = e.clientX - overlayDragOffset.x;
+    overlayY = e.clientY - overlayDragOffset.y;
+  }
+
+  function stopOverlayDrag() {
+    overlayDragging = false;
+    window.removeEventListener('mousemove', onOverlayDrag);
+    window.removeEventListener('mouseup', stopOverlayDrag);
+  }
+
+  function resetOverlay() {
+    overlayImage = null;
+    overlayX = 0;
+    overlayY = 0;
+    overlayScale = 1;
+    overlayOpacity = 0.5;
+  }
+
+  function toggleOverlayLock() {
+    overlayLocked = !overlayLocked;
+  }
 </script>
 
 <!-- Main map container -->
@@ -287,6 +343,31 @@ import RegionModal from './RegionModal.svelte';
   class="map-canvas-container" 
   bind:this={canvasContainer}
 >
+  <!-- Overlay Image Tool UI and Image -->
+  <div class="overlay-controls">
+    <label class="overlay-upload-label">
+      <input type="file" accept="image/*" on:change={handleOverlayUpload} style="display:none" />
+      {overlayImage ? 'Change Overlay Image' : 'Upload Overlay Image'}
+    </label>
+    {#if overlayImage}
+      <div class="overlay-sliders">
+        <label>Opacity <input type="range" min="0" max="1" step="0.01" bind:value={overlayOpacity} /></label>
+        <label>Scale <input type="range" min="0.1" max="3" step="0.01" bind:value={overlayScale} /></label>
+        <button on:click={resetOverlay}>Remove Overlay</button>
+        <button on:click={toggleOverlayLock} type="button">{overlayLocked ? 'Unlock Overlay' : 'Lock Overlay'}</button>
+      </div>
+    {/if}
+  </div>
+  {#if overlayImage}
+    <img
+      src={overlayImage}
+      alt="Overlay"
+      class="map-overlay-image"
+      style="left: {overlayX}px; top: {overlayY}px; opacity: {overlayOpacity}; transform: scale({overlayScale}); pointer-events: {overlayLocked ? 'none' : 'auto'};"
+      draggable="false"
+      on:mousedown={!overlayLocked ? startOverlayDrag : undefined}
+    />
+  {/if}
   <!-- Info Displays -->
   <!-- POI Info Display -->
   {#if $uiStore.hoveredPOI}
@@ -631,5 +712,56 @@ import RegionModal from './RegionModal.svelte';
   .route-name {
     color: white;
     font-weight: 500;
+  }
+
+  .map-overlay-image {
+    position: absolute;
+    z-index: 10;
+    pointer-events: auto;
+    cursor: move;
+    max-width: none;
+    max-height: none;
+    user-select: none;
+  }
+  .overlay-controls {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 20;
+    background: rgba(34,34,34,0.95);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    font-size: 0.95rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .overlay-upload-label {
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .overlay-sliders label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95em;
+  }
+  .overlay-sliders input[type="range"] {
+    flex: 1;
+  }
+  .overlay-sliders button {
+    margin-top: 0.5rem;
+    background: #444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+  }
+  .overlay-sliders button:hover {
+    background: #666;
   }
 </style>
