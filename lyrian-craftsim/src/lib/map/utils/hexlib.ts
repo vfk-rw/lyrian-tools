@@ -8,9 +8,6 @@ const HEX_SIZE = 50; // Size from center to corner
 const HEX_WIDTH = HEX_SIZE * 2; // Full width of a hex
 const HEX_HEIGHT = Math.sqrt(3) * HEX_SIZE; // Height for flat-topped hex
 
-// 60-degree projection factor
-const PROJECTION_FACTOR = 0.5; // cos(60°) = 0.5
-
 /**
  * Convert hex coordinates (q,r) to pixel position in flat-top orientation
  */
@@ -40,14 +37,9 @@ export function hexToIsometric(q: number, r: number): { x: number, y: number } {
  * Convert pixel position to hex coordinates (cube coordinates)
  */
 export function pixelToHex(x: number, y: number): { q: number, r: number, s: number } {
-  // First adjust for the 60° projection
-  const yAdjusted = y / PROJECTION_FACTOR;
-  
-  // Now do the inverse of hexToPixel
   const q = (2/3) * x / HEX_SIZE;
-  const r = (-1/3 * x + Math.sqrt(3)/3 * yAdjusted) / HEX_SIZE;
-  const s = -q - r; // Cube coordinate constraint: q + r + s = 0
-  
+  const r = (-1/3 * x + Math.sqrt(3)/3 * y) / HEX_SIZE;
+  const s = -q - r;
   return cubeRound(q, r, s);
 }
 
@@ -163,19 +155,15 @@ export function getHexNeighbors(q: number, r: number): Array<[number, number]> {
  * with proper 60° projection
  */
 export function getHexVertices(q: number, r: number): Array<{ x: number, y: number }> {
-  const { x, y } = hexToIsometric(q, r);
-  const vertices = [];
-  
-  // Calculate corners of a flat-topped hex with 60° projection
+  const center = hexToPixel(q, r);
+  const vertices: Array<{ x: number, y: number }> = [];
   for (let i = 0; i < 6; i++) {
     const angle = Math.PI / 3 * i;
-    // Standard hex corner
-    const cornerX = x + HEX_SIZE * Math.cos(angle);
-    // Apply 60° projection to the y-component
-    const cornerY = y + HEX_SIZE * Math.sin(angle) * PROJECTION_FACTOR;
-    vertices.push({ x: cornerX, y: cornerY });
+    vertices.push({
+      x: center.x + HEX_SIZE * Math.cos(angle),
+      y: center.y + HEX_SIZE * Math.sin(angle)
+    });
   }
-  
   return vertices;
 }
 
@@ -367,13 +355,23 @@ export function getHexesInRange(centerQ: number, centerR: number, range: number)
  * Check if a point is inside a hex
  */
 export function isPointInHex(x: number, y: number, hexQ: number, hexR: number): boolean {
-  const hexCenter = hexToIsometric(hexQ, hexR);
-  
-  // Calculate the distance from the center
-  const dx = x - hexCenter.x;
-  const dy = y - hexCenter.y;
-  
-  // Check if the point is within the hex boundaries
-  // Simplified check using distance from center
+  const center = hexToPixel(hexQ, hexR);
+  const dx = x - center.x;
+  const dy = y - center.y;
   return Math.sqrt(dx * dx + dy * dy) <= HEX_SIZE;
+}
+
+/**
+ * New helper: convert pixel to hex key using precise test
+ */
+export function pixelToHexKey(x: number, y: number): string {
+  const { q, r } = pixelToHex(x, y);
+  const approxQ = Math.round(q);
+  const approxR = Math.round(r);
+  const neighbors = getHexNeighbors(approxQ, approxR);
+  neighbors.unshift([approxQ, approxR]);
+  for (const [cq, cr] of neighbors) {
+    if (isPointInHexPrecise(x, y, cq, cr)) return `${cq},${cr}`;
+  }
+  return `${approxQ},${approxR}`;
 }

@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { hexToIsometric } from '$lib/map/utils/hexlib';
+  import { hexToPixel } from '$lib/map/utils/hexlib';
   
   // Props
   export let iconPath: string;
   export let q: number;
   export let r: number;
   
-  // Calculate position based on tile coordinates
-  $: position = hexToIsometric(q, r);
+  // Calculate position based on tile coordinates (top-down)
+  $: position = hexToPixel(q, r);
   
   // Position offsets
   const offsetY = -5; // Slightly above center

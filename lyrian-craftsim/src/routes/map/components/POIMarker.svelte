@@ -1,7 +1,7 @@
 <script lang="ts">
   import { uiStore, showModal, setHoveredPOI } from '$lib/map/stores/uiStore';
   import { mapData } from '$lib/map/stores/mapStore';
-  import { hexToIsometric, getHexCoordinatesFromKey } from '$lib/map/utils/hexlib';
+  import { getHexCoordinatesFromKey, hexToPixel } from '$lib/map/utils/hexlib';
   
   // Props
   export let poiId: string;
@@ -19,8 +19,8 @@
   
   // Get tile coordinates from the key
   $: tileCoords = getHexCoordinatesFromKey(tileKey);
-  // Calculate position based on tile coordinates
-  $: position = hexToIsometric(tileCoords[0], tileCoords[1]);
+  // Calculate position for POI marker (top-down)
+  $: position = hexToPixel(tileCoords[0], tileCoords[1]);
   
   // Icon display helpers
   const POI_ICONS: Record<string, string> = {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { hexToIsometric } from '$lib/map/utils/hexlib';
+  import { hexToPixel } from '$lib/map/utils/hexlib';
   import { uiStore, setHoveredWaypoint, showModal } from '$lib/map/stores/uiStore';
   import { routesData } from '$lib/map/stores/routeStore';
   
@@ -14,8 +14,8 @@
   export let notes: string | undefined = undefined;
   export let isEditable: boolean = false;
   
-  // Calculate position
-  $: position = hexToIsometric(q, r);
+  // Calculate position for the waypoint marker (top-down)
+  $: position = hexToPixel(q, r);
   
   // Handle hover
   function handleMouseEnter() {

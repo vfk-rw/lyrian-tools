@@ -3,7 +3,7 @@
   import { mapData, updateBiome, updateHeight, addPOI, updateTileIcon } from '$lib/map/stores/mapStore';
   import { activeEditRoute, addWaypoint } from '$lib/map/stores/routeStore';
   import type { POI } from '$lib/map/stores/mapStore';
-  import { hexToIsometric, getHexVertices, getHexesInRange, getHexKey } from '$lib/map/utils/hexlib';
+  import { hexToPixel, getHexVertices, getHexesInRange, getHexKey } from '$lib/map/utils/hexlib';
   import POIMarker from './POIMarker.svelte';
   import TileIcon from './TileIcon.svelte';
   
@@ -22,10 +22,10 @@
   $: vertices = getHexVertices(q, r);
   $: hexPoints = vertices.map(point => `${point.x},${point.y}`).join(' ');
   
-  // Get position for the tile
-  $: position = hexToIsometric(q, r);
+  // Get position for the tile (top-down)
+  $: position = hexToPixel(q, r);
   
-  // Calculate vertices once for the polygon
+  // Calculate vertices once for the polygon (top-down)
   $: polygonPoints = getHexVertices(q, r)
     .map(v => `${v.x},${v.y}`)
     .join(' ');

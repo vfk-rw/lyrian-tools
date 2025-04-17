@@ -1,6 +1,6 @@
 <script lang="ts">
   import { uiStore, showModal } from '$lib/map/stores/uiStore';
-  import { hexToIsometric } from '$lib/map/utils/hexlib';
+  import { hexToPixel } from '$lib/map/utils/hexlib';
   
   // Props with correct typing
   export let regionId: string;
@@ -28,7 +28,7 @@
     const centerR = sumR / tiles.length;
     
     // Convert to pixel coordinates
-    return hexToIsometric(centerQ, centerR);
+    return hexToPixel(centerQ, centerR);
   }
   
   // Handle click on the region

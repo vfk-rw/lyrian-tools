@@ -13,7 +13,7 @@ import RegionModal from './RegionModal.svelte';
   import { routesData, activeEditRoute, getRouteLengthInDays } from '$lib/map/stores/routeStore';
   import type { Tile, Region } from '$lib/map/stores/mapStore';
   import { uiStore, updateCameraOffset, updateCameraZoom, showModal, type RegionHoverInfo } from '$lib/map/stores/uiStore';
-  import { isometricPointToHexKey, hexToIsometric, getHexCoordinatesFromKey, getHexesInRange } from '$lib/map/utils/hexlib';
+  import { hexToPixel, getHexesInRange, pixelToHexKey } from '$lib/map/utils/hexlib';
 
   // Helper function to calculate region center for labels
   function calculateRegionCenter(tiles: Array<[number, number]>): { x: number; y: number } {
@@ -28,8 +28,8 @@ import RegionModal from './RegionModal.svelte';
     const centerQ = sumQ / tiles.length;
     const centerR = sumR / tiles.length;
     
-    // Convert to pixel coordinates
-    return hexToIsometric(centerQ, centerR);
+    // Convert to pixel coordinates (top-down)
+    return hexToPixel(centerQ, centerR);
   }
   
   // POI icons dictionary for displaying in the info panel
@@ -123,8 +123,8 @@ import RegionModal from './RegionModal.svelte';
     const worldX = (x - $uiStore.cameraOffset.x) / $uiStore.cameraZoom;
     const worldY = (y - $uiStore.cameraOffset.y) / $uiStore.cameraZoom;
     
-    // Find hex at click position
-    const hexKey = isometricPointToHexKey(worldX, worldY);
+    // Find hex at click position (top-down)
+    const hexKey = pixelToHexKey(worldX, worldY);
     
     // Debug what hex was clicked
     console.log(`Canvas click at world coords (${worldX.toFixed(2)}, ${worldY.toFixed(2)}) mapped to hex: ${hexKey}`);

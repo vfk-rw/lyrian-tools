@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { hexToIsometric } from '$lib/map/utils/hexlib';
+  import { hexToPixel } from '$lib/map/utils/hexlib';
   import { uiStore, setHoveredRoute } from '$lib/map/stores/uiStore';
   
   // Props
@@ -19,19 +19,17 @@
   // Generate the SVG path string from waypoints
   function generateRoutePath(waypoints: Array<{q: number, r: number}>): string {
     if (waypoints.length < 2) return '';
-    
     let path = '';
+    // Start at the first point (top-down)
+    const first = hexToPixel(waypoints[0].q, waypoints[0].r);
+    path = `M ${first.x} ${first.y}`;
     
-    // Start at the first point
-    const firstPoint = hexToIsometric(waypoints[0].q, waypoints[0].r);
-    path += `M ${firstPoint.x} ${firstPoint.y}`;
-    
-    // Draw lines to each subsequent point
+    // Draw lines to each subsequent point (top-down)
     for (let i = 1; i < waypoints.length; i++) {
-      const point = hexToIsometric(waypoints[i].q, waypoints[i].r);
+      const pt = waypoints[i];
+      const point = hexToPixel(pt.q, pt.r);
       path += ` L ${point.x} ${point.y}`;
     }
-    
     return path;
   }
   
