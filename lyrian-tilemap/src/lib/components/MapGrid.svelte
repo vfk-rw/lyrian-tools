@@ -10,6 +10,8 @@
   
   // Original PNG tile size (from readme)
   const originalTileSize = 256;
+  // Optimal vertical spacing for hex tiles (exactly 2/3 of 256px)
+  const optimalVerticalSpacing = 171;
   
   // State for scale
   let scale = 1.0;
@@ -141,23 +143,18 @@
     return false;
   }
   
-  // Calculate vertical position offset for image in cell
-  function calculateVerticalImageOffset(cellSize: number): string {
-    if (cellSize === originalTileSize) return '0px';
-    
-    // Only offset from top when verticalTileSize is smaller than originalTileSize
-    // This ensures mountains and other vertical features remain visible and aligned
-    const offset = $verticalTileSize < originalTileSize ? 0 : (cellSize - originalTileSize) / 2;
-    return `${offset}px`;
+  // Calculate position offset for image in cell
+  function calculateHorizontalOffset(): string {
+    // Center horizontally
+    return '0px';
   }
   
-  // Calculate horizontal position offset for image in cell
-  function calculateHorizontalImageOffset(cellSize: number): string {
-    if (cellSize === originalTileSize) return '0px';
-    
-    // For horizontal, we center the image
-    const offset = (cellSize - originalTileSize) / 2;
-    return `${offset}px`;
+  // Calculate vertical position offset for image in cell
+  // We align the bottom of the PNG with the bottom of the grid cell
+  function calculateVerticalOffset(): string {
+    // originalTileSize (256) - optimalVerticalSpacing (171) = 85px offset from top
+    // This will align the bottom of the 256px tall PNG with the bottom of the 171px tall grid cell
+    return `${optimalVerticalSpacing - originalTileSize}px`;
   }
   
   // Get tiles for a specific cell
@@ -175,8 +172,8 @@
     if (!container) return;
     
     const rect = container.getBoundingClientRect();
-    offsetX = rect.width / 2 - ($mapStore.width * $tileSize * scale) / 2;
-    offsetY = rect.height / 2 - ($mapStore.height * $verticalTileSize * scale) / 2;
+    offsetX = rect.width / 2 - ($mapStore.width * originalTileSize * scale) / 2;
+    offsetY = rect.height / 2 - ($mapStore.height * optimalVerticalSpacing * scale) / 2;
     scale = 1.0;
   }
   
@@ -212,7 +209,7 @@
       {#each Array($mapStore.width) as _, x}
         <div 
           class="grid-cell {$selectedTile ? 'placing-mode' : ''}"
-          style="width: {$tileSize}px; height: {$verticalTileSize}px; left: {x * $tileSize}px; top: {y * $verticalTileSize}px;"
+          style="width: {originalTileSize}px; height: {optimalVerticalSpacing}px; left: {x * originalTileSize}px; top: {y * optimalVerticalSpacing}px;"
           onclick={() => handleCellClick(x, y)}
           onmouseover={() => handleCellOver(x, y)}
           oncontextmenu={(e) => handleContextMenu(e, x, y)}
@@ -228,7 +225,7 @@
                   alt={`${layer} tile`} 
                   class="cell-tile"
                   data-layer={layer}
-                  style="left: {calculateHorizontalImageOffset($tileSize)}; top: {calculateVerticalImageOffset($verticalTileSize)};" 
+                  style="left: {calculateHorizontalOffset()}; top: {calculateVerticalOffset()};" 
                   draggable="false"
                 />
               {/each}
@@ -255,7 +252,7 @@
       🔍
     </button>
     <div class="zoom-indicator">
-      Zoom: {(scale * 100).toFixed(0)}% | Size: {$tileSize}px × {$verticalTileSize}px
+      Zoom: {(scale * 100).toFixed(0)}% | Size: 256px × 171px
     </div>
     <div class="layer-indicators">
       {#each layers as layer}

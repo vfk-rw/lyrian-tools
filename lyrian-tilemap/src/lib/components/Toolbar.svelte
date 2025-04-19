@@ -2,15 +2,12 @@
   import { saveMap, loadMap } from '$lib/utils/saveLoad';
   import { mapStore } from '$lib/stores/mapStore';
   import { selectedTile } from '$lib/stores/tileStore';
-  import { tileSize, verticalTileSize } from '$lib/stores/gridStore';
   import HelpModal from './HelpModal.svelte';
   
   let mapName = 'tilemap';
   let width = $mapStore.width;
   let height = $mapStore.height;
   let showHelp = false;
-  let newTileSize = $tileSize;
-  let newVerticalTileSize = $verticalTileSize;
   
   // Handler for saving the map
   async function handleSave() {
@@ -69,21 +66,6 @@
   function toggleHelp() {
     showHelp = !showHelp;
   }
-  
-  // Handler for updating tile size
-  function updateTileSize() {
-    tileSize.set(newTileSize);
-  }
-  
-  // Handler for updating vertical tile size
-  function updateVerticalTileSize() {
-    verticalTileSize.set(newVerticalTileSize);
-  }
-
-  // Calculate mathematically significant values based on original 256px tile size
-  const exactTwoThirds = Math.round(256 * (2/3)); // 171px (mathematically perfect 2/3 ratio)
-  const hexRatio = Math.round(256 * 0.6698); // 171px (typical hex vertical ratio ~67%)
-  const goldenRatio = Math.round(256 * 0.6765); // 173px (golden ratio ~0.6765)
 </script>
 
 <div class="toolbar">
@@ -119,48 +101,10 @@
   </div>
   
   <div class="middle-buttons">
-    <div class="tile-size-controls">
-      <label>
-        Tile Size: {newTileSize}px
-        <input
-          type="range"
-          min="32"
-          max="512"
-          step="8"
-          bind:value={newTileSize}
-          class="tile-slider"
-          oninput={updateTileSize}
-        />
-      </label>
-      
-      <label>
-        Vertical Spacing: {newVerticalTileSize}px
-        <input
-          type="range"
-          min="32"
-          max="512"
-          step="1"
-          bind:value={newVerticalTileSize}
-          class="tile-slider"
-          oninput={updateVerticalTileSize}
-        />
-      </label>
-      
-      <div class="size-presets">
-        <button class="btn btn-sm" onclick={() => { newTileSize = 64; updateTileSize(); }}>64px</button>
-        <button class="btn btn-sm" onclick={() => { newTileSize = 128; updateTileSize(); }}>128px</button>
-        <button class="btn btn-sm" onclick={() => { newTileSize = 256; updateTileSize(); }}>256px</button>
-      </div>
-      
-      <div class="size-presets">
-        <button class="btn btn-sm" onclick={() => { newVerticalTileSize = exactTwoThirds; updateVerticalTileSize(); }}>2/3 (171px)</button>
-        <button class="btn btn-sm" onclick={() => { newVerticalTileSize = 170; updateVerticalTileSize(); }}>170px</button>
-        <button class="btn btn-sm" onclick={() => { newVerticalTileSize = 172; updateVerticalTileSize(); }}>172px</button>
-      </div>
-      <div class="size-presets">
-        <button class="btn btn-sm" onclick={() => { newVerticalTileSize = Math.floor(newTileSize * 0.75); updateVerticalTileSize(); }}>75%</button>
-        <button class="btn btn-sm" onclick={() => { newVerticalTileSize = Math.floor(newTileSize * 0.5); updateVerticalTileSize(); }}>50%</button>
-        <button class="btn btn-sm" onclick={() => { newVerticalTileSize = newTileSize; updateVerticalTileSize(); }}>1:1</button>
+    <div class="map-info">
+      <div class="info-text">
+        Tiles: 256px × 171px
+        <div class="info-details">(optimal ratio for hex terrain)</div>
       </div>
     </div>
   </div>
@@ -241,38 +185,22 @@
     justify-content: center;
   }
   
-  .tile-size-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+  .map-info {
     background-color: #374151;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 0.25rem;
-    min-width: 250px;
+    text-align: center;
   }
   
-  .tile-slider {
-    width: 100%;
-    margin-top: 0.25rem;
-    cursor: pointer;
+  .info-text {
+    font-size: 0.9rem;
+    font-weight: 500;
   }
   
-  .size-presets {
-    display: flex;
-    gap: 0.25rem;
-    margin-top: 0.25rem;
-  }
-  
-  .btn-sm {
-    padding: 0.125rem 0.25rem;
+  .info-details {
     font-size: 0.75rem;
-    background-color: #4b5563;
-    border-radius: 0.125rem;
-  }
-  
-  .btn-sm:hover {
-    background-color: #374151;
+    color: #9ca3af;
+    margin-top: 0.125rem;
   }
   
   .input-group {
