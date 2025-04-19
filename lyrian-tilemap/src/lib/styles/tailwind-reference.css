@@ -1,0 +1,81 @@
+/* 
+This file contains CSS styles for component imports.
+Updated to use standard CSS instead of Tailwind directives.
+*/
+
+/* Common utility classes specific to Lyrian Tilemap */
+/* Tile grid cell styling */
+.tile-grid-cell {
+  position: relative;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+}
+
+.tile-grid-cell:hover {
+  outline: 2px solid rgb(59 130 246);
+  outline-offset: -2px;
+  z-index: 10;
+}
+
+/* Button styles */
+.toolbar-button {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  color: white;
+  transition: background-color 0.15s ease;
+}
+
+.toolbar-button-primary {
+  background-color: #2563eb;
+}
+
+.toolbar-button-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.toolbar-button-success {
+  background-color: #16a34a;
+}
+
+.toolbar-button-success:hover {
+  background-color: #15803d;
+}
+
+.toolbar-button-warning {
+  background-color: #ca8a04;
+}
+
+.toolbar-button-warning:hover {
+  background-color: #a16207;
+}
+
+.toolbar-button-info {
+  background-color: #4f46e5;
+}
+
+.toolbar-button-info:hover {
+  background-color: #4338ca;
+}
+
+.toolbar-button-secondary {
+  background-color: #4b5563;
+}
+
+.toolbar-button-secondary:hover {
+  background-color: #374151;
+}
+
+.toolbar-button-accent {
+  background-color: #9333ea;
+}
+
+.toolbar-button-accent:hover {
+  background-color: #7e22ce;
+}
+
+.toolbar-input {
+  background-color: #374151;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
