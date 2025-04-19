@@ -33,11 +33,11 @@
   
   // Fine-tuning sliders for hex alignment
   let hexSizeAdjust = 138; // Base hex size
-  let xOffset = -2; // X offset for hex image positioning
-  let yOffset = -4; // Y offset for hex image positioning
-  let hexImageSize = 256; // Hex image size
+  let xOffset = 0; // X offset for hex image positioning
+  let yOffset = 0; // Y offset for hex image positioning
+  let hexImageSize = 239; // Hex image size
   let xGap = 0; // Gap between tiles in X direction
-  let yGap = 0; // Gap between tiles in Y direction
+  let yGap = -32; // Gap between tiles in Y direction
   let showAlignmentTools = false;
   
   // Track if loading images is still in progress
@@ -168,9 +168,15 @@
     canvasContext.save();
     canvasContext.translate(canvasWidth / 2 + $uiStore.panX, canvasHeight / 2 + $uiStore.panY);
     canvasContext.scale($uiStore.zoom, $uiStore.zoom);
+
+    // Collect and sort tiles by row (r coordinate) to ensure back-to-front rendering
+    // This ensures tiles at the top of the map (lower r values) are drawn first
+    const tileArray = Array.from($mapStore.tiles.entries()).map(([key, tile]) => tile);
+    tileArray.sort((a, b) => a.r - b.r); // Sort by r coordinate, so top tiles render first
     
-    // Draw tiles
-    for (const [key, tile] of $mapStore.tiles.entries()) {
+    // Draw tiles in sorted order (back to front)
+    for (const tile of tileArray) {
+      const key = getTileKey(tile.q, tile.r);
       const hex = grid.getHex({ q: tile.q, r: tile.r });
       if (!hex) continue;
       
@@ -305,6 +311,54 @@
     }
   }
   
+  // Custom pointToHex function that takes into account all the rendering adjustments
+  // This ensures selection matches what the user sees visually
+  function customPointToHex(x: number, y: number): { q: number, r: number } | null {
+    if (!grid) return null;
+    
+    // Reverse-apply the offsets and gaps to get coordinates in the raw grid space
+    // First, we need to find which hex is closest to this point in the raw grid
+    const possibleHexes: { hex: any, distanceSq: number }[] = [];
+    
+    // Check a reasonable area around the point
+    const searchRadius = 3;
+    for (let q = -searchRadius; q <= searchRadius; q++) {
+      for (let r = -searchRadius; r <= searchRadius; r++) {
+        const hex = grid.getHex({ q, r });
+        if (!hex) continue;
+        
+        // Apply the same gap adjustments we use in rendering
+        const gapX = xGap * Math.abs(q) / 1.25;
+        const gapY = yGap * Math.abs(r) / 1.25;
+        
+        const gapDirX = q >= 0 ? 1 : -1;
+        const gapDirY = r >= 0 ? 1 : -1;
+        
+        // Calculate the center with all adjustments applied
+        const adjustedX = hex.x + (gapX * gapDirX) + xOffset;
+        const adjustedY = hex.y + (gapY * gapDirY) + yOffset;
+        
+        // Calculate distance to this adjusted center
+        const dx = x - adjustedX;
+        const dy = y - adjustedY;
+        const distanceSq = dx * dx + dy * dy;
+        
+        // Store this hex and its distance
+        possibleHexes.push({ hex, distanceSq });
+      }
+    }
+    
+    // Find the hex with the minimum distance
+    possibleHexes.sort((a, b) => a.distanceSq - b.distanceSq);
+    
+    if (possibleHexes.length > 0 && possibleHexes[0].distanceSq <= (hexImageSize / 2) * (hexImageSize / 2)) {
+      const closestHex = possibleHexes[0].hex;
+      return { q: closestHex.q, r: closestHex.r };
+    }
+    
+    return null;
+  }
+
   // Handle mouse down event
   function handleMouseDown(event: MouseEvent) {
     if (!grid) return;
@@ -321,7 +375,7 @@
     switch ($uiStore.mode) {
       case EditMode.SELECT:
         isDragging = false;
-        const hex = pointToHex(grid, x, y);
+        const hex = customPointToHex(x, y);
         if (hex) {
           const hexKey = getTileKey(hex.q, hex.r);
           
@@ -350,7 +404,7 @@
         
       case EditMode.PAINT:
         if ($uiStore.selectedAssetId) {
-          const hex = pointToHex(grid, x, y);
+          const hex = customPointToHex(x, y);
           if (hex) {
             lastPaintedHexKey = getTileKey(hex.q, hex.r);
             mapStore.setTile(hex.q, hex.r, $uiStore.selectedAssetId);
@@ -360,7 +414,7 @@
         break;
         
       case EditMode.ERASE:
-        const eraseHex = pointToHex(grid, x, y);
+        const eraseHex = customPointToHex(x, y);
         if (eraseHex) {
           lastPaintedHexKey = getTileKey(eraseHex.q, eraseHex.r);
           mapStore.removeTile(eraseHex.q, eraseHex.r);
@@ -374,7 +428,7 @@
         
       case EditMode.POI:
         // Create a POI
-        const poiHex = pointToHex(grid, x, y);
+        const poiHex = customPointToHex(x, y);
         if (poiHex) {
           mapStore.addPOI('New POI', '', poiHex.q, poiHex.r);
           historyStore.pushState('Add POI');
@@ -400,8 +454,8 @@
     mouseX = Math.round(x);
     mouseY = Math.round(y);
     
-    // Find and update hovered hex
-    const hex = pointToHex(grid, x, y);
+    // Find and update hovered hex using our custom function
+    const hex = customPointToHex(x, y);
     hoveredHexKey = hex ? getTileKey(hex.q, hex.r) : null;
     
     // Handle panning via middle mouse button or alt+drag
@@ -553,12 +607,12 @@
       
       <div class="slider-container">
         <label>X Gap: {xGap}</label>
-        <input type="range" min="-20" max="20" step="1" bind:value={xGap} />
+        <input type="range" min="-32" max="32" step="1" bind:value={xGap} />
       </div>
       
       <div class="slider-container">
         <label>Y Gap: {yGap}</label>
-        <input type="range" min="-20" max="20" step="1" bind:value={yGap} />
+        <input type="range" min="-32" max="32" step="1" bind:value={yGap} />
       </div>
       
       <div class="alignment-values">
