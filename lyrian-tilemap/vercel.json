@@ -1,0 +1,12 @@
+{
+  "framework": "sveltekit",
+  "version": 2,
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "devCommand": "pnpm run dev",
+  "build": {
+    "env": {
+      "NODE_VERSION": "18"
+    }
+  }
+}
