@@ -24,6 +24,22 @@
   function handleCategoryClick(name: string) {
     activeCategory = name;
   }
+  
+  // Check if a tile is a decoration (small) tile that should be displayed centered
+  function isDecorationTile(tile: TileInfo): boolean {
+    // Use the isSmall property if available (from server)
+    if (tile.isSmall !== undefined) {
+      return tile.isSmall;
+    }
+    
+    // Fallback to checking the path or name for indicators that it's a small tile
+    return tile.path.toLowerCase().includes('decoration') || 
+           tile.path.toLowerCase().includes('house') ||
+           (tile.name.length > 0 && (
+             tile.name.toLowerCase().startsWith('house') || 
+             tile.name.toLowerCase().includes('decoration')
+           ));
+  }
 </script>
 
 <div class="tile-selector {expanded ? 'expanded' : 'collapsed'} bg-gray-100 p-4 overflow-auto">
@@ -51,14 +67,20 @@
           role="button"
           tabindex="0"
         >
-          <img 
-            src={tile.path} 
-            alt={tile.name} 
-            class="w-full object-contain"
-            draggable="true" 
-          />
+          <div class="tile-image-container {isDecorationTile(tile) ? 'decoration-tile' : ''}">
+            <img 
+              src={tile.path} 
+              alt={tile.name}
+              class="tile-image" 
+              draggable="false"
+              title={tile.width && tile.height ? `${tile.width}x${tile.height}px` : ''}
+            />
+          </div>
           <div class="tile-name" title={tile.name}>
             {tile.name}
+            {#if tile.width && tile.height && tile.width !== 256 && isDecorationTile(tile)}
+              <span class="tile-size">{tile.width}x{tile.height}</span>
+            {/if}
           </div>
         </div>
       {/each}
@@ -147,6 +169,28 @@
     aspect-ratio: 1/1;
   }
   
+  .tile-image-container {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+  }
+  
+  .tile-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  .decoration-tile .tile-image {
+    width: auto;
+    height: auto;
+    object-fit: none; /* Prevents any kind of stretching */
+  }
+
   .tile-item:hover {
     border-color: #d1d5db;
   }
@@ -169,6 +213,14 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-top: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .tile-size {
+    font-size: 0.65rem;
+    color: #6b7280;
+    margin-left: 0.25rem;
   }
   
   .text-center {

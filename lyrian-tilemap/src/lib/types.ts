@@ -3,6 +3,9 @@ export interface TileInfo {
 	path: string;
 	category: string;
 	name: string;
+	width?: number;
+	height?: number;
+	isSmall?: boolean;
 }
 
 export interface TileCategory {

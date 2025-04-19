@@ -26,44 +26,31 @@
   let offsetX = 0;
   let offsetY = 0;
   
-  // Tile placement mode
-  let isPlacingTiles = false;
-  let lastPlacedX = -1;
-  let lastPlacedY = -1;
+  // Cache for tile metadata to avoid redundant fetch requests
+  const tileMetadataCache = new Map<string, {width: number, height: number, isSmall: boolean}>();
   
   // Common layers - base, terrain features, structures
   const layers = ['base', 'terrain', 'structures', 'decoration'];
   
-  // When a cell is clicked or dragged over
+  // When a cell is clicked
   function handleCellClick(x: number, y: number) {
     if ($selectedTile) {
       addTileToCell(x, y, $selectedTile);
-      // Start tile placement mode for drag-to-place
-      isPlacingTiles = true;
-      lastPlacedX = x;
-      lastPlacedY = y;
     }
-  }
-  
-  // Handle mouse over cell during tile placement
-  function handleCellOver(x: number, y: number) {
-    if (isPlacingTiles && $selectedTile && (x !== lastPlacedX || y !== lastPlacedY)) {
-      addTileToCell(x, y, $selectedTile);
-      lastPlacedX = x;
-      lastPlacedY = y;
-    }
-  }
-  
-  // End tile placement mode
-  function endTilePlacement() {
-    isPlacingTiles = false;
-    lastPlacedX = -1;
-    lastPlacedY = -1;
   }
   
   // Add a tile to a cell
   function addTileToCell(x: number, y: number, tile: TileInfo) {
     if (x >= 0 && x < $mapStore.width && y >= 0 && y < $mapStore.height) {
+      // Add tile metadata to cache for future reference when rendering
+      if (tile.width && tile.height) {
+        tileMetadataCache.set(tile.id, {
+          width: tile.width,
+          height: tile.height,
+          isSmall: tile.isSmall || false
+        });
+      }
+      
       // Use the current layer or default to base
       const layer = $selectedLayer || 'base';
       mapStore.addTile(x, y, tile.id);
@@ -109,7 +96,6 @@
   // End map dragging
   function endDrag() {
     isDragging = false;
-    endTilePlacement();
   }
   
   // Zoom handling
@@ -144,17 +130,25 @@
   }
   
   // Calculate position offset for image in cell
-  function calculateHorizontalOffset(): string {
-    // Center horizontally
-    return '0px';
-  }
-  
-  // Calculate vertical position offset for image in cell
-  // We align the bottom of the PNG with the bottom of the grid cell
-  function calculateVerticalOffset(): string {
-    // originalTileSize (256) - optimalVerticalSpacing (171) = 85px offset from top
-    // This will align the bottom of the 256px tall PNG with the bottom of the 171px tall grid cell
-    return `${optimalVerticalSpacing - originalTileSize}px`;
+  function calculatePositionStyle(tileId: string): string {
+    const metadata = tileMetadataCache.get(tileId);
+    
+    if (metadata && metadata.isSmall) {
+      // For small tiles, center them in the tile space
+      const horizontalOffset = Math.floor((originalTileSize - metadata.width) / 2);
+      
+      // For vertical offset, we need to:
+      // 1. Start at optimalVerticalSpacing - originalTileSize (the standard offset)
+      // 2. Add half the difference between originalTileSize and the image height
+      const baseOffset = optimalVerticalSpacing - originalTileSize;
+      const centeringOffset = Math.floor((originalTileSize - metadata.height) / 2);
+      const verticalOffset = baseOffset + centeringOffset;
+      
+      return `left: ${horizontalOffset}px; top: ${verticalOffset}px; width: ${metadata.width}px; height: ${metadata.height}px;`;
+    }
+    
+    // For regular tiles, use the standard vertical offset to align the bottom edge
+    return `left: 0px; top: ${optimalVerticalSpacing - originalTileSize}px; width: ${originalTileSize}px; height: ${originalTileSize}px;`;
   }
   
   // Get tiles for a specific cell
@@ -165,6 +159,18 @@
     
     // Since we don't have layers in our cell structure yet, return a simple object
     return { base: cell.tiles || [] };
+  }
+  
+  // Check if an image is a small decoration that should be centered
+  function isSmallTile(tileId: string): boolean {
+    const metadata = tileMetadataCache.get(tileId);
+    if (metadata) {
+      return metadata.isSmall;
+    }
+    
+    // If no metadata yet, use heuristics based on filename
+    return tileId.toLowerCase().includes('decoration') || 
+           tileId.toLowerCase().includes('house');
   }
   
   // Reset the view to center
@@ -188,6 +194,35 @@
     
     return colors[layer] || 'rgba(0, 0, 0, 0.5)';
   }
+  
+  // Fetch and store image dimensions when a new tile is added
+  function fetchTileMetadata(tileId: string): void {
+    // If already in cache, don't fetch again
+    if (tileMetadataCache.has(tileId)) return;
+    
+    // Create a hidden image element to load the image and get its dimensions
+    const img = new Image();
+    img.onload = () => {
+      const isSmall = img.width < 200 || img.height < 200;
+      tileMetadataCache.set(tileId, {
+        width: img.width,
+        height: img.height,
+        isSmall
+      });
+    };
+    img.src = tileId;
+  }
+  
+  // When the map store changes, fetch metadata for any new tiles
+  $effect(() => {
+    for (const cell of Object.values($mapStore.cells)) {
+      for (const tileId of cell.tiles) {
+        if (!tileMetadataCache.has(tileId)) {
+          fetchTileMetadata(tileId);
+        }
+      }
+    }
+  });
 </script>
 
 <div 
@@ -208,10 +243,9 @@
     {#each Array($mapStore.height) as _, y}
       {#each Array($mapStore.width) as _, x}
         <div 
-          class="grid-cell {$selectedTile ? 'placing-mode' : ''}"
+          class="grid-cell {$selectedTile ? 'paintable' : ''}"
           style="width: {originalTileSize}px; height: {optimalVerticalSpacing}px; left: {x * originalTileSize}px; top: {y * optimalVerticalSpacing}px;"
           onclick={() => handleCellClick(x, y)}
-          onmouseover={() => handleCellOver(x, y)}
           oncontextmenu={(e) => handleContextMenu(e, x, y)}
           data-x={x}
           data-y={y}
@@ -223,9 +257,9 @@
                 <img 
                   src={tileId} 
                   alt={`${layer} tile`} 
-                  class="cell-tile"
+                  class="cell-tile {isSmallTile(tileId) ? 'small-tile' : ''}"
                   data-layer={layer}
-                  style="left: {calculateHorizontalOffset()}; top: {calculateVerticalOffset()};" 
+                  style={calculatePositionStyle(tileId)}
                   draggable="false"
                 />
               {/each}
@@ -296,16 +330,20 @@
     z-index: 10;
   }
   
-  .placing-mode:hover {
+  .paintable:hover {
     cursor: pointer;
     outline: 2px solid rgb(34 197 94); /* green-500 */
   }
   
   .cell-tile {
     position: absolute;
-    width: 256px;
-    height: 256px;
     pointer-events: none;
+    /* Width and height now set via style attribute */
+  }
+  
+  .small-tile {
+    /* Class to mark small tiles - can add specific styling if needed */
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
   }
   
   .cell-coordinates {
