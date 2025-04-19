@@ -22,6 +22,9 @@ interface UIState {
   showRegions: boolean;
   showPOIs: boolean;
   
+  // Hex display options
+  hexProjectionAngle: number; // Continuous value from 0-60
+  
   // Canvas transform state
   zoom: number;
   panX: number;
@@ -47,6 +50,7 @@ const initialState: UIState = {
   showGrid: true,
   showRegions: true,
   showPOIs: true,
+  hexProjectionAngle: 45, // Default to 45 degrees
   zoom: 1,
   panX: 0,
   panY: 0,
@@ -77,6 +81,12 @@ function createUIStore() {
     
     // Toggle POI visibility
     togglePOIs: () => update(state => ({ ...state, showPOIs: !state.showPOIs })),
+    
+    // Set hex projection angle (0-60 degrees)
+    setHexProjectionAngle: (angle: number) => update(state => ({
+      ...state,
+      hexProjectionAngle: Math.min(60, Math.max(0, angle))
+    })),
     
     // Set zoom level
     setZoom: (zoom: number) => update(state => ({ ...state, zoom: Math.max(0.1, Math.min(3, zoom)) })),

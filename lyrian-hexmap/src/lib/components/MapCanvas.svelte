@@ -31,6 +31,15 @@
   let lastMouseX = 0;
   let lastMouseY = 0;
   
+  // Fine-tuning sliders for hex alignment
+  let hexSizeAdjust = 138; // Base hex size
+  let xOffset = -2; // X offset for hex image positioning
+  let yOffset = -4; // Y offset for hex image positioning
+  let hexImageSize = 256; // Hex image size
+  let xGap = 0; // Gap between tiles in X direction
+  let yGap = 0; // Gap between tiles in Y direction
+  let showAlignmentTools = false;
+  
   // Track if loading images is still in progress
   let isLoadingImages = false;
   
@@ -42,11 +51,22 @@
   // Animation frame ID for rendering loop
   let animationFrameId: number;
 
-  // Initialize grid based on map dimensions
+  // Initialize grid based on map dimensions and current projection angle
   $: {
     width = $mapStore.width;
     height = $mapStore.height;
-    grid = createGrid(width, height);
+    // Use the adjusted hex size and projection angle for grid creation
+    grid = createGrid(width, height, $uiStore.hexProjectionAngle, hexSizeAdjust);
+  }
+  
+  // Function to change projection
+  function setProjection(angle: number) {
+    uiStore.setHexProjectionAngle(angle);
+  }
+  
+  // Toggle alignment tools visibility
+  function toggleAlignmentTools() {
+    showAlignmentTools = !showAlignmentTools;
   }
   
   // Load hex assets
@@ -154,17 +174,30 @@
       const hex = grid.getHex({ q: tile.q, r: tile.r });
       if (!hex) continue;
       
+      // Apply gap adjustments to position
+      // X and Y gaps are applied as a function of the hex coordinates
+      // This ensures that tiles further from the origin have larger gaps
+      const gapX = xGap * Math.abs(tile.q) / 1.25;
+      const gapY = yGap * Math.abs(tile.r) / 1.25;
+      
+      // Apply gaps based on the direction from origin
+      const gapDirX = tile.q >= 0 ? 1 : -1;
+      const gapDirY = tile.r >= 0 ? 1 : -1;
+      
       const { x, y } = hex; // Access x and y properties directly
+      const adjustedX = x + (gapX * gapDirX);
+      const adjustedY = y + (gapY * gapDirY);
       
       // Draw the tile image if available
       const img = getImageForAsset(tile.assetId);
       if (img && img.complete) {
+        // Apply the adjusted offsets, gaps, and image size
         canvasContext.drawImage(
           img,
-          x - hex.width / 2,
-          y - hex.height / 2,
-          hex.width,
-          hex.height
+          adjustedX - hexImageSize / 2 + xOffset,
+          adjustedY - hexImageSize / 2 + yOffset,
+          hexImageSize,
+          hexImageSize
         );
       }
       
@@ -359,6 +392,7 @@
     const rawX = event.clientX - rect.left;
     const rawY = event.clientY - rect.top;
     
+    // Fix the Y coordinate calculation (was using panX instead of panY)
     const x = (rawX - canvasWidth / 2 - $uiStore.panX) / $uiStore.zoom;
     const y = (rawY - canvasHeight / 2 - $uiStore.panY) / $uiStore.zoom;
     
@@ -455,6 +489,11 @@
     uiStore.setZoom(newZoom);
     uiStore.setPan($uiStore.panX + dx, $uiStore.panY + dy);
   }
+
+  // Function to update grid when hex size is changed
+  function refreshGrid() {
+    grid = createGrid(width, height, $uiStore.hexProjectionAngle, hexSizeAdjust);
+  }
 </script>
 
 <div class="canvas-container">
@@ -467,11 +506,73 @@
     on:contextmenu|preventDefault
   ></canvas>
   
+  <!-- Projection selector -->
+  <div class="projection-selector">
+    <div class="projection-label">Hex Projection:</div>
+    <div class="projection-slider">
+      <input 
+        type="range" 
+        min="0" 
+        max="60" 
+        step="1" 
+        value={$uiStore.hexProjectionAngle} 
+        on:input={(e) => uiStore.setHexProjectionAngle(Number(e.currentTarget.value))}
+        title="Adjust projection angle (0-60 degrees)"
+      />
+      <span class="projection-value">{$uiStore.hexProjectionAngle}°</span>
+    </div>
+    
+    <!-- Alignment tools toggle -->
+    <button class="alignment-toggle" on:click={toggleAlignmentTools}>
+      {showAlignmentTools ? 'Hide' : 'Show'} Alignment Tools
+    </button>
+  </div>
+  
+  <!-- Alignment fine-tuning sliders -->
+  {#if showAlignmentTools}
+    <div class="alignment-tools">
+      <div class="slider-container">
+        <label>Hex Size: {hexSizeAdjust}</label>
+        <input type="range" min="100" max="180" step="1" bind:value={hexSizeAdjust} on:change={refreshGrid} />
+      </div>
+      
+      <div class="slider-container">
+        <label>X Offset: {xOffset}</label>
+        <input type="range" min="-20" max="20" step="1" bind:value={xOffset} />
+      </div>
+      
+      <div class="slider-container">
+        <label>Y Offset: {yOffset}</label>
+        <input type="range" min="-50" max="20" step="1" bind:value={yOffset} />
+      </div>
+      
+      <div class="slider-container">
+        <label>Image Size: {hexImageSize}</label>
+        <input type="range" min="200" max="300" step="1" bind:value={hexImageSize} />
+      </div>
+      
+      <div class="slider-container">
+        <label>X Gap: {xGap}</label>
+        <input type="range" min="-20" max="20" step="1" bind:value={xGap} />
+      </div>
+      
+      <div class="slider-container">
+        <label>Y Gap: {yGap}</label>
+        <input type="range" min="-20" max="20" step="1" bind:value={yGap} />
+      </div>
+      
+      <div class="alignment-values">
+        <p>Current values: Size={hexSizeAdjust}, X={xOffset}, Y={yOffset}, ImgSize={hexImageSize}, XGap={xGap}, YGap={yGap}</p>
+      </div>
+    </div>
+  {/if}
+  
   <!-- Debug info overlay -->
   <div class="debug-info">
     <p>Mouse: {mouseX}, {mouseY}</p>
     <p>Hex: {hoveredHexKey || 'None'}</p>
     <p>Mode: {$uiStore.mode}</p>
+    <p>Projection: {$uiStore.hexProjectionAngle}°</p>
     <p>Zoom: {$uiStore.zoom.toFixed(2)}</p>
   </div>
   
@@ -482,6 +583,7 @@
 </div>
 
 <style>
+  /* Existing styles */
   .canvas-container {
     position: relative;
     width: 100%;
@@ -496,6 +598,104 @@
     width: 100%;
     height: 100%;
     cursor: pointer;
+  }
+  
+  /* Alignment tools styles */
+  .alignment-tools {
+    position: absolute;
+    top: 55px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    width: 280px;
+  }
+  
+  .slider-container {
+    margin-bottom: 10px;
+  }
+  
+  .slider-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .slider-container input {
+    width: 100%;
+  }
+  
+  .alignment-values {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    font-size: 12px;
+    font-family: monospace;
+  }
+  
+  .alignment-values p {
+    margin: 0;
+  }
+  
+  .alignment-toggle {
+    margin-left: 10px;
+    padding: 4px 8px;
+    font-size: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Projection slider styles */
+  .projection-slider {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    gap: 8px;
+  }
+  
+  .projection-slider input[type="range"] {
+    width: 120px;
+  }
+  
+  .projection-value {
+    font-weight: bold;
+    min-width: 30px;
+  }
+
+  /* Existing styles continued */
+  .projection-selector {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+  }
+
+  .projection-label {
+    margin-right: 10px;
+  }
+
+  .projection-options button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+
+  .projection-options button.active {
+    background-color: #007bff;
+    color: white;
   }
   
   .debug-info {

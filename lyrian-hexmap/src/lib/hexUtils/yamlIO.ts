@@ -1,5 +1,11 @@
 import yaml from 'js-yaml';
-import { Hex, gridToJSON, gridFromJSON, createGrid, type HexType } from './hexUtils';
+import { 
+  createHex, 
+  gridToJSON, 
+  gridFromJSON, 
+  createGrid, 
+  type HexType 
+} from './hexUtils';
 import type { Grid } from 'honeycomb-grid';
 
 // Interface for tile data
