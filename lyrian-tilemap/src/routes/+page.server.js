@@ -12,9 +12,16 @@ import { promisify } from 'util';
 async function getPngDimensions(filePath) {
   return new Promise((resolve, reject) => {
     const stream = createReadStream(filePath, { start: 16, end: 24 });
+    /** @type {Buffer[]} */
     const chunks = [];
     
-    stream.on('data', chunk => chunks.push(chunk));
+    stream.on('data', (chunk) => {
+      if (Buffer.isBuffer(chunk)) {
+        chunks.push(chunk);
+      } else if (typeof chunk === 'string') {
+        chunks.push(Buffer.from(chunk));
+      }
+    });
     
     stream.on('end', () => {
       try {

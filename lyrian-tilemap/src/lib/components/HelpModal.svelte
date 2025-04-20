@@ -1,5 +1,6 @@
 <script lang="ts">
   import { fade, scale } from 'svelte/transition';
+  import '$lib/styles/help-modal.css';
   
   // Control visibility of the modal
   let { isOpen = false, toggleHelp } = $props<{ isOpen?: boolean, toggleHelp: () => void }>();
@@ -81,81 +82,3 @@
     </div>
   </div>
 {/if}
-
-<style>
-  /* Regular CSS without Tailwind import */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 50;
-  }
-  
-  .modal-content {
-    background-color: white;
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    max-width: 42rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    max-height: 80vh;
-    overflow: auto;
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  
-  .modal-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-  
-  .modal-close {
-    color: #6b7280;
-    font-size: 1.5rem;
-    line-height: 1;
-  }
-  
-  .modal-close:hover {
-    color: #374151;
-  }
-  
-  .modal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    color: #374151;
-  }
-  
-  .instruction-section {
-    margin-bottom: 0.75rem;
-  }
-  
-  .section-title {
-    font-weight: 600;
-    font-size: 1.125rem;
-    margin-bottom: 0.25rem;
-  }
-  
-  .control-list {
-    list-style-type: disc;
-    padding-left: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-  
-  .credits {
-    font-size: 0.875rem;
-    color: #6b7280;
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid #e5e7eb;
-  }
-</style>

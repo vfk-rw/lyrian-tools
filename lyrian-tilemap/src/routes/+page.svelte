@@ -4,6 +4,7 @@
   import Toolbar from '$lib/components/Toolbar.svelte';
   import { initializeTileStore } from '$lib/stores/tileStore';
   import type { TileCategory } from '$lib/types';
+  import '$lib/styles/page.css';
 
   // Get data from server
   let { data } = $props<{ data: { categories: TileCategory[] } }>();
@@ -31,22 +32,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  /* Regular CSS without Tailwind imports */
-  .app-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  .main-content {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
-  
-  .map-container {
-    flex: 1;
-  }
-</style>

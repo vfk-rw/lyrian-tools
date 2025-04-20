@@ -1,0 +1,139 @@
+/* Tile selector component styles */
+.tile-selector {
+  height: 100%;
+  width: 300px;
+  transition: width 0.3s ease;
+  background-color: #f3f4f6;
+  padding: 1rem;
+  overflow: auto;
+}
+  
+.tile-selector.collapsed {
+  width: 80px;
+}
+  
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+  
+.font-bold {
+  font-weight: 700;
+}
+  
+.mb-4 {
+  margin-bottom: 1rem;
+}
+  
+.flex {
+  display: flex;
+}
+  
+.flex-wrap {
+  flex-wrap: wrap;
+}
+  
+.grid {
+  display: grid;
+}
+  
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+  
+.gap-2 {
+  gap: 0.5rem;
+}
+  
+.category-tab {
+  padding: 0.25rem 0.75rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  background-color: #e5e7eb;
+}
+  
+.category-tab:hover {
+  background-color: #d1d5db;
+}
+  
+.category-tab.active {
+  background-color: #2563eb;
+  color: white;
+}
+  
+.tile-item {
+  position: relative;
+  padding: 0.25rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  aspect-ratio: 1/1;
+}
+  
+.tile-image-container {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+  
+.tile-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+  
+.decoration-tile .tile-image {
+  width: auto;
+  height: auto;
+  object-fit: none; /* Prevents any kind of stretching */
+}
+
+.tile-item:hover {
+  border-color: #d1d5db;
+}
+  
+.tile-item.selected {
+  border-color: #3b82f6;
+}
+  
+.w-full {
+  width: 100%;
+}
+  
+.object-contain {
+  object-fit: contain;
+}
+  
+.tile-name {
+  font-size: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+}
+  
+.tile-size {
+  font-size: 0.65rem;
+  color: #6b7280;
+  margin-left: 0.25rem;
+}
+  
+.text-center {
+  text-align: center;
+}
+  
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+  
+.text-gray-500 {
+  color: #6b7280;
+}

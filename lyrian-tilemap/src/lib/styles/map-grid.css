@@ -1,0 +1,109 @@
+/* Map grid component styles */
+.grid-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #f3f4f6;
+  overflow: hidden;
+  user-select: none;
+}
+  
+.grid-inner {
+  position: absolute;
+}
+  
+.grid-cell {
+  position: absolute;
+  overflow: visible; /* Changed from hidden to visible */
+  border: 1px solid rgba(229, 231, 235, 0.4); /* Made border semi-transparent */
+  background-color: transparent; 
+}
+
+.grid-cell:hover {
+  outline: 2px solid rgb(59 130 246); /* blue-500 color */
+  outline-offset: -2px;
+  z-index: 10;
+}
+  
+.paintable:hover {
+  cursor: pointer;
+  outline: 2px solid rgb(34 197 94); /* green-500 */
+}
+  
+.cell-tile {
+  position: absolute;
+  pointer-events: none;
+  /* Width and height now set via style attribute */
+}
+  
+.small-tile {
+  /* Class to mark small tiles - can add specific styling if needed */
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+}
+  
+.cell-coordinates {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.25rem;
+}
+  
+.layer-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+  
+.map-controls {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+  
+.zoom-indicator {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+  
+.control-button {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+  
+.layer-indicators {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+  
+.layer-button {
+  background-color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+  
+.layer-button.active {
+  background-color: #f3f4f6;
+  font-weight: bold;
+}

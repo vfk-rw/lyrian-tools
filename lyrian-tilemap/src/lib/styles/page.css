@@ -1,0 +1,16 @@
+/* Styles for the main page layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+  
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+  
+.map-container {
+  flex: 1;
+}
