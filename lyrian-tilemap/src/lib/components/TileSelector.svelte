@@ -9,7 +9,7 @@
   // State for managing the active category
   let activeCategory = $state<string | null>(null);
 
-  // When component mounts, select first category if available
+  // When component mounts, select first category if available (Props should be first)
   $effect(() => {
     if ($tileCategories.length > 0 && !activeCategory) {
       activeCategory = $tileCategories[0].name;
@@ -50,36 +50,39 @@
   <div class="flex flex-wrap mb-4">
     {#each $tileCategories as category}
       <button 
-        class="category-tab {activeCategory === category.name ? 'active' : ''}"
+        class="category-tab {activeCategory === category.name ? 'active' : ''} {category.name === 'Props' ? 'category-props' : ''}"
         onclick={() => handleCategoryClick(category.name)}
       >
         {category.name}
+        {#if category.name === 'Props'}
+          <span class="props-count">{category.tiles.length}</span>
+        {/if}
       </button>
     {/each}
   </div>
   
-  <!-- Tiles grid -->
-  <div class="grid grid-cols-3 gap-2">
+  <!-- Tiles grid - use grid-cols-4 for Props to show more items -->
+  <div class="grid {activeCategory === 'Props' ? 'grid-cols-4' : 'grid-cols-3'} gap-2">
     {#each $tileCategories.filter(c => c.name === activeCategory) as category}
       {#each category.tiles as tile}
         <div 
-          class="tile-item {$selectedTile?.id === tile.id ? 'selected' : ''}"
+          class="tile-item {$selectedTile?.id === tile.id ? 'selected' : ''} {tile.isSmall ? 'prop-item' : ''}"
           onclick={() => handleTileClick(tile)}
           role="button"
           tabindex="0"
         >
-          <div class="tile-image-container {isDecorationTile(tile) ? 'decoration-tile' : ''}">
+          <div class="tile-image-container {isDecorationTile(tile) ? 'decoration-tile' : ''} {tile.isSmall ? 'prop-container' : ''}">
             <img 
               src={tile.path} 
               alt={tile.name}
               class="tile-image" 
               draggable="false"
-              title={tile.width && tile.height ? `${tile.width}x{tile.height}px` : ''}
+              title={tile.width && tile.height ? `${tile.width}x${tile.height}px` : ''}
             />
           </div>
           <div class="tile-name" title={tile.name}>
             {tile.name}
-            {#if tile.width && tile.height && tile.width !== 256 && isDecorationTile(tile)}
+            {#if tile.width && tile.height}
               <span class="tile-size">{tile.width}x{tile.height}</span>
             {/if}
           </div>

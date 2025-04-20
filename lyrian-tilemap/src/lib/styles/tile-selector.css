@@ -40,6 +40,10 @@
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
   
 .gap-2 {
   gap: 0.5rem;
@@ -62,6 +66,31 @@
   background-color: #2563eb;
   color: white;
 }
+
+/* Special styling for the Props category tab */
+.category-props {
+  background-color: #8b5cf6; /* Purple background */
+  color: white;
+}
+
+.category-props:hover {
+  background-color: #7c3aed; /* Darker purple on hover */
+}
+
+.category-props.active {
+  background-color: #6d28d9; /* Even darker purple when active */
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5); /* Purple glow */
+}
+
+.props-count {
+  display: inline-block;
+  font-size: 0.7rem;
+  background-color: white;
+  color: #8b5cf6;
+  border-radius: 9999px;
+  padding: 0.1rem 0.35rem;
+  margin-left: 0.35rem;
+}
   
 .tile-item {
   position: relative;
@@ -69,6 +98,28 @@
   border: 2px solid transparent;
   cursor: pointer;
   aspect-ratio: 1/1;
+}
+
+/* Styling for prop items */
+.prop-item {
+  border-color: rgba(139, 92, 246, 0.2); /* Light purple border */
+  background-color: rgba(139, 92, 246, 0.05); /* Very light purple background */
+}
+
+.prop-item:hover {
+  border-color: rgba(139, 92, 246, 0.6); /* Darker purple border on hover */
+}
+
+.prop-item.selected {
+  border-color: #8b5cf6; /* Purple border when selected */
+  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.5); /* Purple glow */
+}
+
+.prop-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
 }
   
 .tile-image-container {

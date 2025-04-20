@@ -105,7 +105,19 @@ export async function load() {
     /** @type {Record<string, {name: string, tiles: Array<{id: string, path: string, category: string, name: string, width: number, height: number, isSmall: boolean}>}>} */
     const tilesByCategory = {};
     
+    // Create a special Props category for small tiles
+    tilesByCategory['Props'] = {
+      name: 'Props',
+      tiles: []
+    };
+    
     tiles.forEach(tile => {
+      // If it's a small tile, add it to the Props category
+      if (tile.isSmall) {
+        tilesByCategory['Props'].tiles.push(tile);
+      }
+      
+      // Add all tiles to their original categories as well
       if (!tilesByCategory[tile.category]) {
         tilesByCategory[tile.category] = {
           name: tile.category?.replace('Tile_', '').replace(/_/g, ' ') || 'Unknown',
@@ -115,8 +127,16 @@ export async function load() {
       tilesByCategory[tile.category].tiles.push(tile);
     });
     
+    // Sort categories alphabetically but put Props first
+    const categoriesArray = Object.values(tilesByCategory);
+    categoriesArray.sort((a, b) => {
+      if (a.name === 'Props') return -1;
+      if (b.name === 'Props') return 1;
+      return a.name.localeCompare(b.name);
+    });
+    
     return {
-      categories: Object.values(tilesByCategory)
+      categories: categoriesArray
     };
   } catch (err) {
     console.error('Error scanning tiles:', err);
