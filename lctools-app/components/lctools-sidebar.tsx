@@ -11,7 +11,8 @@ import {
   CalendarDays,
   ChevronRight,
   Anvil,
-  FlaskRound
+  FlaskRound,
+  FileSpreadsheet
 } from "lucide-react"
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Avatar } from "@/components/ui/avatar";
@@ -88,6 +89,11 @@ const navItems = [
         url: "/mirane/calendar",
         icon: CalendarDays,
       },
+      {
+        title: "Manage Sheets",
+        url: "/mirane/census/manage-sheets",
+        icon: FileSpreadsheet,
+      },
     ],
   },
 ];
@@ -113,7 +119,7 @@ export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar
                 <Collapsible
                   key={item.title}
                   asChild
-                  defaultOpen={item.isActive}
+                  defaultOpen={true}
                   className="group/collapsible"
                 >
                   <SidebarMenuItem>

@@ -56,6 +56,7 @@ export default function ManageCharacterSheetsPage() {
   const [sheets, setSheets] = useState<CharacterSheet[]>([])
   const [loading, setLoading] = useState(true)
   const [newSheetUrl, setNewSheetUrl] = useState("")
+  const [urlError, setUrlError] = useState<string | null>(null)
   const [newSheetStatus, setNewSheetStatus] = useState<CharacterStatus>("active")
   const [deleteSheetId, setDeleteSheetId] = useState<string | null>(null)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
@@ -101,6 +102,7 @@ export default function ManageCharacterSheetsPage() {
     }
 
     if (!isValidGoogleSheetUrl(newSheetUrl)) {
+      setUrlError('Please enter a valid Google Sheets URL')
       toast.error('Please enter a valid Google Sheets URL')
       return
     }
@@ -133,6 +135,7 @@ export default function ManageCharacterSheetsPage() {
       setSheets([...(data || []), ...sheets])
       setNewSheetUrl("")
       setNewSheetStatus("active")
+      setUrlError(null)
       toast.success('Character sheet added successfully')
     } catch (error: any) {
       console.error('Error adding sheet:', error.message)
@@ -324,9 +327,15 @@ export default function ManageCharacterSheetsPage() {
                           type="url"
                           id="sheet-url"
                           value={newSheetUrl}
-                          onChange={(e) => setNewSheetUrl(e.target.value)}
+                          onChange={(e) => {
+                            const url = e.target.value;
+                            setNewSheetUrl(url);
+                            setUrlError(url && !isValidGoogleSheetUrl(url) ? "Please enter a valid Google Sheets URL" : null);
+                          }}
                           placeholder="https://docs.google.com/spreadsheets/..."
+                          className={urlError ? "border-red-500" : ""}
                         />
+                        {urlError && <p className="text-sm text-red-500">{urlError}</p>}
                       </div>
                       
                       <div className="space-y-2">
@@ -349,7 +358,6 @@ export default function ManageCharacterSheetsPage() {
                       
                       <Button 
                         onClick={addCharacterSheet}
-                        disabled={!newSheetUrl || sheets.length >= 5}
                       >
                         Add Character Sheet
                       </Button>
