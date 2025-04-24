@@ -5,6 +5,8 @@ import type { Session } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { isValidGoogleSheetUrl, CHARACTER_TABLE_NAME } from '@/lib/supabase'
 
+export const CHARACTER_SHEET_LIMIT = 50;
+
 // Initialize Supabase with admin privileges (service role)
 // Using environment variables on the server side
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -46,6 +48,11 @@ export async function GET() {
   }
 }
 
+// GET /api/census/sheets/limit - returns the character sheet limit for frontend
+export async function GET_LIMIT() {
+  return NextResponse.json({ limit: CHARACTER_SHEET_LIMIT })
+}
+
 // POST to add a new sheet
 export async function POST(request: NextRequest) {
   try {
@@ -80,17 +87,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid Google Sheet URL' }, { status: 400 })
     }
 
-    // Check if user already has 5 sheets
+    // Check if user already has CHARACTER_SHEET_LIMIT sheets
     const { data: existingSheets, error: countError } = await supabaseAdmin
       .from(CHARACTER_TABLE_NAME)
       .select('id')
       .eq('user_id', userId)
-    
     if (countError) throw countError
-    
-    if (existingSheets && existingSheets.length >= 5) {
+    if (existingSheets && existingSheets.length >= CHARACTER_SHEET_LIMIT) {
       return NextResponse.json(
-        { error: 'You can only have up to 5 character sheets' },
+        { error: `You can only have up to ${CHARACTER_SHEET_LIMIT} character sheets` },
         { status: 400 }
       )
     }

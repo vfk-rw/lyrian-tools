@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { 
@@ -41,6 +41,7 @@ import {
   CHARACTER_STATUSES, 
   CharacterStatus
 } from '@/lib/supabase'
+import useSWR from 'swr'
 
 // Extending the Session types to include Discord ID
 type ExtendedUser = {
@@ -66,7 +67,29 @@ async function fetchCharacterName(sheetId: string): Promise<string | null> {
   }
 }
 
+// Helper to parse a sheet and return result
+async function parseSheet(sheetId: string): Promise<{ name: string | null, error?: string }> {
+  try {
+    const response = await fetch(`/api/census/sheets/${sheetId}/parse`, { method: 'POST' })
+    const data = await response.json()
+    if (!response.ok) {
+      return { name: null, error: data.error || 'Parse failed' }
+    }
+    return { name: data.info?.name || null }
+  } catch (e: any) {
+    return { name: null, error: e.message || 'Parse failed' }
+  }
+}
+
+// Fetch the backend limit dynamically
+const fetcher = (url: string) => fetch(url).then(res => res.json())
+function useCharacterSheetLimit() {
+  const { data } = useSWR<{ limit: number }>('/api/census/sheets/limit', fetcher)
+  return data?.limit ?? 50
+}
+
 export default function ManageCharacterSheetsPage() {
+  const CHARACTER_SHEET_LIMIT = useCharacterSheetLimit()
   const { data: session, status } = useSession()
   const router = useRouter()
   const [sheets, setSheets] = useState<CharacterSheet[]>([])
@@ -81,6 +104,9 @@ export default function ManageCharacterSheetsPage() {
   const [parseError, setParseError] = useState<string | null>(null)
   const [isParseDialogOpen, setIsParseDialogOpen] = useState(false)
   const [characterNames, setCharacterNames] = useState<Record<string, string | null>>({})
+  const [parseAllResults, setParseAllResults] = useState<{ success: string[]; failed: { url: string; error: string }[] }>({ success: [], failed: [] })
+  const [isParsingAll, setIsParsingAll] = useState(false)
+  const parseAllRef = useRef(false)
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -145,8 +171,8 @@ export default function ManageCharacterSheetsPage() {
       return
     }
 
-    if (sheets.length >= 50) {
-      toast.error('You can only have up to 50 character sheets')
+    if (sheets.length >= CHARACTER_SHEET_LIMIT) {
+      toast.error(`You can only have up to ${CHARACTER_SHEET_LIMIT} character sheets`)
       return
     }
 
@@ -267,6 +293,26 @@ export default function ManageCharacterSheetsPage() {
     }
   }
 
+  // Parse all new sheets not imported
+  async function parseAllNewSheets() {
+    setIsParsingAll(true)
+    parseAllRef.current = true
+    const notImported = sheets.filter(sheet => !characterNames[sheet.id])
+    const results = await Promise.all(
+      notImported.map(async (sheet) => {
+        const result = await parseSheet(sheet.id)
+        return { ...result, url: sheet.sheet_url }
+      })
+    )
+    const success = results.filter(r => r.name).map(r => r.name as string)
+    const failed = results.filter(r => !r.name).map(r => ({ url: r.url, error: r.error || 'Unknown error' }))
+    setParseAllResults({ success, failed })
+    setIsParsingAll(false)
+    parseAllRef.current = false
+    // Optionally, reload character names after parsing
+    fetchUserSheets()
+  }
+
   if (status === "loading" || loading) {
     return <div className="flex items-center justify-center h-screen">Loading...</div>
   }
@@ -312,8 +358,27 @@ export default function ManageCharacterSheetsPage() {
             <CardHeader>
               <CardTitle>Manage Character Sheets</CardTitle>
               <CardDescription>
-                You can add up to 50 character sheets and manage their status.
+                You can add up to {CHARACTER_SHEET_LIMIT} character sheets and manage their status.
               </CardDescription>
+              <div className="mt-4 flex gap-4 items-center">
+                <Button
+                  variant="secondary"
+                  onClick={parseAllNewSheets}
+                  disabled={isParsingAll || sheets.filter(sheet => !characterNames[sheet.id]).length === 0}
+                >
+                  {isParsingAll ? 'Parsing...' : 'Parse all new'}
+                </Button>
+                {parseAllResults.success.length > 0 && (
+                  <div className="text-green-700 text-sm">
+                    Parsed: {parseAllResults.success.join(', ')}
+                  </div>
+                )}
+                {parseAllResults.failed.length > 0 && (
+                  <div className="text-red-700 text-sm">
+                    Failed: {parseAllResults.failed.map(f => f.url + (f.error ? ` (${f.error})` : '')).join(', ')}
+                  </div>
+                )}
+              </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -401,9 +466,9 @@ export default function ManageCharacterSheetsPage() {
                 <div className="border p-4 rounded-md">
                   <h3 className="text-lg font-medium mb-4">Add New Character Sheet</h3>
                   
-                  {sheets.length >= 50 ? (
+                  {sheets.length >= CHARACTER_SHEET_LIMIT ? (
                     <p className="text-amber-600">
-                      You've reached the maximum limit of 50 character sheets.
+                      You've reached the maximum limit of {CHARACTER_SHEET_LIMIT} character sheets.
                     </p>
                   ) : (
                     <div className="space-y-4">
