@@ -76,6 +76,19 @@ function parseCsv(csv: string): string[][] {
   return (result.data as any) as string[][]
 }
 
+// Helper to sanitize text fields for DB
+function sanitizeTextField(input: string, maxLength = 32): string {
+  if (!input) return '';
+  // Remove control characters and non-printable unicode
+  let sanitized = input.replace(/[\x00-\x1F\x7F-\x9F]/g, '');
+  // Remove suspicious SQL patterns (very basic)
+  sanitized = sanitized.replace(/(--|;|\/\*|\*\/|DROP|SELECT|INSERT|DELETE|UPDATE|CREATE|ALTER|EXEC|UNION)/gi, '');
+  // Remove non-ASCII (optional, or use .normalize('NFKC') for unicode normalization)
+  sanitized = sanitized.replace(/[^\x20-\x7E]/g, '');
+  // Trim and limit length
+  return sanitized.trim().slice(0, maxLength);
+}
+
 // Helper to extract character info from CSV
 function extractCharacterInfo(rows: string[][]) {
   let name = '', race = '', sub_race = '', spirit_core: number | null = null
@@ -94,7 +107,12 @@ function extractCharacterInfo(rows: string[][]) {
         if (!isNaN(num)) spirit_core = num
       }
       if (name && race && sub_race && spirit_core) {
-        return { name, race, sub_race, spirit_core }
+        return {
+          name: sanitizeTextField(name),
+          race: sanitizeTextField(race),
+          sub_race: sanitizeTextField(sub_race),
+          spirit_core
+        }
       }
     }
   }
@@ -110,7 +128,12 @@ function extractCharacterInfo(rows: string[][]) {
     }
     if (spirit_core !== null) break
   }
-  return { name, race, sub_race, spirit_core }
+  return {
+    name: sanitizeTextField(name),
+    race: sanitizeTextField(race),
+    sub_race: sanitizeTextField(sub_race),
+    spirit_core
+  }
 }
 
 // Helper to extract class info from CSV rows
@@ -129,7 +152,11 @@ function extractClassInfo(rows: string[][]) {
     const level = parseInt(levelStr)
     if (isNaN(level)) break
     const tier = parseInt(tierStr)
-    classes.push({ class_name: name.trim(), class_tier: isNaN(tier) ? null : tier, class_level: level })
+    classes.push({
+      class_name: sanitizeTextField(name.trim()),
+      class_tier: isNaN(tier) ? null : tier,
+      class_level: level
+    })
   }
   return classes
 }

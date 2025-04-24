@@ -34,4 +34,5 @@ export interface CharacterSheet {
   sheet_url: string;
   status: CharacterStatus;
   created_at: string;
+  updated_at: string; // Added to match DB schema and usage
 }

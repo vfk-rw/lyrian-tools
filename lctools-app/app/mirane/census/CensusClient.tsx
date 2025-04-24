@@ -54,13 +54,19 @@ export default function CensusClient({
   const [classFilter, setClassFilter] = useState('all')
   const [drillRace, setDrillRace] = useState<string | null>(null)
 
+  // Helper to normalize blank/null values
+  function safe(val: any, fallback = 'Unknown') {
+    if (val === null || val === undefined || (typeof val === 'string' && val.trim() === '')) return fallback
+    return val
+  }
+
   const filtered = useMemo(
     () =>
       data.filter(
         (d) =>
-          d.name.toLowerCase().includes(nameFilter.toLowerCase()) &&
-          (raceFilter !== 'all' ? d.race === raceFilter : true) &&
-          (classFilter !== 'all' ? d.classes.includes(classFilter) : true)
+          safe(d.name, '').toLowerCase().includes(nameFilter.toLowerCase()) &&
+          (raceFilter !== 'all' ? safe(d.race) === raceFilter : true) &&
+          (classFilter !== 'all' ? d.classes.filter(Boolean).includes(classFilter) : true)
       ),
     [data, nameFilter, raceFilter, classFilter]
   )
@@ -130,8 +136,8 @@ export default function CensusClient({
     [allClasses]
   )
 
-  const races = Array.from(new Set(data.map((d) => d.race)))
-  const classes = Array.from(new Set(data.flatMap((d) => d.classes)))
+  const races = Array.from(new Set(data.map((d) => safe(d.race)))).filter(Boolean)
+  const classes = Array.from(new Set(data.flatMap((d) => d.classes && d.classes.length ? d.classes.map((c) => safe(c)) : ['Unknown']))).filter(Boolean)
 
   return (
     <div className="space-y-8 p-4">
@@ -258,7 +264,7 @@ export default function CensusClient({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All</SelectItem>
-              {races.map((r) => (
+              {races.filter(Boolean).map((r) => (
                 <SelectItem key={r} value={r}>
                   {r}
                 </SelectItem>
@@ -271,7 +277,7 @@ export default function CensusClient({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All</SelectItem>
-              {classes.map((c) => (
+              {classes.filter(Boolean).map((c) => (
                 <SelectItem key={c} value={c}>
                   {c}
                 </SelectItem>
@@ -298,12 +304,12 @@ export default function CensusClient({
                 onClick={() => window.open(d.sheetUrl, '_blank')}
                 className="cursor-pointer hover:bg-gray-100"
               >
-                <TableCell>{d.name}</TableCell>
-                <TableCell>{d.race}</TableCell>
-                <TableCell>{d.subRace}</TableCell>
-                <TableCell>{d.spiritCore}</TableCell>
-                <TableCell>{d.status}</TableCell>
-                <TableCell>{d.classes.join(', ')}</TableCell>
+                <TableCell>{safe(d.name)}</TableCell>
+                <TableCell>{safe(d.race)}</TableCell>
+                <TableCell>{safe(d.subRace)}</TableCell>
+                <TableCell>{d.spiritCore ?? 'Unknown'}</TableCell>
+                <TableCell>{safe(d.status)}</TableCell>
+                <TableCell>{Array.isArray(d.classes) && d.classes.length > 0 ? d.classes.filter(Boolean).map((c) => safe(c)).join(', ') : 'Unknown'}</TableCell>
               </TableRow>
             ))}
           </TableBody>
