@@ -88,6 +88,25 @@ function useCharacterSheetLimit() {
   return data?.limit ?? 50
 }
 
+// Utility to extract spreadsheetId and gid from a Google Sheets URL
+function extractSheetIds(url: string): { spreadsheetId: string | null, gid: string | null } {
+  try {
+    const u = new URL(url);
+    const match = u.pathname.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+    const spreadsheetId = match ? match[1] : null;
+    let gid = null;
+    if (u.searchParams.has('gid')) {
+      gid = u.searchParams.get('gid');
+    } else {
+      // Default to '0' if not present (first sheet)
+      gid = '0';
+    }
+    return { spreadsheetId, gid };
+  } catch {
+    return { spreadsheetId: null, gid: null };
+  }
+}
+
 export default function ManageCharacterSheetsPage() {
   const CHARACTER_SHEET_LIMIT = useCharacterSheetLimit()
   const { data: session, status } = useSession()
@@ -174,6 +193,23 @@ export default function ManageCharacterSheetsPage() {
     if (!isValidGoogleSheetUrl(newSheetUrl)) {
       setUrlError('Please enter a valid Google Sheets URL')
       toast.error('Please enter a valid Google Sheets URL')
+      return
+    }
+
+    // Duplicate GID check
+    const { spreadsheetId: newId, gid: newGid } = extractSheetIds(newSheetUrl)
+    if (!newId) {
+      setUrlError('Could not extract spreadsheet ID from URL')
+      toast.error('Could not extract spreadsheet ID from URL')
+      return
+    }
+    const duplicate = sheets.some(sheet => {
+      const { spreadsheetId, gid } = extractSheetIds(sheet.sheet_url)
+      return spreadsheetId === newId && gid === newGid
+    })
+    if (duplicate) {
+      setUrlError('A sheet with the same Google Sheet and tab (GID) already exists')
+      toast.error('A sheet with the same Google Sheet and tab (GID) already exists')
       return
     }
 
