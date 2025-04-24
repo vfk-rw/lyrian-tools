@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useSession } from "next-auth/react"
 import {
   Dialog,
@@ -13,54 +13,16 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 
-type DiscordRole = {
-  id: string
-  name: string
-  color: number
-}
-
 export function UserProfileDialog() {
   const { data: session } = useSession()
-  const [roles, setRoles] = useState<DiscordRole[]>([])
   const [open, setOpen] = useState(false)
-  
-  useEffect(() => {
-    // Fetch role details when dialog opens
-    if (open && session?.user?.accessToken && session?.user?.roles) {
-      const fetchRoleDetails = async () => {
-        const guildId = process.env.NEXT_PUBLIC_DISCORD_SERVER_ID || session?.user?.guildId
-        if (!guildId) return
-        
-        try {
-          // Try to get guild roles to enrich the role data
-          const response = await fetch(`https://discord.com/api/guilds/${guildId}/roles`, {
-            headers: {
-              Authorization: `Bearer ${session.user.accessToken}`,
-            }
-          })
-          
-          if (response.ok) {
-            const guildRoles = await response.json()
-            // Filter to only include user's roles with details
-            const userRoleDetails = guildRoles.filter((role: DiscordRole) => 
-              session.user.roles.includes(role.id)
-            )
-            setRoles(userRoleDetails)
-          }
-        } catch (error) {
-          console.error("Failed to fetch role details:", error)
-          // Fallback to basic role IDs
-          setRoles(session.user.roles.map((id: string) => ({ id, name: id, color: 0 })))
-        }
-      }
-      
-      fetchRoleDetails()
-    }
-  }, [open, session])
   
   if (!session) {
     return null
   }
+  
+  // Get user roles from session
+  const userRoles = (session.user as any)?.roles || []
   
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -100,29 +62,25 @@ export function UserProfileDialog() {
           
           <div>
             <h4 className="text-sm font-medium mb-2">Server</h4>
-            <p className="text-sm">{session.user?.guildName || "Unknown server"}</p>
+            <p className="text-sm">{(session.user as any)?.guildName || "Unknown server"}</p>
           </div>
           
           <div>
             <h4 className="text-sm font-medium mb-2">Roles</h4>
             <div className="flex flex-wrap gap-2">
-              {roles.length > 0 ? (
-                roles.map((role) => (
-                  <Badge 
-                    key={role.id} 
-                    style={{ backgroundColor: role.color ? `#${role.color.toString(16)}` : undefined }}
-                  >
-                    {role.name}
+              {userRoles.length > 0 ? (
+                userRoles.map((roleId: string) => (
+                  <Badge key={roleId} variant="outline" className="overflow-hidden text-ellipsis">
+                    {roleId}
                   </Badge>
-                ))
-              ) : session.user?.roles ? (
-                session.user.roles.map((roleId: string) => (
-                  <Badge key={roleId}>{roleId}</Badge>
                 ))
               ) : (
                 <span className="text-sm text-slate-500">No roles found</span>
               )}
             </div>
+            <p className="text-xs mt-2 text-slate-500">
+              Note: Showing role IDs. Role names will be available in a future update.
+            </p>
           </div>
         </div>
       </DialogContent>
