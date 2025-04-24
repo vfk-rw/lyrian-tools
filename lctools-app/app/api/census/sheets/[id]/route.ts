@@ -131,7 +131,7 @@ export async function DELETE(
 
 // GET to fetch character info for a sheet/character id
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
