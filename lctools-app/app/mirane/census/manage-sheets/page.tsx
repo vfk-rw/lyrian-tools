@@ -108,6 +108,12 @@ export default function ManageCharacterSheetsPage() {
   const [isParsingAll, setIsParsingAll] = useState(false)
   const parseAllRef = useRef(false)
 
+  // Pagination state
+  const [page, setPage] = useState(1)
+  const PAGE_SIZE = 10
+  const totalPages = Math.ceil(sheets.length / PAGE_SIZE)
+  const pagedSheets = sheets.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+
   // Redirect if not authenticated
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -382,90 +388,9 @@ export default function ManageCharacterSheetsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
-                {/* Current Sheets */}
-                <div>
-                  <h3 className="text-lg font-medium mb-4">Your Character Sheets</h3>
-                  {sheets.length === 0 ? (
-                    <p className="text-muted-foreground">You haven't added any character sheets yet.</p>
-                  ) : (
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Sheet Link</TableHead>
-                          <TableHead>Status</TableHead>
-                          <TableHead>Actions</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {sheets.map((sheet) => (
-                          <TableRow key={sheet.id}>
-                            <TableCell>
-                              <div className="flex flex-col">
-                                <a 
-                                  href={sheet.sheet_url} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="text-blue-600 hover:underline"
-                                >
-                                  View Sheet
-                                </a>
-                                <span className="text-xs text-muted-foreground">
-                                  {characterNames[sheet.id] === undefined
-                                    ? '...'
-                                    : characterNames[sheet.id] || 'not imported'}
-                                </span>
-                              </div>
-                            </TableCell>
-                            <TableCell>
-                              <RadioGroup
-                                value={sheet.status}
-                                onValueChange={(value) => 
-                                  updateSheetStatus(sheet.id, value as CharacterStatus)
-                                }
-                                className="flex space-x-3"
-                              >
-                                {CHARACTER_STATUSES.map((status) => (
-                                  <div key={status} className="flex items-center space-x-1">
-                                    <RadioGroupItem value={status} id={`status-${sheet.id}-${status}`} />
-                                    <Label htmlFor={`status-${sheet.id}-${status}`} className="capitalize">
-                                      {status}
-                                    </Label>
-                                  </div>
-                                ))}
-                              </RadioGroup>
-                            </TableCell>
-                            <TableCell className="flex gap-2">
-                              <Button 
-                                variant="destructive" 
-                                size="sm"
-                                onClick={() => confirmDelete(sheet.id)}
-                              >
-                                Remove
-                              </Button>
-                              <Button
-                                variant="secondary"
-                                size="sm"
-                                onClick={() => testParseSheet(sheet.id)}
-                                disabled={isTesting}
-                              >
-                                {isTesting ? (
-                                  <span className="block w-4 h-4 border-2 border-t-transparent border-current rounded-full animate-spin" />
-                                ) : (
-                                  'Test Parsing'
-                                )}
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  )}
-                </div>
-
-                {/* Add New Sheet Form */}
-                <div className="border p-4 rounded-md">
+                {/* Add New Sheet Form - moved above list */}
+                <div className="border p-4 rounded-md mb-8">
                   <h3 className="text-lg font-medium mb-4">Add New Character Sheet</h3>
-                  
                   {sheets.length >= CHARACTER_SHEET_LIMIT ? (
                     <p className="text-amber-600">
                       You've reached the maximum limit of {CHARACTER_SHEET_LIMIT} character sheets.
@@ -488,7 +413,6 @@ export default function ManageCharacterSheetsPage() {
                         />
                         {urlError && <p className="text-sm text-red-500">{urlError}</p>}
                       </div>
-                      
                       <div className="space-y-2">
                         <Label>Character Status</Label>
                         <RadioGroup
@@ -506,13 +430,102 @@ export default function ManageCharacterSheetsPage() {
                           ))}
                         </RadioGroup>
                       </div>
-                      
-                      <Button 
-                        onClick={addCharacterSheet}
-                      >
-                        Add Character Sheet
-                      </Button>
+                      <Button onClick={addCharacterSheet}>Add Character Sheet</Button>
                     </div>
+                  )}
+                </div>
+                {/* Current Sheets with pagination and highlighting */}
+                <div>
+                  <h3 className="text-lg font-medium mb-4">Your Character Sheets</h3>
+                  {sheets.length === 0 ? (
+                    <p className="text-muted-foreground">You haven't added any character sheets yet.</p>
+                  ) : (
+                    <>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Sheet Link</TableHead>
+                            <TableHead>Status</TableHead>
+                            <TableHead>Actions</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {pagedSheets.map((sheet) => {
+                            const notImported = characterNames[sheet.id] === '' || characterNames[sheet.id] === null
+                            return (
+                              <TableRow key={sheet.id} className={notImported ? 'bg-yellow-100/60' : ''}>
+                                <TableCell>
+                                  <div className="flex flex-col">
+                                    <a 
+                                      href={sheet.sheet_url} 
+                                      target="_blank" 
+                                      rel="noopener noreferrer"
+                                      className="text-blue-600 hover:underline"
+                                    >
+                                      View Sheet
+                                    </a>
+                                    <span className={`text-xs ${notImported ? 'text-yellow-800 font-semibold' : 'text-muted-foreground'}`}>
+                                      {characterNames[sheet.id] === undefined
+                                        ? '...'
+                                        : characterNames[sheet.id] || 'not imported'}
+                                    </span>
+                                  </div>
+                                </TableCell>
+                                <TableCell>
+                                  <RadioGroup
+                                    value={sheet.status}
+                                    onValueChange={(value) => 
+                                      updateSheetStatus(sheet.id, value as CharacterStatus)
+                                    }
+                                    className="flex space-x-3"
+                                  >
+                                    {CHARACTER_STATUSES.map((status) => (
+                                      <div key={status} className="flex items-center space-x-1">
+                                        <RadioGroupItem value={status} id={`status-${sheet.id}-${status}`} />
+                                        <Label htmlFor={`status-${sheet.id}-${status}`} className="capitalize">
+                                          {status}
+                                        </Label>
+                                      </div>
+                                    ))}
+                                  </RadioGroup>
+                                </TableCell>
+                                <TableCell className="flex gap-2">
+                                  <Button 
+                                    variant="destructive" 
+                                    size="sm"
+                                    onClick={() => confirmDelete(sheet.id)}
+                                  >
+                                    Remove
+                                  </Button>
+                                  <Button
+                                    variant="secondary"
+                                    size="sm"
+                                    onClick={() => testParseSheet(sheet.id)}
+                                    disabled={isTesting}
+                                  >
+                                    {isTesting ? (
+                                      <span className="block w-4 h-4 border-2 border-t-transparent border-current rounded-full animate-spin" />
+                                    ) : (
+                                      'Test Parsing'
+                                    )}
+                                  </Button>
+                                </TableCell>
+                              </TableRow>
+                            )
+                          })}
+                        </TableBody>
+                      </Table>
+                      {/* Pagination controls */}
+                      <div className="flex justify-center items-center gap-4 mt-4">
+                        <Button size="sm" variant="outline" onClick={() => setPage(page - 1)} disabled={page === 1}>
+                          Previous
+                        </Button>
+                        <span className="text-sm">Page {page} of {totalPages}</span>
+                        <Button size="sm" variant="outline" onClick={() => setPage(page + 1)} disabled={page === totalPages}>
+                          Next
+                        </Button>
+                      </div>
+                    </>
                   )}
                 </div>
               </div>
