@@ -69,11 +69,11 @@ export const authOptions: NextAuthOptions = {
     
     async session({ session, token }) {
       if (session.user) {
-        (session.user as unknown).id = token.sub;
-        (session.user as unknown).image = token.picture;
-        (session.user as unknown).guildName = token.guildName;
-        (session.user as unknown).roles = token.roles;
-        (session.user as unknown).accessToken = token.accessToken;
+        (session.user as { id?: string }).id = token.sub;
+        (session.user as { image?: string | null }).image = typeof token.picture === 'string' || token.picture === null ? token.picture : undefined;
+        (session.user as { guildName?: string }).guildName = typeof token.guildName === 'string' ? token.guildName : undefined;
+        (session.user as { roles?: string[] }).roles = Array.isArray(token.roles) ? token.roles as string[] : undefined;
+        (session.user as { accessToken?: string }).accessToken = typeof token.accessToken === 'string' ? token.accessToken : undefined;
       }
       return session;
     },

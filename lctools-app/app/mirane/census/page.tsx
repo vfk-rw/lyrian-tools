@@ -24,6 +24,10 @@ type ProcessedRow = {
   classes: string[]
 }
 
+function hasErrorString(obj: unknown): obj is { error: string } {
+  return typeof obj === 'object' && obj !== null && 'error' in obj && typeof (obj as { error: unknown }).error === 'string';
+}
+
 export default function MiraneCensusPage() {
   const [data, setData] = useState<ProcessedRow[] | null>(null)
   const [loading, setLoading] = useState(true)
@@ -34,7 +38,13 @@ export default function MiraneCensusPage() {
       try {
         const res = await fetch('/api/census/data')
         const raw = await res.json()
-        if (!res.ok) throw new Error((raw as unknown).error || res.statusText)
+        if (!res.ok) {
+          let errorMsg = res.statusText;
+          if (hasErrorString(raw)) {
+            errorMsg = raw.error;
+          }
+          throw new Error(errorMsg);
+        }
         const json: RawRow[] = raw
         setData(
           json.map((row) => ({
@@ -49,7 +59,11 @@ export default function MiraneCensusPage() {
           }))
         )
       } catch (e: unknown) {
-        setError((e as Error).message)
+        if (e instanceof Error) {
+          setError(e.message)
+        } else {
+          setError('An unknown error occurred')
+        }
       } finally {
         setLoading(false)
       }
