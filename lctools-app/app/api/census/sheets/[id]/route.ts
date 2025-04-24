@@ -128,3 +128,35 @@ export async function DELETE(
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
+
+// GET to fetch character info for a sheet/character id
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    if (!supabaseUrl || !supabaseServiceKey) {
+      return NextResponse.json(
+        { error: 'Server configuration error. Missing Supabase credentials.' },
+        { status: 500 }
+      )
+    }
+    const { id } = params
+    // Fetch character and join character_info
+    const { data, error } = await supabaseAdmin
+      .from('characters')
+      .select('id, character_info(name)')
+      .eq('id', id)
+      .single()
+    if (error) {
+      if (error.code === 'PGRST116') {
+        // Not found
+        return NextResponse.json({}, { status: 404 })
+      }
+      throw error
+    }
+    return NextResponse.json(data || {})
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { 
@@ -50,6 +50,22 @@ type ExtendedUser = {
   image?: string | null;
 };
 
+// Helper to fetch character info for a sheet
+async function fetchCharacterName(sheetId: string): Promise<string | null> {
+  try {
+    const res = await fetch(`/api/census/sheets/${sheetId}`)
+    if (!res.ok) return null
+    const data = await res.json()
+    // If info is present, return name
+    if (data && data.character_info && data.character_info.length > 0) {
+      return data.character_info[0].name || null
+    }
+    return null
+  } catch {
+    return null
+  }
+}
+
 export default function ManageCharacterSheetsPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -64,6 +80,7 @@ export default function ManageCharacterSheetsPage() {
   const [parseResult, setParseResult] = useState<{ info: any; classes: any } | null>(null)
   const [parseError, setParseError] = useState<string | null>(null)
   const [isParseDialogOpen, setIsParseDialogOpen] = useState(false)
+  const [characterNames, setCharacterNames] = useState<Record<string, string | null>>({})
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -99,6 +116,23 @@ export default function ManageCharacterSheetsPage() {
     }
   }
 
+  // Fetch character names for all sheets
+  const loadCharacterNames = useCallback(async (sheets: CharacterSheet[]) => {
+    const entries = await Promise.all(
+      sheets.map(async (sheet) => {
+        const name = await fetchCharacterName(sheet.id)
+        return [sheet.id, name] as [string, string | null]
+      })
+    )
+    setCharacterNames(Object.fromEntries(entries))
+  }, [])
+
+  useEffect(() => {
+    if (sheets.length > 0) {
+      loadCharacterNames(sheets)
+    }
+  }, [sheets, loadCharacterNames])
+
   async function addCharacterSheet() {
     if (status !== "authenticated") {
       toast.error('You must be logged in to add a character sheet')
@@ -111,8 +145,8 @@ export default function ManageCharacterSheetsPage() {
       return
     }
 
-    if (sheets.length >= 5) {
-      toast.error('You can only have up to 5 character sheets')
+    if (sheets.length >= 50) {
+      toast.error('You can only have up to 50 character sheets')
       return
     }
 
@@ -278,7 +312,7 @@ export default function ManageCharacterSheetsPage() {
             <CardHeader>
               <CardTitle>Manage Character Sheets</CardTitle>
               <CardDescription>
-                You can add up to 5 character sheets and manage their status.
+                You can add up to 50 character sheets and manage their status.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -301,14 +335,21 @@ export default function ManageCharacterSheetsPage() {
                         {sheets.map((sheet) => (
                           <TableRow key={sheet.id}>
                             <TableCell>
-                              <a 
-                                href={sheet.sheet_url} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
-                              >
-                                View Sheet
-                              </a>
+                              <div className="flex flex-col">
+                                <a 
+                                  href={sheet.sheet_url} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 hover:underline"
+                                >
+                                  View Sheet
+                                </a>
+                                <span className="text-xs text-muted-foreground">
+                                  {characterNames[sheet.id] === undefined
+                                    ? '...'
+                                    : characterNames[sheet.id] || 'not imported'}
+                                </span>
+                              </div>
                             </TableCell>
                             <TableCell>
                               <RadioGroup
@@ -360,9 +401,9 @@ export default function ManageCharacterSheetsPage() {
                 <div className="border p-4 rounded-md">
                   <h3 className="text-lg font-medium mb-4">Add New Character Sheet</h3>
                   
-                  {sheets.length >= 5 ? (
+                  {sheets.length >= 50 ? (
                     <p className="text-amber-600">
-                      You've reached the maximum limit of 5 character sheets.
+                      You've reached the maximum limit of 50 character sheets.
                     </p>
                   ) : (
                     <div className="space-y-4">
