@@ -13,6 +13,10 @@ import {
   Anvil,
   FlaskRound
 } from "lucide-react"
+import { useSession, signIn, signOut } from "next-auth/react";
+import { Avatar } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { UserProfileDialog } from "./user-profile-dialog";
 
 import {
   Collapsible,
@@ -89,6 +93,9 @@ const navItems = [
 ];
 
 export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: session, status } = useSession();
+  const user = session?.user;
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="pb-2">
@@ -148,6 +155,18 @@ export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
+        <div className="px-2 text-xs text-muted-foreground mb-2">
+          {status === "loading" ? (
+            <p>Loading...</p>
+          ) : user ? (
+            <div className="flex items-center gap-2">
+              <UserProfileDialog />
+              <Button size="sm" variant="outline" onClick={() => signOut()} className="ml-auto">Logout</Button>
+            </div>
+          ) : (
+            <Button size="sm" variant="outline" onClick={() => signIn("discord")}>Login with Discord</Button>
+          )}
+        </div>
         <div className="px-2 text-xs text-muted-foreground">
           <p>© 2025 TTRPG Tools</p>
         </div>
