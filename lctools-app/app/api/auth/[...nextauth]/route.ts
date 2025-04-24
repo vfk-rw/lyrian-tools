@@ -4,7 +4,7 @@ import type { NextAuthOptions } from "next-auth";
 
 const DISCORD_GUILD_ID = process.env.DISCORD_SERVER_ID;
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID!,
