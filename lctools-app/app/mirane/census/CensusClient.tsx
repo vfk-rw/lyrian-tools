@@ -144,6 +144,22 @@ export default function CensusClient({
     return { bin: `${binStart}-${binEnd}`, count }
   })
 
+  // Reverse cumulative spirit core chart data
+  const spiritThresholds = [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000]
+  const spiritReverseCumulative = useMemo(() => {
+    const under1000 = filtered.filter(d => d.spiritCore < 1000).length
+    const result = [
+      { label: '<1000', count: under1000 }
+    ]
+    for (const threshold of spiritThresholds) {
+      result.push({
+        label: `≥${threshold}`,
+        count: filtered.filter(d => d.spiritCore >= threshold).length
+      })
+    }
+    return result
+  }, [filtered])
+
   const allClasses = useMemo(() => filtered.flatMap((d) => d.classes), [filtered])
   const classCounts = useMemo(
     () =>
@@ -257,6 +273,18 @@ export default function CensusClient({
                       <XAxis dataKey="bin" label={{ value: 'Spirit Core', position: 'insideBottom', offset: -5 }} />
                       <YAxis allowDecimals={false} label={{ value: 'Count', angle: -90, position: 'insideLeft' }} />
                       <Bar dataKey="count" fill={COLORS[1]} />
+                      <ChartTooltip />
+                    </BarChart>
+                  </ChartContainer>
+                </div>
+                {/* Reverse cumulative bar chart */}
+                <div className="flex-1 mt-8" style={{ height: '100%' }}>
+                  <ChartContainer id="spirit-cumulative" config={{}}>
+                    <BarChart data={spiritReverseCumulative} width={undefined} height={220} style={{ width: '100%' }}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="label" label={{ value: 'Spirit Core', position: 'insideBottom', offset: -5 }} />
+                      <YAxis allowDecimals={false} label={{ value: 'Count', angle: -90, position: 'insideLeft' }} />
+                      <Bar dataKey="count" fill={COLORS[2]} />
                       <ChartTooltip />
                     </BarChart>
                   </ChartContainer>
