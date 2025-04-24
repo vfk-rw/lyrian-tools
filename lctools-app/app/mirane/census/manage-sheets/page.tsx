@@ -200,6 +200,21 @@ export default function ManageCharacterSheetsPage() {
     setIsDeleteDialogOpen(true)
   }
 
+  async function testParseSheet(sheetId: string) {
+    try {
+      const response = await fetch(`/api/census/sheets/${sheetId}/parse`, {
+        method: 'POST',
+      })
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to parse character sheet')
+      }
+      toast.success('Sheet parsed and saved!')
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to parse character sheet')
+    }
+  }
+
   if (status === "loading" || loading) {
     return <div className="flex items-center justify-center h-screen">Loading...</div>
   }
@@ -295,13 +310,20 @@ export default function ManageCharacterSheetsPage() {
                                 ))}
                               </RadioGroup>
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="flex gap-2">
                               <Button 
                                 variant="destructive" 
                                 size="sm"
                                 onClick={() => confirmDelete(sheet.id)}
                               >
                                 Remove
+                              </Button>
+                              <Button 
+                                variant="secondary"
+                                size="sm"
+                                onClick={() => testParseSheet(sheet.id)}
+                              >
+                                Test Parsing
                               </Button>
                             </TableCell>
                           </TableRow>
