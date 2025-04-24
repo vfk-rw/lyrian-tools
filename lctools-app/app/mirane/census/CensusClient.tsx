@@ -75,9 +75,9 @@ export default function CensusClient({
   }, [showClassChart])
 
   // Helper to normalize blank/null values
-  function safe(val: any, fallback = 'Unknown') {
+  function safe(val: unknown, fallback = 'Unknown'): string {
     if (val === null || val === undefined || (typeof val === 'string' && val.trim() === '')) return fallback
-    return val
+    return String(val)
   }
 
   const filtered = useMemo(
@@ -124,17 +124,6 @@ export default function CensusClient({
         }, {} as Record<string, number>)
     )
   }, [filtered, drillRace])
-
-  const spiritCounts = useMemo(
-    () =>
-      Object.entries(
-        filtered.reduce((acc, d) => {
-          acc[d.spiritCore] = (acc[d.spiritCore] || 0) + 1
-          return acc
-        }, {} as Record<number, number>)
-      ).map(([k, v]) => ({ spirit: +k, count: v })),
-    [filtered]
-  )
 
   // Spirit core histogram binning: bins of 100, from 800 to 2000
   const spiritBins = Array.from({ length: ((2000 - 800) / 100) + 1 }, (_, i) => 800 + i * 100)

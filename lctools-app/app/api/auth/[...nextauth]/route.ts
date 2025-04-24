@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt({ token, account, profile }) {
+    async jwt({ token, account }) {
       // Add Discord information to the token
       if (account) {
         token.accessToken = account.access_token;
@@ -31,7 +31,7 @@ export const authOptions: NextAuthOptions = {
         
         if (guildsRes.ok) {
           const guilds = await guildsRes.json();
-          const targetGuild = guilds.find((g: any) => g.id === DISCORD_GUILD_ID);
+          const targetGuild = guilds.find((g: unknown) => typeof g === 'object' && g !== null && 'id' in g && g.id === DISCORD_GUILD_ID);
           
           if (targetGuild) {
             token.guildName = targetGuild.name;
@@ -63,17 +63,17 @@ export const authOptions: NextAuthOptions = {
       if (!res.ok) return false;
       const guilds = await res.json();
       // Check if the user is in the required guild
-      const inGuild = guilds.some((g: any) => g.id === DISCORD_GUILD_ID);
+      const inGuild = guilds.some((g: unknown) => typeof g === 'object' && g !== null && 'id' in g && g.id === DISCORD_GUILD_ID);
       return inGuild;
     },
     
     async session({ session, token }) {
       if (session.user) {
-        (session.user as any).id = token.sub;
-        (session.user as any).image = token.picture;
-        (session.user as any).guildName = token.guildName;
-        (session.user as any).roles = token.roles;
-        (session.user as any).accessToken = token.accessToken;
+        (session.user as unknown).id = token.sub;
+        (session.user as unknown).image = token.picture;
+        (session.user as unknown).guildName = token.guildName;
+        (session.user as unknown).roles = token.roles;
+        (session.user as unknown).accessToken = token.accessToken;
       }
       return session;
     },

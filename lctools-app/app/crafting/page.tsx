@@ -1,4 +1,3 @@
-import { LCToolsSidebar } from "@/components/lctools-sidebar"
 import LCToolsSidebarClient from "@/components/lctools-sidebar-client";
 import {
   Breadcrumb,
@@ -52,7 +51,7 @@ export default function CraftingPage() {
             </CardHeader>
             <CardContent>
               <p className="mb-4">
-                Welcome to the crafting hub. Here you'll find tools and resources for various crafting systems used in your TTRPG campaigns.
+                Welcome to the crafting hub. Here you&apos;ll find tools and resources for various crafting systems used in your TTRPG campaigns.
               </p>
               <p className="mb-4">
                 Select a crafting system from the menu to get started:

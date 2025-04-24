@@ -6,7 +6,6 @@ import {
   Info,
   Hammer,
   Map,
-  Scroll,
   Users,
   CalendarDays,
   ChevronRight,
@@ -15,7 +14,6 @@ import {
   FileSpreadsheet
 } from "lucide-react"
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { UserProfileDialog } from "./user-profile-dialog";
 

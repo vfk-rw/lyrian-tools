@@ -15,7 +15,7 @@ export function isValidGoogleSheetUrl(url: string): boolean {
     const urlObj = new URL(url);
     return urlObj.hostname === 'docs.google.com' && 
            (urlObj.pathname.includes('/spreadsheets/') || urlObj.pathname.includes('/document/'));
-  } catch (e) {
+  } catch {
     return false;
   }
 }

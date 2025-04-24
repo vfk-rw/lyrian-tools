@@ -42,9 +42,9 @@ export async function GET() {
     if (error) throw error
 
     return NextResponse.json(data, { status: 200 })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error fetching sheets:', error)
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ error: (error as Error).message }, { status: 500 })
   }
 }
 
@@ -120,8 +120,8 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(data, { status: 201 })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error adding sheet:', error)
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ error: (error as Error).message }, { status: 500 })
   }
 }

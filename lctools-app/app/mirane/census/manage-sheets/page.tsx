@@ -8,7 +8,7 @@ import {
   BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator 
 } from "@/components/ui/breadcrumb"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
@@ -17,7 +17,6 @@ import {
   Table, TableBody, TableCell, TableHead, 
   TableHeader, TableRow 
 } from "@/components/ui/table"
-import { LCToolsSidebar } from "@/components/lctools-sidebar"
 import LCToolsSidebarClient from "@/components/lctools-sidebar-client";
 import {
   SidebarInset,
@@ -42,14 +41,6 @@ import {
   CharacterStatus
 } from '@/lib/supabase'
 import useSWR from 'swr'
-
-// Extending the Session types to include Discord ID
-type ExtendedUser = {
-  id: string;
-  name?: string | null;
-  email?: string | null;
-  image?: string | null;
-};
 
 // Helper to fetch character info for a sheet
 async function fetchCharacterName(sheetId: string): Promise<string | null> {
@@ -76,14 +67,15 @@ async function parseSheet(sheetId: string): Promise<{ name: string | null, error
       return { name: null, error: data.error || 'Parse failed' }
     }
     return { name: data.info?.name || null }
-  } catch (e: any) {
-    return { name: null, error: e.message || 'Parse failed' }
+  } catch (e: unknown) {
+    return { name: null, error: (e as Error).message || 'Parse failed' }
   }
 }
 
 // Fetch the backend limit dynamically
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 function useCharacterSheetLimit() {
+   
   const { data } = useSWR<{ limit: number }>('/api/census/sheets/limit', fetcher)
   return data?.limit ?? 50
 }
@@ -109,7 +101,7 @@ function extractSheetIds(url: string): { spreadsheetId: string | null, gid: stri
 
 export default function ManageCharacterSheetsPage() {
   const CHARACTER_SHEET_LIMIT = useCharacterSheetLimit()
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const router = useRouter()
   const [sheets, setSheets] = useState<CharacterSheet[]>([])
   const [loading, setLoading] = useState(true)
@@ -119,7 +111,7 @@ export default function ManageCharacterSheetsPage() {
   const [deleteSheetId, setDeleteSheetId] = useState<string | null>(null)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const [isTesting, setIsTesting] = useState(false)
-  const [parseResult, setParseResult] = useState<{ info: any; classes: any } | null>(null)
+  const [parseResult, setParseResult] = useState<{ info: unknown; classes: unknown } | null>(null)
   const [parseError, setParseError] = useState<string | null>(null)
   const [isParseDialogOpen, setIsParseDialogOpen] = useState(false)
   const [characterNames, setCharacterNames] = useState<Record<string, string | null>>({})
@@ -159,8 +151,8 @@ export default function ManageCharacterSheetsPage() {
       
       const data = await response.json()
       setSheets(data || [])
-    } catch (error: any) {
-      console.error('Error fetching sheets:', error.message)
+    } catch (error: unknown) {
+      console.error('Error fetching sheets:', (error as Error).message)
       toast.error('Failed to load character sheets')
     } finally {
       setLoading(false)
@@ -243,9 +235,9 @@ export default function ManageCharacterSheetsPage() {
       setNewSheetStatus("active")
       setUrlError(null)
       toast.success('Character sheet added successfully')
-    } catch (error: any) {
-      console.error('Error adding sheet:', error.message)
-      toast.error(error.message || 'Failed to add character sheet')
+    } catch (error: unknown) {
+      console.error('Error adding sheet:', (error as Error).message)
+      toast.error((error as Error).message || 'Failed to add character sheet')
     }
   }
 
@@ -264,15 +256,15 @@ export default function ManageCharacterSheetsPage() {
         throw new Error(errorData.error || 'Failed to update character sheet')
       }
 
-      const data = await response.json()
+      await response.json()
       
       // Update the sheet in state
       setSheets(sheets.map(sheet => 
         sheet.id === sheetId ? { ...sheet, status } : sheet
       ))
       toast.success('Character sheet status updated')
-    } catch (error: any) {
-      console.error('Error updating sheet status:', error.message)
+    } catch (error: unknown) {
+      console.error('Error updating sheet status:', (error as Error).message)
       toast.error('Failed to update character sheet')
     }
   }
@@ -295,8 +287,8 @@ export default function ManageCharacterSheetsPage() {
       setDeleteSheetId(null)
       setIsDeleteDialogOpen(false)
       toast.success('Character sheet removed')
-    } catch (error: any) {
-      console.error('Error deleting sheet:', error.message)
+    } catch (error: unknown) {
+      console.error('Error deleting sheet:', (error as Error).message)
       toast.error('Failed to remove character sheet')
     }
   }
@@ -325,11 +317,11 @@ export default function ManageCharacterSheetsPage() {
         toast.success('Sheet parsed and saved!')
       }
       setIsParseDialogOpen(true)
-    } catch (error: any) {
+    } catch (error: unknown) {
       setParseResult(null)
-      setParseError(error.message || 'Failed to parse character sheet')
+      setParseError((error as Error).message || 'Failed to parse character sheet')
       setIsParseDialogOpen(true)
-      toast.error(error.message || 'Failed to parse character sheet')
+      toast.error((error as Error).message || 'Failed to parse character sheet')
     } finally {
       setIsTesting(false)
     }
@@ -429,7 +421,7 @@ export default function ManageCharacterSheetsPage() {
                   <h3 className="text-lg font-medium mb-4">Add New Character Sheet</h3>
                   {sheets.length >= CHARACTER_SHEET_LIMIT ? (
                     <p className="text-amber-600">
-                      You've reached the maximum limit of {CHARACTER_SHEET_LIMIT} character sheets.
+                      You&apos;ve reached the maximum limit of {CHARACTER_SHEET_LIMIT} character sheets.
                     </p>
                   ) : (
                     <div className="space-y-4">
@@ -474,7 +466,7 @@ export default function ManageCharacterSheetsPage() {
                 <div>
                   <h3 className="text-lg font-medium mb-4">Your Character Sheets</h3>
                   {sheets.length === 0 ? (
-                    <p className="text-muted-foreground">You haven't added any character sheets yet.</p>
+                    <p className="text-muted-foreground">You haven&apos;t added any character sheets yet.</p>
                   ) : (
                     <>
                       <Table>

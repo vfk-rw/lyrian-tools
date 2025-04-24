@@ -1,4 +1,3 @@
-import { LCToolsSidebar } from "@/components/lctools-sidebar"
 import LCToolsSidebarClient from "@/components/lctools-sidebar-client";
 import {
   Breadcrumb,

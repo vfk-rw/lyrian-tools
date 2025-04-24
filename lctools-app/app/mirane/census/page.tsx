@@ -34,7 +34,7 @@ export default function MiraneCensusPage() {
       try {
         const res = await fetch('/api/census/data')
         const raw = await res.json()
-        if (!res.ok) throw new Error((raw as any).error || res.statusText)
+        if (!res.ok) throw new Error((raw as unknown).error || res.statusText)
         const json: RawRow[] = raw
         setData(
           json.map((row) => ({
@@ -48,8 +48,8 @@ export default function MiraneCensusPage() {
             classes: row.character_class_info.map((c) => c.class_name),
           }))
         )
-      } catch (e: any) {
-        setError(e.message)
+      } catch (e: unknown) {
+        setError((e as Error).message)
       } finally {
         setLoading(false)
       }

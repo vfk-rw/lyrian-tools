@@ -40,8 +40,8 @@ async function fetchGoogleSheetCsv(csvUrl: string): Promise<string> {
     const gid = gidMatchForAll ? gidMatchForAll[1] : '0'
     // First fallback: export without gid param
     const baseExportUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/export?format=csv`
-    let fallbackRes = await fetch(baseExportUrl)
-    let fallbackText = await fallbackRes.text()
+    const fallbackRes = await fetch(baseExportUrl)
+    const fallbackText = await fallbackRes.text()
     const fallbackType = fallbackRes.headers.get('content-type') || ''
     if (fallbackRes.ok && !fallbackType.includes('text/html') && !/^\s*</.test(fallbackText)) {
       console.debug('[parse] No-gid export succeeded')
@@ -51,8 +51,8 @@ async function fetchGoogleSheetCsv(csvUrl: string): Promise<string> {
     // Second fallback: generic spreadsheets/export endpoint
     console.debug('[parse] Attempting generic spreadsheets/export CSV endpoint')
     const altExportUrl = `https://docs.google.com/spreadsheets/export?format=csv&spreadsheetId=${spreadsheetId}&gid=${gid}`
-    let altRes = await fetch(altExportUrl)
-    let altText = await altRes.text()
+    const altRes = await fetch(altExportUrl)
+    const altText = await altRes.text()
     const altType = altRes.headers.get('content-type') || ''
     if (altRes.ok && !altType.includes('text/html') && !/^\s*</.test(altText)) {
       console.debug('[parse] Generic export endpoint succeeded')
@@ -73,14 +73,15 @@ async function fetchGoogleSheetCsv(csvUrl: string): Promise<string> {
 // Helper to parse CSV with PapaParse
 function parseCsv(csv: string): string[][] {
   const result = parseCsvWithPapa(csv, { skipEmptyLines: true })
-  return (result.data as any) as string[][]
+  return (result.data as unknown) as string[][]
 }
 
 // Helper to sanitize text fields for DB
 function sanitizeTextField(input: string, maxLength = 32): string {
   if (!input) return '';
   // Remove control characters and non-printable unicode
-  let sanitized = input.replace(/[\x00-\x1F\x7F-\x9F]/g, '');
+  // eslint-disable-next-line no-control-regex
+  let sanitized = input.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
   // Remove suspicious SQL patterns (very basic)
   sanitized = sanitized.replace(/(--|;|\/\*|\*\/|DROP|SELECT|INSERT|DELETE|UPDATE|CREATE|ALTER|EXEC|UNION)/gi, '');
   // Remove non-ASCII (optional, or use .normalize('NFKC') for unicode normalization)
@@ -98,7 +99,6 @@ function extractCharacterInfo(rows: string[][]) {
       const key = row[i]?.trim()
       const value = row[i + 1]?.trim() || ''
       if (!key) continue
-      const k = key.toLowerCase()
       if (!name && /character\s*name|^name$/i.test(key)) name = value
       if (!race && /^(race|species)$/i.test(key)) race = value
       if (!sub_race && /^sub[\s_-]?race$/i.test(key)) sub_race = value
@@ -261,9 +261,9 @@ export async function POST(
     }
     // Return parsed data for client logging
     return NextResponse.json({ success: true, info, classes })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(`Error parsing sheet ${id} (URL: ${originalSheetUrl}):`, error)
     // Include stack trace in response for debugging
-    return NextResponse.json({ error: error.message, stack: error.stack }, { status: 500 })
+    return NextResponse.json({ error: (error as Error).message, stack: (error as Error).stack }, { status: 500 })
   }
 }

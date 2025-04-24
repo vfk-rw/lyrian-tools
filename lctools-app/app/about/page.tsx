@@ -1,4 +1,3 @@
-import { LCToolsSidebar } from "@/components/lctools-sidebar"
 import LCToolsSidebarClient from "@/components/lctools-sidebar-client";
 import {
   Breadcrumb,
@@ -52,7 +51,7 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent>
               <p className="leading-7 mb-4">
-                TTRPG Tools is a comprehensive companion application designed to enhance your tabletop roleplaying game experience. Whether you're a player or a game master, our tools help you manage your campaign, track resources, and bring your fantasy worlds to life.
+                TTRPG Tools is a comprehensive companion application designed to enhance your tabletop roleplaying game experience. Whether you&apos;re a player or a game master, our tools help you manage your campaign, track resources, and bring your fantasy worlds to life.
               </p>
               <p className="leading-7 mb-4">
                 Built with modern web technologies, TTRPG Tools provides a seamless and intuitive user experience across devices, allowing you to access your campaign information wherever you are.
