@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
   ChartContainer,
   ChartTooltip,
@@ -30,7 +30,6 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/ui/select'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 
 const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#64748B']
@@ -53,6 +52,27 @@ export default function CensusClient({
   const [raceFilter, setRaceFilter] = useState('all')
   const [classFilter, setClassFilter] = useState('all')
   const [drillRace, setDrillRace] = useState<string | null>(null)
+  const [showRaceChart, setShowRaceChart] = useState(true)
+  const [showSpiritChart, setShowSpiritChart] = useState(true)
+  const [showClassChart, setShowClassChart] = useState(true)
+
+  // Load chart visibility from localStorage
+  useEffect(() => {
+    setShowRaceChart(localStorage.getItem('census_showRaceChart') !== 'false')
+    setShowSpiritChart(localStorage.getItem('census_showSpiritChart') !== 'false')
+    setShowClassChart(localStorage.getItem('census_showClassChart') !== 'false')
+  }, [])
+
+  // Persist chart visibility to localStorage
+  useEffect(() => {
+    localStorage.setItem('census_showRaceChart', showRaceChart ? 'true' : 'false')
+  }, [showRaceChart])
+  useEffect(() => {
+    localStorage.setItem('census_showSpiritChart', showSpiritChart ? 'true' : 'false')
+  }, [showSpiritChart])
+  useEffect(() => {
+    localStorage.setItem('census_showClassChart', showClassChart ? 'true' : 'false')
+  }, [showClassChart])
 
   // Helper to normalize blank/null values
   function safe(val: any, fallback = 'Unknown') {
@@ -149,107 +169,132 @@ export default function CensusClient({
           </div>
         ))}
       </div>
-      {/* Charts tabs */}
-      <Tabs defaultValue="race" className="w-full max-w-3xl mx-auto mb-8">
-        <TabsList className="mb-4 flex justify-center">
-          <TabsTrigger value="race">Race Distribution</TabsTrigger>
-          <TabsTrigger value="spirit">Spirit Core Histogram</TabsTrigger>
-          <TabsTrigger value="class">Class Distribution</TabsTrigger>
-        </TabsList>
-        <TabsContent value="race">
-          <Card className="border shadow">
-            <CardHeader>
-              <CardTitle>Race Distribution</CardTitle>
-            </CardHeader>
-            <CardContent style={{ minHeight: 420 }}>
-              <div style={{ height: 340 }}>
-                <ChartContainer id="race" config={{}}>
-                  <PieChart>
-                    <Pie
-                      data={
-                        !drillRace
-                          ? raceCounts.map(([name, value]) => ({ name, value }))
-                          : subRaceCounts.map(([name, value]) => ({ name, value }))
-                      }
-                      dataKey="value"
-                      nameKey="name"
-                      innerRadius={40}
-                      outerRadius={80}
-                      label
-                      onClick={(entry) => {
-                        if (!drillRace) setDrillRace(entry.name)
-                      }}
-                    >
-                      {( !drillRace ? raceCounts : subRaceCounts ).map((_, i) => (
-                        <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <ChartTooltip />
-                    <ChartLegend />
-                  </PieChart>
-                </ChartContainer>
-              </div>
-              {drillRace && (
-                <button
-                  className="text-sm text-blue-600 hover:underline mt-2"
-                  onClick={() => setDrillRace(null)}
-                >
-                  Back to races
-                </button>
-              )}
-            </CardContent>
+      {/* Chart toggles */}
+      <div className="flex gap-2 justify-center mb-4">
+        <button
+          className={`px-3 py-1 rounded border ${showRaceChart ? 'bg-blue-100' : 'bg-gray-100'}`}
+          onClick={() => setShowRaceChart((v) => !v)}
+        >
+          Race Distribution
+        </button>
+        <button
+          className={`px-3 py-1 rounded border ${showSpiritChart ? 'bg-blue-100' : 'bg-gray-100'}`}
+          onClick={() => setShowSpiritChart((v) => !v)}
+        >
+          Spirit Core Histogram
+        </button>
+        <button
+          className={`px-3 py-1 rounded border ${showClassChart ? 'bg-blue-100' : 'bg-gray-100'}`}
+          onClick={() => setShowClassChart((v) => !v)}
+        >
+          Class Distribution
+        </button>
+      </div>
+      {/* Responsive grid for charts - auto-fit, minmax for expansion */}
+      <div
+        className="grid gap-8 w-full max-w-7xl mx-auto mb-8"
+        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}
+      >
+        {showRaceChart && (
+          <Card className="border shadow w-full min-w-[350px]">
+            <div className="aspect-[16/9] flex flex-col">
+              <CardHeader>
+                <CardTitle>Race Distribution</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col justify-center" style={{ minHeight: 0 }}>
+                <div className="flex-1" style={{ height: '100%' }}>
+                  <ChartContainer id="race" config={{}}>
+                    <PieChart width={undefined} height={undefined} style={{ width: '100%', height: '100%' }}>
+                      <Pie
+                        data={
+                          !drillRace
+                            ? raceCounts.map(([name, value]) => ({ name, value }))
+                            : subRaceCounts.map(([name, value]) => ({ name, value }))
+                        }
+                        dataKey="value"
+                        nameKey="name"
+                        innerRadius={40}
+                        outerRadius={80}
+                        label
+                        onClick={(entry) => {
+                          if (!drillRace) setDrillRace(entry.name)
+                        }}
+                      >
+                        {( !drillRace ? raceCounts : subRaceCounts ).map((_, i) => (
+                          <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <ChartTooltip />
+                      <ChartLegend />
+                    </PieChart>
+                  </ChartContainer>
+                </div>
+                {drillRace && (
+                  <button
+                    className="text-sm text-blue-600 hover:underline mt-2"
+                    onClick={() => setDrillRace(null)}
+                  >
+                    Back to races
+                  </button>
+                )}
+              </CardContent>
+            </div>
           </Card>
-        </TabsContent>
-        <TabsContent value="spirit">
-          <Card className="border shadow">
-            <CardHeader>
-              <CardTitle>Spirit Core Histogram</CardTitle>
-            </CardHeader>
-            <CardContent style={{ minHeight: 420 }}>
-              <div style={{ height: 340 }}>
-                <ChartContainer id="spirit" config={{}}>
-                  <BarChart data={spiritCountsBinned}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="bin" label={{ value: 'Spirit Core', position: 'insideBottom', offset: -5 }} />
-                    <YAxis allowDecimals={false} label={{ value: 'Count', angle: -90, position: 'insideLeft' }} />
-                    <Bar dataKey="count" fill={COLORS[1]} />
-                    <ChartTooltip />
-                  </BarChart>
-                </ChartContainer>
-              </div>
-            </CardContent>
+        )}
+        {showSpiritChart && (
+          <Card className="border shadow w-full min-w-[350px]">
+            <div className="aspect-[16/9] flex flex-col">
+              <CardHeader>
+                <CardTitle>Spirit Core Histogram</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col justify-center" style={{ minHeight: 0 }}>
+                <div className="flex-1" style={{ height: '100%' }}>
+                  <ChartContainer id="spirit" config={{}}>
+                    <BarChart data={spiritCountsBinned} width={undefined} height={undefined} style={{ width: '100%', height: '100%' }}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="bin" label={{ value: 'Spirit Core', position: 'insideBottom', offset: -5 }} />
+                      <YAxis allowDecimals={false} label={{ value: 'Count', angle: -90, position: 'insideLeft' }} />
+                      <Bar dataKey="count" fill={COLORS[1]} />
+                      <ChartTooltip />
+                    </BarChart>
+                  </ChartContainer>
+                </div>
+              </CardContent>
+            </div>
           </Card>
-        </TabsContent>
-        <TabsContent value="class">
-          <Card className="border shadow">
-            <CardHeader>
-              <CardTitle>Class Distribution</CardTitle>
-            </CardHeader>
-            <CardContent style={{ minHeight: 420 }}>
-              <div style={{ height: 340 }}>
-                <ChartContainer id="class" config={{}}>
-                  <PieChart>
-                    <Pie
-                      data={classCounts.map(([name, value]) => ({ name, value }))}
-                      dataKey="value"
-                      nameKey="name"
-                      innerRadius={40}
-                      outerRadius={80}
-                      label
-                    >
-                      {classCounts.map((_, i) => (
-                        <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <ChartTooltip />
-                    <ChartLegend />
-                  </PieChart>
-                </ChartContainer>
-              </div>
-            </CardContent>
+        )}
+        {showClassChart && (
+          <Card className="border shadow w-full min-w-[350px]">
+            <div className="aspect-[16/9] flex flex-col">
+              <CardHeader>
+                <CardTitle>Class Distribution</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col justify-center" style={{ minHeight: 0 }}>
+                <div className="flex-1" style={{ height: '100%' }}>
+                  <ChartContainer id="class" config={{}}>
+                    <PieChart width={undefined} height={undefined} style={{ width: '100%', height: '100%' }}>
+                      <Pie
+                        data={classCounts.map(([name, value]) => ({ name, value }))}
+                        dataKey="value"
+                        nameKey="name"
+                        innerRadius={40}
+                        outerRadius={80}
+                        label
+                      >
+                        {classCounts.map((_, i) => (
+                          <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <ChartTooltip />
+                      <ChartLegend />
+                    </PieChart>
+                  </ChartContainer>
+                </div>
+              </CardContent>
+            </div>
           </Card>
-        </TabsContent>
-      </Tabs>
+        )}
+      </div>
       {/* Filters and Data Table */}
       <div className="space-y-4">
         <div className="flex items-center space-x-4">
