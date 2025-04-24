@@ -60,6 +60,10 @@ export default function ManageCharacterSheetsPage() {
   const [newSheetStatus, setNewSheetStatus] = useState<CharacterStatus>("active")
   const [deleteSheetId, setDeleteSheetId] = useState<string | null>(null)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+  const [isTesting, setIsTesting] = useState(false)
+  const [parseResult, setParseResult] = useState<{ info: any; classes: any } | null>(null)
+  const [parseError, setParseError] = useState<string | null>(null)
+  const [isParseDialogOpen, setIsParseDialogOpen] = useState(false)
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -201,17 +205,31 @@ export default function ManageCharacterSheetsPage() {
   }
 
   async function testParseSheet(sheetId: string) {
+    setIsTesting(true)
     try {
-      const response = await fetch(`/api/census/sheets/${sheetId}/parse`, {
-        method: 'POST',
-      })
+      const response = await fetch(`/api/census/sheets/${sheetId}/parse`, { method: 'POST' })
+      const data = await response.json()
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to parse character sheet')
+        setParseResult(null)
+        // Include stack trace if present
+        const msg = data.error || 'Failed to parse character sheet'
+        const stk = data.stack ? `\n\nStack:\n${data.stack}` : ''
+        setParseError(`${msg}${stk}`)
+      } else {
+        console.log('Parsed character info:', data.info)
+        console.log('Parsed classes:', data.classes)
+        setParseResult({ info: data.info, classes: data.classes })
+        setParseError(null)
+        toast.success('Sheet parsed and saved!')
       }
-      toast.success('Sheet parsed and saved!')
+      setIsParseDialogOpen(true)
     } catch (error: any) {
+      setParseResult(null)
+      setParseError(error.message || 'Failed to parse character sheet')
+      setIsParseDialogOpen(true)
       toast.error(error.message || 'Failed to parse character sheet')
+    } finally {
+      setIsTesting(false)
     }
   }
 
@@ -318,12 +336,17 @@ export default function ManageCharacterSheetsPage() {
                               >
                                 Remove
                               </Button>
-                              <Button 
+                              <Button
                                 variant="secondary"
                                 size="sm"
                                 onClick={() => testParseSheet(sheet.id)}
+                                disabled={isTesting}
                               >
-                                Test Parsing
+                                {isTesting ? (
+                                  <span className="block w-4 h-4 border-2 border-t-transparent border-current rounded-full animate-spin" />
+                                ) : (
+                                  'Test Parsing'
+                                )}
                               </Button>
                             </TableCell>
                           </TableRow>
@@ -394,16 +417,36 @@ export default function ManageCharacterSheetsPage() {
       
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <AlertDialogContent>
+        <AlertDialogContent aria-describedby="delete-dialog-description">
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogDescription id="delete-dialog-description">
               This will permanently remove this character sheet from your collection.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={deleteSheet}>Delete</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Test Parsing result dialog */}
+      <AlertDialog open={isParseDialogOpen} onOpenChange={setIsParseDialogOpen}>
+        <AlertDialogContent aria-describedby="parse-dialog-description">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Parsing Result</AlertDialogTitle>
+          </AlertDialogHeader>
+          <AlertDialogDescription id="parse-dialog-description" asChild>
+            <div className="px-4 py-2 text-sm whitespace-pre-wrap text-muted-foreground">
+              {parseError
+                ? `Error: ${parseError}`
+                : JSON.stringify(parseResult, null, 2)
+              }
+            </div>
+          </AlertDialogDescription>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Close</AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
