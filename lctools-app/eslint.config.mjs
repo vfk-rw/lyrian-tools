@@ -56,5 +56,5 @@ export default defineConfig([
       // Disable prop-types rule for TypeScript projects
       "react/prop-types": "off",
     },
-  },
+  }
 ]);

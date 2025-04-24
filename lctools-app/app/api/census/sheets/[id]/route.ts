@@ -22,9 +22,10 @@ const supabaseAdmin = createClient(
 
 // PATCH to update sheet status
 export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: NextRequest
 ) {
+  // Extract dynamic `id` from the URL path
+  const id = request.nextUrl.pathname.split('/').pop() || '';
   try {
     // Check if Supabase environment variables are set
     if (!supabaseUrl || !supabaseServiceKey) {
@@ -41,7 +42,6 @@ export async function PATCH(
     }
 
     const userId = session.user.id
-    const { id } = params
     const body = await request.json()
     const { status } = body
 
@@ -77,9 +77,10 @@ export async function PATCH(
 
 // DELETE to remove a sheet
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: NextRequest
 ) {
+  // Extract dynamic `id` from the URL path
+  const id = request.nextUrl.pathname.split('/').pop() || '';
   try {
     // Check if Supabase environment variables are set
     if (!supabaseUrl || !supabaseServiceKey) {
@@ -96,7 +97,6 @@ export async function DELETE(
     }
 
     const userId = session.user.id
-    const { id } = params
 
     // Check if sheet belongs to user
     const { data: existingSheet, error: fetchError } = await supabaseAdmin
@@ -131,8 +131,7 @@ export async function DELETE(
 
 // GET to fetch character info for a sheet/character id
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: NextRequest
 ) {
   try {
     if (!supabaseUrl || !supabaseServiceKey) {
@@ -141,7 +140,9 @@ export async function GET(
         { status: 500 }
       )
     }
-    const { id } = params
+    // Extract dynamic `id` from the URL path
+    const { pathname } = request.nextUrl;
+    const id = pathname.split('/').pop() || '';
     // Fetch character and join character_info
     const { data, error } = await supabaseAdmin
       .from('characters')
