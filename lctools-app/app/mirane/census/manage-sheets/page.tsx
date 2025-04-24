@@ -36,12 +36,10 @@ import {
 } from "@/components/ui/alert-dialog"
 import { toast } from "sonner"
 import { 
-  supabase, 
   isValidGoogleSheetUrl, 
   CharacterSheet, 
   CHARACTER_STATUSES, 
-  CharacterStatus,
-  CHARACTER_TABLE_NAME
+  CharacterStatus
 } from '@/lib/supabase'
 
 // Extending the Session types to include Discord ID
@@ -59,9 +57,7 @@ export default function ManageCharacterSheetsPage() {
   const [loading, setLoading] = useState(true)
   const [newSheetUrl, setNewSheetUrl] = useState("")
   const [newSheetStatus, setNewSheetStatus] = useState<CharacterStatus>("active")
-  const [newCharacterName, setNewCharacterName] = useState("")
   const [deleteSheetId, setDeleteSheetId] = useState<string | null>(null)
-  const [editingSheet, setEditingSheet] = useState<CharacterSheet | null>(null)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
   // Redirect if not authenticated
@@ -73,25 +69,22 @@ export default function ManageCharacterSheetsPage() {
 
   // Fetch user's character sheets
   useEffect(() => {
-    if (session?.user) {
-      const user = session.user as ExtendedUser
-      if (user.id) {
-        fetchUserSheets(user.id)
-      }
+    if (status === "authenticated") {
+      fetchUserSheets()
     }
-  }, [session])
+  }, [status])
 
-  async function fetchUserSheets(userId: string) {
+  async function fetchUserSheets() {
     setLoading(true)
     try {
-      const { data, error } = await supabase
-        .from(CHARACTER_TABLE_NAME)
-        .select('*')
-        .eq('user_id', userId)
-        .order('created_at', { ascending: false })
-
-      if (error) throw error
-
+      const response = await fetch('/api/census/sheets/user')
+      
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to load character sheets')
+      }
+      
+      const data = await response.json()
       setSheets(data || [])
     } catch (error: any) {
       console.error('Error fetching sheets:', error.message)
@@ -102,24 +95,13 @@ export default function ManageCharacterSheetsPage() {
   }
 
   async function addCharacterSheet() {
-    if (!session?.user) {
+    if (status !== "authenticated") {
       toast.error('You must be logged in to add a character sheet')
-      return
-    }
-
-    const user = session.user as ExtendedUser
-    if (!user.id) {
-      toast.error('User ID not available')
       return
     }
 
     if (!isValidGoogleSheetUrl(newSheetUrl)) {
       toast.error('Please enter a valid Google Sheets URL')
-      return
-    }
-
-    if (!newCharacterName.trim()) {
-      toast.error('Please enter a character name')
       return
     }
 
@@ -129,45 +111,53 @@ export default function ManageCharacterSheetsPage() {
     }
 
     try {
-      const { data, error } = await supabase
-        .from(CHARACTER_TABLE_NAME)
-        .insert([
-          {
-            user_id: user.id,
-            sheet_url: newSheetUrl,
-            status: newSheetStatus,
-            character_name: newCharacterName
-          }
-        ])
-        .select()
+      const response = await fetch('/api/census/sheets', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sheet_url: newSheetUrl,
+          status: newSheetStatus
+        }),
+      })
 
-      if (error) throw error
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to add character sheet')
+      }
 
+      const data = await response.json()
+      
+      // Update state with new sheet
       setSheets([...(data || []), ...sheets])
       setNewSheetUrl("")
       setNewSheetStatus("active")
-      setNewCharacterName("")
       toast.success('Character sheet added successfully')
     } catch (error: any) {
       console.error('Error adding sheet:', error.message)
-      toast.error('Failed to add character sheet')
+      toast.error(error.message || 'Failed to add character sheet')
     }
   }
 
   async function updateSheetStatus(sheetId: string, status: CharacterStatus) {
-    if (!session?.user) return
-    
-    const user = session.user as ExtendedUser
-    
     try {
-      const { error } = await supabase
-        .from(CHARACTER_TABLE_NAME)
-        .update({ status })
-        .eq('id', sheetId)
-        .eq('user_id', user.id) // Security check
+      const response = await fetch(`/api/census/sheets/${sheetId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status }),
+      })
 
-      if (error) throw error
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to update character sheet')
+      }
 
+      const data = await response.json()
+      
+      // Update the sheet in state
       setSheets(sheets.map(sheet => 
         sheet.id === sheetId ? { ...sheet, status } : sheet
       ))
@@ -179,19 +169,19 @@ export default function ManageCharacterSheetsPage() {
   }
 
   async function deleteSheet() {
-    if (!deleteSheetId || !session?.user) return
-    
-    const user = session.user as ExtendedUser
+    if (!deleteSheetId) return
     
     try {
-      const { error } = await supabase
-        .from(CHARACTER_TABLE_NAME)
-        .delete()
-        .eq('id', deleteSheetId)
-        .eq('user_id', user.id) // Security check
+      const response = await fetch(`/api/census/sheets/${deleteSheetId}`, {
+        method: 'DELETE',
+      })
 
-      if (error) throw error
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to remove character sheet')
+      }
 
+      // Remove the deleted sheet from state
       setSheets(sheets.filter(sheet => sheet.id !== deleteSheetId))
       setDeleteSheetId(null)
       setIsDeleteDialogOpen(false)
@@ -266,7 +256,6 @@ export default function ManageCharacterSheetsPage() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Character Name</TableHead>
                           <TableHead>Sheet Link</TableHead>
                           <TableHead>Status</TableHead>
                           <TableHead>Actions</TableHead>
@@ -275,7 +264,6 @@ export default function ManageCharacterSheetsPage() {
                       <TableBody>
                         {sheets.map((sheet) => (
                           <TableRow key={sheet.id}>
-                            <TableCell>{sheet.character_name}</TableCell>
                             <TableCell>
                               <a 
                                 href={sheet.sheet_url} 
@@ -331,17 +319,6 @@ export default function ManageCharacterSheetsPage() {
                   ) : (
                     <div className="space-y-4">
                       <div className="grid w-full max-w-sm items-center gap-1.5">
-                        <Label htmlFor="character-name">Character Name</Label>
-                        <Input
-                          type="text"
-                          id="character-name"
-                          value={newCharacterName}
-                          onChange={(e) => setNewCharacterName(e.target.value)}
-                          placeholder="Enter character name"
-                        />
-                      </div>
-                      
-                      <div className="grid w-full max-w-sm items-center gap-1.5">
                         <Label htmlFor="sheet-url">Google Sheet URL</Label>
                         <Input
                           type="url"
@@ -372,7 +349,7 @@ export default function ManageCharacterSheetsPage() {
                       
                       <Button 
                         onClick={addCharacterSheet}
-                        disabled={!newSheetUrl || !newCharacterName || sheets.length >= 5}
+                        disabled={!newSheetUrl || sheets.length >= 5}
                       >
                         Add Character Sheet
                       </Button>

@@ -34,5 +34,4 @@ export interface CharacterSheet {
   sheet_url: string;
   status: CharacterStatus;
   created_at: string;
-  character_name?: string;
 }

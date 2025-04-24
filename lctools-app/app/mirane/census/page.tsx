@@ -33,7 +33,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { supabase, CharacterSheet, CHARACTER_TABLE_NAME } from "@/lib/supabase"
+import { CharacterSheet } from "@/lib/supabase"
 
 // The metadata has been moved to layout.tsx
 
@@ -43,19 +43,21 @@ export default function MiraneCensusPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Fetch all character sheets from the database
+  // Fetch all character sheets using the API
   useEffect(() => {
     async function fetchAllSheets() {
       setLoading(true)
       setError(null)
       
       try {
-        const { data, error } = await supabase
-          .from(CHARACTER_TABLE_NAME)
-          .select('*')
-          .order('created_at', { ascending: false })
+        const response = await fetch('/api/census/sheets')
         
-        if (error) throw error
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.error || 'Failed to load character sheets')
+        }
+        
+        const data = await response.json()
         setSheets(data || [])
       } catch (err: any) {
         console.error('Error fetching sheets:', err.message)
@@ -119,16 +121,16 @@ export default function MiraneCensusPage() {
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <Card>
             <CardHeader>
-              <CardTitle>Mirane Census</CardTitle>
+              <CardTitle>Mirane Character Registry</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="mb-4">
-                The Mirane Census provides population data, notable characters, and demographic information about the world setting.
+              <p className="mb-6">
+                The Character Registry tracks all player characters in the world of Mirane.
+                Status indicators show whether characters are currently active in the story or not.
               </p>
               
               {/* Character Sheets Section */}
-              <div className="mt-6">
-                <h3 className="text-lg font-medium mb-4">Character Registry</h3>
+              <div>
                 {loading ? (
                   <div className="space-y-2">
                     <Skeleton className="h-8 w-full" />
@@ -147,20 +149,13 @@ export default function MiraneCensusPage() {
                     <TableCaption>A list of all registered characters</TableCaption>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Character Name</TableHead>
+                        <TableHead>Character Sheet URL</TableHead>
                         <TableHead>Status</TableHead>
-                        <TableHead>Character Sheet</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {sheets.map((sheet) => (
                         <TableRow key={sheet.id}>
-                          <TableCell>{sheet.character_name}</TableCell>
-                          <TableCell>
-                            <Badge variant={getStatusColor(sheet.status)}>
-                              {sheet.status}
-                            </Badge>
-                          </TableCell>
                           <TableCell>
                             <a 
                               href={sheet.sheet_url} 
@@ -170,6 +165,11 @@ export default function MiraneCensusPage() {
                             >
                               View Sheet
                             </a>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={getStatusColor(sheet.status)}>
+                              {sheet.status}
+                            </Badge>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -185,60 +185,6 @@ export default function MiraneCensusPage() {
                 </p>
               </CardFooter>
             )}
-          </Card>
-          
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Notable NPCs</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-muted-foreground text-sm mb-4">Placeholder for NPC database search</div>
-                <div className="bg-muted/50 h-48 rounded-md flex items-center justify-center">
-                  <div className="text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="mx-auto text-muted-foreground mb-2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    <p className="text-muted-foreground text-sm">NPC search results will appear here</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <CardTitle>Factions and Organizations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-muted-foreground text-sm mb-4">Placeholder for faction data and relationships</div>
-                <div className="bg-muted/50 h-48 rounded-md flex items-center justify-center">
-                  <div className="text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="mx-auto text-muted-foreground mb-2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    <p className="text-muted-foreground text-sm">Faction information will appear here</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          
-          <Card>
-            <CardHeader>
-              <CardTitle>Demographics</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">
-                Population statistics and demographic data for the regions and settlements of Mirane.
-              </p>
-              <div className="grid gap-4 md:grid-cols-3">
-                <div className="bg-muted/50 h-32 rounded-md flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">Race distribution chart</p>
-                </div>
-                <div className="bg-muted/50 h-32 rounded-md flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">Class distribution chart</p>
-                </div>
-                <div className="bg-muted/50 h-32 rounded-md flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">Population density map</p>
-                </div>
-              </div>
-            </CardContent>
           </Card>
         </div>
       </SidebarInset>
