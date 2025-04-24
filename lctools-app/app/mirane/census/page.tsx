@@ -1,3 +1,7 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { useSession } from "next-auth/react"
 import { LCToolsSidebar } from "@/components/lctools-sidebar"
 import LCToolsSidebarClient from "@/components/lctools-sidebar-client";
 import {
@@ -8,19 +12,73 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Badge } from "@/components/ui/badge"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+import Link from "next/link"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { supabase, CharacterSheet, CHARACTER_TABLE_NAME } from "@/lib/supabase"
 
-export const metadata = {
-  title: "Census",
-};
+// The metadata has been moved to layout.tsx
 
 export default function MiraneCensusPage() {
+  const { data: session, status } = useSession()
+  const [sheets, setSheets] = useState<CharacterSheet[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // Fetch all character sheets from the database
+  useEffect(() => {
+    async function fetchAllSheets() {
+      setLoading(true)
+      setError(null)
+      
+      try {
+        const { data, error } = await supabase
+          .from(CHARACTER_TABLE_NAME)
+          .select('*')
+          .order('created_at', { ascending: false })
+        
+        if (error) throw error
+        setSheets(data || [])
+      } catch (err: any) {
+        console.error('Error fetching sheets:', err.message)
+        setError('Failed to load character sheets')
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    fetchAllSheets()
+  }, [])
+
+  // Helper function to get status badge color
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active': return 'success'
+      case 'inactive': return 'secondary'
+      case 'retired': return 'warning'
+      case 'dead': return 'destructive'
+      default: return 'default'
+    }
+  }
+
   return (
     <SidebarProvider>
       <LCToolsSidebarClient />
@@ -48,6 +106,15 @@ export default function MiraneCensusPage() {
               </BreadcrumbList>
             </Breadcrumb>
           </div>
+          {status === "authenticated" && (
+            <div className="ml-auto mr-4">
+              <Button asChild size="sm" variant="outline">
+                <Link href="/mirane/census/manage-sheets">
+                  Manage Character Sheets
+                </Link>
+              </Button>
+            </div>
+          )}
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <Card>
@@ -58,10 +125,66 @@ export default function MiraneCensusPage() {
               <p className="mb-4">
                 The Mirane Census provides population data, notable characters, and demographic information about the world setting.
               </p>
-              <p className="text-muted-foreground">
-                This is a placeholder for the census database and search functionality.
-              </p>
+              
+              {/* Character Sheets Section */}
+              <div className="mt-6">
+                <h3 className="text-lg font-medium mb-4">Character Registry</h3>
+                {loading ? (
+                  <div className="space-y-2">
+                    <Skeleton className="h-8 w-full" />
+                    <Skeleton className="h-8 w-full" />
+                    <Skeleton className="h-8 w-full" />
+                  </div>
+                ) : error ? (
+                  <Alert variant="destructive">
+                    <AlertTitle>Error</AlertTitle>
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
+                ) : sheets.length === 0 ? (
+                  <p className="text-muted-foreground">No character sheets have been registered yet.</p>
+                ) : (
+                  <Table>
+                    <TableCaption>A list of all registered characters</TableCaption>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Character Name</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Character Sheet</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {sheets.map((sheet) => (
+                        <TableRow key={sheet.id}>
+                          <TableCell>{sheet.character_name}</TableCell>
+                          <TableCell>
+                            <Badge variant={getStatusColor(sheet.status)}>
+                              {sheet.status}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <a 
+                              href={sheet.sheet_url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:underline"
+                            >
+                              View Sheet
+                            </a>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                )}
+              </div>
             </CardContent>
+            {status === "unauthenticated" && (
+              <CardFooter>
+                <p className="text-sm text-muted-foreground">
+                  Sign in with Discord to manage your character sheets.
+                </p>
+              </CardFooter>
+            )}
           </Card>
           
           <div className="grid gap-4 md:grid-cols-2">
