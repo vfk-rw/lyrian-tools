@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { getServerSession } from 'next-auth'
 import type { Session } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import { CHARACTER_TABLE_NAME } from '@/lib/supabase'
 
 // Initialize Supabase with admin privileges
@@ -131,7 +131,7 @@ export async function DELETE(
 
 // GET to fetch character info for a sheet/character id
 export async function GET(
-  request: NextRequest,
+  request: Request,
   { params }: { params: { id: string } }
 ) {
   try {
