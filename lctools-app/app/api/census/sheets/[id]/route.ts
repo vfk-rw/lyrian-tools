@@ -113,6 +113,20 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 })
     }
 
+    // Delete related character_class_info rows
+    const { error: classInfoError } = await supabaseAdmin
+      .from('character_class_info')
+      .delete()
+      .eq('character_id', id)
+    if (classInfoError) throw classInfoError
+
+    // Delete related character_info row
+    const { error: infoError } = await supabaseAdmin
+      .from('character_info')
+      .delete()
+      .eq('character_id', id)
+    if (infoError) throw infoError
+
     // Delete the sheet
     const { error } = await supabaseAdmin
       .from(CHARACTER_TABLE_NAME)
