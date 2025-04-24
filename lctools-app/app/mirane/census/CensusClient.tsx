@@ -30,6 +30,8 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/ui/select'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 
 const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#64748B']
 
@@ -108,6 +110,14 @@ export default function CensusClient({
     [filtered]
   )
 
+  // Spirit core histogram binning: bins of 100, from 800 to 2000
+  const spiritBins = Array.from({ length: ((2000 - 800) / 100) + 1 }, (_, i) => 800 + i * 100)
+  const spiritCountsBinned = spiritBins.map((binStart) => {
+    const binEnd = binStart + 99
+    const count = filtered.filter(d => d.spiritCore >= binStart && d.spiritCore <= binEnd).length
+    return { bin: `${binStart}-${binEnd}`, count }
+  })
+
   const allClasses = useMemo(() => filtered.flatMap((d) => d.classes), [filtered])
   const classCounts = useMemo(
     () =>
@@ -125,95 +135,115 @@ export default function CensusClient({
 
   return (
     <div className="space-y-8 p-4">
-      {/* Charts grid */}
-      <div className="grid grid-cols-2 gap-8">
-        {/* Status pie */}
-        <ChartContainer id="status" config={{}}>
-          <PieChart>
-            <Pie
-              data={statusCounts.map(([name, value]) => ({ name, value }))}
-              dataKey="value"
-              nameKey="name"
-              innerRadius={40}
-              outerRadius={80}
-              label
-            >
-              {statusCounts.map((_, i) => (
-                <Cell key={i} fill={COLORS[i % COLORS.length]} />
-              ))}
-            </Pie>
-            <ChartTooltip />
-            <ChartLegend />
-          </PieChart>
-        </ChartContainer>
-
-        {/* Race/subrace pie */}
-        <ChartContainer id="race" config={{}}>
-          <PieChart>
-            <Pie
-              data={
-                !drillRace
-                  ? raceCounts.map(([name, value]) => ({ name, value }))
-                  : subRaceCounts.map(([name, value]) => ({ name, value }))
-              }
-              dataKey="value"
-              nameKey="name"
-              innerRadius={40}
-              outerRadius={80}
-              label
-              onClick={(entry) => {
-                if (!drillRace) setDrillRace(entry.name)
-              }}
-            >
-              {( !drillRace ? raceCounts : subRaceCounts ).map((_, i) => (
-                <Cell key={i} fill={COLORS[i % COLORS.length]} />
-              ))}
-            </Pie>
-            <ChartTooltip />
-            <ChartLegend />
-          </PieChart>
-        </ChartContainer>
-        {drillRace && (
-          <button
-            className="text-sm text-blue-600 hover:underline mt-2"
-            onClick={() => setDrillRace(null)}
-          >
-            Back to races
-          </button>
-        )}
-
-        {/* Spirit core histogram */}
-        <ChartContainer id="spirit" config={{}}>
-          <BarChart data={spiritCounts}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="spirit" />
-            <YAxis />
-            <Bar dataKey="count" fill={COLORS[1]} />
-            <ChartTooltip />
-          </BarChart>
-        </ChartContainer>
-
-        {/* Class distribution pie */}
-        <ChartContainer id="class" config={{}}>
-          <PieChart>
-            <Pie
-              data={classCounts.map(([name, value]) => ({ name, value }))}
-              dataKey="value"
-              nameKey="name"
-              innerRadius={40}
-              outerRadius={80}
-              label
-            >
-              {classCounts.map((_, i) => (
-                <Cell key={i} fill={COLORS[i % COLORS.length]} />
-              ))}
-            </Pie>
-            <ChartTooltip />
-            <ChartLegend />
-          </PieChart>
-        </ChartContainer>
+      {/* Status counts summary */}
+      <div className="flex flex-wrap gap-6 items-center justify-center mb-4">
+        {statusCounts.map(([status, count]) => (
+          <div key={status} className="px-4 py-2 rounded bg-muted border text-base font-medium">
+            <span className="capitalize">{status}</span>: {count}
+          </div>
+        ))}
       </div>
-
+      {/* Charts tabs */}
+      <Tabs defaultValue="race" className="w-full max-w-3xl mx-auto mb-8">
+        <TabsList className="mb-4 flex justify-center">
+          <TabsTrigger value="race">Race Distribution</TabsTrigger>
+          <TabsTrigger value="spirit">Spirit Core Histogram</TabsTrigger>
+          <TabsTrigger value="class">Class Distribution</TabsTrigger>
+        </TabsList>
+        <TabsContent value="race">
+          <Card className="border shadow">
+            <CardHeader>
+              <CardTitle>Race Distribution</CardTitle>
+            </CardHeader>
+            <CardContent style={{ minHeight: 420 }}>
+              <div style={{ height: 340 }}>
+                <ChartContainer id="race" config={{}}>
+                  <PieChart>
+                    <Pie
+                      data={
+                        !drillRace
+                          ? raceCounts.map(([name, value]) => ({ name, value }))
+                          : subRaceCounts.map(([name, value]) => ({ name, value }))
+                      }
+                      dataKey="value"
+                      nameKey="name"
+                      innerRadius={40}
+                      outerRadius={80}
+                      label
+                      onClick={(entry) => {
+                        if (!drillRace) setDrillRace(entry.name)
+                      }}
+                    >
+                      {( !drillRace ? raceCounts : subRaceCounts ).map((_, i) => (
+                        <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <ChartTooltip />
+                    <ChartLegend />
+                  </PieChart>
+                </ChartContainer>
+              </div>
+              {drillRace && (
+                <button
+                  className="text-sm text-blue-600 hover:underline mt-2"
+                  onClick={() => setDrillRace(null)}
+                >
+                  Back to races
+                </button>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="spirit">
+          <Card className="border shadow">
+            <CardHeader>
+              <CardTitle>Spirit Core Histogram</CardTitle>
+            </CardHeader>
+            <CardContent style={{ minHeight: 420 }}>
+              <div style={{ height: 340 }}>
+                <ChartContainer id="spirit" config={{}}>
+                  <BarChart data={spiritCountsBinned}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="bin" label={{ value: 'Spirit Core', position: 'insideBottom', offset: -5 }} />
+                    <YAxis allowDecimals={false} label={{ value: 'Count', angle: -90, position: 'insideLeft' }} />
+                    <Bar dataKey="count" fill={COLORS[1]} />
+                    <ChartTooltip />
+                  </BarChart>
+                </ChartContainer>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="class">
+          <Card className="border shadow">
+            <CardHeader>
+              <CardTitle>Class Distribution</CardTitle>
+            </CardHeader>
+            <CardContent style={{ minHeight: 420 }}>
+              <div style={{ height: 340 }}>
+                <ChartContainer id="class" config={{}}>
+                  <PieChart>
+                    <Pie
+                      data={classCounts.map(([name, value]) => ({ name, value }))}
+                      dataKey="value"
+                      nameKey="name"
+                      innerRadius={40}
+                      outerRadius={80}
+                      label
+                    >
+                      {classCounts.map((_, i) => (
+                        <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <ChartTooltip />
+                    <ChartLegend />
+                  </PieChart>
+                </ChartContainer>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
       {/* Filters and Data Table */}
       <div className="space-y-4">
         <div className="flex items-center space-x-4">
