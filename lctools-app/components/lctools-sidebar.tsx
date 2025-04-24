@@ -6,11 +6,12 @@ import {
   Info,
   Hammer,
   Map,
-  Flask,
   Scroll,
   Users,
   CalendarDays,
-  ChevronRight
+  ChevronRight,
+  Anvil,
+  FlaskRound
 } from "lucide-react"
 
 import {
@@ -54,10 +55,12 @@ const navItems = [
       {
         title: "Blacksmithing",
         url: "/crafting/blacksmithing",
+        icon: Anvil,
       },
       {
         title: "Alchemy",
         url: "/crafting/alchemy",
+        icon: FlaskRound,
       },
     ],
   },
@@ -69,14 +72,17 @@ const navItems = [
       {
         title: "Map",
         url: "/mirane/map",
+        icon: Map,
       },
       {
         title: "Census",
         url: "/mirane/census",
+        icon: Users,
       },
       {
         title: "Calendar",
         url: "/mirane/calendar",
+        icon: CalendarDays,
       },
     ],
   },
@@ -117,6 +123,7 @@ export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar
                           <SidebarMenuSubItem key={subItem.title}>
                             <SidebarMenuSubButton asChild>
                               <a href={subItem.url}>
+                                {subItem.icon && <subItem.icon className="mr-2" />}
                                 <span>{subItem.title}</span>
                               </a>
                             </SidebarMenuSubButton>
