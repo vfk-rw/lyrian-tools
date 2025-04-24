@@ -445,6 +445,7 @@ export default function ManageCharacterSheetsPage() {
                         <TableHeader>
                           <TableRow>
                             <TableHead>Sheet Link</TableHead>
+                            <TableHead>Last Updated</TableHead>
                             <TableHead>Status</TableHead>
                             <TableHead>Actions</TableHead>
                           </TableRow>
@@ -470,6 +471,11 @@ export default function ManageCharacterSheetsPage() {
                                         : characterNames[sheet.id] || 'not imported'}
                                     </span>
                                   </div>
+                                </TableCell>
+                                <TableCell>
+                                  <span className="text-xs text-muted-foreground">
+                                    {sheet.updated_at ? new Date(sheet.updated_at).toLocaleString() : '-'}
+                                  </span>
                                 </TableCell>
                                 <TableCell>
                                   <RadioGroup
