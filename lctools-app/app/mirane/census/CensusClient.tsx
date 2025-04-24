@@ -202,7 +202,7 @@ export default function CensusClient({
                 <CardTitle>Race Distribution</CardTitle>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col justify-center" style={{ minHeight: 0 }}>
-                <div className="flex-1" style={{ height: '100%' }}>
+                <div className="flex-1 flex flex-row" style={{ height: '100%' }}>
                   <ChartContainer id="race" config={{}}>
                     <PieChart width={undefined} height={undefined} style={{ width: '100%', height: '100%' }}>
                       <Pie
@@ -225,9 +225,11 @@ export default function CensusClient({
                         ))}
                       </Pie>
                       <ChartTooltip />
-                      <ChartLegend />
+                      <ChartLegend layout="vertical" align="right" verticalAlign="middle" />
                     </PieChart>
                   </ChartContainer>
+                  {/* Side legend, scrollable if too tall */}
+                  {/* The legend is now inside PieChart, so this div is just for spacing if needed */}
                 </div>
                 {drillRace && (
                   <button
@@ -270,7 +272,7 @@ export default function CensusClient({
                 <CardTitle>Class Distribution</CardTitle>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col justify-center" style={{ minHeight: 0 }}>
-                <div className="flex-1" style={{ height: '100%' }}>
+                <div className="flex-1 flex flex-row" style={{ height: '100%' }}>
                   <ChartContainer id="class" config={{}}>
                     <PieChart width={undefined} height={undefined} style={{ width: '100%', height: '100%' }}>
                       <Pie
@@ -286,7 +288,7 @@ export default function CensusClient({
                         ))}
                       </Pie>
                       <ChartTooltip />
-                      <ChartLegend />
+                      <ChartLegend layout="vertical" align="right" verticalAlign="middle" wrapperStyle={{ maxHeight: '80%', overflowY: 'auto', minWidth: 120 }} />
                     </PieChart>
                   </ChartContainer>
                 </div>
