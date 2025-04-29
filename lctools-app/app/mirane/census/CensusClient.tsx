@@ -55,6 +55,9 @@ export default function CensusClient({
   const [showRaceChart, setShowRaceChart] = useState(true)
   const [showSpiritChart, setShowSpiritChart] = useState(true)
   const [showClassChart, setShowClassChart] = useState(true)
+  const [classLevelClass, setClassLevelClass] = useState('all')
+  const [classLevelOp, setClassLevelOp] = useState('>')
+  const [classLevelValue, setClassLevelValue] = useState('')
 
   // Load chart visibility from localStorage
   useEffect(() => {
@@ -80,15 +83,30 @@ export default function CensusClient({
     return String(val)
   }
 
-  const filtered = useMemo(
-    () =>
-      data.filter(
-        (d) =>
-          safe(d.name, '').toLowerCase().includes(nameFilter.toLowerCase()) &&
-          (raceFilter !== 'all' ? safe(d.race) === raceFilter : true) &&
-          (classFilter !== 'all' ? d.classes.filter(Boolean).includes(classFilter) : true)
-      ),
-    [data, nameFilter, raceFilter, classFilter]
+  // For class-level filtering, get all unique class names
+  const allClassNames = useMemo(() => Array.from(new Set(data.flatMap((d) => d.classes.map((c) => c.class_name)))), [data])
+
+  // Filtering logic
+  const filtered = useMemo(() =>
+    data.filter((d) => {
+      const nameMatch = safe(d.name, '').toLowerCase().includes(nameFilter.toLowerCase())
+      const raceMatch = raceFilter !== 'all' ? safe(d.race) === raceFilter : true
+      // Old class filter (by name only)
+      const classNameMatch = classFilter !== 'all' ? d.classes.some((c) => c.class_name === classFilter) : true
+      // New class level filter
+      let classLevelMatch = true
+      if (classLevelClass !== 'all' && classLevelValue !== '') {
+        const classObj = d.classes.find((c) => c.class_name === classLevelClass)
+        if (!classObj) return false
+        const val = parseInt(classLevelValue)
+        if (isNaN(val)) return false
+        if (classLevelOp === '>') classLevelMatch = classObj.class_level > val
+        else if (classLevelOp === '<') classLevelMatch = classObj.class_level < val
+        else classLevelMatch = classObj.class_level === val
+      }
+      return nameMatch && raceMatch && classNameMatch && classLevelMatch
+    }),
+    [data, nameFilter, raceFilter, classFilter, classLevelClass, classLevelOp, classLevelValue]
   )
 
   const statusCounts = useMemo(
@@ -348,6 +366,34 @@ export default function CensusClient({
               ))}
             </SelectContent>
           </Select>
+          {/* Class Level Filter UI */}
+          <Select value={classLevelClass} onValueChange={setClassLevelClass}>
+            <SelectTrigger className="w-40">
+              {classLevelClass === 'all' ? 'Class (level filter)' : classLevelClass}
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Class (level filter)</SelectItem>
+              {allClassNames.map((c) => (
+                <SelectItem key={c} value={c}>{c}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={classLevelOp} onValueChange={setClassLevelOp}>
+            <SelectTrigger className="w-20">{classLevelOp}</SelectTrigger>
+            <SelectContent>
+              <SelectItem value=">">&gt;</SelectItem>
+              <SelectItem value="=">=</SelectItem>
+              <SelectItem value="<">&lt;</SelectItem>
+            </SelectContent>
+          </Select>
+          <Input
+            type="number"
+            placeholder="Level"
+            className="w-24"
+            value={classLevelValue}
+            onChange={e => setClassLevelValue(e.target.value)}
+            min={0}
+          />
         </div>
 
         <Table>
@@ -373,7 +419,7 @@ export default function CensusClient({
                 <TableCell>{safe(d.subRace)}</TableCell>
                 <TableCell>{d.spiritCore ?? 'Unknown'}</TableCell>
                 <TableCell>{safe(d.status)}</TableCell>
-                <TableCell>{Array.isArray(d.classes) && d.classes.length > 0 ? d.classes.filter(Boolean).map((c) => safe(c)).join(', ') : 'Unknown'}</TableCell>
+                <TableCell>{Array.isArray(d.classes) && d.classes.length > 0 ? d.classes.filter(Boolean).map((c) => `${safe(c.class_name)} (exp ${c.class_level})`).join(', ') : 'Unknown'}</TableCell>
               </TableRow>
             ))}
           </TableBody>

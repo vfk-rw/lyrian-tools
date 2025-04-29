@@ -9,7 +9,7 @@ export async function GET() {
   const { data, error } = await supabase
     .from('characters')
     .select(
-      'id, status, sheet_url, character_info(name, race, sub_race, spirit_core), character_class_info(class_name)'
+      'id, status, sheet_url, character_info(name, race, sub_race, spirit_core), character_class_info(class_name, class_level)'
     )
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })

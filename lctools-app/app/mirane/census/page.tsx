@@ -10,8 +10,10 @@ type RawRow = {
   status: string
   sheet_url: string
   character_info: Array<{ name: string; race: string; sub_race: string; spirit_core: number }>
-  character_class_info: Array<{ class_name: string }>
+  character_class_info: Array<{ class_name: string; class_level: number }>
 }
+
+type ProcessedClass = { class_name: string; class_level: number }
 
 type ProcessedRow = {
   id: string
@@ -21,7 +23,7 @@ type ProcessedRow = {
   spiritCore: number
   status: string
   sheetUrl: string
-  classes: string[]
+  classes: ProcessedClass[]
 }
 
 function hasErrorString(obj: unknown): obj is { error: string } {
@@ -55,7 +57,10 @@ export default function MiraneCensusPage() {
             spiritCore: row.character_info[0]?.spirit_core ?? 0,
             status: row.status,
             sheetUrl: row.sheet_url,
-            classes: row.character_class_info.map((c) => c.class_name),
+            classes: row.character_class_info.map((c) => ({
+              class_name: c.class_name,
+              class_level: c.class_level ?? 0,
+            })),
           }))
         )
       } catch (e: unknown) {

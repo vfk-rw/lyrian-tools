@@ -147,15 +147,15 @@ function extractClassInfo(rows: string[][]) {
   const classes: { class_name: string; class_tier: number | null; class_level: number }[] = []
   // Parse subsequent rows until a non-class row is encountered
   for (let i = headerIndex + 1; i < rows.length; i++) {
-    const [name, tierStr, levelStr] = rows[i]
+    const [name, tierStr, , costExpStr] = rows[i]
     if (!name?.trim()) break
-    const level = parseInt(levelStr)
-    if (isNaN(level)) break
-    const tier = parseInt(tierStr)
+    const class_level = parseInt(costExpStr)
+    if (isNaN(class_level)) break
+    const class_tier = parseInt(tierStr)
     classes.push({
       class_name: sanitizeTextField(name.trim()),
-      class_tier: isNaN(tier) ? null : tier,
-      class_level: level
+      class_tier: isNaN(class_tier) ? null : class_tier,
+      class_level
     })
   }
   return classes

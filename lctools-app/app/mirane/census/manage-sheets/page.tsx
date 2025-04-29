@@ -118,6 +118,9 @@ export default function ManageCharacterSheetsPage() {
   const [parseAllResults, setParseAllResults] = useState<{ success: string[]; failed: { url: string; error: string }[] }>({ success: [], failed: [] })
   const [isParsingAll, setIsParsingAll] = useState(false)
   const parseAllRef = useRef(false)
+  const [isUpdatingAll, setIsUpdatingAll] = useState(false)
+  const [updateAllProgress, setUpdateAllProgress] = useState(0)
+  const [updateAllTotal, setUpdateAllTotal] = useState(0)
 
   // Pagination state
   const [page, setPage] = useState(1)
@@ -347,6 +350,24 @@ export default function ManageCharacterSheetsPage() {
     fetchUserSheets()
   }
 
+  // Update all sheets, one every 10 seconds
+  async function updateAllSheets() {
+    setIsUpdatingAll(true)
+    setUpdateAllProgress(0)
+    setUpdateAllTotal(sheets.length)
+    for (let i = 0; i < sheets.length; i++) {
+      const sheet = sheets[i]
+      await parseSheet(sheet.id) // Triggers backend parse and timestamp update
+      setUpdateAllProgress(i + 1)
+      if (i < sheets.length - 1) {
+        await new Promise(res => setTimeout(res, 10000)) // 10 seconds
+      }
+    }
+    setIsUpdatingAll(false)
+    // Optionally reload sheets after update
+    fetchUserSheets()
+  }
+
   if (status === "loading" || loading) {
     return <div className="flex items-center justify-center h-screen">Loading...</div>
   }
@@ -402,6 +423,26 @@ export default function ManageCharacterSheetsPage() {
                 >
                   {isParsingAll ? 'Parsing...' : 'Parse all new'}
                 </Button>
+                <Button
+                  variant="default"
+                  onClick={updateAllSheets}
+                  disabled={isUpdatingAll}
+                >
+                  {isUpdatingAll ? 'Updating...' : 'Update All Sheets'}
+                </Button>
+                {isUpdatingAll && (
+                  <div className="flex items-center gap-2 w-48">
+                    <div className="flex-1 bg-gray-200 rounded h-2 overflow-hidden">
+                      <div
+                        className="bg-blue-500 h-2 rounded"
+                        style={{ width: `${(updateAllProgress / (updateAllTotal || 1)) * 100}%` }}
+                      />
+                    </div>
+                    <span className="text-xs text-muted-foreground">
+                      {updateAllProgress}/{updateAllTotal}
+                    </span>
+                  </div>
+                )}
                 {parseAllResults.success.length > 0 && (
                   <div className="text-green-700 text-sm">
                     Parsed: {parseAllResults.success.join(', ')}
