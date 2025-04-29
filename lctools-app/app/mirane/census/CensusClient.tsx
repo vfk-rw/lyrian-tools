@@ -45,7 +45,7 @@ export default function CensusClient({
     spiritCore: number
     status: string
     sheetUrl: string
-    classes: string[]
+    classes: { class_name: string; class_level: number }[]
   }>
 }) {
   const [nameFilter, setNameFilter] = useState('')
