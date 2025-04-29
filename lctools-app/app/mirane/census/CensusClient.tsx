@@ -172,7 +172,7 @@ export default function CensusClient({
     () =>
       Object.entries(
         allClasses.reduce((acc, c) => {
-          acc[c] = (acc[c] || 0) + 1
+          acc[c.class_name] = (acc[c.class_name] || 0) + 1
           return acc
         }, {} as Record<string, number>)
       ),
