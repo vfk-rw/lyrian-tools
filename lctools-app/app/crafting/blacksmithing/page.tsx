@@ -5,6 +5,7 @@ import { initialCraftingState } from '@/lib/crafting/state'
 import { jsonBaseMaterials, jsonCraftingActions } from '@/lib/crafting/data-loader'
 import type { CraftingState, CraftingAction } from '@/lib/crafting/types'
 import { Button } from '@/components/ui/button'
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
 import LCToolsSidebarClient from '@/components/lctools-sidebar-client'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import { Separator } from '@/components/ui/separator'
@@ -13,12 +14,14 @@ import { SetupPanel } from '@/components/crafting/SetupPanel'
 import { ProgressPanel } from '@/components/crafting/ProgressPanel'
 import { ActionsPanel } from '@/components/crafting/ActionsPanel'
 import LogPanel from '@/components/crafting/LogPanel'
+import { Anvil, PlayIcon, RefreshCcwIcon } from 'lucide-react'
 
 export default function BlacksmithingPage() {
   const [state, setState] = useState<CraftingState>({ ...initialCraftingState })
   const [selectedAlloy, setSelectedAlloy] = useState<string>('')
   const [isStarted, setIsStarted] = useState(false)
   const [isEnded, setIsEnded] = useState(false)
+  const [showResetConfirm, setShowResetConfirm] = useState(false)
 
   function reset() {
     setState(prev => ({
@@ -32,6 +35,7 @@ export default function BlacksmithingPage() {
     }))
     setIsStarted(false)
     setIsEnded(false)
+    setShowResetConfirm(false)
   }
 
   function updateField<K extends keyof CraftingState>(key: K, value: CraftingState[K]) {
@@ -80,11 +84,14 @@ export default function BlacksmithingPage() {
     setState(() => next)
   }
 
+  // Calculate if setup is complete and valid
+  const isSetupValid = state.baseMaterial && state.craftingHP > 0
+
   return (
     <SidebarProvider>
       <LCToolsSidebarClient />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2">
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -98,12 +105,56 @@ export default function BlacksmithingPage() {
               </BreadcrumbList>
             </Breadcrumb>
           </div>
-        </header>
-        <div className="p-4">
-          <div className="flex gap-2 mb-4">
-            <Button onClick={startCraft} disabled={isStarted}>Start Craft</Button>
-            <Button variant="secondary" onClick={reset}>Reset Craft</Button>
+          <div className="ml-auto flex items-center gap-2 px-4">
+            <Anvil className="w-5 h-5 text-slate-500" />
+            <span className="font-medium">Blacksmithing Simulator</span>
           </div>
+        </header>
+        
+        <div className="p-6">
+          <div className="flex gap-3 mb-6">
+            <Button 
+              onClick={startCraft} 
+              disabled={isStarted || !isSetupValid} 
+              className="gap-2"
+              size="lg"
+            >
+              <PlayIcon className="h-4 w-4" />
+              Start Craft
+            </Button>
+            
+            <AlertDialog open={showResetConfirm} onOpenChange={setShowResetConfirm}>
+              <AlertDialogTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="gap-2"
+                  size="lg"
+                >
+                  <RefreshCcwIcon className="h-4 w-4" />
+                  Reset Craft
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Reset Crafting Session</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will reset your current progress. Your crafting setup will be preserved, but all progress and actions will be reset.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={reset}>Reset</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+            
+            {!isSetupValid && !isStarted && (
+              <p className="text-sm text-amber-500 flex items-center ml-2">
+                Please complete the setup before starting crafting.
+              </p>
+            )}
+          </div>
+
           <div className="grid gap-6">
             <SetupPanel
               state={state}
@@ -111,7 +162,8 @@ export default function BlacksmithingPage() {
               updateField={updateField}
               baseMaterials={jsonBaseMaterials}
             />
-            <div className="grid md:grid-cols-2 gap-4">
+            
+            <div className="grid lg:grid-cols-2 gap-6">
               <ProgressPanel state={state} />
               <ActionsPanel
                 actions={available}
@@ -123,6 +175,7 @@ export default function BlacksmithingPage() {
                 isEnded={isEnded}
               />
             </div>
+            
             <LogPanel state={state} />
           </div>
         </div>
