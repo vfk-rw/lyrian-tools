@@ -413,13 +413,18 @@
     "dice_cost": 1,
     "points_cost": 0,
     "is_rapid": false,
-    "requires_prerequisite": false,
+    "requires_prerequisite": true,
     "description": "You add a crafting check to the item. The crafting dice is automatically a 7.",
     "conditions": [
       {
         "type": "check_class_level",
         "class": "blacksmith",
         "min_level": 6
+      },
+      {
+        "type": "check_action_used",
+        "action_id": "steady-craft",
+        "used": false
       }
     ],
     "effects": [

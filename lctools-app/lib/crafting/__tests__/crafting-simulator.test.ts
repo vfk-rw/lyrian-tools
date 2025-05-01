@@ -83,6 +83,31 @@ describe('Crafting Simulator Integration Tests', () => {
     expect(state.craftingPoints).toBe(50 - 30); // 20 points remaining after paying 30
   });
 
+  it('Steady Craft and Steady Craft II are mutually exclusive', () => {
+    const actions = jsonCraftingActions;
+    let state = JSON.parse(JSON.stringify(initialCraftingState));
+    
+    // Set blacksmith level high enough to use Steady Craft II
+    state.blacksmithLevel = 6;
+    state.diceRemaining = 5; // Ensure we have enough dice
+    
+    // First check: Initially both should be available
+    expect(actions['steady-craft'].prerequisite?.(state)).toBe(true);
+    expect(actions['steady-craft-2'].prerequisite?.(state)).toBe(true);
+    
+    // Test 1: Use Steady Craft, then Steady Craft II should be blocked
+    let state1 = JSON.parse(JSON.stringify(state));
+    state1 = actions['steady-craft'].effect(state1);
+    expect(state1.usedActions).toContain('steady-craft');
+    expect(actions['steady-craft-2'].prerequisite?.(state1)).toBe(false);
+    
+    // Test 2: Use Steady Craft II, then Steady Craft should be blocked
+    let state2 = JSON.parse(JSON.stringify(state));
+    state2 = actions['steady-craft-2'].effect(state2);
+    expect(state2.usedActions).toContain('steady-craft-2');
+    expect(actions['steady-craft'].prerequisite?.(state2)).toBe(false);
+  });
+
   describe('Weapon Alloy cost deduction for all special materials', () => {
     const actions = jsonCraftingActions;
     const materials = specialMaterials as Array<{ id: string; point_cost: number; dice_cost: number }>;
