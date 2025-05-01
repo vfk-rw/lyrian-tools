@@ -1,0 +1,32 @@
+[
+  {
+    "id": "iron",
+    "name": "Iron",
+    "effect_text": "None",
+    "bonus_dice": 0
+  },
+  {
+    "id": "tamahagane",
+    "name": "Tamahagane",
+    "effect_text": "+1 Crafting Dice",
+    "bonus_dice": 1
+  },
+  {
+    "id": "mithril",
+    "name": "Mithril",
+    "effect_text": "+2 Crafting Dice",
+    "bonus_dice": 2
+  },
+  {
+    "id": "orichalcum",
+    "name": "Orichalcum",
+    "effect_text": "+3 Crafting Dice",
+    "bonus_dice": 3
+  },
+  {
+    "id": "escudo",
+    "name": "Escudo",
+    "effect_text": "+4 Crafting Dice",
+    "bonus_dice": 4
+  }
+]

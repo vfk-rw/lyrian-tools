@@ -50,7 +50,6 @@ export default function CensusClient({
 }) {
   const [nameFilter, setNameFilter] = useState('')
   const [raceFilter, setRaceFilter] = useState('all')
-  const [classFilter, setClassFilter] = useState('all')
   const [drillRace, setDrillRace] = useState<string | null>(null)
   const [showRaceChart, setShowRaceChart] = useState(true)
   const [showSpiritChart, setShowSpiritChart] = useState(true)
@@ -92,7 +91,7 @@ export default function CensusClient({
       const nameMatch = safe(d.name, '').toLowerCase().includes(nameFilter.toLowerCase())
       const raceMatch = raceFilter !== 'all' ? safe(d.race) === raceFilter : true
       // Old class filter (by name only)
-      const classNameMatch = classFilter !== 'all' ? d.classes.some((c) => c.class_name === classFilter) : true
+      const classNameMatch = true
       // New class level filter
       let classLevelMatch = true
       if (classLevelClass !== 'all' && classLevelValue !== '') {
@@ -106,7 +105,7 @@ export default function CensusClient({
       }
       return nameMatch && raceMatch && classNameMatch && classLevelMatch
     }),
-    [data, nameFilter, raceFilter, classFilter, classLevelClass, classLevelOp, classLevelValue]
+    [data, nameFilter, raceFilter, classLevelClass, classLevelOp, classLevelValue]
   )
 
   const statusCounts = useMemo(
@@ -180,7 +179,6 @@ export default function CensusClient({
   )
 
   const races = Array.from(new Set(data.map((d) => safe(d.race)))).filter(Boolean)
-  const classes = Array.from(new Set(data.flatMap((d) => d.classes && d.classes.length ? d.classes.map((c) => safe(c)) : ['Unknown']))).filter(Boolean)
 
   // Sorting state
   const [sortBy, setSortBy] = useState<'name'|'race'|'subRace'|'spiritCore'|'status'|'classes'>("name")
@@ -196,11 +194,11 @@ export default function CensusClient({
     }
   }
 
-  // Sorting logic
+  // Fix type for aVal and bVal
   const sorted = useMemo(() => {
     const sortedData = [...filtered]
     sortedData.sort((a, b) => {
-      let aVal: any, bVal: any
+      let aVal: string | number | undefined, bVal: string | number | undefined
       switch (sortBy) {
         case 'name': aVal = a.name; bVal = b.name; break;
         case 'race': aVal = a.race; bVal = b.race; break;
