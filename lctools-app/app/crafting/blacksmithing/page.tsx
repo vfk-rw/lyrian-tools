@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { initialCraftingState } from '@/lib/crafting/state'
-import { jsonBaseMaterials, jsonCraftingActions } from '@/lib/crafting/data-loader'
+import { jsonBaseMaterials, jsonCraftingActions, jsonSpecialMaterials } from '@/lib/crafting/data-loader'
 import type { CraftingState, CraftingAction } from '@/lib/crafting/types'
 import { Button } from '@/components/ui/button'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
@@ -65,7 +65,19 @@ export default function BlacksmithingPage() {
   function startCraft() {
     if (!isStarted) {
       setIsStarted(true)
-      setState(prev => ({ ...prev, log: [...prev.log, 'Crafting began.'] }))
+      setState(prev => ({ 
+        ...prev, 
+        log: [...prev.log, 'Crafting began.']
+      }))
+
+      // If an alloy is selected, add a log message
+      if (selectedAlloy) {
+        const alloyName = jsonSpecialMaterials[selectedAlloy]?.name || 'Unknown';
+        setState(prev => ({ 
+          ...prev, 
+          log: [...prev.log, `Crafting with ${alloyName} alloy.`]
+        }));
+      }
     }
   }
 
@@ -156,15 +168,22 @@ export default function BlacksmithingPage() {
           </div>
 
           <div className="grid gap-6">
-            <SetupPanel
-              state={state}
-              isStarted={isStarted}
-              updateField={updateField}
-              baseMaterials={jsonBaseMaterials}
-            />
-            
+            {/* Row 1: Setup and Progress side by side */}
             <div className="grid lg:grid-cols-2 gap-6">
+              <SetupPanel
+                state={state}
+                isStarted={isStarted}
+                updateField={updateField}
+                baseMaterials={jsonBaseMaterials}
+                specialMaterials={jsonSpecialMaterials}
+                selectedAlloy={selectedAlloy}
+                onSelectAlloy={setSelectedAlloy}
+              />
               <ProgressPanel state={state} />
+            </div>
+            
+            {/* Row 2: Actions and Log side by side */}
+            <div className="grid lg:grid-cols-2 gap-6">
               <ActionsPanel
                 actions={available}
                 state={state}
@@ -174,9 +193,8 @@ export default function BlacksmithingPage() {
                 isStarted={isStarted}
                 isEnded={isEnded}
               />
+              <LogPanel state={state} />
             </div>
-            
-            <LogPanel state={state} />
           </div>
         </div>
       </SidebarInset>

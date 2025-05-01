@@ -3,11 +3,8 @@
 import React, { useMemo } from 'react'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/components/ui/hover-card'
 import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
 import { DiamondIcon, DicesIcon, InfoIcon } from 'lucide-react'
 import type { CraftingState, CraftingAction, SpecialMaterial } from '@/lib/crafting/types'
 import { jsonSpecialMaterials } from '@/lib/crafting/data-loader'
@@ -22,7 +19,7 @@ interface ActionsPanelProps {
   isEnded: boolean
 }
 
-export function ActionsPanel({ actions, state, selectedAlloy, onSelectAlloy, onExecute, isStarted, isEnded }: ActionsPanelProps) {
+export function ActionsPanel({ actions, state, selectedAlloy, onExecute, isStarted, isEnded }: ActionsPanelProps) {
   // Group the actions by their class requirements
   const groupedActions = useMemo(() => {
     const basic = actions.filter(a => a.className === null);
@@ -75,14 +72,14 @@ export function ActionsPanel({ actions, state, selectedAlloy, onSelectAlloy, onE
               <span>{action.name}</span>
               <div className="flex items-center gap-1">
                 {action.diceCost > 0 && (
-                  <Badge variant="outline" className="flex items-center gap-1 ml-2">
-                    <DicesIcon className="h-3 w-3" />
+                  <Badge variant="outline" className="flex items-center gap-1 ml-2 bg-white/90 text-black border-slate-400">
+                    <DicesIcon className="h-3 w-3 text-black" />
                     {action.diceCost}
                   </Badge>
                 )}
                 {action.pointsCost > 0 && (
-                  <Badge variant="outline" className="flex items-center gap-1">
-                    <DiamondIcon className="h-3 w-3" />
+                  <Badge variant="outline" className="flex items-center gap-1 bg-white/90 text-black border-slate-400">
+                    <DiamondIcon className="h-3 w-3 text-black" />
                     {action.pointsCost}
                   </Badge>
                 )}
@@ -148,12 +145,19 @@ export function ActionsPanel({ actions, state, selectedAlloy, onSelectAlloy, onE
   const renderWeaponAlloyAction = () => {
     const alloyAction = actions.find(a => a.id === 'weapon-alloy');
     if (!alloyAction) return null;
+    
+    // Don't display the action if no alloy was selected
+    if (!selectedAlloy) return null;
+
+    // Get the selected alloy's costs
+    const diceCost = selectedAlloyInfo ? selectedAlloyInfo.dice_cost : alloyAction.diceCost;
+    const pointCost = selectedAlloyInfo ? selectedAlloyInfo.point_cost : alloyAction.pointsCost;
 
     const requiresPrereq = alloyAction.requiresPrerequisite && !alloyAction.prerequisite?.(state);
     const used = state.usedActions.includes(alloyAction.id);
-    const notEnoughDice = isStarted && !isEnded && state.diceRemaining < alloyAction.diceCost;
-    const notEnoughPoints = isStarted && !isEnded && state.craftingPoints < alloyAction.pointsCost;
-    const buttonDisabled = requiresPrereq || (!alloyAction.isRapid && used) || !isStarted || isEnded || notEnoughDice || notEnoughPoints || !selectedAlloy;
+    const notEnoughDice = isStarted && !isEnded && state.diceRemaining < diceCost;
+    const notEnoughPoints = isStarted && !isEnded && state.craftingPoints < pointCost;
+    const buttonDisabled = requiresPrereq || (!alloyAction.isRapid && used) || !isStarted || isEnded || notEnoughDice || notEnoughPoints;
     
     let variant: "default" | "secondary" | "outline" | "destructive" | "ghost" = "default";
     let className = "";
@@ -175,62 +179,40 @@ export function ActionsPanel({ actions, state, selectedAlloy, onSelectAlloy, onE
     return (
       <div className="space-y-2" key={alloyAction.id}>
         <h3 className="text-sm font-medium flex items-center gap-2">
-          Special Alloys
+          Apply Selected Alloy
           <HoverCard>
             <HoverCardTrigger asChild>
               <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
             </HoverCardTrigger>
             <HoverCardContent className="w-80">
-              <p className="text-sm">Apply special alloys to enhance your weapon with unique properties.</p>
+              <p className="text-sm">Apply the selected {selectedAlloyInfo?.name} alloy to enhance your weapon.</p>
             </HoverCardContent>
           </HoverCard>
         </h3>
 
         <div className="flex gap-2 flex-col sm:flex-row">
-          <Select 
-            value={selectedAlloy} 
-            onValueChange={onSelectAlloy} 
-            disabled={!isStarted || isEnded || used}
-          >
-            <SelectTrigger className="sm:w-[180px]">
-              <SelectValue placeholder="Select alloy" />
-            </SelectTrigger>
-            <SelectContent>
-              {(Object.entries(jsonSpecialMaterials) as [string, SpecialMaterial][]).map(([id, m]) => (
-                <SelectItem key={id} value={id}>
-                  <div className="flex flex-col">
-                    <span>{m.name}</span>
-                    <span className="text-xs text-muted-foreground">{m.effect}</span>
-                  </div>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          
           <Button 
             onClick={() => onExecute(alloyAction)} 
             disabled={buttonDisabled}
             variant={variant}
-            className={className}
+            className={`${className} w-full`}
           >
             <div className="flex items-center gap-2">
-              <span>Apply Alloy</span>
-              {(alloyAction.diceCost > 0 || alloyAction.pointsCost > 0) && (
-                <div className="flex items-center gap-1">
-                  {alloyAction.diceCost > 0 && (
-                    <Badge variant="outline" className="flex items-center gap-1">
-                      <DicesIcon className="h-3 w-3" />
-                      {alloyAction.diceCost}
-                    </Badge>
-                  )}
-                  {alloyAction.pointsCost > 0 && (
-                    <Badge variant="outline" className="flex items-center gap-1">
-                      <DiamondIcon className="h-3 w-3" />
-                      {alloyAction.pointsCost}
-                    </Badge>
-                  )}
-                </div>
-              )}
+              <span>Apply {selectedAlloyInfo?.name} Alloy</span>
+              <div className="flex items-center gap-1">
+                {diceCost > 0 && (
+                  <Badge variant="outline" className="flex items-center gap-1 bg-white/90 text-black border-slate-400">
+                    <DicesIcon className="h-3 w-3 text-black" />
+                    {diceCost}
+                  </Badge>
+                )}
+                {pointCost > 0 && (
+                  <Badge variant="outline" className="flex items-center gap-1 bg-white/90 text-black border-slate-400">
+                    <DiamondIcon className="h-3 w-3 text-black" />
+                    {pointCost}
+                  </Badge>
+                )}
+              </div>
             </div>
           </Button>
         </div>
@@ -267,87 +249,68 @@ export function ActionsPanel({ actions, state, selectedAlloy, onSelectAlloy, onE
         <CardDescription>Available crafting actions</CardDescription>
       </CardHeader>
       <CardContent className="flex-1">
-        <Tabs defaultValue="basic" className="w-full">
-          <TabsList className="grid grid-cols-3 mb-4">
-            <TabsTrigger value="basic">Basic</TabsTrigger>
-            <TabsTrigger value="blacksmith">Blacksmith</TabsTrigger>
-            <TabsTrigger value="forgemaster">Forgemaster</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="basic" className="space-y-4">
-            {groupedActions.basic.filter(a => a.id === 'weapon-alloy').length > 0 && renderWeaponAlloyAction()}
-            
-            {groupedActions.basic.filter(a => a.id !== 'weapon-alloy').length > 0 && (
-              <>
-                {renderWeaponAlloyAction() && <Separator className="my-4" />}
-                <div className="space-y-2">
-                  <h3 className="text-sm font-medium flex items-center gap-2">
-                    Basic Actions
-                    <HoverCard>
-                      <HoverCardTrigger asChild>
-                        <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
-                      </HoverCardTrigger>
-                      <HoverCardContent className="w-80">
-                        <p className="text-sm">Basic crafting actions available to all characters.</p>
-                      </HoverCardContent>
-                    </HoverCard>
-                  </h3>
-                  <div className="grid gap-2">
-                    {groupedActions.basic
-                      .filter(a => a.id !== 'weapon-alloy')
-                      .map(renderActionButton)}
-                  </div>
-                </div>
-              </>
-            )}
-          </TabsContent>
-          
-          <TabsContent value="blacksmith" className="space-y-4">
-            <div className="space-y-2">
-              <h3 className="text-sm font-medium flex items-center gap-2">
-                Blacksmith Actions
-                <HoverCard>
-                  <HoverCardTrigger asChild>
-                    <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
-                  </HoverCardTrigger>
-                  <HoverCardContent className="w-80">
-                    <p className="text-sm">Special actions available to characters with Blacksmith levels.</p>
-                  </HoverCardContent>
-                </HoverCard>
-              </h3>
-              {groupedActions.blacksmith.length > 0 ? (
-                <div className="grid gap-2">
-                  {groupedActions.blacksmith.map(renderActionButton)}
-                </div>
-              ) : (
-                <p className="text-sm text-muted-foreground">No blacksmith actions available.</p>
-              )}
+        {/* Special Alloys Section */}
+        {groupedActions.basic.filter(a => a.id === 'weapon-alloy').length > 0 && renderWeaponAlloyAction()}
+        
+        {/* Basic Actions Section */}
+        <div className="space-y-2 mt-4">
+          <h3 className="text-sm font-medium flex items-center gap-2">
+            Basic Actions
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
+              </HoverCardTrigger>
+              <HoverCardContent className="w-80">
+                <p className="text-sm">Basic crafting actions available to all characters.</p>
+              </HoverCardContent>
+            </HoverCard>
+          </h3>
+          <div className="grid gap-2">
+            {groupedActions.basic
+              .filter(a => a.id !== 'weapon-alloy')
+              .map(renderActionButton)}
+          </div>
+        </div>
+        
+        {/* Blacksmith Actions Section */}
+        {groupedActions.blacksmith.length > 0 && (
+          <div className="space-y-2 mt-6">
+            <h3 className="text-sm font-medium flex items-center gap-2">
+              Blacksmith Actions
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80">
+                  <p className="text-sm">Special actions available to characters with Blacksmith levels.</p>
+                </HoverCardContent>
+              </HoverCard>
+            </h3>
+            <div className="grid gap-2">
+              {groupedActions.blacksmith.map(renderActionButton)}
             </div>
-          </TabsContent>
-          
-          <TabsContent value="forgemaster" className="space-y-4">
-            <div className="space-y-2">
-              <h3 className="text-sm font-medium flex items-center gap-2">
-                Forgemaster Actions
-                <HoverCard>
-                  <HoverCardTrigger asChild>
-                    <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
-                  </HoverCardTrigger>
-                  <HoverCardContent className="w-80">
-                    <p className="text-sm">Special actions available to characters with Forgemaster levels.</p>
-                  </HoverCardContent>
-                </HoverCard>
-              </h3>
-              {groupedActions.forgemaster.length > 0 ? (
-                <div className="grid gap-2">
-                  {groupedActions.forgemaster.map(renderActionButton)}
-                </div>
-              ) : (
-                <p className="text-sm text-muted-foreground">No forgemaster actions available.</p>
-              )}
+          </div>
+        )}
+        
+        {/* Forgemaster Actions Section */}
+        {groupedActions.forgemaster.length > 0 && (
+          <div className="space-y-2 mt-6">
+            <h3 className="text-sm font-medium flex items-center gap-2">
+              Forgemaster Actions
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80">
+                  <p className="text-sm">Special actions available to characters with Forgemaster levels.</p>
+                </HoverCardContent>
+              </HoverCard>
+            </h3>
+            <div className="grid gap-2">
+              {groupedActions.forgemaster.map(renderActionButton)}
             </div>
-          </TabsContent>
-        </Tabs>
+          </div>
+        )}
       </CardContent>
     </Card>
   )
