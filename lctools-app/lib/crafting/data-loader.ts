@@ -2,11 +2,9 @@
  * Data loader module that loads crafting data from JSON files and converts it to executable structures
  */
 
-import type { CraftingActions, SpecialMaterials, BaseMaterial } from '../types';
-import { createExecutableActions, loadActionsFromJson } from './interpreters/action-interpreter';
+import type { CraftingActions, SpecialMaterials, BaseMaterial } from './types';
+import { loadActionsFromJson } from './interpreters/action-interpreter';
 import { 
-  createBaseMaterials, 
-  createSpecialMaterials,
   loadBaseMaterialsFromJson,
   loadSpecialMaterialsFromJson
 } from './interpreters/material-interpreter';

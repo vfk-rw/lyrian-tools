@@ -120,8 +120,16 @@ function evaluateContainsCondition(
     return false;
   }
   
-  // Check if the array contains the value
-  return array.includes(condition.value);
+  // Special handling for materials array which contains objects
+  if (arrayProperty === 'materials') {
+    // Type cast to the correct type for materials array
+    const materialsArray = array as { name: string; units: number }[];
+    return materialsArray.some(item => item.name === condition.value);
+  }
+  
+  // For other arrays, use type assertion to tell TypeScript this is a safe operation
+  // This is necessary because TypeScript doesn't know which specific array type we're working with at runtime
+  return (array as unknown[]).includes(condition.value);
 }
 
 function evaluateNotContainsCondition(
@@ -144,8 +152,15 @@ function evaluateNotContainsCondition(
     return false;
   }
   
-  // Check if the array does not contain the value
-  return !array.includes(condition.value);
+  // Special handling for materials array which contains objects
+  if (arrayProperty === 'materials') {
+    // Type cast to the correct type for materials array
+    const materialsArray = array as { name: string; units: number }[];
+    return !materialsArray.some(item => item.name === condition.value);
+  }
+  
+  // For other arrays, use type assertion to tell TypeScript this is a safe operation
+  return !(array as unknown[]).includes(condition.value);
 }
 
 function evaluateClassLevelCondition(

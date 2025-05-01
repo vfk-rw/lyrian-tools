@@ -85,6 +85,7 @@ describe('Crafting Simulator Integration Tests', () => {
 
   it('Steady Craft and Steady Craft II are mutually exclusive', () => {
     const actions = jsonCraftingActions;
+    // eslint-disable-next-line prefer-const
     let state = JSON.parse(JSON.stringify(initialCraftingState));
     
     // Set blacksmith level high enough to use Steady Craft II
