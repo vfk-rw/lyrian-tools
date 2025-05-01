@@ -1,0 +1,213 @@
+[
+  {
+    "id": "blacksmiths-design",
+    "name": "Blacksmith's Design",
+    "cost_text": "15 Crafting Points",
+    "class_name": "blacksmith",
+    "class_level": 1,
+    "dice_cost": 0,
+    "points_cost": 15,
+    "is_rapid": false,
+    "requires_prerequisite": false,
+    "description": "If crafting a smithing tool it gains a +1 Crafting Artisan Bonus.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "blacksmith",
+        "min_level": 1
+      }
+    ],
+    "effects": [
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "subtract",
+        "value": 15
+      },
+      {
+        "type": "add_bonus",
+        "bonus": "+1 Crafting"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "blacksmiths-design"
+      },
+      {
+        "type": "log",
+        "message": "Used Blacksmith's Design. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Added +1 Crafting bonus."
+      }
+    ]
+  },
+  {
+    "id": "weapon-alloy",
+    "name": "Weapon Alloy",
+    "cost_text": "X Crafting Points",
+    "class_name": "blacksmith",
+    "class_level": 1,
+    "dice_cost": 0,
+    "points_cost": 0,
+    "is_rapid": false,
+    "requires_prerequisite": false,
+    "description": "Mix a special material into the weapon costing Crafting Points.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "blacksmith",
+        "min_level": 1
+      },
+      {
+        "type": "check_custom",
+        "check": "weapon_alloy_eligibility"
+      }
+    ],
+    "effects": [
+      {
+        "type": "add_alloy",
+        "alloy": "{selected_alloy}"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "weapon-alloy"
+      }
+    ]
+  },
+  {
+    "id": "sharpening-and-reinforcing",
+    "name": "Sharpening and Reinforcing",
+    "cost_text": "15 Crafting Points",
+    "class_name": "blacksmith",
+    "class_level": 1,
+    "dice_cost": 0,
+    "points_cost": 15,
+    "is_rapid": false,
+    "requires_prerequisite": false,
+    "description": "The smithing weapon gains a +1 Power Artisan Bonus.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "blacksmith",
+        "min_level": 1
+      }
+    ],
+    "effects": [
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "subtract",
+        "value": 15
+      },
+      {
+        "type": "add_bonus",
+        "bonus": "+1 Power"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "sharpening-and-reinforcing"
+      },
+      {
+        "type": "log",
+        "message": "Used Sharpening and Reinforcing. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Added +1 Power bonus."
+      }
+    ]
+  },
+  {
+    "id": "weight-balancing",
+    "name": "Weight Balancing",
+    "cost_text": "15 Crafting Points",
+    "class_name": "blacksmith",
+    "class_level": 1,
+    "dice_cost": 0,
+    "points_cost": 15,
+    "is_rapid": false,
+    "requires_prerequisite": false,
+    "description": "The smithing weapon gains a +1 Focus Artisan Bonus.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "blacksmith",
+        "min_level": 1
+      }
+    ],
+    "effects": [
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "subtract",
+        "value": 15
+      },
+      {
+        "type": "add_bonus",
+        "bonus": "+1 Focus"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "weight-balancing"
+      },
+      {
+        "type": "log",
+        "message": "Used Weight Balancing. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Added +1 Focus bonus."
+      }
+    ]
+  },
+  {
+    "id": "steady-craft-2",
+    "name": "Steady Craft II",
+    "cost_text": "1 Crafting Die",
+    "class_name": "blacksmith",
+    "class_level": 6,
+    "dice_cost": 1,
+    "points_cost": 0,
+    "is_rapid": false,
+    "requires_prerequisite": true,
+    "description": "You add a crafting check to the item. The crafting dice is automatically a 7.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "blacksmith",
+        "min_level": 6
+      },
+      {
+        "type": "check_action_used",
+        "action_id": "steady-craft",
+        "used": false
+      }
+    ],
+    "effects": [
+      {
+        "type": "calculate",
+        "formula": "7 + {craftingSkill} + {expertise}",
+        "store_as": "pointsAdded"
+      },
+      {
+        "type": "modify",
+        "target": "diceRemaining",
+        "operation": "subtract",
+        "value": 1
+      },
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "add",
+        "value": "{pointsAdded}"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "steady-craft-2"
+      },
+      {
+        "type": "log",
+        "message": "Used Steady Craft II. Roll is 7. Added {pointsAdded} points ({initialCraftingPoints} -> {craftingPoints}). {diceRemaining} dice left."
+      }
+    ]
+  }
+]

@@ -37,12 +37,12 @@ export type ComparisonOperation =
 // Base interfaces
 export interface Effect {
   type: EffectType;
-  [key: string]: any; // Additional properties based on effect type
+  [key: string]: string | number | boolean | object | unknown; // Additional properties based on effect type
 }
 
 export interface Condition {
   type: ConditionType;
-  [key: string]: any; // Additional properties based on condition type
+  [key: string]: string | number | boolean | object | unknown; // Additional properties based on condition type
 }
 
 // Specific effect types
@@ -98,19 +98,19 @@ export interface PropertyCondition extends Condition {
   type: 'check_property';
   property: keyof CraftingState | string;
   operation: ComparisonOperation;
-  value: any;
+  value: string | number | boolean;
 }
 
 export interface ContainsCondition extends Condition {
   type: 'check_contains';
   array: keyof CraftingState | string; // Should reference an array property
-  value: any;
+  value: string | number;
 }
 
 export interface NotContainsCondition extends Condition {
   type: 'check_not_contains';
   array: keyof CraftingState | string; // Should reference an array property
-  value: any;
+  value: string | number;
 }
 
 export interface ClassLevelCondition extends Condition {

@@ -1,0 +1,202 @@
+[
+  {
+    "id": "basic-craft",
+    "name": "Basic Craft",
+    "cost_text": "1 Crafting Die",
+    "class_name": null,
+    "class_level": 0,
+    "dice_cost": 1,
+    "points_cost": 0,
+    "is_rapid": true,
+    "requires_prerequisite": false,
+    "description": "Perform a standard crafting check (1d10 + Skill + Expertise).",
+    "effects": [
+      {
+        "type": "roll",
+        "dice": {
+          "sides": 10,
+          "count": 1
+        },
+        "store_as": "roll"
+      },
+      {
+        "type": "calculate",
+        "formula": "{roll} + {craftingSkill} + {expertise}",
+        "store_as": "pointsAdded"
+      },
+      {
+        "type": "modify",
+        "target": "diceRemaining",
+        "operation": "subtract",
+        "value": 1
+      },
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "add",
+        "value": "{pointsAdded}"
+      },
+      {
+        "type": "log",
+        "message": "Used Basic Craft. Rolled {roll}. Added {pointsAdded} points ({initialCraftingPoints} -> {craftingPoints}). {diceRemaining} dice left."
+      }
+    ]
+  },
+  {
+    "id": "beginners-luck",
+    "name": "Beginner's Luck",
+    "cost_text": "1 Crafting Die",
+    "class_name": null,
+    "class_level": 0,
+    "dice_cost": 1,
+    "points_cost": 0,
+    "is_rapid": false,
+    "requires_prerequisite": false,
+    "description": "Roll 2d10 pick highest. Add result + Expertise (NO Skill) to points.",
+    "effects": [
+      {
+        "type": "roll",
+        "dice": {
+          "sides": 10,
+          "count": 1
+        },
+        "store_as": "roll1"
+      },
+      {
+        "type": "roll",
+        "dice": {
+          "sides": 10,
+          "count": 1
+        },
+        "store_as": "roll2"
+      },
+      {
+        "type": "calculate",
+        "formula": "Math.max({roll1}, {roll2})",
+        "store_as": "highestRoll"
+      },
+      {
+        "type": "calculate",
+        "formula": "{highestRoll} + {expertise}",
+        "store_as": "pointsAdded"
+      },
+      {
+        "type": "modify",
+        "target": "diceRemaining",
+        "operation": "subtract",
+        "value": 1
+      },
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "add",
+        "value": "{pointsAdded}"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "beginners-luck"
+      },
+      {
+        "type": "log",
+        "message": "Used Beginner's Luck. Rolled {roll1}, {roll2} (took {highestRoll}). Added {pointsAdded} points ({initialCraftingPoints} -> {craftingPoints}). {diceRemaining} dice left."
+      }
+    ]
+  },
+  {
+    "id": "standard-finish",
+    "name": "Standard Finish",
+    "cost_text": "2 Crafting Dice",
+    "class_name": null,
+    "class_level": 0,
+    "dice_cost": 2,
+    "points_cost": 0,
+    "is_rapid": false,
+    "requires_prerequisite": true,
+    "description": "Double current crafting points and END crafting. Cannot be used if item has bonuses or alloys.",
+    "conditions": [
+      {
+        "type": "check_custom",
+        "check": "standard_finish_eligibility"
+      }
+    ],
+    "effects": [
+      {
+        "type": "calculate",
+        "formula": "{craftingPoints} * 2",
+        "store_as": "doubledPoints"
+      },
+      {
+        "type": "modify",
+        "target": "diceRemaining",
+        "operation": "set",
+        "value": 0
+      },
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "set",
+        "value": "{doubledPoints}"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "standard-finish"
+      },
+      {
+        "type": "log",
+        "message": "Used Standard Finish. Doubled points ({initialCraftingPoints} -> {doubledPoints}). Crafting ended."
+      }
+    ]
+  },
+  {
+    "id": "steady-craft",
+    "name": "Steady Craft",
+    "cost_text": "1 Crafting Die",
+    "class_name": null,
+    "class_level": 0,
+    "dice_cost": 1,
+    "points_cost": 0,
+    "is_rapid": false,
+    "requires_prerequisite": true,
+    "description": "Perform a crafting check (Skill + Expertise) d10 result is automatically 5.",
+    "conditions": [
+      {
+        "type": "check_action_used",
+        "action_id": "steady-craft-2",
+        "used": false
+      }
+    ],
+    "effects": [
+      {
+        "type": "calculate",
+        "formula": "5 + {craftingSkill} + {expertise}",
+        "store_as": "pointsAdded"
+      },
+      {
+        "type": "modify",
+        "target": "diceRemaining",
+        "operation": "subtract",
+        "value": 1
+      },
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "add",
+        "value": "{pointsAdded}"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "steady-craft"
+      },
+      {
+        "type": "log",
+        "message": "Used Steady Craft. Roll is 5. Added {pointsAdded} points ({initialCraftingPoints} -> {craftingPoints}). {diceRemaining} dice left."
+      }
+    ]
+  }
+]

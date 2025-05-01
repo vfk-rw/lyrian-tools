@@ -14,17 +14,51 @@ import {
 // Import JSON data
 import baseMatJson from './json/base-materials.json';
 import specialMatJson from './json/special-materials.json';
-import actionsJson from './json/crafting-actions.json';
+
+// Import separated action files
+import baseActionsJson from './json/base-actions.json';
+import blacksmithActionsJson from './json/blacksmith-actions.json';
+import forgemasterActionsJson from './json/forgemaster-actions.json';
 
 // Convert JSON to string for our loader functions
 const baseMatString = JSON.stringify(baseMatJson);
 const specialMatString = JSON.stringify(specialMatJson);
-const actionsString = JSON.stringify(actionsJson);
 
-// Parse and convert the data into executable structures
+// Convert action JSONs to strings
+const baseActionsString = JSON.stringify(baseActionsJson);
+const blacksmithActionsString = JSON.stringify(blacksmithActionsJson);
+const forgemasterActionsString = JSON.stringify(forgemasterActionsJson);
+
+// Parse and convert materials data into executable structures
 export const jsonBaseMaterials: { [key: string]: BaseMaterial } = loadBaseMaterialsFromJson(baseMatString);
 export const jsonSpecialMaterials: SpecialMaterials = loadSpecialMaterialsFromJson(specialMatString);
-export const jsonCraftingActions: CraftingActions = loadActionsFromJson(actionsString);
+
+// Load actions from each class file
+const baseActions = loadActionsFromJson(baseActionsString);
+const blacksmithActions = loadActionsFromJson(blacksmithActionsString);
+const forgemasterActions = loadActionsFromJson(forgemasterActionsString);
+
+// Combine all actions into a single object
+export const jsonCraftingActions: CraftingActions = {
+  ...baseActions,
+  ...blacksmithActions,
+  ...forgemasterActions
+};
+
+// List of class action files for extensibility
+const classActionFiles = [
+  { name: 'base', data: baseActionsJson },
+  { name: 'blacksmith', data: blacksmithActionsJson },
+  { name: 'forgemaster', data: forgemasterActionsJson }
+];
+
+// Function to get actions for a specific class
+export function getActionsForClass(className: string): CraftingActions {
+  const matchingFile = classActionFiles.find(file => file.name === className);
+  if (!matchingFile) return {};
+  
+  return loadActionsFromJson(JSON.stringify(matchingFile.data));
+}
 
 /**
  * Load data from custom JSON files (useful for mods or user-defined content)
@@ -155,5 +189,23 @@ export function validateCustomDataFile(json: string, type: 'baseMaterials' | 'sp
   } catch (error) {
     console.error('Error validating data:', error);
     return false;
+  }
+}
+
+/**
+ * Load actions from a specific class file
+ * This can be used to dynamically load actions for different crafting disciplines
+ */
+export function loadActionsForClass(className: string): CraftingActions {
+  switch (className) {
+    case 'base':
+      return loadActionsFromJson(baseActionsString);
+    case 'blacksmith':
+      return loadActionsFromJson(blacksmithActionsString);
+    case 'forgemaster':
+      return loadActionsFromJson(forgemasterActionsString);
+    default:
+      console.warn(`Unknown class name: ${className}`);
+      return {};
   }
 }
