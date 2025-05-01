@@ -4,6 +4,7 @@
 
 import type { CraftingState } from '../types';
 import { rollD10, logMessage } from '../utils';
+import { jsonSpecialMaterials } from '../data-loader';
 import type { 
   Effect,
   ModifyEffect,
@@ -274,11 +275,18 @@ function executeAddAlloyEffect(
     }
   }
   
+  // Deduct material cost if defined
+  const material = jsonSpecialMaterials[alloyId];
+  let newState = { ...state };
+  if (material) {
+    newState = {
+      ...newState,
+      craftingPoints: newState.craftingPoints - material.point_cost,
+      diceRemaining: newState.diceRemaining - material.dice_cost
+    };
+  }
   // Add the alloy to the state's alloys array
-  const newState = { 
-    ...state, 
-    alloys: [...state.alloys, alloyId] 
-  };
+  newState = { ...newState, alloys: [...newState.alloys, alloyId] };
   
   return { state: newState, variables };
 }
