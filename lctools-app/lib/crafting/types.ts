@@ -41,7 +41,8 @@ export interface CraftingAction {
 	isRapid: boolean;
 	requiresPrerequisite: boolean;
 	prerequisite?: (state: CraftingState) => boolean;
-	effect: (state: CraftingState) => CraftingState; // Function to apply the action's effect
+	// effect applies state transformation, with optional additional crafting data (e.g., selected alloy id)
+	effect: (state: CraftingState, additionalData?: unknown) => CraftingState;
 	description: string; // Added for tooltips/info
 }
 

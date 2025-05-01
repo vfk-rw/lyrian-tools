@@ -17,19 +17,17 @@ import type {
 } from '../schemas/action-schema';
 
 // Variable store for temporary values during effect execution
-type VariableStore = {
-  [key: string]: any;
-};
+type VariableStore = Record<string, unknown>;
 
 /**
  * Execute a single effect and return the updated state and variable store
  */
 export function executeEffect(
-  effect: Effect, 
-  state: CraftingState, 
+  effect: Effect,
+  state: CraftingState,
   variables: VariableStore,
-  additionalData?: any
-): { state: CraftingState, variables: VariableStore } {
+  additionalData?: unknown
+): { state: CraftingState; variables: VariableStore } {
   switch (effect.type) {
     case 'modify':
       return executeModifyEffect(effect as ModifyEffect, state, variables);
@@ -57,9 +55,9 @@ export function executeEffect(
  * Execute all effects in sequence, passing the state and variables between them
  */
 export function executeEffects(
-  effects: Effect[], 
-  state: CraftingState, 
-  additionalData?: any
+  effects: Effect[],
+  state: CraftingState,
+  additionalData?: unknown
 ): CraftingState {
   let currentState = { ...state };
   let variables: VariableStore = {};
@@ -85,10 +83,10 @@ function executeModifyEffect(
   variables: VariableStore
 ): { state: CraftingState, variables: VariableStore } {
   let newState = { ...state };
-  let target = effect.target as keyof CraftingState;
-  
+  const target = effect.target as keyof CraftingState;
+
   // Get the current value
-  let currentValue: any;
+  let currentValue: unknown;
   if (target in state) {
     currentValue = state[target];
   } else if (target in variables) {
@@ -99,7 +97,7 @@ function executeModifyEffect(
   }
   
   // Get the value to apply
-  let valueToApply: any;
+  let valueToApply: unknown;
   if (typeof effect.value === 'string' && effect.value.startsWith('{') && effect.value.endsWith('}')) {
     const variableName = effect.value.slice(1, -1);
     valueToApply = variables[variableName];
@@ -119,16 +117,16 @@ function executeModifyEffect(
     // Handle numeric operations
     switch (effect.operation) {
       case 'add':
-        currentValue += Number(valueToApply);
+        currentValue = Number(currentValue) + Number(valueToApply);
         break;
       case 'subtract':
-        currentValue -= Number(valueToApply);
+        currentValue = Number(currentValue) - Number(valueToApply);
         break;
       case 'multiply':
-        currentValue *= Number(valueToApply);
+        currentValue = Number(currentValue) * Number(valueToApply);
         break;
       case 'divide':
-        currentValue /= Number(valueToApply);
+        currentValue = Number(currentValue) / Number(valueToApply);
         break;
       case 'set':
         currentValue = valueToApply;
@@ -161,7 +159,7 @@ function executeRollEffect(
   const rolls: number[] = [];
   
   for (let i = 0; i < count; i++) {
-    const roll = Math.floor(Math.random() * sides) + 1;
+    const roll = sides === 10 ? rollD10() : Math.floor(Math.random() * sides) + 1;
     rolls.push(roll);
     total += roll;
   }
@@ -262,7 +260,7 @@ function executeAddAlloyEffect(
   effect: AddAlloyEffect,
   state: CraftingState,
   variables: VariableStore,
-  additionalData?: any
+  additionalData?: unknown
 ): { state: CraftingState, variables: VariableStore } {
   let alloyId = effect.alloy;
   
@@ -270,9 +268,9 @@ function executeAddAlloyEffect(
   if (typeof alloyId === 'string' && alloyId.startsWith('{') && alloyId.endsWith('}')) {
     const variableName = alloyId.slice(1, -1);
     if (variableName === 'selected_alloy' && additionalData) {
-      alloyId = additionalData;
+      alloyId = additionalData as string;
     } else if (variables[variableName]) {
-      alloyId = variables[variableName];
+      alloyId = variables[variableName] as string;
     }
   }
   

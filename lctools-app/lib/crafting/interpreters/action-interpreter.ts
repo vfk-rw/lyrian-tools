@@ -29,13 +29,8 @@ export function createExecutableAction(declarativeAction: DeclarativeAction): Cr
       : undefined,
     
     // Create the effect function
-    effect: (state: CraftingState, ...additionalArgs: any[]) => {
-      // Handle special case for weapon alloy which receives additional arguments
-      let additionalData = undefined;
-      if (declarativeAction.id === 'weapon-alloy' && additionalArgs.length >= 1) {
-        additionalData = additionalArgs[0];
-      }
-      
+    effect: (state: CraftingState, additionalData?: unknown) => {
+      // Pass additionalData through for effects needing extra context
       return executeEffects(declarativeAction.effects, state, additionalData);
     }
   };
