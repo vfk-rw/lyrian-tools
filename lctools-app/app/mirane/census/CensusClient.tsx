@@ -182,6 +182,47 @@ export default function CensusClient({
   const races = Array.from(new Set(data.map((d) => safe(d.race)))).filter(Boolean)
   const classes = Array.from(new Set(data.flatMap((d) => d.classes && d.classes.length ? d.classes.map((c) => safe(c)) : ['Unknown']))).filter(Boolean)
 
+  // Sorting state
+  const [sortBy, setSortBy] = useState<'name'|'race'|'subRace'|'spiritCore'|'status'|'classes'>("name")
+  const [sortDir, setSortDir] = useState<'asc'|'desc'>("asc")
+
+  // Sorting handler
+  function handleSort(col: typeof sortBy) {
+    if (sortBy === col) {
+      setSortDir((prev) => (prev === 'asc' ? 'desc' : 'asc'))
+    } else {
+      setSortBy(col)
+      setSortDir('asc')
+    }
+  }
+
+  // Sorting logic
+  const sorted = useMemo(() => {
+    const sortedData = [...filtered]
+    sortedData.sort((a, b) => {
+      let aVal: any, bVal: any
+      switch (sortBy) {
+        case 'name': aVal = a.name; bVal = b.name; break;
+        case 'race': aVal = a.race; bVal = b.race; break;
+        case 'subRace': aVal = a.subRace; bVal = b.subRace; break;
+        case 'spiritCore': aVal = a.spiritCore; bVal = b.spiritCore; break;
+        case 'status': aVal = a.status; bVal = b.status; break;
+        case 'classes':
+          aVal = a.classes.map(c => c.class_name).join(', ')
+          bVal = b.classes.map(c => c.class_name).join(', ')
+          break;
+        default: aVal = a.name; bVal = b.name
+      }
+      if (aVal == null) return 1
+      if (bVal == null) return -1
+      if (typeof aVal === 'number' && typeof bVal === 'number') {
+        return sortDir === 'asc' ? aVal - bVal : bVal - aVal
+      }
+      return sortDir === 'asc' ? String(aVal).localeCompare(String(bVal)) : String(bVal).localeCompare(String(aVal))
+    })
+    return sortedData
+  }, [filtered, sortBy, sortDir])
+
   return (
     <div className="space-y-8 p-4">
       {/* Status counts summary */}
@@ -353,26 +394,13 @@ export default function CensusClient({
               ))}
             </SelectContent>
           </Select>
-          <Select value={classFilter} onValueChange={setClassFilter}>
-            <SelectTrigger className="w-40">
-              {classFilter === 'all' ? 'All classes' : classFilter}
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              {classes.filter(Boolean).map((c) => (
-                <SelectItem key={c} value={c}>
-                  {c}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
           {/* Class Level Filter UI */}
           <Select value={classLevelClass} onValueChange={setClassLevelClass}>
             <SelectTrigger className="w-40">
-              {classLevelClass === 'all' ? 'Class (level filter)' : classLevelClass}
+              {classLevelClass === 'all' ? 'Class (exp filter)' : classLevelClass}
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Class (level filter)</SelectItem>
+              <SelectItem value="all">Class (exp filter)</SelectItem>
               {allClassNames.map((c) => (
                 <SelectItem key={c} value={c}>{c}</SelectItem>
               ))}
@@ -388,7 +416,7 @@ export default function CensusClient({
           </Select>
           <Input
             type="number"
-            placeholder="Level"
+            placeholder="Exp"
             className="w-24"
             value={classLevelValue}
             onChange={e => setClassLevelValue(e.target.value)}
@@ -399,16 +427,46 @@ export default function CensusClient({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Race</TableHead>
-              <TableHead>Sub-race</TableHead>
-              <TableHead>Spirit Core</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Classes</TableHead>
+              <TableHead>
+                <button className="flex items-center gap-1" onClick={() => handleSort('name')}>
+                  Name
+                  {sortBy==='name' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
+                </button>
+              </TableHead>
+              <TableHead>
+                <button className="flex items-center gap-1" onClick={() => handleSort('race')}>
+                  Race
+                  {sortBy==='race' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
+                </button>
+              </TableHead>
+              <TableHead>
+                <button className="flex items-center gap-1" onClick={() => handleSort('subRace')}>
+                  Sub-race
+                  {sortBy==='subRace' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
+                </button>
+              </TableHead>
+              <TableHead>
+                <button className="flex items-center gap-1" onClick={() => handleSort('spiritCore')}>
+                  Spirit Core
+                  {sortBy==='spiritCore' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
+                </button>
+              </TableHead>
+              <TableHead>
+                <button className="flex items-center gap-1" onClick={() => handleSort('status')}>
+                  Status
+                  {sortBy==='status' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
+                </button>
+              </TableHead>
+              <TableHead>
+                <button className="flex items-center gap-1" onClick={() => handleSort('classes')}>
+                  Classes
+                  {sortBy==='classes' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
+                </button>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filtered.map((d) => (
+            {sorted.map((d) => (
               <TableRow
                 key={d.id}
                 onClick={() => window.open(d.sheetUrl, '_blank')}
