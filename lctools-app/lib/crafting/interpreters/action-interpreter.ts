@@ -11,6 +11,8 @@ import { evaluateConditions } from './condition-interpreter';
  * Convert a declarative action into an executable action
  */
 export function createExecutableAction(declarativeAction: DeclarativeAction): CraftingAction {
+  const diceCost = declarativeAction.dice_cost;
+  const pointsCost = declarativeAction.points_cost;
   return {
     id: declarativeAction.id,
     name: declarativeAction.name,
@@ -30,7 +32,16 @@ export function createExecutableAction(declarativeAction: DeclarativeAction): Cr
     
     // Create the effect function
     effect: (state: CraftingState, additionalData?: unknown) => {
-      // Pass additionalData through for effects needing extra context
+      // Prevent any actions after crafting ended
+      if (state.diceRemaining <= 0) return state;
+      // Prevent actions without enough dice or points
+      if (state.diceRemaining < diceCost) return state;
+      if (state.craftingPoints < pointsCost) return state;
+      // Prevent if prerequisite not met
+      if (declarativeAction.requires_prerequisite && declarativeAction.conditions && !evaluateConditions(declarativeAction.conditions, state)) {
+        return state;
+      }
+      // Execute effects
       return executeEffects(declarativeAction.effects, state, additionalData);
     }
   };

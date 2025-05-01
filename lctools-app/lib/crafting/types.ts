@@ -21,9 +21,11 @@ export interface MaterialBonusDice {
 }
 
 export interface SpecialMaterial {
+    name: string;
 	point_cost: number;
 	dice_cost: number; // Note: readme says 0, rules have costs for some? Sticking to rules for now.
 	effect: string;
+	special_effect?: string; // Added to support special effects like titanium_points
 }
 
 export interface SpecialMaterials {

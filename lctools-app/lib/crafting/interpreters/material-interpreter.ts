@@ -36,10 +36,11 @@ export function createBaseMaterials(
  */
 export function createSpecialMaterial(declarativeMaterial: DeclarativeSpecialMaterial): SpecialMaterial {
   return {
+    name: declarativeMaterial.name,
     point_cost: declarativeMaterial.point_cost,
     dice_cost: declarativeMaterial.dice_cost,
-    effect: declarativeMaterial.effect
-    // If we need special handling of special_effect, it would be processed here
+    effect: declarativeMaterial.effect,
+    special_effect: declarativeMaterial.special_effect
   };
 }
 

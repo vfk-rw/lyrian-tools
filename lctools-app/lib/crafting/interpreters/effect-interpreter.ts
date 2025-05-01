@@ -275,18 +275,62 @@ function executeAddAlloyEffect(
     }
   }
   
-  // Deduct material cost if defined
+  // Get material info
   const material = jsonSpecialMaterials[alloyId];
   let newState = { ...state };
+  let effectDescription = '';
+  
   if (material) {
-    newState = {
-      ...newState,
-      craftingPoints: newState.craftingPoints - material.point_cost,
-      diceRemaining: newState.diceRemaining - material.dice_cost
-    };
+    effectDescription = material.effect;
+    
+    // Handle point costs
+    if (material.point_cost > 0) {
+      newState = {
+        ...newState,
+        craftingPoints: newState.craftingPoints - material.point_cost
+      };
+    }
+    
+    // Handle dice costs
+    if (material.dice_cost > 0) {
+      newState = {
+        ...newState,
+        diceRemaining: newState.diceRemaining - material.dice_cost
+      };
+    }
+    
+    // Handle special effects
+    if (material.special_effect === 'titanium_points') {
+      newState = {
+        ...newState,
+        craftingPoints: newState.craftingPoints + 30
+      };
+    }
+    
+    // Add to bonuses array if material has an effect
+    if (material.effect) {
+      newState = {
+        ...newState,
+        bonuses: [...newState.bonuses, material.name]
+      };
+    }
   }
+  
   // Add the alloy to the state's alloys array
-  newState = { ...newState, alloys: [...newState.alloys, alloyId] };
+  newState = { 
+    ...newState, 
+    alloys: [...newState.alloys, alloyId] 
+  };
+  
+  // Add a more informative log message
+  const logMessage = material 
+    ? `Used Weapon Alloy: Added ${material.name}. ${effectDescription}` 
+    : 'Used Weapon Alloy. Added alloy effect.';
+  
+  newState = { 
+    ...newState, 
+    log: [...newState.log, logMessage] 
+  };
   
   return { state: newState, variables };
 }

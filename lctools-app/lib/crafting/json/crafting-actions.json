@@ -272,10 +272,6 @@
         "target": "usedActions",
         "operation": "add",
         "value": "weapon-alloy"
-      },
-      {
-        "type": "log",
-        "message": "Used Weapon Alloy. Added alloy effect."
       }
     ]
   },
@@ -323,6 +319,290 @@
       {
         "type": "log",
         "message": "Used Blacksmith's Ergonomics. Cost 30 points ({initialCraftingPoints} -> {craftingPoints}). Upgraded +1 Crafting to +2."
+      }
+    ]
+  },
+  {
+    "id": "sharpening-and-reinforcing",
+    "name": "Sharpening and Reinforcing",
+    "cost_text": "15 Crafting Points",
+    "class_name": "blacksmith",
+    "class_level": 1,
+    "dice_cost": 0,
+    "points_cost": 15,
+    "is_rapid": false,
+    "requires_prerequisite": false,
+    "description": "The smithing weapon gains a +1 Power Artisan Bonus.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "blacksmith",
+        "min_level": 1
+      }
+    ],
+    "effects": [
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "subtract",
+        "value": 15
+      },
+      {
+        "type": "add_bonus",
+        "bonus": "+1 Power"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "sharpening-and-reinforcing"
+      },
+      {
+        "type": "log",
+        "message": "Used Sharpening and Reinforcing. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Added +1 Power bonus."
+      }
+    ]
+  },
+  {
+    "id": "weight-balancing",
+    "name": "Weight Balancing",
+    "cost_text": "15 Crafting Points",
+    "class_name": "blacksmith",
+    "class_level": 1,
+    "dice_cost": 0,
+    "points_cost": 15,
+    "is_rapid": false,
+    "requires_prerequisite": false,
+    "description": "The smithing weapon gains a +1 Focus Artisan Bonus.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "blacksmith",
+        "min_level": 1
+      }
+    ],
+    "effects": [
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "subtract",
+        "value": 15
+      },
+      {
+        "type": "add_bonus",
+        "bonus": "+1 Focus"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "weight-balancing"
+      },
+      {
+        "type": "log",
+        "message": "Used Weight Balancing. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Added +1 Focus bonus."
+      }
+    ]
+  },
+  {
+    "id": "steady-craft-2",
+    "name": "Steady Craft II",
+    "cost_text": "1 Crafting Die",
+    "class_name": "blacksmith",
+    "class_level": 6,
+    "dice_cost": 1,
+    "points_cost": 0,
+    "is_rapid": false,
+    "requires_prerequisite": false,
+    "description": "You add a crafting check to the item. The crafting dice is automatically a 7.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "blacksmith",
+        "min_level": 6
+      }
+    ],
+    "effects": [
+      {
+        "type": "calculate",
+        "formula": "7 + {craftingSkill} + {expertise}",
+        "store_as": "pointsAdded"
+      },
+      {
+        "type": "modify",
+        "target": "diceRemaining",
+        "operation": "subtract",
+        "value": 1
+      },
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "add",
+        "value": "{pointsAdded}"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "steady-craft-2"
+      },
+      {
+        "type": "log",
+        "message": "Used Steady Craft II. Roll is 7. Added {pointsAdded} points ({initialCraftingPoints} -> {craftingPoints}). {diceRemaining} dice left."
+      }
+    ]
+  },
+  {
+    "id": "tempering",
+    "name": "Tempering",
+    "cost_text": "30 Crafting Points",
+    "class_name": "forgemaster",
+    "class_level": 1,
+    "dice_cost": 0,
+    "points_cost": 30,
+    "is_rapid": false,
+    "requires_prerequisite": true,
+    "description": "The smithing weapon with a +1 Power Artisan Bonus upgrades into a +2 Power Artisan Bonus.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "forgemaster",
+        "min_level": 1
+      },
+      {
+        "type": "check_contains",
+        "array": "bonuses",
+        "value": "+1 Power"
+      }
+    ],
+    "effects": [
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "subtract",
+        "value": 30
+      },
+      {
+        "type": "upgrade_bonus",
+        "from": "+1 Power",
+        "to": "+2 Power"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "tempering"
+      },
+      {
+        "type": "log",
+        "message": "Used Tempering. Cost 30 points ({initialCraftingPoints} -> {craftingPoints}). Upgraded +1 Power to +2 Power."
+      }
+    ]
+  },
+  {
+    "id": "grip-ergonomics",
+    "name": "Grip Ergonomics",
+    "cost_text": "30 Crafting Points",
+    "class_name": "forgemaster",
+    "class_level": 1,
+    "dice_cost": 0,
+    "points_cost": 30,
+    "is_rapid": false,
+    "requires_prerequisite": true,
+    "description": "The smithing weapon with a +1 Focus Artisan Bonus upgrades into a +2 Focus Artisan Bonus.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "forgemaster",
+        "min_level": 1
+      },
+      {
+        "type": "check_contains",
+        "array": "bonuses",
+        "value": "+1 Focus"
+      }
+    ],
+    "effects": [
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "subtract",
+        "value": 30
+      },
+      {
+        "type": "upgrade_bonus",
+        "from": "+1 Focus",
+        "to": "+2 Focus"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "grip-ergonomics"
+      },
+      {
+        "type": "log",
+        "message": "Used Grip Ergonomics. Cost 30 points ({initialCraftingPoints} -> {craftingPoints}). Upgraded +1 Focus to +2 Focus."
+      }
+    ]
+  },
+  {
+    "id": "inspired-finish",
+    "name": "Inspired Finish",
+    "cost_text": "1 Crafting Die",
+    "class_name": "forgemaster",
+    "class_level": 2,
+    "dice_cost": 1,
+    "points_cost": 0,
+    "is_rapid": false,
+    "requires_prerequisite": true,
+    "description": "Make a crafting check. The dice is upgraded to 3d10. The crafting immediately ends after the check and no further bonuses can be added.",
+    "conditions": [
+      {
+        "type": "check_class_level",
+        "class": "forgemaster",
+        "min_level": 2
+      },
+      {
+        "type": "check_custom",
+        "check": "is_last_crafting_dice"
+      }
+    ],
+    "effects": [
+      {
+        "type": "roll",
+        "dice": {
+          "sides": 10,
+          "count": 3
+        },
+        "store_as": "rolls"
+      },
+      {
+        "type": "calculate",
+        "formula": "{rolls[0]} + {rolls[1]} + {rolls[2]} + {craftingSkill} + {expertise}",
+        "store_as": "pointsAdded"
+      },
+      {
+        "type": "modify",
+        "target": "diceRemaining",
+        "operation": "set",
+        "value": 0
+      },
+      {
+        "type": "modify",
+        "target": "craftingPoints",
+        "operation": "add",
+        "value": "{pointsAdded}"
+      },
+      {
+        "type": "modify",
+        "target": "usedActions",
+        "operation": "add",
+        "value": "inspired-finish"
+      },
+      {
+        "type": "log",
+        "message": "Used Inspired Finish. Rolled {rolls[0]}, {rolls[1]}, {rolls[2]}. Added {pointsAdded} points ({initialCraftingPoints} -> {craftingPoints}). Crafting ended."
       }
     ]
   }
