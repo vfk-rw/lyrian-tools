@@ -83,11 +83,15 @@ export default function BlacksmithingPage() {
 
   const actions = jsonCraftingActions
   const available = (Object.values(actions) as CraftingAction[]).filter(a => {
-    if (a.className === 'blacksmith' && state.blacksmithLevel < a.classLevel) return false
-    if (a.className === 'forgemaster' && state.forgemasterLevel < a.classLevel) return false
-    return true
+    if (a.className === null) return true
+    if (a.className === 'blacksmith' || a.className === 'forgemaster') {
+      const levelKey = a.className === 'blacksmith' ? 'blacksmithLevel' : 'forgemasterLevel'
+      const levelValue = state[levelKey as keyof CraftingState] as number
+      return levelValue >= a.classLevel
+    }
+    return false
   })
-
+  
   function execute(action: CraftingAction) {
     if (action.prerequisite && !action.prerequisite(state)) return
     const next = action.id === 'weapon-alloy'
