@@ -10,7 +10,7 @@ import LCToolsSidebarClient from '@/components/lctools-sidebar-client'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import { Separator } from '@/components/ui/separator'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { SetupPanel } from '@/components/crafting/SetupPanel'
+import { BlacksmithingSetupPanel } from '@/components/crafting/BlacksmithingSetupPanel'
 import { ProgressPanel } from '@/components/crafting/ProgressPanel'
 import { ActionsPanel } from '@/components/crafting/ActionsPanel'
 import LogPanel from '@/components/crafting/LogPanel'
@@ -174,7 +174,7 @@ export default function BlacksmithingPage() {
           <div className="grid gap-6">
             {/* Row 1: Setup and Progress side by side */}
             <div className="grid lg:grid-cols-2 gap-6">
-              <SetupPanel
+              <BlacksmithingSetupPanel
                 state={state}
                 isStarted={isStarted}
                 updateField={updateField}

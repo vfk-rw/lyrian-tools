@@ -21,7 +21,7 @@ interface SetupPanelProps {
   onSelectAlloy: (id: string) => void
 }
 
-export function SetupPanel({ state, isStarted, updateField, baseMaterials, specialMaterials, selectedAlloy, onSelectAlloy }: SetupPanelProps) {
+export function BlacksmithingSetupPanel({ state, isStarted, updateField, baseMaterials, specialMaterials, selectedAlloy, onSelectAlloy }: SetupPanelProps) {
   return (
     <Card>
       <CardHeader>
