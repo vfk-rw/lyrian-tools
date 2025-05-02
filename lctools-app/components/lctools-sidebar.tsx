@@ -11,11 +11,15 @@ import {
   ChevronRight,
   Anvil,
   FlaskRound,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Sun,
+  Moon
 } from "lucide-react"
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { UserProfileDialog } from "./user-profile-dialog";
+import { useTheme } from "next-themes";
+import { Switch } from "@/components/ui/switch";
 
 import {
   Collapsible,
@@ -99,6 +103,7 @@ const navItems = [
 export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: session, status } = useSession();
   const user = session?.user;
+  const { setTheme, resolvedTheme } = useTheme();
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -159,6 +164,15 @@ export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
+        <div className="px-2 flex items-center justify-center space-x-2">
+          <Sun className="w-4 h-4 text-yellow-500" />
+          <Switch
+            checked={resolvedTheme === "dark"}
+            onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+            aria-label="Toggle theme"
+          />
+          <Moon className="w-4 h-4 text-blue-500" />
+        </div>
         <div className="px-2 text-xs text-muted-foreground mb-2">
           {status === "loading" ? (
             <p>Loading...</p>
