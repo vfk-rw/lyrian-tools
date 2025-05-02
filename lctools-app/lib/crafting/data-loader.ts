@@ -17,6 +17,9 @@ import specialMatJson from './json/special-materials.json';
 import baseActionsJson from './json/base-actions.json';
 import blacksmithActionsJson from './json/blacksmith-actions.json';
 import forgemasterActionsJson from './json/forgemaster-actions.json';
+// Import alchemy action files
+import alchemistActionsJson from './json/alchemist-actions.json';
+import alchemeisterActionsJson from './json/alchemeister-actions.json';
 
 // Convert JSON to string for our loader functions
 const baseMatString = JSON.stringify(baseMatJson);
@@ -26,6 +29,9 @@ const specialMatString = JSON.stringify(specialMatJson);
 const baseActionsString = JSON.stringify(baseActionsJson);
 const blacksmithActionsString = JSON.stringify(blacksmithActionsJson);
 const forgemasterActionsString = JSON.stringify(forgemasterActionsJson);
+// Convert alchemy action JSONs to strings
+const alchemistActionsString = JSON.stringify(alchemistActionsJson);
+const alchemeisterActionsString = JSON.stringify(alchemeisterActionsJson);
 
 // Parse and convert materials data into executable structures
 export const jsonBaseMaterials: { [key: string]: BaseMaterial } = loadBaseMaterialsFromJson(baseMatString);
@@ -35,19 +41,26 @@ export const jsonSpecialMaterials: SpecialMaterials = loadSpecialMaterialsFromJs
 const baseActions = loadActionsFromJson(baseActionsString);
 const blacksmithActions = loadActionsFromJson(blacksmithActionsString);
 const forgemasterActions = loadActionsFromJson(forgemasterActionsString);
+// Load alchemy actions
+const alchemistActions = loadActionsFromJson(alchemistActionsString);
+const alchemeisterActions = loadActionsFromJson(alchemeisterActionsString);
 
 // Combine all actions into a single object
 export const jsonCraftingActions: CraftingActions = {
   ...baseActions,
   ...blacksmithActions,
-  ...forgemasterActions
+  ...forgemasterActions,
+  ...alchemistActions,
+  ...alchemeisterActions
 };
 
 // List of class action files for extensibility
 const classActionFiles = [
   { name: 'base', data: baseActionsJson },
   { name: 'blacksmith', data: blacksmithActionsJson },
-  { name: 'forgemaster', data: forgemasterActionsJson }
+  { name: 'forgemaster', data: forgemasterActionsJson },
+  { name: 'alchemist', data: alchemistActionsJson },
+  { name: 'alchemeister', data: alchemeisterActionsJson }
 ];
 
 // Function to get actions for a specific class
@@ -202,6 +215,10 @@ export function loadActionsForClass(className: string): CraftingActions {
       return loadActionsFromJson(blacksmithActionsString);
     case 'forgemaster':
       return loadActionsFromJson(forgemasterActionsString);
+    case 'alchemist':
+      return loadActionsFromJson(alchemistActionsString);
+    case 'alchemeister':
+      return loadActionsFromJson(alchemeisterActionsString);
     default:
       console.warn(`Unknown class name: ${className}`);
       return {};

@@ -1,0 +1,276 @@
+[
+    {
+      "id": "masterful-dilution",
+      "name": "Masterful Dilution",
+      "cost_text": "30 Crafting Points",
+      "class_name": "alchemeister",
+      "class_level": 1,
+      "dice_cost": 0,
+      "points_cost": 30,
+      "is_rapid": false,
+      "requires_prerequisite": false,
+      "description": "By diluting the contents to the perfect required amounts, you gain an additional Elixir, Potion, Flask or Salve upon crafting success. Stacks with Efficient Dilution.",
+      "conditions": [
+        {
+          "type": "check_class_level",
+          "class": "alchemeister",
+          "min_level": 1
+        },
+        {
+          "type": "check_action_used",
+          "action_id": "masterful-dilution",
+          "used": false
+        }
+      ],
+      "effects": [
+        {
+          "type": "modify",
+          "target": "craftingPoints",
+          "operation": "subtract",
+          "value": 30
+        },
+        {
+          "type": "add_bonus",
+          "bonus": "+1 Extra"
+        },
+        {
+          "type": "modify",
+          "target": "usedActions",
+          "operation": "add",
+          "value": "masterful-dilution"
+        },
+        {
+          "type": "log",
+          "message": "Used Masterful Dilution. Cost 30 points ({initialCraftingPoints} -> {craftingPoints}). Added +1 Extra bonus that stacks with Efficient Dilution."
+        }
+      ]
+    },
+    {
+      "id": "distillation",
+      "name": "Distillation",
+      "cost_text": "30 Crafting Points",
+      "class_name": "alchemeister",
+      "class_level": 1,
+      "dice_cost": 0,
+      "points_cost": 30,
+      "is_rapid": false,
+      "requires_prerequisite": true,
+      "description": "You extract the highest quality healing materials from herbs, granting Healing +5 to a Potion with a heal effect.",
+      "conditions": [
+        {
+          "type": "check_class_level",
+          "class": "alchemeister",
+          "min_level": 1
+        },
+        {
+          "type": "check_action_used",
+          "action_id": "distillation",
+          "used": false
+        },
+        {
+          "type": "check_custom",
+          "check": "is_healing_potion"
+        },
+        {
+          "type": "check_contains",
+          "array": "bonuses",
+          "value": "+3 Healing"
+        }
+      ],
+      "effects": [
+        {
+          "type": "modify",
+          "target": "craftingPoints",
+          "operation": "subtract",
+          "value": 30
+        },
+        {
+          "type": "upgrade_bonus",
+          "from": "+3 Healing",
+          "to": "+5 Healing"
+        },
+        {
+          "type": "modify",
+          "target": "usedActions",
+          "operation": "add",
+          "value": "distillation"
+        },
+        {
+          "type": "log",
+          "message": "Used Distillation. Cost 30 points ({initialCraftingPoints} -> {craftingPoints}). Upgraded +3 Healing to +5 Healing."
+        }
+      ]
+    },
+    {
+      "id": "explosive-lining",
+      "name": "Explosive Lining",
+      "cost_text": "15 Crafting Points",
+      "class_name": "alchemeister",
+      "class_level": 1,
+      "dice_cost": 0,
+      "points_cost": 15,
+      "is_rapid": false,
+      "requires_prerequisite": true,
+      "description": "You carefully add an alchemical compound to a pressurized Flask. If the Flask has an area of effect, increases the area by another 5ft (example a 10ft radius becomes 15ft radius).",
+      "conditions": [
+        {
+          "type": "check_class_level",
+          "class": "alchemeister",
+          "min_level": 1
+        },
+        {
+          "type": "check_action_used",
+          "action_id": "explosive-lining",
+          "used": false
+        },
+        {
+          "type": "check_contains",
+          "array": "bonuses",
+          "value": "+5ft Area"
+        },
+        {
+          "type": "check_custom",
+          "check": "is_aoe_flask"
+        }
+      ],
+      "effects": [
+        {
+          "type": "modify",
+          "target": "craftingPoints",
+          "operation": "subtract",
+          "value": 15
+        },
+        {
+          "type": "upgrade_bonus",
+          "from": "+5ft Area",
+          "to": "+10ft Area"
+        },
+        {
+          "type": "modify",
+          "target": "usedActions",
+          "operation": "add",
+          "value": "explosive-lining"
+        },
+        {
+          "type": "log",
+          "message": "Used Explosive Lining. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Upgraded +5ft Area to +10ft Area."
+        }
+      ]
+    },
+    {
+      "id": "purify-elixir",
+      "name": "Purify Elixir",
+      "cost_text": "30 Crafting Points",
+      "class_name": "alchemeister",
+      "class_level": 1,
+      "dice_cost": 0,
+      "points_cost": 30,
+      "is_rapid": false,
+      "requires_prerequisite": true,
+      "description": "You reduce the toxicity of an Elixir that has been detoxified while still maintaining its effect, reducing the damage from taking an Elixir by an additional 3.",
+      "conditions": [
+        {
+          "type": "check_class_level",
+          "class": "alchemeister",
+          "min_level": 1
+        },
+        {
+          "type": "check_action_used",
+          "action_id": "purify-elixir",
+          "used": false
+        },
+        {
+          "type": "check_contains",
+          "array": "bonuses",
+          "value": "-2 Toxicity"
+        },
+        {
+          "type": "check_custom",
+          "check": "is_elixir"
+        }
+      ],
+      "effects": [
+        {
+          "type": "modify",
+          "target": "craftingPoints",
+          "operation": "subtract",
+          "value": 30
+        },
+        {
+          "type": "upgrade_bonus",
+          "from": "-2 Toxicity",
+          "to": "-5 Toxicity"
+        },
+        {
+          "type": "modify",
+          "target": "usedActions",
+          "operation": "add",
+          "value": "purify-elixir"
+        },
+        {
+          "type": "log",
+          "message": "Used Purify Elixir. Cost 30 points ({initialCraftingPoints} -> {craftingPoints}). Upgraded -2 Toxicity to -5 Toxicity."
+        }
+      ]
+    },
+    {
+        "id": "detailed-finish",
+        "name": "Detailed Finish",
+        "cost_text": "1 Crafting Die",
+        "class_name": "alchemeister",
+        "class_level": 6,
+        "dice_cost": 1,
+        "points_cost": 0,
+        "is_rapid": false,
+        "requires_prerequisite": true,
+        "description": "Make a crafting check. Upgrade the dice to 2d8.",
+        "conditions": [
+          {
+            "type": "check_class_level",
+            "class": "alchemeister",
+            "min_level": 6
+          },
+          {
+            "type": "check_custom",
+            "check": "is_last_crafting_dice"
+          }
+        ],
+        "effects": [
+          {
+            "type": "roll",
+            "dice": {
+              "sides": 8,
+              "count": 2
+            },
+            "store_as": "rolls"
+          },
+          {
+            "type": "calculate",
+            "formula": "{rolls[0]} + {rolls[1]} + {craftingSkill} + {expertise}",
+            "store_as": "pointsAdded"
+          },
+          {
+            "type": "modify",
+            "target": "diceRemaining",
+            "operation": "subtract",
+            "value": 1
+          },
+          {
+            "type": "modify",
+            "target": "craftingPoints",
+            "operation": "add",
+            "value": "{pointsAdded}"
+          },
+          {
+            "type": "modify",
+            "target": "usedActions",
+            "operation": "add",
+            "value": "detailed-finish"
+          },
+          {
+            "type": "log",
+            "message": "Used Detailed Finish. Rolled {rolls[0]}, {rolls[1]}. Added {pointsAdded} points ({initialCraftingPoints} -> {craftingPoints}). {diceRemaining} dice left."
+          }
+        ]
+      }
+    ]

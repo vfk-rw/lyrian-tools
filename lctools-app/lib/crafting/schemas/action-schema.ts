@@ -115,7 +115,7 @@ export interface NotContainsCondition extends Condition {
 
 export interface ClassLevelCondition extends Condition {
   type: 'check_class_level';
-  class: 'blacksmith' | 'forgemaster';
+  class: 'blacksmith' | 'forgemaster' | 'alchemist' | 'alchemeister';
   min_level: number;
 }
 
@@ -141,7 +141,7 @@ export interface DeclarativeAction {
   id: string;
   name: string;
   cost_text: string;
-  class_name: 'blacksmith' | 'forgemaster' | null;
+  class_name: 'blacksmith' | 'forgemaster' | 'alchemist' | 'alchemeister' | null;
   class_level: number;
   dice_cost: number;
   points_cost: number;

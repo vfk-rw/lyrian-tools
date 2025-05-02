@@ -6,6 +6,14 @@ export interface CraftingState {
 	expertise: number;
 	blacksmithLevel: number;
 	forgemasterLevel: number;
+	// Alchemy-specific properties
+	alchemistLevel: number;  
+	alchemeisterLevel: number;
+	itemType: string;  // 'potion', 'elixir', 'salve', 'flask'
+	isHealing: boolean;
+	isDamaging: boolean;
+	isAOE: boolean;
+	// Common properties
 	diceRemaining: number;
 	craftingPoints: number;
 	usedActions: string[];
@@ -15,6 +23,9 @@ export interface CraftingState {
 	log: string[];
 	initialDice: number; // Store the starting dice count
 }
+
+// Add alchemy item types
+export type AlchemyItemType = 'potion' | 'elixir' | 'salve' | 'flask';
 
 export interface MaterialBonusDice {
 	[key: string]: number;
@@ -36,7 +47,7 @@ export interface CraftingAction {
 	id: string;
 	name: string; // Added for display purposes
 	costText: string; // Added for display purposes
-	className: 'blacksmith' | 'forgemaster' | null;
+	className: 'blacksmith' | 'forgemaster' | 'alchemist' | 'alchemeister' | null;
 	classLevel: number;
 	diceCost: number;
 	pointsCost: number;

@@ -9,6 +9,14 @@ export const initialCraftingState: CraftingState = {
     expertise: 10,
     blacksmithLevel: 1,
     forgemasterLevel: 0,
+    // Alchemy-specific properties
+    alchemistLevel: 1,
+    alchemeisterLevel: 0,
+    itemType: 'potion', // Default item type
+    isHealing: false,
+    isDamaging: false,
+    isAOE: false,
+    // Common properties
     diceRemaining: 5, // Base 5 + material bonus (calculated on init)
     craftingPoints: 0,
     usedActions: [],

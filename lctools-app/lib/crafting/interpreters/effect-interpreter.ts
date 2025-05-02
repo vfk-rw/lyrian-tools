@@ -165,11 +165,11 @@ function executeRollEffect(
     total += roll;
   }
   
-  // Store the total roll and individual rolls
+  // Store individual rolls and total separately
   const newVariables = { 
     ...variables, 
-    [effect.store_as]: total,
-    [`${effect.store_as}_rolls`]: rolls 
+    [effect.store_as]: rolls,         // individual rolls array
+    [`${effect.store_as}_total`]: total  // total of rolls
   };
   
   return { state, variables: newVariables };
@@ -182,6 +182,12 @@ function executeCalculateEffect(
 ): { state: CraftingState, variables: VariableStore } {
   // Parse the formula and replace variables
   let formula = effect.formula;
+
+  // Handle array indexing in formulas like {rolls[0]}
+  formula = formula.replace(/\{(\w+)\[(\d+)\]\}/g, (_match, varName, idx) => {
+    const arr = variables[varName];
+    return Array.isArray(arr) ? String(arr[Number(idx)]) : '0';
+  });
   
   // Replace state variables
   for (const key in state) {
@@ -203,7 +209,7 @@ function executeCalculateEffect(
     
     return { state, variables: newVariables };
   } catch (error) {
-    console.error(`Error evaluating formula: ${formula}`, error);
+    console.warn(`Error evaluating formula: ${formula}`, error);
     return { state, variables };
   }
 }

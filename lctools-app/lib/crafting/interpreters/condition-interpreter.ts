@@ -175,6 +175,10 @@ function evaluateClassLevelCondition(
     return state.blacksmithLevel >= minLevel;
   } else if (className === 'forgemaster') {
     return state.forgemasterLevel >= minLevel;
+  } else if (className === 'alchemist') {
+    return state.alchemistLevel >= minLevel;
+  } else if (className === 'alchemeister') {
+    return state.alchemeisterLevel >= minLevel;
   }
   
   return false;
@@ -232,6 +236,27 @@ function evaluateCustomCondition(
     case 'weapon_alloy_eligibility':
       // Only one alloy allowed per weapon
       return state.alloys.length === 0;
+    
+    // Alchemy-specific checks
+    case 'is_healing_potion':
+      // Check if the item is a potion and has healing properties
+      return state.itemType === 'potion' && state.isHealing;
+    case 'is_aoe_flask':
+      // Check if the item is a flask with area of effect properties
+      return state.itemType === 'flask' && state.isAOE;
+    case 'is_damage_flask':
+      // Check if the item is a flask with damage properties
+      return state.itemType === 'flask' && state.isDamaging;
+    case 'is_elixir':
+      // Check if the item is an elixir
+      return state.itemType === 'elixir';
+    case 'is_first_action':
+      // Check if no actions have been used yet (first action)
+      return state.usedActions.length === 0;
+    case 'is_last_crafting_dice':
+      // Check if this is the last crafting dice
+      return state.diceRemaining === 1;
+      
     // Add other custom checks as needed
     default:
       console.warn(`Unknown custom check: ${condition.check}`);

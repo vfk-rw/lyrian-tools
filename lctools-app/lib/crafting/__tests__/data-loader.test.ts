@@ -1,10 +1,23 @@
 import baseMatJson from '../json/base-materials.json';
 import specialMatJson from '../json/special-materials.json';
-import actionsJson from '../json/crafting-actions.json';
+import baseActionsJson from '../json/base-actions.json';
+import blacksmithActionsJson from '../json/blacksmith-actions.json';
+import forgemasterActionsJson from '../json/forgemaster-actions.json';
+import alchemistActionsJson from '../json/alchemist-actions.json';
+import alchemeisterActionsJson from '../json/alchemeister-actions.json';
+
 import { loadBaseMaterialsFromJson, loadSpecialMaterialsFromJson } from '../interpreters/material-interpreter';
 import { loadActionsFromJson } from '../interpreters/action-interpreter';
-// Jest globals (describe, it, expect) are available via tsconfig types
+import { initialCraftingState } from '../state';
 import type { CraftingState } from '../types';
+
+const actionsJson = [
+  ...baseActionsJson,
+  ...blacksmithActionsJson,
+  ...forgemasterActionsJson,
+  ...alchemistActionsJson,
+  ...alchemeisterActionsJson
+];
 
 describe('Crafting data loader', () => {
   describe('Base materials', () => {
@@ -64,26 +77,14 @@ describe('Crafting data loader', () => {
 
     it('basic-craft decrements dice and adds points', () => {
       const state: CraftingState = {
-        itemValue: 0,
-        craftingHP: 0,
-        baseMaterial: 'iron',
-        craftingSkill: 1,
-        expertise: 0,
-        blacksmithLevel: 0,
-        forgemasterLevel: 0,
-        diceRemaining: 5,
+        ...initialCraftingState,
         craftingPoints: 0,
-        usedActions: [],
-        bonuses: [],
-        materials: [],
-        alloys: [],
-        log: [],
-        initialDice: 5
+        diceRemaining: initialCraftingState.diceRemaining
       };
       const result = actions['basic-craft'].effect(state);
       expect(result.diceRemaining).toBe(state.diceRemaining - 1);
       expect(result.craftingPoints).toBeGreaterThanOrEqual(1);
-      expect(result.log.some(entry => entry.includes('Used Basic Craft'))).toBe(true);
+      expect(result.log.some((entry: string) => entry.includes('Used Basic Craft'))).toBe(true);
     });
   });
 });

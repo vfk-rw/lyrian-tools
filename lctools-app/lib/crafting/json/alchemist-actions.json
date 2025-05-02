@@ -1,0 +1,320 @@
+[
+    {
+      "id": "efficient-dilution",
+      "name": "Efficient Dilution",
+      "cost_text": "15 Crafting Points",
+      "class_name": "alchemist",
+      "class_level": 1,
+      "dice_cost": 0,
+      "points_cost": 15,
+      "is_rapid": false,
+      "requires_prerequisite": false,
+      "description": "By diluting the contents to the perfect required amounts, you gain an additional Elixir, Potion, Flask or Salve upon crafting success.",
+      "conditions": [
+        {
+          "type": "check_class_level",
+          "class": "alchemist",
+          "min_level": 1
+        },
+        {
+          "type": "check_action_used",
+          "action_id": "efficient-dilution",
+          "used": false
+        }
+      ],
+      "effects": [
+        {
+          "type": "modify",
+          "target": "craftingPoints",
+          "operation": "subtract",
+          "value": 15
+        },
+        {
+          "type": "add_bonus",
+          "bonus": "+1 Extra"
+        },
+        {
+          "type": "modify",
+          "target": "usedActions",
+          "operation": "add",
+          "value": "efficient-dilution"
+        },
+        {
+          "type": "log",
+          "message": "Used Efficient Dilution. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Added +1 Extra bonus."
+        }
+      ]
+    },
+    {
+      "id": "stone-grinding",
+      "name": "Stone Grinding",
+      "cost_text": "15 Crafting Points",
+      "class_name": "alchemist",
+      "class_level": 1,
+      "dice_cost": 0,
+      "points_cost": 15,
+      "is_rapid": false,
+      "requires_prerequisite": false,
+      "description": "You extract the highest quality healing materials from herbs, granting Healing +3 to a Potion with a heal effect.",
+      "conditions": [
+        {
+          "type": "check_class_level",
+          "class": "alchemist",
+          "min_level": 1
+        },
+        {
+          "type": "check_action_used",
+          "action_id": "stone-grinding",
+          "used": false
+        },
+        {
+          "type": "check_custom",
+          "check": "is_healing_potion"
+        }
+      ],
+      "effects": [
+        {
+          "type": "modify",
+          "target": "craftingPoints",
+          "operation": "subtract",
+          "value": 15
+        },
+        {
+          "type": "add_bonus",
+          "bonus": "+3 Healing"
+        },
+        {
+          "type": "modify",
+          "target": "usedActions",
+          "operation": "add",
+          "value": "stone-grinding"
+        },
+        {
+          "type": "log",
+          "message": "Used Stone Grinding. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Added +3 Healing bonus."
+        }
+      ]
+    },
+    {
+      "id": "pressurization",
+      "name": "Pressurization",
+      "cost_text": "15 Crafting Points",
+      "class_name": "alchemist",
+      "class_level": 1,
+      "dice_cost": 0,
+      "points_cost": 15,
+      "is_rapid": false,
+      "requires_prerequisite": false,
+      "description": "You pressurize a Flask carefully. If the Flask has an area of effect, increases the area by 5ft (example a 10ft radius becomes 15ft radius).",
+      "conditions": [
+        {
+          "type": "check_class_level",
+          "class": "alchemist",
+          "min_level": 1
+        },
+        {
+          "type": "check_action_used",
+          "action_id": "pressurization",
+          "used": false
+        },
+        {
+          "type": "check_custom",
+          "check": "is_aoe_flask"
+        }
+      ],
+      "effects": [
+        {
+          "type": "modify",
+          "target": "craftingPoints",
+          "operation": "subtract",
+          "value": 15
+        },
+        {
+          "type": "add_bonus",
+          "bonus": "+5ft Area"
+        },
+        {
+          "type": "modify",
+          "target": "usedActions",
+          "operation": "add",
+          "value": "pressurization"
+        },
+        {
+          "type": "log",
+          "message": "Used Pressurization. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Added +5ft Area bonus."
+        }
+      ]
+    },
+    {
+      "id": "volatile-flask",
+      "name": "Volatile Flask",
+      "cost_text": "15 Crafting Points",
+      "class_name": "alchemist",
+      "class_level": 1,
+      "dice_cost": 0,
+      "points_cost": 15,
+      "is_rapid": false,
+      "requires_prerequisite": false,
+      "description": "You overload the active ingredients on a Flask, giving it a +3 damage to its damaging effects.",
+      "conditions": [
+        {
+          "type": "check_class_level",
+          "class": "alchemist",
+          "min_level": 1
+        },
+        {
+          "type": "check_action_used",
+          "action_id": "volatile-flask",
+          "used": false
+        },
+        {
+          "type": "check_custom",
+          "check": "is_damage_flask"
+        }
+      ],
+      "effects": [
+        {
+          "type": "modify",
+          "target": "craftingPoints",
+          "operation": "subtract",
+          "value": 15
+        },
+        {
+          "type": "add_bonus",
+          "bonus": "+3 Damage"
+        },
+        {
+          "type": "modify",
+          "target": "usedActions",
+          "operation": "add",
+          "value": "volatile-flask"
+        },
+        {
+          "type": "log",
+          "message": "Used Volatile Flask. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Added +3 Damage bonus."
+        }
+      ]
+    },
+    {
+      "id": "detoxify-elixir",
+      "name": "Detoxify Elixir",
+      "cost_text": "15 Crafting Points",
+      "class_name": "alchemist",
+      "class_level": 1,
+      "dice_cost": 0,
+      "points_cost": 15,
+      "is_rapid": false,
+      "requires_prerequisite": false,
+      "description": "You reduce the toxicity of an Elixir while still maintaining its effect, reducing the damage from taking an Elixir by 2.",
+      "conditions": [
+        {
+          "type": "check_class_level",
+          "class": "alchemist",
+          "min_level": 1
+        },
+        {
+          "type": "check_action_used",
+          "action_id": "detoxify-elixir",
+          "used": false
+        },
+        {
+          "type": "check_custom",
+          "check": "is_elixir"
+        }
+      ],
+      "effects": [
+        {
+          "type": "modify",
+          "target": "craftingPoints",
+          "operation": "subtract",
+          "value": 15
+        },
+        {
+          "type": "add_bonus",
+          "bonus": "-2 Toxicity"
+        },
+        {
+          "type": "modify",
+          "target": "usedActions",
+          "operation": "add",
+          "value": "detoxify-elixir"
+        },
+        {
+          "type": "log",
+          "message": "Used Detoxify Elixir. Cost 15 points ({initialCraftingPoints} -> {craftingPoints}). Added -2 Toxicity bonus."
+        }
+      ]
+    },
+    {
+        "id": "light-work",
+        "name": "Light Work",
+        "cost_text": "1 Crafting Die",
+        "class_name": "alchemist",
+        "class_level": 6,
+        "dice_cost": 1,
+        "points_cost": 0,
+        "is_rapid": false,
+        "requires_prerequisite": true,
+        "description": "Only usable as the first crafting action. All material costs are doubled and all produced items are doubled. You may only use basic crafting actions for the rest of the craft. Make a crafting attempt.",
+        "conditions": [
+          {
+            "type": "check_class_level",
+            "class": "alchemist",
+            "min_level": 6
+          },
+          {
+            "type": "check_custom",
+            "check": "is_first_action"
+          }
+        ],
+        "effects": [
+          {
+            "type": "roll",
+            "dice": {
+              "sides": 10,
+              "count": 1
+            },
+            "store_as": "roll"
+          },
+          {
+            "type": "calculate",
+            "formula": "{roll} + {craftingSkill} + {expertise}",
+            "store_as": "pointsAdded"
+          },
+          {
+            "type": "modify",
+            "target": "diceRemaining",
+            "operation": "subtract",
+            "value": 1
+          },
+          {
+            "type": "modify",
+            "target": "craftingPoints",
+            "operation": "add",
+            "value": "{pointsAdded}"
+          },
+          {
+            "type": "add_bonus",
+            "bonus": "Double Materials"
+          },
+          {
+            "type": "add_bonus",
+            "bonus": "Double Output"
+          },
+          {
+            "type": "add_flag",
+            "flag": "basic_actions_only"
+          },
+          {
+            "type": "modify",
+            "target": "usedActions",
+            "operation": "add",
+            "value": "light-work"
+          },
+          {
+            "type": "log",
+            "message": "Used Light Work. Rolled {roll}. Added {pointsAdded} points ({initialCraftingPoints} -> {craftingPoints}). Materials and output doubled. Only basic actions available for the rest of crafting. {diceRemaining} dice left."
+          }
+        ]
+      }
+  ]
