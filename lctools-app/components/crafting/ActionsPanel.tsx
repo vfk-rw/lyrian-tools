@@ -21,12 +21,14 @@ interface ActionsPanelProps {
 
 export function ActionsPanel({ actions, state, selectedAlloy, onExecute, isStarted, isEnded }: ActionsPanelProps) {
   // Group the actions by their class requirements
-  const groupedActions = useMemo(() => {
-    const basic = actions.filter(a => a.className === null);
-    const blacksmith = actions.filter(a => a.className === 'blacksmith');
-    const forgemaster = actions.filter(a => a.className === 'forgemaster');
-    return { basic, blacksmith, forgemaster };
-  }, [actions]);
+const groupedActions = useMemo(() => {
+  const basic = actions.filter(a => a.className === null);
+  const alchemist = actions.filter(a => a.className === 'alchemist');
+  const alchemeister = actions.filter(a => a.className === 'alchemeister');
+  const blacksmith = actions.filter(a => a.className === 'blacksmith');
+  const forgemaster = actions.filter(a => a.className === 'forgemaster');
+  return { basic, alchemist, alchemeister, blacksmith, forgemaster };
+}, [actions]);
 
   // Get selected alloy info
   const selectedAlloyInfo = selectedAlloy ? 
@@ -272,6 +274,46 @@ export function ActionsPanel({ actions, state, selectedAlloy, onExecute, isStart
           </div>
         </div>
         
+        {/* Alchemist Actions Section */}
+        {groupedActions.alchemist.length > 0 && (
+          <div className="space-y-2 mt-6">
+            <h3 className="text-sm font-medium flex items-center gap-2">
+              Alchemist Actions
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80">
+                  <p className="text-sm">Special actions available to characters with Alchemist levels.</p>
+                </HoverCardContent>
+              </HoverCard>
+            </h3>
+            <div className="grid gap-2">
+              {groupedActions.alchemist.map(renderActionButton)}
+            </div>
+          </div>
+        )}
+
+        {/* Alchemeister Actions Section */}
+        {groupedActions.alchemeister.length > 0 && (
+          <div className="space-y-2 mt-6">
+            <h3 className="text-sm font-medium flex items-center gap-2">
+              Alchemeister Actions
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80">
+                  <p className="text-sm">Special actions available to characters with Alchemeister levels.</p>
+                </HoverCardContent>
+              </HoverCard>
+            </h3>
+            <div className="grid gap-2">
+              {groupedActions.alchemeister.map(renderActionButton)}
+            </div>
+          </div>
+        )}
+
         {/* Blacksmith Actions Section */}
         {groupedActions.blacksmith.length > 0 && (
           <div className="space-y-2 mt-6">
