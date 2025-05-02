@@ -50,6 +50,56 @@ export function AlchemySetupPanel({ state, isStarted, updateField }: AlchemySetu
           />
         </div>
 
+        {/* Skill & Expertise Fields */}
+        <div className="grid grid-cols-2 gap-4">
+          {/* Crafting Skill */}
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2">
+              <Label htmlFor="crafting-skill">Crafting Skill</Label>
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80">
+                  <p>Your character's crafting skill level.</p>
+                </HoverCardContent>
+              </HoverCard>
+            </div>
+            <Input
+              id="crafting-skill"
+              type="number"
+              min={0}
+              value={state.craftingSkill}
+              onChange={e => updateField('craftingSkill', Number(e.target.value))}
+              disabled={isStarted}
+              className="w-full"
+            />
+          </div>
+          {/* Expertise */}
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2">
+              <Label htmlFor="expertise">Expertise</Label>
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <InfoIcon className="h-4 w-4 text-muted-foreground cursor-help" />
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80">
+                  <p>Your character's expertise bonus added to rolls.</p>
+                </HoverCardContent>
+              </HoverCard>
+            </div>
+            <Input
+              id="expertise"
+              type="number"
+              min={0}
+              value={state.expertise}
+              onChange={e => updateField('expertise', Number(e.target.value))}
+              disabled={isStarted}
+              className="w-full"
+            />
+          </div>
+        </div>
+
         {/* Alchemist and Alchemeister Levels */}
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1.5">
