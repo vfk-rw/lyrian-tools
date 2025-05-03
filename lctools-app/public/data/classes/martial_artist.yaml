@@ -5,139 +5,135 @@ class:
   difficulty: 1
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/3cbdbd65-5ec6-4ee6-baa5-73508e2263c8-Martial_Artist_Portrait_Final.sm.webp
+  image_url: /images/classes/Martial_Artist.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: None.
-  description: 'Martial Artists are fighters who’ve turned their bodies into finely
-    tuned weapons. All across the world of Lyr, you can find them practicing different
-    arts and styles. The true might of the Martial Artist is their mastery of Zaipher,
-    the skill of tapping into their internal mana to heal themselves and deal devastating
-    magic-enhanced blows.
+      - type: text
+        description: None.
+  description: "Martial Artists are fighters who’ve turned their bodies into finely tuned weapons. All across the world of Lyr, you can find them practicing different arts and styles. The true might of the Martial Artist is their mastery of Zaipher, the skill of tapping into their internal mana to heal themselves and deal devastating magic-enhanced blows.\nZaipher doesn't have the raw power of Arcane magic, but what it lacks in volume, it makes up for in blazing speed. Martial Artists utilize \_quick, sudden bursts of energy that can take an enemy by surprise."
+  guide: >-
+    Martial Artists are strikers with a simple standard combo. Leg Sweep is the
+    combo starter. Being knocked prone is already bad normally, but especially
+    so against a martial artist. You should expect most enemies to attempt to
+    react to a leg sweep. If they don't, or if you hit anyway, you can follow up
+    with a Rushing Knee Drop.
 
-    Zaipher doesn''t have the raw power of Arcane magic, but what it lacks in volume,
-    it makes up for in blazing speed. Martial Artists utilize  quick, sudden bursts
-    of energy that can take an enemy by surprise.'
-  guide: 'Martial Artists are strikers with a simple standard combo. Leg Sweep is
-    the combo starter. Being knocked prone is already bad normally, but especially
-    so against a martial artist. You should expect most enemies to attempt to react
-    to a leg sweep. If they don''t, or if you hit anyway, you can follow up with a
-    Rushing Knee Drop.
+    Rushing Knee Drop is guaranteed to hit and can be used with both AP and RP.
+    The RP version is less efficient, but it can allow for a higher damage turn.
+    Rushing Knee Drop can also be used when its not your turn, if an ally is
+    able to render an opponent Prone. Because this is not on your turn, this
+    version always costs an RP and can't be used with just an AP.
 
-    Rushing Knee Drop is guaranteed to hit and can be used with both AP and RP. The
-    RP version is less efficient, but it can allow for a higher damage turn. Rushing
-    Knee Drop can also be used when its not your turn, if an ally is able to render
-    an opponent Prone. Because this is not on your turn, this version always costs
-    an RP and can''t be used with just an AP.
+    The final part of the combo is Double Punch. This ability is good even by
+    itself, paying 1 mana for an extra light attack. The mana cost does mean you
+    can't simply use it every turn, but it's low enough that you should consider
+    it on most turns.
 
-    The final part of the combo is Double Punch. This ability is good even by itself,
-    paying 1 mana for an extra light attack. The mana cost does mean you can''t simply
-    use it every turn, but it''s low enough that you should consider it on most turns.
+    Their single non-damaging combat ability is Vital Drive. Vital Drive isn't
+    very mana efficient, but it takes no action and you can potentially spend a
+    lot of mana on it to heal for a large amount.
 
-    Their single non-damaging combat ability is Vital Drive. Vital Drive isn''t very
-    mana efficient, but it takes no action and you can potentially spend a lot of
-    mana on it to heal for a large amount.
-
-    Unarmed abilities only require a single free hand, so keeping an utility item
-    in your offhand for quick use is possible.'
+    Unarmed abilities only require a single free hand, so keeping an utility
+    item in your offhand for quick use is possible.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Martial Artist's Journey
-  - level: 2
-    benefits:
-    - type: ability
-      value: Leg Sweep
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Vital Drive
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Rushing Knee Drop
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Agility
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Double Punch
+    - level: 1
+      benefits:
+        - type: ability
+          value: Martial Artist's Journey
+    - level: 2
+      benefits:
+        - type: ability
+          value: Leg Sweep
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Vital Drive
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Rushing Knee Drop
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Agility
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Double Punch
   abilities:
-  - id: martial_artist_s_journey
-    name: Martial Artist's Journey
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: leg_sweep
-    name: Leg Sweep
-    type: passive
-    keywords:
-    - Unarmed Strike
-    range: Melee Weapon Range
-    description: You may make a Light Attack against the target. On damage, the target
-      falls Prone.
-    costs:
-      ap: 2
-  - id: vital_drive
-    name: Vital Drive
-    type: passive
-    keywords:
-    - Healing
-    range: Self
-    description: You regain HP equal  to triple the mana spent.
-    costs:
-      ap: 0
-  - id: rushing_knee_drop
-    name: Rushing Knee Drop
-    type: passive
-    keywords:
-    - Sure Hit
-    - Unarmed Strike
-    - Jump
-    range: 15ft
-    description: You may spend either 1 AP or 1 RP to leap up to 15 ft and crush a
-      target within 5ft with a knee attack, dealing Light Damage. This movement does
-      not provoke attacks of opportunity.
-    requirements:
-    - type: text
-      description: An enemy is rendered prone in range.
-    costs:
-      ap: 1
-      rp: 1
-  - id: double_punch
-    name: Double Punch
-    type: passive
-    keywords:
-    - Unarmed Strike
-    range: Melee Weapon Range
-    description: You may make two Light Attacks against the same target.
-    costs:
-      mana: 1
-      ap: 1
+    - id: martial_artist_s_journey
+      name: Martial Artist's Journey
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: leg_sweep
+      name: Leg Sweep
+      type: passive
+      keywords:
+        - Unarmed Strike
+      range: Melee Weapon Range
+      description: >-
+        You may make a Light Attack against the target. On damage, the target
+        falls Prone.
+      costs:
+        ap: 2
+    - id: vital_drive
+      name: Vital Drive
+      type: passive
+      keywords:
+        - Healing
+      range: Self
+      description: You regain HP equal  to triple the mana spent.
+      costs:
+        ap: 0
+    - id: rushing_knee_drop
+      name: Rushing Knee Drop
+      type: passive
+      keywords:
+        - Sure Hit
+        - Unarmed Strike
+        - Jump
+      range: 15ft
+      description: >-
+        You may spend either 1 AP or 1 RP to leap up to 15 ft and crush a target
+        within 5ft with a knee attack, dealing Light Damage. This movement does
+        not provoke attacks of opportunity.
+      requirements:
+        - type: text
+          description: An enemy is rendered prone in range.
+      costs:
+        ap: 1
+        rp: 1
+    - id: double_punch
+      name: Double Punch
+      type: passive
+      keywords:
+        - Unarmed Strike
+      range: Melee Weapon Range
+      description: You may make two Light Attacks against the same target.
+      costs:
+        mana: 1
+        ap: 1

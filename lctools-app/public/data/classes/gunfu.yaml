@@ -5,156 +5,159 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/27ed724e-fb06-4aaa-aa2b-03462c41fb9d-GunFu_raw
-    .sm.webp
+  image_url: /images/classes/Gunfu.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Martial Artist mastered and Gunslinger mastered.
-  description: A skilled gunner and martial artist that combines guns and martial
-    arts into a deadly mix.
-  guide: 'Those who practice Gunfu are able to fight well from both range as well
-    as in melee due to not suffering any penalties when firing in melee combat. They
-    are able to weaken the enemy from range, then go in for the kill once they’ve
-    come closer.
+      - type: text
+        description: Martial Artist mastered and Gunslinger mastered.
+  description: >-
+    A skilled gunner and martial artist that combines guns and martial arts into
+    a deadly mix.
+  guide: >-
+    Those who practice Gunfu are able to fight well from both range as well as
+    in melee due to not suffering any penalties when firing in melee combat.
+    They are able to weaken the enemy from range, then go in for the kill once
+    they’ve come closer.
 
-    Slide & Shoot is their gap closer that can be used to slip past the frontline
-    to target the backline. It also starts their combo and should always be followed
-    up with an unarmed attack for maximum value.
+    Slide & Shoot is their gap closer that can be used to slip past the
+    frontline to target the backline. It also starts their combo and should
+    always be followed up with an unarmed attack for maximum value.
 
-    Pistol Whip is counted as an unarmed attack and is thus a natural follow up that
-    now costs 0 AP. The debuff it applies will help reduce the amount of attacks you
-    face.
+    Pistol Whip is counted as an unarmed attack and is thus a natural follow up
+    that now costs 0 AP. The debuff it applies will help reduce the amount of
+    attacks you face.
 
-    After that, you can finish it up with a Point Blank Shot. It is not particularly
-    effective against heavy armor, but it punishes dodgy characters extremely hard.
+    After that, you can finish it up with a Point Blank Shot. It is not
+    particularly effective against heavy armor, but it punishes dodgy characters
+    extremely hard.
 
-    Their Secret Art Whirling Death is an excellent clean up tool for grunt type enemies.
-    Ideally it should be used when multiple enemies are already weakened. This will
-    allow for multiple activations of its Killing Blow mechanic when you finish off
-    the weak enemies and can keep shooting.'
+    Their Secret Art Whirling Death is an excellent clean up tool for grunt type
+    enemies. Ideally it should be used when multiple enemies are already
+    weakened. This will allow for multiple activations of its Killing Blow
+    mechanic when you finish off the weak enemies and can keep shooting.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Gun Martial Arts
-  - level: 2
-    benefits:
-    - type: ability
-      value: Slide & Shoot
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Point Blank Shot
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness Cunning
-        value: 1
-      - attribute: Awareness
-        value: 1
-      - attribute: Presence
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Pistol Whip
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Whirling Death'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Gun Martial Arts
+    - level: 2
+      benefits:
+        - type: ability
+          value: Slide & Shoot
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Point Blank Shot
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness Cunning
+              value: 1
+            - attribute: Awareness
+              value: 1
+            - attribute: Presence
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Pistol Whip
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Whirling Death'
   abilities:
-  - id: gun_martial_arts
-    name: Gun Martial Arts
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: slide___shoot
-    name: Slide & Shoot
-    type: passive
-    keywords: []
-    range: Ranged Weapon Range
-    description: 'You slide forward up to 20ft towards your target. This movement
-      does not provoke attacks of opportunity and you may pass through enemy space
-      while moving. At the same time, you may make a Light Attack with your pistol
-      against the target at any point during this movement.
+    - id: gun_martial_arts
+      name: Gun Martial Arts
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: slide___shoot
+      name: Slide & Shoot
+      type: passive
+      keywords: []
+      range: Ranged Weapon Range
+      description: >-
+        You slide forward up to 20ft towards your target. This movement does not
+        provoke attacks of opportunity and you may pass through enemy space
+        while moving. At the same time, you may make a Light Attack with your
+        pistol against the target at any point during this movement.
 
-      Your next ability gains
+        Your next ability gains
 
-      Combo
+        Combo
 
-      : If this attack is an unarmed attack, its AP cost is reduced by 1.'
-    requirements:
-    - type: text
-      description: Pistol only.
-    costs:
-      ap: 20
-  - id: point_blank_shot
-    name: Point Blank Shot
-    type: passive
-    keywords:
-    - Sure Hit
-    range: 5ft
-    description: You make a Heavy Attack against the target.
-    requirements:
-    - type: text
-      description: Pistol only.
-    costs:
-      mana: 3
-      ap: 2
-  - id: pistol_whip
-    name: Pistol Whip
-    type: passive
-    keywords:
-    - Unarmed Strike
-    range: Melee Weapon Range
-    description: You make a Light Attack with a pistol in your hand. On damage, the
-      target becomes Unbalanced.
-    requirements:
-    - type: text
-      description: Must be holding a pistol.
-    costs:
-      mana: 1
-      ap: 1
-  - id: secret_art__whirling_death
-    name: 'Secret Art: Whirling Death'
-    type: combat_action
-    keywords:
-    - Secret Art
-    - Stance
-    range: Self
-    description: 'You enter the Whirling Death stance, spinning wildly and shooting
-      at enemies within range. While in this Stance you may spend 2 AP to make a Light
-      Attack against all enemies within 20ft.
+        : If this attack is an unarmed attack, its AP cost is reduced by 1.
+      requirements:
+        - type: text
+          description: Pistol only.
+      costs:
+        ap: 20
+    - id: point_blank_shot
+      name: Point Blank Shot
+      type: passive
+      keywords:
+        - Sure Hit
+      range: 5ft
+      description: You make a Heavy Attack against the target.
+      requirements:
+        - type: text
+          description: Pistol only.
+      costs:
+        mana: 3
+        ap: 2
+    - id: pistol_whip
+      name: Pistol Whip
+      type: passive
+      keywords:
+        - Unarmed Strike
+      range: Melee Weapon Range
+      description: "You make a Light Attack with a pistol in your hand. On damage, the target becomes\_Unbalanced."
+      requirements:
+        - type: text
+          description: Must be holding a pistol.
+      costs:
+        mana: 1
+        ap: 1
+    - id: secret_art__whirling_death
+      name: 'Secret Art: Whirling Death'
+      type: combat_action
+      keywords:
+        - Secret Art
+        - Stance
+      range: Self
+      description: >-
+        You enter the Whirling Death stance, spinning wildly and shooting at
+        enemies within range. While in this Stance you may spend 2 AP to make a
+        Light Attack against all enemies within 20ft.
 
-      These Light Attacks have
+        These Light Attacks have
 
-      Killing Blow
+        Killing Blow
 
-      : Repeat this attack.
+        : Repeat this attack.
 
-      The Stance lasts until you enter a different Stance or until you make an attack
-      that is not tied to this ability.'
-    costs:
-      mana: 3
-      ap: 0
+        The Stance lasts until you enter a different Stance or until you make an
+        attack that is not tied to this ability.
+      costs:
+        mana: 3
+        ap: 0

@@ -5,167 +5,153 @@ class:
   difficulty: 2
   main_role: Controller
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/6645d412-b2af-4f0e-b479-4d7ca9ff7aa3-Cryomancer_Clean.sm.webp
+  image_url: /images/classes/Hoarfrost.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Cryomancer mastered.
-  description: 'The Hoarfrosts are Cryomancers who’ve mastered the chilling power
-    of ice, tracing their origins back to a legendary mage named Mirane. She was the
-    first to truly perfect the art of Cryomancy during her journey through the eastern
-    Tundra. Her story took a dramatic turn when she faced off against a powerful Fiend.
-    In that intense battle, Mirane developed her ultimate spell, the Eternal Mirane
-    Cage. This incredible spell froze the Fiend in place for ten long years, giving
-    an army of adventurers the time they needed to arrive and finally take it down.
+      - type: text
+        description: Cryomancer mastered.
+  description: >-
+    The Hoarfrosts are Cryomancers who’ve mastered the chilling power of ice,
+    tracing their origins back to a legendary mage named Mirane. She was the
+    first to truly perfect the art of Cryomancy during her journey through the
+    eastern Tundra. Her story took a dramatic turn when she faced off against a
+    powerful Fiend. In that intense battle, Mirane developed her ultimate spell,
+    the Eternal Mirane Cage. This incredible spell froze the Fiend in place for
+    ten long years, giving an army of adventurers the time they needed to arrive
+    and finally take it down.
 
-    Mirane’s magic didn’t just fade into history—it’s been passed down through the
-    generations to future Hoarfrosts. Those who follow in her footsteps wear a snowflake
-    emblem, just like Mirane did, and many of them embark on their own journeys to
-    the Tundra that now bears her name.'
-  guide: 'Eternal Mirane Cage is a legendary ability, but it’s not something you’ll
-    use all the time. It’s perfect for when you need to subdue enemies who just won’t
-    give up, making Hoarfrosts a great choice for missions where taking down targets
-    alive is the goal.
+    Mirane’s magic didn’t just fade into history—it’s been passed down through
+    the generations to future Hoarfrosts. Those who follow in her footsteps wear
+    a snowflake emblem, just like Mirane did, and many of them embark on their
+    own journeys to the Tundra that now bears her name.
+  guide: >-
+    Eternal Mirane Cage is a legendary ability, but it’s not something you’ll
+    use all the time. It’s perfect for when you need to subdue enemies who just
+    won’t give up, making Hoarfrosts a great choice for missions where taking
+    down targets alive is the goal.
 
-    Frost Driver is an excellent follow-up move that turns a slow into a full-on root,
-    setting up your team for devastating AoE attacks and utility plays. Just be aware
-    of its limitation against flying enemies—it won’t be as effective there.
+    Frost Driver is an excellent follow-up move that turns a slow into a full-on
+    root, setting up your team for devastating AoE attacks and utility plays.
+    Just be aware of its limitation against flying enemies—it won’t be as
+    effective there.
 
-    White Thunder is a clever setup move that transforms your Glacial Walls into potential
-    bombs. It forces enemies to think twice before getting too close, giving you control
-    over the battlefield.
+    White Thunder is a clever setup move that transforms your Glacial Walls into
+    potential bombs. It forces enemies to think twice before getting too close,
+    giving you control over the battlefield.
 
-    When things get dicey, Glacial Bastion is your panic button, but it’s not something
-    to use without thought. While it shields you, it can also give enemies the chance
-    to position themselves around you, potentially trapping you. If you see them making
-    a move for a big strike, use White Thunder while encased, since you can’t defend
-    yourself while you’re in the ice.
+    When things get dicey, Glacial Bastion is your panic button, but it’s not
+    something to use without thought. While it shields you, it can also give
+    enemies the chance to position themselves around you, potentially trapping
+    you. If you see them making a move for a big strike, use White Thunder while
+    encased, since you can’t defend yourself while you’re in the ice.
 
-    Lastly, the Hoarfrost’s Secret Art, Whiteout, is a powerful tool that reduces
-    accuracy for everyone on the battlefield and can be activated right at the start
-    of an encounter. It’s especially useful if you’re ambushed or under heavy pressure,
-    buying your team some defensive turns to regroup and reposition. Just keep in
-    mind that enemies with Frost Immunity or Ice Cold are unaffected by it, just like
-    you.'
+    Lastly, the Hoarfrost’s Secret Art, Whiteout, is a powerful tool that
+    reduces accuracy for everyone on the battlefield and can be activated right
+    at the start of an encounter. It’s especially useful if you’re ambushed or
+    under heavy pressure, buying your team some defensive turns to regroup and
+    reposition. Just keep in mind that enemies with Frost Immunity or Ice Cold
+    are unaffected by it, just like you.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Eternal Mirane Cage
-  - level: 2
-    benefits:
-    - type: ability
-      value: Frost Driver
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: White Thunder
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Glacial Bastion
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Whiteout'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Eternal Mirane Cage
+    - level: 2
+      benefits:
+        - type: ability
+          value: Frost Driver
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: White Thunder
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Glacial Bastion
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Whiteout'
   abilities:
-  - id: eternal_mirane_cage
-    name: Eternal Mirane Cage
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: frost_driver
-    name: Frost Driver
-    type: passive
-    keywords:
-    - Frost
-    - Root
-    - Slow
-    - Spell
-    range: 80ft
-    description: 'You send ice spikes along the ground towards a single target, making
-      a Heavy attack that deals Water(Frost) Damage. This cannot hit a target higher
-      than 5ft above the ground. On hit, the target is Slowed
-
-      until the end of their next turn.  If the target is already Slowed, they instead
-      become Rooted, making them unable to move until the end of their next turn.'
-    costs:
-      mana: 1
-      ap: 2
-  - id: white_thunder
-    name: White Thunder
-    type: passive
-    keywords:
-    - Frost
-    - Slow
-    - Spell
-    range: 80ft
-    description: You target a Glacial Wall in range and fire a bolt of Frost energy
-      that requires line of sight. On impact, the wall is destroyed and explodes into
-      blades of ice, attacking all enemies within 5ft of the destroyed wall with a
-      Precise attack that deals Water(Frost) damage. On damage, the target is Slowed
-      until the end of their next turn.
-    costs:
-      ap: 1
-  - id: glacial_bastion
-    name: Glacial Bastion
-    type: passive
-    keywords:
-    - Frost
-    - Spell
-    range: Self
-    description: 'You encase yourself in a Glacial Wall that fills your space until
-      the start of your next turn, making you untargetable for attacks during the
-      duration. This Glacial Wall has HP equal to 15 + Focus, any remaining damage
-      is transferred to you (mitigated by your armor).  While encased, you can cast
-      White Thunder on your encased Ice for 1 RP which removes Glacial Bastion. Other
-      than White Thunder, you cannot take any other actions while under the effect
-      of Glacial Bastion.
-
-      This Spell does not provoke attacks of opportunity.'
-    costs:
-      mana: 1
-      rp: 1
-  - id: secret_art__whiteout
-    name: 'Secret Art: Whiteout'
-    type: passive
-    keywords:
-    - Encounter Start
-    - Frost
-    - Spell
-    - Upkeep
-    range: 2500ft radius on self
-    description: 'You create a sudden snowstorm that obscures sight, creating difficult
-      battle conditions. Attack accuracy for all affected units is reduced by your
-      Focus. Units with "Ice Cold" or Frost Immunity are not affected by this ability.
-      The snowstorm ends at the end of your next turn, unless you pay 3 mana to Upkeep.
-
-      You may activate this ability as an Encounter Start action during the Encounter
-      Start phase of an encounter. If you do, you do not pay the RP cost.'
-    costs:
-      rp: 3
+    - id: eternal_mirane_cage
+      name: Eternal Mirane Cage
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: frost_driver
+      name: Frost Driver
+      type: passive
+      keywords:
+        - Frost
+        - Root
+        - Slow
+        - Spell
+      range: 80ft
+      description: "You send ice spikes along the ground towards a single target, making a Heavy attack that deals Water(Frost) Damage. This cannot hit a target higher than 5ft above the ground. On hit, the target is\_Slowed\nuntil the end of their next turn.\_ If the target is already Slowed, they instead become\_Rooted, making them unable to move until the end of their next turn."
+      costs:
+        mana: 1
+        ap: 2
+    - id: white_thunder
+      name: White Thunder
+      type: passive
+      keywords:
+        - Frost
+        - Slow
+        - Spell
+      range: 80ft
+      description: >-
+        You target a Glacial Wall in range and fire a bolt of Frost energy that
+        requires line of sight. On impact, the wall is destroyed and explodes
+        into blades of ice, attacking all enemies within 5ft of the destroyed
+        wall with a Precise attack that deals Water(Frost) damage. On damage,
+        the target is Slowed until the end of their next turn.
+      costs:
+        ap: 1
+    - id: glacial_bastion
+      name: Glacial Bastion
+      type: passive
+      keywords:
+        - Frost
+        - Spell
+      range: Self
+      description: "You encase yourself in a Glacial Wall that fills your space until the start of your next turn, making you untargetable for attacks during the duration.\_This Glacial Wall has HP equal to 15 + Focus, any remaining damage is transferred to you (mitigated by your armor).\_ While encased, you can cast White Thunder on your encased Ice for 1 RP which removes Glacial Bastion.\_Other than White Thunder, you cannot take any other actions while under the effect of Glacial Bastion.\nThis Spell does not provoke attacks of opportunity."
+      costs:
+        mana: 1
+        rp: 1
+    - id: secret_art__whiteout
+      name: 'Secret Art: Whiteout'
+      type: passive
+      keywords:
+        - Encounter Start
+        - Frost
+        - Spell
+        - Upkeep
+      range: 2500ft radius on self
+      description: "You create a sudden snowstorm that obscures sight, creating difficult battle conditions.\_Attack accuracy for all affected units is reduced by your Focus. Units with \"Ice Cold\" or Frost Immunity are not affected by this ability. The snowstorm ends at the end of your next turn, unless you pay 3 mana to Upkeep.\nYou may activate this ability as an Encounter Start action during the Encounter Start phase of an encounter. If you do, you do not pay the RP cost."
+      costs:
+        rp: 3

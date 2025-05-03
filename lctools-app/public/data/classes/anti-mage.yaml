@@ -5,7 +5,7 @@ class:
   difficulty: 2
   main_role: Support
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/2b3d2ee1-ee9d-4799-9892-f2e6a344abc4-anti-mage.sm.webp
+  image_url: /images/classes/Anti-Mage.webp
   requirements:
     type: and
     conditions:

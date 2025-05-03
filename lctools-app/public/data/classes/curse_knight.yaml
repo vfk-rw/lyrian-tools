@@ -5,143 +5,153 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/f7d9fc58-41f5-4bbd-bc08-da484d852647-RNG_Fighter.sm.webp
+  image_url: /images/classes/Curse_Knight.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Any class mastered.
-  description: A name given to warriors who suffer from a terrible curse. Their frequent
-    misfortune is well known with even their weapons often managing to strike themselves
-    instead of their enemies. However, there are some who manage to channel this misfortune
-    and use its power against their enemies.
-  guide: 'The Curse Knight is a class that can deal a high amount of damage at the
+      - type: text
+        description: Any class mastered.
+  description: >-
+    A name given to warriors who suffer from a terrible curse. Their frequent
+    misfortune is well known with even their weapons often managing to strike
+    themselves instead of their enemies. However, there are some who manage to
+    channel this misfortune and use its power against their enemies.
+  guide: >-
+    The Curse Knight is a class that can deal a high amount of damage at the
     cost of their own health.
 
-    Backlash is guaranteed damage on an enemy that they almost cannot stop, but you
-    also take some damage yourself. It''s good for finishing off low health targets
-    or in fights where you feel the HP loss won''t matter.
+    Backlash is guaranteed damage on an enemy that they almost cannot stop, but
+    you also take some damage yourself. It's good for finishing off low health
+    targets or in fights where you feel the HP loss won't matter.
 
-    Devil''s Blow is another good damage dealing ability that comes with a risk of
-    potentially hitting yourself. The mana cost is low, so the attack can be spammed
-    as long as you feel lucky. If you have an oracle in your party, then this attack
-    is almost always safe to use.
+    Devil's Blow is another good damage dealing ability that comes with a risk
+    of potentially hitting yourself. The mana cost is low, so the attack can be
+    spammed as long as you feel lucky. If you have an oracle in your party, then
+    this attack is almost always safe to use.
 
-    Devi''s Curse relies on the enemy missing to deal damage to them. Best used on
-    their heavy attacks, as the mana cost may not be worth it to reflect a light one.
+    Devi's Curse relies on the enemy missing to deal damage to them. Best used
+    on their heavy attacks, as the mana cost may not be worth it to reflect a
+    light one.
 
-    The Secret Art: Life Bet lets you do one massive hit, but the damage is based
-    on how much HP you lose from it. Finding an optimal timing may be difficult, as
-    you don''t want to use it while an enemy still has reactions left but as the fight
-    drags on, your HP will most likely be lower. Having support from your allies or
-    your other abilities will be key in using this secret art.
+    The Secret Art: Life Bet lets you do one massive hit, but the damage is
+    based on how much HP you lose from it. Finding an optimal timing may be
+    difficult, as you don't want to use it while an enemy still has reactions
+    left but as the fight drags on, your HP will most likely be lower. Having
+    support from your allies or your other abilities will be key in using this
+    secret art.
 
-    Finally, the key ability On my terms allows you to continue using your abilities
-    even as your HP gets lower. You won''t need to worry about accidentally killing
-    yourself. You can also use it to effectively ignore enemy attacks of opportunity
-    while you''re at low HP, since they will never kill you anyway or stand in effects
-    that trigger at the start of your turn such as a fire.'
+    Finally, the key ability On my terms allows you to continue using your
+    abilities even as your HP gets lower. You won't need to worry about
+    accidentally killing yourself. You can also use it to effectively ignore
+    enemy attacks of opportunity while you're at low HP, since they will never
+    kill you anyway or stand in effects that trigger at the start of your turn
+    such as a fire.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: On my terms
-  - level: 2
-    benefits:
-    - type: ability
-      value: Backlash
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Devil's Curse
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-      - attribute: Cunning
-        value: 1
-      - attribute: Awareness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Devil's Blow
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Life Bet'
+    - level: 1
+      benefits:
+        - type: ability
+          value: On my terms
+    - level: 2
+      benefits:
+        - type: ability
+          value: Backlash
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Devil's Curse
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+            - attribute: Cunning
+              value: 1
+            - attribute: Awareness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Devil's Blow
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Life Bet'
   abilities:
-  - id: on_my_terms
-    name: On my terms
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: backlash
-    name: Backlash
-    type: passive
-    keywords:
-    - Sure Hit
-    - Full Pierce
-    range: Melee Weapon Range
-    description: You make a Light attack against the target. You take true damage
-      equal to half the damage dealt.
-    costs:
-      ap: 1
-  - id: devil_s_curse
-    name: Devil's Curse
-    type: passive
-    keywords: []
-    range: Self
-    description: 'The attacker takes damage equal to the damage roll of the triggering
-      attack. They cannot Dodge or Block this damage.
+    - id: on_my_terms
+      name: On my terms
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: backlash
+      name: Backlash
+      type: passive
+      keywords:
+        - Sure Hit
+        - Full Pierce
+      range: Melee Weapon Range
+      description: >-
+        You make a Light attack against the target. You take true damage equal
+        to half the damage dealt.
+      costs:
+        ap: 1
+    - id: devil_s_curse
+      name: Devil's Curse
+      type: passive
+      keywords: []
+      range: Self
+      description: >-
+        The attacker takes damage equal to the damage roll of the triggering
+        attack. They cannot Dodge or Block this damage.
 
-      Does not work against Secret Arts, Climax Arts or similar level abilities.'
-    requirements:
-    - type: text
-      description: An enemy accuracy check against you rolls a 1.
-    costs:
-      mana: 2
-      rp: 0
-  - id: devil_s_blow
-    name: Devil's Blow
-    type: passive
-    keywords: []
-    range: Melee Weapon Range
-    description: 'You make a Heavy attack against the target.
+        Does not work against Secret Arts, Climax Arts or similar level
+        abilities.
+      requirements:
+        - type: text
+          description: An enemy accuracy check against you rolls a 1.
+      costs:
+        mana: 2
+        rp: 0
+    - id: devil_s_blow
+      name: Devil's Blow
+      type: passive
+      keywords: []
+      range: Melee Weapon Range
+      description: >-
+        You make a Heavy attack against the target.
 
-      If you roll a 1 on the accuracy check, you take true damage equal to the damage
-      roll of the attack and you regain the mana spent on this.'
-    costs:
-      mana: 1
-      ap: 1
-  - id: secret_art__life_bet
-    name: 'Secret Art: Life Bet'
-    type: combat_action
-    keywords:
-    - Secret Art
-    range: Melee Weapon Range
-    description: You reduce your HP to 1 and make a Heavy attack against the target.
-      You gain a bonus to the damage roll of this attack equal to the amount of HP
-      you lost through this ability.
-    costs:
-      ap: 2
+        If you roll a 1 on the accuracy check, you take true damage equal to the
+        damage roll of the attack and you regain the mana spent on this.
+      costs:
+        mana: 1
+        ap: 1
+    - id: secret_art__life_bet
+      name: 'Secret Art: Life Bet'
+      type: combat_action
+      keywords:
+        - Secret Art
+      range: Melee Weapon Range
+      description: >-
+        You reduce your HP to 1 and make a Heavy attack against the target. You
+        gain a bonus to the damage roll of this attack equal to the amount of HP
+        you lost through this ability.
+      costs:
+        ap: 2

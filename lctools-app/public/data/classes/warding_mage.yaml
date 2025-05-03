@@ -5,167 +5,179 @@ class:
   difficulty: 3
   main_role: Utility
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/a57e99e0-1fed-45b6-bcd2-2b9a4d6b782c-warding-mage.sm.webp
+  image_url: /images/classes/Warding_Mage.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Mage mastered.
+      - type: text
+        description: Mage mastered.
   description: Warding Mages focus on creating bounded fields that ward off intruders.
-  guide: 'The warding mage is a utility class that relies on setting up defensive
-    barriers. It is unsuited for many normal campaigns, due to the long casting time
-    and only working when enemies come to you. In a campaign focused more around intrigue
-    or where action takes place around a single place, they can provide peace of mind
-    and creates a zone where enemies will struggle to fight in.
+  guide: >-
+    The warding mage is a utility class that relies on setting up defensive
+    barriers. It is unsuited for many normal campaigns, due to the long casting
+    time and only working when enemies come to you. In a campaign focused more
+    around intrigue or where action takes place around a single place, they can
+    provide peace of mind and creates a zone where enemies will struggle to
+    fight in.
 
-    Maintaining bounded fields reduces your maximum mana, but they last forever. Maintain
-    the ones you need to and cancel fields once they have exhausted their use.
+    Maintaining bounded fields reduces your maximum mana, but they last forever.
+    Maintain the ones you need to and cancel fields once they have exhausted
+    their use.
 
-    Alarm Ward is the first field you get. It simply warns you (and others) when someone
-    unwanted enters it. Many vaults, treasure rooms or other rooms containing important
-    goodds or information will contain some form of an Alarm Ward.
+    Alarm Ward is the first field you get. It simply warns you (and others) when
+    someone unwanted enters it. Many vaults, treasure rooms or other rooms
+    containing important goodds or information will contain some form of an
+    Alarm Ward.
 
-    Explosive Ward is your second available field. It is usually placed on containers
-    containing papers with sensitive information on it. If anybody tries to steal
-    it, the papers will be destroyed even if the thief manages to get away.
+    Explosive Ward is your second available field. It is usually placed on
+    containers containing papers with sensitive information on it. If anybody
+    tries to steal it, the papers will be destroyed even if the thief manages to
+    get away.
 
-    Sapping Ward is your final ward and one that greatly reduces the combat potential
-    of any enemies entering it. The weakened condition is already bad enough, but
-    grunts become stunned as well. Because a stunned target has no AP or RP, they
-    will never be able to escape the ward while it lasts, essentially permanently
-    disabling them for the encounter.
+    Sapping Ward is your final ward and one that greatly reduces the combat
+    potential of any enemies entering it. The weakened condition is already bad
+    enough, but grunts become stunned as well. Because a stunned target has no
+    AP or RP, they will never be able to escape the ward while it lasts,
+    essentially permanently disabling them for the encounter.
 
-    Through hidden wards, you are able to hide your fields. With Disable Magic, you
-    are able to disable other fields making Warding Mages good for infiltration as
-    well.'
+    Through hidden wards, you are able to hide your fields. With Disable Magic,
+    you are able to disable other fields making Warding Mages good for
+    infiltration as well.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Disable Magic
-  - level: 2
-    benefits:
-    - type: ability
-      value: Alarm Ward
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Hidden Wards
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Cunning
-        value: 1
-      - attribute: Reason
-        value: 1
-      - attribute: Awareness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Explosive Ward
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-      - attribute: Agility
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Sapping Ward
+    - level: 1
+      benefits:
+        - type: ability
+          value: Disable Magic
+    - level: 2
+      benefits:
+        - type: ability
+          value: Alarm Ward
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Hidden Wards
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Cunning
+              value: 1
+            - attribute: Reason
+              value: 1
+            - attribute: Awareness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Explosive Ward
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+            - attribute: Agility
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Sapping Ward
   abilities:
-  - id: disable_magic
-    name: Disable Magic
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: alarm_ward
-    name: Alarm Ward
-    type: passive
-    keywords:
-    - Bounded Field
-    - Spell
-    range: Touch
-    description: A ward that can be placed on a normal-sized room or can be combined
-      to ward off a house or larger area. Each ward can cover a 40ft radius. For each
-      Alarm Ward placed in the same area as another Alarm Ward, this radius increases
-      by 40ft (For example, 120ft with 3 Alarm Wards). If someone other than you passes
-      through the ward, the ward triggers creating a loud ringing noise that persists
-      until the ward is disabled. Casting this takes 10 minutes of uninterrupted casting.
-      Once triggered, the field remains active for 5 more minutes before vanishing.
-      At the time of casting, you may choose people that can pass through the barrier
-      without triggering it. If not triggered, Alarm Ward lasts until you remove it.
-      For each Alarm Ward you maintain, your maximum mana is reduced by 1. This is
-      considered a tier 1 ward.
-    costs:
-      mana: 1
-  - id: hidden_wards
-    name: Hidden Wards
-    type: passive
-    keywords: []
-    range: '-'
-    description: You may choose to hide your Bounded Fields when casting them by making
-      a Stealth check. The casted ward uses the result of your Stealth check. Hidden
-      Bounded Fields cannot be seen with Sense Magic without a successful perception
-      or insight check.
-  - id: explosive_ward
-    name: Explosive Ward
-    type: passive
-    keywords:
-    - Bounded Field
-    - Fire
-    - Spell
-    range: Touch
-    description: A ward that can be placed on a door or medium-sized container of
-      some sort. If someone other than you opens the door or container, the ward triggers
-      creating a loud noise and dealing Heavy Fire Damage to all creatures in a 10ft
-      radius around the container. All items inside the container (if any) also take
-      this damage. Once triggered, the bounded field vanishes. Casting this takes
-      10 minutes of uninterrupted casting. You may at the time of casting choose a
-      number of people equal to your Focus that can also open the container or door
-      without triggering the ward. If not triggered, Explosive Ward lasts until you
-      remove it. For each Explosive Ward you maintain your maximum mana is reduced
-      by 2. This is considered a tier 2 ward.
-    costs:
-      mana: 2
-  - id: sapping_ward
-    name: Sapping Ward
-    type: passive
-    keywords:
-    - Bounded Field
-    - Spell
-    range: Touch
-    description: A ward that can be placed on a normal-sized room or can be combined
-      to ward off a house or larger area. Each ward can cover a 20ft radius and for
-      each Sapping Ward placed in the same area as another Sapping Ward, this radius
-      increases by 20ft (For example, 60ft with 3 Sapping Wards) If someone other
-      than you enters the area, they must make a save against your Potency or become
-      Weakened. Non-heroic units that enter the area must make a save or become Stunned
-      instead. These conditions last while they remain inside the field and for an
-      additional 2 rounds after exiting it. Casting this takes 10 minutes of uninterrupted
-      casting. Once triggered, the field remains active for 5 more minutes before
-      vanishing. You may at the time of casting choose a number of people equal to
-      your Focus that can enter the area without triggering the ward. If not triggered,
-      Sapping Ward lasts until you remove it. While it remains, your maximum mana
-      is reduced by 2 for each instance of Sapping Ward you have active. This is considered
-      a tier 2 ward.
-    costs:
-      mana: 2
+    - id: disable_magic
+      name: Disable Magic
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: alarm_ward
+      name: Alarm Ward
+      type: passive
+      keywords:
+        - Bounded Field
+        - Spell
+      range: Touch
+      description: >-
+        A ward that can be placed on a normal-sized room or can be combined to
+        ward off a house or larger area. Each ward can cover a 40ft radius. For
+        each Alarm Ward placed in the same area as another Alarm Ward, this
+        radius increases by 40ft (For example, 120ft with 3 Alarm Wards). If
+        someone other than you passes through the ward, the ward triggers
+        creating a loud ringing noise that persists until the ward is disabled.
+        Casting this takes 10 minutes of uninterrupted casting. Once triggered,
+        the field remains active for 5 more minutes before vanishing. At the
+        time of casting, you may choose people that can pass through the barrier
+        without triggering it. If not triggered, Alarm Ward lasts until you
+        remove it. For each Alarm Ward you maintain, your maximum mana is
+        reduced by 1. This is considered a tier 1 ward.
+      costs:
+        mana: 1
+    - id: hidden_wards
+      name: Hidden Wards
+      type: passive
+      keywords: []
+      range: '-'
+      description: >-
+        You may choose to hide your Bounded Fields when casting them by making a
+        Stealth check. The casted ward uses the result of your Stealth check.
+        Hidden Bounded Fields cannot be seen with Sense Magic without a
+        successful perception or insight check.
+    - id: explosive_ward
+      name: Explosive Ward
+      type: passive
+      keywords:
+        - Bounded Field
+        - Fire
+        - Spell
+      range: Touch
+      description: >-
+        A ward that can be placed on a door or medium-sized container of some
+        sort. If someone other than you opens the door or container, the ward
+        triggers creating a loud noise and dealing Heavy Fire Damage to all
+        creatures in a 10ft radius around the container. All items inside the
+        container (if any) also take this damage. Once triggered, the bounded
+        field vanishes. Casting this takes 10 minutes of uninterrupted casting.
+        You may at the time of casting choose a number of people equal to your
+        Focus that can also open the container or door without triggering the
+        ward. If not triggered, Explosive Ward lasts until you remove it. For
+        each Explosive Ward you maintain your maximum mana is reduced by 2. This
+        is considered a tier 2 ward.
+      costs:
+        mana: 2
+    - id: sapping_ward
+      name: Sapping Ward
+      type: passive
+      keywords:
+        - Bounded Field
+        - Spell
+      range: Touch
+      description: >-
+        A ward that can be placed on a normal-sized room or can be combined to
+        ward off a house or larger area. Each ward can cover a 20ft radius and
+        for each Sapping Ward placed in the same area as another Sapping Ward,
+        this radius increases by 20ft (For example, 60ft with 3 Sapping Wards)
+        If someone other than you enters the area, they must make a save against
+        your Potency or become Weakened. Non-heroic units that enter the area
+        must make a save or become Stunned instead. These conditions last while
+        they remain inside the field and for an additional 2 rounds after
+        exiting it. Casting this takes 10 minutes of uninterrupted casting. Once
+        triggered, the field remains active for 5 more minutes before vanishing.
+        You may at the time of casting choose a number of people equal to your
+        Focus that can enter the area without triggering the ward. If not
+        triggered, Sapping Ward lasts until you remove it. While it remains,
+        your maximum mana is reduced by 2 for each instance of Sapping Ward you
+        have active. This is considered a tier 2 ward.
+      costs:
+        mana: 2

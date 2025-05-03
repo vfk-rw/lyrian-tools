@@ -5,135 +5,140 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/d45c15bc-9a7c-470a-a972-cb3e444d9abe-deadeye.sm.webp
+  image_url: /images/classes/Deadeye.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Marksman or Archer mastered.
-  description: An expert marksman or archer whose unmatched aim allows them to perform
+      - type: text
+        description: Marksman or Archer mastered.
+  description: >-
+    An expert marksman or archer whose unmatched aim allows them to perform
     incredible feats.
-  guide: 'The deadeye is a ranged striker with some minor control and utility. Status
-    Assessment III is similar to the previous version, but it no longer has the quick
-    keyword meaning it can be used without worrying that it increases the cost of
-    other abilities.
+  guide: >-
+    The deadeye is a ranged striker with some minor control and utility. Status
+    Assessment III is similar to the previous version, but it no longer has the
+    quick keyword meaning it can be used without worrying that it increases the
+    cost of other abilities.
 
     Aimed Shot is a simple attack meant to punish enemies that rely on dodge.
 
-    Disarming Shot is a powerful tool that can be used to disarm enemies for a long
-    range. Disarming melee enemies may seem like the obvious choice, but many ranged
-    enemies will not carry a spare ranged weapon. Disarming them will most likely
-    lead to them being unable to act for the turn.
+    Disarming Shot is a powerful tool that can be used to disarm enemies for a
+    long range. Disarming melee enemies may seem like the obvious choice, but
+    many ranged enemies will not carry a spare ranged weapon. Disarming them
+    will most likely lead to them being unable to act for the turn.
 
-    Countershot is another tool the Deadeye has to show it is the superior ranged
-    attacker. It is not guaranteed, but it can assist allies and defend yourself against
-    opposing ranged attacks.
+    Countershot is another tool the Deadeye has to show it is the superior
+    ranged attacker. It is not guaranteed, but it can assist allies and defend
+    yourself against opposing ranged attacks.
 
-    Secret Art: Perfect Repetition is not the easiest secret art to use. It has the
-    upside of having no mana cost and relatively low AP cost, but if you roll badly
-    the attack is wasted. On the other hand, a good roll almost ensures a guaranteed
-    hit every round unless the target takes cover. It is more reliable when the enemy
-    has no RP, but don''t be afraid to throw it out early and go for a gamble. It''s
-    worth the risk.'
+    Secret Art: Perfect Repetition is not the easiest secret art to use. It has
+    the upside of having no mana cost and relatively low AP cost, but if you
+    roll badly the attack is wasted. On the other hand, a good roll almost
+    ensures a guaranteed hit every round unless the target takes cover. It is
+    more reliable when the enemy has no RP, but don't be afraid to throw it out
+    early and go for a gamble. It's worth the risk.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Superior Assessment
-  - level: 2
-    benefits:
-    - type: ability
-      value: Disarming Shot
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Countershot
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Fitness
-        value: 1
-      - attribute: Cunning
-        value: 1
-      - attribute: Awareness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Aimed Shot
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Focus
-        value: 1
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Perfect Repetition'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Superior Assessment
+    - level: 2
+      benefits:
+        - type: ability
+          value: Disarming Shot
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Countershot
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Fitness
+              value: 1
+            - attribute: Cunning
+              value: 1
+            - attribute: Awareness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Aimed Shot
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Focus
+              value: 1
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Perfect Repetition'
   abilities:
-  - id: superior_assessment
-    name: Superior Assessment
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: disarming_shot
-    name: Disarming Shot
-    type: passive
-    keywords:
-    - Disarm
-    range: Ranged Weapon Range
-    description: You may make a Light Attack against the target. On damage, you Disarm
-      the target until the start of your next turn.
-    costs:
-      mana: 3
-      ap: 2
-  - id: countershot
-    name: Countershot
-    type: passive
-    keywords: []
-    range: Ranged Weapon Range
-    description: You may make a Precise Attack against the incoming attack. If your
-      accuracy check matches or beats the enemy’s accuracy check, you shoot down the
-      incoming arrow and the attack is negated.
-    requirements:
-    - type: text
-      description: You or an ally are targeted by a ranged weapon attack.
-    costs:
-      rp: 1
-  - id: aimed_shot
-    name: Aimed Shot
-    type: passive
-    keywords:
-    - Lock On
-    range: Ranged Weapon Range
-    description: You make a Heavy Attack against the target.
-    costs:
-      mana: 2
-      ap: 2
-  - id: secret_art__perfect_repetition
-    name: 'Secret Art: Perfect Repetition'
-    type: combat_action
-    keywords:
-    - Secret Art
-    range: Ranged Weapon Range
-    description: You may make a Heavy Attack against the target. On damage, on the
-      next turn, you may repeat this attack against the same target using the same
-      accuracy check as the initial attack. You may continue to repeat this attack
-      on subsequent turns until you spend a turn not using this move or if the attack
-      fails to deal damage.
-    costs:
-      ap: 2
+    - id: superior_assessment
+      name: Superior Assessment
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: disarming_shot
+      name: Disarming Shot
+      type: passive
+      keywords:
+        - Disarm
+      range: Ranged Weapon Range
+      description: >-
+        You may make a Light Attack against the target. On damage, you Disarm
+        the target until the start of your next turn.
+      costs:
+        mana: 3
+        ap: 2
+    - id: countershot
+      name: Countershot
+      type: passive
+      keywords: []
+      range: Ranged Weapon Range
+      description: >-
+        You may make a Precise Attack against the incoming attack. If your
+        accuracy check matches or beats the enemy’s accuracy check, you shoot
+        down the incoming arrow and the attack is negated.
+      requirements:
+        - type: text
+          description: You or an ally are targeted by a ranged weapon attack.
+      costs:
+        rp: 1
+    - id: aimed_shot
+      name: Aimed Shot
+      type: passive
+      keywords:
+        - Lock On
+      range: Ranged Weapon Range
+      description: You make a Heavy Attack against the target.
+      costs:
+        mana: 2
+        ap: 2
+    - id: secret_art__perfect_repetition
+      name: 'Secret Art: Perfect Repetition'
+      type: combat_action
+      keywords:
+        - Secret Art
+      range: Ranged Weapon Range
+      description: >-
+        You may make a Heavy Attack against the target. On damage, on the next
+        turn, you may repeat this attack against the same target using the same
+        accuracy check as the initial attack. You may continue to repeat this
+        attack on subsequent turns until you spend a turn not using this move or
+        if the attack fails to deal damage.
+      costs:
+        ap: 2

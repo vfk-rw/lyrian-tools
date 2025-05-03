@@ -5,118 +5,118 @@ class:
   difficulty: 2
   main_role: Artisan
   secondary_role: Healer
-  image_url: https://cdn.angelssword.com/ttrpg/assets/2500094c-dbfe-437a-99cf-bc178a219633-Alchemist_Raw.sm.webp
+  image_url: /images/classes/Alchemist.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: None.
+      - type: text
+        description: None.
   description: Researchers and chemists who try to understand what composes the world.
-  guide: 'Alchemist is a crafting class that can use the consumables they craft to
-    great effect. With Light Work you can craft tons of items at the same time, though
-    you still have to pay material costs as normal. As you go through a lot of items,
-    being able to double what you craft in 1 point is still valuable.
+  guide: >-
+    Alchemist is a crafting class that can use the consumables they craft to
+    great effect. With Light Work you can craft tons of items at the same time,
+    though you still have to pay material costs as normal. As you go through a
+    lot of items, being able to double what you craft in 1 point is still
+    valuable.
 
-    Throw Potion lets you function as a healer for a party. Your healing will be fairly
-    AP efficient, but it can be dangerous to rely on an alchemist healer as the person
-    receiving the potion has to pay the mana cost. In a party where other people may
-    want to use their mana for their own abilities, it may be impossible to heal as
-    the fight drags on.
+    Throw Potion lets you function as a healer for a party. Your healing will be
+    fairly AP efficient, but it can be dangerous to rely on an alchemist healer
+    as the person receiving the potion has to pay the mana cost. In a party
+    where other people may want to use their mana for their own abilities, it
+    may be impossible to heal as the fight drags on.
 
-    Doctor Jekyll lets you or an ally drink a potion or elixir when the combat start.
-    In most cases this will be an elixir, allowing you to get a boost without having
-    to spend an action on it.
+    Doctor Jekyll lets you or an ally drink a potion or elixir when the combat
+    start. In most cases this will be an elixir, allowing you to get a boost
+    without having to spend an action on it.
 
-    Quickdraw Alchemy lets you take out an alchemy item at any time, even when it''s
-    not your turn. Most of the time this property will not come into play, as you
-    can''t use it when it''s not your turn yet, but you could prepare a flask that
-    an ally can take off your hands when it is their turn. Of course, you will most
-    likely just want to use it to not have to spend your AP to draw them before using
-    them yourself.'
+    Quickdraw Alchemy lets you take out an alchemy item at any time, even when
+    it's not your turn. Most of the time this property will not come into play,
+    as you can't use it when it's not your turn yet, but you could prepare a
+    flask that an ally can take off your hands when it is their turn. Of course,
+    you will most likely just want to use it to not have to spend your AP to
+    draw them before using them yourself.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: The Alchemist
-  - level: 2
-    benefits:
-    - type: ability
-      value: Throw Potion
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - Alchemy
-      can_convert_to_expertise: false
-  - level: 4
-    benefits:
-    - type: ability
-      value: Doctor Jekyll
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Light Work
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Quickdraw Alchemy
+    - level: 1
+      benefits:
+        - type: ability
+          value: The Alchemist
+    - level: 2
+      benefits:
+        - type: ability
+          value: Throw Potion
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - Alchemy
+          can_convert_to_expertise: false
+    - level: 4
+      benefits:
+        - type: ability
+          value: Doctor Jekyll
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Light Work
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Quickdraw Alchemy
   abilities:
-  - id: the_alchemist
-    name: The Alchemist
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: throw_potion
-    name: Throw Potion
-    type: passive
-    keywords: []
-    range: 30ft
-    description: You throw a Potion in your hands at a willing ally unit within range. The
-      unit may pay the mana cost (if any) to receive the effect of the Potion.
-    costs:
-      ap: 1
-  - id: doctor_jekyll
-    name: Doctor Jekyll
-    type: passive
-    keywords:
-    - Encounter Start
-    range: 30ft
-    description: You draw and either drink a Potion or Elixir, or throw one to a willing
-      ally within 30ft who immediately drinks it.
-  - id: light_work
-    name: Light Work
-    type: passive
-    keywords: []
-    range: ''
-    description: Only usable as the first crafting action. All material costs are
-      doubled and all produced items are doubled. You may only use basic crafting
-      actions for the rest of the craft. Make a crafting attempt.
-    requirements:
-    - type: text
-      description: Costs 1 Crafting Dice.
-  - id: quickdraw_alchemy
-    name: Quickdraw Alchemy
-    type: passive
-    keywords: []
-    range: Self
-    description: You draw an Alchemy item from your combat inventory.
-    costs:
-      rp: 0
+    - id: the_alchemist
+      name: The Alchemist
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: throw_potion
+      name: Throw Potion
+      type: passive
+      keywords: []
+      range: 30ft
+      description: "You throw a Potion in your hands at a willing ally unit within range.\_The unit may pay the mana cost (if any) to receive the effect of the Potion."
+      costs:
+        ap: 1
+    - id: doctor_jekyll
+      name: Doctor Jekyll
+      type: passive
+      keywords:
+        - Encounter Start
+      range: 30ft
+      description: >-
+        You draw and either drink a Potion or Elixir, or throw one to a willing
+        ally within 30ft who immediately drinks it.
+    - id: light_work
+      name: Light Work
+      type: passive
+      keywords: []
+      range: ''
+      description: "Only usable as the first crafting action.\_All material costs are doubled and all produced items are doubled.\_You may only use basic crafting actions for the rest of the craft.\_Make a crafting attempt."
+      requirements:
+        - type: text
+          description: Costs 1 Crafting Dice.
+    - id: quickdraw_alchemy
+      name: Quickdraw Alchemy
+      type: passive
+      keywords: []
+      range: Self
+      description: You draw an Alchemy item from your combat inventory.
+      costs:
+        rp: 0

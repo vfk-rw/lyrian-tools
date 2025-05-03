@@ -5,146 +5,152 @@ class:
   difficulty: 3
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/1f5a483d-fdb9-41e3-aaf7-616e4cdf375d-pyromaster.sm.webp
+  image_url: /images/classes/Pyromaster.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Pyromancer mastered.
+      - type: text
+        description: Pyromancer mastered.
   description: Fire mages who have reached the pinnacle of fire control.
-  guide: 'The Pyromaster is AoE striker that deals fire damage. Their Eternal Flames
-    ability heavily punishes people who don''t immediately remove the burns they inflict,
-    all but ensuring they will die eventually. They rely on the pyromancer''s ignite
-    for many of their burning needs.
+  guide: >-
+    The Pyromaster is AoE striker that deals fire damage. Their Eternal Flames
+    ability heavily punishes people who don't immediately remove the burns they
+    inflict, all but ensuring they will die eventually. They rely on the
+    pyromancer's ignite for many of their burning needs.
 
-    Fireball II is their one ability that inflicts Burning without the need of ignite.
-    This makes it more mana and action efficient than a normal fireball. If needed,
-    the size of it can also be increased by spending more mana. Good for those situations
-    where a few enemies are barely out of range.
+    Fireball II is their one ability that inflicts Burning without the need of
+    ignite. This makes it more mana and action efficient than a normal fireball.
+    If needed, the size of it can also be increased by spending more mana. Good
+    for those situations where a few enemies are barely out of range.
 
-    Blast Wave is a self peel tool. It also knocks back allies, so be mindful of your
-    positioning.
+    Blast Wave is a self peel tool. It also knocks back allies, so be mindful of
+    your positioning.
 
-    Fireball Barrage lets you pelt an entire battlefield with fireballs. Very likely
-    to be useful at the start of a fight where enemies are not yet clustered into
-    one position.
+    Fireball Barrage lets you pelt an entire battlefield with fireballs. Very
+    likely to be useful at the start of a fight where enemies are not yet
+    clustered into one position.
 
-    The Climax Art: Meteor is a sure hit attack that can only be avoided by walking
-    out of the area before it lands. The damage potential of this ability when overcharged
-    to the maximum is insane, though you are unlikely to be able to do so. Even when
-    used at just 4 AP, the damage is high. You will need to rely on your teammates
-    or terrain to keep enemies inside the strike radius however.'
+    The Climax Art: Meteor is a sure hit attack that can only be avoided by
+    walking out of the area before it lands. The damage potential of this
+    ability when overcharged to the maximum is insane, though you are unlikely
+    to be able to do so. Even when used at just 4 AP, the damage is high. You
+    will need to rely on your teammates or terrain to keep enemies inside the
+    strike radius however.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Eternal Flames
-  - level: 2
-    benefits:
-    - type: ability
-      value: Blast Wave
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Fireball II
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Fireball Barrage
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Climax Art: Meteor'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Eternal Flames
+    - level: 2
+      benefits:
+        - type: ability
+          value: Blast Wave
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Fireball II
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Fireball Barrage
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Climax Art: Meteor'
   abilities:
-  - id: eternal_flames
-    name: Eternal Flames
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: blast_wave
-    name: Blast Wave
-    type: passive
-    keywords:
-    - Fire
-    - Spell
-    range: Self
-    description: You may make a Light attack that deals Fire damage against every
-      character within 10ft of you. On damage, they are pushed back 10ft. This spell
-      does not provoke attacks of opportunity.
-    costs:
-      ap: 2
-  - id: fireball_ii
-    name: Fireball II
-    type: passive
-    keywords:
-    - Fire
-    - Overcharge
-    - Spell
-    range: 60ft
-    description: 'You hurl a Fireball at a 15x15ft area, making a Light Attack that
-      deals Fire Damage against all units in the area. On damage, they become Burning
-      X where X equals your Power x 2
+    - id: eternal_flames
+      name: Eternal Flames
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: blast_wave
+      name: Blast Wave
+      type: passive
+      keywords:
+        - Fire
+        - Spell
+      range: Self
+      description: >-
+        You may make a Light attack that deals Fire damage against every
+        character within 10ft of you. On damage, they are pushed back 10ft. This
+        spell does not provoke attacks of opportunity.
+      costs:
+        ap: 2
+    - id: fireball_ii
+      name: Fireball II
+      type: passive
+      keywords:
+        - Fire
+        - Overcharge
+        - Spell
+      range: 60ft
+      description: >-
+        You hurl a Fireball at a 15x15ft area, making a Light Attack that deals
+        Fire Damage against all units in the area. On damage, they become
+        Burning X where X equals your Power x 2
 
-      Overcharge:
+        Overcharge:
 
-      You may spend extra mana to increase the size of the area. Every mana spent
-      increases the size by 5ft.'
-    costs:
-      mana: 1
-      ap: 2
-  - id: fireball_barrage
-    name: Fireball Barrage
-    type: passive
-    keywords:
-    - Fire
-    - Spell
-    range: 60ft
-    description: You hurl three Fireballs at three separate 15x15ft areas, making
-      a Light Attack that deals Fire Damage against all units in each area. These
-      three areas may not overlap.
-    costs:
-      ap: 3
-  - id: climax_art__meteor
-    name: 'Climax Art: Meteor'
-    type: passive
-    keywords:
-    - Climax Art
-    - Fire
-    - Overcharge
-    - Spell
-    - Sure Hit
-    range: 120ft
-    description: 'You mark a 30x30ft area and begin summoning a meteor to strike it
-      at the start of your next turn. Those in the area when it lands take Heavy Fire
-      Damage. You cannot use the Prepare action on this ability. Overcharge: You may
-      spend extra AP on this ability to increase the damage and size of it. For every
-      extra 2 AP spent on it, the size increases by 5ft and the damage increases by
-      your Power. If the Overcharge increases the AP cost to above 4, this ability
-      gains the Setup keyword. You mark the area of this ability when you have finished
-      spending all AP on it and not before. The maximum AP you can spend on this ability
-      is 16 AP.'
-    costs:
-      mana: 4
-      ap: 30
+        You may spend extra mana to increase the size of the area. Every mana
+        spent increases the size by 5ft.
+      costs:
+        mana: 1
+        ap: 2
+    - id: fireball_barrage
+      name: Fireball Barrage
+      type: passive
+      keywords:
+        - Fire
+        - Spell
+      range: 60ft
+      description: >-
+        You hurl three Fireballs at three separate 15x15ft areas, making a Light
+        Attack that deals Fire Damage against all units in each area. These
+        three areas may not overlap.
+      costs:
+        ap: 3
+    - id: climax_art__meteor
+      name: 'Climax Art: Meteor'
+      type: passive
+      keywords:
+        - Climax Art
+        - Fire
+        - Overcharge
+        - Spell
+        - Sure Hit
+      range: 120ft
+      description: >-
+        You mark a 30x30ft area and begin summoning a meteor to strike it at the
+        start of your next turn. Those in the area when it lands take Heavy Fire
+        Damage. You cannot use the Prepare action on this ability. Overcharge:
+        You may spend extra AP on this ability to increase the damage and size
+        of it. For every extra 2 AP spent on it, the size increases by 5ft and
+        the damage increases by your Power. If the Overcharge increases the AP
+        cost to above 4, this ability gains the Setup keyword. You mark the area
+        of this ability when you have finished spending all AP on it and not
+        before. The maximum AP you can spend on this ability is 16 AP.
+      costs:
+        mana: 4
+        ap: 30

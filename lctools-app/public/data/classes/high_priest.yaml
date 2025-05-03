@@ -5,129 +5,131 @@ class:
   difficulty: 1
   main_role: Healer
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/7df18ec3-394d-4e7c-aaf4-2071498cad71-High_Priest_raw.sm.webp
+  image_url: /images/classes/High_Priest.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Priest mastered.
+      - type: text
+        description: Priest mastered.
   description: Powerful divine agents who bring peace and comfort to their allies.
-  guide: 'The high priest has strong out of combat healing thanks to their Tranquil
-    Prayers. If possible, you will want to delay healing near the end of a fight and
-    save your mana to use it after combat ends.
+  guide: >-
+    The high priest has strong out of combat healing thanks to their Tranquil
+    Prayers. If possible, you will want to delay healing near the end of a fight
+    and save your mana to use it after combat ends.
 
-    Cure Touch II is a massive heal with an equally big mana cost. It''s very powerful
-    when an ally is low on hit points, but it may leave you out of options in the
-    future.
+    Cure Touch II is a massive heal with an equally big mana cost. It's very
+    powerful when an ally is low on hit points, but it may leave you out of
+    options in the future.
 
-    Purify is a simple spell that lets you remove a negative effect from an ally.
-    While the cost is low, it does still cost mana so only remove effects that matter.
+    Purify is a simple spell that lets you remove a negative effect from an
+    ally. While the cost is low, it does still cost mana so only remove effects
+    that matter.
 
-    Radiant Halo is another spell with a high mana cost. It heals all allies, but
-    the range may be limiting if the party is split up in a fight. You can also cast
-    it by using RP, which can be a lifesaver when you need to top of your allies after
-    a powerful AoE attack.
+    Radiant Halo is another spell with a high mana cost. It heals all allies,
+    but the range may be limiting if the party is split up in a fight. You can
+    also cast it by using RP, which can be a lifesaver when you need to top of
+    your allies after a powerful AoE attack.
 
-    Finally, Walking Church is a secret art that effectively makes a target immune
-    to damage for one turn. There will always be a use for this ability in a fight,
-    so save a mana and RP for it until you need it.'
+    Finally, Walking Church is a secret art that effectively makes a target
+    immune to damage for one turn. There will always be a use for this ability
+    in a fight, so save a mana and RP for it until you need it.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Tranquil Prayers
-  - level: 2
-    benefits:
-    - type: ability
-      value: Cure Touch II
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Purify
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Awareness
-        value: 1
-      - attribute: Presence
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Radiant Halo
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Power of Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Walking Church'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Tranquil Prayers
+    - level: 2
+      benefits:
+        - type: ability
+          value: Cure Touch II
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Purify
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Awareness
+              value: 1
+            - attribute: Presence
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Radiant Halo
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Power of Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Walking Church'
   abilities:
-  - id: tranquil_prayers
-    name: Tranquil Prayers
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: cure_touch_ii
-    name: Cure Touch II
-    type: passive
-    keywords:
-    - Healing
-    - Spell
-    range: Touch
-    description: You Heal the target for 12 + (3 x Power)
-    costs:
-      mana: 5
-      ap: 2
-  - id: purify
-    name: Purify
-    type: passive
-    keywords:
-    - Spell
-    range: 40ft
-    description: You cleanse a target, removing 1 stack of a negative effect of your
-      choice that you are able to identify.
-    costs:
-      mana: 1
-      ap: 1
-  - id: radiant_halo
-    name: Radiant Halo
-    type: passive
-    keywords:
-    - Healing
-    - Spell
-    range: 120ft
-    description: 'You Heal all allied targets in a 15ft radius from the target point
-      for 6 + (2 x Power).
+    - id: tranquil_prayers
+      name: Tranquil Prayers
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: cure_touch_ii
+      name: Cure Touch II
+      type: passive
+      keywords:
+        - Healing
+        - Spell
+      range: Touch
+      description: You Heal the target for 12 + (3 x Power)
+      costs:
+        mana: 5
+        ap: 2
+    - id: purify
+      name: Purify
+      type: passive
+      keywords:
+        - Spell
+      range: 40ft
+      description: >-
+        You cleanse a target, removing 1 stack of a negative effect of your
+        choice that you are able to identify.
+      costs:
+        mana: 1
+        ap: 1
+    - id: radiant_halo
+      name: Radiant Halo
+      type: passive
+      keywords:
+        - Healing
+        - Spell
+      range: 120ft
+      description: >-
+        You Heal all allied targets in a 15ft radius from the target point for 6
+        + (2 x Power).
 
-      You may use 1 RP instead of 2 AP for this ability. When using RP on this ability,
-      you may use it even when it is not your turn.'
-    costs:
-      mana: 6
-      ap: 2
-  - id: secret_art__walking_church
-    name: 'Secret Art: Walking Church'
-    type: combat_action
-    keywords:
-    - Secret Art
-    range: 120ft
-    description: Blesses the target, granting them the status of a church. Until the
-      end of your next turn, the target gains Damage Reduction 1000 against all damage
-      types.
-    costs:
-      mana: 1
-      rp: 1
+        You may use 1 RP instead of 2 AP for this ability. When using RP on this
+        ability, you may use it even when it is not your turn.
+      costs:
+        mana: 6
+        ap: 2
+    - id: secret_art__walking_church
+      name: 'Secret Art: Walking Church'
+      type: combat_action
+      keywords:
+        - Secret Art
+      range: 120ft
+      description: "Blesses the target, granting them the status of a church.\_Until the end of your next turn, the target gains Damage Reduction 1000 against all damage types."
+      costs:
+        mana: 1
+        rp: 1

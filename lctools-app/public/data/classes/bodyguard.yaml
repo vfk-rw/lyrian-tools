@@ -5,128 +5,135 @@ class:
   difficulty: 2
   main_role: Defender
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/885ca336-701e-4ba7-9439-458eb1abb74f-bodyguard.sm.webp
+  image_url: /images/classes/Bodyguard.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Fighter mastered.
+      - type: text
+        description: Fighter mastered.
   description: Bodyguards specialize in protecting a single person.
-  guide: 'The bodyguard is focused around protecting a single target. You can choose
-    who this target is with VIP Protection. They are well-suited to escort and protection
-    missions, but even in normal ones they synergize well with squishy melee allies.
-    Since they automatically get hit and can''t react when using the redirect part
-    of VIP Protection, having high Toughness and wearing armor is recommended.
+  guide: >-
+    The bodyguard is focused around protecting a single target. You can choose
+    who this target is with VIP Protection. They are well-suited to escort and
+    protection missions, but even in normal ones they synergize well with
+    squishy melee allies. Since they automatically get hit and can't react when
+    using the redirect part of VIP Protection, having high Toughness and wearing
+    armor is recommended.
 
-    With Temporary Protection, the bodyguard can pay a heavy mana cost to protect
-    another ally. It should only be used in emergencies, but using it on a low health
-    ally can keep them in the fight without them having to play super defensive.
+    With Temporary Protection, the bodyguard can pay a heavy mana cost to
+    protect another ally. It should only be used in emergencies, but using it on
+    a low health ally can keep them in the fight without them having to play
+    super defensive.
 
-    Shelter is a more limited, but powerful version of the re-direct of the key ability.
-    Heavy Attacks will do a lot of damage if you take them without reacting, so Shelter
-    is best saved for those attacks.
+    Shelter is a more limited, but powerful version of the re-direct of the key
+    ability. Heavy Attacks will do a lot of damage if you take them without
+    reacting, so Shelter is best saved for those attacks.
 
-    At your side helps you with positioning. It can save your VIP target when they
-    do something stupid or if they get forcefully moved, but it can also be used offensively
-    to teleport next to them when they charge ahead.
+    At your side helps you with positioning. It can save your VIP target when
+    they do something stupid or if they get forcefully moved, but it can also be
+    used offensively to teleport next to them when they charge ahead.
 
-    Vengeance is a cheaper heavy attack that can be used if your VIP target was attacked.
-    If the condition is met, there''s rarely a reason not to use it. It becomes even
-    more powerful if your VIP target is below 0 HP, though you obviously do not want
-    that situation to happen to begin with.'
+    Vengeance is a cheaper heavy attack that can be used if your VIP target was
+    attacked. If the condition is met, there's rarely a reason not to use it. It
+    becomes even more powerful if your VIP target is below 0 HP, though you
+    obviously do not want that situation to happen to begin with.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: VIP Protection
-  - level: 2
-    benefits:
-    - type: ability
-      value: Shelter
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Temporary Protection
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Fitness
-        value: 1
-      - attribute: Awareness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Vengeance
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: At your side
+    - level: 1
+      benefits:
+        - type: ability
+          value: VIP Protection
+    - level: 2
+      benefits:
+        - type: ability
+          value: Shelter
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Temporary Protection
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Fitness
+              value: 1
+            - attribute: Awareness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Vengeance
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: At your side
   abilities:
-  - id: vip_protection
-    name: VIP Protection
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: shelter
-    name: Shelter
-    type: passive
-    keywords: []
-    range: 5ft
-    description: The attack targeting your VIP instead targets you. You may use this
-      even if you’re also a target of the attack and both attacks will resolve against
-      you. You also gain the benefits of the Block action against the triggering attack.
-    requirements:
-    - type: text
-      description: Your VIP is the target of an attack.
-    costs:
-      rp: 1
-  - id: temporary_protection
-    name: Temporary Protection
-    type: passive
-    keywords: []
-    range: 30ft
-    description: Until the end of the encounter, the target ally you selected is also
-      treated as your VIP.
-    costs:
-      mana: 3
-      ap: 0
-  - id: vengeance
-    name: Vengeance
-    type: passive
-    keywords: []
-    range: Weapon Range
-    description: You may make a Heavy Attack against the target. If your VIP is at
-      0 HP or lower, this attack gains Lock On and Guard Crush.
-    requirements:
-    - type: text
-      description: Your VIP was attacked last turn.
-    costs:
-      ap: 1
-  - id: at_your_side
-    name: At your side
-    type: passive
-    keywords:
-    - Teleport
-    range: 40ft
-    description: You teleport next to your VIP.
-    costs:
-      mana: 2
-      rp: 0
+    - id: vip_protection
+      name: VIP Protection
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: shelter
+      name: Shelter
+      type: passive
+      keywords: []
+      range: 5ft
+      description: >-
+        The attack targeting your VIP instead targets you. You may use this even
+        if you’re also a target of the attack and both attacks will resolve
+        against you. You also gain the benefits of the Block action against the
+        triggering attack.
+      requirements:
+        - type: text
+          description: Your VIP is the target of an attack.
+      costs:
+        rp: 1
+    - id: temporary_protection
+      name: Temporary Protection
+      type: passive
+      keywords: []
+      range: 30ft
+      description: >-
+        Until the end of the encounter, the target ally you selected is also
+        treated as your VIP.
+      costs:
+        mana: 3
+        ap: 0
+    - id: vengeance
+      name: Vengeance
+      type: passive
+      keywords: []
+      range: Weapon Range
+      description: >-
+        You may make a Heavy Attack against the target. If your VIP is at 0 HP
+        or lower, this attack gains Lock On and Guard Crush.
+      requirements:
+        - type: text
+          description: Your VIP was attacked last turn.
+      costs:
+        ap: 1
+    - id: at_your_side
+      name: At your side
+      type: passive
+      keywords:
+        - Teleport
+      range: 40ft
+      description: You teleport next to your VIP.
+      costs:
+        mana: 2
+        rp: 0

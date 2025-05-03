@@ -5,129 +5,117 @@ class:
   difficulty: 3
   main_role: Specialist
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/c78bac4b-2620-42b7-a6d8-0c47f222437d-Summoner_raw.sm.webp
+  image_url: /images/classes/Summoner.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Any class mastered.
-  description: 'A summoning that contracts with Eidolons.
+      - type: text
+        description: Any class mastered.
+  description: >-
+    A summoning that contracts with Eidolons.
 
-    (See Summoning Contract breakthroughs for which eidolons you can contract with.)'
+    (See Summoning Contract breakthroughs for which eidolons you can contract
+    with.)
   guide: Soon.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Summoning Basics
-  - level: 2
-    benefits:
-    - type: ability
-      value: Channel Eidolon
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Summon Lesser Eidolon
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-      - attribute: Cunning
-        value: 1
-      - attribute: Reason
-        value: 1
-      - attribute: Awareness
-        value: 1
-      - attribute: Presence
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Unsummon
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-      - attribute: Agility
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Summon Eidolon'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Summoning Basics
+    - level: 2
+      benefits:
+        - type: ability
+          value: Channel Eidolon
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Summon Lesser Eidolon
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+            - attribute: Cunning
+              value: 1
+            - attribute: Reason
+              value: 1
+            - attribute: Awareness
+              value: 1
+            - attribute: Presence
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Unsummon
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+            - attribute: Agility
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Summon Eidolon'
   abilities:
-  - id: summoning_basics
-    name: Summoning Basics
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: channel_eidolon
-    name: Channel Eidolon
-    type: passive
-    keywords: []
-    range: ''
-    description: You use the ability granted by your attuned Eidolon. All costs and
-      effects aree determined by your attunement.
-  - id: summon_lesser_eidolon
-    name: Summon Lesser Eidolon
-    type: passive
-    keywords:
-    - Summon
-    - Spell
-    - Upkeep
-    range: 30ft
-    description: 'Your contracted Eidolon hears your call and sends their minions
-      to fight for you. The summon called and costs are dependent on your attunement. Lasts
-      up to 5 minutes. You must pay the upkeep cost under the Summon’s
-
-      Summon
-
-      Skill or the Summon vanishes.'
-  - id: unsummon
-    name: Unsummon
-    type: passive
-    keywords:
-    - Encounter Conclusion
-    range: Self
-    description: 'Unsummon your Eidolon or Lesser Eidolon.  Recover mana equal to
-      half of the mana cost of the summon cost.
-
-      You may use this as an Encounter Conclusion action.'
-    requirements:
-    - type: text
-      description: You have an active Eidolon or Lesser Eidolon.
-    costs:
-      ap: 3
-  - id: secret_art__summon_eidolon
-    name: 'Secret Art: Summon Eidolon'
-    type: combat_action
-    keywords:
-    - Summon
-    - Spell
-    - Upkeep
-    - Secret Art
-    range: 30ft
-    description: 'Your contracted Eidolon hears your call and sends a proxy of themselves
-      to fight for you.  The Eidolon called and the costs are dependent on your attunement. 
-      Lasts up to 5 minutes.  You must pay the upkeep cost under the Eidolon’s
-
-      Summon
-
-      Skill or the Eidolon vanishes.'
+    - id: summoning_basics
+      name: Summoning Basics
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: channel_eidolon
+      name: Channel Eidolon
+      type: passive
+      keywords: []
+      range: ''
+      description: >-
+        You use the ability granted by your attuned Eidolon. All costs and
+        effects aree determined by your attunement.
+    - id: summon_lesser_eidolon
+      name: Summon Lesser Eidolon
+      type: passive
+      keywords:
+        - Summon
+        - Spell
+        - Upkeep
+      range: 30ft
+      description: "Your contracted Eidolon hears your call and sends their minions to fight for you.\_The summon called and costs are dependent on your attunement.\_Lasts up to 5 minutes.\_You must pay the upkeep cost under the Summon’s\nSummon\nSkill or the Summon vanishes."
+    - id: unsummon
+      name: Unsummon
+      type: passive
+      keywords:
+        - Encounter Conclusion
+      range: Self
+      description: "Unsummon your Eidolon or Lesser Eidolon.\_ Recover mana equal to half of the mana cost of the summon cost.\nYou may use this as an Encounter Conclusion action."
+      requirements:
+        - type: text
+          description: You have an active Eidolon or Lesser Eidolon.
+      costs:
+        ap: 3
+    - id: secret_art__summon_eidolon
+      name: 'Secret Art: Summon Eidolon'
+      type: combat_action
+      keywords:
+        - Summon
+        - Spell
+        - Upkeep
+        - Secret Art
+      range: 30ft
+      description: "Your contracted Eidolon hears your call and sends a proxy of themselves to fight for you.\_ The Eidolon called and the costs are dependent on your attunement.\_ Lasts up to 5 minutes.\_ You must pay the upkeep cost under the Eidolon’s\nSummon\nSkill or the Eidolon vanishes."

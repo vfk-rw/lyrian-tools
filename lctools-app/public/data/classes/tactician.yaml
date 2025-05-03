@@ -5,129 +5,139 @@ class:
   difficulty: 3
   main_role: Support
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/23f6e137-6477-417e-ad42-2303b7e287a4-Tactician_Shannon_Clean.sm.webp
+  image_url: /images/classes/Tactician.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Any class mastered, 5 skill points in the history skill.
-  description: Tacticians are capable battlefield commanders that augment their allies’
+      - type: text
+        description: Any class mastered, 5 skill points in the history skill.
+  description: >-
+    Tacticians are capable battlefield commanders that augment their allies’
     natural abilities through tactical advance and organization.
-  guide: 'The tactician is a support class that has a lot of mobility options. Stratagem:
-    Lightning not only gives all your allies extra initiative, it also lets them move
-    once for free. This is very useful if your part consists of primarily melee fighters.
+  guide: >-
+    The tactician is a support class that has a lot of mobility options.
+    Stratagem: Lightning not only gives all your allies extra initiative, it
+    also lets them move once for free. This is very useful if your part consists
+    of primarily melee fighters.
 
-    Order: Retreat is primarily meant to be a defensive tool, pulling an injured ally
-    out of a bad situation. It can also be used offensively. You can move up towards
-    the enemy and then Order: Retreat them closer to you and the enemy.
+    Order: Retreat is primarily meant to be a defensive tool, pulling an injured
+    ally out of a bad situation. It can also be used offensively. You can move
+    up towards the enemy and then Order: Retreat them closer to you and the
+    enemy.
 
-    Tag Rotation is useful in chokepoints. Let your first ally make attacks, then
-    tag rotate to let your second melee fighter make their attacks. It can also be
-    used when a weaker ally is about to be attacked to swap positions with a tank.
+    Tag Rotation is useful in chokepoints. Let your first ally make attacks,
+    then tag rotate to let your second melee fighter make their attacks. It can
+    also be used when a weaker ally is about to be attacked to swap positions
+    with a tank.
 
-    Take Cover! is used in long range shootoffs. Turning your low cover into high
-    cover will give your allies an edge in ranged battles.
+    Take Cover! is used in long range shootoffs. Turning your low cover into
+    high cover will give your allies an edge in ranged battles.
 
-    Attack in Detail is used against boss type enemies. The primary benefit is the
-    +1 damage all your allies get against the target. It''s more useful if your allies
-    use light attacks, due to more attacks gaining a benefit from the +1. It also
-    is more useful the more allies you have. When you only have 2 allies with you,
-    the benefit of this ability might not be high enough vs just firing an attack
-    yourself.'
+    Attack in Detail is used against boss type enemies. The primary benefit is
+    the +1 damage all your allies get against the target. It's more useful if
+    your allies use light attacks, due to more attacks gaining a benefit from
+    the +1. It also is more useful the more allies you have. When you only have
+    2 allies with you, the benefit of this ability might not be high enough vs
+    just firing an attack yourself.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Scholar of Tactics
-  - level: 2
-    benefits:
-    - type: ability
-      value: Tag Rotation
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: 'Order: Retreat'
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-      - attribute: Awareness
-        value: 1
-      - attribute: Cunning
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: 'Stratagem: Lightning'
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Agility
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Attack in Detail
+    - level: 1
+      benefits:
+        - type: ability
+          value: Scholar of Tactics
+    - level: 2
+      benefits:
+        - type: ability
+          value: Tag Rotation
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: 'Order: Retreat'
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+            - attribute: Awareness
+              value: 1
+            - attribute: Cunning
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: 'Stratagem: Lightning'
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Agility
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Attack in Detail
   abilities:
-  - id: scholar_of_tactics
-    name: Scholar of Tactics
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: tag_rotation
-    name: Tag Rotation
-    type: passive
-    keywords: []
-    range: Two ally units, or yourself and an ally unit  that are adjacent to each
-      other that you can see.
-    description: The target willing allies, or yourself and a target willing ally
-      switch places.  This movement does not trigger any attacks of opportunity.  You
-      cannot use this if it causes an ally unit to occupy an invalid space. You may
-      use either AP or RP for this ability.
-    costs:
-      ap: 1
-      rp: 1
-  - id: order__retreat
-    name: 'Order: Retreat'
-    type: passive
-    keywords: []
-    range: 60ft
-    description: You order one willing allied unit to retreat, moving up to their
-      Speed. All movement must be made towards you, and does not provoke attacks of
-      opportunity.
-    costs:
-      ap: 1
-  - id: stratagem__lightning
-    name: 'Stratagem: Lightning'
-    type: passive
-    keywords:
-    - Encounter Start
-    range: All allies in sight, including yourself.
-    description: All allied units (including yourself) gain +1 to Initiative and may
-      immediately move up to their Speed.
-  - id: attack_in_detail
-    name: Attack in Detail
-    type: passive
-    keywords: []
-    range: 120ft
-    description: You target one enemy unit. All allied units (including yourself)
-      gain a +1 Damage Bonus when that enemy unit is the target of an attack until
-      the start of your next turn. In addition, all allied units gain +5 Movement
-      Speed when moving towards that enemy unit.
-    costs:
-      ap: 2
+    - id: scholar_of_tactics
+      name: Scholar of Tactics
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: tag_rotation
+      name: Tag Rotation
+      type: passive
+      keywords: []
+      range: >-
+        Two ally units, or yourself and an ally unit  that are adjacent to each
+        other that you can see.
+      description: >-
+        The target willing allies, or yourself and a target willing ally switch
+        places.  This movement does not trigger any attacks of opportunity.  You
+        cannot use this if it causes an ally unit to occupy an invalid space.
+        You may use either AP or RP for this ability.
+      costs:
+        ap: 1
+        rp: 1
+    - id: order__retreat
+      name: 'Order: Retreat'
+      type: passive
+      keywords: []
+      range: 60ft
+      description: >-
+        You order one willing allied unit to retreat, moving up to their Speed.
+        All movement must be made towards you, and does not provoke attacks of
+        opportunity.
+      costs:
+        ap: 1
+    - id: stratagem__lightning
+      name: 'Stratagem: Lightning'
+      type: passive
+      keywords:
+        - Encounter Start
+      range: All allies in sight, including yourself.
+      description: >-
+        All allied units (including yourself) gain +1 to Initiative and may
+        immediately move up to their Speed.
+    - id: attack_in_detail
+      name: Attack in Detail
+      type: passive
+      keywords: []
+      range: 120ft
+      description: >-
+        You target one enemy unit. All allied units (including yourself) gain a
+        +1 Damage Bonus when that enemy unit is the target of an attack until
+        the start of your next turn. In addition, all allied units gain +5
+        Movement Speed when moving towards that enemy unit.
+      costs:
+        ap: 2

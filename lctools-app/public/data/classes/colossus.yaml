@@ -5,151 +5,159 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: Controller
-  image_url: https://cdn.angelssword.com/ttrpg/assets/62c2521d-c3fc-46f8-8c75-409559d274c5-Colossus_1_raw.sm.webp
+  image_url: /images/classes/Colossus.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Any tier 2 class mastered. Fighter mastered.
+      - type: text
+        description: Any tier 2 class mastered. Fighter mastered.
   description: A warrior that fights with two heavy weapons to crush their enemies.
-  guide: 'A colossus wants to use heavy weapons and Titan''s Grip means that there
-    is very little reason not to do so. They can use Mighty Leap get into range of
-    an enemy and disrupt all enemies around the target, allowing the Colossus to engage
-    into groups of enemies without severe risk. You can also jump to an empty spot
-    if your goal is just to land an AoE unbalanced debuff.
+  guide: >-
+    A colossus wants to use heavy weapons and Titan's Grip means that there is
+    very little reason not to do so. They can use Mighty Leap get into range of
+    an enemy and disrupt all enemies around the target, allowing the Colossus to
+    engage into groups of enemies without severe risk. You can also jump to an
+    empty spot if your goal is just to land an AoE unbalanced debuff.
 
-    Double Slam is two hit combo of which every hit can inflict a debuff on the enemy.
-    You can combo it after apply Unbalanced with mighty leap for a double chance to
-    knock someone prone.
+    Double Slam is two hit combo of which every hit can inflict a debuff on the
+    enemy. You can combo it after apply Unbalanced with mighty leap for a double
+    chance to knock someone prone.
 
-    Two Sword Crush is a powerful ability that lets you push past the guard of an
-    enemy. Slam and Double Slam both only apply their effects on damage and are light
-    attack, making an enemy likely to Block against it. If their guard isn''t super
-    high, you can then use Two Sword Crush to do more damage than their Block and
-    apply the effect.
+    Two Sword Crush is a powerful ability that lets you push past the guard of
+    an enemy. Slam and Double Slam both only apply their effects on damage and
+    are light attack, making an enemy likely to Block against it. If their guard
+    isn't super high, you can then use Two Sword Crush to do more damage than
+    their Block and apply the effect.
 
-    Climax Art: Titan''s Blade is a powerful AoE attack that will annihilate people
-    that cannot avoid the initial strike. Can be used as a finisher, but also an opening
-    move to immediately burn some RP from enemies if they line up for you.'
+    Climax Art: Titan's Blade is a powerful AoE attack that will annihilate
+    people that cannot avoid the initial strike. Can be used as a finisher, but
+    also an opening move to immediately burn some RP from enemies if they line
+    up for you.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Titan's Grip
-  - level: 2
-    benefits:
-    - type: ability
-      value: Mighty Leap
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Double Slam
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Two Sword Crush
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Climax Art: Titan Blade'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Titan's Grip
+    - level: 2
+      benefits:
+        - type: ability
+          value: Mighty Leap
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Double Slam
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Two Sword Crush
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Climax Art: Titan Blade'
   abilities:
-  - id: titan_s_grip
-    name: Titan's Grip
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: mighty_leap
-    name: Mighty Leap
-    type: passive
-    keywords:
-    - Unbalanced
-    range: 20ft
-    description: 'You jump to a target within range and may make a Light attack against
-      them. All enemies within 5ft of the target must make a save or become
+    - id: titan_s_grip
+      name: Titan's Grip
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: mighty_leap
+      name: Mighty Leap
+      type: passive
+      keywords:
+        - Unbalanced
+      range: 20ft
+      description: >-
+        You jump to a target within range and may make a Light attack against
+        them. All enemies within 5ft of the target must make a save or become
 
-      Unbalanced
+        Unbalanced
 
-      .'
-    requirements:
-    - type: text
-      description: Heavy melee weapons only.
-    costs:
-      mana: 1
-      ap: 2
-  - id: double_slam
-    name: Double Slam
-    type: passive
-    keywords:
-    - Unbalanced
-    range: Melee Weapon Range
-    description: 'You may make 2 Light attacks against the target. On damage of either
-      hit, the target becomes
+        .
+      requirements:
+        - type: text
+          description: Heavy melee weapons only.
+      costs:
+        mana: 1
+        ap: 2
+    - id: double_slam
+      name: Double Slam
+      type: passive
+      keywords:
+        - Unbalanced
+      range: Melee Weapon Range
+      description: >-
+        You may make 2 Light attacks against the target. On damage of either
+        hit, the target becomes
 
-      Unbalanced
+        Unbalanced
 
-      . If the target is already unbalanced, they are knocked prone.
+        . If the target is already unbalanced, they are knocked prone.
 
-      If you are wielding only 1 Heavy weapon, the AP cost, Mana cost and number of
-      attacks is reduced to 1.'
-    requirements:
-    - type: text
-      description: Heavy weapons only
-    costs:
-      mana: 2
-      ap: 2
-  - id: two_sword_crush
-    name: Two Sword Crush
-    type: passive
-    keywords: []
-    range: Melee Weapon Range
-    description: You may add your Light damage to the attack.
-    requirements:
-    - type: text
-      description: Can be used after hitting an attack with a Heavy melee weapon.
-        Must be dual wielding.
-    costs:
-      mana: 2
-      rp: 1
-  - id: climax_art__titan_blade
-    name: 'Climax Art: Titan Blade'
-    type: passive
-    keywords:
-    - Climax Art
-    - Sure Hit
-    - Full Pierce
-    range: 40ft
-    description: 'You greatly increase the size and weight of your weapons, then slam
-      them down in a direction. You make a melee Heavy attack against all enemies
-      in a 15ft wide line up to the range. On damage, a target is knocked prone.
+        If you are wielding only 1 Heavy weapon, the AP cost, Mana cost and
+        number of attacks is reduced to 1.
+      requirements:
+        - type: text
+          description: Heavy weapons only
+      costs:
+        mana: 2
+        ap: 2
+    - id: two_sword_crush
+      name: Two Sword Crush
+      type: passive
+      keywords: []
+      range: Melee Weapon Range
+      description: You may add your Light damage to the attack.
+      requirements:
+        - type: text
+          description: >-
+            Can be used after hitting an attack with a Heavy melee weapon. Must
+            be dual wielding.
+      costs:
+        mana: 2
+        rp: 1
+    - id: climax_art__titan_blade
+      name: 'Climax Art: Titan Blade'
+      type: passive
+      keywords:
+        - Climax Art
+        - Sure Hit
+        - Full Pierce
+      range: 40ft
+      description: >-
+        You greatly increase the size and weight of your weapons, then slam them
+        down in a direction. You make a melee Heavy attack against all enemies
+        in a 15ft wide line up to the range. On damage, a target is knocked
+        prone.
 
-      After the initial hit, a shockwave follows. You make another Heavy attack against
-      any enemy still in the original line’s range. This second attack has the Sure
-      Hit and Full Pierce qualities against a prone target.'
-    requirements:
-    - type: text
-      description: Heavy melee weapons only.
-    costs:
-      mana: 4
-      ap: 2
+        After the initial hit, a shockwave follows. You make another Heavy
+        attack against any enemy still in the original line’s range. This second
+        attack has the Sure Hit and Full Pierce qualities against a prone
+        target.
+      requirements:
+        - type: text
+          description: Heavy melee weapons only.
+      costs:
+        mana: 4
+        ap: 2

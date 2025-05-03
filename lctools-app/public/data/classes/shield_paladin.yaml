@@ -5,146 +5,155 @@ class:
   difficulty: 2
   main_role: Defender
   secondary_role: Support
-  image_url: https://cdn.angelssword.com/ttrpg/assets/02ca3b00-c94f-4a5e-91d8-84952f8c25f9-Shield_Paladin_Clean.sm.webp
+  image_url: /images/classes/Shield_Paladin.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Human, proficient with shields and medium armor.
-  description: Paladins are powerful warriors who receive their powers from their
-    god. Shield paladins are frontline defenders and healers who can keep their weaker
-    allies safe.
-  guide: 'The shield paladin is a tank that focuses on blocking and temporary HP.
+      - type: text
+        description: Human, proficient with shields and medium armor.
+  description: >-
+    Paladins are powerful warriors who receive their powers from their god.
+    Shield paladins are frontline defenders and healers who can keep their
+    weaker allies safe.
+  guide: >-
+    The shield paladin is a tank that focuses on blocking and temporary HP.
 
-    Through their Aura of Protection, they allow their allies to block against attacks
-    even if their Block is normally too low to be usable. This does cost mana and
-    it requires your ally to block, so communication with your allies is key.
+    Through their Aura of Protection, they allow their allies to block against
+    attacks even if their Block is normally too low to be usable. This does cost
+    mana and it requires your ally to block, so communication with your allies
+    is key.
 
-    With Holy Shield, you can convert AP into defense, gaining both a high Block potentially
-    allowing you to block even heavy attacks and a decent check of temporary HP. You
-    do give up damage by using too much AP on this, so it is not always the best option
-    to dump all your AP into it.
+    With Holy Shield, you can convert AP into defense, gaining both a high Block
+    potentially allowing you to block even heavy attacks and a decent check of
+    temporary HP. You do give up damage by using too much AP on this, so it is
+    not always the best option to dump all your AP into it.
 
-    Divine Smite is a more offensive way to gain temporary hit points. It does require
-    landing the heavy attack, but it can be used both on yourself or an ally.
+    Divine Smite is a more offensive way to gain temporary hit points. It does
+    require landing the heavy attack, but it can be used both on yourself or an
+    ally.
 
-    Shield paladins can also heal themselves or ally through their Lay on Hands ability.
-    It''s efficient both mana and AP wise, with the only drawback being that it only
-    has a touch range. It does not provoke attacks of opportunity however, so you
-    don''t need to worry about disengaging from the fight before healing.'
+    Shield paladins can also heal themselves or ally through their Lay on Hands
+    ability. It's efficient both mana and AP wise, with the only drawback being
+    that it only has a touch range. It does not provoke attacks of opportunity
+    however, so you don't need to worry about disengaging from the fight before
+    healing.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Holy Weapon
-  - level: 2
-    benefits:
-    - type: ability
-      value: Lay on Hands
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Aura of Protection
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-      - attribute: Awareness
-        value: 1
-      - attribute: Presence
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Holy Shield
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Divine Smite II
+    - level: 1
+      benefits:
+        - type: ability
+          value: Holy Weapon
+    - level: 2
+      benefits:
+        - type: ability
+          value: Lay on Hands
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Aura of Protection
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+            - attribute: Awareness
+              value: 1
+            - attribute: Presence
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Holy Shield
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Divine Smite II
   abilities:
-  - id: holy_weapon
-    name: Holy Weapon
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: lay_on_hands
-    name: Lay on Hands
-    type: passive
-    keywords:
-    - Healing
-    - Overcharge
-    range: Touch
-    description: 'You Heal the target for 3 + Power.
+    - id: holy_weapon
+      name: Holy Weapon
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: lay_on_hands
+      name: Lay on Hands
+      type: passive
+      keywords:
+        - Healing
+        - Overcharge
+      range: Touch
+      description: >-
+        You Heal the target for 3 + Power.
 
-      Overcharge:
+        Overcharge:
 
-      You may spend an additional mana to remove a negative effect from the target.
-      Injuries and Mortal Wounds cannot be removed with this.'
-    costs:
-      mana: 1
-      ap: 1
-  - id: aura_of_protection
-    name: Aura of Protection
-    type: passive
-    keywords:
-    - Aura
-    range: Self
-    description: You create a 30ft radius Aura of Protection around yourself. While
-      this aura is active, when an ally within 30ft of you takes the Block action
-      you may spend 1 Mana to replace their Block Value with your own. In addition,
-      any abilities with the Aid keyword have their range increased by 20ft while
-      inside the Aura.
-    costs:
-      ap: 0
-  - id: holy_shield
-    name: Holy Shield
-    type: passive
-    keywords:
-    - Overcharge
-    range: Self
-    description: 'Your next Block action gains a +2 guard bonus (not doubled again).
-      If you reduce the damage you take with your next Block action to 0, you gain
-      2 temporary HP.
+        You may spend an additional mana to remove a negative effect from the
+        target. Injuries and Mortal Wounds cannot be removed with this.
+      costs:
+        mana: 1
+        ap: 1
+    - id: aura_of_protection
+      name: Aura of Protection
+      type: passive
+      keywords:
+        - Aura
+      range: Self
+      description: >-
+        You create a 30ft radius Aura of Protection around yourself. While this
+        aura is active, when an ally within 30ft of you takes the Block action
+        you may spend 1 Mana to replace their Block Value with your own. In
+        addition, any abilities with the Aid keyword have their range increased
+        by 20ft while inside the Aura.
+      costs:
+        ap: 0
+    - id: holy_shield
+      name: Holy Shield
+      type: passive
+      keywords:
+        - Overcharge
+      range: Self
+      description: >-
+        Your next Block action gains a +2 guard bonus (not doubled again). If
+        you reduce the damage you take with your next Block action to 0, you
+        gain 2 temporary HP.
 
-      Overcharge:
+        Overcharge:
 
-      You may spend up to 3 additional AP on this ability. Each extra AP spent increases
-      the Guard bonus and temporary HP gained by 2.'
-    requirements:
-    - type: text
-      description: Must be using a shield.
-    costs:
-      ap: 1
-  - id: divine_smite_ii
-    name: Divine Smite II
-    type: passive
-    keywords: []
-    range: Melee Weapon Range
-    description: You may make a Heavy Attack that deals Holy Damage against the target.
-      On damage, you may give yourself or an ally within 30ft temporary HP equal your
-      Power.
-    costs:
-      mana: 1
-      ap: 2
+        You may spend up to 3 additional AP on this ability. Each extra AP spent
+        increases the Guard bonus and temporary HP gained by 2.
+      requirements:
+        - type: text
+          description: Must be using a shield.
+      costs:
+        ap: 1
+    - id: divine_smite_ii
+      name: Divine Smite II
+      type: passive
+      keywords: []
+      range: Melee Weapon Range
+      description: >-
+        You may make a Heavy Attack that deals Holy Damage against the target.
+        On damage, you may give yourself or an ally within 30ft temporary HP
+        equal your Power.
+      costs:
+        mana: 1
+        ap: 2

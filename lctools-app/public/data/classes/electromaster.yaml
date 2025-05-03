@@ -5,155 +5,164 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: Controller
-  image_url: https://cdn.angelssword.com/ttrpg/assets/fdcbd5fd-758c-45b6-a2d2-68d2c5f09884-Electromancer_Clean.sm.webp
+  image_url: /images/classes/Electromaster.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Electromancer mastered.
+      - type: text
+        description: Electromancer mastered.
   description: Masters of lightning.
-  guide: 'Electromaster builds on the Electromancer, focusing around dealing damage
+  guide: >-
+    Electromaster builds on the Electromancer, focusing around dealing damage
     and controlling the battlefield with their static.
 
-    Lightning Strikes Twice punishes enemies who don’t position themselves properly
-    by transferring any static to the targets they hit. Against clusters of enemies,
-    this can chain into many applications.
+    Lightning Strikes Twice punishes enemies who don’t position themselves
+    properly by transferring any static to the targets they hit. Against
+    clusters of enemies, this can chain into many applications.
 
-    With Static Discharge, they can force this chain reaction even easier. Applying
-    static on an enemy and then instantly discharging it gets the ball rolling quickly.
+    With Static Discharge, they can force this chain reaction even easier.
+    Applying static on an enemy and then instantly discharging it gets the ball
+    rolling quickly.
 
-    Once the static is properly applied, they can begin to do AoE damage through thunderstorm.
-    The damage is not particularly high, but it can hit many enemies. Note that it
-    cannot be used indoors, making Electromasters more suited for outside combat.
+    Once the static is properly applied, they can begin to do AoE damage through
+    thunderstorm. The damage is not particularly high, but it can hit many
+    enemies. Note that it cannot be used indoors, making Electromasters more
+    suited for outside combat.
 
-    Against bosses or other scenarios where single target damage is required, they
-    can use Static Overload. It requires static to be applied, but it does decent
-    damage and dazes the target.
+    Against bosses or other scenarios where single target damage is required,
+    they can use Static Overload. It requires static to be applied, but it does
+    decent damage and dazes the target.
 
-    When they activate their secret art Lightning Field, they become almost unapproachable
-    for grunt level enemies. The constant unavoidable damage will shred through them
-    in only a couple of turns.'
+    When they activate their secret art Lightning Field, they become almost
+    unapproachable for grunt level enemies. The constant unavoidable damage will
+    shred through them in only a couple of turns.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Lightning Strikes Twice
-  - level: 2
-    benefits:
-    - type: ability
-      value: Thunderstorm
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Static Overload
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Static Discharge
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Lightning Field'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Lightning Strikes Twice
+    - level: 2
+      benefits:
+        - type: ability
+          value: Thunderstorm
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Static Overload
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Static Discharge
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Lightning Field'
   abilities:
-  - id: lightning_strikes_twice
-    name: Lightning Strikes Twice
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: thunderstorm
-    name: Thunderstorm
-    type: passive
-    keywords:
-    - Lightning
-    - Spell
-    range: 40ft
-    description: You may make a Light Attack that deals Wind(Lightning) damage against
-      all enemies in range. As the attack comes from the sky, any cover is calculated
-      from above the target rather than from your path to the target.
-    costs:
-      ap: 4
-  - id: static_overload
-    name: Static Overload
-    type: passive
-    keywords:
-    - Daze
-    - Lightning
-    - Spell
-    range: 60ft
-    description: 'A single target in range must make a save or immediately take Wind(Lightning)
-      damage equal to their Static and become inflicted with
+    - id: lightning_strikes_twice
+      name: Lightning Strikes Twice
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: thunderstorm
+      name: Thunderstorm
+      type: passive
+      keywords:
+        - Lightning
+        - Spell
+      range: 40ft
+      description: >-
+        You may make a Light Attack that deals Wind(Lightning) damage against
+        all enemies in range. As the attack comes from the sky, any cover is
+        calculated from above the target rather than from your path to the
+        target.
+      costs:
+        ap: 4
+    - id: static_overload
+      name: Static Overload
+      type: passive
+      keywords:
+        - Daze
+        - Lightning
+        - Spell
+      range: 60ft
+      description: >-
+        A single target in range must make a save or immediately take
+        Wind(Lightning) damage equal to their Static and become inflicted with
 
-      Daze
+        Daze
 
-      .'
-    requirements:
-    - type: text
-      description: The target must be afflicted with Static you applied.
-    costs:
-      ap: 2
-  - id: static_discharge
-    name: Static Discharge
-    type: passive
-    keywords:
-    - Lightning
-    - Spell
-    range: 40ft
-    description: 'A single target in range must make a save or the Static stacks on
-      them immediately discharge, triggering the Static effect as though it was the
-      end of the target’s turn.
+        .
+      requirements:
+        - type: text
+          description: The target must be afflicted with Static you applied.
+      costs:
+        ap: 2
+    - id: static_discharge
+      name: Static Discharge
+      type: passive
+      keywords:
+        - Lightning
+        - Spell
+      range: 40ft
+      description: >-
+        A single target in range must make a save or the Static stacks on them
+        immediately discharge, triggering the Static effect as though it was the
+        end of the target’s turn.
 
-      Whether the target succeeds at or fails the save, they lose all Static charges.'
-    requirements:
-    - type: text
-      description: The target must be afflicted with Static you applied.
-    costs:
-      mana: 2
-      ap: 2
-  - id: secret_art__lightning_field
-    name: 'Secret Art: Lightning Field'
-    type: combat_action
-    keywords:
-    - Lightning
-    - Secret Art
-    - Spell
-    - Upkeep
-    range: 30ft
-    description: 'You conjure a statically charged field around you, applying Static
-      X where X equals your Power x 2 to all enemies within 30ft of you. Enemies already
-      afflicted by Static immediately take damage equal to half the static value.
-      While within your Lightning Field, the Static on enemies is not removed at the
-      end of their turn.
+        Whether the target succeeds at or fails the save, they lose all Static
+        charges.
+      requirements:
+        - type: text
+          description: The target must be afflicted with Static you applied.
+      costs:
+        mana: 2
+        ap: 2
+    - id: secret_art__lightning_field
+      name: 'Secret Art: Lightning Field'
+      type: combat_action
+      keywords:
+        - Lightning
+        - Secret Art
+        - Spell
+        - Upkeep
+      range: 30ft
+      description: >-
+        You conjure a statically charged field around you, applying Static X
+        where X equals your Power x 2 to all enemies within 30ft of you. Enemies
+        already afflicted by Static immediately take damage equal to half the
+        static value. While within your Lightning Field, the Static on enemies
+        is not removed at the end of their turn.
 
-      This field lasts until the end of your next turn.
+        This field lasts until the end of your next turn.
 
-      Upkeep:
+        Upkeep:
 
-      You may pay 1 Mana at the start of your turn to repeat the initial effect and
-      extend the duration of the field by 1 turn.'
-    costs:
-      mana: 3
-      ap: 2
+        You may pay 1 Mana at the start of your turn to repeat the initial
+        effect and extend the duration of the field by 1 turn.
+      costs:
+        mana: 3
+        ap: 2

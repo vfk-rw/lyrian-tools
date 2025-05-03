@@ -5,187 +5,197 @@ class:
   difficulty: 2
   main_role: Utility
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/f63966b8-ae14-4cfb-825f-7a911ee2f026-Cavalier_-_Raw.sm.webp
+  image_url: /images/classes/Cavalier.webp
   requirements:
     type: none
-  description: 'The origin of mounted combat and cavalry specifically has been debated
-    among historians since nomadic riders hunted game across the Axian Plains. Cavalry,
-    as it’s recognizably known in a more modern sense, was first organized by humans,
-    utilizing their more advanced techniques of animal husbandry to domesticate and
-    breed horses into mounts and beasts of burden. With their reliance on various
-    animals for labor, humanity had a head start and also had a distinct need for
-    increased mobility on the battlefield. With open plains and rolling hills making
-    up a generous portion of their homeland, humans were at a distinct disadvantage
-    in mobility to the Chimera of Northi.
+  description: >-
+    The origin of mounted combat and cavalry specifically has been debated among
+    historians since nomadic riders hunted game across the Axian Plains.
+    Cavalry, as it’s recognizably known in a more modern sense, was first
+    organized by humans, utilizing their more advanced techniques of animal
+    husbandry to domesticate and breed horses into mounts and beasts of burden.
+    With their reliance on various animals for labor, humanity had a head start
+    and also had a distinct need for increased mobility on the battlefield. With
+    open plains and rolling hills making up a generous portion of their
+    homeland, humans were at a distinct disadvantage in mobility to the Chimera
+    of Northi.
 
-    In the long conflicts before the advent of Paladins, Westrian cavalry stood as
-    the only near parity force humans could deploy against Northi and Sorthen. Light
-    scouts and mounted archers were the primary uses of cavalry at the time to both
-    maximize the strengths of mounted soldiers and to preserve both the precious skills
-    of the riders and their trained mounts. While there have been many techniques
-    surrounding cavalry over the centuries, modern understanding has codified the
-    most basic of elements into the art of the Cavalier.
+    In the long conflicts before the advent of Paladins, Westrian cavalry stood
+    as the only near parity force humans could deploy against Northi and
+    Sorthen. Light scouts and mounted archers were the primary uses of cavalry
+    at the time to both maximize the strengths of mounted soldiers and to
+    preserve both the precious skills of the riders and their trained mounts.
+    While there have been many techniques surrounding cavalry over the
+    centuries, modern understanding has codified the most basic of elements into
+    the art of the Cavalier.
 
-    Today, the use of cavalry has spread to every corner of Lyr. No matter the type
-    of mount, be it horse, wyvern, or even the humble dragonfly, the Cavalier lays
-    the foundation for all cavalry techniques.'
-  guide: 'The cavalier is a mounted combatant that excels in wide open plains. Being
-    a tier 1 class, you get some proficiencies with Lance being the stand out one.
-    It''s a speciality weapon that can only be used while mounted, but it''s effectively
-    a polearm with a potential for increased damage. Make sure you always carry a
-    backup weapon in case you are forced to fight dismounted.
+    Today, the use of cavalry has spread to every corner of Lyr. No matter the
+    type of mount, be it horse, wyvern, or even the humble dragonfly, the
+    Cavalier lays the foundation for all cavalry techniques.
+  guide: >-
+    The cavalier is a mounted combatant that excels in wide open plains. Being a
+    tier 1 class, you get some proficiencies with Lance being the stand out one.
+    It's a speciality weapon that can only be used while mounted, but it's
+    effectively a polearm with a potential for increased damage. Make sure you
+    always carry a backup weapon in case you are forced to fight dismounted.
 
-    Because mounts are such an important part of the cavalier, your mount choice will
-    matter a lot. A horse is the most common choice (or a pony for smaller races).
-    It is the fastest land mount, but it can only move in a straight line and has
-    little other special qualities. The boar is the optimal choice for smaller races,
-    as it will buff their trample and make it work against medium creatures. Wolf
-    is the slowest of the three, but it is not restricted to line movement and has
-    a special attack it can use. For most cavaliers, the horse is the best choice
-    as it will make it easier to activate your Trample.
+    Because mounts are such an important part of the cavalier, your mount choice
+    will matter a lot. A horse is the most common choice (or a pony for smaller
+    races). It is the fastest land mount, but it can only move in a straight
+    line and has little other special qualities. The boar is the optimal choice
+    for smaller races, as it will buff their trample and make it work against
+    medium creatures. Wolf is the slowest of the three, but it is not restricted
+    to line movement and has a special attack it can use. For most cavaliers,
+    the horse is the best choice as it will make it easier to activate your
+    Trample.
 
-    The core ability of the cavalier is Trample. It requires you to build up some
-    speed by moving, but once you do you can trample a large amount of enemies in
-    a single movement. It''s a sure hit attack that knocks enemies prone, making it
-    extremely punishing if it lands. It does however have some counters to be aware
-    of. First being that you can''t trample enemies that are the same size as you,
-    so large enemies are unaffected. Secondly that the enemy can block your attack
-    to stop it. Attempting a direct charge through the enemy tank may not work out
-    very well.
+    The core ability of the cavalier is Trample. It requires you to build up
+    some speed by moving, but once you do you can trample a large amount of
+    enemies in a single movement. It's a sure hit attack that knocks enemies
+    prone, making it extremely punishing if it lands. It does however have some
+    counters to be aware of. First being that you can't trample enemies that are
+    the same size as you, so large enemies are unaffected. Secondly that the
+    enemy can block your attack to stop it. Attempting a direct charge through
+    the enemy tank may not work out very well.
 
-    To help with hit and run attacks, you get Canter. It must be used immediately
-    after attacking, but it lets you sidestep 10ft which can let you move out of range
-    of the enemy. After your out of range, you can then reposition and prepare for
-    another charge.
+    To help with hit and run attacks, you get Canter. It must be used
+    immediately after attacking, but it lets you sidestep 10ft which can let you
+    move out of range of the enemy. After your out of range, you can then
+    reposition and prepare for another charge.
 
-    Rider & Mount as one is a passive ability that lets you re-direct attacks to you
-    instead of your mount. Mounts are not as durable as you are, so you will want
-    to almost always use this. AoE attacks cannot be re-directed with this, so be
-    careful of those. It also doesn''t work if you''re using a flying mount, so you''ll
-    want to stick with land based ones.
+    Rider & Mount as one is a passive ability that lets you re-direct attacks to
+    you instead of your mount. Mounts are not as durable as you are, so you will
+    want to almost always use this. AoE attacks cannot be re-directed with this,
+    so be careful of those. It also doesn't work if you're using a flying mount,
+    so you'll want to stick with land based ones.
 
-    Horse Whistle is what you can use to get your mount back to you after you''re
-    dismounted. This lets you use other abilities such as Faerie Flash or abilities
-    from other classes to temporarily get off your mount without having to walk back
-    to it.
+    Horse Whistle is what you can use to get your mount back to you after you're
+    dismounted. This lets you use other abilities such as Faerie Flash or
+    abilities from other classes to temporarily get off your mount without
+    having to walk back to it.
 
-    Spirit Jump can be used as an anti-air tool, but it can also be used to help your
-    mount maneuver across difficult terrain such as cliffs or wide pits.'
+    Spirit Jump can be used as an anti-air tool, but it can also be used to help
+    your mount maneuver across difficult terrain such as cliffs or wide pits.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Mounted Basics
-  - level: 2
-    benefits:
-    - type: ability
-      value: Canter
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Horse Whistle
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-      - attribute: Awareness
-        value: 1
-      - attribute: Presence
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Rider & Mount As One
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-      - attribute: Agility
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Trample
+    - level: 1
+      benefits:
+        - type: ability
+          value: Mounted Basics
+    - level: 2
+      benefits:
+        - type: ability
+          value: Canter
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Horse Whistle
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+            - attribute: Awareness
+              value: 1
+            - attribute: Presence
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Rider & Mount As One
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+            - attribute: Agility
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Trample
   abilities:
-  - id: mounted_basics
-    name: Mounted Basics
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: canter
-    name: Canter
-    type: passive
-    keywords:
-    - Sidestep
-    range: Self
-    description: You may Sidestep 10ft.
-    requirements:
-    - type: text
-      description: Must be mounted and can be used immediately after making a weapon
-        attack.
-    costs:
-      mana: 1
-      ap: 0
-  - id: horse_whistle
-    name: Horse Whistle
-    type: passive
-    keywords:
-    - Sidestep
-    range: Sight
-    description: Your mount (the last mount you were riding on this arc) may sidestep
-      up to its speed towards you and it gains Trample (as per the ability, if you
-      have it) for this movement. If this movement moves your mount onto your square,
-      you may mount it for 0 RP.
-    requirements:
-    - type: text
-      description: Must NOT be mounted.
-    costs:
-      mana: 1
-      rp: 0
-  - id: rider___mount_as_one
-    name: Rider & Mount As One
-    type: passive
-    keywords: []
-    range: Self
-    description: While you are mounted and not flying you may re-direct any attack
-      against your mount that does not include you as the target against you. You
-      may still dodge these attacks like normal.
-  - id: trample
-    name: Trample
-    type: passive
-    keywords:
-    - Sure Hit
-    range: Self
-    description: 'You may activate this after moving at least 20ft in continuous movement
-      actions to gain Trample until you stop moving. While under the effects of trample,
-      you don''t provoke attacks of opportunity by moving and you can move into enemies
-      that are at least one size smaller than your mount. An enemy may spend 1 RP
-      to move out of the way to an empty spot within 5ft of them.
+    - id: mounted_basics
+      name: Mounted Basics
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: canter
+      name: Canter
+      type: passive
+      keywords:
+        - Sidestep
+      range: Self
+      description: You may Sidestep 10ft.
+      requirements:
+        - type: text
+          description: >-
+            Must be mounted and can be used immediately after making a weapon
+            attack.
+      costs:
+        mana: 1
+        ap: 0
+    - id: horse_whistle
+      name: Horse Whistle
+      type: passive
+      keywords:
+        - Sidestep
+      range: Sight
+      description: >-
+        Your mount (the last mount you were riding on this arc) may sidestep up
+        to its speed towards you and it gains Trample (as per the ability, if
+        you have it) for this movement. If this movement moves your mount onto
+        your square, you may mount it for 0 RP.
+      requirements:
+        - type: text
+          description: Must NOT be mounted.
+      costs:
+        mana: 1
+        rp: 0
+    - id: rider___mount_as_one
+      name: Rider & Mount As One
+      type: passive
+      keywords: []
+      range: Self
+      description: >-
+        While you are mounted and not flying you may re-direct any attack
+        against your mount that does not include you as the target against you.
+        You may still dodge these attacks like normal.
+    - id: trample
+      name: Trample
+      type: passive
+      keywords:
+        - Sure Hit
+      range: Self
+      description: >-
+        You may activate this after moving at least 20ft in continuous movement
+        actions to gain Trample until you stop moving. While under the effects
+        of trample, you don't provoke attacks of opportunity by moving and you
+        can move into enemies that are at least one size smaller than your
+        mount. An enemy may spend 1 RP to move out of the way to an empty spot
+        within 5ft of them.
 
-      If they don’t move out of the way, you make a Sure Hit Light attack against
-      them with your mount, using your mount’s stats. On damage, you knock them prone
-      into the square you came from and keep moving, occupying the square they were
-      in. Otherwise your movement action ends.'
-    requirements:
-    - type: text
-      description: Must be mounted.
-    costs:
-      rp: 0
+        If they don’t move out of the way, you make a Sure Hit Light attack
+        against them with your mount, using your mount’s stats. On damage, you
+        knock them prone into the square you came from and keep moving,
+        occupying the square they were in. Otherwise your movement action ends.
+      requirements:
+        - type: text
+          description: Must be mounted.
+      costs:
+        rp: 0

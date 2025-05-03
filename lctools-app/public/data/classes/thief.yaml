@@ -5,144 +5,150 @@ class:
   difficulty: 2
   main_role: Utility
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/b8c4f9f2-7476-4858-8d0e-96d2a3d9c9fc-thief.sm.webp
+  image_url: /images/classes/Thief.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Rogue mastered, must possess Decipher Magic ability.
+      - type: text
+        description: Rogue mastered, must possess Decipher Magic ability.
   description: Pickpockets and scallywags.
-  guide: 'The thief is a class that steals things, whether it''s small objects, magic
+  guide: >-
+    The thief is a class that steals things, whether it's small objects, magic
     or a grand robbery.
 
-    Their infiltrate ability lets them sneak into magically guarded places without
-    raising any suspicion.
+    Their infiltrate ability lets them sneak into magically guarded places
+    without raising any suspicion.
 
-    With Quick Getaway, you are able to escape from pursuers when you use it after
-    Feint or Disengage. If used after feint, you can effectively more for 5 AP in
-    1 turn which lets you move faster than the enemy. Even against groups, they will
-    never be able to catch up and attack in the same turn without movement abilities
-    of their own.
+    With Quick Getaway, you are able to escape from pursuers when you use it
+    after Feint or Disengage. If used after feint, you can effectively more for
+    5 AP in 1 turn which lets you move faster than the enemy. Even against
+    groups, they will never be able to catch up and attack in the same turn
+    without movement abilities of their own.
 
-    Fast Hands can also help with escaping, allowing you to open or close doors without
-    using AP on them. It can also just let you draw a weapon or consumable.
+    Fast Hands can also help with escaping, allowing you to open or close doors
+    without using AP on them. It can also just let you draw a weapon or
+    consumable.
 
-    Snatch is a situational ability that makes it impossible for enemies to use consumables
-    against you when you are close to them. If you are able to close in on an enemy
-    before they can draw their weapon, you can even steal that.
+    Snatch is a situational ability that makes it impossible for enemies to use
+    consumables against you when you are close to them. If you are able to close
+    in on an enemy before they can draw their weapon, you can even steal that.
 
-    Spellsteal is another situational ability that lets you steal a buff from the
-    enemy. It removes the buff from the enemy, so even if you can''t use it very well
-    it may still be worth using.'
+    Spellsteal is another situational ability that lets you steal a buff from
+    the enemy. It removes the buff from the enemy, so even if you can't use it
+    very well it may still be worth using.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Infiltrate
-  - level: 2
-    benefits:
-    - type: ability
-      value: Fast Hands
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Snatch
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-      - attribute: Cunning
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Quick Getaway
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Agility
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Spellsteal
+    - level: 1
+      benefits:
+        - type: ability
+          value: Infiltrate
+    - level: 2
+      benefits:
+        - type: ability
+          value: Fast Hands
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Snatch
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+            - attribute: Cunning
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Quick Getaway
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Agility
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Spellsteal
   abilities:
-  - id: infiltrate
-    name: Infiltrate
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: fast_hands
-    name: Fast Hands
-    type: passive
-    keywords:
-    - Quick
-    range: '-'
-    description: You reduce the AP cost of your next Interact with object action this
-      turn by 1.
-    costs:
-      ap: 1
-  - id: snatch
-    name: Snatch
-    type: passive
-    keywords: []
-    range: 5ft
-    description: 'You may use this when a target in range uses the interact with object
-      action. If you can hold the object the target is interacting with in one hand,
-      you steal it from them.
+    - id: infiltrate
+      name: Infiltrate
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: fast_hands
+      name: Fast Hands
+      type: passive
+      keywords:
+        - Quick
+      range: '-'
+      description: >-
+        You reduce the AP cost of your next Interact with object action this
+        turn by 1.
+      costs:
+        ap: 1
+    - id: snatch
+      name: Snatch
+      type: passive
+      keywords: []
+      range: 5ft
+      description: >-
+        You may use this when a target in range uses the interact with object
+        action. If you can hold the object the target is interacting with in one
+        hand, you steal it from them.
 
 
-      Any AP they may have spent on their action is not refunded to them.'
-    requirements:
-    - type: text
-      description: At least 1 hand free.
-    costs:
-      rp: 0
-  - id: quick_getaway
-    name: Quick Getaway
-    type: passive
-    keywords:
-    - Combo
-    range: '-'
-    description: 'You may move as if you had spent 2 AP on the movement action.
+        Any AP they may have spent on their action is not refunded to them.
+      requirements:
+        - type: text
+          description: At least 1 hand free.
+      costs:
+        rp: 0
+    - id: quick_getaway
+      name: Quick Getaway
+      type: passive
+      keywords:
+        - Combo
+      range: '-'
+      description: >-
+        You may move as if you had spent 2 AP on the movement action.
 
-      Combo:
+        Combo:
 
-      If used after Feint or the Disengage action, the AP cost of this is reduced
-      by 2.'
-    costs:
-      ap: 2
-  - id: spellsteal
-    name: Spellsteal
-    type: passive
-    keywords: []
-    range: 5ft
-    description: 'You attempt to steal an effect from the target, removing it from
-      the target and applying it to yourself for the same duration, provided you meet
-      the requirements (if any). You must pay mana equal to the effects original mana
-      cost.
-
-
-      Effects granted through stances and permanent effects cannot be stolen. After
-      stealing an effect, you can’t use this again until the stolen effect has ended.
-      The stolen effect also cannot be re-applied on the target until it has faded
-      from you.
+        If used after Feint or the Disengage action, the AP cost of this is
+        reduced by 2.
+      costs:
+        ap: 2
+    - id: spellsteal
+      name: Spellsteal
+      type: passive
+      keywords: []
+      range: 5ft
+      description: >-
+        You attempt to steal an effect from the target, removing it from the
+        target and applying it to yourself for the same duration, provided you
+        meet the requirements (if any). You must pay mana equal to the effects
+        original mana cost.
 
 
-      You must have seen the effect be applied or otherwise identified an effect before
-      you can steal it.'
-    costs:
-      ap: 2
+        Effects granted through stances and permanent effects cannot be stolen.
+        After stealing an effect, you can’t use this again until the stolen
+        effect has ended. The stolen effect also cannot be re-applied on the
+        target until it has faded from you.
+
+
+        You must have seen the effect be applied or otherwise identified an
+        effect before you can steal it.
+      costs:
+        ap: 2

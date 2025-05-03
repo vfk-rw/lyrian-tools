@@ -5,127 +5,131 @@ class:
   difficulty: 3
   main_role: Utility
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/bcc63219-f401-4e0b-aa92-b9641f9b1fb1-archsage.sm.webp
+  image_url: /images/classes/Archsage.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Sage mastered.
-  description: The Sage is a class that specializes in augmenting the magical abilities
-    of themselves. They are highly skilled in the use of magic enhancement spells
-    and techniques, able to boost the power and effectiveness of other magic used
-    by themselves.
-  guide: 'The archsage brings more utility to the table, further augmenting spells
+      - type: text
+        description: Sage mastered.
+  description: >-
+    The Sage is a class that specializes in augmenting the magical abilities of
+    themselves. They are highly skilled in the use of magic enhancement spells
+    and techniques, able to boost the power and effectiveness of other magic
+    used by themselves.
+  guide: >-
+    The archsage brings more utility to the table, further augmenting spells
     they might have from other classes.
 
-    Persistent spell adds another turn to the duration of a buff or debuff. Most of
-    these have a short duration to begin with, so this can double the duration in
-    a lot of cases.
+    Persistent spell adds another turn to the duration of a buff or debuff. Most
+    of these have a short duration to begin with, so this can double the
+    duration in a lot of cases.
 
-    Battle Cast can be used when pressured by a melee enemy to cast spells without
-    the risk of being attacked. It has a mana cost, so sometimes it may be better
-    to simply retreat.
+    Battle Cast can be used when pressured by a melee enemy to cast spells
+    without the risk of being attacked. It has a mana cost, so sometimes it may
+    be better to simply retreat.
 
-    If the archsage has mana, they can have powerful turns with the use of Presence
-    of Mind. Reducing the ap cost by 2 is effectively the same as getting 2 AP, allowing
-    for a potential 6 AP turn as long as mana lasts.
+    If the archsage has mana, they can have powerful turns with the use of
+    Presence of Mind. Reducing the ap cost by 2 is effectively the same as
+    getting 2 AP, allowing for a potential 6 AP turn as long as mana lasts.
 
-    To help with their mana issues, they have clearcasting. It is hard to find a better
-    use of your encounter start ability than reducing the mana cost by 2.
+    To help with their mana issues, they have clearcasting. It is hard to find a
+    better use of your encounter start ability than reducing the mana cost by 2.
 
-    Finally, they have their Secret Art: Ultimate Spell. It works on AoE spells as
-    well as single target ones and by turning it into true damage you ignore guard
-    as well as damage resistances.'
+    Finally, they have their Secret Art: Ultimate Spell. It works on AoE spells
+    as well as single target ones and by turning it into true damage you ignore
+    guard as well as damage resistances.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Augmented Casting - Persistent Spell
-  - level: 2
-    benefits:
-    - type: ability
-      value: Battle Cast
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Clearcasting
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Presence of Mind
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-      - attribute: Agility
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Ultimate Spell'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Augmented Casting - Persistent Spell
+    - level: 2
+      benefits:
+        - type: ability
+          value: Battle Cast
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Clearcasting
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Presence of Mind
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+            - attribute: Agility
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Ultimate Spell'
   abilities:
-  - id: augmented_casting_-_persistent_spell
-    name: Augmented Casting - Persistent Spell
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: battle_cast
-    name: Battle Cast
-    type: passive
-    keywords: []
-    range: The next Spell you cast before the end of your turn does not provoke an
-      attack of opportunity from being casted in Melee Range of an opponent.
-    description: The next Spell you cast before the end of your turn does not provoke
-      an attack of opportunity from being casted in Melee Range of an opponent.
-    costs:
-      mana: 1
-      ap: 0
-  - id: clearcasting
-    name: Clearcasting
-    type: passive
-    keywords:
-    - Encounter Start
-    range: Self
-    description: The next Spell you cast this encounter has its mana cost reduced
-      by 2.
-  - id: presence_of_mind
-    name: Presence of Mind
-    type: passive
-    keywords: []
-    range: Self
-    description: You reduce the AP cost of your next Spell this turn by 2 AP.
-    costs:
-      mana: 3
-      ap: 2
-  - id: secret_art__ultimate_spell
-    name: 'Secret Art: Ultimate Spell'
-    type: passive
-    keywords: []
-    range: Self
-    description: The next Spell you cast this turn with an AP cost lower than 5 deals
-      true damage.
-    costs:
-      mana: 4
-      ap: 5
+    - id: augmented_casting_-_persistent_spell
+      name: Augmented Casting - Persistent Spell
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: battle_cast
+      name: Battle Cast
+      type: passive
+      keywords: []
+      range: >-
+        The next Spell you cast before the end of your turn does not provoke an
+        attack of opportunity from being casted in Melee Range of an opponent.
+      description: >-
+        The next Spell you cast before the end of your turn does not provoke an
+        attack of opportunity from being casted in Melee Range of an opponent.
+      costs:
+        mana: 1
+        ap: 0
+    - id: clearcasting
+      name: Clearcasting
+      type: passive
+      keywords:
+        - Encounter Start
+      range: Self
+      description: The next Spell you cast this encounter has its mana cost reduced by 2.
+    - id: presence_of_mind
+      name: Presence of Mind
+      type: passive
+      keywords: []
+      range: Self
+      description: You reduce the AP cost of your next Spell this turn by 2 AP.
+      costs:
+        mana: 3
+        ap: 2
+    - id: secret_art__ultimate_spell
+      name: 'Secret Art: Ultimate Spell'
+      type: passive
+      keywords: []
+      range: Self
+      description: >-
+        The next Spell you cast this turn with an AP cost lower than 5 deals
+        true damage.
+      costs:
+        mana: 4
+        ap: 5

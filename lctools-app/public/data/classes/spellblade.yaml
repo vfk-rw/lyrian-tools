@@ -5,147 +5,136 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/581256bb-a941-4f0e-9062-e4b5c66462f8-spellblade.sm.webp
+  image_url: /images/classes/Spellblade.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Have at least 1 spell, Have one element mastered, Be proficient
-        in 1 weapon.
+      - type: text
+        description: >-
+          Have at least 1 spell, Have one element mastered, Be proficient in 1
+          weapon.
   description: Spellblades are melee fighters that enchant their weapons with magic.
-  guide: 'The spellblade is a melee class that relies on its versatility of its weapon
+  guide: >-
+    The spellblade is a melee class that relies on its versatility of its weapon
     enchantments to gain an edge in battle.
 
-    Imbue Weapon allows you to always do damage that an enemy is weak to if you''re
-    aware of it. Greater Imbue Weapon is similar, paying 1 mana cost for +1 power
-    bonus. Most of the time, if you are planning to stick with 1 enchantment, you
-    will want to use the Greater version. In fights where you are constantly swapping
-    your enchantment, it may be more worth to stick with the normal version.
+    Imbue Weapon allows you to always do damage that an enemy is weak to if
+    you're aware of it. Greater Imbue Weapon is similar, paying 1 mana cost for
+    +1 power bonus. Most of the time, if you are planning to stick with 1
+    enchantment, you will want to use the Greater version. In fights where you
+    are constantly swapping your enchantment, it may be more worth to stick with
+    the normal version.
 
-    Draw Elements is what allows the spellblade to pick whatever element they want.
-    Outside of elemental damage bonuses, this is mostly relevant for Elemental Strike.
+    Draw Elements is what allows the spellblade to pick whatever element they
+    want. Outside of elemental damage bonuses, this is mostly relevant for
+    Elemental Strike.
 
-    Elemental Strike is a light attack that can apply a whole variety of effects,
-    based on what your weapon is currently enchanted with. Which one of these is the
-    most effective depends heavily on the situation.
+    Elemental Strike is a light attack that can apply a whole variety of
+    effects, based on what your weapon is currently enchanted with. Which one of
+    these is the most effective depends heavily on the situation.
 
-    Spellstrike lets you use attack magic despite being in melee combat. It is effectively
-    the same as casting a spell without provoking attacks of opportunity, but since
-    it is applied through your weapon it does benefit from Greater Imbue Weapon or
-    similar weapon related buffs.'
+    Spellstrike lets you use attack magic despite being in melee combat. It is
+    effectively the same as casting a spell without provoking attacks of
+    opportunity, but since it is applied through your weapon it does benefit
+    from Greater Imbue Weapon or similar weapon related buffs.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Draw Elements
-  - level: 2
-    benefits:
-    - type: ability
-      value: Imbue Weapon
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Elemental Strike
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Fitness
-        value: 1
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Greater Imbue Weapon
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Focus
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Spellstrike
+    - level: 1
+      benefits:
+        - type: ability
+          value: Draw Elements
+    - level: 2
+      benefits:
+        - type: ability
+          value: Imbue Weapon
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Elemental Strike
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Fitness
+              value: 1
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Greater Imbue Weapon
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Focus
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Spellstrike
   abilities:
-  - id: draw_elements
-    name: Draw Elements
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: imbue_weapon
-    name: Imbue Weapon
-    type: passive
-    keywords:
-    - Enchantment
-    range: Self
-    description: 'You enchant your melee weapon with an element you mastered. Your
-      weapon now deals the chosen element’s damage instead of its normal damage.
+    - id: draw_elements
+      name: Draw Elements
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: imbue_weapon
+      name: Imbue Weapon
+      type: passive
+      keywords:
+        - Enchantment
+      range: Self
+      description: >-
+        You enchant your melee weapon with an element you mastered. Your weapon
+        now deals the chosen element’s damage instead of its normal damage.
 
 
-      If you are not holding the enchanted weapon at the start of your turn, your
-      weapon loses this benefit.'
-    costs:
-      ap: 1
-  - id: elemental_strike
-    name: Elemental Strike
-    type: passive
-    keywords: []
-    range: Melee Weapon Range
-    description: 'You make a Light Attack against the target. On damage, your attack
-      applies an additional effect based on your attack''s damage type.
-
-      Arcane: The target loses 1 mana.
-
-      Fire: The target becomes Burning X, where X equals your Power x 2.
-
-      Water: The target becomes Soaked for 1 turn or until they take Lightning damage.
-
-      Lightning: The target is afflicted with Static X, where X equals your Power
-      x 2.
-
-      Earth/Frost: The target becomes Slowed until the start of your next turn.
-
-      Wind: You may push the target back 10ft.
-
-      Holy: You gain temporary hit points equal to your Power.
-
-      Dark: The target becomes Blinded until after their next attack.'
-    costs:
-      mana: 1
-      ap: 1
-  - id: greater_imbue_weapon
-    name: Greater Imbue Weapon
-    type: passive
-    keywords:
-    - Enchantment
-    range: Self
-    description: You may enchant your weapon as though you had used Imbue Weapon,
-      but it also gains a +1 Power bonus in addition to the normal benefits. If you
-      are not holding the enchanted weapon at the start of your turn, your weapon
-      loses this benefit.
-    costs:
-      mana: 1
-      ap: 1
-  - id: spellstrike
-    name: Spellstrike
-    type: passive
-    keywords: []
-    range: Melee Weapon Range
-    description: You choose an ability with the Spell keyword that you can use. You
-      make a melee attack against a target in range for the same AP and mana as the
-      Spell. Your attack does the damage and applies all the effects that the chosen
-      Spell does, but does not provoke an Attack of Opportunity. The requirements
-      for applying these effects remain the same. Only works with Spells that are
-      attacks.
+        If you are not holding the enchanted weapon at the start of your turn,
+        your weapon loses this benefit.
+      costs:
+        ap: 1
+    - id: elemental_strike
+      name: Elemental Strike
+      type: passive
+      keywords: []
+      range: Melee Weapon Range
+      description: "You make a Light Attack against the target. On damage, your attack applies an additional effect based on your attack's damage type.\nArcane: The target loses 1 mana.\nFire: The target becomes Burning X, where X equals your Power x 2.\nWater:\_The target becomes Soaked for 1 turn or until they take Lightning damage.\nLightning: The target is afflicted with Static X, where X equals your Power x 2.\nEarth/Frost: The target becomes Slowed until the start of your next turn.\nWind: You may push the target back 10ft.\nHoly: You gain temporary hit points equal to your Power.\nDark: The target becomes Blinded until after their next attack."
+      costs:
+        mana: 1
+        ap: 1
+    - id: greater_imbue_weapon
+      name: Greater Imbue Weapon
+      type: passive
+      keywords:
+        - Enchantment
+      range: Self
+      description: >-
+        You may enchant your weapon as though you had used Imbue Weapon, but it
+        also gains a +1 Power bonus in addition to the normal benefits. If you
+        are not holding the enchanted weapon at the start of your turn, your
+        weapon loses this benefit.
+      costs:
+        mana: 1
+        ap: 1
+    - id: spellstrike
+      name: Spellstrike
+      type: passive
+      keywords: []
+      range: Melee Weapon Range
+      description: >-
+        You choose an ability with the Spell keyword that you can use. You make
+        a melee attack against a target in range for the same AP and mana as the
+        Spell. Your attack does the damage and applies all the effects that the
+        chosen Spell does, but does not provoke an Attack of Opportunity. The
+        requirements for applying these effects remain the same. Only works with
+        Spells that are attacks.

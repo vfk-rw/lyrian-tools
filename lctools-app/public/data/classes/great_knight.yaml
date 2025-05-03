@@ -5,197 +5,211 @@ class:
   difficulty: 3
   main_role: Defender
   secondary_role: Support
-  image_url: https://cdn.angelssword.com/ttrpg/assets/9d70a3c3-6431-4581-af15-635f18ac2bee-Great_Knight_-_Raw.sm.webp
+  image_url: /images/classes/Great_Knight.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Cavalier mastered.
-  description: 'First fielded by Northi not long after Hussars were becoming common
-    on the battlefield, the Great Knight represented the quintessential heavy cavalry.
-    With knight and mount both clad in heavy armor, the Great Knight was made to be
-    a mobile barrier. Able to interpose their armored bulk for their allies and even
-    project that protection into an aura around them, Great Knights were able to push
-    through even the most heavily contested battlefields for their allies. And while
-    there were countless stories throughout the ages of heavily armored knights turning
-    the tides of battle, there were none as debated as the story of Sir Owain Morgan
-    and Dame Madeline Benoit.
+      - type: text
+        description: Cavalier mastered.
+  description: >-
+    First fielded by Northi not long after Hussars were becoming common on the
+    battlefield, the Great Knight represented the quintessential heavy cavalry.
+    With knight and mount both clad in heavy armor, the Great Knight was made to
+    be a mobile barrier. Able to interpose their armored bulk for their allies
+    and even project that protection into an aura around them, Great Knights
+    were able to push through even the most heavily contested battlefields for
+    their allies. And while there were countless stories throughout the ages of
+    heavily armored knights turning the tides of battle, there were none as
+    debated as the story of Sir Owain Morgan and Dame Madeline Benoit.
 
-    As told and accepted by Northi historians, Sir Owain Morgan was a dogfolk Great
-    Knight without peer. Honorable beyond reproach and an unstoppable juggernaut on
-    the battlefield, he had a list of successful battles attributed to him that stretched
-    the imagination. In fact, detractors of Sir Owain’s tale would often point out
-    that he must have surely known teleportation and time travel magics to be at so
-    many battles at once. What could not be disputed was that Sir Owain certainly
-    existed, his name recorded in the annals of the Bastion Knights. But his most
-    debated feat was one that involved a Westrian knight, Dame Madeline Benoit, and
-    the proliferation of Mage Knights into Northi’s military.
+    As told and accepted by Northi historians, Sir Owain Morgan was a dogfolk
+    Great Knight without peer. Honorable beyond reproach and an unstoppable
+    juggernaut on the battlefield, he had a list of successful battles
+    attributed to him that stretched the imagination. In fact, detractors of Sir
+    Owain’s tale would often point out that he must have surely known
+    teleportation and time travel magics to be at so many battles at once. What
+    could not be disputed was that Sir Owain certainly existed, his name
+    recorded in the annals of the Bastion Knights. But his most debated feat was
+    one that involved a Westrian knight, Dame Madeline Benoit, and the
+    proliferation of Mage Knights into Northi’s military.
 
-    While there were many versions of the tale, the most accepted one in Northi followed
-    a series of reasonably set in stone facts. During one of the many border skirmishes
-    common between Northi and Westria as they vied for control over the Nuren Plains,
-    it was said that Sir Owain led a counter attack against a Westrian skirmishing
-    force. He led his men to victory and successfully captured many knights to ransom
-    back to Westria, including Dame Madeline Benoit. While most of the knights and
-    men at arms were released back to their homes, Dame Madeline was kept for one
-    very important reason: to teach Northi the art of the Mage Knight. Historians
-    for the Era of Knights could often be incited into argument around the idea as
-    there were as many accounts for how Northi gained access to the skills of Westria’s
+    While there were many versions of the tale, the most accepted one in Northi
+    followed a series of reasonably set in stone facts. During one of the many
+    border skirmishes common between Northi and Westria as they vied for control
+    over the Nuren Plains, it was said that Sir Owain led a counter attack
+    against a Westrian skirmishing force. He led his men to victory and
+    successfully captured many knights to ransom back to Westria, including Dame
+    Madeline Benoit. While most of the knights and men at arms were released
+    back to their homes, Dame Madeline was kept for one very important reason:
+    to teach Northi the art of the Mage Knight. Historians for the Era of
+    Knights could often be incited into argument around the idea as there were
+    as many accounts for how Northi gained access to the skills of Westria’s
     holy knights as there were historians to argue about them.
 
-    But what was almost universally accepted as the truth was that Sir Owain, disgusted
-    with his peers and superiors'' lack of any decency to release Dame Madeline back
-    to her family, took it upon himself to free the woman. There was little historical
-    accounting of where they went or what they did but there were legends of a pair
-    of knights wandering Lyr and helping those in need. And while those actions had
-    never definitively been attributed to Sir Owain and Dame Madeline, what couldn’t
-    be denied was when they both turned back up in solid historical record.
+    But what was almost universally accepted as the truth was that Sir Owain,
+    disgusted with his peers and superiors' lack of any decency to release Dame
+    Madeline back to her family, took it upon himself to free the woman. There
+    was little historical accounting of where they went or what they did but
+    there were legends of a pair of knights wandering Lyr and helping those in
+    need. And while those actions had never definitively been attributed to Sir
+    Owain and Dame Madeline, what couldn’t be denied was when they both turned
+    back up in solid historical record.
 
-    They would found Morgan Ranch in what would later become Dacquoise, near the future
-    site of the city of Madeline. It was there that the retired knights, happily married
-    for an unclear amount of time, had begun taking on students and ranch hands to
-    teach the art of horsemanship, knighthood, and magic. While the ranch itself did
-    not last into modern times, the house itself was maintained and the legacy of
-    chivalry was upheld by the descendants of those students. Collectively, and informally,
-    they called themselves the Knights of Morgan and dedicated themselves to helping
-    those in need whenever and wherever they were found.'
-  guide: 'The great knight is a mounted tank class that excels in fights with many
+    They would found Morgan Ranch in what would later become Dacquoise, near the
+    future site of the city of Madeline. It was there that the retired knights,
+    happily married for an unclear amount of time, had begun taking on students
+    and ranch hands to teach the art of horsemanship, knighthood, and magic.
+    While the ranch itself did not last into modern times, the house itself was
+    maintained and the legacy of chivalry was upheld by the descendants of those
+    students. Collectively, and informally, they called themselves the Knights
+    of Morgan and dedicated themselves to helping those in need whenever and
+    wherever they were found.
+  guide: >-
+    The great knight is a mounted tank class that excels in fights with many
     different engagements.
 
-    Intercept is your main tool in getting around the battlefield, allowing you to
-    ride to an allies aid. If you move to an ally far away enough, you can even use
-    Trample and do some damage with it. Note that your movement is not a sidestep,
-    you do provoke attacks of opportunity with it.
+    Intercept is your main tool in getting around the battlefield, allowing you
+    to ride to an allies aid. If you move to an ally far away enough, you can
+    even use Trample and do some damage with it. Note that your movement is not
+    a sidestep, you do provoke attacks of opportunity with it.
 
-    Rescue & Drop lets you save an ally from a bad situation and ride them out to
-    safety. You can also drop them immediately to another square nearby to break them
-    free from being surrounded or to let them move away without provoking.
+    Rescue & Drop lets you save an ally from a bad situation and ride them out
+    to safety. You can also drop them immediately to another square nearby to
+    break them free from being surrounded or to let them move away without
+    provoking.
 
-    Your Secret Art: Moving Castle is an aura that reduces damage by 3 in a small
-    aura around you. This can be massive when fighting against a group of non-heroic
-    enemies, reducing the damage your allies take by a large amount. You can also
-    move for free once per turn to reposition and potentially help allies in two completely
-    different positions at the same time.
+    Your Secret Art: Moving Castle is an aura that reduces damage by 3 in a
+    small aura around you. This can be massive when fighting against a group of
+    non-heroic enemies, reducing the damage your allies take by a large amount.
+    You can also move for free once per turn to reposition and potentially help
+    allies in two completely different positions at the same time.
 
-    Shared Defense is a simple tool that helps you protect your mount from AoE attacks.'
+    Shared Defense is a simple tool that helps you protect your mount from AoE
+    attacks.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Heavy Cavalry
-  - level: 2
-    benefits:
-    - type: ability
-      value: Rescue & Drop
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Intercept
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-      - attribute: Awareness
-        value: 1
-      - attribute: Presence
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Shared Defense
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Moving Castle'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Heavy Cavalry
+    - level: 2
+      benefits:
+        - type: ability
+          value: Rescue & Drop
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Intercept
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+            - attribute: Awareness
+              value: 1
+            - attribute: Presence
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Shared Defense
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Moving Castle'
   abilities:
-  - id: heavy_cavalry
-    name: Heavy Cavalry
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: rescue___drop
-    name: Rescue & Drop
-    type: passive
-    keywords: []
-    range: 5ft
-    description: 'You pick up a willing ally and put them on your mount. They travel
-      with you on the back of your mount until either you or they spend 0 AP or 1
-      RP to place them back on the ground. An ally that is being rescued can not take
-      any other actions until they are dropped.
+    - id: heavy_cavalry
+      name: Heavy Cavalry
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: rescue___drop
+      name: Rescue & Drop
+      type: passive
+      keywords: []
+      range: 5ft
+      description: >-
+        You pick up a willing ally and put them on your mount. They travel with
+        you on the back of your mount until either you or they spend 0 AP or 1
+        RP to place them back on the ground. An ally that is being rescued can
+        not take any other actions until they are dropped.
 
-      Only 1 ally can be rescued at a time.'
-    requirements:
-    - type: text
-      description: Must be mounted.
-    costs:
-      ap: 1
-  - id: intercept
-    name: Intercept
-    type: passive
-    keywords: []
-    range: Your movement speed.
-    description: 'You move towards an ally, Sidestepping them 5ft in a direction of
-      their choice and occupying their square. The triggering attack is made against
-      you and you automatically take the Block action against it.
+        Only 1 ally can be rescued at a time.
+      requirements:
+        - type: text
+          description: Must be mounted.
+      costs:
+        ap: 1
+    - id: intercept
+      name: Intercept
+      type: passive
+      keywords: []
+      range: Your movement speed.
+      description: >-
+        You move towards an ally, Sidestepping them 5ft in a direction of their
+        choice and occupying their square. The triggering attack is made against
+        you and you automatically take the Block action against it.
 
-      Mounted move rules apply to your movement for this action.'
-    requirements:
-    - type: text
-      description: Must be mounted and an ally is the target of an attack.
-    costs:
-      mana: 1
-      rp: 1
-  - id: shared_defense
-    name: Shared Defense
-    type: passive
-    keywords: []
-    range: Self
-    description: You and your mount take the Block action against the attack. Your
-      mount may use your Block stat instead of its own.
-    requirements:
-    - type: text
-      description: Must be mounted and you and your mount are the target of an attack.
-    costs:
-      rp: 1
-  - id: secret_art__moving_castle
-    name: 'Secret Art: Moving Castle'
-    type: combat_action
-    keywords:
-    - Secret Art
-    - Aura
-    - Upkeep
-    range: Self
-    description: 'You project a defensive aura up to 15ft around you, granting all
-      allies (excluding yourself) the
+        Mounted move rules apply to your movement for this action.
+      requirements:
+        - type: text
+          description: Must be mounted and an ally is the target of an attack.
+      costs:
+        mana: 1
+        rp: 1
+    - id: shared_defense
+      name: Shared Defense
+      type: passive
+      keywords: []
+      range: Self
+      description: >-
+        You and your mount take the Block action against the attack. Your mount
+        may use your Block stat instead of its own.
+      requirements:
+        - type: text
+          description: Must be mounted and you and your mount are the target of an attack.
+      costs:
+        rp: 1
+    - id: secret_art__moving_castle
+      name: 'Secret Art: Moving Castle'
+      type: combat_action
+      keywords:
+        - Secret Art
+        - Aura
+        - Upkeep
+      range: Self
+      description: >-
+        You project a defensive aura up to 15ft around you, granting all allies
+        (excluding yourself) the
 
-      Bulwark
+        Bulwark
 
-      buff. While under the effects of Bulwark, allies take 3 less damage.
+        buff. While under the effects of Bulwark, allies take 3 less damage.
 
-      While projecting this aura, you may spend 0 RP to sidestep up to your movement.
-      After you do so, you may not do so again until the start of your next turn.
+        While projecting this aura, you may spend 0 RP to sidestep up to your
+        movement. After you do so, you may not do so again until the start of
+        your next turn.
 
-      Upkeep
+        Upkeep
 
-      : You must spend 1 mana at the start of your turn to continue this effect.'
-    costs:
-      mana: 2
-      ap: 2
+        : You must spend 1 mana at the start of your turn to continue this
+        effect.
+      costs:
+        mana: 2
+        ap: 2

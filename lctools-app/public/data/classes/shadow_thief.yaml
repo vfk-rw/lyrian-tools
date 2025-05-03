@@ -5,143 +5,150 @@ class:
   difficulty: 3
   main_role: Utility
   secondary_role: Support
-  image_url: https://cdn.angelssword.com/ttrpg/assets/b79c0f11-7825-4b63-a539-dd0b73174325-shadow-thief.sm.webp
+  image_url: /images/classes/Shadow_Thief.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Rogue mastered.
-  description: The Shadow Thief is a stealthy and cunning character, specializing
-    in thievery, deception, and infiltration. They excel at slipping into enemy territory
-    undetected and stealing valuable items or information, using their quick reflexes
-    and agility to escape undetected.
-  guide: 'The shadow thief is a utility class that works best during the night. Every
-    single ability they have has higher than normal mana costs during the day, but
-    lower than average during the night. Ideally, you only want to fight during the
-    night though of course this isn''t always an option.
+      - type: text
+        description: Rogue mastered.
+  description: >-
+    The Shadow Thief is a stealthy and cunning character, specializing in
+    thievery, deception, and infiltration. They excel at slipping into enemy
+    territory undetected and stealing valuable items or information, using their
+    quick reflexes and agility to escape undetected.
+  guide: >-
+    The shadow thief is a utility class that works best during the night. Every
+    single ability they have has higher than normal mana costs during the day,
+    but lower than average during the night. Ideally, you only want to fight
+    during the night though of course this isn't always an option.
 
-    Shadowstep at night is better than normal movement. Not only do you move further
-    or the AP cost, with it being a teleport you ignore attacks of opportunity, difficult
-    terrain and other hassles. During the day, it''s a worse Fae Flash. Still usable
-    if you need to teleport, but not worth the mana cost in a lot of cases.
+    Shadowstep at night is better than normal movement. Not only do you move
+    further or the AP cost, with it being a teleport you ignore attacks of
+    opportunity, difficult terrain and other hassles. During the day, it's a
+    worse Fae Flash. Still usable if you need to teleport, but not worth the
+    mana cost in a lot of cases.
 
-    Vanish during the night is a 1 RP hide action. This has some use cases, allowing
-    you to make more attack while taking advantage of the stealth bonus. The use case
-    by itself doesn''t change much during the day, as the RP cost is a bigger limiting
-    factor than the mana cost in most cases.
+    Vanish during the night is a 1 RP hide action. This has some use cases,
+    allowing you to make more attack while taking advantage of the stealth
+    bonus. The use case by itself doesn't change much during the day, as the RP
+    cost is a bigger limiting factor than the mana cost in most cases.
 
-    Shadow Cloak not only gives you a stealth bonus, it also lets you stealth even
-    when you don''t have cover or concealment. This makes the Vanish ability a lot
-    more useful, allowing you to stealth in the middle of nowhere, although it requires
-    a high stealth skill bonus. It''s a one time cost that lasts until the end of
-    the encounter, so it''s still usable even during the day. It''s also just good
-    for sneaking into places, especially when combined with Shade Form.
+    Shadow Cloak not only gives you a stealth bonus, it also lets you stealth
+    even when you don't have cover or concealment. This makes the Vanish ability
+    a lot more useful, allowing you to stealth in the middle of nowhere,
+    although it requires a high stealth skill bonus. It's a one time cost that
+    lasts until the end of the encounter, so it's still usable even during the
+    day. It's also just good for sneaking into places, especially when combined
+    with Shade Form.
 
-    Shade Form is a primarily out of combat exploration tool, though it has some use
-    in combat too by being able to move through enemy spaces. It is almost unusable
-    during the day due to its upkeep cost though.'
+    Shade Form is a primarily out of combat exploration tool, though it has some
+    use in combat too by being able to move through enemy spaces. It is almost
+    unusable during the day due to its upkeep cost though.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Nightstalker
-  - level: 2
-    benefits:
-    - type: ability
-      value: Shadow Step
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Shade Form
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Cunning
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Vanish
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Agility
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Shadow Cloak
+    - level: 1
+      benefits:
+        - type: ability
+          value: Nightstalker
+    - level: 2
+      benefits:
+        - type: ability
+          value: Shadow Step
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Shade Form
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Cunning
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Vanish
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Agility
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Shadow Cloak
   abilities:
-  - id: nightstalker
-    name: Nightstalker
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: shadow_step
-    name: Shadow Step
-    type: passive
-    keywords:
-    - Shadow
-    - Teleport
-    range: Self
-    description: You may Teleport up to twice your movement speed. During the night,
-      the mana cost of this is reduced by 2.
-    costs:
-      mana: 2
-      ap: 1
-  - id: shade_form
-    name: Shade Form
-    type: passive
-    keywords:
-    - Shadow
-    range: Self
-    description: 'You become like a shade becoming near weightless and gaining the
-      ability to pass through spaces occupied by other creatures. You can also slip
-      through small cracks in walls or doors, as long as they are at least 1inch wide
-      and tall.
+    - id: nightstalker
+      name: Nightstalker
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: shadow_step
+      name: Shadow Step
+      type: passive
+      keywords:
+        - Shadow
+        - Teleport
+      range: Self
+      description: >-
+        You may Teleport up to twice your movement speed. During the night, the
+        mana cost of this is reduced by 2.
+      costs:
+        mana: 2
+        ap: 1
+    - id: shade_form
+      name: Shade Form
+      type: passive
+      keywords:
+        - Shadow
+      range: Self
+      description: >-
+        You become like a shade becoming near weightless and gaining the ability
+        to pass through spaces occupied by other creatures. You can also slip
+        through small cracks in walls or doors, as long as they are at least
+        1inch wide and tall.
 
-      Upkeep:
+        Upkeep:
 
-      You must pay 2 mana at the start of each turn or this ability ends. During the
-      night, the mana cost and Upkeep of this is reduced by 2.'
-    costs:
-      mana: 2
-      ap: 1
-  - id: vanish
-    name: Vanish
-    type: passive
-    keywords:
-    - Shadow
-    range: Self
-    description: 'You may immediately take the Hide action.
+        You must pay 2 mana at the start of each turn or this ability ends.
+        During the night, the mana cost and Upkeep of this is reduced by 2.
+      costs:
+        mana: 2
+        ap: 1
+    - id: vanish
+      name: Vanish
+      type: passive
+      keywords:
+        - Shadow
+      range: Self
+      description: |-
+        You may immediately take the Hide action.
 
-
-      During the night, the mana cost of this is reduced by 1.'
-    costs:
-      mana: 1
-      rp: 1
-  - id: shadow_cloak
-    name: Shadow Cloak
-    type: passive
-    keywords:
-    - Shadow
-    range: Self
-    description: You cloak yourself in Shadows, giving you a +5 bonus on Stealth checks
-      until end of scene. It also allows you to hide even when not behind cover or
-      concealment, but with a -15 penalty. During the night, the mana cost of this
-      is reduced by 2.
-    costs:
-      mana: 2
-      ap: 2
+        During the night, the mana cost of this is reduced by 1.
+      costs:
+        mana: 1
+        rp: 1
+    - id: shadow_cloak
+      name: Shadow Cloak
+      type: passive
+      keywords:
+        - Shadow
+      range: Self
+      description: >-
+        You cloak yourself in Shadows, giving you a +5 bonus on Stealth checks
+        until end of scene. It also allows you to hide even when not behind
+        cover or concealment, but with a -15 penalty. During the night, the mana
+        cost of this is reduced by 2.
+      costs:
+        mana: 2
+        ap: 2

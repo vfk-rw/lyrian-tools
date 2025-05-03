@@ -5,137 +5,144 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/c136cd56-c2d3-4556-87a1-2bd7415513db-Brawler_New.sm.webp
+  image_url: /images/classes/Brawler.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Martial Artist mastered.
+      - type: text
+        description: Martial Artist mastered.
   description: Scrappy fighters that are willing to get into the fray and trade blows.
-  guide: 'A brawler is a scrappy fighter that takes hits to dish them out.
+  guide: >-
+    A brawler is a scrappy fighter that takes hits to dish them out.
 
-    Counter Stance is a risky stance in which you cannot react to attacks through
-    normal means, but you get to make a counter attack afterwards. A brawler has to
-    carefully weigh his options before entering the stance, as he cannot end it until
-    his next turn starts. One option is to only use it when you are already low on
-    RP, as being unable to Dodge or Block has little effect when you lack the RP to
-    do so to begin with.
+    Counter Stance is a risky stance in which you cannot react to attacks
+    through normal means, but you get to make a counter attack afterwards. A
+    brawler has to carefully weigh his options before entering the stance, as he
+    cannot end it until his next turn starts. One option is to only use it when
+    you are already low on RP, as being unable to Dodge or Block has little
+    effect when you lack the RP to do so to begin with.
 
-    To help survive while countering, a brawler has access to Vital Drive II. While
-    the healing itself isn''t the most efficient, being able to use it as reaction
-    allows you to stay standing after attacks that should have knocked you out.
+    To help survive while countering, a brawler has access to Vital Drive II.
+    While the healing itself isn't the most efficient, being able to use it as
+    reaction allows you to stay standing after attacks that should have knocked
+    you out.
 
-    Suckerpunch is an amazing opening move, if you can land it. It can only be used
-    when already in melee range of an enemy at the start of the encounter, so getting
-    up in someone''s face before you fight them is a good move.
+    Suckerpunch is an amazing opening move, if you can land it. It can only be
+    used when already in melee range of an enemy at the start of the encounter,
+    so getting up in someone's face before you fight them is a good move.
 
-    Knockout Punch instantly takes out grunt level enemies and leaves them alive,
-    which sets it apart from similar abilities. Useful for when you need to interrogate
-    them after. The 4 AP cost for a heavy attack makes it risky to use against enemies
-    who still have RP left, so ideally you let your allies set you up before using
-    it.
+    Knockout Punch instantly takes out grunt level enemies and leaves them
+    alive, which sets it apart from similar abilities. Useful for when you need
+    to interrogate them after. The 4 AP cost for a heavy attack makes it risky
+    to use against enemies who still have RP left, so ideally you let your
+    allies set you up before using it.
 
-    Wind-up punch is an attack meant to punch through tough guards. While it lacks
-    the full pierce or guard crush properties, by adding all the damage together into
-    1 big attack, the guard is less valuable than what is it applied multiple times.'
+    Wind-up punch is an attack meant to punch through tough guards. While it
+    lacks the full pierce or guard crush properties, by adding all the damage
+    together into 1 big attack, the guard is less valuable than what is it
+    applied multiple times.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Shrug it off
-  - level: 2
-    benefits:
-    - type: ability
-      value: Suckerpunch
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Wind-up Punch
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Fitness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Counter Stance
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Power
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Knockout Punch
+    - level: 1
+      benefits:
+        - type: ability
+          value: Shrug it off
+    - level: 2
+      benefits:
+        - type: ability
+          value: Suckerpunch
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Wind-up Punch
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Fitness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Counter Stance
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Power
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Knockout Punch
   abilities:
-  - id: shrug_it_off
-    name: Shrug it off
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: suckerpunch
-    name: Suckerpunch
-    type: passive
-    keywords:
-    - Encounter Start
-    - Sure Hit
-    - Unarmed Strike
-    range: Melee Weapon Range
-    description: You may make a Heavy Attack against the target. On damage, the target
-      becomes Unbalanced.
-  - id: wind-up_punch
-    name: Wind-up Punch
-    type: passive
-    keywords:
-    - Overcharge
-    - Unarmed Strike
-    range: Melee Weapon Range
-    description: 'You may make a Heavy attack against the target.
+    - id: shrug_it_off
+      name: Shrug it off
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: suckerpunch
+      name: Suckerpunch
+      type: passive
+      keywords:
+        - Encounter Start
+        - Sure Hit
+        - Unarmed Strike
+      range: Melee Weapon Range
+      description: >-
+        You may make a Heavy Attack against the target. On damage, the target
+        becomes Unbalanced.
+    - id: wind-up_punch
+      name: Wind-up Punch
+      type: passive
+      keywords:
+        - Overcharge
+        - Unarmed Strike
+      range: Melee Weapon Range
+      description: >-
+        You may make a Heavy attack against the target.
 
-      Overcharge:
+        Overcharge:
 
-      You may spend additional AP when using this ability to deal an additional Light
-      Damage per AP used. Add all of this damage together before applying damage reduction
-      from Guard or abilities.'
-    costs:
-      ap: 2
-  - id: counter_stance
-    name: Counter Stance
-    type: passive
-    keywords:
-    - Counter
-    - Stance
-    - Unarmed Strike
-    range: Self
-    description: You enter a stance in which you freely counterattack against enemies
-      that attack you. After an attack against you has resolved, you may make a Melee
-      Attack of Opportunity against that target. While in this stance, you cannot
-      use the Dodge or Block reactions.
-    costs:
-      ap: 1
-  - id: knockout_punch
-    name: Knockout Punch
-    type: passive
-    keywords:
-    - Unarmed Strike
-    range: Melee Weapon Range
-    description: You may make a Heavy Attack against the target. On damage if the
-      enemy is a Grunt, they immediately drop to 0 HP and fall unconscious.
-    costs:
-      ap: 4
+        You may spend additional AP when using this ability to deal an
+        additional Light Damage per AP used. Add all of this damage together
+        before applying damage reduction from Guard or abilities.
+      costs:
+        ap: 2
+    - id: counter_stance
+      name: Counter Stance
+      type: passive
+      keywords:
+        - Counter
+        - Stance
+        - Unarmed Strike
+      range: Self
+      description: >-
+        You enter a stance in which you freely counterattack against enemies
+        that attack you. After an attack against you has resolved, you may make
+        a Melee Attack of Opportunity against that target. While in this stance,
+        you cannot use the Dodge or Block reactions.
+      costs:
+        ap: 1
+    - id: knockout_punch
+      name: Knockout Punch
+      type: passive
+      keywords:
+        - Unarmed Strike
+      range: Melee Weapon Range
+      description: >-
+        You may make a Heavy Attack against the target. On damage if the enemy
+        is a Grunt, they immediately drop to 0 HP and fall unconscious.
+      costs:
+        ap: 4

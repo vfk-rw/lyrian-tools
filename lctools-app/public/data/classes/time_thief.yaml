@@ -5,136 +5,142 @@ class:
   difficulty: 3
   main_role: Utility
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/b0d517a8-fef0-4c05-b4a1-a886ba645fae-Time_Thief_raw_2.sm.webp
+  image_url: /images/classes/Time_Thief.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Rogue mastered.
+      - type: text
+        description: Rogue mastered.
   description: Time Thieves manipulate time to pull off perfect heists.
-  guide: 'The time thief is a utility class that manipulates their own time to gain
+  guide: >-
+    The time thief is a utility class that manipulates their own time to gain
     advantages.
 
-    With Shatter Time, you can act multiple times in a turn. This can let you act
-    after teammates when needed, act when an enemy has moved closer to you or enemies
-    have positioned for an AoE or several other things. It doesn''t let you use an
-    ability multiple times in a round though.
+    With Shatter Time, you can act multiple times in a turn. This can let you
+    act after teammates when needed, act when an enemy has moved closer to you
+    or enemies have positioned for an AoE or several other things. It doesn't
+    let you use an ability multiple times in a round though.
 
-    Start Dash is a free movement, but it can only be used as the first action on
-    your turn. This movement does provoke attacks of opportunity and you can''t disengage
-    or feint before it, so you may want to evasive maneuver before your turn begins
-    if you plan to use it while engaged in melee.
+    Start Dash is a free movement, but it can only be used as the first action
+    on your turn. This movement does provoke attacks of opportunity and you
+    can't disengage or feint before it, so you may want to evasive maneuver
+    before your turn begins if you plan to use it while engaged in melee.
 
-    Steal Time gives you a small boost to your initiative while lowering that of enemy.
-    This may let your allies potentially act before the enemy does on subsequent turns.
+    Steal Time gives you a small boost to your initiative while lowering that of
+    enemy. This may let your allies potentially act before the enemy does on
+    subsequent turns.
 
-    Secret Art: Rewind lets you do stupid things without being punished for it. You
-    can potentially hit into enemy counters to see what happens, run past suspicious
-    hallways that may be trapped, attempt dangerous jumps across a cliff. If the result
-    is bad, you can simply rewind time and either try again or do something else entirely.'
+    Secret Art: Rewind lets you do stupid things without being punished for it.
+    You can potentially hit into enemy counters to see what happens, run past
+    suspicious hallways that may be trapped, attempt dangerous jumps across a
+    cliff. If the result is bad, you can simply rewind time and either try again
+    or do something else entirely.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Thefts of the past
-  - level: 2
-    benefits:
-    - type: ability
-      value: Start Dash
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Steal Time
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Cunning
-        value: 1
-      - attribute: Awareness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Shatter Time
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Agility
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Rewind'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Thefts of the past
+    - level: 2
+      benefits:
+        - type: ability
+          value: Start Dash
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Steal Time
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Cunning
+              value: 1
+            - attribute: Awareness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Shatter Time
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Agility
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Rewind'
   abilities:
-  - id: thefts_of_the_past
-    name: Thefts of the past
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: start_dash
-    name: Start Dash
-    type: passive
-    keywords:
-    - Quick
-    range: Self
-    description: You move up to your speed.
-    requirements:
-    - type: text
-      description: Must be the first action in your turn.
-    costs:
-      ap: 0
-  - id: steal_time
-    name: Steal Time
-    type: passive
-    keywords: []
-    range: Melee Weapon Range
-    description: You may make a Light Attack against the target. On damage, you lower
-      their Initiative by 1 and increase yours by 1.
-    costs:
-      mana: 1
-      ap: 1
-  - id: shatter_time
-    name: Shatter Time
-    type: passive
-    keywords:
-    - Encounter Start
-    range: Self
-    description: 'For this encounter you may act during different parts of a round.
-      When you end your turn with AP remaining, you may choose to act immediately
-      after another creature ends their turn.
+    - id: thefts_of_the_past
+      name: Thefts of the past
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: start_dash
+      name: Start Dash
+      type: passive
+      keywords:
+        - Quick
+      range: Self
+      description: You move up to your speed.
+      requirements:
+        - type: text
+          description: Must be the first action in your turn.
+      costs:
+        ap: 0
+    - id: steal_time
+      name: Steal Time
+      type: passive
+      keywords: []
+      range: Melee Weapon Range
+      description: >-
+        You may make a Light Attack against the target. On damage, you lower
+        their Initiative by 1 and increase yours by 1.
+      costs:
+        mana: 1
+        ap: 1
+    - id: shatter_time
+      name: Shatter Time
+      type: passive
+      keywords:
+        - Encounter Start
+      range: Self
+      description: >-
+        For this encounter you may act during different parts of a round. When
+        you end your turn with AP remaining, you may choose to act immediately
+        after another creature ends their turn.
 
 
-      You do not regain AP or RP and these extra actions are not considered turns.
-      You may take these extra actions multiple times during a round, provided you
-      have AP remaining.'
-  - id: secret_art__rewind
-    name: 'Secret Art: Rewind'
-    type: combat_action
-    keywords:
-    - Instant
-    - Secret Art
-    range: Self
-    description: You rewind time to before your last action. All results based on
-      your last action are reversed- All HP, Mana, AP and RP are returned to how they
-      were. The ability you used in that action is no longer considered used, but
-      this ability is.
-    requirements:
-    - type: text
-      description: Can only be used on your turn.
-    costs:
-      mana: 1
-      rp: 0
+        You do not regain AP or RP and these extra actions are not considered
+        turns. You may take these extra actions multiple times during a round,
+        provided you have AP remaining.
+    - id: secret_art__rewind
+      name: 'Secret Art: Rewind'
+      type: combat_action
+      keywords:
+        - Instant
+        - Secret Art
+      range: Self
+      description: >-
+        You rewind time to before your last action. All results based on your
+        last action are reversed- All HP, Mana, AP and RP are returned to how
+        they were. The ability you used in that action is no longer considered
+        used, but this ability is.
+      requirements:
+        - type: text
+          description: Can only be used on your turn.
+      costs:
+        mana: 1
+        rp: 0

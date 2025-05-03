@@ -5,137 +5,123 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/5e2d5055-b3d4-4cbd-b53c-908c31a46b70-Spell_Blademaster_raw.sm.webp
+  image_url: /images/classes/Spell_Blademaster.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Spellblade mastered.
+      - type: text
+        description: Spellblade mastered.
   description: Spellblades that have mastered their art.
   guide: '-'
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Draw Elements II
-  - level: 2
-    benefits:
-    - type: ability
-      value: Spellblade's Preparation
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Elemental Sweep
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Fitness
-        value: 1
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Double Elements
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Focus
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Spectrum Blade'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Draw Elements II
+    - level: 2
+      benefits:
+        - type: ability
+          value: Spellblade's Preparation
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Elemental Sweep
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Fitness
+              value: 1
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Double Elements
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Focus
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Spectrum Blade'
   abilities:
-  - id: draw_elements_ii
-    name: Draw Elements II
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: spellblade_s_preparation
-    name: Spellblade's Preparation
-    type: passive
-    keywords:
-    - Enchantment
-    - Encounter Start
-    range: Self
-    description: 'You may enchant your weapon with an element. Your weapon now deals
-      the chosen element’s damage instead of its normal damage.
+    - id: draw_elements_ii
+      name: Draw Elements II
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: spellblade_s_preparation
+      name: Spellblade's Preparation
+      type: passive
+      keywords:
+        - Enchantment
+        - Encounter Start
+      range: Self
+      description: >-
+        You may enchant your weapon with an element. Your weapon now deals the
+        chosen element’s damage instead of its normal damage.
 
-      If you are not holding the enchanted weapon at the start of your turn, your
-      weapon loses this benefit.
+        If you are not holding the enchanted weapon at the start of your turn,
+        your weapon loses this benefit.
 
-      The weapon gains a +1 Power bonus to attacks until the end of the encounter.'
-  - id: elemental_sweep
-    name: Elemental Sweep
-    type: passive
-    keywords: []
-    range: Melee Weapon Range
-    description: 'You may make a Light Attack against all enemies within range. On
-      damage, your attack applies an additional effect based on your attack''s damage
-      type.
+        The weapon gains a +1 Power bonus to attacks until the end of the
+        encounter.
+    - id: elemental_sweep
+      name: Elemental Sweep
+      type: passive
+      keywords: []
+      range: Melee Weapon Range
+      description: "You may make a Light Attack against all enemies within range. On damage, your attack applies an additional effect based on your attack's damage type.\nArcane: The target loses 1 mana.\nFire: The target becomes\_Burning X, where X equals your Power x 2.\nWater:\_The target becomes Soaked for 1 turn or until they take Lightning damage.\nLightning: The target is afflicted with Static X, where X equals your Power x 2.\nEarth/Frost: The target becomes Slowed until the start of your next turn.\nWind: You may push the target back 10ft.\nHoly: You gain temporary hit points equal to your Power.\nDark: The target becomes Blinded until after their next attack."
+      costs:
+        mana: 1
+        ap: 2
+    - id: double_elements
+      name: Double Elements
+      type: passive
+      keywords:
+        - Quick
+      range: Self
+      description: >-
+        Your next Elemental Strike or Elemental Sweep ability used this turn may
+        add in the effect of another element. This element must be different
+        from the one caused by your weapon’s enchantment type and of an element
+        you have mastered.
+      costs:
+        ap: 0
+    - id: secret_art__spectrum_blade
+      name: 'Secret Art: Spectrum Blade'
+      type: combat_action
+      keywords:
+        - Enchantment
+        - Secret Art
+      range: Self
+      description: >-
+        Until the end of the encounter, you enchant your weapon with every
+        single element. When using Elemental Strike or Elemental Sweep, you may
+        choose which effect you want regardless of the damage type your attack
+        deals. When you deal damage, you apply the damage type that would deal
+        the most damage.
 
-      Arcane: The target loses 1 mana.
+        In addition, your weapon gains a +1 Power bonus until the end of the
+        encounter. If it already had a +1 Power bonus through an enchantment,
+        this bonus is instead increased to +2.
 
-      Fire: The target becomes Burning X, where X equals your Power x 2.
-
-      Water: The target becomes Soaked for 1 turn or until they take Lightning damage.
-
-      Lightning: The target is afflicted with Static X, where X equals your Power
-      x 2.
-
-      Earth/Frost: The target becomes Slowed until the start of your next turn.
-
-      Wind: You may push the target back 10ft.
-
-      Holy: You gain temporary hit points equal to your Power.
-
-      Dark: The target becomes Blinded until after their next attack.'
-    costs:
-      mana: 1
-      ap: 2
-  - id: double_elements
-    name: Double Elements
-    type: passive
-    keywords:
-    - Quick
-    range: Self
-    description: Your next Elemental Strike or Elemental Sweep ability used this turn
-      may add in the effect of another element. This element must be different from
-      the one caused by your weapon’s enchantment type and of an element you have
-      mastered.
-    costs:
-      ap: 0
-  - id: secret_art__spectrum_blade
-    name: 'Secret Art: Spectrum Blade'
-    type: combat_action
-    keywords:
-    - Enchantment
-    - Secret Art
-    range: Self
-    description: 'Until the end of the encounter, you enchant your weapon with every
-      single element. When using Elemental Strike or Elemental Sweep, you may choose
-      which effect you want regardless of the damage type your attack deals. When
-      you deal damage, you apply the damage type that would deal the most damage.
-
-      In addition, your weapon gains a +1 Power bonus until the end of the encounter.
-      If it already had a +1 Power bonus through an enchantment, this bonus is instead
-      increased to +2.
-
-      If you are not holding the enchanted weapon at the start of your turn, your
-      weapon loses this benefit.'
-    costs:
-      mana: 2
-      ap: 1
+        If you are not holding the enchanted weapon at the start of your turn,
+        your weapon loses this benefit.
+      costs:
+        mana: 2
+        ap: 1

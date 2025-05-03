@@ -5,141 +5,148 @@ class:
   difficulty: 3
   main_role: Utility
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/a6460ce9-10da-4be1-826d-8f29a6de175a-Sage_Clean.sm.webp
+  image_url: /images/classes/Sage.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Mage mastered.
+      - type: text
+        description: Mage mastered.
   description: Sages are spellcasters that excel in augmenting spells.
-  guide: 'Sage is an utility class that amplifies other spells you already know. Thus,
-    it is best to only take sage if you already have some spells from other classes.
+  guide: >-
+    Sage is an utility class that amplifies other spells you already know. Thus,
+    it is best to only take sage if you already have some spells from other
+    classes.
 
-    Increased Reach is a situational, but useful tool to make those spells that have
-    a low range easier to use.
+    Increased Reach is a situational, but useful tool to make those spells that
+    have a low range easier to use.
 
-    With selective casting, AoE abilities that can also hit allies before a lot easier
-    to use. Even something like a meteor is now perfectly safe to stand in for your
-    allies.
+    With selective casting, AoE abilities that can also hit allies before a lot
+    easier to use. Even something like a meteor is now perfectly safe to stand
+    in for your allies.
 
-    Lengthened Incantation can be used to increase the damage your spells deal. It
-    is most effective when used with AoE attacks, as the damage bonus would be effective
-    against all enemies hit. You can also use it to gather damage for 1 big attack
-    when dealing with high guard enemies.
+    Lengthened Incantation can be used to increase the damage your spells deal.
+    It is most effective when used with AoE attacks, as the damage bonus would
+    be effective against all enemies hit. You can also use it to gather damage
+    for 1 big attack when dealing with high guard enemies.
 
-    Dualcast effectively allows you to give a spell the rapid keyword for a turn,
-    though with some more restrictions. There are many potential ways to use it. The
-    low mana cost makes it easy to use it even for things like tossing two fireballs.
-    Lengthened Incantation can provide a similar amount of damage, but dualcast has
-    the advantage of being able to see the results of your action before you commit
-    to casting it again.
+    Dualcast effectively allows you to give a spell the rapid keyword for a
+    turn, though with some more restrictions. There are many potential ways to
+    use it. The low mana cost makes it easy to use it even for things like
+    tossing two fireballs. Lengthened Incantation can provide a similar amount
+    of damage, but dualcast has the advantage of being able to see the results
+    of your action before you commit to casting it again.
 
-    Secret Art: Overcharge can be seen as a free 3 mana once per encounter, at the
-    cost of using your secret art. It does require a high mana spell to get maximum
-    use out of, but unless you have another secret art it competes with, it''s worth
-    using every fight.'
+    Secret Art: Overcharge can be seen as a free 3 mana once per encounter, at
+    the cost of using your secret art. It does require a high mana spell to get
+    maximum use out of, but unless you have another secret art it competes with,
+    it's worth using every fight.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Augmented Casting - Increased Reach
-  - level: 2
-    benefits:
-    - type: ability
-      value: Lengthened Incantation
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Selective Casting
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Dualcast
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-      - attribute: Agility
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Overcharge'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Augmented Casting - Increased Reach
+    - level: 2
+      benefits:
+        - type: ability
+          value: Lengthened Incantation
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Selective Casting
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Dualcast
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+            - attribute: Agility
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Overcharge'
   abilities:
-  - id: augmented_casting_-_increased_reach
-    name: Augmented Casting - Increased Reach
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: lengthened_incantation
-    name: Lengthened Incantation
-    type: passive
-    keywords:
-    - Arcane
-    range: Self
-    description: 'You lengthen the time it takes to cast your next Spell to empower
-      it. You may add up to 8 AP to the cost of your next spell with the Spell gaining
-      additional Light Damage for every 2 AP added. If you cannot pay this AP cost
-      this turn, the Spell also gains the Setup keyword.
+    - id: augmented_casting_-_increased_reach
+      name: Augmented Casting - Increased Reach
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: lengthened_incantation
+      name: Lengthened Incantation
+      type: passive
+      keywords:
+        - Arcane
+      range: Self
+      description: >-
+        You lengthen the time it takes to cast your next Spell to empower it.
+        You may add up to 8 AP to the cost of your next spell with the Spell
+        gaining additional Light Damage for every 2 AP added. If you cannot pay
+        this AP cost this turn, the Spell also gains the Setup keyword.
 
-      If the Spell has multiple attack rolls or different damage rolls, this bonus
-      only applies to one of them.'
-    costs:
-      ap: 8
-  - id: selective_casting
-    name: Selective Casting
-    type: passive
-    keywords: []
-    range: Self
-    description: For the next Spell you cast, you may choose to have it not affect
-      a number of targets equal to your Focus.
-    costs:
-      mana: 1
-      rp: 0
-  - id: dualcast
-    name: Dualcast
-    type: passive
-    keywords:
-    - Arcane
-    range: Self
-    description: You immediately repeat the last used ability with the same target.
-      Any cost must be paid as normal.
-    requirements:
-    - type: text
-      description: Must be used immediately after successfully using an ability with
-        the spell keyword.
-    costs:
-      mana: 1
-      ap: 0
-  - id: secret_art__overcharge
-    name: 'Secret Art: Overcharge'
-    type: combat_action
-    keywords:
-    - Secret Art
-    range: Self
-    description: Reduces the mana cost of your next Spell cast this turn by 3. You
-      cannot gain mana from this.
-    costs:
-      ap: 0
+        If the Spell has multiple attack rolls or different damage rolls, this
+        bonus only applies to one of them.
+      costs:
+        ap: 8
+    - id: selective_casting
+      name: Selective Casting
+      type: passive
+      keywords: []
+      range: Self
+      description: >-
+        For the next Spell you cast, you may choose to have it not affect a
+        number of targets equal to your Focus.
+      costs:
+        mana: 1
+        rp: 0
+    - id: dualcast
+      name: Dualcast
+      type: passive
+      keywords:
+        - Arcane
+      range: Self
+      description: >-
+        You immediately repeat the last used ability with the same target. Any
+        cost must be paid as normal.
+      requirements:
+        - type: text
+          description: >-
+            Must be used immediately after successfully using an ability with
+            the spell keyword.
+      costs:
+        mana: 1
+        ap: 0
+    - id: secret_art__overcharge
+      name: 'Secret Art: Overcharge'
+      type: combat_action
+      keywords:
+        - Secret Art
+      range: Self
+      description: >-
+        Reduces the mana cost of your next Spell cast this turn by 3. You cannot
+        gain mana from this.
+      costs:
+        ap: 0

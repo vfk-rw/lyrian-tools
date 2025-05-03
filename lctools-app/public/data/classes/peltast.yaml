@@ -5,133 +5,140 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/42e87c85-fc63-4ba6-936c-ac5b04ac278c-Pitcher_2_raw.sm.webp
+  image_url: /images/classes/Peltast.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Any class mastered. Proficiency in throwing weapons.
+      - type: text
+        description: Any class mastered. Proficiency in throwing weapons.
   description: A specialist in using throwing weapons.
-  guide: 'The peltast makes throwing weapons a valid choice for a main weapon. The
-    boomerang key ability makes it so you no longer have to keep paying AP to draw
-    more weapons. The peltast ideally wants to play close to the enemy and isn''t
-    afraid of melee combat.
+  guide: >-
+    The peltast makes throwing weapons a valid choice for a main weapon. The
+    boomerang key ability makes it so you no longer have to keep paying AP to
+    draw more weapons. The peltast ideally wants to play close to the enemy and
+    isn't afraid of melee combat.
 
-    Long Toss gives you a long range option. The range of throwing weapons is normally
-    a bit low, so this can be used when you would be out of range to attack normally.
+    Long Toss gives you a long range option. The range of throwing weapons is
+    normally a bit low, so this can be used when you would be out of range to
+    attack normally.
 
-    Rappelling Dagger is a movement option that can also deal damage. Useful when
-    you have to engage an enemy that''s not too far away and it can be used to obtain
-    high ground by rappelling into a tree or on top of a building.
+    Rappelling Dagger is a movement option that can also deal damage. Useful
+    when you have to engage an enemy that's not too far away and it can be used
+    to obtain high ground by rappelling into a tree or on top of a building.
 
-    Fan of Knives is a point blank AoE that can be used even when engaged in melee.
-    It will require you to get close to the enemy before you can use it.
+    Fan of Knives is a point blank AoE that can be used even when engaged in
+    melee. It will require you to get close to the enemy before you can use it.
 
-    Stab & Throw is an AP efficient attack that requires you to be in melee, plus
-    to have another enemy nearby.'
+    Stab & Throw is an AP efficient attack that requires you to be in melee,
+    plus to have another enemy nearby.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Boomerang
-  - level: 2
-    benefits:
-    - type: ability
-      value: Long Toss
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Fan of Knives
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-      - attribute: Awareness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Rappelling Dagger
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Stab & Throw
+    - level: 1
+      benefits:
+        - type: ability
+          value: Boomerang
+    - level: 2
+      benefits:
+        - type: ability
+          value: Long Toss
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Fan of Knives
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+            - attribute: Awareness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Rappelling Dagger
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Stab & Throw
   abilities:
-  - id: boomerang
-    name: Boomerang
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: long_toss
-    name: Long Toss
-    type: passive
-    keywords: []
-    range: Ranged Weapon Range
-    description: You may make a Heavy Attack against the target. This attack has triple
-      the range it would normally have.
-    requirements:
-    - type: text
-      description: Throwing Weapon or Thrown attack only.
-    costs:
-      ap: 2
-  - id: fan_of_knives
-    name: Fan of Knives
-    type: passive
-    keywords: []
-    range: 20ft
-    description: You may make a Light Attack against all enemies in range. This is
-      considered a Ranged Weapon Attack that does not provoke attacks of opportunity.
-    requirements:
-    - type: text
-      description: Throwing Weapon or Thrown attack only.
-    costs:
-      ap: 2
-  - id: rappelling_dagger
-    name: Rappelling Dagger
-    type: passive
-    keywords: []
-    range: 30ft
-    description: You may make a Light Attack against the target. On damage, you may
-      move to the closest available spot within 5ft of the target. This movement does
-      not provoke attacks of opportunity. Can be used against non-living objects and
-      the on damage part always applies when used in that way.
-    requirements:
-    - type: text
-      description: Throwing Weapon or Thrown attack only.
-    costs:
-      mana: 1
-      ap: 1
-  - id: stab___throw
-    name: Stab & Throw
-    type: passive
-    keywords: []
-    range: Special
-    description: You may make a Heavy Attack against a target in melee range. You
-      may then use the same weapon to Heavy Attack a different target within your
-      ranged weapon range or thrown attack range. This second attack does not provoke
-      attacks of opportunity from the target of your first attack.
-    requirements:
-    - type: text
-      description: Throwing Weapon or Thrown attack only.
-    costs:
-      ap: 3
+    - id: boomerang
+      name: Boomerang
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: long_toss
+      name: Long Toss
+      type: passive
+      keywords: []
+      range: Ranged Weapon Range
+      description: >-
+        You may make a Heavy Attack against the target. This attack has triple
+        the range it would normally have.
+      requirements:
+        - type: text
+          description: Throwing Weapon or Thrown attack only.
+      costs:
+        ap: 2
+    - id: fan_of_knives
+      name: Fan of Knives
+      type: passive
+      keywords: []
+      range: 20ft
+      description: >-
+        You may make a Light Attack against all enemies in range. This is
+        considered a Ranged Weapon Attack that does not provoke attacks of
+        opportunity.
+      requirements:
+        - type: text
+          description: Throwing Weapon or Thrown attack only.
+      costs:
+        ap: 2
+    - id: rappelling_dagger
+      name: Rappelling Dagger
+      type: passive
+      keywords: []
+      range: 30ft
+      description: >-
+        You may make a Light Attack against the target. On damage, you may move
+        to the closest available spot within 5ft of the target. This movement
+        does not provoke attacks of opportunity. Can be used against non-living
+        objects and the on damage part always applies when used in that way.
+      requirements:
+        - type: text
+          description: Throwing Weapon or Thrown attack only.
+      costs:
+        mana: 1
+        ap: 1
+    - id: stab___throw
+      name: Stab & Throw
+      type: passive
+      keywords: []
+      range: Special
+      description: >-
+        You may make a Heavy Attack against a target in melee range. You may
+        then use the same weapon to Heavy Attack a different target within your
+        ranged weapon range or thrown attack range. This second attack does not
+        provoke attacks of opportunity from the target of your first attack.
+      requirements:
+        - type: text
+          description: Throwing Weapon or Thrown attack only.
+      costs:
+        ap: 3

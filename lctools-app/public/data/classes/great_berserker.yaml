@@ -5,142 +5,149 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/f8e87d2c-1c98-4bb1-b6d8-760a089d6843-great-berserker.sm.webp
+  image_url: /images/classes/Great_Berserker.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Berserker mastered.
+      - type: text
+        description: Berserker mastered.
   description: Offensive powerhouses that overwhelm enemies with sheer force.
-  guide: 'Great Berserker are high risk, offensive powerhouses.
+  guide: >-
+    Great Berserker are high risk, offensive powerhouses.
 
-    Single-Minded Fury makes them focus on that 1 person, gaining a ton of bonuses
-    and immunities, but being effectively useless against other enemies until that
-    target is dead. Using it early or against the wrong target can make you ineffective
-    in the fight. For example, a flying enemy may be unreachable for several turns
-    in which you''d be able to do little.
+    Single-Minded Fury makes them focus on that 1 person, gaining a ton of
+    bonuses and immunities, but being effectively useless against other enemies
+    until that target is dead. Using it early or against the wrong target can
+    make you ineffective in the fight. For example, a flying enemy may be
+    unreachable for several turns in which you'd be able to do little.
 
-    Simply running away is not much of an option however. Unrelenting assault prevents
-    them from escaping through any means other than teleporting.
+    Simply running away is not much of an option however. Unrelenting assault
+    prevents them from escaping through any means other than teleporting.
 
-    Smash through the pain gives great berserkers a bit of survivability, though at
-    the cost of using that RP to do more damage. It''s pretty efficient and it stacks
-    with your normal guard bonus.
+    Smash through the pain gives great berserkers a bit of survivability, though
+    at the cost of using that RP to do more damage. It's pretty efficient and it
+    stacks with your normal guard bonus.
 
-    Victory or Death is a double-edged sword. Doing maximum damage is obviously good,
-    but if you fail to finish off the enemy or enemies, then you will take a ton of
-    damage on the turn after. It is best used when needing to finish off a high priority
-    target or near the end of a fight. Because of the difference in damage rolls sizes,
-    it is best used solely with heavy attacks. There''s little benefit to maximum
-    damage light attacks in most cases.'
+    Victory or Death is a double-edged sword. Doing maximum damage is obviously
+    good, but if you fail to finish off the enemy or enemies, then you will take
+    a ton of damage on the turn after. It is best used when needing to finish
+    off a high priority target or near the end of a fight. Because of the
+    difference in damage rolls sizes, it is best used solely with heavy attacks.
+    There's little benefit to maximum damage light attacks in most cases.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Giant Strength
-  - level: 2
-    benefits:
-    - type: ability
-      value: Unrelenting Assault
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Single-Minded Fury
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Fitness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Smash through the pain
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Victory or Death
+    - level: 1
+      benefits:
+        - type: ability
+          value: Giant Strength
+    - level: 2
+      benefits:
+        - type: ability
+          value: Unrelenting Assault
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Single-Minded Fury
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Fitness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Smash through the pain
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Victory or Death
   abilities:
-  - id: giant_strength
-    name: Giant Strength
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: unrelenting_assault
-    name: Unrelenting Assault
-    type: passive
-    keywords:
-    - Rage
-    range: Melee Weapon Range
-    description: 'You may use this ability when an enemy willingly moves out of your
-      melee weapon range to make a Heavy attack against them. You can use this even
-      if they took the disengage action or a similar action that would not make them
-      provoke attacks of opportunity. If the target uses a teleport type move, then
-      you cannot use this ability, unless they Teleport into your weapon range.
+    - id: giant_strength
+      name: Giant Strength
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: unrelenting_assault
+      name: Unrelenting Assault
+      type: passive
+      keywords:
+        - Rage
+      range: Melee Weapon Range
+      description: >-
+        You may use this ability when an enemy willingly moves out of your melee
+        weapon range to make a Heavy attack against them. You can use this even
+        if they took the disengage action or a similar action that would not
+        make them provoke attacks of opportunity. If the target uses a teleport
+        type move, then you cannot use this ability, unless they Teleport into
+        your weapon range.
 
-      This is treated as an opportunity attack.'
-    requirements:
-    - type: text
-      description: An enemy moves out of your range.
-    costs:
-      rp: 1
-  - id: single-minded_fury
-    name: Single-Minded Fury
-    type: passive
-    keywords:
-    - Quick
-    range: Sight
-    description: You choose a single enemy as the target of your Single-Minded Fury.
-      Your movement speed is doubled when moving towards your target plus you gain
-      immunity to Slowed and difficult terrain. You also gain immunity to any mind-affecting
-      effect that would prevent you from chasing or attacking your target. You gain
-      a 1d4 bonus to accuracy rolls against that target, but suffer a 2d4 penalty
-      to accuracy rolls against any other target. This effect lasts until the end
-      of the encounter or until the target falls to 0 HP or lower.
-    requirements:
-    - type: text
-      description: In Rage Stance, ability is not already active.
-    costs:
-      ap: 0
-  - id: smash_through_the_pain
-    name: Smash through the pain
-    type: passive
-    keywords:
-    - Rage
-    range: Self
-    description: You reduce the damage taken by the next attack by an amount equal
-      to 3 + Power
-    costs:
-      rp: 1
-  - id: victory_or_death
-    name: Victory or Death
-    type: passive
-    keywords: []
-    range: Self
-    description: 'All melee weapon attacks that you make this turn deal maximum damage
-      on hit. All weapon attacks made against you until the start of your next turn
-      also deal maximum damage on hit.
+        This is treated as an opportunity attack.
+      requirements:
+        - type: text
+          description: An enemy moves out of your range.
+      costs:
+        rp: 1
+    - id: single-minded_fury
+      name: Single-Minded Fury
+      type: passive
+      keywords:
+        - Quick
+      range: Sight
+      description: >-
+        You choose a single enemy as the target of your Single-Minded Fury. Your
+        movement speed is doubled when moving towards your target plus you gain
+        immunity to Slowed and difficult terrain. You also gain immunity to any
+        mind-affecting effect that would prevent you from chasing or attacking
+        your target. You gain a 1d4 bonus to accuracy rolls against that target,
+        but suffer a 2d4 penalty to accuracy rolls against any other target.
+        This effect lasts until the end of the encounter or until the target
+        falls to 0 HP or lower.
+      requirements:
+        - type: text
+          description: In Rage Stance, ability is not already active.
+      costs:
+        ap: 0
+    - id: smash_through_the_pain
+      name: Smash through the pain
+      type: passive
+      keywords:
+        - Rage
+      range: Self
+      description: >-
+        You reduce the damage taken by the next attack by an amount equal to 3 +
+        Power
+      costs:
+        rp: 1
+    - id: victory_or_death
+      name: Victory or Death
+      type: passive
+      keywords: []
+      range: Self
+      description: >-
+        All melee weapon attacks that you make this turn deal maximum damage on
+        hit. All weapon attacks made against you until the start of your next
+        turn also deal maximum damage on hit.
 
 
-      Once used, this cannot be used again until the end of the encounter.'
-    requirements:
-    - type: text
-      description: In rage stance.
-    costs:
-      ap: 0
+        Once used, this cannot be used again until the end of the encounter.
+      requirements:
+        - type: text
+          description: In rage stance.
+      costs:
+        ap: 0

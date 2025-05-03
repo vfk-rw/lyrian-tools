@@ -5,148 +5,157 @@ class:
   difficulty: 2
   main_role: Healer
   secondary_role: Striker
-  image_url: https://cdn.angelssword.com/ttrpg/assets/73382576-e975-4d2e-baeb-5f0284ebdfcc-Mycomancer_Clean.sm.webp
+  image_url: /images/classes/Mycomancer.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Mage mastered.
-  description: Mycomancers are powerful mages that harness the power of fungi to heal
+      - type: text
+        description: Mage mastered.
+  description: >-
+    Mycomancers are powerful mages that harness the power of fungi to heal
     allies and destroy enemies. They try to understand death through mycology.
-  guide: 'Mycomancers are a unique healer that relies on dealing damage to heal their
+  guide: >-
+    Mycomancers are a unique healer that relies on dealing damage to heal their
     allies. The only target they can heal is their Spore Symbiote.
 
-    Once it is placed, you can use Saprophytic Bolt to heal your target. Grunts may
-    react to it even if its a light attack, so burning their RP first may be advised
-    so you don''t waste it.
+    Once it is placed, you can use Saprophytic Bolt to heal your target. Grunts
+    may react to it even if its a light attack, so burning their RP first may be
+    advised so you don't waste it.
 
-    Destroying Angel is a bigger heal and also comes with the benefit of instantly
-    killing the target when used against grunts. It is not worth using against non-grunts
-    however.
+    Destroying Angel is a bigger heal and also comes with the benefit of
+    instantly killing the target when used against grunts. It is not worth using
+    against non-grunts however.
 
-    Poison Spore is the last ability that can center around the spore symbiote. It
-    can be used as a zoning tool of sorts, but be aware that your allies are not immune
-    to the poison. One of the better uses is placing it around yourself or the symbiote
-    if they are a more vulnerable target and using the spore as a deterrent to any
-    assassin type enemies that might threaten the backline.
+    Poison Spore is the last ability that can center around the spore symbiote.
+    It can be used as a zoning tool of sorts, but be aware that your allies are
+    not immune to the poison. One of the better uses is placing it around
+    yourself or the symbiote if they are a more vulnerable target and using the
+    spore as a deterrent to any assassin type enemies that might threaten the
+    backline.
 
-    Amoxicillin is a simple disease removal spell. The cast time makes it unusable
-    in battle and you are required to identify the disease first, but it''s a free
-    removal once you do.
+    Amoxicillin is a simple disease removal spell. The cast time makes it
+    unusable in battle and you are required to identify the disease first, but
+    it's a free removal once you do.
 
-    As a mycomancer, it is recommended you heal early rather than late. Your healing
-    can be unreliable and you don''t want your allies to drop low, only for you to
-    miss a crucial a heal and watch them go down.'
+    As a mycomancer, it is recommended you heal early rather than late. Your
+    healing can be unreliable and you don't want your allies to drop low, only
+    for you to miss a crucial a heal and watch them go down.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Spore Symbiote
-  - level: 2
-    benefits:
-    - type: ability
-      value: Saprophytic Bolt
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Poison Spore
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Awareness
-        value: 1
-      - attribute: Cunning
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Amoxicillin
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Power
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Destroying Angel
+    - level: 1
+      benefits:
+        - type: ability
+          value: Spore Symbiote
+    - level: 2
+      benefits:
+        - type: ability
+          value: Saprophytic Bolt
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Poison Spore
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Awareness
+              value: 1
+            - attribute: Cunning
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Amoxicillin
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Power
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Destroying Angel
   abilities:
-  - id: spore_symbiote
-    name: Spore Symbiote
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: saprophytic_bolt
-    name: Saprophytic Bolt
-    type: passive
-    keywords:
-    - Healing
-    - Spell
-    - Earth
-    range: 60ft
-    description: You may make a Light Attack against the target, dealing Earth damage
-      On damage, the current host of Spore Symbiote is Healed for your Power.
-    costs:
-      mana: 1
-      ap: 1
-  - id: poison_spore
-    name: Poison Spore
-    type: passive
-    keywords:
-    - Concentration
-    - Poison
-    - Full Pierce
-    range: Self or The Host of Poison Spore. 15ft x 15ft Area with the target at the
-      center.
-    description: 'You may spend either 2 AP or 1 RP to use this ability.
+    - id: spore_symbiote
+      name: Spore Symbiote
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: saprophytic_bolt
+      name: Saprophytic Bolt
+      type: passive
+      keywords:
+        - Healing
+        - Spell
+        - Earth
+      range: 60ft
+      description: >-
+        You may make a Light Attack against the target, dealing Earth damage On
+        damage, the current host of Spore Symbiote is Healed for your Power.
+      costs:
+        mana: 1
+        ap: 1
+    - id: poison_spore
+      name: Poison Spore
+      type: passive
+      keywords:
+        - Concentration
+        - Poison
+        - Full Pierce
+      range: >-
+        Self or The Host of Poison Spore. 15ft x 15ft Area with the target at
+        the center.
+      description: >-
+        You may spend either 2 AP or 1 RP to use this ability.
 
-      You create an Area of Poison Spores around you or the Host of Spore Symbiote.
-      Units who end their turn in the Poison Spore take Full Pierce Earth(Poison)
-      damage equal to your Power. You and the host of Spore Symbiote are immune to
-      your own Poison Spore. Poison Spore lasts until the end of the encounter but
-      you can only have one instance of Poison Spore active at a time.'
-    costs:
-      ap: 2
-      rp: 1
-  - id: amoxicillin
-    name: Amoxicillin
-    type: passive
-    keywords:
-    - Concentration
-    - Healing
-    - Spell
-    range: 30ft
-    description: You choose up to 10 willing units in range.  After spending 1 minute
-      in concentration, you create a cloud of spores that heals a disease that you
-      can identify.
-    requirements:
-    - type: text
-      description: You can identify the disease.
-  - id: destroying_angel
-    name: Destroying Angel
-    type: passive
-    keywords:
-    - Poison
-    - Spell
-    range: 60ft
-    description: You make a Precise Attack against an enemy unit within range, dealing
-      Earth(Poison) Damage. On unguarded hit, if the enemy is a Grunt, they are immediately
-      reduced to negative their Max HP and die. On Killing Blow, the current host
-      of Spore Symbiote is healed for your Power x 2.
-    costs:
-      mana: 2
-      ap: 4
+        You create an Area of Poison Spores around you or the Host of Spore
+        Symbiote. Units who end their turn in the Poison Spore take Full Pierce
+        Earth(Poison) damage equal to your Power. You and the host of Spore
+        Symbiote are immune to your own Poison Spore. Poison Spore lasts until
+        the end of the encounter but you can only have one instance of Poison
+        Spore active at a time.
+      costs:
+        ap: 2
+        rp: 1
+    - id: amoxicillin
+      name: Amoxicillin
+      type: passive
+      keywords:
+        - Concentration
+        - Healing
+        - Spell
+      range: 30ft
+      description: >-
+        You choose up to 10 willing units in range.  After spending 1 minute in
+        concentration, you create a cloud of spores that heals a disease that
+        you can identify.
+      requirements:
+        - type: text
+          description: You can identify the disease.
+    - id: destroying_angel
+      name: Destroying Angel
+      type: passive
+      keywords:
+        - Poison
+        - Spell
+      range: 60ft
+      description: >-
+        You make a Precise Attack against an enemy unit within range, dealing
+        Earth(Poison) Damage. On unguarded hit, if the enemy is a Grunt, they
+        are immediately reduced to negative their Max HP and die. On Killing
+        Blow, the current host of Spore Symbiote is healed for your Power x 2.
+      costs:
+        mana: 2
+        ap: 4

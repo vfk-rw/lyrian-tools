@@ -5,148 +5,155 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/ad77fd9a-c4d8-4f97-8525-56d47ccc3532-Sword_Saint_New_1_raw.sm.webp
+  image_url: /images/classes/Sword_Saint.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Iaido style mastered.
+      - type: text
+        description: Iaido style mastered.
   description: A warrior with peerless skill in swordsmanship.
-  guide: 'The Sword Saint has further mastered Iaido. Resheathe allows them to regain
-    the Sheathed state during combat without relying on a kiri-tsuke killing blow.
-    The AP cost is high though and it should only be used during a lull in combat.
+  guide: >-
+    The Sword Saint has further mastered Iaido. Resheathe allows them to regain
+    the Sheathed state during combat without relying on a kiri-tsuke killing
+    blow. The AP cost is high though and it should only be used during a lull in
+    combat.
 
-    Kiri-tsuke II is an upgrade from the normal kiri-tsuke that combos of Iai strike,
-    saving you some AP.
+    Kiri-tsuke II is an upgrade from the normal kiri-tsuke that combos of Iai
+    strike, saving you some AP.
 
-    Chiburi Noto II is also a straight upgrade from Chiburi Noto, adding full pierce
-    on top of the previous benefit.
+    Chiburi Noto II is also a straight upgrade from Chiburi Noto, adding full
+    pierce on top of the previous benefit.
 
-    Flash Cut is a mana intensive attack that does unavoidable heavy damage. It requires
-    you to be in the sheathed state, which makes it only really an option in the beginning
-    of the fight. Flash Cut into Iai strike into Kiri-tsuke II is a very dangerous
-    combo.
+    Flash Cut is a mana intensive attack that does unavoidable heavy damage. It
+    requires you to be in the sheathed state, which makes it only really an
+    option in the beginning of the fight. Flash Cut into Iai strike into
+    Kiri-tsuke II is a very dangerous combo.
 
-    The Secret Art: Tsubame Gaeshi has high potential damage, but also does some guaranteed
-    damage. You are guaranteed at least 1 hit, most likely a second and a third if
-    you''re lucky or if the target is out of RP. You can use this even early in the
-    fight, especially if you''ve already softened up an enemy through your other attacks
-    with sure hit and lock on.'
+    The Secret Art: Tsubame Gaeshi has high potential damage, but also does some
+    guaranteed damage. You are guaranteed at least 1 hit, most likely a second
+    and a third if you're lucky or if the target is out of RP. You can use this
+    even early in the fight, especially if you've already softened up an enemy
+    through your other attacks with sure hit and lock on.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Resheathe
-  - level: 2
-    benefits:
-    - type: ability
-      value: Kiri-tsuke II
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Flash Cut
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Awareness
-        value: 1
-      - attribute: Fitness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Chiburi Noto II
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Tsubame Gaeshi'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Resheathe
+    - level: 2
+      benefits:
+        - type: ability
+          value: Kiri-tsuke II
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Flash Cut
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Awareness
+              value: 1
+            - attribute: Fitness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Chiburi Noto II
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Tsubame Gaeshi'
   abilities:
-  - id: resheathe
-    name: Resheathe
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: kiri-tsuke_ii
-    name: Kiri-tsuke II
-    type: passive
-    keywords:
-    - Combo
-    - Killing Blow
-    range: Melee Weapon Range
-    description: 'You may make a Heavy Attack against the target. On Killing Blow,
-      you regain the Sheathed state.
+    - id: resheathe
+      name: Resheathe
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: kiri-tsuke_ii
+      name: Kiri-tsuke II
+      type: passive
+      keywords:
+        - Combo
+        - Killing Blow
+      range: Melee Weapon Range
+      description: >-
+        You may make a Heavy Attack against the target. On Killing Blow, you
+        regain the Sheathed state.
 
-      Combo:
+        Combo:
 
-      If used after Iai Strike, the AP cost is reduced by 1.'
-    requirements:
-    - type: text
-      description: Katana only.
-    costs:
-      mana: 1
-      ap: 1
-  - id: flash_cut
-    name: Flash Cut
-    type: passive
-    keywords:
-    - Iaijutsu
-    - Sure Hit
-    range: Melee Weapon Range
-    description: You draw your katana and attack with such Speed it becomes impossible
-      to perceive, making a Heavy Attack against the target, after which you resheathe
-      the weapon. This ability does not break the Sheathed state.
-    requirements:
-    - type: text
-      description: Katana only, must be in Sheathed state.
-    costs:
-      mana: 3
-      ap: 2
-  - id: chiburi_noto_ii
-    name: Chiburi Noto II
-    type: passive
-    keywords:
-    - Encounter Conclusion
-    range: Self (Weapon)
-    description: You clean the blood of your katana and sheath the blade. If your
-      next Iai strike with this weapon during this arc is a hit, its Roll Damage is
-      maximized and it gains Full Pierce.
-    requirements:
-    - type: text
-      description: Must have used an ability with the Iaijutsu keyword with the chosen
-        weapon this encounter.
-  - id: secret_art__tsubame_gaeshi
-    name: 'Secret Art: Tsubame Gaeshi'
-    type: combat_action
-    keywords:
-    - Lock On
-    - Secret Art
-    - Sure Hit
-    range: Melee Weapon Range
-    description: You may make a Heavy Attack against the target 3 times. On the first
-      miss, the next attacks gain Lock On. On the second miss, the next attack gains
-      Sure Hit. These only apply to attacks made during Tsubame Gaeshi.
-    requirements:
-    - type: text
-      description: Katana only.
-    costs:
-      mana: 3
-      ap: 4
+        If used after Iai Strike, the AP cost is reduced by 1.
+      requirements:
+        - type: text
+          description: Katana only.
+      costs:
+        mana: 1
+        ap: 1
+    - id: flash_cut
+      name: Flash Cut
+      type: passive
+      keywords:
+        - Iaijutsu
+        - Sure Hit
+      range: Melee Weapon Range
+      description: >-
+        You draw your katana and attack with such Speed it becomes impossible to
+        perceive, making a Heavy Attack against the target, after which you
+        resheathe the weapon. This ability does not break the Sheathed state.
+      requirements:
+        - type: text
+          description: Katana only, must be in Sheathed state.
+      costs:
+        mana: 3
+        ap: 2
+    - id: chiburi_noto_ii
+      name: Chiburi Noto II
+      type: passive
+      keywords:
+        - Encounter Conclusion
+      range: Self (Weapon)
+      description: >-
+        You clean the blood of your katana and sheath the blade. If your next
+        Iai strike with this weapon during this arc is a hit, its Roll Damage is
+        maximized and it gains Full Pierce.
+      requirements:
+        - type: text
+          description: >-
+            Must have used an ability with the Iaijutsu keyword with the chosen
+            weapon this encounter.
+    - id: secret_art__tsubame_gaeshi
+      name: 'Secret Art: Tsubame Gaeshi'
+      type: combat_action
+      keywords:
+        - Lock On
+        - Secret Art
+        - Sure Hit
+      range: Melee Weapon Range
+      description: >-
+        You may make a Heavy Attack against the target 3 times. On the first
+        miss, the next attacks gain Lock On. On the second miss, the next attack
+        gains Sure Hit. These only apply to attacks made during Tsubame Gaeshi.
+      requirements:
+        - type: text
+          description: Katana only.
+      costs:
+        mana: 3
+        ap: 4

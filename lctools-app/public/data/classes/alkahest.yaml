@@ -5,232 +5,132 @@ class:
   difficulty: 2
   main_role: Artisan
   secondary_role: Utility
-  image_url: https://cdn.angelssword.com/ttrpg/assets/6cd14d04-04a1-4475-88de-718ecff3e465-Transmute_Master_2_-_Copy.sm.webp
+  image_url: /images/classes/Alkahest.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Transmuter mastered
-  description: 'While Transmuters provide foundations for everyday life and artisan
-    work, Alkahests are those who are obsessed with the subtleties of matter and creation.
-     Alkahests are the experts in the fields of Transmutational Alchemy, quickly altering
-    reality with precision and artistic flair.  They''re able to immediately concept
-    and transmute just the right tool for any situation.
+      - type: text
+        description: Transmuter mastered
+  description: "While Transmuters provide foundations for everyday life and artisan work, Alkahests are those who are obsessed with the subtleties of matter and creation. \_Alkahests are the experts in the fields of Transmutational Alchemy, quickly altering reality with precision and artistic flair. \_They're able to immediately concept and transmute just the right tool for any situation.\nHistorically, one Alkahest above all others was a pioneer in her field. \_She remains celebrated across Lyr to this day—Etoile Dacquoise. \_While her best friend and rival, Riannon Aquanas, focused on the art of core Alchemy, Etoile dedicated her life to mastering the complexities of Transmutation. \_In the atelier together, these pioneers had opened an often historically referenced shop in the Kingdom of Mothergreen—and became the foundation of innovation during Lyr's darkest hours.\nHistorical word of mouth speaks of Etoile's contributions from behind the scenes in the battle against Heira, the Goddess of Evil. \_Although she never wielded a sword on the front lines, her mastery of transmutation alongside Riannon's expertise in alchemical creations created the tools and solutions needed by their friends that did. \_The members of those legendary heroes helped create that shop themselves, as the procurement arm of the business. \_Etoile's legacy is still immortalized to this day behind the statues of Riannon and the other heroes:\nElly, The Hero\nUruka, The Sylph\nSignum, The Heretic\nLeaflit, The Pixie\nBrynhildr, The Dragon\nBasalt, The Dwarf\nToday's Alkahests follow in Etoile's footsteps and in her teachings, fulfilling their roles as vital supporters and adventurers, heroes and innovators alike. \_They sometimes provide assistance from the sidelines, demonstrating that heroism is not only about direct confrontation but also wits, innovation and dedication to a future victory."
+  guide: >-
+    The Alkahest is a crafter and utility class with very limited combat
+    potential.
 
-    Historically, one Alkahest above all others was a pioneer in her field.  She remains
-    celebrated across Lyr to this day—Etoile Dacquoise.  While her best friend and
-    rival, Riannon Aquanas, focused on the art of core Alchemy, Etoile dedicated her
-    life to mastering the complexities of Transmutation.  In the atelier together,
-    these pioneers had opened an often historically referenced shop in the Kingdom
-    of Mothergreen—and became the foundation of innovation during Lyr''s darkest hours.
+    Your best combat ability is your Secret Art: Transmute Proto Armatae. While
+    it costs a fair bit of mana, you can view the armatae's HP as getting a ton
+    of bonus HP that stacks with temporary HP. In addition, you get to make a
+    free attack each turn. It doesn't increase your damage output much (or at
+    all), but it's good defensively. You can use it defensively by spending RP
+    and absorb a hit with the free 20 HP shield it comes with.
 
-    Historical word of mouth speaks of Etoile''s contributions from behind the scenes
-    in the battle against Heira, the Goddess of Evil.  Although she never wielded
-    a sword on the front lines, her mastery of transmutation alongside Riannon''s
-    expertise in alchemical creations created the tools and solutions needed by their
-    friends that did.  The members of those legendary heroes helped create that shop
-    themselves, as the procurement arm of the business.  Etoile''s legacy is still
-    immortalized to this day behind the statues of Riannon and the other heroes:
+    Alchemical Detonation is your other ability that can be used in combat,
+    although it is situational. Strong when you're against enemies that use wall
+    creation. It also has strong out of combat benefits, allowing you enter
+    virtually any building at little cost.
 
-    Elly, The Hero
+    Transmute Effective Implement is another out of combat tool that can grant
+    you a massive bonus to a skill check. If you're willing to spend enough
+    mana, you can succeed at almost any check if you want to.
 
-    Uruka, The Sylph
+    Siphon Materials costs an interlude point, but it lets you extract valuable
+    materials that might otherwise be wasted in an item you can't use. You could
+    extract the silver from a katana to have a blacksmith make it into a dagger
+    for example.
 
-    Signum, The Heretic
-
-    Leaflit, The Pixie
-
-    Brynhildr, The Dragon
-
-    Basalt, The Dwarf
-
-    Today''s Alkahests follow in Etoile''s footsteps and in her teachings, fulfilling
-    their roles as vital supporters and adventurers, heroes and innovators alike.
-     They sometimes provide assistance from the sidelines, demonstrating that heroism
-    is not only about direct confrontation but also wits, innovation and dedication
-    to a future victory.'
-  guide: 'The Alkahest is a crafter and utility class with very limited combat potential.
-
-    Your best combat ability is your Secret Art: Transmute Proto Armatae. While it
-    costs a fair bit of mana, you can view the armatae''s HP as getting a ton of bonus
-    HP that stacks with temporary HP. In addition, you get to make a free attack each
-    turn. It doesn''t increase your damage output much (or at all), but it''s good
-    defensively. You can use it defensively by spending RP and absorb a hit with the
-    free 20 HP shield it comes with.
-
-    Alchemical Detonation is your other ability that can be used in combat, although
-    it is situational. Strong when you''re against enemies that use wall creation.
-    It also has strong out of combat benefits, allowing you enter virtually any building
-    at little cost.
-
-    Transmute Effective Implement is another out of combat tool that can grant you
-    a massive bonus to a skill check. If you''re willing to spend enough mana, you
-    can succeed at almost any check if you want to.
-
-    Siphon Materials costs an interlude point, but it lets you extract valuable materials
-    that might otherwise be wasted in an item you can''t use. You could extract the
-    silver from a katana to have a blacksmith make it into a dagger for example.
-
-    Finally, stabilize matter is another co crafting ability. It statistically beats
-    out the other options, though you do have to precast it instead of using it after
-    you see the roll. A small bit of creation lets you convert a herb to one of a
-    different element at the cost of reducing the rarity. Using this reduces the value
-    of herb, so it should only be done if you desperately need the herb.'
+    Finally, stabilize matter is another co crafting ability. It statistically
+    beats out the other options, though you do have to precast it instead of
+    using it after you see the roll. A small bit of creation lets you convert a
+    herb to one of a different element at the cost of reducing the rarity. Using
+    this reduces the value of herb, so it should only be done if you desperately
+    need the herb.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Transmutation Tricks
-  - level: 2
-    benefits:
-    - type: ability
-      value: Transmute Effective Implement
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Alchemical Detonation
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Siphon Material
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-      - attribute: Agility
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Transmute Proto Armatae'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Transmutation Tricks
+    - level: 2
+      benefits:
+        - type: ability
+          value: Transmute Effective Implement
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Alchemical Detonation
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Siphon Material
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+            - attribute: Agility
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Transmute Proto Armatae'
   abilities:
-  - id: transmutation_tricks
-    name: Transmutation Tricks
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: transmute_effective_implement
-    name: Transmute Effective Implement
-    type: passive
-    keywords:
-    - Overcharge
-    range: 5ft
-    description: 'From the surrounding material you construct an “Effective Implement”,
-      granting you a +5 to the skill of your choice.  You must explain how this implement
-      will be effective towards the check using the relevant skill (example:  creating
-      a springboard to jump higher with acrobatics) and the GM determines the validity
-      or this ability has no effect.  Does not work with crafting or gathering skills.
-      This implement lasts until you have attempted the specific check it was created
-      for.
-
-      You may also spend 1 RP instead of 1 AP for this ability.
-
-      Overcharge
-
-      :  You can spend 1 additional mana to increase the skill bonus to +10.'
-    costs:
-      mana: 1
-      ap: 1
-  - id: alchemical_detonation
-    name: Alchemical Detonation
-    type: passive
-    keywords:
-    - Rapid
-    range: 5ft
-    description: You touch a wall, door or container in front of you, which shatters
-      from deconstructive force, becoming destroyed.  Can destroy up to a 5ftx5ft
-      segment of wall.  Only affects objects made out of common building materials
-      (wood, clay, stone, iron etc), however it affects all walls made out of player
-      abilities.  The GM determines if the object is detonateable.  You can then take
-      a movement action to move 5ft into the space where the wall was.
-    costs:
-      mana: 1
-      ap: 1
-  - id: siphon_material
-    name: Siphon Material
-    type: passive
-    keywords: []
-    range: ''
-    description: 'Costs an interlude point to use.
-
-      You siphon the specific special material from an item if possible, removing
-      the effects that the original item would’ve had.  If you cannot remove the effect
-      then the skill fails.  You remove the special material and regain its original
-      form, while also maintaining the form of the item minus the effect.'
-  - id: secret_art__transmute_proto_armatae
-    name: 'Secret Art: Transmute Proto Armatae'
-    type: combat_action
-    keywords:
-    - Secret Art
-    range: Self
-    description: 'You touch the ground, transmuting a Proto Armatae of your own design. 
-      The Proto Armatae lifts you up and immediately encases you into its cockpit.
-        The Proto Armatae is 15ft tall and is a large creature that occupies a 15ftx15ft
-      space.  All creatures and moveable objects surrounding the Proto Armatae are
-      pushed back away from its zone of control in a burst of steam.  The Armatae
-      also gains a temporary shield with 20 HP that disappears at the start of your
-      next turn.
-
-      You must use your own actions to cause the Proto Armatae to move and attack. 
-      You can eject from a transmutation hatch on the top at the center of the Proto
-      Armatae for 1 AP, in which the Proto Armatae stops functioning.  When you re-enter
-      you must close the hatch for 1 AP before the Proto Armatae functions again.
-
-      The Proto Armatae has health equal to 15 + 3x Focus and it uses your AP and
-      RP for actions.  You can channel your Transmuter abilities through the Proto
-      Armatae, and Transmute Weapon can create a giant sized weapon for the Armatae
-      to use.
-
-      You may also spend 1 RP to use this ability instead of the AP cost.
-
-      Only usable once.  You regain the use of this ability when you gain an Interlude
-      Point.
-
-      Proto Armatae
-
-      HP: –
-
-      Evasion: 9/19
-
-      Guard: 4/14
-
-      Mini Transmutation Cannon (Right Arm)
-
-      Cost: 0 AP
-
-      Range: 40ft
-
-      Description:  Fires a mini transmutation cannon of deconstructive energy making
-      a light attack against a target.  Doesn’t provoke attacks of opportunity.
-
-      Humanoid Gripper (Left Arm)
-
-      Description: Humanoid Gripper can make all basic attacks.  It is proficient
-      in any transmuted weapon it holds.  Its regular melee attacks deal light weapon
-      damage and any transmuted weapon it wields gains the benefit of that weapon
-      category.'
-    costs:
-      mana: 4
-      ap: 15
+    - id: transmutation_tricks
+      name: Transmutation Tricks
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: transmute_effective_implement
+      name: Transmute Effective Implement
+      type: passive
+      keywords:
+        - Overcharge
+      range: 5ft
+      description: "From the surrounding material you construct an “Effective Implement”, granting you a +5 to the skill of your choice.\_ You must explain how this implement will be effective towards the check using the relevant skill (example:\_ creating a springboard to jump higher with acrobatics) and the GM determines the validity or this ability has no effect.\_ Does not work with crafting or gathering skills. This implement lasts until you have attempted the specific check it was created for.\nYou may also spend 1 RP instead of 1 AP for this ability.\nOvercharge\n:\_ You can spend 1 additional mana to increase the skill bonus to +10."
+      costs:
+        mana: 1
+        ap: 1
+    - id: alchemical_detonation
+      name: Alchemical Detonation
+      type: passive
+      keywords:
+        - Rapid
+      range: 5ft
+      description: "You touch a wall, door or container in front of you, which shatters from deconstructive force, becoming destroyed.\_ Can destroy up to a 5ftx5ft segment of wall.\_ Only affects objects made out of common building materials (wood, clay, stone, iron etc), however it affects all walls made out of player abilities.\_ The GM determines if the object is detonateable.\_ You can then take a movement action to move 5ft into the space where the wall was."
+      costs:
+        mana: 1
+        ap: 1
+    - id: siphon_material
+      name: Siphon Material
+      type: passive
+      keywords: []
+      range: ''
+      description: "Costs an interlude point to use.\nYou siphon the specific special material from an item if possible, removing the effects that the original item would’ve had.\_ If you cannot remove the effect then the skill fails.\_ You remove the special material and regain its original form, while also maintaining the form of the item minus the effect."
+    - id: secret_art__transmute_proto_armatae
+      name: 'Secret Art: Transmute Proto Armatae'
+      type: combat_action
+      keywords:
+        - Secret Art
+      range: Self
+      description: "You touch the ground, transmuting a Proto Armatae of your own design.\_ The Proto Armatae lifts you up and immediately encases you into its cockpit. \_ The Proto Armatae is 15ft tall and is a large creature that occupies a 15ftx15ft space.\_ All creatures and moveable objects surrounding the Proto Armatae are pushed back away from its zone of control in a burst of steam.\_ The Armatae also gains a temporary shield with 20 HP that disappears at the start of your next turn.\nYou must use your own actions to cause the Proto Armatae to move and attack.\_ You can eject from a transmutation hatch on the top at the center of the Proto Armatae for 1 AP, in which the Proto Armatae stops functioning.\_ When you re-enter you must close the hatch for 1 AP before the Proto Armatae functions again.\nThe Proto Armatae has health equal to 15 + 3x Focus and it uses your AP and RP for actions.\_ You can channel your Transmuter abilities through the Proto Armatae, and Transmute Weapon can create a giant sized weapon for the Armatae to use.\nYou may also spend 1 RP to use this ability instead of the AP cost.\nOnly usable once.\_ You regain the use of this ability when you gain an Interlude Point.\nProto Armatae\nHP: –\nEvasion: 9/19\nGuard: 4/14\nMini Transmutation Cannon (Right Arm)\nCost: 0 AP\nRange: 40ft\nDescription:\_ Fires a mini transmutation cannon of deconstructive energy making a light attack against a target.\_ Doesn’t provoke attacks of opportunity.\nHumanoid Gripper (Left Arm)\nDescription: Humanoid Gripper can make all basic attacks.\_ It is proficient in any transmuted weapon it holds.\_ Its regular melee attacks deal light weapon damage and any transmuted weapon it wields gains the benefit of that weapon category."
+      costs:
+        mana: 4
+        ap: 15

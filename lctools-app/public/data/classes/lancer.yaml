@@ -5,125 +5,132 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/788b8f70-41e6-4551-af74-69eb1d68572d-Lancer_2_raw.sm.webp
+  image_url: /images/classes/Lancer.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Fighter mastered, Proficient in polearms.
+      - type: text
+        description: Fighter mastered, Proficient in polearms.
   description: Lancers are a class that specializes in using polearms.
-  guide: 'Lancers prefer to let the enemy come to them. The full pierce effect gained
-    from their Brace key ability makes even a readied light attack do good damage.
+  guide: >-
+    Lancers prefer to let the enemy come to them. The full pierce effect gained
+    from their Brace key ability makes even a readied light attack do good
+    damage.
 
-    Extending Spear allows the lancer to attack from long range and hit a lot of enemies
-    if they line up. Extending Spear followed by a readied attack is a good way to
-    start fights and wait for the enemy to get closer.
+    Extending Spear allows the lancer to attack from long range and hit a lot of
+    enemies if they line up. Extending Spear followed by a readied attack is a
+    good way to start fights and wait for the enemy to get closer.
 
-    Once they are close, a crescent sweep can knock them all off their feet and set
-    them up for the rest of the team.
+    Once they are close, a crescent sweep can knock them all off their feet and
+    set them up for the rest of the team.
 
-    When there is only a few enemies, look for a position to use Piercing Stab in.
-    2 AP for 2 heavy attacks is very cost efficient, even if you have to move for
-    1 AP to position for it.
+    When there is only a few enemies, look for a position to use Piercing Stab
+    in. 2 AP for 2 heavy attacks is very cost efficient, even if you have to
+    move for 1 AP to position for it.
 
-    Finally, lunge with a polearm gives you a 20ft attack range. This is long enough
-    to hit basically every enemy in the front line and may be enough range to even
-    hit a backline target that moved up too far.'
+    Finally, lunge with a polearm gives you a 20ft attack range. This is long
+    enough to hit basically every enemy in the front line and may be enough
+    range to even hit a backline target that moved up too far.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Brace
-  - level: 2
-    benefits:
-    - type: ability
-      value: Lunge
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Piercing Stab
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Fitness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Extending Spear
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Focus
-        value: 1
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Crescent Sweep
+    - level: 1
+      benefits:
+        - type: ability
+          value: Brace
+    - level: 2
+      benefits:
+        - type: ability
+          value: Lunge
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Piercing Stab
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Fitness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Extending Spear
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Focus
+              value: 1
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Crescent Sweep
   abilities:
-  - id: brace
-    name: Brace
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: lunge
-    name: Lunge
-    type: passive
-    keywords: []
-    range: Self
-    description: The attack range of your next basic Light, Heavy or Precise Attack
-      with a melee weapon is doubled.
-    costs:
-      ap: 0
-  - id: piercing_stab
-    name: Piercing Stab
-    type: passive
-    keywords: []
-    range: A target in melee weapon range and a target directly behind the first target
-      in melee weapon range.
-    description: You may make a Heavy Attack against the target and the target directly
-      behind it.
-    requirements:
-    - type: text
-      description: Polearm only.
-    costs:
-      mana: 1
-      ap: 2
-  - id: extending_spear
-    name: Extending Spear
-    type: passive
-    keywords: []
-    range: 30ft
-    description: You may make a Light Attack against all targets in a line up to the
-      range.
-    requirements:
-    - type: text
-      description: Polearm only.
-    costs:
-      ap: 2
-  - id: crescent_sweep
-    name: Crescent Sweep
-    type: passive
-    keywords: []
-    range: Melee Weapon Range
-    description: You make a Light Attack against every enemy in range. On damage,
-      a target falls Prone.
-    requirements:
-    - type: text
-      description: Polearm only
-    costs:
-      ap: 3
+    - id: brace
+      name: Brace
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: lunge
+      name: Lunge
+      type: passive
+      keywords: []
+      range: Self
+      description: >-
+        The attack range of your next basic Light, Heavy or Precise Attack with
+        a melee weapon is doubled.
+      costs:
+        ap: 0
+    - id: piercing_stab
+      name: Piercing Stab
+      type: passive
+      keywords: []
+      range: >-
+        A target in melee weapon range and a target directly behind the first
+        target in melee weapon range.
+      description: >-
+        You may make a Heavy Attack against the target and the target directly
+        behind it.
+      requirements:
+        - type: text
+          description: Polearm only.
+      costs:
+        mana: 1
+        ap: 2
+    - id: extending_spear
+      name: Extending Spear
+      type: passive
+      keywords: []
+      range: 30ft
+      description: >-
+        You may make a Light Attack against all targets in a line up to the
+        range.
+      requirements:
+        - type: text
+          description: Polearm only.
+      costs:
+        ap: 2
+    - id: crescent_sweep
+      name: Crescent Sweep
+      type: passive
+      keywords: []
+      range: Melee Weapon Range
+      description: >-
+        You make a Light Attack against every enemy in range. On damage, a
+        target falls Prone.
+      requirements:
+        - type: text
+          description: Polearm only
+      costs:
+        ap: 3

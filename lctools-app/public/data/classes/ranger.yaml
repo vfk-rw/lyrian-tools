@@ -5,139 +5,132 @@ class:
   difficulty: 1
   main_role: Striker
   secondary_role: Utility
-  image_url: https://cdn.angelssword.com/ttrpg/assets/46869133-fbea-4d50-ae5c-386794433dd4-Ranger_New_1.1_raw_w_string.sm.webp
+  image_url: /images/classes/Ranger.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: None.
-  description: 'Rangers hail from the ranks of expert hunters and skilled military
-    marksmen. Their senses and instincts are keen—taking down targets from incredible
-    distances. Whether wielding bows, crossbows, or rifles, Rangers are always ready
-    with an oppressive rain of missiles.
+      - type: text
+        description: None.
+  description: "Rangers hail from the ranks of expert hunters and skilled military marksmen. Their senses and instincts are keen—taking down targets from incredible distances. Whether wielding bows, crossbows, or rifles, Rangers are always ready with an oppressive rain of missiles.\nAn expert ranger has the ability to pick out targets of opportunity. They quickly zero in on the most vulnerable enemies, picking them off with precision. It’s this talent for oppressively breaking down the opposition that makes Rangers so effective in battle.\nRangers have trained the ability to flood mana into their optical magic circuits—granting them the ability to see further and more sharply.\_ They spot threats from great distances and then strike them with pinpoint accuracy.\nThey're a welcome addition to any adventuring party.\_ With sharp focus and deadly accuracy that makes them fearsome opponents."
+  guide: >-
+    Rangers are versatile strikers that can excel at ranged combat, but can also
+    fight in melee if required.
 
-    An expert ranger has the ability to pick out targets of opportunity. They quickly
-    zero in on the most vulnerable enemies, picking them off with precision. It’s
-    this talent for oppressively breaking down the opposition that makes Rangers so
-    effective in battle.
+    Track is a pure out of combat utility tool that ensures the ranger can
+    always follow tracks without rolling.
 
-    Rangers have trained the ability to flood mana into their optical magic circuits—granting
-    them the ability to see further and more sharply.  They spot threats from great
-    distances and then strike them with pinpoint accuracy.
+    Status Assessment is a support tool that lets your party know how injured a
+    target is. Knowing the rough HP % of an enemy is important in making correct
+    tactical decisions, whether it's who to focus fire or whether to retreat all
+    together.
 
-    They''re a welcome addition to any adventuring party.  With sharp focus and deadly
-    accuracy that makes them fearsome opponents.'
-  guide: 'Rangers are versatile strikers that can excel at ranged combat, but can
-    also fight in melee if required.
+    Crippling attack can be used with both a melee and ranged weapon, but
+    applying it from range is a lot more useful. Landing a slow on a melee enemy
+    can allow you to kite it or seriously delay it from being able to attack.
 
-    Track is a pure out of combat utility tool that ensures the ranger can always
-    follow tracks without rolling.
+    Snap Shot is an 1 AP heavy attack, but the chance to hit on it isn't going
+    to be great. Rangers focused on power over focus may see some good use out
+    of this ability. Even normal rangers should consider using this over a light
+    attack when forced to choose between the two, especially against enemies
+    with high guard against who a light attack would do very little even if it
+    hits.
 
-    Status Assessment is a support tool that lets your party know how injured a target
-    is. Knowing the rough HP % of an enemy is important in making correct tactical
-    decisions, whether it''s who to focus fire or whether to retreat all together.
-
-    Crippling attack can be used with both a melee and ranged weapon, but applying
-    it from range is a lot more useful. Landing a slow on a melee enemy can allow
-    you to kite it or seriously delay it from being able to attack.
-
-    Snap Shot is an 1 AP heavy attack, but the chance to hit on it isn''t going to
-    be great. Rangers focused on power over focus may see some good use out of this
-    ability. Even normal rangers should consider using this over a light attack when
-    forced to choose between the two, especially against enemies with high guard against
-    who a light attack would do very little even if it hits.
-
-    Guided Aim is what rangers can spend a lot of mana on. It will remain a powerful
-    ability especially as you go into later classes. Adding a bonus to your accuracy
-    roll, even if the mana cost is higher for the benefit, can help make important
-    abilities more reliable. With guided aim, you need to worry less about future
-    secret art attacks barely missing.'
+    Guided Aim is what rangers can spend a lot of mana on. It will remain a
+    powerful ability especially as you go into later classes. Adding a bonus to
+    your accuracy roll, even if the mana cost is higher for the benefit, can
+    help make important abilities more reliable. With guided aim, you need to
+    worry less about future secret art attacks barely missing.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Ranger's Journey
-  - level: 2
-    benefits:
-    - type: ability
-      value: Track
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Guided Aim
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Awareness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Crippling Attack
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Snap Shot
+    - level: 1
+      benefits:
+        - type: ability
+          value: Ranger's Journey
+    - level: 2
+      benefits:
+        - type: ability
+          value: Track
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Guided Aim
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Awareness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Crippling Attack
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Snap Shot
   abilities:
-  - id: ranger_s_journey
-    name: Ranger's Journey
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: track
-    name: Track
-    type: passive
-    keywords: []
-    range: Self
-    description: You find any tracks that aren’t hidden.  Once you find tracks, you
-      can follow them at normal speed without having to make checks.
-    costs:
-      ap: 1
-  - id: guided_aim
-    name: Guided Aim
-    type: passive
-    keywords: []
-    range: Self
-    description: You gain a bonus to your next accuracy roll equal to the mana spent
-      on this ability. If the attack is a Precise Attack, the bonus gained is doubled.
-    costs:
-      ap: 0
-  - id: crippling_attack
-    name: Crippling Attack
-    type: passive
-    keywords:
-    - Slow
-    range: Weapon Range
-    description: You make a Light Attack against the target. On damage the target
-      is Slowed until the end of their next turn.
-    costs:
-      mana: 1
-      ap: 1
-  - id: snap_shot
-    name: Snap Shot
-    type: passive
-    keywords: []
-    range: Ranged Weapon Range
-    description: You may make a Heavy Attack against the target with a ranged weapon
-      or a thrown weapon. You do not add your Focus to the accuracy roll.
-    costs:
-      ap: 1
+    - id: ranger_s_journey
+      name: Ranger's Journey
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: track
+      name: Track
+      type: passive
+      keywords: []
+      range: Self
+      description: >-
+        You find any tracks that aren’t hidden.  Once you find tracks, you can
+        follow them at normal speed without having to make checks.
+      costs:
+        ap: 1
+    - id: guided_aim
+      name: Guided Aim
+      type: passive
+      keywords: []
+      range: Self
+      description: >-
+        You gain a bonus to your next accuracy roll equal to the mana spent on
+        this ability. If the attack is a Precise Attack, the bonus gained is
+        doubled.
+      costs:
+        ap: 0
+    - id: crippling_attack
+      name: Crippling Attack
+      type: passive
+      keywords:
+        - Slow
+      range: Weapon Range
+      description: >-
+        You make a Light Attack against the target. On damage the target is
+        Slowed until the end of their next turn.
+      costs:
+        mana: 1
+        ap: 1
+    - id: snap_shot
+      name: Snap Shot
+      type: passive
+      keywords: []
+      range: Ranged Weapon Range
+      description: >-
+        You may make a Heavy Attack against the target with a ranged weapon or a
+        thrown weapon. You do not add your Focus to the accuracy roll.
+      costs:
+        ap: 1

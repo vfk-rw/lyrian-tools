@@ -5,127 +5,135 @@ class:
   difficulty: 2
   main_role: Support
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/fe70d420-fa5f-4b90-b20b-bd80dce74298-Oracle_Clean.sm.webp
+  image_url: /images/classes/Oracle.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Any class mastered.
-  description: Mysterious people that work on the edge of Magic and Divinity, utilizing
-    enigmatic powers to see the future whether by instinct or divine intervention.
+      - type: text
+        description: Any class mastered.
+  description: >-
+    Mysterious people that work on the edge of Magic and Divinity, utilizing
+    enigmatic powers to see the future whether by instinct or divine
+    intervention.
   guide: '-'
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Receive Oracle
-  - level: 2
-    benefits:
-    - type: ability
-      value: Scry
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Foretell
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Prediction
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-      - attribute: Agility
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Gate of Fate'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Receive Oracle
+    - level: 2
+      benefits:
+        - type: ability
+          value: Scry
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Foretell
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Prediction
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+            - attribute: Agility
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Gate of Fate'
   abilities:
-  - id: receive_oracle
-    name: Receive Oracle
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: scry
-    name: Scry
-    type: passive
-    keywords:
-    - Divination
-    - Spell
-    range: 5000ft
-    description: 'You designate a point that you can see within range, creating a
-      magical ward at that point.  If you focus you can shift your perception to that
-      ward and see and hear everything within line of the sight of that ward in a
-      30ft radius.  The ward can persist as long as you want over any distance, but
-      you can only have one instance of Scry active at a time.
+    - id: receive_oracle
+      name: Receive Oracle
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: scry
+      name: Scry
+      type: passive
+      keywords:
+        - Divination
+        - Spell
+      range: 5000ft
+      description: >-
+        You designate a point that you can see within range, creating a magical
+        ward at that point.  If you focus you can shift your perception to that
+        ward and see and hear everything within line of the sight of that ward
+        in a 30ft radius.  The ward can persist as long as you want over any
+        distance, but you can only have one instance of Scry active at a time.
 
 
-      The ward is invisible and inaudible, but can be detected through magical means.'
-    costs:
-      mana: 1
-      ap: 4
-  - id: foretell
-    name: Foretell
-    type: passive
-    keywords:
-    - Divination
-    range: Self
-    description: You receive a vision of the near future.  Roll any dice of your choice
-      and store that number.  When you or your allies roll are going to roll that
-      dice, you can instead replace it with your dice roll, you then lose your Foretell
-      dice.  You can only have one Foretell dice at a time, casting Foretell again
-      overwrites the previous dice.
-    costs:
-      ap: 1
-  - id: prediction
-    name: Prediction
-    type: passive
-    keywords:
-    - Aid
-    - Divination
-    range: 60ft
-    description: You remove the keyword Sure Hit and Lock On from the triggering attack
-      and the target gains a +2 Dodge Bonus for their next Dodge action.
-    requirements:
-    - type: text
-      description: An ally is the target of an attack.
-    costs:
-      rp: 1
-  - id: secret_art__gate_of_fate
-    name: 'Secret Art: Gate of Fate'
-    type: combat_action
-    keywords:
-    - Divination
-    - Secret Art
-    range: 120ft
-    description: You subvert fate and a bad end, twisting reality into its most fortunate
-      outcome.  When a target ally rolls a 1, you can instead change it to a 20.
-    requirements:
-    - type: text
-      description: An ally rolls a 1.
-    costs:
-      mana: 1
-      rp: 0
+        The ward is invisible and inaudible, but can be detected through magical
+        means.
+      costs:
+        mana: 1
+        ap: 4
+    - id: foretell
+      name: Foretell
+      type: passive
+      keywords:
+        - Divination
+      range: Self
+      description: >-
+        You receive a vision of the near future.  Roll any dice of your choice
+        and store that number.  When you or your allies roll are going to roll
+        that dice, you can instead replace it with your dice roll, you then lose
+        your Foretell dice.  You can only have one Foretell dice at a time,
+        casting Foretell again overwrites the previous dice.
+      costs:
+        ap: 1
+    - id: prediction
+      name: Prediction
+      type: passive
+      keywords:
+        - Aid
+        - Divination
+      range: 60ft
+      description: >-
+        You remove the keyword Sure Hit and Lock On from the triggering attack
+        and the target gains a +2 Dodge Bonus for their next Dodge action.
+      requirements:
+        - type: text
+          description: An ally is the target of an attack.
+      costs:
+        rp: 1
+    - id: secret_art__gate_of_fate
+      name: 'Secret Art: Gate of Fate'
+      type: combat_action
+      keywords:
+        - Divination
+        - Secret Art
+      range: 120ft
+      description: >-
+        You subvert fate and a bad end, twisting reality into its most fortunate
+        outcome.  When a target ally rolls a 1, you can instead change it to a
+        20.
+      requirements:
+        - type: text
+          description: An ally rolls a 1.
+      costs:
+        mana: 1
+        rp: 0

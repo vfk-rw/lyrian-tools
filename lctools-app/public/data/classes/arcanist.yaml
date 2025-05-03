@@ -5,140 +5,148 @@ class:
   difficulty: 2
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/ba0d5917-fd53-4944-bed6-c0268d223192-Arcanist_1_raw_Final.sm.webp
+  image_url: /images/classes/Arcanist.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Mage mastered.
-  description: 'While many Mages focus on transforming mana into different elements,
-    Arcanists take a different path. They dedicate themselves to mastering its purest
-    form—the raw, unaltered magic known as Arcane. It might not be as flashy as other
-    types of magic, but when it comes to sheer power, nothing else comes close.
+      - type: text
+        description: Mage mastered.
+  description: >-
+    While many Mages focus on transforming mana into different elements,
+    Arcanists take a different path. They dedicate themselves to mastering its
+    purest form—the raw, unaltered magic known as Arcane. It might not be as
+    flashy as other types of magic, but when it comes to sheer power, nothing
+    else comes close.
 
-    Arcane magic is notoriously difficult to defend against. However, it demands a
-    lot from the caster, drawing heavily on their personal mana reserves. That''s
-    why Arcanists spend so much time meditating and training—to build up their mana
-    and ensure they can wield this potent force.
+    Arcane magic is notoriously difficult to defend against. However, it demands
+    a lot from the caster, drawing heavily on their personal mana reserves.
+    That's why Arcanists spend so much time meditating and training—to build up
+    their mana and ensure they can wield this potent force.
 
-    These Mages are the masters of fundamental attack magic, capable of delivering
-    devastating blows of pure magical energy. When it''s raw power you need, an Arcanist
-    is the one you want on your side.'
-  guide: 'Arcanists have relatively high mana costs, but their expanded circuits key
-    ability gives them a bit extra to work with. Arcane Buster is a tool for dealing
-    with opposing spellcasters due to its shieldbreaker property.
+    These Mages are the masters of fundamental attack magic, capable of
+    delivering devastating blows of pure magical energy. When it's raw power you
+    need, an Arcanist is the one you want on your side.
+  guide: >-
+    Arcanists have relatively high mana costs, but their expanded circuits key
+    ability gives them a bit extra to work with. Arcane Buster is a tool for
+    dealing with opposing spellcasters due to its shieldbreaker property.
 
-    Arcane Explosion is a simple AoE spell that forces you to get close to the action.
-    In exchange, it does not provoke attacks of opportunity and has the rapid keyword.
-    If you''re swarmed by grunts, two arcane explosions can go a long way to clearing
-    them out.
+    Arcane Explosion is a simple AoE spell that forces you to get close to the
+    action. In exchange, it does not provoke attacks of opportunity and has the
+    rapid keyword. If you're swarmed by grunts, two arcane explosions can go a
+    long way to clearing them out.
 
-    To help with this, Arcane Power exists. It has a steep mana cost, but costs no
-    action and all spells in this class do arcane damage.
+    To help with this, Arcane Power exists. It has a steep mana cost, but costs
+    no action and all spells in this class do arcane damage.
 
-    Finally, they have Magic Missile II which is a spammable version of Magic Missile.
-    This is also powerful when used in conjunction with Arcane Power, especially against
-    enemies that rely on dodge. 4 Arcane Power''d Magic Missiles are a serious threat
-    against them.'
+    Finally, they have Magic Missile II which is a spammable version of Magic
+    Missile. This is also powerful when used in conjunction with Arcane Power,
+    especially against enemies that rely on dodge. 4 Arcane Power'd Magic
+    Missiles are a serious threat against them.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Expanded Circuits
-  - level: 2
-    benefits:
-    - type: ability
-      value: Arcane Buster
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Arcane Explosion
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Arcane Power
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Magic Missile II
+    - level: 1
+      benefits:
+        - type: ability
+          value: Expanded Circuits
+    - level: 2
+      benefits:
+        - type: ability
+          value: Arcane Buster
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Arcane Explosion
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Arcane Power
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Magic Missile II
   abilities:
-  - id: expanded_circuits
-    name: Expanded Circuits
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: arcane_buster
-    name: Arcane Buster
-    type: passive
-    keywords:
-    - Arcane
-    - Rapid
-    - Spell
-    - Shieldbreaker
-    range: 60ft
-    description: You fire a blast of energy, making a Heavy Attack that deals Arcane
-      Damage. This attack has the Shieldbreaker property.
-    costs:
-      mana: 1
-      ap: 2
-  - id: arcane_explosion
-    name: Arcane Explosion
-    type: passive
-    keywords:
-    - Arcane
-    - Rapid
-    - Spell
-    range: Self
-    description: You make a Light Attack that deals Arcane damage against all enemies
-      within 10ft of yourself. This Spell does not provoke attacks of opportunity.
-    costs:
-      ap: 2
-  - id: arcane_power
-    name: Arcane Power
-    type: passive
-    keywords:
-    - Arcane
-    range: Self
-    description: You add 2 damage to the damage of all your Arcane Damage rolls until
-      the start of your next turn.
-    costs:
-      mana: 3
-      ap: 0
-  - id: magic_missile_ii
-    name: Magic Missile II
-    type: passive
-    keywords:
-    - Arcane
-    - Lock On
-    - Rapid
-    - Spell
-    range: 60ft
-    description: You fire a highly accurate blast of arcane energy at the target,
-      making a Light Attack that deals Arcane damage against the target
-    costs:
-      mana: 1
-      ap: 1
+    - id: expanded_circuits
+      name: Expanded Circuits
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: arcane_buster
+      name: Arcane Buster
+      type: passive
+      keywords:
+        - Arcane
+        - Rapid
+        - Spell
+        - Shieldbreaker
+      range: 60ft
+      description: >-
+        You fire a blast of energy, making a Heavy Attack that deals Arcane
+        Damage. This attack has the Shieldbreaker property.
+      costs:
+        mana: 1
+        ap: 2
+    - id: arcane_explosion
+      name: Arcane Explosion
+      type: passive
+      keywords:
+        - Arcane
+        - Rapid
+        - Spell
+      range: Self
+      description: >-
+        You make a Light Attack that deals Arcane damage against all enemies
+        within 10ft of yourself. This Spell does not provoke attacks of
+        opportunity.
+      costs:
+        ap: 2
+    - id: arcane_power
+      name: Arcane Power
+      type: passive
+      keywords:
+        - Arcane
+      range: Self
+      description: >-
+        You add 2 damage to the damage of all your Arcane Damage rolls until the
+        start of your next turn.
+      costs:
+        mana: 3
+        ap: 0
+    - id: magic_missile_ii
+      name: Magic Missile II
+      type: passive
+      keywords:
+        - Arcane
+        - Lock On
+        - Rapid
+        - Spell
+      range: 60ft
+      description: >-
+        You fire a highly accurate blast of arcane energy at the target, making
+        a Light Attack that deals Arcane damage against the target
+      costs:
+        mana: 1
+        ap: 1

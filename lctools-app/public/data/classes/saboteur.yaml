@@ -5,126 +5,134 @@ class:
   difficulty: 2
   main_role: Support
   secondary_role: Utility
-  image_url: https://cdn.angelssword.com/ttrpg/assets/4ec3a44e-eac1-4679-8836-1428cf92dd98-Saboteur_v3.sm.webp
+  image_url: /images/classes/Saboteur.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Rogue mastered.
-  description: Rogues that create opportunities for their teammates, breaking through
-    and creating their own entrances while hindering the enemy.
-  guide: 'Saboteurs combine scouting tools with some gadgets and explosives they can
+      - type: text
+        description: Rogue mastered.
+  description: >-
+    Rogues that create opportunities for their teammates, breaking through and
+    creating their own entrances while hindering the enemy.
+  guide: >-
+    Saboteurs combine scouting tools with some gadgets and explosives they can
     use in combat.
 
-    Presence Concealment protects you from certain magical tracking tools. Scouting
-    Ahead is useful when sneakily trying to move through a dungeon or other dangerous
-    place, allowing your group to move stealthily even when not everyone in the group
-    has put points into stealth.
+    Presence Concealment protects you from certain magical tracking tools.
+    Scouting Ahead is useful when sneakily trying to move through a dungeon or
+    other dangerous place, allowing your group to move stealthily even when not
+    everyone in the group has put points into stealth.
 
-    Chemical Explosive is a bomb that can be used to blow up many different things.
-    Blowing a hole through a wall, or just blowing up a house straight up are both
-    possible. You can only use it once per arc, so you do need to put in a bit of
-    thought before committing to it. It can deal a lot of damage if it hits a person,
-    but the detonation time is too long for it to see use in combat.
+    Chemical Explosive is a bomb that can be used to blow up many different
+    things. Blowing a hole through a wall, or just blowing up a house straight
+    up are both possible. You can only use it once per arc, so you do need to
+    put in a bit of thought before committing to it. It can deal a lot of damage
+    if it hits a person, but the detonation time is too long for it to see use
+    in combat.
 
-    Flash Bomb is effectively a free flashbang flask that allows a save. Daze is pretty
-    powerful when you can inflict it on multiple people, tossing a flash bomb every
-    turn can be worth it, even against just a single enemy.
+    Flash Bomb is effectively a free flashbang flask that allows a save. Daze is
+    pretty powerful when you can inflict it on multiple people, tossing a flash
+    bomb every turn can be worth it, even against just a single enemy.
 
-    Wire Sweep is another potentially powerful CC tool. Because it is a save instead
-    of an attack, enemies with low toughness may find it hard to defend against.'
+    Wire Sweep is another potentially powerful CC tool. Because it is a save
+    instead of an attack, enemies with low toughness may find it hard to defend
+    against.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Saboteur
-  - level: 2
-    benefits:
-    - type: ability
-      value: Flash Bomb
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - custom
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Scouting Ahead
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Awareness
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Wire Sweep
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: You gain +1 Agility
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Chemical Explosive
+    - level: 1
+      benefits:
+        - type: ability
+          value: Saboteur
+    - level: 2
+      benefits:
+        - type: ability
+          value: Flash Bomb
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - custom
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Scouting Ahead
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Awareness
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Wire Sweep
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: You gain +1 Agility
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Chemical Explosive
   abilities:
-  - id: saboteur
-    name: Saboteur
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: flash_bomb
-    name: Flash Bomb
-    type: passive
-    keywords: []
-    range: 20ft
-    description: You throw a Flash Bomb at an 25x25 area. All targets within the area
-      must save against Potency or become Dazed.
-    costs:
-      ap: 1
-  - id: scouting_ahead
-    name: Scouting Ahead
-    type: passive
-    keywords: []
-    range: '-'
-    description: You can choose to move slightly ahead of the party when moving.  All
-      party members may use your Stealth Check instead of rolling their own.
-  - id: wire_sweep
-    name: Wire Sweep
-    type: passive
-    keywords: []
-    range: 20ft
-    description: You whip your wire to ensnare the target.  If they fail their save
-      against your Potency they are rendered Prone and take Light Damage.
-    requirements:
-    - type: text
-      description: Saboteur Threaded Dagger only.
-    costs:
-      ap: 2
-  - id: chemical_explosive
-    name: Chemical Explosive
-    type: passive
-    keywords:
-    - Sure Hit
-    range: 5ft
-    description: You place a Chemical Explosive package that detonates after one minute.
-      The explosion has a 15 ft radius and deals Double Heavy damage. The package
-      makes an obvious noise after it has been planted that can be heard within the
-      radius. The explosive charge deals 5x damage against inanimate objects. You
-      can create a Chemical Explosive during an interlude phase for free, but can
-      only carry one at a time. The check to disable a Chemical Explosive is equal
-      to 20 + 2 x Power of the creator.
-    requirements:
-    - type: text
-      description: Requires 1 Chemical Explosive.
-    costs:
-      ap: 4
+    - id: saboteur
+      name: Saboteur
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: flash_bomb
+      name: Flash Bomb
+      type: passive
+      keywords: []
+      range: 20ft
+      description: >-
+        You throw a Flash Bomb at an 25x25 area. All targets within the area
+        must save against Potency or become Dazed.
+      costs:
+        ap: 1
+    - id: scouting_ahead
+      name: Scouting Ahead
+      type: passive
+      keywords: []
+      range: '-'
+      description: >-
+        You can choose to move slightly ahead of the party when moving.  All
+        party members may use your Stealth Check instead of rolling their own.
+    - id: wire_sweep
+      name: Wire Sweep
+      type: passive
+      keywords: []
+      range: 20ft
+      description: >-
+        You whip your wire to ensnare the target.  If they fail their save
+        against your Potency they are rendered Prone and take Light Damage.
+      requirements:
+        - type: text
+          description: Saboteur Threaded Dagger only.
+      costs:
+        ap: 2
+    - id: chemical_explosive
+      name: Chemical Explosive
+      type: passive
+      keywords:
+        - Sure Hit
+      range: 5ft
+      description: >-
+        You place a Chemical Explosive package that detonates after one minute.
+        The explosion has a 15 ft radius and deals Double Heavy damage. The
+        package makes an obvious noise after it has been planted that can be
+        heard within the radius. The explosive charge deals 5x damage against
+        inanimate objects. You can create a Chemical Explosive during an
+        interlude phase for free, but can only carry one at a time. The check to
+        disable a Chemical Explosive is equal to 20 + 2 x Power of the creator.
+      requirements:
+        - type: text
+          description: Requires 1 Chemical Explosive.
+      costs:
+        ap: 4

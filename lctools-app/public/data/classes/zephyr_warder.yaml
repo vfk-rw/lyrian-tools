@@ -5,162 +5,162 @@ class:
   difficulty: 2
   main_role: Support
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/a9e0b062-436a-4886-9713-d106121720c9-Zephyr_Ward_Master_2.2_raw.sm.webp
+  image_url: /images/classes/Zephyr_Warder.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Mage mastered or Wind mastered.
-  description: A supportive wind user that can protect against and help with ranged
+      - type: text
+        description: Mage mastered or Wind mastered.
+  description: >-
+    A supportive wind user that can protect against and help with ranged
     attacks.
-  guide: 'The Zephyr Warder specializes in ranged combat, helping both allies hit
+  guide: >-
+    The Zephyr Warder specializes in ranged combat, helping both allies hit
     targets and preventing enemy archers from hitting.
 
-    Wind Infusion can be cast on every ally over the course of a battle and gives
-    them not only an evasion bonus against ranged attacks, but also damage resistance
-    against wind attacks. Worth using immediately when facing those types of enemies.
+    Wind Infusion can be cast on every ally over the course of a battle and
+    gives them not only an evasion bonus against ranged attacks, but also damage
+    resistance against wind attacks. Worth using immediately when facing those
+    types of enemies.
 
-    Wind Shield completely shuts down an enemy ranged attack, granting your ally such
-    a huge bonus along with removing the lock-on and sure hit that the attack is sure
-    to miss.
+    Wind Shield completely shuts down an enemy ranged attack, granting your ally
+    such a huge bonus along with removing the lock-on and sure hit that the
+    attack is sure to miss.
 
-    Wind Wall has to be cast in advance, but it can cover a wide chokepoint and removes
-    all keywords that lets them ignore Dodge or Block. The range decrease can also
-    matter a lot, especially if enemies are only using light ranged weapons. The mana
-    cost isn''t too bad either.
+    Wind Wall has to be cast in advance, but it can cover a wide chokepoint and
+    removes all keywords that lets them ignore Dodge or Block. The range
+    decrease can also matter a lot, especially if enemies are only using light
+    ranged weapons. The mana cost isn't too bad either.
 
-    Wind-Empowered Aim buffs all your (heroic) ranged allies, giving a decent bonus
-    to their accuracy rolls. Worth using if you have a lot of ranged attackers in
-    your party or if you get into a shootout. With this buffs and all the anti-ranged
-    buffs you have, you''re sure to win a shooting battle.'
+    Wind-Empowered Aim buffs all your (heroic) ranged allies, giving a decent
+    bonus to their accuracy rolls. Worth using if you have a lot of ranged
+    attackers in your party or if you get into a shootout. With this buffs and
+    all the anti-ranged buffs you have, you're sure to win a shooting battle.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Wind Master
-  - level: 2
-    benefits:
-    - type: ability
-      value: Wind Infusion
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Wind Wall
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-      - attribute: Presence
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Wind-Empowered Aim
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Agility
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Wind Shield
+    - level: 1
+      benefits:
+        - type: ability
+          value: Wind Master
+    - level: 2
+      benefits:
+        - type: ability
+          value: Wind Infusion
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Wind Wall
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+            - attribute: Presence
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Wind-Empowered Aim
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Agility
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Wind Shield
   abilities:
-  - id: wind_master
-    name: Wind Master
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: wind_infusion
-    name: Wind Infusion
-    type: passive
-    keywords:
-    - Spell
-    - Type
-    - Wind
-    range: 30ft
-    description: 'You surround the target in protective winds, changing their typing
-      to Wind II. As a Wind II type, they take regular damage from all other elements,
-      but only half damage from attacks with the Wind keyword.
+    - id: wind_master
+      name: Wind Master
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: wind_infusion
+      name: Wind Infusion
+      type: passive
+      keywords:
+        - Spell
+        - Type
+        - Wind
+      range: 30ft
+      description: >-
+        You surround the target in protective winds, changing their typing to
+        Wind II. As a Wind II type, they take regular damage from all other
+        elements, but only half damage from attacks with the Wind keyword.
 
 
-      While the ward lasts, they gain a +2 bonus to their Evasion against ranged weapon
-      attacks.
+        While the ward lasts, they gain a +2 bonus to their Evasion against
+        ranged weapon attacks.
 
 
-      The ward lasts until the end of the encounter or until their type is overwritten
-      by a more powerful type.'
-    costs:
-      mana: 0
-      ap: 1
-  - id: wind_wall
-    name: Wind Wall
-    type: passive
-    keywords:
-    - Concentration
-    - Spell
-    - Wind
-    range: 60ft
-    description: You create a wall of wind that is 30ft long, 5ft wide and 10ft high
-      that slows down all ranged weapon attacks passing through it, treating them
-      as having only half the normal range. This wall must be a straight line. These
-      attacks also lose the Lock On, Sure Hit, Half Pierce, Guard Crush and Full Pierce
-      keywords. In addition, the targets of those attacks are treated as having +2
-      Evasion and +1 Guard. Any Spells that are considered attacks (those that require
-      an accuracy roll against a person that isn’t using the Block reaction) that
-      pass through the wall also suffer this penalty.
-    costs:
-      mana: 1
-      ap: 2
-  - id: wind-empowered_aim
-    name: Wind-Empowered Aim
-    type: passive
-    keywords:
-    - Aura
-    - Upkeep
-    range: Self
-    description: 'You project an Aura around yourself that empowers the ranged attacks
-      of your allies. When a heroic ally within 20ft of you makes a ranged attack,
-      they may add 1d4 to the accuracy roll.
+        The ward lasts until the end of the encounter or until their type is
+        overwritten by a more powerful type.
+      costs:
+        mana: 0
+        ap: 1
+    - id: wind_wall
+      name: Wind Wall
+      type: passive
+      keywords:
+        - Concentration
+        - Spell
+        - Wind
+      range: 60ft
+      description: >-
+        You create a wall of wind that is 30ft long, 5ft wide and 10ft high that
+        slows down all ranged weapon attacks passing through it, treating them
+        as having only half the normal range. This wall must be a straight line.
+        These attacks also lose the Lock On, Sure Hit, Half Pierce, Guard Crush
+        and Full Pierce keywords. In addition, the targets of those attacks are
+        treated as having +2 Evasion and +1 Guard. Any Spells that are
+        considered attacks (those that require an accuracy roll against a person
+        that isn’t using the Block reaction) that pass through the wall also
+        suffer this penalty.
+      costs:
+        mana: 1
+        ap: 2
+    - id: wind-empowered_aim
+      name: Wind-Empowered Aim
+      type: passive
+      keywords:
+        - Aura
+        - Upkeep
+      range: Self
+      description: >-
+        You project an Aura around yourself that empowers the ranged attacks of
+        your allies. When a heroic ally within 20ft of you makes a ranged
+        attack, they may add 1d4 to the accuracy roll.
 
-      Upkeep:
+        Upkeep:
 
-      You must spend 1 AP at the start of each turn or the Aura fades.'
-    costs:
-      ap: 2
-  - id: wind_shield
-    name: Wind Shield
-    type: passive
-    keywords:
-    - Aid
-    - Shield
-    - Spell
-    range: 30ft
-    description: 'You grant the target  1 RP that must be spent on the basic Dodge
-      or Block action against the triggering attack as well as
-
-      Wind Shield
-
-      . Wind Shield grants a bonus to Evasion equal to your Focus against the triggering
-      attack. The triggering attack can also no longer benefit from Lock On or Sure
-      Hit'
-    requirements:
-    - type: text
-      description: Ally is targeted by a ranged attack.
-    costs:
-      rp: 1
+        You must spend 1 AP at the start of each turn or the Aura fades.
+      costs:
+        ap: 2
+    - id: wind_shield
+      name: Wind Shield
+      type: passive
+      keywords:
+        - Aid
+        - Shield
+        - Spell
+      range: 30ft
+      description: "You grant the target \_1 RP that must be spent on the basic Dodge or Block action against the triggering attack as well as\nWind Shield\n. Wind Shield grants a bonus to Evasion equal to your Focus against the triggering attack. The triggering attack can also no longer benefit from Lock On or Sure Hit"
+      requirements:
+        - type: text
+          description: Ally is targeted by a ranged attack.
+      costs:
+        rp: 1

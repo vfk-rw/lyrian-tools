@@ -5,125 +5,126 @@ class:
   difficulty: 3
   main_role: Specialist
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/46de5ec2-1f11-4e78-833f-e32abc67298a-WildHeart_raw.sm.webp
+  image_url: /images/classes/Wildheart.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Animal summoner mastered.
+      - type: text
+        description: Animal summoner mastered.
   description: A better animal summoner.
   guide: Soon.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Expanded Menagerie
-  - level: 2
-    benefits:
-    - type: ability
-      value: X-Attack
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Quick Revive
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-      - attribute: Cunning
-        value: 1
-      - attribute: Reason
-        value: 1
-      - attribute: Awareness
-        value: 1
-      - attribute: Presence
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Leashing
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-      - attribute: Agility
-        value: 1
-      - attribute: Toughness
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Secret Art: Bestial Wrath'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Expanded Menagerie
+    - level: 2
+      benefits:
+        - type: ability
+          value: X-Attack
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Quick Revive
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+            - attribute: Cunning
+              value: 1
+            - attribute: Reason
+              value: 1
+            - attribute: Awareness
+              value: 1
+            - attribute: Presence
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Leashing
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+            - attribute: Agility
+              value: 1
+            - attribute: Toughness
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Secret Art: Bestial Wrath'
   abilities:
-  - id: expanded_menagerie
-    name: Expanded Menagerie
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: x-attack
-    name: X-Attack
-    type: passive
-    keywords: []
-    range: Sight
-    description: You give your summon a +1 Focus and +1 Power buff.
-    requirements:
-    - type: text
-      description: Can only target your summoned animal.
-    costs:
-      ap: 2
-  - id: quick_revive
-    name: Quick Revive
-    type: passive
-    keywords: []
-    range: 40ft
-    description: You immediately resummon the summon from your Summon Animal that
-      was killed in this current encounter. If multiple of your summons have died,
-      you summon the one that died most recently.
-    costs:
-      mana: 2
-      ap: 0
-  - id: leashing
-    name: Leashing
-    type: passive
-    keywords:
-    - Teleport
-    range: Sight
-    description: You teleport your summoned animal to an empty square within 5ft of
-      you.
-    requirements:
-    - type: text
-      description: Can only target your summoned animal.
-    costs:
-      ap: 1
-  - id: secret_art__bestial_wrath
-    name: 'Secret Art: Bestial Wrath'
-    type: combat_action
-    keywords:
-    - Secret Art
-    range: Sight
-    description: Your summon gains Bestial Wrath and AP equal to its maximum AP they
-      may immediately use. Bestial Wrath gives +2 Focus and +2 Power and prevents
-      the summon from dropping below 1 HP. This effect lasts for 3 rounds or until
-      the summon is reduced to 1 HP.
-    requirements:
-    - type: text
-      description: Can only target your summoned animal.
-    costs:
-      mana: 3
-      ap: 2
+    - id: expanded_menagerie
+      name: Expanded Menagerie
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: x-attack
+      name: X-Attack
+      type: passive
+      keywords: []
+      range: Sight
+      description: You give your summon a +1 Focus and +1 Power buff.
+      requirements:
+        - type: text
+          description: Can only target your summoned animal.
+      costs:
+        ap: 2
+    - id: quick_revive
+      name: Quick Revive
+      type: passive
+      keywords: []
+      range: 40ft
+      description: >-
+        You immediately resummon the summon from your Summon Animal that was
+        killed in this current encounter. If multiple of your summons have died,
+        you summon the one that died most recently.
+      costs:
+        mana: 2
+        ap: 0
+    - id: leashing
+      name: Leashing
+      type: passive
+      keywords:
+        - Teleport
+      range: Sight
+      description: You teleport your summoned animal to an empty square within 5ft of you.
+      requirements:
+        - type: text
+          description: Can only target your summoned animal.
+      costs:
+        ap: 1
+    - id: secret_art__bestial_wrath
+      name: 'Secret Art: Bestial Wrath'
+      type: combat_action
+      keywords:
+        - Secret Art
+      range: Sight
+      description: >-
+        Your summon gains Bestial Wrath and AP equal to its maximum AP they may
+        immediately use. Bestial Wrath gives +2 Focus and +2 Power and prevents
+        the summon from dropping below 1 HP. This effect lasts for 3 rounds or
+        until the summon is reduced to 1 HP.
+      requirements:
+        - type: text
+          description: Can only target your summoned animal.
+      costs:
+        mana: 3
+        ap: 2

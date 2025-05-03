@@ -5,156 +5,149 @@ class:
   difficulty: 2
   main_role: Utility
   secondary_role: Controller
-  image_url: https://cdn.angelssword.com/ttrpg/assets/40d30d9c-6b41-4499-b895-88cfa946ae38-mage.sm.webp
+  image_url: /images/classes/Mage.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: None.
-  description: 'Mages are initiates of the arcane, who’ve mastered the basics and
-    proven their skill in both control and power. By drawing in ambient mana and blending
-    it with their own, they can cast devastating spells of all kinds. The path of
-    a Mage is as varied as the Mages themselves.
+      - type: text
+        description: None.
+  description: >-
+    Mages are initiates of the arcane, who’ve mastered the basics and proven
+    their skill in both control and power. By drawing in ambient mana and
+    blending it with their own, they can cast devastating spells of all kinds.
+    The path of a Mage is as varied as the Mages themselves.
 
-    Some might start off their journey at the Merlin''s Academy of Magic, while others
-    are self taught or might become the pupil of a wandering teacher.
+    Some might start off their journey at the Merlin's Academy of Magic, while
+    others are self taught or might become the pupil of a wandering teacher.
 
-    While still considered beginners in the journey of Magic, Mages are quite powerful
-    on their own with many considering a skilled mage to be worth the equivalent of
-    an entire squad of infantry.'
-  guide: 'Mages offer supportive control to the party, out of combat utility and a
+    While still considered beginners in the journey of Magic, Mages are quite
+    powerful on their own with many considering a skilled mage to be worth the
+    equivalent of an entire squad of infantry.
+  guide: >-
+    Mages offer supportive control to the party, out of combat utility and a
     barrage of long range spells to wither down the most evasive of targets.
 
-    Sense Magic and Decipher Magic both serve as out of combat investigation tools.
-    Sense Magic gives information, while Decipher Magic actively lets you disable
-    magical fields.
+    Sense Magic and Decipher Magic both serve as out of combat investigation
+    tools. Sense Magic gives information, while Decipher Magic actively lets you
+    disable magical fields.
 
-    Arcane Barrier is a defensive tool that lets mages effectively block without having
-    a high guard. If an attack did a low amount of damage, you may be able to use
-    the Block reaction afterwards with the barrier still up and still get some value
-    out of it.
+    Arcane Barrier is a defensive tool that lets mages effectively block without
+    having a high guard. If an attack did a low amount of damage, you may be
+    able to use the Block reaction afterwards with the barrier still up and
+    still get some value out of it.
 
-    Glittershards is their control ability. It covers a 15x15ft area which is a decent
-    area and be can be used primarily to block enemy ranged attackers from shooting
-    you. The mana cost on it is low, so you can feel free to drop it and recast it
-    in a better position if the need arises.
+    Glittershards is their control ability. It covers a 15x15ft area which is a
+    decent area and be can be used primarily to block enemy ranged attackers
+    from shooting you. The mana cost on it is low, so you can feel free to drop
+    it and recast it in a better position if the need arises.
 
-    Magic Missile is light attack that should be used against dodge heavy characters.
-    If you know the enemy is not going to die from 1 missile, you can overcharge it
-    and fire a second one for the same cost again. The target has to react to both
-    of them with separate reactions, so you''ll be doing some good damage or burning
-    reactions with it.'
+    Magic Missile is light attack that should be used against dodge heavy
+    characters. If you know the enemy is not going to die from 1 missile, you
+    can overcharge it and fire a second one for the same cost again. The target
+    has to react to both of them with separate reactions, so you'll be doing
+    some good damage or burning reactions with it.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Mage's Journey
-  - level: 2
-    benefits:
-    - type: ability
-      value: Decipher Magic
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: Arcane Barrier
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Reason
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: Glittershards
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: Magic Missile
+    - level: 1
+      benefits:
+        - type: ability
+          value: Mage's Journey
+    - level: 2
+      benefits:
+        - type: ability
+          value: Decipher Magic
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: Arcane Barrier
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Reason
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: Glittershards
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: Magic Missile
   abilities:
-  - id: mage_s_journey
-    name: Mage's Journey
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: decipher_magic
-    name: Decipher Magic
-    type: passive
-    keywords:
-    - Hacking
-    range: Sight
-    description: 'You may start a skill challenge against a magic effect you can see
-      in an attempt to understand it.
+    - id: mage_s_journey
+      name: Mage's Journey
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: decipher_magic
+      name: Decipher Magic
+      type: passive
+      keywords:
+        - Hacking
+      range: Sight
+      description: >-
+        You may start a skill challenge against a magic effect you can see in an
+        attempt to understand it.
 
-      You are able to disable tier 1 bounded fields with this ability.'
-    costs:
-      ap: 1
-  - id: arcane_barrier
-    name: Arcane Barrier
-    type: passive
-    keywords:
-    - Shield
-    - Spell
-    range: Self
-    description: 'You create a Magical Barrier that absorbs damage until it breaks. The
-      barrier has HP equal to 5 + your Focus. The barrier has a Guard of 0 and any
-      damage it takes is subtracted from the barrier’s HP. When the barrier breaks,
-      any remaining damage is subtracted from your HP. The barrier otherwise lasts
-      until the start of your next turn or until you take any action other than the
-      Block action.
+        You are able to disable tier 1 bounded fields with this ability.
+      costs:
+        ap: 1
+    - id: arcane_barrier
+      name: Arcane Barrier
+      type: passive
+      keywords:
+        - Shield
+        - Spell
+      range: Self
+      description: "You create a Magical Barrier that absorbs damage until it breaks.\_The barrier has HP equal to 5 + your Focus. The barrier has a Guard of 0 and any damage it takes is subtracted from the barrier’s HP.\_When the barrier breaks, any remaining damage is subtracted from your HP.\_The barrier otherwise lasts until the start of your next turn or until you take any action other than the Block action.\nThis spell does not provoke attacks of opportunity."
+      costs:
+        mana: 1
+        rp: 1
+    - id: glittershards
+      name: Glittershards
+      type: passive
+      keywords:
+        - Concentration
+        - Spell
+      range: 40ft range, 5ft radius
+      description: "Numerous sparkling arcane crystals swarm the area and block line of sight.\_Targets inside of or within 5ft of the Glittershards can only see up to 5ft into or out of Glittershards.\_Glittershards lasts for up to 10 minutes and you can only have 1 Glittershards active at a time.\_You can end this effect for 0 AP on your turn."
+      costs:
+        mana: 1
+        ap: 2
+    - id: magic_missile
+      name: Magic Missile
+      type: passive
+      keywords:
+        - Arcane
+        - Lock On
+        - Spell
+      range: 60ft
+      description: >-
+        You fire a highly accurate blast of arcane energy at the target, making
+        a Light Attack that deals Arcane damage against the target
 
-      This spell does not provoke attacks of opportunity.'
-    costs:
-      mana: 1
-      rp: 1
-  - id: glittershards
-    name: Glittershards
-    type: passive
-    keywords:
-    - Concentration
-    - Spell
-    range: 40ft range, 5ft radius
-    description: Numerous sparkling arcane crystals swarm the area and block line
-      of sight. Targets inside of or within 5ft of the Glittershards can only see
-      up to 5ft into or out of Glittershards. Glittershards lasts for up to 10 minutes
-      and you can only have 1 Glittershards active at a time. You can end this effect
-      for 0 AP on your turn.
-    costs:
-      mana: 1
-      ap: 2
-  - id: magic_missile
-    name: Magic Missile
-    type: passive
-    keywords:
-    - Arcane
-    - Lock On
-    - Spell
-    range: 60ft
-    description: 'You fire a highly accurate blast of arcane energy at the target,
-      making a Light Attack that deals Arcane damage against the target
+        Overcharge:
 
-      Overcharge:
-
-      You may spend 1 extra mana and 1 extra AP to fire an additional missile at the
-      same target.'
-    costs:
-      mana: 1
-      ap: 1
+        You may spend 1 extra mana and 1 extra AP to fire an additional missile
+        at the same target.
+      costs:
+        mana: 1
+        ap: 1

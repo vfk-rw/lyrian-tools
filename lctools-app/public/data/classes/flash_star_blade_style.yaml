@@ -5,157 +5,149 @@ class:
   difficulty: 3
   main_role: Striker
   secondary_role: null
-  image_url: https://cdn.angelssword.com/ttrpg/assets/4e03d9a8-6c1b-4208-965e-ff7bb5ad5ed0-Flash_Star_Blade_raw.sm.webp
+  image_url: /images/classes/Flash_Star_Blade_Style.webp
   requirements:
     type: and
     conditions:
-    - type: text
-      description: Any class mastered. Proficiency in one of light blades, longsword
-        or katana.
-  description: A blade style originating from Raijin swordmasters.  A notable practicioner
-    of Flash Star Blade Style is Rin Tatsugami of Madeline.
-  guide: 'The Flash Star Style is a sword style originating from the Raijin that requires
-    precise positioning. Photon Line moves you exactly 25ft, not up to 25ft. This
-    can make it difficult to use against a single target, since you''ll often dash
-    past the target and be unable to attack them without moving. Using it as a retreating
-    option is a valid choice as you force the enemy to move to attack you.
+      - type: text
+        description: >-
+          Any class mastered. Proficiency in one of light blades, longsword or
+          katana.
+  description: "A blade style originating from Raijin swordmasters. \_A notable practicioner of Flash Star Blade Style is Rin Tatsugami of Madeline."
+  guide: >-
+    The Flash Star Style is a sword style originating from the Raijin that
+    requires precise positioning. Photon Line moves you exactly 25ft, not up to
+    25ft. This can make it difficult to use against a single target, since
+    you'll often dash past the target and be unable to attack them without
+    moving. Using it as a retreating option is a valid choice as you force the
+    enemy to move to attack you.
 
-    If you do manage to line up the perfect Photon Line on the offense, you can combo
-    it into Thunderbolt Slash. Thunderbolt Slash is 3 light attacks for the cost of
-    2 AP. With its mana cost reduced by the combo effect, it lines up perfectly for
-    a 4 AP turn that doesn''t cost any mana.
+    If you do manage to line up the perfect Photon Line on the offense, you can
+    combo it into Thunderbolt Slash. Thunderbolt Slash is 3 light attacks for
+    the cost of 2 AP. With its mana cost reduced by the combo effect, it lines
+    up perfectly for a 4 AP turn that doesn't cost any mana.
 
-    Starlight Crescent Reversal is a safe mana dump each turn, allowing for a cheap
-    Light attack.
+    Starlight Crescent Reversal is a safe mana dump each turn, allowing for a
+    cheap Light attack.
 
-    The Secret Art: Twin Nova Pursuit is an engagement and isolation tool. You are
-    able to move a target 25ft or 50ft, depending on how they react, which can let
-    you get a 1v1 when you remove an enemy from a melee brawl. It can also be used
-    to engage and knock an enemy into your own allies, allowing them to pile on without
-    having to move and most likely dragging that enemy out of range of any support
-    abilities.'
+    The Secret Art: Twin Nova Pursuit is an engagement and isolation tool. You
+    are able to move a target 25ft or 50ft, depending on how they react, which
+    can let you get a 1v1 when you remove an enemy from a melee brawl. It can
+    also be used to engage and knock an enemy into your own allies, allowing
+    them to pile on without having to move and most likely dragging that enemy
+    out of range of any support abilities.
   progression:
-  - level: 1
-    benefits:
-    - type: ability
-      value: Lightning Weapon
-  - level: 2
-    benefits:
-    - type: ability
-      value: 'Flash Star Style: Photon Line'
-  - level: 3
-    benefits:
-    - type: skills
-      points: 5
-      eligible_skills:
-      - any
-      can_convert_to_expertise: true
-  - level: 4
-    benefits:
-    - type: ability
-      value: 'Flash Star Style: Thunderbolt Slash'
-  - level: 5
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Fitness
-        value: 1
-      - attribute: Cunning
-        value: 1
-      - attribute: Awareness
-        value: 1
-      - attribute: Presence
-        value: 1
-  - level: 6
-    benefits:
-    - type: ability
-      value: 'Flash Star Style: Starlight Crescent Reversal'
-  - level: 7
-    benefits:
-    - type: attribute_choice
-      choose: 1
-      options:
-      - attribute: Focus
-        value: 1
-      - attribute: Power
-        value: 1
-      - attribute: Agility
-        value: 1
-  - level: 8
-    benefits:
-    - type: ability
-      value: 'Flash Star Style Secret Art: Twin Nova Pursuit'
+    - level: 1
+      benefits:
+        - type: ability
+          value: Lightning Weapon
+    - level: 2
+      benefits:
+        - type: ability
+          value: 'Flash Star Style: Photon Line'
+    - level: 3
+      benefits:
+        - type: skills
+          points: 5
+          eligible_skills:
+            - any
+          can_convert_to_expertise: true
+    - level: 4
+      benefits:
+        - type: ability
+          value: 'Flash Star Style: Thunderbolt Slash'
+    - level: 5
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Fitness
+              value: 1
+            - attribute: Cunning
+              value: 1
+            - attribute: Awareness
+              value: 1
+            - attribute: Presence
+              value: 1
+    - level: 6
+      benefits:
+        - type: ability
+          value: 'Flash Star Style: Starlight Crescent Reversal'
+    - level: 7
+      benefits:
+        - type: attribute_choice
+          choose: 1
+          options:
+            - attribute: Focus
+              value: 1
+            - attribute: Power
+              value: 1
+            - attribute: Agility
+              value: 1
+    - level: 8
+      benefits:
+        - type: ability
+          value: 'Flash Star Style Secret Art: Twin Nova Pursuit'
   abilities:
-  - id: lightning_weapon
-    name: Lightning Weapon
-    type: passive
-    keywords: []
-    range: ''
-    description: ''
-  - id: flash_star_style__photon_line
-    name: 'Flash Star Style: Photon Line'
-    type: passive
-    keywords:
-    - Sidestep
-    range: 25ft
-    description: You sidestep exactly 25ft in a straight line in any direction and
-      can move over gaps of terrain as long as you end on solid ground. You make a
-      Light attack against all targets that are in your path.  If only one target
-      is in your path, make a Heavy attack instead.
-    requirements:
-    - type: text
-      description: Can move 25ft in a straight line. Light blade, longsword, katana
-        only.
-    costs:
-      ap: 2
-  - id: flash_star_style__thunderbolt_slash
-    name: 'Flash Star Style: Thunderbolt Slash'
-    type: passive
-    keywords:
-    - Combo
-    range: Melee Weapon Range
-    description: 'You slash the target in a thunderbolt pattern, making a 3-hit attack. 
-      Make 3 separate Light attacks against the target.
-
-      Combo: If used immediately after Flash Star Style: Photon Line, mana cost reduced
-      by 1.'
-    requirements:
-    - type: text
-      description: Light Blade, Longsword, Katana only.
-    costs:
-      mana: 1
-      ap: 2
-  - id: flash_star_style__starlight_crescent_reversal
-    name: 'Flash Star Style: Starlight Crescent Reversal'
-    type: passive
-    keywords:
-    - Counter
-    range: Melee Weapon Range
-    description: You take advantage of the slow windup of the enemy’s attack, countering
-      with a Light attack of your own. You may still Dodge or Block the triggering
-      attack after this counter.
-    requirements:
-    - type: text
-      description: You are targeted by a heavy attack. Light Blade, Longsword, Katana
-        only.
-    costs:
-      mana: 1
-      rp: 0
-  - id: flash_star_style_secret_art__twin_nova_pursuit
-    name: 'Flash Star Style Secret Art: Twin Nova Pursuit'
-    type: combat_action
-    keywords:
-    - Teleport
-    - Secret Art
-    range: 50ft
-    description: You teleport to the target and then knock them 25ft in any horizontal
-      direction.  You then teleport in a straight line to them again and make a Heavy
-      attack.  If the attack is responded to with any RP action, knock them straight
-      back 25ft again, teleport in a straight line to them and make another Heavy
-      attack.
-    requirements:
-    - type: text
-      description: Light Blade, Longsword, Katana only.
-    costs:
-      ap: 4
+    - id: lightning_weapon
+      name: Lightning Weapon
+      type: passive
+      keywords: []
+      range: ''
+      description: ''
+    - id: flash_star_style__photon_line
+      name: 'Flash Star Style: Photon Line'
+      type: passive
+      keywords:
+        - Sidestep
+      range: 25ft
+      description: "You sidestep exactly 25ft in a straight line in any direction and can move over gaps of terrain as long as you end on solid ground. You make a Light attack against all targets that are in your path.\_ If only one target is in your path, make a Heavy attack instead."
+      requirements:
+        - type: text
+          description: >-
+            Can move 25ft in a straight line. Light blade, longsword, katana
+            only.
+      costs:
+        ap: 2
+    - id: flash_star_style__thunderbolt_slash
+      name: 'Flash Star Style: Thunderbolt Slash'
+      type: passive
+      keywords:
+        - Combo
+      range: Melee Weapon Range
+      description: "You slash the target in a thunderbolt pattern, making a 3-hit attack.\_ Make 3 separate Light attacks against the target.\nCombo: If used immediately after Flash Star Style: Photon Line, mana cost reduced by 1."
+      requirements:
+        - type: text
+          description: Light Blade, Longsword, Katana only.
+      costs:
+        mana: 1
+        ap: 2
+    - id: flash_star_style__starlight_crescent_reversal
+      name: 'Flash Star Style: Starlight Crescent Reversal'
+      type: passive
+      keywords:
+        - Counter
+      range: Melee Weapon Range
+      description: >-
+        You take advantage of the slow windup of the enemy’s attack, countering
+        with a Light attack of your own. You may still Dodge or Block the
+        triggering attack after this counter.
+      requirements:
+        - type: text
+          description: "You are targeted by a heavy attack.\_Light Blade, Longsword, Katana only."
+      costs:
+        mana: 1
+        rp: 0
+    - id: flash_star_style_secret_art__twin_nova_pursuit
+      name: 'Flash Star Style Secret Art: Twin Nova Pursuit'
+      type: combat_action
+      keywords:
+        - Teleport
+        - Secret Art
+      range: 50ft
+      description: "You teleport to the target and then knock them 25ft in any horizontal direction.\_ You then teleport in a straight line to them again and make a Heavy attack.\_ If the attack is responded to with any RP action, knock them straight back 25ft again, teleport in a straight line to them and make another Heavy attack."
+      requirements:
+        - type: text
+          description: Light Blade, Longsword, Katana only.
+      costs:
+        ap: 4
