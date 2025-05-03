@@ -86,7 +86,7 @@ function extractSheetIds(url: string): { spreadsheetId: string | null, gid: stri
     const u = new URL(url);
     const match = u.pathname.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
     const spreadsheetId = match ? match[1] : null;
-    let gid = null;
+    let gid: string | null = null;
     if (u.searchParams.has('gid')) {
       gid = u.searchParams.get('gid');
     } else {

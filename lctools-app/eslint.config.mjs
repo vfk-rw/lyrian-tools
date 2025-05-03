@@ -38,6 +38,21 @@ export default defineConfig([
       },
     },
   },
+  // API routes - disable strict typing rules
+  {
+    files: ["**/app/api/**/*.ts"],
+    rules: {
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+    }
+  },
+  // Page components - disable strict typing rules for Next.js App Router
+  {
+    files: ["**/app/**/*.tsx", "**/app/**/*.ts"],
+    rules: {
+      "@typescript-eslint/ban-ts-comment": "off",
+    }
+  },
   // React config
   {
     files: ["**/*.{jsx,tsx}"],

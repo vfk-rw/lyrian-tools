@@ -13,7 +13,8 @@ import {
   FlaskRound,
   FileSpreadsheet,
   Sun,
-  Moon
+  Moon,
+  GraduationCap
 } from "lucide-react"
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
@@ -47,12 +48,16 @@ const navItems = [
     title: "Home",
     url: "/",
     icon: Home,
-    isActive: true,
   },
   {
     title: "About",
     url: "/about",
     icon: Info,
+  },
+  {
+    title: "Classes",
+    url: "/classes",
+    icon: GraduationCap,
   },
   {
     title: "Crafting",
@@ -151,7 +156,7 @@ export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar
                 </Collapsible>
               ) : (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild tooltip={item.title} isActive={item.isActive}>
+                  <SidebarMenuButton asChild tooltip={item.title}>
                     <a href={item.url}>
                       {item.icon && <item.icon />}
                       <span>{item.title}</span>
