@@ -47,12 +47,13 @@ export async function GET(request: Request) {
     const parsed = yaml.load(content) as { class: ClassData };
     const classData = parsed.class;
     
-    // Generate image path if needed
-    if (typeof classData.image_url === 'string' && 
-        classData.image_url.includes('cdn.angelssword.com')) {
-      const imageName = `${classData.name.replace(/\s+/g, '_')}.webp`;
-      classData.image_url = `/images/classes/${imageName}`;
-    }
+    // Always replace image URLs with local images regardless of source
+    const classId = classData.id || classData.name.toLowerCase().replace(/[\s-]+/g, '_');
+    
+    // Format should match the files you have in /images/classes/
+    // E.g., "Anti-Mage.webp" instead of "Anti_Mage.webp"
+    const imageName = `${classId.charAt(0).toUpperCase() + classId.slice(1).replace(/_/g, '-')}.webp`;
+    classData.image_url = `/images/classes/${imageName}`;
     
     return NextResponse.json(classData);
   } catch (error) {
