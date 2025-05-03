@@ -14,17 +14,34 @@ export interface AbilitySearchParams {
  * Get all abilities from all classes
  */
 export async function getAllAbilities(): Promise<{ ability: ClassAbility; className: string; classId: string }[]> {
-  const classes = await getAllClasses();
+  // For server-side builds, we'll use direct access to class data
+  // This ensures abilities are available during the build process on Vercel
+  console.log('Loading abilities from classes...');
   
-  const allAbilities = classes.flatMap(classData => {
-    return (classData.abilities || []).map(ability => ({
-      ability,
-      className: classData.name,
-      classId: classData.id
-    }));
-  });
-  
-  return allAbilities;
+  try {
+    // Get all classes (with our improved build-time loading)
+    const classes = await getAllClasses();
+    
+    console.log(`Found ${classes.length} classes to extract abilities from`);
+    
+    // Extract all abilities from all classes
+    const allAbilities = classes.flatMap(classData => {
+      const classAbilities = classData.abilities || [];
+      console.log(`Class ${classData.name} has ${classAbilities.length} abilities`);
+      
+      return classAbilities.map(ability => ({
+        ability,
+        className: classData.name,
+        classId: classData.id
+      }));
+    });
+    
+    console.log(`Extracted a total of ${allAbilities.length} abilities from all classes`);
+    return allAbilities;
+  } catch (error) {
+    console.error('Error getting abilities from classes:', error);
+    return [];
+  }
 }
 
 /**
