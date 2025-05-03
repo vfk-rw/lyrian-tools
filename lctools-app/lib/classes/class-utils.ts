@@ -133,7 +133,7 @@ export async function getClassById(id: string): Promise<ClassData | null> {
     
     // If not in cache, fetch from API
     const baseUrl = getBaseUrl();
-    const response = await fetch(`${baseUrl}/api/classes/${id}`, {
+    const response = await fetch(`${baseUrl}/api/classes/details?id=${id}`, {
       cache: 'no-store',
       next: { revalidate: 3600 } // Revalidate once per hour
     });
