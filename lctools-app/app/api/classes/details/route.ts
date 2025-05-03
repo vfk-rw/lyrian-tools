@@ -35,7 +35,51 @@ export async function GET(request: Request) {
     
     const baseUrl = getBaseUrl();
     
-    // Attempt to fetch the class data file by ID
+    // First try to get the list of class files
+    try {
+      // Attempt to get the class list first to find the exact filename
+      const listResponse = await fetch(`${baseUrl}/data/class-list.json`);
+      
+      if (listResponse.ok) {
+        const classFiles = await listResponse.json();
+        // Find the matching class file - handle both exact and normalized filenames
+        const classFile = classFiles.find(
+          (file: string) => 
+            file === `${id}.yaml` || // Exact match
+            file.toLowerCase() === `${id.toLowerCase()}.yaml` || // Case-insensitive match
+            file.replace(/[-_]/g, '').toLowerCase() === id.replace(/[-_]/g, '').toLowerCase() // Normalized match (ignore hyphens/underscores)
+        );
+        
+        if (classFile) {
+          // Found a matching file, fetch its contents
+          console.log(`Found matching class file: ${classFile} for ID: ${id}`);
+          
+          const response = await fetch(`${baseUrl}/data/classes/${classFile}`);
+          
+          if (response.ok) {
+            const content = await response.text();
+            const parsed = yaml.load(content) as { class: ClassData };
+            const classData = parsed.class;
+            
+            // Always replace image URLs with local images regardless of source
+            const classId = classData.id || classData.name.toLowerCase().replace(/[\s-]+/g, '_');
+            
+            // Format should match the files you have in /images/classes/
+            // E.g., "Anti-Mage.webp" instead of "Anti_Mage.webp"
+            const imageName = `${classId.charAt(0).toUpperCase() + classId.slice(1).replace(/_/g, '-')}.webp`;
+            classData.image_url = `/images/classes/${imageName}`;
+            
+            return NextResponse.json(classData);
+          }
+        }
+      }
+    } catch (listError) {
+      console.error('Error fetching class list:', listError);
+      // Continue to fallback approach
+    }
+    
+    // Fallback to direct file fetch if the above approach fails
+    console.log(`Attempting direct fetch for class file: ${id}.yaml`);
     const response = await fetch(`${baseUrl}/data/classes/${id}.yaml`);
     
     if (!response.ok) {
