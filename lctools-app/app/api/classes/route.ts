@@ -5,15 +5,22 @@ import { ClassData } from '@/lib/classes/class-utils';
 
 /**
  * Helper function to get base URL depending on environment
+ * This function properly handles Vercel deployments
  */
 function getBaseUrl() {
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  } else {
-    return process.env.NODE_ENV === 'development' 
-      ? 'http://localhost:3000' 
-      : `https://${process.env.NEXT_PUBLIC_VERCEL_URL || 'localhost:3000'}`;
+  // For client-side requests, use relative URLs
+  if (typeof window !== 'undefined') {
+    return '';
   }
+  
+  // For server-side requests in production (Vercel)
+  if (process.env.VERCEL_URL) {
+    // Use the correct URL format for Vercel deployments
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  
+  // For server-side requests in local development
+  return `http://localhost:${process.env.PORT || 3000}`;
 }
 
 export async function GET() {

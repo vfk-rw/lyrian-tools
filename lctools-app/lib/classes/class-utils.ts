@@ -71,17 +71,22 @@ let cachedClasses: ClassData[] | null = null;
 
 /**
  * Get the API base URL depending on environment
+ * This function properly handles Vercel deployments
  */
 function getBaseUrl() {
+  // For client-side requests, use relative URLs
   if (typeof window !== 'undefined') {
-    // Browser should use relative path
     return '';
   }
   
-  // SSR should use absolute URL
-  return process.env.VERCEL_URL 
-    ? `https://${process.env.VERCEL_URL}` 
-    : `http://localhost:${process.env.PORT || 3000}`;
+  // For server-side requests in production (Vercel)
+  if (process.env.VERCEL_URL) {
+    // Use the correct URL format for Vercel deployments
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  
+  // For server-side requests in local development
+  return `http://localhost:${process.env.PORT || 3000}`;
 }
 
 /**
