@@ -92,30 +92,31 @@ export async function getAllClasses(): Promise<ClassData[]> {
   
   try {
     const baseUrl = getBaseUrl();
-    let url = `${baseUrl}/api/classes`;
+    const url = `${baseUrl}/api/classes`;
     
     // During server-side builds, try to fetch from the JSON file directly
     if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
       console.log('Fetching class data from JSON file during build...');
       try {
-        // Import fs and path modules dynamically only during build
-        const fs = require('fs');
-        const path = require('path');
+        // Use dynamic import() instead of require() to avoid ESLint errors
+        // This is only used during build time on the server
+        const { readFileSync, existsSync } = await import('fs');
+        const { join } = await import('path');
+        const yaml = await import('js-yaml');
         
         // Try to read the class list JSON file
-        const classListPath = path.join(process.cwd(), 'public/data/class-list.json');
-        if (fs.existsSync(classListPath)) {
+        const classListPath = join(process.cwd(), 'public/data/class-list.json');
+        if (existsSync(classListPath)) {
           // Get the list of class files
-          const classFiles = JSON.parse(fs.readFileSync(classListPath, 'utf8'));
+          const classFiles = JSON.parse(readFileSync(classListPath, 'utf8'));
           const classesData: ClassData[] = [];
           
           // Loop through each class file and load its data
           for (const filename of classFiles) {
             try {
-              const yamlPath = path.join(process.cwd(), 'public/data/classes', filename);
-              if (fs.existsSync(yamlPath)) {
-                const yaml = require('js-yaml');
-                const content = fs.readFileSync(yamlPath, 'utf8');
+              const yamlPath = join(process.cwd(), 'public/data/classes', filename);
+              if (existsSync(yamlPath)) {
+                const content = readFileSync(yamlPath, 'utf8');
                 const parsed = yaml.load(content) as { class: ClassData };
                 if (parsed && parsed.class) {
                   classesData.push(parsed.class);
