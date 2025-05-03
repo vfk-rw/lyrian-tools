@@ -91,29 +91,65 @@ export async function getAllClasses(): Promise<ClassData[]> {
   if (cachedClasses) return cachedClasses;
   
   try {
-    // In development or when running the app normally, use the API
-    if (process.env.NODE_ENV === 'development' || typeof window !== 'undefined') {
-      const baseUrl = getBaseUrl();
-      const response = await fetch(`${baseUrl}/api/classes`, {
-        cache: 'no-store',
-        next: { revalidate: 3600 } // Revalidate once per hour
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Failed to fetch classes: ${response.status}`);
+    const baseUrl = getBaseUrl();
+    let url = `${baseUrl}/api/classes`;
+    
+    // During server-side builds, try to fetch from the JSON file directly
+    if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+      console.log('Fetching class data from JSON file during build...');
+      try {
+        // Import fs and path modules dynamically only during build
+        const fs = require('fs');
+        const path = require('path');
+        
+        // Try to read the class list JSON file
+        const classListPath = path.join(process.cwd(), 'public/data/class-list.json');
+        if (fs.existsSync(classListPath)) {
+          // Get the list of class files
+          const classFiles = JSON.parse(fs.readFileSync(classListPath, 'utf8'));
+          const classesData: ClassData[] = [];
+          
+          // Loop through each class file and load its data
+          for (const filename of classFiles) {
+            try {
+              const yamlPath = path.join(process.cwd(), 'public/data/classes', filename);
+              if (fs.existsSync(yamlPath)) {
+                const yaml = require('js-yaml');
+                const content = fs.readFileSync(yamlPath, 'utf8');
+                const parsed = yaml.load(content) as { class: ClassData };
+                if (parsed && parsed.class) {
+                  classesData.push(parsed.class);
+                }
+              }
+            } catch (err) {
+              console.error(`Error loading class ${filename}:`, err);
+            }
+          }
+          
+          console.log(`Loaded ${classesData.length} classes directly during build`);
+          cachedClasses = classesData;
+          return classesData;
+        }
+      } catch (err) {
+        console.error('Failed to load classes directly during build:', err);
+        // Fall back to API approach if direct loading fails
       }
-      
-      const data = await response.json();
-      cachedClasses = data;
-      return data;
-    } 
-    // During build time, use a static empty array
-    // This is fine because the page will be dynamically populated on the client
-    else {
-      console.log('Using empty class data for static build');
-      cachedClasses = [];
-      return [];
     }
+    
+    // Standard API approach for client-side and development
+    console.log(`Fetching classes from API: ${url}`);
+    const response = await fetch(url, {
+      cache: 'no-store',
+      next: { revalidate: 3600 } // Revalidate once per hour
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch classes: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    cachedClasses = data;
+    return data;
   } catch (error) {
     console.error('Error fetching classes:', error);
     return [];
