@@ -91,19 +91,29 @@ export async function getAllClasses(): Promise<ClassData[]> {
   if (cachedClasses) return cachedClasses;
   
   try {
-    const baseUrl = getBaseUrl();
-    const response = await fetch(`${baseUrl}/api/classes`, {
-      cache: 'no-store',
-      next: { revalidate: 3600 } // Revalidate once per hour
-    });
-    
-    if (!response.ok) {
-      throw new Error(`Failed to fetch classes: ${response.status}`);
+    // In development or when running the app normally, use the API
+    if (process.env.NODE_ENV === 'development' || typeof window !== 'undefined') {
+      const baseUrl = getBaseUrl();
+      const response = await fetch(`${baseUrl}/api/classes`, {
+        cache: 'no-store',
+        next: { revalidate: 3600 } // Revalidate once per hour
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch classes: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      cachedClasses = data;
+      return data;
+    } 
+    // During build time, use a static empty array
+    // This is fine because the page will be dynamically populated on the client
+    else {
+      console.log('Using empty class data for static build');
+      cachedClasses = [];
+      return [];
     }
-    
-    const data = await response.json();
-    cachedClasses = data;
-    return data;
   } catch (error) {
     console.error('Error fetching classes:', error);
     return [];

@@ -58,6 +58,18 @@ const navItems = [
     title: "Classes",
     url: "/classes",
     icon: GraduationCap,
+    items: [
+      {
+        title: "Class List",
+        url: "/classes",
+        icon: GraduationCap,
+      },
+      {
+        title: "Abilities",
+        url: "/classes/abilities",
+        icon: ChevronRight,
+      },
+    ],
   },
   {
     title: "Crafting",
@@ -109,6 +121,12 @@ export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar
   const { data: session, status } = useSession();
   const user = session?.user;
   const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  // After mounting, we have access to the theme
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -171,11 +189,13 @@ export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar
       <SidebarFooter>
         <div className="px-2 flex items-center justify-center space-x-2">
           <Sun className="w-4 h-4 text-yellow-500" />
-          <Switch
-            checked={resolvedTheme === "dark"}
-            onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
-            aria-label="Toggle theme"
-          />
+          {mounted && (
+            <Switch
+              checked={resolvedTheme === "dark"}
+              onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+              aria-label="Toggle theme"
+            />
+          )}
           <Moon className="w-4 h-4 text-blue-500" />
         </div>
         <div className="px-2 text-xs text-muted-foreground mb-2">
