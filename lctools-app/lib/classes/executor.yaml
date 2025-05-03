@@ -1,0 +1,146 @@
+class:
+  id: executor
+  name: Executor
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/fe8c19f2-14b7-4aab-a3fb-704c8b752720-executor.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any mastered class + Any points in Acolyte.
+  description: Agents of the Church's justice.
+  guide: 'Executors are good against mages. Holy Orders gives them sticking power
+    to a single target that is almost impossible to escape from. Because they can
+    only attack a single target, it does mean they cannot threaten multiple backline
+    threats by themselves. Sometimes, it may be worth foregoing the holy orders until
+    later.
+
+    Deus Vult can only be used against people who have Holy Orders on them. It allos
+    the executor to trade an RP for an offensive boost, making for an attack that
+    is hard to dodge. It also gains the shieldbreaker property, which can heavily
+    punish mages.
+
+    It is best used in combination with Ave Maria. It has a higher AP cost, so missing
+    it is particularly bad which deus vult helps prevent. It can be worth tossing
+    out against a target that has no RP left, especially if they have higher guard.
+    It also does Holy damage, which may be relevant against some enemies.
+
+    Eagle Hunt is what Executors use to get in range of their targets. They can leap
+    over the frontline and land in the back. It may also be used as an escape tool
+    or it can be seen as a cheap movement option if you are already planning to use
+    Silentium, which gets a 1 AP discount when used during Eagle Hunt. Silentium is
+    primarily used against mages, against who disabling their concentration can be
+    devastating. It also disables their spells until they remove it, which can be
+    seen as effectively lowering their RP or AP for the next turn. Use with Deus Vult
+    when you absolutely need to cancel an ongoing spell they are concentrating on.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Holy Orders
+  - level: 2
+    benefits:
+    - type: ability
+      value: Silentium
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Eagle Hunt
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Cunning
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Deus Vult
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Power
+        value: 1
+      - attribute: Focus
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Ave María
+  abilities:
+  - id: holy_orders
+    name: Holy Orders
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: silentium
+    name: Silentium
+    type: passive
+    keywords:
+    - Combo
+    - Holy
+    range: Weapon Range
+    description: 'You infuse a light thrown weapon with Sacred Power and Light Attack
+      the target for Light Holy Damage. On damage the weapon disrupts the target’s
+      magic circuits, breaking concentration and preventing the target from using
+      abilities with the Spell keyword. The lodged weapon can be removed for 1 RP
+      or 2 AP, removing the disruption.
+
+      Combo:
+
+      If used after Eagle’s Hunt, reduce the AP cost to 1 from 2.'
+    requirements:
+    - type: text
+      description: Light Thrown Weapon or Sets of missiles Only.
+    costs:
+      mana: 1
+      ap: 1
+  - id: eagle_hunt
+    name: Eagle Hunt
+    type: passive
+    keywords:
+    - Combo
+    - Jump
+    range: '-'
+    description: You leap up to 30ft into the air and then horizontally up to twice
+      your Speed, this movement does not provoke attacks of opportunity. You may use
+      Silentium at any point during the movement, gaining the Combo bonus.
+    costs:
+      ap: 2
+  - id: deus_vult
+    name: Deus Vult
+    type: passive
+    keywords: []
+    range: Self
+    description: Can use with active Holy Orders. Your next attack against your Holy
+      Order gains the Lock On and Shieldbreaker keywords against your Holy Order.
+    requirements:
+    - type: text
+      description: A target of your Holy Order.
+    costs:
+      rp: 1
+  - id: ave_maría
+    name: Ave María
+    type: passive
+    keywords: []
+    range: Melee Weapon Range
+    description: You attack with a swift double slash in the blink of an eye, making
+      a Heavy Attack that deals Light damage + Heavy Holy damage.
+    costs:
+      ap: 3

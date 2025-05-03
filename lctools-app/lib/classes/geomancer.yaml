@@ -1,0 +1,161 @@
+class:
+  id: geomancer
+  name: Geomancer
+  tier: 2
+  difficulty: 3
+  main_role: Controller
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3eaec338-c845-4080-8177-55f2ce69607f-GeoMancer_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered or Earth mastered.
+  description: A magic user that focuses on manipulating the earth around them.
+  guide: 'A Geomancer is a controller that uses shapes the battlefield to their benefit.
+    Fissure is their main control spell that creates a large hole in the ground that
+    enemies will have to get out of. This can be powerful when combined with other
+    tools such as a Flame Oil Flask. People at the edges may step out of the fissure
+    by spending an RP, but then you have the option of hitting them with a Seismic
+    Shove.
+
+    Seismic Shove is a unique forced movement ability in that it lets you push an
+    enemy in any direction, instead of only backwards. If you hit an enemy with it,
+    you can toss them into the Fissure they just avoided.
+
+    Mud Wall is another area control spell that you can use. You can spend AP on it
+    to either build cover for yourself and your allies, or create a small patch of
+    difficult terrain for the enemies. When used a reaction, you can use the cover
+    creating part of it to turn a potential hit into a miss or use it to make an enemy
+    be unable to reach your allies. You can also use it in combination with the Fissure
+    ability to create a sudden wall for when an enemy attempts to jump out of the
+    hole.
+
+    Secret Art: Earthquake is a wide hitting spell that does low damage, but knocks
+    enemies prone. Its main strength is the extremely long range on it and the bonus
+    damage it does against magically created objects. The last part may not come up
+    often, but it will be devastating when it does. Be aware that it will also destroy
+    your own mud walls.
+
+    Finally, Tremorsense is a simple spell that lets you temporarily become aware
+    of creatures. Useful for spotting out potential assassins, but it can also let
+    you do things like position a fissure through a wall.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Tremorsense
+  - level: 2
+    benefits:
+    - type: ability
+      value: Mud Wall
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Fissure
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Seismic Shove
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: 'Secret Art: Earthquake'
+  abilities:
+  - id: tremorsense
+    name: Tremorsense
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: mud_wall
+    name: Mud Wall
+    type: passive
+    keywords:
+    - Spell
+    - Earth
+    range: 40ft
+    description: 'You create a wall 4ft high, 1ft thick and up to 20ft long that serves
+      as low cover. Anybody attempting to get over the wall treats it as difficult
+      terrain. Walls must be placed on solid ground and cannot be stacked on top of
+      eachother.
+
+      Each 5ft of wall has 50 HP and dissolves if it reaches 0. It otherwise lasts
+      until the end of the encounter.
+
+      You may spend 1 RP instead of 2 AP on this ability instead.'
+    costs:
+      ap: 2
+  - id: fissure
+    name: Fissure
+    type: passive
+    keywords:
+    - Spell
+    - Earth
+    range: 30ft
+    description: 'You slam the ground and create a 15ft wide fissure up to the target
+      point. Those at the edges of the spell’s range may spend 1 RP to Sidestep 5ft
+      out of the effect. All caught in the effect fall down 10ft into the fissure
+      and take falling damage as normal.
+
+      The spell requires natural ground to be below the touching surface to function.
+      It may work on the bottom floor of a house, but will fail if used higher up
+      or in some dungeons.'
+    requirements:
+    - type: text
+      description: Special
+    costs:
+      mana: 2
+      ap: 2
+  - id: seismic_shove
+    name: Seismic Shove
+    type: passive
+    keywords:
+    - Spell
+    - Earth
+    range: 80ft
+    description: You make a Light attack that deals Earth damage against the target.
+      On damage, you may push the target 5ft in any direction.
+    costs:
+      mana: 1
+      ap: 1
+  - id: secret_art__earthquake
+    name: 'Secret Art: Earthquake'
+    type: combat_action
+    keywords:
+    - Spell
+    - Earth
+    - Secret Art
+    range: 160ft
+    description: 'You make a Light attack that deals Earth damage against all enemies
+      in range. On damage, they fall prone.
+
+      You also make a Light attack that deals Earth damage against all magically created
+      walls and similar inanimate objects created by magic. You deal 10x damage against
+      those targets.'
+    costs:
+      mana: 3
+      ap: 4

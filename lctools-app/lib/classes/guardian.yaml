@@ -1,0 +1,130 @@
+class:
+  id: guardian
+  name: Guardian
+  tier: 2
+  difficulty: 2
+  main_role: Defender
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/a33c977d-313c-4754-b090-1e314b404e60-Guardian_2_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Fighter mastered.
+  description: Guardians are heavily armored fighters that specialize in defense for
+    both themselves and their allies.
+  guide: 'The guardian is a defender that wants to reduce damage through high toughness
+    and heavy armor. They get access to this heavy armor, though the drawbacks of
+    it are noticeable too. Too much guard may be overkill and it may be better to
+    stick to medium or light armor in some cases.
+
+    They control what the enemy can do by using Provoke and Threatening Aura. Provoke
+    is a 1 turn Challenge for no AP cost, while threatening aura does cost 2 AP, but
+    you automatically challenge everything around you. Challenge makes enemies provoke
+    attacks of opportunity when they hit anybody except you, so you do need to keep
+    in melee range of the enemies. Challenging Aura is especially good when you have
+    other melee fighters that are squishy next to you. A berserker will greatly appreciate
+    being hard to target.
+
+    To help with being a threat with your attacks of opportunity, the controlled opportunities
+    key ability gives you a small bonus to them. Thanks to it, guardians are more
+    free to ignore focus and power and focus on defensive stats.
+
+    Hold the line lets a guardian convert AP to RP at a good rate, at the cost of
+    some mana. In a long fight, frequent use of this will let you keep your RP until
+    you really need it.
+
+    Last Stand is an ability that should only be used when you know you''re going
+    to face many attacks during the upcoming round. The RP cost is heavy, but it can
+    easily be RP efficient. You don''t need to use mana on this for it to be worth
+    it, but it''s worth considering if you are likely to face a bunch of heavy attacks.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Controlled Opportunities
+  - level: 2
+    benefits:
+    - type: ability
+      value: Provoke
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Hold the line
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Threatening Aura
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Last Stand
+  abilities:
+  - id: controlled_opportunities
+    name: Controlled Opportunities
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: provoke
+    name: Provoke
+    type: passive
+    keywords:
+    - Challenge
+    range: 5ft
+    description: You Challenge an enemy until the start of your next turn.
+    costs:
+      mana: 1
+      ap: 0
+  - id: hold_the_line
+    name: Hold the line
+    type: passive
+    keywords: []
+    range: Self
+    description: Your next Block action costs 0 RP. Until the start of your next turn,
+      unless you use the Dodge action, you become Immovable.
+    costs:
+      mana: 1
+      ap: 1
+  - id: threatening_aura
+    name: Threatening Aura
+    type: passive
+    keywords:
+    - Challenge
+    range: 20ft
+    description: Until the start of your next turn, all enemies in your melee range
+      are considered Challenged by you.
+    costs:
+      ap: 2
+  - id: last_stand
+    name: Last Stand
+    type: passive
+    keywords:
+    - Stance
+    range: Self
+    description: Until the start of your next turn, you may use the Block action for
+      0 RP and you gain additional Guard equal to half the mana spent on this ability.
+      Once you use this ability, you cannot use it again in this encounter.
+    costs:
+      rp: 2

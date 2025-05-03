@@ -1,0 +1,132 @@
+class:
+  id: blacksmith
+  name: Blacksmith
+  tier: 1
+  difficulty: 2
+  main_role: Artisan
+  secondary_role: Support
+  image_url: https://cdn.angelssword.com/ttrpg/assets/7cf0cd80-9967-48dd-ac03-190b2403c163-Blacksmith_Clean.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: None.
+  description: Forgers of Lyr's weapons.
+  guide: 'Blacksmith is a crafting class that creates weapons. A lot of your abilities
+    and use will come during interlude phases where you can craft your weapons.
+
+    Outside of crafting, you can use Forged Knowledge to boost the damage of an attack
+    you made. It requires you to use a weapon you crafted yourself and you only maximize
+    one dice, so use it when you are a few points of damage of from killing an enemy
+    or to turn a 1 into a 6 or 8.
+
+    With Weapon Maintenance, you give a weapon a +1 bonus to damage or accuracy. It
+    only costs an encounter start action, so there''s no reason not to do it if you
+    aren''t using it for anything else.
+
+    When crafting, Steady Craft II is better than rolling on average. You can delay
+    using it to see if you need a higher number at the end before using it, but it
+    will be better most of the time.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Craft Weapons
+  - level: 2
+    benefits:
+    - type: ability
+      value: Repair Weapon
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - Blacksmithing
+      can_convert_to_expertise: false
+  - level: 4
+    benefits:
+    - type: ability
+      value: Forged Knowledge
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Steady Craft II
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Power
+        value: 1
+      - attribute: Focus
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Weapon Maintenance
+  abilities:
+  - id: craft_weapons
+    name: Craft Weapons
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: repair_weapon
+    name: Repair Weapon
+    type: passive
+    keywords: []
+    range: ''
+    description: You repair a broken smithing weapon.
+    requirements:
+    - type: text
+      description: Costs 1 interlude point.
+  - id: forged_knowledge
+    name: Forged Knowledge
+    type: passive
+    keywords:
+    - Instant
+    range: Self
+    description: Using your knowledge of weapons, you infuse the strongest point of
+      your weapon with mana and then strike at the perfect angle dealing maximum weapon
+      damage.  Maximize one damage dice for the attack.
+    requirements:
+    - type: text
+      description: Attack must be made with a weapon you crafted.
+    costs:
+      mana: 1
+      rp: 0
+  - id: steady_craft_ii
+    name: Steady Craft II
+    type: passive
+    keywords: []
+    range: ''
+    description: You add a crafting check to the item. The crafting dice is automatically
+      a 7.
+    requirements:
+    - type: text
+      description: 1 Crafting Dice.
+  - id: weapon_maintenance
+    name: Weapon Maintenance
+    type: passive
+    keywords:
+    - Encounter Start
+    - Flashback
+    range: ''
+    description: You recall having previously assisted an ally in maintaining their
+      weapon, causing it to be in top shape for battle. This weapon gains a +1 Power
+      Artisan Bonus or +1 Focus Artisan Bonus. If you smithed the weapon it gains
+      both.
+    requirements:
+    - type: text
+      description: 1 Ally’s Smithed Weapon, or your own smithed weapon.

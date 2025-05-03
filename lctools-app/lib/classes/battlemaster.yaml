@@ -1,0 +1,143 @@
+class:
+  id: battlemaster
+  name: Battlemaster
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/6e8ef73f-342f-49b9-9997-13c21fc00b43-BattleMaster_Clean.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Fighter mastered.
+  description: A versatile fighter that can use any weapon.
+  guide: 'The battlemaster is an expert in all weapons. If you find a good weapon,
+    whether its an artifice, relic or even a divine arms, you will be able to use
+    it to its maximum effect.
+
+    You also don''t need to worry about being unable to use certains attack with your
+    new weapon due to the Unconventional Weapon ability. It has the potential for
+    silly combos, such as using Iai while a greataxe.
+
+    Being a master of battle, they posses ways to punish both Dodge and Guard focused
+    characters. Skillful blow has lock-on to make it good against high agility where
+    as Mordschlag''s guard crush allows it to punish heavily armored enemies.
+
+    Disarming Attack is their last ability and it can give them the edge in a duel
+    against most martial enemies. If they forgot to bring a spare weapon, the disarm
+    all but disables them for a turn.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Arms Mastery
+  - level: 2
+    benefits:
+    - type: ability
+      value: Mordschlag
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Skillfull Blow
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+      - attribute: Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Unconventional Weapon
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Disarming Attack
+  abilities:
+  - id: arms_mastery
+    name: Arms Mastery
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: mordschlag
+    name: Mordschlag
+    type: passive
+    keywords:
+    - Guard Crush
+    range: Melee Weapon Range
+    description: You attack the target with the pommel or crossguard making a Heavy
+      Attack against the target.
+    requirements:
+    - type: text
+      description: Longsword, Heavy Blades and Bludgeoning weapons only.
+    costs:
+      mana: 1
+      ap: 2
+  - id: skillfull_blow
+    name: Skillfull Blow
+    type: passive
+    keywords:
+    - Lock On
+    range: Melee Weapon Range
+    description: You may make a Heavy Attack against the target.
+    costs:
+      mana: 2
+      ap: 2
+  - id: unconventional_weapon
+    name: Unconventional Weapon
+    type: passive
+    keywords:
+    - Quick
+    range: Self
+    description: 'You may treat the weapon you’re currently wielding as a weapon of
+      a different group for the next attack, allowing it to meet the requirements
+      of abilities that require a certain group and allowing you to change its damage
+      type to the chosen weapon’s damage type.
+
+
+      The GM may rule that some abilities still cannot be performed with your equipped
+      weapon.'
+    costs:
+      ap: 0
+  - id: disarming_attack
+    name: Disarming Attack
+    type: passive
+    keywords:
+    - Disarm
+    range: Melee Weapon Range
+    description: You may make a Light Attack against the target. On damage, you Disarm
+      the target until the start of your next turn.
+    costs:
+      mana: 2
+      ap: 2

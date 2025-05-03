@@ -1,0 +1,198 @@
+class:
+  id: sky_knight
+  name: Sky Knight
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Utility
+  image_url: https://cdn.angelssword.com/ttrpg/assets/ea296223-3876-4707-adb9-aa09eca420e0-Sky_Knight_-_Raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Cavalier mastered.
+  description: 'As was common with most innovations that made radical leaps, the history
+    of the Sky Knights was steeped in warfare. Like the development of the Cavalier,
+    learning to take to the sky on the backs of winged mounts stemmed from a need
+    to counter a threat. Aerial Mages from Sorthen had long since, and in some cases
+    continue, dominated the skies as scouts, couriers, and as untouchable bombardment
+    specialists. With no modern airships to deter them and no Aeromancers to threaten
+    them, both Northi and Westria searched for a solution. Nearly simultaneously,
+    the two countries developed their own methods.
+
+    From the mountains and hills near Mount Merlin, Northi tamed the wild pegasi.
+    Harpy hunters were the first to capture and tame the wild flying horses and harpy
+    run ranches continue to produce the highest quality mounts with specialized breeds
+    tailored for various tasks. A pegasus’s agility and speed in the air let the chimeran
+    knights of Northi put up a challenge to Sorthen aerial units in terms of scouting,
+    but their limited endurance and fragile wings made them less suited as couriers
+    and frontline combatants.
+
+    Westria took a nuisance that plagued their southeastern border along the mountains
+    near Jav and turned it into a solution. Wyverns roosting in the mountains and
+    forests were regularly dealt with by adventurers and knights but some enterprising
+    (and foolhardy) beast tamers decided to attempt to tame newly hatched wyverns
+    as companions. With some false starts, they succeeded and it wasn’t long before
+    an interest in training them as mounts emerged. Slower and less nimble in the
+    air than their pegasi counterparts, a wyvern’s thick scales and devastating Reginleiv
+    made them much more suitable as flying heavy cavalry.
+
+    To this day, there is little overlap in the Sky Knight forces of Northi and Westria.
+    While each side failed to deploy units that could directly counter Aerial Mages,
+    their arrival on the battlefield removed Sorthen’s complete dominance of the air.
+    Modern Sky Knight adventurers utilize whatever type of mount that suits their
+    style (or that they can afford) and continue to fill their historical roles as
+    scouts, couriers, and aerial cavalry.'
+  guide: 'The sky knight is a class that focuses on flying mounts. It is vulnerable
+    to ranged attacks, but it has excellent target access. Despite being a tier 2
+    class, it may not be accessible for everyone due to the high cost of pegasi and
+    wyverns. A pegasus is faster, but wyverns are a lot more durable and with some
+    offensive power.
+
+    Air Stability helps manage the durability issues of the pegasus, allowing you
+    to re-direct attacks like normal. The flight rules of you losing altitude still
+    apply though. Aerial Loop can also help with this. It can be used if either you
+    or your mount become the target and it affects both of you, useful for avoiding
+    AoE attacks.
+
+    Aerial Crashdown is your main tool of attacking the backline, moving you to the
+    target and allowing your mount to make a heavy attack for just 2 AP. Be careful
+    of getting stuck on the ground against melee enemies however, as you can''t canter
+    of your mounts attack.
+
+    If you don''t want to commit to an engagement, you can use Flyby attack. This,
+    like Aerial Crashdown, also works with Trample, though getting trample value is
+    harder with a flying mount.
+
+    Your Secret Art: Mythical Awakening varies based on the type of flying mount you
+    use. The pegasus one can be used both offensively to just deal damage, but also
+    defensively if you''re scared of being forced to the ground by arrows. You can
+    just bellorophon to attack and move low enough that you won''t get shot down.
+    The wyvern''s reginliev is best used on the same elevation as the enemy, as it
+    will be hard to hit many targets with the line attack otherwise.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Air Stability
+  - level: 2
+    benefits:
+    - type: ability
+      value: Aerial Crashdown
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Aerial Loop
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Flyby Attack
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: 'Secret Art: Mythical Awakening'
+  abilities:
+  - id: air_stability
+    name: Air Stability
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: aerial_crashdown
+    name: Aerial Crashdown
+    type: passive
+    keywords: []
+    range: 60ft
+    description: You and your mount crash down on the target. You move towards the
+      target and your mount makes a Heavy attack against it. On damage, the target
+      is knocked prone.
+    requirements:
+    - type: text
+      description: You are mounted on a flying mount and the target is at least 20ft
+        below you.
+    costs:
+      ap: 2
+  - id: aerial_loop
+    name: Aerial Loop
+    type: passive
+    keywords: []
+    range: Self or Mount
+    description: You and your mount take the Dodge action and gain a +5 bonus to evasion
+      against the attack.
+    requirements:
+    - type: text
+      description: You are mounted on a flying mount and you or your mount are the
+        target of a ranged attack
+    costs:
+      mana: 1
+      rp: 1
+  - id: flyby_attack
+    name: Flyby Attack
+    type: passive
+    keywords:
+    - Sidestep
+    range: Self
+    description: You sidestep up to your speed. At any point during this movement,
+      you may spend 1 AP to make a Light attack with a weapon or spend 2 AP to make
+      a Heavy attack with a weapon. After this attack, you may change the direction
+      in which you spend the rest of your movement.
+    requirements:
+    - type: text
+      description: Must be mounted on a flying mount.
+    costs:
+      mana: 1
+      ap: 1
+  - id: secret_art__mythical_awakening
+    name: 'Secret Art: Mythical Awakening'
+    type: combat_action
+    keywords:
+    - Secret Art
+    range: Self
+    description: 'You channel your power into your mount, allowing it to unleash a
+      devastating attack based on what type of mount it is.
+
+      Pegasus: Bellerophon: You Sidestep towards a target within 60ft and make a Heavy
+      attack against it. This attack has Lock-on and costs 1 RP and 2 Mana
+
+      Wyvern: Reginliev: You make a Heavy attack against all enemies in a 5ft wide
+      line up to a point within 60ft. You also make a Heavy attack against all enemies
+      within 10ft of the selected point, though enemies can also take an attack from
+      this ability once. This attack costs 2 AP and 2 Mana.
+
+      Dragonfly: Darting Mirage: You move at incredible speed and create several illusionary
+      afterimages in your wake. Until the start of your next turn, every attack against
+      you or your mount that is not a critical hit or does not have the Sure Hit keyword
+       automatically misses. This is an Illusion effect. This ability costs 0 AP and
+      4 Mana.
+
+      All these attacks are made with your mount’s stats instead of your own.'
+    requirements:
+    - type: text
+      description: Must be mounted on a mount mentioned in the description.

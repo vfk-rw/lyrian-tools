@@ -1,0 +1,160 @@
+class:
+  id: dragoon
+  name: Dragoon
+  tier: 3
+  difficulty: 3
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/35e96b33-6df3-4070-baaa-9face291f252-dragoon.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Lancer mastered, 10 Points in the Athletics (Jumping) expertise
+        skill.
+  description: Dragoons are a high mobility class that can fight at great heights
+    without risk.
+  guide: 'Dragoons excel at fighting at heights. They do not need to worry about fall
+    damage when using their dragoon abilities and can turn it into damage for them
+    by using Skydive. When not fighting on an airship or something else that flies,
+    Dragoons can use buildings or trees to gain the height advantage.
+
+    If there is nothing else around, Jump can be used. It is a decent initiation option,
+    though Jump is often better used to reposition or escape from a bad situation
+    than pure initiation.
+
+    Dragonfire Dive is a powerful AoE tool that puts you in range to follow up with
+    more attacks right after.
+
+    Jump Back is an ability that allows the dragoon to perform hit and run attacks.
+    You can engage, then jump back to force enemies to waste their movement in coming
+    to you. When fighting in the air, you can jump on an enemy, kill it, then jump
+    back to your airship. There''s a lot of possibilities, just keep in mind that
+    it has to be used directly after a Jump ability. Don''t stick around for too long,
+    or you aren''t able to get back.
+
+    Their Secret Art: Dragonslaying Jump is what makes them masters of aerial combat.
+    It is effectively a guaranteed heavy hit on a flying target that forces them to
+    the ground. Against a target that is flying high above the ground, this last part
+    can easily be fatal.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Jump
+  - level: 2
+    benefits:
+    - type: ability
+      value: Skydive
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Dragonfire Dive
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Jump Back
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: 'Secret Art: Dragonslaying Jump'
+  abilities:
+  - id: jump
+    name: Jump
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: skydive
+    name: Skydive
+    type: passive
+    keywords:
+    - Jump
+    range: Special
+    description: You target an enemy below you, no more than 5ft away from you horizontally.
+      You then immediately dive down to that target, making a Heavy Attack against
+      them. You deal an additional point of damage for every 10ft you fell before
+      making the attack, up to 10 extra damage.
+    requirements:
+    - type: text
+      description: Must be airborne, polearm only.
+    costs:
+      ap: 2
+  - id: dragonfire_dive
+    name: Dragonfire Dive
+    type: passive
+    keywords:
+    - Fire
+    - Jump
+    range: 40ft
+    description: You jump to the target, not provoking any attacks of opportunity,
+      and attacking the target plus all other creatures within 5ft of the target for
+      Heavy Fire Damage.
+    requirements:
+    - type: text
+      description: Polearm only.
+    costs:
+      mana: 2
+      ap: 2
+  - id: jump_back
+    name: Jump Back
+    type: passive
+    keywords:
+    - Jump
+    - Quick
+    range: 120ft
+    description: You Jump Back to your previous location. This movement does not provoke
+      any attacks of opportunity.
+    requirements:
+    - type: text
+      description: Previous action had the jump keyword.
+    costs:
+      ap: 0
+  - id: secret_art__dragonslaying_jump
+    name: 'Secret Art: Dragonslaying Jump'
+    type: combat_action
+    keywords:
+    - Full Pierce
+    - Jump
+    - Overcharge
+    - Secret Art
+    - Sure Hit
+    range: 120ft
+    description: 'You Jump up to the target, not provoking any attacks of opportunity,
+      and make a Heavy Attack against it. On damage, the target plummets to the ground
+      taking falling damage as normal.
+
+      Overcharge:
+
+      You may spend additional AP on this ability to increase the range by 60ft for
+      every extra AP spent. If this increases the AP cost to more than what you currently
+      have, it gains the Setup keyword.'
+    requirements:
+    - type: text
+      description: Target must be airborne, polearm only.
+    costs:
+      mana: 2
+      ap: 60

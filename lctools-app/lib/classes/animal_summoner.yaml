@@ -1,0 +1,143 @@
+class:
+  id: animal_summoner
+  name: Animal Summoner
+  tier: 2
+  difficulty: 3
+  main_role: Specialist
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/a69904ed-2795-4e62-b475-9665bf3dd4c0-Animal_Summoner_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered.
+  description: A summoning class that specializes in animals.
+  guide: Soon.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Summon Animal
+  - level: 2
+    benefits:
+    - type: ability
+      value: Emergency Recall
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Half Restore
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+      - attribute: Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Independent Action
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Bestial Command
+  abilities:
+  - id: summon_animal
+    name: Summon Animal
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: emergency_recall
+    name: Emergency Recall
+    type: passive
+    keywords: []
+    range: Sight
+    description: You give your summon 100 Damage Reduction against the attack. Afterwards,
+      if it is still alive, it is immediately unsummoned.
+    requirements:
+    - type: text
+      description: Your summon from Summon Animal is the target of an attack.
+    costs:
+      rp: 1
+  - id: half_restore
+    name: Half Restore
+    type: passive
+    keywords:
+    - Healing
+    range: 5ft
+    description: You heal your summoned animal for 6 + Power x 2 HP. It also removes
+      1 negative effect from it. If the amount healed exceeds the target’s maximum
+      HP, any extra HP is converted into temporary HP.
+    requirements:
+    - type: text
+      description: Can only target your summoned animal.
+    costs:
+      mana: 2
+      ap: 2
+  - id: independent_action
+    name: Independent Action
+    type: passive
+    keywords: []
+    range: Sight
+    description: 'Your animal summoned through the Summon Animal ability gains the
+      ability to act independently. It acts at initiative 0, though you may still
+      control its action. A summon with Independent Action starts with 2 AP and 1
+      RP and may use those as normal. If they have an ability that costs mana, then
+      you still have to pay that mana cost.
+
+      While it is under the effects of Independent Action, you cannot command your
+      summon through the use of your own AP.
+
+      A summon targeted by this ability takes up 2 slots towards the summon limit.
+      If this would put you past your limit, you cannot use this ability.'
+    requirements:
+    - type: text
+      description: Can only target your summoned animal.
+    costs:
+      rp: 0
+  - id: bestial_command
+    name: Bestial Command
+    type: passive
+    keywords: []
+    range: Sight
+    description: 'The summon may take basic actions as if it had 2 AP to spend.
+
+      In addition, if your summon is under the effects of Independent Action, it gains
+      Bestial Command until the end of the encounter, it dies or you cancel it for
+      0 AP. While Bestial Command lasts, its maximum AP and AP recovery are increased
+      by 2 while your AP recovery is lowered by 2.'
+    requirements:
+    - type: text
+      description: Can only target your summoned animal.
+    costs:
+      mana: 2
+      ap: 0

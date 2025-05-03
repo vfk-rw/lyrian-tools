@@ -1,0 +1,135 @@
+class:
+  id: archer
+  name: Archer
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/f6fa114e-0b65-4630-8b1a-018d9fdb26b8-archer.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Ranger mastered.
+  description: 'Archers are the masters of ranged combat, commanding the battlements
+    during times of war. Skilled squads of Archers were feared for their ability to
+    deliver devastating volleys of missiles at high speed, effectively keeping infantry
+    advances at bay. Their keen eyes and sharp intuition allowed them to choose the
+    most effective ammunition for maximum impact.
+
+    The title "Archer" originally referred to those who wielded bows, but as technology
+    evolved, so did the term. With the invention of crossbows and firearms, those
+    who demonstrated exceptional skill with these new weapons still proudly took on
+    the title. Today, "Archer" represents anyone with a remarkable talent for ranged
+    prowess, regardless of the weapon they use.'
+  guide: 'Archers build on the ranger with a heavier focus on ranged attacks. They
+    gain Status Assessment II, which in addition to showing HP also informs you of
+    damage type strengths and weaknesses. Knowledge on what to use against enemies
+    can be very important and this should be used frequently.
+
+    For single target attacks, they gain Snap Shot II. It allows the archer to make
+    a light attack at a mana cost. While it competes against the normal snap shot,
+    it has no AP cost and is a lot more likely to hit. It is best used when an enemy
+    is low on hit points and you lack AP to finish it before it can take a turn.
+
+    The archer is strong against small groups and big groups. Against big groups,
+    a volley covers a very large area. Against smaller groups, multishot can target
+    multiple enemies with a heavy attack doing serious damage or burning RP. The mana
+    cost for overcharging it isn''t too high either, so you could feasibly attack
+    several enemies at the same time.
+
+    Finally, for the creative archers out there there is Unerring Aim. While it has
+    a less immediately clear combat purpose, targeting things such as a rope holding
+    a chandelier or a potion an enemy is holding in their hands can still prove useful.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Status Assessment II
+  - level: 2
+    benefits:
+    - type: ability
+      value: Unerring Aim
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Volley
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Snap Shot II
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Multishot
+  abilities:
+  - id: status_assessment_ii
+    name: Status Assessment II
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: unerring_aim
+    name: Unerring Aim
+    type: passive
+    keywords: []
+    range: ''
+    description: When you aim at an object not being worn or wielded within your ranged
+      weapon range, you always hit your target.
+  - id: volley
+    name: Volley
+    type: passive
+    keywords: []
+    range: Ranged Weapon Range
+    description: You attack all targets in a 25x25ft area for Light Damage.
+    costs:
+      mana: 1
+      ap: 2
+  - id: snap_shot_ii
+    name: Snap Shot II
+    type: passive
+    keywords: []
+    range: Ranged Weapon Range
+    description: You may make a Light Attack against the target.
+    costs:
+      mana: 2
+      ap: 0
+  - id: multishot
+    name: Multishot
+    type: passive
+    keywords:
+    - Overcharge
+    range: Ranged Weapon Range
+    description: 'You may make a Heavy Attack against two different targets.
+
+      Overcharge:
+
+      You may spend X extra mana to attack 2 + X targets instead.'
+    costs:
+      mana: 1
+      ap: 3

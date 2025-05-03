@@ -1,0 +1,136 @@
+class:
+  id: bloodbinder
+  name: Bloodbinder
+  tier: 2
+  difficulty: 4
+  main_role: Healer
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/cf1254ba-06a6-4a15-aac2-7f29caf156d4-BloodBinder_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: At least 1 class mastered.
+  description: Healers that use their own lifeforce.
+  guide: 'As a Bloodbinder, you’ll want to hover around 50% HP to get the most out
+    of Crimson Enmity. It’s a bit of a balancing act, but the extra healing boost
+    is worth it.
+
+    Your bread-and-butter combo is Transfusion followed by Blood Drain. Start by healing
+    your allies with Transfusion, then use Blood Drain to top up your own HP. It’s
+    a great way to keep both you and your team in the fight without leaving yourself
+    too vulnerable.
+
+    Blood Shield is super effective when you cast it on someone with high guard. It’s
+    a two for one—blocking damage while also healing them up, so it’s a great move
+    when you need to protect and patch up a teammate at the same time.
+
+    Life Sacrifice takes you down to just 1 HP, but all that lost health goes directly
+    into healing an ally, which can be a real game-changer when things get rough.
+    If you pair it with Crimson Enmity, you can really boost its impact and turn the
+    tide when your team needs it most.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Crimson Enmity
+  - level: 2
+    benefits:
+    - type: ability
+      value: Transfusion
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Blood Drain
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Blood Shield
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: 'Secret Art: Life Sacrifice'
+  abilities:
+  - id: crimson_enmity
+    name: Crimson Enmity
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: transfusion
+    name: Transfusion
+    type: passive
+    keywords:
+    - Healing
+    range: 20ft
+    description: 'You lose HP up to your Toughness. An ally within range heals for
+      the same amount of HP you lost.
+
+      This HP loss cannot be mitigated in any way and ignores temporary HP.'
+    costs:
+      ap: 0
+  - id: blood_drain
+    name: Blood Drain
+    type: passive
+    keywords: []
+    range: 40ft
+    description: You make a Light Attack against the target. On damage, you recover
+      HP equal to your Toughness.
+    requirements:
+    - type: text
+      description: Target must be a living creature.
+    costs:
+      mana: 1
+      ap: 1
+  - id: blood_shield
+    name: Blood Shield
+    type: passive
+    keywords:
+    - Aid
+    - Healing
+    - Shield
+    range: 40ft
+    description: You grant the target 1 RP that must be spent on the Block action
+      against the triggering attack. They gain a +5 bonus to their Guard for this
+      Block action. After the attack, the target regains HP equal to half the damage
+      blocked (Blocked meaning the damage reduced through block, not necessarily your
+      total block value).
+    requirements:
+    - type: text
+      description: Target is the target of an attack.
+    costs:
+      mana: 2
+      rp: 1
+  - id: secret_art__life_sacrifice
+    name: 'Secret Art: Life Sacrifice'
+    type: passive
+    keywords:
+    - Healing
+    range: 40ft
+    description: You lose HP until your HP reaches 1. Another ally within range recovers
+      that much HP. Any HP that exceeds the target’s max HP becomes temporary HP.
+    costs:
+      ap: 1

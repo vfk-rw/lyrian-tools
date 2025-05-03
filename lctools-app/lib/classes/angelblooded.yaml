@@ -1,0 +1,142 @@
+class:
+  id: angelblooded
+  name: Angelblooded
+  tier: 2
+  difficulty: 1
+  main_role: Utility
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/011cd99f-b19a-4805-a53f-90b99624d673-angelblooded.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Must have the Angelblooded breakthrough.
+  description: Angelblooded are humans with angelic heritage that can transform into
+    semi-divine beings.
+  guide: 'The main appeal of the angelblooded is the True Divine Release. Not only
+    does it give flight and extra movement speed, it is also a requirement to use
+    the other two abilities of the class. Unfortunately, the upkeep and cost make
+    it hard to use until you obtain God''s Blessing, which reduces both to 0.
+
+    Once this class is mastered, it becomes very powerful. On top of the benefits
+    mentioned above, you get to make a free light attack every round. You also get
+    to do a stronger block every round, making blocking an option even if your toughness
+    is low and you''re not wearing armor.
+
+    Even after mastering it, it is still a once per arc ability. Make sure you don''t
+    use it too early.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Angelic Presence
+  - level: 2
+    benefits:
+    - type: ability
+      value: True Divine Release
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Divine Guard
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+      - attribute: Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Divine Might
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: God's Blessing
+  abilities:
+  - id: angelic_presence
+    name: Angelic Presence
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: true_divine_release
+    name: True Divine Release
+    type: passive
+    keywords:
+    - Transformation
+    - Upkeep
+    range: Self
+    description: 'You unleash your latent angelic powers and transform into a semi-divine
+      being for up to an hour. While transformed, you gain controlled flight and +5
+      movement speed.
+
+      Upkeep:
+
+      2 mana After using this ability, you cannot do so again until the interlude
+      rest phase.'
+    requirements:
+    - type: text
+      description: Not already transformed
+    costs:
+      ap: 4
+  - id: divine_guard
+    name: Divine Guard
+    type: passive
+    keywords: []
+    range: Self
+    description: You may immediately use the Block action to guard against the triggering
+      attack with a +5 bonus to Guard.
+    requirements:
+    - type: text
+      description: Must be transformed by Divine Release and targeted by an attack.
+    costs:
+      rp: 1
+  - id: divine_might
+    name: Divine Might
+    type: passive
+    keywords: []
+    range: Melee Weapon Range
+    description: You make a Light Attack against the target.
+    requirements:
+    - type: text
+      description: Must be transformed by Divine Release.
+    costs:
+      ap: 0
+  - id: god_s_blessing
+    name: God's Blessing
+    type: passive
+    keywords: []
+    range: '-'
+    description: The AP cost of True Divine Release I is lowered by 4 and the mana
+      cost upkeep is lowered to 0.
+    costs:
+      ap: 4

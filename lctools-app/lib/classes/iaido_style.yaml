@@ -1,0 +1,158 @@
+class:
+  id: iaido_style
+  name: Iaido Style
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/d065137e-ecce-440d-abbe-7f67369a3369-iaido-style.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered. Proficient with Katana.
+  description: The art of Iai came from the Island of Kirara, a sword style utilizing
+    Kiraran blades.  The Youkai were known for their highly lethal speed and technique
+    in preference over raw power.  Iaidoka are quite rare, students of elusive Kiraran
+    Masters who only train two students at a time.
+  guide: 'Masters of the Iaido style typically start the battle in one of two ways:
+    They open with an Iai strike or wait for the enemy to strike, then counter with
+    Uke Nagashi. Iaido centers around Iaijutsu and the sheathed state. Their most
+    important abilities are locked behind this sheathed state and unless you fulfill
+    conditions, its a once per battle thing.
+
+    Iai Strike is a powerful attack that not only has lock-on, it''s also only 1 AP.
+    Unless you are using a weapon other than a katana and mixing weapon fighting styles,
+    this will most likely be your first action in combat. Because using it loses the
+    sheathed state, it can not be used again unless you use Kiri-tsuke.
+
+    Kiri-tsuke is a heavy attack with the benefit of resetting your sheathed state
+    when you score a kill with it. Depending on the battle, this may be an easy or
+    hard thing to do, but you should always look for the opportunity for the reset.
+
+    Chiburi Noto is used at the end of the encounter and buffs you for your next one
+    by maximizing your Iai strike damage. The benefit of this can be good, but if
+    you are low on HP or mana it may be wise to use one of the basic options instead.
+
+    Uke Nagashi is a powerful counter move that has the condition that you must still
+    be in the sheathed state. Because making any attack with a katana removes the
+    sheathed state, this means you can not attack before using Uke Nagashi, unless
+    you use a different weapon. This is a valid option. You can choose to attack with
+    a normal sword, then drop it and prepare for your counter. If you''d rather only
+    use a katana and still want to use this, then you can instead play very aggressive
+    with your positioning. Use all your AP to move up, then when the enemy wants to
+    attack you, unleash the counter. You can also choose to delay and hope the enemy
+    moves up and attacks you.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Iaijutsu
+  - level: 2
+    benefits:
+    - type: ability
+      value: Iai Strike
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Kiri-tsuke
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Awareness
+        value: 1
+      - attribute: Fitness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Chiburi Noto
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Uke Nagashi
+  abilities:
+  - id: iaijutsu
+    name: Iaijutsu
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: iai_strike
+    name: Iai Strike
+    type: passive
+    keywords:
+    - Iaijutsu
+    - Lock On
+    range: Melee Weapon Range
+    description: You draw your weapon and attack with lightning speed, making a Heavy
+      Attack. You lose the Sheathed state afterwards.
+    requirements:
+    - type: text
+      description: Katana only. Must be in the Sheathed state.
+    costs:
+      ap: 1
+  - id: kiri-tsuke
+    name: Kiri-tsuke
+    type: passive
+    keywords:
+    - Killing Blow
+    range: Melee Weapon Range
+    description: You may make a Heavy Attack against the target. On Killing Blow,
+      you regain the Sheathed state.
+    requirements:
+    - type: text
+      description: Katana only
+    costs:
+      mana: 1
+      ap: 2
+  - id: chiburi_noto
+    name: Chiburi Noto
+    type: passive
+    keywords:
+    - Encounter Conclusion
+    range: Self (Weapon)
+    description: You clean the blood of your katana and sheath the blade. If your
+      next Iai strike with this weapon during this arc is a hit, its Roll Damage is
+      maximized.
+    requirements:
+    - type: text
+      description: Must have used an ability with the Iaijutsu keyword with the chosen
+        weapon this encounter.
+  - id: uke_nagashi
+    name: Uke Nagashi
+    type: passive
+    keywords:
+    - Counter
+    - Iaijutsu
+    range: Melee Weapon Range
+    description: Roll Heavy Damage and treat that as your Guard against the attack
+      that’s targeting you. If you reduce the damage to 0, the attacker becomes Unbalanced.
+      On hit effects and maces do not gain their effect if you reduce the damage to
+      0. After the attack is resolved, you may immediately make an Iai Strike against
+      the attacker for 0 RP. This Iai Strike gains the Sure Hit keyword against an
+      Unbalanced target.
+    requirements:
+    - type: text
+      description: Katana only, target of a melee attack and must be in the Sheathed
+        state.
+    costs:
+      rp: 1

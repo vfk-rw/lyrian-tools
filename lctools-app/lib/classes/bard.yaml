@@ -1,0 +1,150 @@
+class:
+  id: bard
+  name: Bard
+  tier: 2
+  difficulty: 3
+  main_role: Support
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3588e085-fa8f-46f8-82ad-a63df6a44fe4-bard.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Have at least 5 skill points in the Art (Singing) expertise or
+        at least 5 points in an Art expertise of an instrument.
+  description: 'Bards are the storytellers, entertainers, and actors of the world,
+    hailing from all sorts of disciplines. Whether they''re performing in a bustling
+    tavern for a handful of tips or captivating a crowd in the town square, Bards
+    bring life and joy wherever they go. They''re the ones who immortalize the tales
+    of adventuring parties, ensuring that no deed, whether noble or notorious, goes
+    unheard.
+
+    In a party, Bards play a crucial role by inspiring their allies to achieve greatness.
+    With their music, they can lift spirits and hype up their companions, turning
+    the tide of battle with a well-timed tune.'
+  guide: 'The bard is a support class primarily focused around their Inspiring Song
+    and Dirge of Despair. Inspiring Song gives every ally a 1d4 bonus to a roll once
+    per round. It may not seem much, but it can be used to push a barely missed attack
+    into hitting. Dirge of Despair is the opposite, affecting enemies instead. Due
+    to allowing a save, it''s a bit less reliable but a lot of fights may have more
+    enemies than allies on the battlefield. Because both of these are songs and cannot
+    be used at the same time, the bard has to choose which one they want to use. In
+    general, Inspiring Song is more offensive while Dirge of Despair is a more defensive
+    song.
+
+    Their other support ability is Siren Song. It also cannot be used with the other
+    two songs, but it can be a powerful CC against grunts. Because they spend the
+    AP on their turn, their movement provokes attacks of opportunities and even if
+    they are broken free, their spent AP remains lost.
+
+    Their last combat ability is Shatter, which is a good follow up after luring enemies
+    closer with Siren Song. The AP cost makes it usable even when keeping up Inspiring
+    Song or Dirge of Despair as well.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Toss a coin
+  - level: 2
+    benefits:
+    - type: ability
+      value: Inspiring Song
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Dirge of Despair
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Shatter
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Siren Song
+  abilities:
+  - id: toss_a_coin
+    name: Toss a coin
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: inspiring_song
+    name: Inspiring Song
+    type: passive
+    keywords:
+    - Song
+    - Sound
+    range: 30ft
+    description: All allies within range (including yourself) may add 1d4 to a single
+      roll they make until the start of your next turn. They may choose to add this
+      after seeing the roll, but before knowing the result. At the start of your next
+      turn and every turn thereafter, you may spend 1 AP to continue this performance,
+      granting all allies within range the benefit once again.
+    costs:
+      ap: 2
+  - id: dirge_of_despair
+    name: Dirge of Despair
+    type: passive
+    keywords:
+    - Sound
+    - Song
+    range: 30ft
+    description: All enemies within range must make a save against your Potency or
+      become affected by this Song. While affected, you may subtract 1d4 from a single
+      roll they make until the start of your next turn. You may choose to add this
+      after seeing the roll, but before knowing the result. At the start of your next
+      turn and every turn thereafter, you may spend 1 AP to continue this performance.
+      Enemies that successfully made their save, do not have to save again against
+      this continued performance, but those who were affected continue to be affected.
+    costs:
+      ap: 2
+  - id: shatter
+    name: Shatter
+    type: passive
+    keywords:
+    - Sound
+    range: 30ft
+    description: Every enemy within range must make a save against your Potency or
+      take Light Damage. Any unattended objects made of glass or a similar vulnerable
+      material also shatter.
+    costs:
+      mana: 1
+      ap: 3
+  - id: siren_song
+    name: Siren Song
+    type: passive
+    keywords:
+    - Song
+    - Sound
+    range: 60ft
+    description: All enemies in range must make a save against your Potency. If they
+      fail, they must spend AP on their next turn to move closer to you using the
+      most direct path possible. If this path leads them through an obviously harmful
+      hazard such as off a cliff, they are no longer affected by this ability. Otherwise,
+      this ability lasts until they are within 5ft of you or until they take damage.
+      While playing this Song, you can take no other actions. Taking any other action
+      cancels the Song, immediately freeing all enemies from its effects. A creature
+      can only be affected by this ability once per encounter.
+    costs:
+      ap: 3

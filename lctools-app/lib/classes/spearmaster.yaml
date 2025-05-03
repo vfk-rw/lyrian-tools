@@ -1,0 +1,154 @@
+class:
+  id: spearmaster
+  name: Spearmaster
+  tier: 3
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Controller
+  image_url: https://cdn.angelssword.com/ttrpg/assets/540ced99-01ef-4236-b0d5-e29b7496973a-Spearmaster_Lamia_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Lancer mastered.
+  description: An expert spear fighter.
+  guide: 'The spearmaster combines the damage dealing capabilities of the lancer and
+    improves on them, adding some controlling power to the mix.
+
+    Versatile range allows you to manipulate your own threatened range. This is useful
+    in spread out melee fights where enemies may have too much freedom to move away
+    from you otherwise.
+
+    Draw-In can either be used as a tool to help position enemies for your allies
+    or it can be combined with Lunge to draw an enemy far away into the range of your
+    polearm.
+
+    Spear Charge is effectively an upgraded version of the basic Charge that the fighter
+    class has. It gives you a small damage bonus, but you are limited to a single
+    attack even if you spend 4 AP. You can also combine it with Wild Thrusts. Wild
+    Thrusts is an AoE attack that leads into a zone denial. The box it strikes in
+    is fairly small, so it is most powerful in tight spaces. It disables your other
+    attacks of opportunity, but you may cancel it when an enemy is about to provoke
+    to attack them.
+
+    The secret art Gae Bolg is a fairly simple move. With a relatively low cost for
+    a secret art, it''s a guaranteed hit with a heavy attack unless fate decides otherwise.
+    It doesn''t add any extra damage, so against Block type defenders it may not be
+    worth the mana cost.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Versatile Range
+  - level: 2
+    benefits:
+    - type: ability
+      value: Draw-In
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Wild Thrusts
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Spear Charge
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: 'Secret Art: Gae Bolg'
+  abilities:
+  - id: versatile_range
+    name: Versatile Range
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: draw-in
+    name: Draw-In
+    type: passive
+    keywords:
+    - Combo
+    range: Melee Weapon Range
+    description: 'You make a Light attack against the target. On damage, they are
+      pulled up to 5ft towards you.
+
+      Combo: If used after Lunge, the range of this attack and the pullback distance
+      are doubled. This consumes the Lunge effect.'
+    requirements:
+    - type: text
+      description: Polearm only.
+    costs:
+      ap: 1
+  - id: wild_thrusts
+    name: Wild Thrusts
+    type: passive
+    keywords: []
+    range: Melee Weapon Range
+    description: 'You rapidly thrust your weapon in front of you, making a Light attack
+      against all enemies in a 15ft wide, 10ft long box in front of you. Until the
+      start of your next turn, you may make Attacks of Opportunity against any enemy
+      walking through that box. You cannot make any other Attacks of Opportunity while
+      this effect lasts.
+
+      You may cancel this effect for 0 RP.'
+    requirements:
+    - type: text
+      description: Polearm only.
+    costs:
+      mana: 1
+      ap: 2
+  - id: spear_charge
+    name: Spear Charge
+    type: passive
+    keywords: []
+    range: Self
+    description: 'You may spend 2 or 4 AP on this ability and move as though you had
+      spent that AP on movement. After you finish moving, you may spend half of the
+      AP you used on this ability on a single Light or Heavy attack.
+
+      For every 10ft moved, this attack gains +1 damage up to a maximum of +10.
+
+      If you spent 4 AP on this ability, you may also choose to use Wild Thrusts instead
+      of making a Light or Heavy attack. These attacks do not gain the damage bonus
+      listed above.'
+    requirements:
+    - type: text
+      description: Polearm only.
+  - id: secret_art__gae_bolg
+    name: 'Secret Art: Gae Bolg'
+    type: combat_action
+    keywords:
+    - Secret Art
+    - Sure Hit
+    range: Melee Weapon Range
+    description: Make a Heavy attack against the target. Unless your accuracy roll
+      is a 1, your roll is treated as if you rolled a 20 and it gains Sure Hit.
+    requirements:
+    - type: text
+      description: Polearm only.
+    costs:
+      mana: 2
+      ap: 2

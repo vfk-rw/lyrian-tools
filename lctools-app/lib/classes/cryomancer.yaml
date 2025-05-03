@@ -1,0 +1,151 @@
+class:
+  id: cryomancer
+  name: Cryomancer
+  tier: 2
+  difficulty: 2
+  main_role: Controller
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3f1620da-f20b-4357-a152-7f1260610bd3-Hoarfrost_1_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered or Frost mastery.
+  description: 'Masters of frost, the Cryomancers weave the raw, chilling power of
+    ice into an art form. Theirs is a domain of control, using their wintry gifts
+    not for sheer damage, but to manipulate the battlefield and dictate the flow of
+    combat.
+
+
+    Cryomancers thrive in battlefield control where their icy enchantments can wreak
+    the most havoc. With a wave of their hand, they can transform the ground to ice,
+    halting an enemy advane, or encase foes in blocks of solid frost, taking them
+    out of the fight completely. Their chilling spells can slow even the most agile
+    opponent, leaving them vulnerable to attacks.
+
+
+    Don''t let their cold demeanor fool you - beneath the icy exterior lies a burning
+    resolve. To be a Cryomancer is to understand that the battlefield is a canvas,
+    and with the power of frost at their fingertips, they are the artists, painting
+    a portrait of control and chaos in equal measure.'
+  guide: 'The combination of Icicle Nail, Sheet Ice and Glacial wall are a hat-trick
+    of battlefield control, both creating cover, halting enemy advances and slowing
+    front line enemy units.  As a pure controller, Sheet Ice can be used freely and
+    at minimal cost to block chokepoints or to funnel enemies.  It can also be used
+    to hinder the movement of units by casting it into an enemy.
+
+
+    Glacial wall can create cover from nothing, quickly subverting a strategic advantage
+    the enemy might have or bolstering your own.
+
+
+    Lastly in a pinch, the Cyromancer can devastate low level enemies with Frost Coffin,
+    immediately eliminating a threat from the battlefield and also creating cover
+    for your team.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Ice Cold
+  - level: 2
+    benefits:
+    - type: ability
+      value: Icicle Nail
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Sheet Ice
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Glacial Wall
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: your Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Frost Coffin
+  abilities:
+  - id: ice_cold
+    name: Ice Cold
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: icicle_nail
+    name: Icicle Nail
+    type: passive
+    keywords:
+    - Frost
+    - Slow
+    - Spell
+    range: 60ft
+    description: You fire a shard of ice at a target unit, making a Light Attack that
+      deals Water(Frost) Damage. On hit, the target is Slowed until the end of their
+      next turn.
+    costs:
+      mana: 1
+      ap: 1
+  - id: sheet_ice
+    name: Sheet Ice
+    type: passive
+    keywords:
+    - Frost
+    - Spell
+    - Upkeep
+    range: 120ft
+    description: You freeze the ground in a 20x20 area, creating difficult terrain
+      that lasts until the end of your next turn.  You may use 1 mana per instance
+      of this spell to continue the effect until the end of your next turn.
+    costs:
+      ap: 1
+  - id: glacial_wall
+    name: Glacial Wall
+    type: passive
+    keywords:
+    - Frost
+    - Spell
+    range: 30ft
+    description: You create 4 * X connected ice structures that are 5ft x 5ft cubes
+      that last for up to 24 hours. These cubes have HP equal to 15 + Focus. These
+      structures can function as low cover. Ice Wall segments take double damage from
+      Fire Attacks.
+    costs:
+      ap: 2
+  - id: frost_coffin
+    name: Frost Coffin
+    type: passive
+    keywords:
+    - Frost
+    - Spell
+    range: 30ft
+    description: You cast a Spell that flash freezes a target Grunt, killing them
+      instantly and creates a two Glacial Wall cube stack at their location. These
+      cubes have HP equal to 15 + Focus. These structures can function as cover. Ice
+      wall segments take double damage from Fire Attacks.
+    costs:
+      mana: 3
+      ap: 3

@@ -1,0 +1,147 @@
+class:
+  id: monk
+  name: Monk
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/e95ebec7-f1fa-488a-ba93-312445861d0d-Monk_New_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Martial Artist mastered.
+  description: Monks are graceful fighters in tune with their inner self.
+  guide: 'Monks are dodge experts with some access to ranged attacks. Ki Blast is
+    a simple ranged attack, being notable for its ability to be used without a weapon
+    and for dealing arcane damage. Many martial artists lack ways to deal non-physical
+    damage and Ki Blast is a good option against enemies that are strong against physical
+    damage.
+
+    Flowing Kick becomes an AP efficient move if used after an attack misses. If you
+    missed an attack previously, there''s little reason not to follow it with a Flowing
+    Kick.
+
+    Serene Water Stance is the core of the monk. Entering it isn''t very hard, but
+    making full use of it isn''t easy. It gives you some extra evasion, but you cannot
+    move normally while in this stance. This means you have little to catch up to
+    an enemy and forced to spam Ki Blast instead. Because of the mana cost, you also
+    have to make a conscious choice whether to enter it or not.
+
+    If you do enter the stance and are able to stay in range of the enemy, you can
+    use Strike of Still Water. With a Sure Hit and Full pierce attack for just 1 mana,
+    it is incredibly powerful. If you are able to use it, do so.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Empty Body
+  - level: 2
+    benefits:
+    - type: ability
+      value: Ki Blast
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Flowing Kick
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Serene Water Stance
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Strike of Still Water
+  abilities:
+  - id: empty_body
+    name: Empty Body
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: ki_blast
+    name: Ki Blast
+    type: passive
+    keywords:
+    - Arcane
+    - Rapid
+    range: 120ft
+    description: You may make a Heavy Attack against the target. This attack deals
+      Arcane damage.
+    costs:
+      ap: 2
+  - id: flowing_kick
+    name: Flowing Kick
+    type: passive
+    keywords:
+    - Combo
+    - Unarmed Strike
+    range: Melee Weapon Range
+    description: 'You make a Heavy Attack against the target.
+
+      Combo:
+
+      If used after an attack with the Unarmed Strike keyword misses, reduce the AP
+      cost of this by 1.'
+    costs:
+      ap: 1
+  - id: serene_water_stance
+    name: Serene Water Stance
+    type: passive
+    keywords:
+    - Stance
+    range: Self
+    description: You enter the Serene Water Stance. While in this Stance, you gain
+      a +3 bonus to your evasion and you may move 5ft everytime an accuracy check
+      against you misses. This movement does not provoke attacks of opportunity. This
+      Stance lasts until you enter a different Stance, you use the Block action or
+      until you move, with the exceptions of this ability and movement abilities with
+      the Unarmed Strike keyword. Making an attack does not cancel this Stance.
+    requirements:
+    - type: text
+      description: An attack against you misses.
+    costs:
+      mana: 1
+      rp: 0
+  - id: strike_of_still_water
+    name: Strike of Still Water
+    type: passive
+    keywords:
+    - Full Pierce
+    - Sure Hit
+    - Unarmed Strike
+    range: Melee Weapon Range
+    description: You may make a Heavy Attack against the target.
+    requirements:
+    - type: text
+      description: Must be in Serene Water Stance.
+    costs:
+      mana: 1
+      ap: 2

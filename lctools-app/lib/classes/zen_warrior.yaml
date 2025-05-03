@@ -1,0 +1,154 @@
+class:
+  id: zen_warrior
+  name: Zen Warrior
+  tier: 3
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Defender
+  image_url: https://cdn.angelssword.com/ttrpg/assets/b1147ad8-bb1b-47e5-9f74-d2d33e19b84e-Zen_Warrior_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Monk mastered.
+  description: Zen Warriors are mobile monks with both offensive and defensive capabilities.
+  guide: 'The Zen Warrior follows up from the monk and gives them some much needed
+    mobility. Walking away from the Serene Water Stance will no longer instantly save
+    you.
+
+    Ki Blast II gives you the option to use a Light or Precise attack. This is useful
+    when already in Serene Water stance, since you can follow it up with Flying Kick.
+
+    Flying Kick can be used immediately after a Ki Blast has hit and places you next
+    to the target. Because it then reduces the AP cost of Strike of Still Water by
+    1, you can do a Precise Ki Blast→Flying Kick→Strike of Still Water combo.
+
+    Ki Burst is a damage increase that can be used after you''ve hit an enemy with
+    an attack. Mostly used for adding small points of damage when an enemy barely
+    survives.
+
+    Redirected Force takes advantage of the high dodge you will have in serene water
+    stance. You can turn heavy attacks that miss you into attacks the enemy must respond
+    to, or may be completely unable to avoid even when reacting to it.
+
+    Secret Art: True Serenity is basically a guaranteed dodge for an entire turn unless
+    the enemy uses sure hit attacks. Due to the +17 bonus that applies even when not
+    dodging, even lock-on attacks will find it near impossible to hit you. As a bonus,
+    you also enter Serene Water Stance from it. Best used when you about to take a
+    lot of attacks in a single turn.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Rapid Blasts
+  - level: 2
+    benefits:
+    - type: ability
+      value: Flying Kick
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Ki Burst
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Redirected Force
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: 'Secret Art: True Serenity'
+  abilities:
+  - id: rapid_blasts
+    name: Rapid Blasts
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: flying_kick
+    name: Flying Kick
+    type: passive
+    keywords:
+    - Combo
+    - Unarmed Strike
+    range: 40ft
+    description: 'You may Sidestep next to the target within range and make a Light
+      Attack against it. You gain Flight for this movement.
+
+      Combo:
+
+      Your Strike of Still Water has its AP cost reduced by 1.'
+    requirements:
+    - type: text
+      description: Must have hit a target with Ki Blast in the previous action.
+    costs:
+      ap: 1
+  - id: ki_burst
+    name: Ki Burst
+    type: passive
+    keywords: []
+    range: Self
+    description: Your attack deals an extra X damage.
+    requirements:
+    - type: text
+      description: Can be used after damaging a single opponent with an Unarmed Strike
+        attack.
+    costs:
+      rp: 0
+  - id: redirected_force
+    name: Redirected Force
+    type: passive
+    keywords:
+    - Counter
+    range: Melee Weapon Range
+    description: 'You redirect the incoming attack back onto the attacker, using the
+      same attack roll. The attacker may react to this attack as normal.
+
+
+      Can not be used against the same attack used to enter the Serene Water stance.'
+    requirements:
+    - type: text
+      description: Must be in Serene Water stance and after a melee attack against
+        you missed.
+    costs:
+      rp: 1
+  - id: secret_art__true_serenity
+    name: 'Secret Art: True Serenity'
+    type: combat_action
+    keywords:
+    - Secret Art
+    - Stance
+    range: Self
+    description: You enter the Serene Water stance and gain an additional +17 bonus
+      to your Evasion until the start of your next turn.
+    costs:
+      mana: 2
+      rp: 1

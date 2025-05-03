@@ -1,0 +1,154 @@
+class:
+  id: anti-mage
+  name: Anti-Mage
+  tier: 2
+  difficulty: 2
+  main_role: Support
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/2b3d2ee1-ee9d-4799-9892-f2e6a344abc4-anti-mage.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered.
+  description: 'Anti-mage is a discipline often pursued by those who don''t practice
+    magic themselves. With Mages playing such a critical role in boosting military
+    power, it''s often a top priority to neutralize them first. That’s where Anti-Mages
+    come in. They dedicate their studies to finding the cracks in all forms of magic,
+    learning how to disrupt and cancel its effects.
+
+    Anti-Mages have a deep understanding of magic, perhaps even more so than some
+    Mages themselves. They don''t just know how magic works, they know how to break
+    it.
+
+    A prime example of their power was seen during the 2nd Battle of Jav. A Demon
+    Anti-Mage singlehandedly turned the tide at the east gate, neutralizing a line
+    of magical smoke deployed by the Westrians. This critical move helped maintain
+    the stalemate that Jav held for years, showcasing just how formidable Anti-Mages
+    can be on the battlefield.'
+  guide: 'Anti-mages do well against mages as the name suggests. Dispel magic is a
+    guaranteed removal of a magical effect that has many possible uses. Whether its
+    buffs, control spells or debuffs, dispel magic can remove it all.
+
+    If you know you''re up against a mage that can shield themselves or allies, you
+    can cast Anti-Shield on them. For many mages, shields are an important defense
+    and Anti-Shield can be safely re-applied to them every turn to deny them this.
+
+    If your allies are under fire by enemy mages, you can use Anti-Magic Shield on
+    them. It gives them 1 RP and reduces the damage they take on top of that.
+
+    Counterspell can be gamechanging if used to counter an important spell. Though
+    it has high potential, it also has a high RP cost. If you try to counterspell
+    simple damage spells, you''ll quickly find yourself running out. Save your RP
+    and only use it to deny a spell the opposing mage absolutely needs to cast.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Magic Resistance
+  - level: 2
+    benefits:
+    - type: ability
+      value: Dispel Magic
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Anti-Shield
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Anti-Magic Shield
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Counterspell
+  abilities:
+  - id: magic_resistance
+    name: Magic Resistance
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: dispel_magic
+    name: Dispel Magic
+    type: passive
+    keywords:
+    - Arcane
+    - Dispel
+    - Spell
+    range: 60ft
+    description: "You dispel a temporary magic effect from an area or target. \n\n\
+      Note: Bounded Fields and Secret Arts cannot be removed with Dispel Magic."
+    costs:
+      mana: 3
+      ap: 2
+  - id: anti-shield
+    name: Anti-Shield
+    type: passive
+    keywords:
+    - Arcane
+    - Spell
+    range: 60ft
+    description: You weave a web of magic around the target. The target cannot be
+      the target of any abilities with the Shield keyword until the start of your
+      next turn.
+    costs:
+      ap: 1
+  - id: anti-magic_shield
+    name: Anti-Magic Shield
+    type: passive
+    keywords:
+    - Aid
+    - Arcane
+    - Shield
+    - Spell
+    range: 60ft
+    description: You grant the target ally 1 RP that must be spend on a basic Dodge
+      or Block action against the triggering attack as well as Anti-Magic Shield for
+      the triggering attack. Anti-Magic Shield reduces the damage the target ally
+      takes by your Power.
+    requirements:
+    - type: text
+      description: Ally is the target of a damage dealing Spell.
+    costs:
+      rp: 1
+  - id: counterspell
+    name: Counterspell
+    type: passive
+    keywords:
+    - Arcane
+    - Counter
+    - Spell
+    range: 60ft
+    description: You pay RP equal to the AP spent on the triggering Spell and Counter
+      it, canceling its effect without refunding the AP. If the AP cost is higher
+      than your RP, you cannot Counterspell it. If used against a non-Grunt target,
+      you must pay 1 mana for each point of Power that the target has more than you
+      (minimum 0). This Spell does not provoke attacks of opportunity, but cannot
+      be used to Counter Spells that have no AP cost.
+    requirements:
+    - type: text
+      description: An enemy casts a spell within range
+    costs:
+      ap: 1

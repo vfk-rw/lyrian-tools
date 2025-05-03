@@ -1,0 +1,160 @@
+class:
+  id: acolyte
+  name: Acolyte
+  tier: 1
+  difficulty: 1
+  main_role: Healer
+  secondary_role: Support
+  image_url: https://cdn.angelssword.com/ttrpg/assets/8ab48520-b1e6-43ab-b503-e6305878747d-Acolyte_Portrait_Final.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: None.
+  description: 'Acolytes are practitioners of the mysterious power known as Faith,
+    which is believed to be the oldest form of magic. In a world where The Church
+    of Kari reigns as the most dominant religion, most Acolytes, about 95%, are Human,
+    and nearly all of them, around 99%, belong to the Church.
+
+    Acolytes are people with a special calling, blessed with the power to perform
+    miracles thanks to their deep faith. They''re part of a bigger community that
+    includes other Acolytes, priests, and sometimes even Paladins. Because of this,
+    they can usually find a safe place to rest and get help in churches and temples
+    wherever they go.
+
+    With their healing and protective abilities, Acolytes are essential members of
+    any party, making sure their friends stay safe and well during tough battles.'
+  guide: 'Acolytes are the main healers of groups of new adventurers, being the only
+    tier 1 class with the capability to heal others.
+
+    Their primary tool for this is Cure Touch. The mana cost is high, but it is still
+    more efficient (and cheaper) than drinking a potion. Keep in mind that it does
+    provoke attacks of opportunity, so position yourself behind the ally you''re healing
+    if they are in melee combat.
+
+    Light''s Care is  some efficient after combat healing. It heals for the same amount
+    as Cure Touch for a fraction of the mana cost. It also has the benefit of allowing
+    the target to prevent an injury to themselves if they went down in combat.
+
+    What makes an acolyte truly valuable for a newbie group is Angel''s Embrace. It
+    has no mana cost and reduces the damage an ally takes by a large amount. The range
+    is short, so most acolyte''s prefer a melee weapon. Since you are using your RP
+    to help others, be wary that you don''t put yourself in a position where the enemy
+    can focus you as your RP dwindles.
+
+    Miracle: Sanctuary creates a small but durable barrier that can be used both offensively
+    and defensively. When used defensively, it can give your allies a moment of reprieve,
+    letting them drink a potion before going for a round two. It can also be used
+    to trap an enemy inside the barrier, isolating it from its allies while your own
+    allies wail on it.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Acolyte's Journey
+  - level: 2
+    benefits:
+    - type: ability
+      value: Cure Touch
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Light's Care
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Angel's Embrace
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Power
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: 'Miracle: Sanctuary'
+  abilities:
+  - id: acolyte_s_journey
+    name: Acolyte's Journey
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: cure_touch
+    name: Cure Touch
+    type: passive
+    keywords:
+    - Healing
+    - Spell
+    range: Touch
+    description: You heal the target for 6 + Power x 2
+    costs:
+      mana: 3
+      ap: 2
+  - id: light_s_care
+    name: Light's Care
+    type: passive
+    keywords:
+    - Encounter Conclusion
+    - Healing
+    range: Touch
+    description: 'At the end of combat you may use 1 Encounter Conclusion action to
+      heal a single target for 6 + Power x 2 and grant them First Aid. First Aid:
+      The target can expend an Encounter Conclusion Action to prevent one injury to
+      themself.'
+    costs:
+      mana: 1
+  - id: angel_s_embrace
+    name: Angel's Embrace
+    type: passive
+    keywords:
+    - Instant
+    - Shield
+    - Spell
+    - Aid
+    range: 15ft
+    description: You grant the target ally Angel’s Embrace, granting a Shield against
+      the triggering attack that blocks damage equal to 2 + (2 x Toughness). This
+      Spell does not provoke attacks of opportunity.
+    requirements:
+    - type: text
+      description: A creature other than you is attacked.
+    costs:
+      rp: 1
+  - id: miracle__sanctuary
+    name: 'Miracle: Sanctuary'
+    type: passive
+    keywords:
+    - Concentration
+    - Miracle
+    - Spell
+    - Upkeep
+    range: 5ft radius centered on self
+    description: You create an immobile sphere of protection in a 5ft radius that
+      prevents all entry into and out of it. The Shield has health points equal to
+      20 + Toughness x 5. Attacks and Magical Effects cannot be casted out of or into
+      the Sanctuary, which functions as line-of-sight blocking for the purposes of
+      abilities. Sanctuary lasts until the start of your next turn unless you pay
+      Upkeep (1 Mana). The Spell also ends when the Shield’s health points are reduced
+      to zero. This spell does not provoke attacks of opportunity.
+    costs:
+      mana: 2
+      ap: 2

@@ -1,0 +1,152 @@
+class:
+  id: fighter
+  name: Fighter
+  tier: 1
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Defender
+  image_url: https://cdn.angelssword.com/ttrpg/assets/e88ad17e-16db-42f1-a591-87143427be51-Fighter_V2_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: None.
+  description: 'Fighters come from many backgrounds. They can be adventurers, soldiers
+    or even just travelers who''ve decided to master the arts of combat. They wield
+    weapons with expert skill, making them the backbone of any adventuring party.
+
+    What sets them apart from ordinary soldiers is their ability to perceive and control
+    mana within their bodies. This keen understanding gives them an edge—allowing
+    them to move at high speeds and deliver powerful blows. Fighters are a force to
+    be reckoned with on the battlefield and welcome allies.'
+  guide: 'Fighters are versatile front liners that are able to defend against attacks
+    effectively while also exerting pressure on the enemy.  A good fighter is expected
+    to draw the enemy to them and to create space for the rest of their allies to
+    unleash their full potential.
+
+    Charge can be used to gain position in a fight without sacrificing attack. When
+    moving in in the first round of a combat, you normally have to sacrifice attacks
+    for the movement. Charge helps mitigate this, allowing the fighter to take point
+    and still do damage.
+
+    Slam is only a small knockback, but the AP cost of the attack is low and it has
+    no other cost. It can be used to create space for an ally to safely escape, but
+    a fighter can also use it at the end of their attack sequence. This way the target
+    will need to spend 1 AP on movement again to get in range, lowering their attacks.
+
+    Defensive Flexibility gives high RP economy, but it requires a bit of thinking
+    ahead. It has to be used after you take one of the two basic reactions, and youll
+    have to predict what your opponent will do next or force them to do suboptimal
+    attacks. In long fights, consider what attacks you can safely tank without the
+    use of RP to allow for more defensive flexibility uses in the future. Every RP
+    you can spend that leads into defensive flexibility is effectively doubled.
+
+    Power Strike is an attack that can deal a lot of damage, but is not very mana-efficient.
+    It should almost always only be used against a target with no RP left. Fighters
+    themselves don''t have anything else that uses mana, so it''s worth using for
+    new characters. As you unlock more classes and get other abilities that use mana,
+    Power Strike will probably not see much use anymore.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Fighter's Journey
+  - level: 2
+    benefits:
+    - type: ability
+      value: Charge
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Power Strike
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Slam
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Power
+        value: 1
+      - attribute: Focus
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Defensive Flexibility
+  abilities:
+  - id: fighter_s_journey
+    name: Fighter's Journey
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: charge
+    name: Charge
+    type: passive
+    keywords: []
+    range: Self
+    description: You may spend 2 or 4 AP on this ability and move as though you had
+      spent that AP on movement. After you finish moving, you may spend half of the
+      AP you used on this ability on Light or Heavy Melee Attacks.
+    costs:
+      ap: 2
+  - id: power_strike
+    name: Power Strike
+    type: passive
+    keywords: []
+    range: Melee Weapon Range
+    description: You attack a single target for Heavy Damage. Add 2 x Mana you spent
+      on this to the damage. You can spend a maximum of 5 mana on this ability.
+    costs:
+      ap: 2
+  - id: slam
+    name: Slam
+    type: passive
+    keywords: []
+    range: Melee Weapon Range
+    description: You attack a single target for Light Damage. On damage, the target
+      is moved 5ft away from you if they are a Grunt or if your Power is higher than
+      theirs, in addition the target must be no more than twice your size.
+    costs:
+      ap: 1
+  - id: defensive_flexibility
+    name: Defensive Flexibility
+    type: passive
+    keywords: []
+    range: Self
+    description: 'You must use this immediately after taking the Dodge or Block action.
+
+      You automatically react to the next attack targeted at you before the start
+      of your next turn with the opposite action that you last took.
+
+      If your last action was the Dodge action, you automatically react with Block.
+
+      If your last action was the Block action, you automatically react with Dodge.
+
+      You may cancel the effect of Defensive Flexibility at any time for 0 RP.'
+    requirements:
+    - type: text
+      description: Can only be used immediately after taking the Dodge or Block action.
+    costs:
+      rp: 0

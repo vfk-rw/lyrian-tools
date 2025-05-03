@@ -1,0 +1,137 @@
+class:
+  id: sword_paladin
+  name: Sword Paladin
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/c8351ce1-e8ec-48c4-8ede-c426f4e2e7d4-sword-paladin.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Human.
+  description: Paladins are powerful warriors who receive their powers from their
+    god. Sword paladins are fearless juggernauts from whom escape is nearly impossible.
+  guide: 'The sword paladin is the more aggressive counterpart of the shield paladin.
+
+    They specialize in hunting down their enemies by limiting their escape options.
+    Mark of Justice slows down an enemy to the same level as a basic human. Very useful
+    against Fae, Cats and rogue-ish characters. It also opens an enemy up to other
+    abilities.
+
+    Justice Blade can only be used against an enemy marked by Mark of Justice. It
+    trades 1 AP cost in 1 for mana, which is a fair trade.
+
+    When an enemy is low enough, Divine Smite can finish them off automatically dealing
+    max damage with full pierce. If the enemy is not low enough, this ability still
+    gets used but without the extra benefits so be aware of that. The enemy can also
+    still dodge it, but it''s good for finishing grunt type enemies.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Holy Weapon
+  - level: 2
+    benefits:
+    - type: ability
+      value: Mark of Justice
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Justice Blade
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Paragon of Virtue
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Divine Smite
+  abilities:
+  - id: holy_weapon
+    name: Holy Weapon
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: mark_of_justice
+    name: Mark of Justice
+    type: passive
+    keywords: []
+    range: Sight
+    description: 'You mark a single enemy, inflicting Mark of Justice on them.
+
+
+      A marked enemy’s movement speed is reduced to 20ft. Abilities that allow for
+      movement cannot move the target for more than 20ft per use. Secret Arts and
+      Climax Arts are not affected by this.
+
+
+      You can only have a single enemy marked by this at the same time. It lasts until
+      the end of the encounter. Does not work on vehicles.'
+    costs:
+      ap: 1
+  - id: justice_blade
+    name: Justice Blade
+    type: passive
+    keywords: []
+    range: Melee Weapon Range
+    description: You make a Heavy Attack against the target.
+    requirements:
+    - type: text
+      description: Target has your Mark of Justice on them.
+    costs:
+      mana: 1
+      ap: 1
+  - id: paragon_of_virtue
+    name: Paragon of Virtue
+    type: passive
+    keywords: []
+    range: Self
+    description: You may remove a single negative effect from yourself. If you are
+      afflicted with more than 1 negative effect, you may choose which one you remove.
+    costs:
+      rp: 1
+  - id: divine_smite
+    name: Divine Smite
+    type: passive
+    keywords:
+    - Full Pierce
+    range: Melee Weapon Range
+    description: You may make a Heavy Attack that deals Holy Damage against the target.
+      If your target’s HP is lower than the max damage your attack would deal, this
+      attack gains Full Pierce and does maximum damage instead of rolling.
+    requirements:
+    - type: text
+      description: Target has your Mark of Justice on them.
+    costs:
+      mana: 1
+      ap: 2

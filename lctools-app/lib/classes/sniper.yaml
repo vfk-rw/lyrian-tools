@@ -1,0 +1,143 @@
+class:
+  id: sniper
+  name: Sniper
+  tier: 3
+  difficulty: 3
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/00da1f57-8c94-4a83-9c60-b31a62a61299-sniper.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Marksman mastered.
+  description: Snipers are expert marksmen that use sniper rifles to devastating effect.
+  guide: 'The sniper uses sniper rifles to fire at enemies from far beyond a range
+    in which they can counter. It will be rare to get these extreme range fight, but
+    you should always look to play as far back as possible.
+
+    Ideally, you want to move as little as possible to get the accuracy bonus from
+    Snipe. Positioning well early in the fight will keep paying off as it goes on.
+
+    Penetrating Shot allows you to remain stationary without having to care about
+    the cover the enemy has. Check with the GM if their cover can be penetrated before
+    using it.
+
+    With Concealed Shot, you are able to keep entering stealth after firing make your
+    attacks impossible to react to. The RP cost may not be an issue either as long
+    as you can stay far enough away from the fighting that you do not take counterattacks.
+
+    Aimed Shot is a lock-on Heavy attack that can punish dodge users. Stealthed attacks
+    can do the same, but you won''t alway have that option.
+
+    Killshot is the opening move of the sniper, provided you are able to remain hidden
+    from the enemies before the fight starts. Normally high AP abilities do not gain
+    the benefit of being a hidden attacker, but Killshot is an exception to this if
+    used in the first round. This lets a sniper do huge damage right from the start.
+    You can combine it with the ranger''s guided aim ability for an almost certain
+    hit that cannot be reacted to in any way.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Snipe
+  - level: 2
+    benefits:
+    - type: ability
+      value: Penetrating Shot
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Concealed Shot
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Cunning
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Aimed Shot
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Killshot
+  abilities:
+  - id: snipe
+    name: Snipe
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: penetrating_shot
+    name: Penetrating Shot
+    type: passive
+    keywords: []
+    range: Ranged Weapon Range
+    description: You may make a Heavy Attack against the target. This attack penetrates
+      through thin layers of cover such as wood planks (GM’s decision), negating the
+      bonus it would give.
+    requirements:
+    - type: text
+      description: Sniper Rifles only.
+    costs:
+      mana: 1
+      ap: 2
+  - id: concealed_shot
+    name: Concealed Shot
+    type: passive
+    keywords: []
+    range: Self
+    description: You immediately make a new stealth check and remain hidden if enemies
+      fail their perception check.
+    requirements:
+    - type: text
+      description: Only usable after attacking with a Sniper Rifle while stealthed.
+    costs:
+      rp: 1
+  - id: aimed_shot
+    name: Aimed Shot
+    type: passive
+    keywords:
+    - Lock On
+    range: Ranged Weapon Range
+    description: You make a Heavy Attack against the target.
+    costs:
+      mana: 2
+      ap: 2
+  - id: killshot
+    name: Killshot
+    type: passive
+    keywords: []
+    range: Ranged Weapon Range
+    description: 'You may make a Heavy Attack against the target that deals double
+      Heavy Damage instead.
+
+      If fired in the first round of combat while all enemies are unaware of you,
+      you gain the hidden attacker bonus to this attack even though it normally wouldn''t
+      apply to a 4 AP ability.'
+    requirements:
+    - type: text
+      description: Sniper Rifles only
+    costs:
+      ap: 4

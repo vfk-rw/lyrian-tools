@@ -1,0 +1,152 @@
+class:
+  id: onmyoji
+  name: Onmyoji
+  tier: 2
+  difficulty: 3
+  main_role: Utility
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/bdcf3d10-67e9-4375-8451-28043a79b7f3-Onmyoji_v1_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered.
+  description: Scribes who use magic paper and ink to create magic talismans imbued
+    with spells.
+  guide: 'The Onmyoji is a utility class that focuses on using talismans, scrolls
+    or similar items. They can either create their own or use those created by others.
+    Buying talismans from others is an excellent way to increase your versatility
+    in combat or plug the gaps in your party composition.
+
+    Create Talisman lets you make your own talismans. The main benefit of this is
+    that it lets you prepare expensive spells in advance, allowing you to pay the
+    mana cost at a point where you don''t care about it instead of in the middle of
+    combat. You can also possibly prepare certain buff spells for your allies, though
+    they will have to pay the mana cost again themselves if they aren''t also an Onmyoji.
+
+    Secret Talisman is an ability that just lets you use a Secret Art that''s on a
+    talisman. Secret Arts are normally limited to once per encounter, so being able
+    to use two can be quite the power boost.
+
+    Sealing Talisman is a powerful CC, but it comes at the cost of having to prepare
+    the talisman beforehand. Grunts have little counterplay against it, but even against
+    heroics you can force them to waste quite a bit of AP for no AP cost of your own.
+
+    Preparedness gives you a bit more flexibility and options in what you can bring.
+    Overall, Onmyoji is very reliant on either outside sources of talismans or in
+    having strong classes to complement it to really shine. It is not recommended
+    to take the class without taking some other classes beforehand or having a clear
+    goal in mind.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Expert Scribe
+  - level: 2
+    benefits:
+    - type: ability
+      value: Create Talisman
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Preparedness
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Sealing Talisman
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Secret Talisman
+  abilities:
+  - id: expert_scribe
+    name: Expert Scribe
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: create_talisman
+    name: Create Talisman
+    type: passive
+    keywords: []
+    range: '-'
+    description: You may create a talisman or scroll. Choose an ability that you know
+      or choose a specialized talisman, such as a Sealing Talisman. You inscribe that
+      Spell onto a piece of paper, paying any mana cost if applicable. If a Spell
+      has X mana cost, the X must be paid at the time of use. A talisman of a Spell
+      allows you to use the Spell at a different time. When you use it, it is consumed.
+      A Spell talisman costs as much AP and mana to use as the original Spell does,
+      though your key ability may reduce this mana cost to 0. You may only craft Secret
+      or Climax Art talismans by using an interlude point. A crafted talisman costs
+      1 burden to carry with you. A Secret or Alimax Art talisman costs 2 burden.
+      At the end of the encounter, any talismans stored like non-combat items lose
+      their power.
+  - id: preparedness
+    name: Preparedness
+    type: passive
+    keywords: []
+    range: '-'
+    description: Up to 3 talismans, scrolls or similar objects you carry do not count
+      towards your burden.
+  - id: sealing_talisman
+    name: Sealing Talisman
+    type: passive
+    keywords:
+    - Stun
+    range: 5ft
+    description: You attach a Sealing Talisman to the target. Non-heroics become Stunned
+      immediately, while heroic targets must spend 2 AP to remove it from themselves.
+      If they do not remove it by the end of their turn, they become Stunned. While
+      the talisman remains attached, the target is stunned. Anyone within touching
+      distance of the talisman may spend 2 AP to remove the talisman, immediately
+      removing the stun effect. If the talisman is not removed, it lasts until the
+      end of encounter or until the target takes damage. A person can only be affected
+      by 1 Sealing Talisman at a time.
+    requirements:
+    - type: text
+      description: The target has 0 RP. Must have a Sealing Talisman in hand.
+    costs:
+      ap: 0
+  - id: secret_talisman
+    name: Secret Talisman
+    type: passive
+    keywords:
+    - Special
+    range: Special
+    description: You use a talisman you possess that contains a Secret Art. This functions
+      like using a normal talisman. You may only use this once per encounter. Does
+      not count towards your Secret Art usage for this encounter.
+    requirements:
+    - type: text
+      description: Special

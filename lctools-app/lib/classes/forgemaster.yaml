@@ -1,0 +1,132 @@
+class:
+  id: forgemaster
+  name: Forgemaster
+  tier: 2
+  difficulty: 2
+  main_role: Artisan
+  secondary_role: Support
+  image_url: https://cdn.angelssword.com/ttrpg/assets/b6b71657-5339-48f9-b18a-858037f18920-Forgemaster_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Blacksmith mastered.
+  description: Crafters who supply the world's weapons.
+  guide: 'The forgemaster retains their crafting focus and is able to craft higher
+    quality items. With Inspired Finish you can add a large boost to your craft at
+    the very end. However, you can''t do anything else after that so you might have
+    to take a risk and apply the bonuses early, then hope you roll high enough.
+
+    Forged Knowledge II now work on the weapons of allies as well, though you still
+    need to have made their weapon. it also maximizes all the damage dice, which can
+    create a sizeable damage increase on a bad damage roll.
+
+    Secret Art: Shatter is either a Sure Hit heavy attack that deals good damage,
+    or if they block it you destroy their weapon. Powerful against enemies that uses
+    weapons, but it won''t have much use against non-humanoids.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Focused Weapons
+  - level: 2
+    benefits:
+    - type: ability
+      value: Inspired Finish
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - Blacksmithing
+      can_convert_to_expertise: false
+  - level: 4
+    benefits:
+    - type: ability
+      value: Forged Knowledge II
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Expertise Study
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Power
+        value: 1
+      - attribute: Focus
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: 'Secret Art: Shatter'
+  abilities:
+  - id: focused_weapons
+    name: Focused Weapons
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: inspired_finish
+    name: Inspired Finish
+    type: passive
+    keywords: []
+    range: ''
+    description: Make a crafting check. The dice is upgraded to 3d10 and you still
+      add your crafting bonus to this. The crafting immediately ends after using this
+      ability and you may not spend Crafting Points to add artisan bonuses, alloys
+      or similar things.
+    requirements:
+    - type: text
+      description: This is your last crafting dice. Costs 1 Crafting Dice.
+  - id: forged_knowledge_ii
+    name: Forged Knowledge II
+    type: passive
+    keywords:
+    - Instant
+    range: Sight
+    description: Your bond with the weapon allows you to infuse it with mana at a
+      crucial point. Use when determining attack damage, maximize all weapon dice
+      for that attack.
+    requirements:
+    - type: text
+      description: You or an ally hit with a weapon you smithed.
+    costs:
+      mana: 2
+  - id: expertise_study
+    name: Expertise Study
+    type: passive
+    keywords: []
+    range: ''
+    description: You gain +4 Expertise (not doubled again) in 3 different blacksmithing
+      crafts.  You also gain wielding proficiency in one melee weapon of your choice.
+  - id: secret_art__shatter
+    name: 'Secret Art: Shatter'
+    type: combat_action
+    keywords:
+    - Secret Art
+    - Sure Hit
+    range: Melee Weapon Range
+    description: You make a Heavy Attack against the target using a Blacksmith’s Hammer. 
+      The target can choose to guard against this attack, and gains +100 damage reduction
+      if they do. If the target guards against this attack, choose one equipped non-divine
+      arms weapon in their hand that has equal or less crafted enhancements than your
+      hammer and destroy that item, rendering it unusable until repaired.
+    requirements:
+    - type: text
+      description: Attack must be made with a Blacksmith's Hammer.
+    costs:
+      mana: 2
+      ap: 2

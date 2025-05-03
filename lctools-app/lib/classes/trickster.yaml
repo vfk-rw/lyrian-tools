@@ -1,0 +1,147 @@
+class:
+  id: trickster
+  name: Trickster
+  tier: 3
+  difficulty: 3
+  main_role: Support
+  secondary_role: Utility
+  image_url: https://cdn.angelssword.com/ttrpg/assets/625344e9-b3cf-4451-84fe-7a6a21f576fc-Trickster_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Two classes mastered, of which 1 must be a tier 2 class.
+  description: Tricksters are a support class that caus chaos on the battlefield.
+     The world is a stage.
+  guide: 'The trickster is a support class that provides weird and unique benefits
+    to the team.
+
+    Assign Decoy gives the unique ability to taunt an enemy by an ally that would
+    normally have no access to it. It can be used to temporarily make an enemy switch
+    targets or if in a party without a tank, can be used to set up a sort of tank
+    rotation.
+
+    Swap gives the Trickster high control over the battlefield. They can walk near
+    the edge of a clif, then swap an enemy next to it. Forcefully group enemies to
+    setup for a teammates AoE attack. Swap an ally out of danger and much more. Extremely
+    versatile and due to its Rapid nature and low cost can easily be spammed.
+
+    Misdirected Blow has some conditions for it to be good, but it can turn enemies
+    against each other. Most effective on tricksters with high agility, as it can
+    let you evade blows that will hit most other targets.
+
+    The Secret Art Grand Theater allows the trickster to set up a magnificent performance.
+    They can force enemies to hit each other and give allies free actions. They just
+    need to be careful, because even their allies are forced to attack and careless
+    use may force them to attack an ally.
+
+    Their perfect mimicry has little combat potential, but it allows a trickster to
+    truly infiltrate a place and sow chaos.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Perfect Mimicry
+  - level: 2
+    benefits:
+    - type: ability
+      value: Assign Decoy
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Swap
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Cunning
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Misdirected Blow
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Agility
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: 'Secret Art: The Grand Theater'
+  abilities:
+  - id: perfect_mimicry
+    name: Perfect Mimicry
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: assign_decoy
+    name: Assign Decoy
+    type: passive
+    keywords:
+    - Challenge
+    - Quick
+    range: 60ft
+    description: Choose one willing ally within range and one enemy within range.
+      The enemy is Challenged by the chosen ally until the start of your next turn.
+    costs:
+      ap: 0
+  - id: swap
+    name: Swap
+    type: passive
+    keywords:
+    - Rapid
+    range: 20ft
+    description: 'You Swap positions with a chosen willing ally or any non-heroic
+      enemy.
+
+      You may use either AP or RP for this ability. You don''t need to pay the cost
+      of both.'
+    costs:
+      ap: 1
+      rp: 1
+  - id: misdirected_blow
+    name: Misdirected Blow
+    type: passive
+    keywords: []
+    range: Self
+    description: 'You may take the Dodge action. If the attack is successfully avoided,
+      the attack is then made against an enemy within 5ft of you and using the same
+      accuracy roll. This enemy must be different from the one making the attack.
+      The new target may react to this attack as normal.
+
+      Does not work against Secret Art or Climax Art level attacks.'
+    requirements:
+    - type: text
+      description: You are the target of an attack and have a different enemy within
+        5ft of you.
+    costs:
+      mana: 2
+      rp: 1
+  - id: secret_art__the_grand_theater
+    name: 'Secret Art: The Grand Theater'
+    type: combat_action
+    keywords:
+    - Secret Art
+    range: 40ft
+    description: 'All allies within range may sidestep up to their movement speed.
+
+      You may Sidestep all enemies within range up to their movement speed.
+
+      After all targets have moved, everyone that was originally in range of this
+      ability immediately gains 2 AP they must spend on attacks against other creatures
+      if possible.'
+    costs:
+      mana: 3
+      ap: 4

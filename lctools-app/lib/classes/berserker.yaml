@@ -1,0 +1,142 @@
+class:
+  id: berserker
+  name: Berserker
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3f8720bb-0c18-4924-8873-b8d69866f550-berserker.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered.
+  description: Berserkers are aggressive fighters that almost completely ignore defense
+    in exchange for more offense.
+  guide: 'Berserkers are highly aggresive fighters that rely on allies to keep them
+    alive. They are centered around their rage stance, which gives them 2 bonus AP
+    in exchange for disabling RP abilities. A person without RP is extremely vulnerable,
+    so you will need allies to cast thing like the acolyte''s Angel''s Embrace on
+    you for protection. Alternatively, you can wait with using it until you are have
+    burned through some RP already. You will lose out on some power, but it may be
+    better than going down.
+
+    Both Break Free and Fallen Friend fit the playstyle of waiting with Rage Stance
+    instead of using it immediately. Break Free especially is powerful against enemies
+    with heavy CC effects.
+
+    Into the fray is a gap closer that lets you approach an enemy without spending
+    AP, allowing for a maximum amount of attacks after. The RP cost makes it so its
+    best used when already in rage stance where your RP is less useful.
+
+    The same applies to Reckless Strike. Normally trading 1 RP for 1 AP is not worth
+    it, but when you can''t use your RP anyway, it is a good way to get some extra
+    damage in.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Fallen Friend
+  - level: 2
+    benefits:
+    - type: ability
+      value: Rage Stance
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Into the Fray
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Break Free
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Power
+        value: 1
+      - attribute: Focus
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Reckless Strike
+  abilities:
+  - id: fallen_friend
+    name: Fallen Friend
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: rage_stance
+    name: Rage Stance
+    type: passive
+    keywords:
+    - Stance
+    range: Self
+    description: You enter a Stance in which you prioritize offense over defense.
+      The Stance lasts until the encounter ends, your HP reaches 0 or up to an hour.
+      While the Stance lasts, gain 2 additional AP that can only be used on melee
+      attacks each turn (including the turn you use this), but cannot use abilities
+      that use RP other than attack of opportunity unless they have the Rage keyword.
+      You also cannot use abilities with the Spell keyword, unless they also have
+      the Rage keyword. You are treated as having 0 RP for abilities with that as
+      a requirement. While in your Rage Stance, you gain a +1 bonus to Guard and a
+      +5 bonus to all Fitness checks.
+    costs:
+      mana: 2
+      ap: 2
+  - id: into_the_fray
+    name: Into the Fray
+    type: passive
+    keywords:
+    - Rage
+    range: Self
+    description: 'You gain 2 AP that you must immediately spend on movement. Any unused
+      movement is lost after this action. You must end this movement in range to make
+      a melee attack against an enemy.
+
+
+      Can only be used on your turn.'
+    costs:
+      rp: 1
+  - id: break_free
+    name: Break Free
+    type: passive
+    keywords:
+    - Rage
+    range: Self
+    description: You may use this ability when you would be affected by a Stun, Root,
+      Fear or a similar effect that would prevent you from acting. You may immediately
+      enter Rage Stance without spending any AP or RP. You gain immunity to this effect
+      for the duration of the Rage.
+    requirements:
+    - type: text
+      description: Not in Rage Stance.
+    costs:
+      rp: 0
+  - id: reckless_strike
+    name: Reckless Strike
+    type: passive
+    keywords:
+    - Rage
+    range: Melee Weapon Range
+    description: You may make a Heavy Attack against the target.
+    costs:
+      ap: 1
+      rp: 1

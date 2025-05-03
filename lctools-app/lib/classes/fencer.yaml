@@ -1,0 +1,139 @@
+class:
+  id: fencer
+  name: Fencer
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Defender
+  image_url: https://cdn.angelssword.com/ttrpg/assets/23244b13-0a57-4ce5-bf25-07b33284963e-fencer.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered.
+  description: A nimble fighter that likes to duel.
+  guide: 'The fencer is a highly mobile 1v1 specialist. Their fancy footwork allows
+    them to reposition on the battlefield and away from other attackers, keeping them
+    focused on their target.
+
+    Parry is their most important ability. It costs 1 mana, but the RP cost is easily
+    refunded if you use it against light attacks or against someone weaker than you.
+    Because it effectively is a damage check with your focus instead of power, you
+    should be careful in using it against high power enemies, especially if they use
+    a heavy weapon. A heavy attack from those is likely to break through your parry
+    and a dodge might be the better option.
+
+    Riposte is the follow up to a parry. It costs 1 RP, so it does eat into your defenses
+    but it is an otherwise free Heavy attack. Just keep your RP in mind before using
+    it.
+
+    Lunge helps fencer on fighting multiple enemies a bit. If an enemy is barely out
+    of range, you can use your Lunge for extra range than fancy footwork to get in
+    range. It can also be useful against rogueish characters who think they are safe
+    after an evasive maneuver. Simply activate lunge and hit them from 10ft away.
+
+    Precise Thrust is an attack that''s best used against heavily armored targets.
+    Dodging is usually the preferred answer to a Heavy attack, so this may not see
+    much use except against the most armored of enemies.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Fancy Footwork
+  - level: 2
+    benefits:
+    - type: ability
+      value: Parry
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Lunge
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Riposte
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Focus
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Precise Thrust
+  abilities:
+  - id: fancy_footwork
+    name: Fancy Footwork
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: parry
+    name: Parry
+    type: passive
+    keywords: []
+    range: '-'
+    description: Roll your Heavy Weapon Damage, but add your Focus instead of Power
+      to the roll and treat that as your guard against the attack targeting you. If
+      Parry reduces the damage to 1 or lower, you regain 1 RP (cannot go higher than
+      your max RP). On hit effects and maces do not gain their effect if you reduce
+      the damage to 0.
+    requirements:
+    - type: text
+      description: Target of a melee attack, wielding a 1handed melee weapon.
+    costs:
+      mana: 1
+      rp: 1
+  - id: lunge
+    name: Lunge
+    type: passive
+    keywords: []
+    range: Self
+    description: The attack range of your next basic Light, Heavy or Precise Attack
+      with a melee weapon is doubled.
+    costs:
+      ap: 0
+  - id: riposte
+    name: Riposte
+    type: passive
+    keywords:
+    - Counter
+    range: Melee Weapon Range
+    description: You may make a Heavy Attack against the target that you used your
+      Parry ability against.
+    requirements:
+    - type: text
+      description: May only be used after you use the Parry fencer ability and you
+        regained the RP.
+    costs:
+      rp: 1
+  - id: precise_thrust
+    name: Precise Thrust
+    type: passive
+    keywords:
+    - Full Pierce
+    range: Melee Weapon Range
+    description: You may make a Heavy Attack against the target.
+    costs:
+      mana: 2
+      ap: 2

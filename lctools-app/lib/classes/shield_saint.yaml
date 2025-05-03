@@ -1,0 +1,163 @@
+class:
+  id: shield_saint
+  name: Shield Saint
+  tier: 3
+  difficulty: 3
+  main_role: Defender
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/ca0b533a-e365-4447-a1a5-4a9d7dae9f72-Shield_Saint_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Bodyguard mastered.
+  description: 'The sworn shieldbrother or sister of a Sword Saint. Like its twin
+    saint, the Shield Saint originally hails from Kirara where it fights together
+    with their chosen partner.
+
+    The Shield Saint is trained in defensive techniques whose purpose is to allow
+    for their partner to focus purely on offense while the Shield Saint absorbs the
+    hits. At first these techniques were merely physical, but over time the nature
+    has evolved into a more spiritual connection. The bond between a Shield Saint
+    and their partner links their very souls together and neither can be bonded again
+    until one of them passes away. Because of this, the partner a Shield Saint chooses
+    is very important and in Kirara most pairs are selected based on compatibility
+    at an early age. It is not uncommon for a Sword Saint and Shield Saint pair to
+    be romantically involved with each other.'
+  guide: 'As a Shield Saint, your primary goal is to protect your soulmate from harm.
+
+    Your main tool for doing so is Faithful Shield, which lets you turn AP into free
+    RP for the purpose of keeping your soulmate safe. Shelter still has a range restriction,
+    so this works best if your soulmate is also a melee character.
+
+    Quick Assist combines several feature of Bodyguard into one and adds some offense
+    on top of it. Keep in mind the range is rather short and like with Faithful Shield,
+    your life is easier with a melee soulmate as you are more likely to get the mana
+    cost reduction.
+
+    The secret art Dynamic Duo combines defense with offense. You Challenge all enemies
+    and can use the bodyguard''s At your side to teleport across the battlefield to
+    threaten enemies you didn''t before. Where normally your attacks might be a bit
+    weak, because your soulmate is making them it will punish enemies ignoring your
+    Challenge that much harder. It also has a low mana and AP cost, so you can use
+    it pretty much every fight.
+
+    Finally, Lifesense is a utility tool that can be used to keep track of the status
+    of your soulmate should you split up. It has no mana cost, so you can keep it
+    up indefinitely if you want to.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Soul Bond
+  - level: 2
+    benefits:
+    - type: ability
+      value: Lifesense
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Faithful Shield
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Quick Assist
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: 'Secret Art: Dynamic Duo'
+  abilities:
+  - id: soul_bond
+    name: Soul Bond
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: lifesense
+    name: Lifesense
+    type: passive
+    keywords: []
+    range: Unlimited
+    description: 'You know the direction your Soulmate is in and if you’re within
+      300 feet of them, you know their exact location.
+
+      You also know their current HP, Mana and RP.'
+    costs:
+      ap: 1
+  - id: faithful_shield
+    name: Faithful Shield
+    type: passive
+    keywords:
+    - Overcharge
+    range: Self
+    description: 'You may use Shelter once at 0 RP cost if the target is your Soulmate.
+      This effect lasts until the start of your next turn.
+
+      Overcharge:
+
+      You may spend 4 AP on this ability to instead gain 2 free uses of Shelter.
+
+      These free uses ignore the normal limitation of using an ability only once per
+      turn.'
+    costs:
+      ap: 2
+      rp: 0
+  - id: quick_assist
+    name: Quick Assist
+    type: passive
+    keywords:
+    - Teleport
+    range: 20ft
+    description: 'You teleport next to your soulmate and force the triggering attack
+      to resolve against you, gaining the benefit of the Block action against it.
+
+      Afterwards, if your Soulmate is in range of the attacker, they may make an Attack
+      of Opportunity against it.
+
+      If you were already next to your Soulmate before you used this ability, the
+      mana cost is reduced by 1.'
+    requirements:
+    - type: text
+      description: Your soulmate is the target of an attack.
+    costs:
+      mana: 2
+      rp: 1
+  - id: secret_art__dynamic_duo
+    name: 'Secret Art: Dynamic Duo'
+    type: combat_action
+    keywords:
+    - Challenge
+    - Secret Art
+    range: Sight
+    description: You challenge all enemies in range until the start of your next turn.
+      Any time you would be allowed to make an Attack of Opportunity, your Soulmate
+      may make it instead. They may Sidestep up to their speed before making each
+      Attack of Opportunity.
+    costs:
+      mana: 1
+      ap: 2

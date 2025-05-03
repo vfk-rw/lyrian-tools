@@ -1,0 +1,144 @@
+class:
+  id: flame_sentinel
+  name: Flame Sentinel
+  tier: 2
+  difficulty: 2
+  main_role: Support
+  secondary_role: Controller
+  image_url: https://cdn.angelssword.com/ttrpg/assets/dc8461ae-d5fe-4235-ad63-d1a304089d1b-Inferno_Blessing_Technique_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Mage mastered or Fire mastery.
+  description: A supportive fire magic user that can buff their allies and zone away
+    enemies.
+  guide: 'Flame Sentinels support their allies primarily through offense. Flame Weapon
+    grants a small power boost to a weapon of an ally and lets them deal fire damage,
+    which may be important against some enemies. Controlled Blaze will not prevent
+    your allies from setting things on fire, so be careful when giving it out when
+    flameable material is around.
+
+    Flame Shield allows you to do damage after an ally takes damage. It costs 1 RP,
+    but its fully unavoidable and full pierce damage. If you hang out in the back
+    and don''t have much use for your RP, this can be an excellent way to spend it.
+
+    Flame Infusion is a situational ability. Against certain enemies it''s extremely
+    powerful and against others, its a detriment.
+
+    Flame Wall is a strong zoning tool, able to cut off a large portion of a fight.
+    You can also use it as a damage tool, dropping it right on top of enemies to force
+    them to use an RP. If they choose not to do so, or if they have no more RP to
+    spent, then it is effectively a Sure Hit attack once their turn starts.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Controlled Blaze
+  - level: 2
+    benefits:
+    - type: ability
+      value: Flame Infusion
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Flame Shield
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Flame Weapon
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Power
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Flame Wall
+  abilities:
+  - id: controlled_blaze
+    name: Controlled Blaze
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: flame_infusion
+    name: Flame Infusion
+    type: passive
+    keywords:
+    - Fire
+    - Spell
+    - Type
+    range: 30ft
+    description: You surround the target in searing flames, changing their typing
+      to Fire II. As a Fire II type, they take half damage from Fire and Earth Damage
+      or attacks with the Fire or Earth keywords. They take 50% more damage from Water
+      Damage or attacks with the Water keyword. While the ward lasts, they also gain
+      immunity to Burning. The ward lasts until the end of the encounter or until
+      their type is overwritten by a more powerful type.
+    costs:
+      mana: 0
+      ap: 1
+  - id: flame_shield
+    name: Flame Shield
+    type: passive
+    keywords:
+    - Fire
+    - Full Pierce
+    - Shield
+    - Spell
+    - Aid
+    - Sure Hit
+    range: 30ft
+    description: The attacker immediately takes Light Fire Damage.
+    requirements:
+    - type: text
+      description: An ally took damage from a melee attack.
+    costs:
+      rp: 1
+  - id: flame_weapon
+    name: Flame Weapon
+    type: passive
+    keywords:
+    - Enchantment
+    range: Touch
+    description: You touch one willing ally’s or your own weapon and enchant it with
+      Fire. Until the end of the encounter, the weapon deals Fire Damage and grants
+      a +1 Power Enchantment.
+    costs:
+      ap: 2
+  - id: flame_wall
+    name: Flame Wall
+    type: passive
+    keywords:
+    - Concentration
+    - Fire
+    - Spell
+    range: 60ft
+    description: You create a wall of Fire that is 30ft long, 5ft wide and 10ft high.
+      This wall must be a straight line. Anyone passing through the wall or starting
+      their turn in it takes Heavy Fire Damage. The wall lasts for 10 minutes or until
+      canceled. Those in the wall when it is casted, may spend 1 RP to step out of
+      the wall.
+    costs:
+      mana: 3
+      ap: 2

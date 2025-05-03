@@ -1,2 +1,6 @@
 notes/Daimus CharacterCore.csv
 .DS_Store*
+**/*_debug.log
+**/*_debug.json
+scraper/debug_output
+scraper/.venv

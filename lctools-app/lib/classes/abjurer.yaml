@@ -1,0 +1,155 @@
+class:
+  id: abjurer
+  name: Abjurer
+  tier: 2
+  difficulty: 3
+  main_role: Defender
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3ee50da0-1baa-4f48-ab15-eb9e24f45e9c-abjurer.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Arcane Barrier learned, must possess at least 1 spell that deals
+        damage.
+  description: 'Every initiate mage learns early on that the first fundamental of
+    magic is defense. But for Abjurers, this lesson became their mantra. These Mages
+    took their masters'' teachings to heart and mastered the art of defensive magic.
+
+    Abjurers are incredibly durable, and they don''t just keep that strength to themselves—they
+    can extend it to their allies, making everyone around them tougher in battle.
+    Their focus is unmatched, allowing them to control space and protect others, even
+    without relying on weapons.
+
+    Despite their power, Abjurers are often underestimated. But when the heat of battle
+    comes, they prove their worth, showing remarkable resilience under fire. It''s
+    this unshakeable defense that makes them indispensable in the chaos of war.'
+  guide: 'Abjurer''s are frontline spellcasters that oftentimes don''t wear armor.
+    To help with the durability, you have Mana Shield. Mana Shield gives you a small
+    amount of temporary HP every turn. It''s good for reducing a small amount of damage
+    every turn, but will not protect from a large burst turn.
+
+    If you expect to take a lot of damage, you can however use Empower Mana Shield.
+    This lets you trade mana for temporary HP is an efficient way, however it only
+    lasts for a short time so the timing is crucial.
+
+    Mana Shield also lets you cast spells while engaged by enemies if they are challenged
+    by you, which can be accomplished by the Spell Challenge key ability. AoE spells
+    can be used to inflict Challenge on many enemies, though they won''t apply it
+    if they are dodged or fully blocked. Single target spells will always apply it
+    however.
+
+    To protect your allies and disrupt enemies that go for them, you have Arcane Pull.
+    Arcane Pull is effective in keeping your backline safe from melee enemies, but
+    it can be useless if there''s not enough distance between you and your allies.
+
+    Finally, Arcane Barrier II is a simple upgrade on the normal arcane barrier, letting
+    you add your guard to the guard of the barrier.
+
+    Positioning and choosing how and who to Challenge is key for an Abjurer. Once
+    enemies are upon you, you may find it hard to safely apply Spell Challenge if
+    not done in advance.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Spell Challenge
+  - level: 2
+    benefits:
+    - type: ability
+      value: Arcane Barrier II
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Mana Shield
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Empower Mana Shield
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Arcane Pull
+  abilities:
+  - id: spell_challenge
+    name: Spell Challenge
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: arcane_barrier_ii
+    name: Arcane Barrier II
+    type: passive
+    keywords:
+    - Shield
+    - Spell
+    range: Self
+    description: You create a Magical Barrier that absorbs damage until it breaks.
+      The barrier has HP equal to 8 + your Focus. The barrier has a Guard of 0 + your
+      guard and any damage it takes is subtracted from the barrier’s HP. When the
+      barrier breaks, any remaining damage is subtracted from your HP. The barrier
+      otherwise lasts until the start of your next turn or until you take any action
+      other than the Block action. If using the Block action while the barrier is
+      active, the guard of the barrier also increases. This spell does not provoke
+      attacks of opportunity.
+    costs:
+      mana: 1
+      rp: 1
+  - id: mana_shield
+    name: Mana Shield
+    type: passive
+    keywords: []
+    range: ''
+    description: At the start of your turn you gain Temporary HP equal to your Toughness.
+      This value cannot exceed your Toughness. Wearing armor reduces this to 2/3rd,
+      1/3rd or 0 if wearing Light, Medium or Heavy Armor respectively. While Mana
+      Shield is active, you do not provoke attacks of opportunity from casting Spells
+      from enemies that are Challenged by you.
+  - id: empower_mana_shield
+    name: Empower Mana Shield
+    type: passive
+    keywords: []
+    range: Self
+    description: You spend X mana to add X x 3 to the value of your mana shield until
+      the start of your next turn.
+    costs:
+      ap: 1
+  - id: arcane_pull
+    name: Arcane Pull
+    type: passive
+    keywords:
+    - Spell
+    range: 40ft
+    description: You pull the target to an empty square next to you. This movement
+      does not provoke attacks of opportunity. Your next Block or Dodge action against
+      the target costs 0 RP. This Spell does not provoke attacks of opportunity.
+    requirements:
+    - type: text
+      description: Target is challenged by you and attacking someone that isn't you.
+    costs:
+      rp: 1

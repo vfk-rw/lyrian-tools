@@ -1,0 +1,162 @@
+class:
+  id: aeromancer
+  name: Aeromancer
+  tier: 2
+  difficulty: 3
+  main_role: Striker
+  secondary_role: Controller
+  image_url: https://cdn.angelssword.com/ttrpg/assets/98143839-09e9-46f8-9409-7144c54627b2-aeromancer.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered or Wind mastered.
+  description: 'The first Aeromancer corps were born in Northi, created as a direct
+    response to Sorthen''s formidable Ace Aerial Mage squads. While the Catfolk had
+    a stronghold on the ground with their incredible speed, the Fae and Sorthen flyers
+    posed a constant threat from above. That is, until a cunning Catfolk mage named
+    Nicole Mimi changed the game.
+
+    Mimi took a magical art that was once considered weak, Aeromancy, and turned it
+    into a force to be reckoned with. By destabilizing the air itself, she crafted
+    powerful gales and sudden downbursts, effectively disrupting air superiority.
+    What was once seen as a lesser magic became a devastating weapon under her mastery.
+
+    To this day, Aeromancers from all corners of the world study Mimi''s tomes, learning
+    to command the sky just as she did. They''ve turned Aeromancy into an art of its
+    own, capable of twisting the winds and reshaping the battlefield.'
+  guide: 'Aeromancers take on a more controllery striker role, displacing enemies
+    while attacking them. They are very dangerous when near cliffs or other hazards.
+    Their difficulty lies in the importance of their positioning. Knockbacks do damage
+    if the target can not be moved the full distance, so knocking enemies into walls
+    can add a decent amount of damage.
+
+    Wind Burst is a low investment ability that provides significant displacement.
+    While using it near hazards is the obvious choice, it can also be used to free
+    up space for allies or to push the enemy closer to your allies so they can spend
+    more AP on attacking instead of moving.
+
+    Wind Scatter is an almost pure disruption tool. It makes further AoE''s impossible,
+    so careful use is required to not disrupt your allies. A good Wind Scatter however,
+    can put significant distance between the front most and backmost enemy of a formation,
+    which allows for targets to be isolated and picked off.
+
+    Wind Buffet is a more defensive knockback, forcing enemies away from you. Be careful,
+    as it provokes attacks of opportunities and can hit allies.
+
+    Downburst is a simple, but extremely powerful anti-air tool. With high range and
+    lock-on, an aeromancer is a aerial mage or flying monster''s worst nightmare.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      value: Wind Master
+  - level: 2
+    benefits:
+    - type: ability
+      value: Wind Blast
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      value: Downburst
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      value: Wind Scatter
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      value: Wind Buffet
+  abilities:
+  - id: wind_master
+    name: Wind Master
+    type: passive
+    keywords: []
+    range: ''
+    description: ''
+  - id: wind_blast
+    name: Wind Blast
+    type: passive
+    keywords:
+    - Spell
+    - Wind
+    range: 120ft
+    description: You may make a Light Attack that deals Wind against the target. On
+      damage, you push the target back 20ft. Targets knocked into other characters
+      or an object take damage as if they fell a distance equal to distance they failed
+      to move.
+    costs:
+      mana: 1
+      ap: 1
+  - id: downburst
+    name: Downburst
+    type: passive
+    keywords:
+    - Lock On
+    - Spell
+    - Wind
+    range: 720ft
+    description: You may make a Heavy Attack that deals Wind damage against the target.
+      On damage, the target immediately begins to plummet to the ground, taking Falling
+      Damage as normal.
+    requirements:
+    - type: text
+      description: Target must be Flying.
+    costs:
+      ap: 4
+  - id: wind_scatter
+    name: Wind Scatter
+    type: passive
+    keywords:
+    - Spell
+    - Wind
+    range: 60ft
+    description: 'You select a point within range. All targets in a 15x15 area must
+      make a save against Potency or be pushed back 15ft away from the point you selected.
+
+
+      Targets knocked into other characters or an object take damage as if they fell
+      a distance equal to distance they failed to move.'
+    costs:
+      ap: 1
+  - id: wind_buffet
+    name: Wind Buffet
+    type: passive
+    keywords:
+    - Spell
+    - Wind
+    range: 30ft cone
+    description: You blow wind in a 30ft cone in your chosen direction. All caught
+      in the cone must make a save against your Potency or be blown back to the end
+      of the cone and knocked Prone. Enemies with a size smaller than you suffer a
+      1d4 penalty to this roll, while enemies bigger than you get a 1d4 bonus instead.
+      Targets knocked into other characters or an object take damage as if they fell
+      a distance equal to distance they failed to move.
+    costs:
+      mana: 2
+      ap: 2
