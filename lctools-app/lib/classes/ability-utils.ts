@@ -56,7 +56,7 @@ export async function getAllAbilities(): Promise<AbilityWithMetadata[]> {
                 if (classData && classData.abilities && classData.abilities.length > 0) {
                   const classAbilities = classData.abilities.map(ability => {
                     // Find the level at which this ability is gained
-                    const level = findAbilityLevel(classData.progression, ability.id);
+                    const level = findAbilityLevel(classData.progression, ability);
                     
                     return {
                       ability,
@@ -99,7 +99,7 @@ export async function getAllAbilities(): Promise<AbilityWithMetadata[]> {
       
       return classAbilities.map(ability => {
         // Find the level at which this ability is gained
-        const level = findAbilityLevel(classData.progression, ability.id);
+        const level = findAbilityLevel(classData.progression, ability);
         
         return {
           ability,
@@ -121,13 +121,14 @@ export async function getAllAbilities(): Promise<AbilityWithMetadata[]> {
 /**
  * Find the level at which an ability is gained from class progression
  */
-function findAbilityLevel(progression: ClassProgression[], abilityId: string): number {
+function findAbilityLevel(progression: ClassProgression[], ability: ClassAbility): number {
   // Default to level 1 if we can't find it in progression
   let level = 1;
   
   for (const prog of progression) {
     const hasBenefit = prog.benefits.some(benefit => 
-      benefit.type === 'ability' && benefit.value === abilityId
+      benefit.type === 'ability' && 
+      (benefit.value === ability.id || benefit.value === ability.name)
     );
     
     if (hasBenefit) {
