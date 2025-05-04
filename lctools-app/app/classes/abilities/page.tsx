@@ -2,24 +2,116 @@ import { Metadata } from "next";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import LCToolsSidebarClient from "@/components/lctools-sidebar-client";
 import { AbilitySearchClient } from "./abilities-search-client";
-import { getAllAbilities, getAllKeywords, getAllRanges, getAllAbilityTypes } from "@/lib/classes/ability-utils";
+import { ClassAbility, ClassData } from "@/lib/classes/class-utils";
+import fs from "fs";
+import path from "path";
+import yaml from "js-yaml";
 
 export const metadata: Metadata = {
   title: "Abilities | LC TTRPG Tools",
   description: "Search and filter abilities from the Lyrian Chronicles TTRPG"
 };
 
-// Ensure this page is always dynamically rendered to get fresh data
-export const dynamic = 'force-dynamic';
-export const revalidate = 0; // Don't cache this page
+// Don't cache this page
+export const revalidate = 0;
 
-export default async function AbilitiesPage() {
-  console.log('Rendering abilities page with server-side data');
+// Directly load abilities from class files without using API routes
+async function getAbilitiesDirectly() {
+  console.log('Directly loading abilities from class files...');
   
   try {
-    // Load abilities data server-side for initial render
-    const allAbilities = await getAllAbilities();
-    console.log(`Server-side rendering with ${allAbilities.length} abilities`);
+    // Get list of class files
+    const classListPath = path.join(process.cwd(), 'public/data/class-list.json');
+    let classFiles: string[] = [];
+    
+    if (fs.existsSync(classListPath)) {
+      const classListContent = fs.readFileSync(classListPath, 'utf8');
+      classFiles = JSON.parse(classListContent);
+      console.log(`Found ${classFiles.length} class files to process`);
+    } else {
+      console.log('Class list not found, scanning directory...');
+      // Fallback: scan directory for YAML files
+      const classesDir = path.join(process.cwd(), 'public/data/classes');
+      classFiles = fs.readdirSync(classesDir).filter(file => file.endsWith('.yaml'));
+    }
+    
+    // Process all class files and extract abilities
+    const abilities: { ability: ClassAbility; className: string; classId: string }[] = [];
+    
+    for (const filename of classFiles) {
+      try {
+        const filePath = path.join(process.cwd(), 'public/data/classes', filename);
+        if (!fs.existsSync(filePath)) continue;
+        
+        const content = fs.readFileSync(filePath, 'utf8');
+        const parsed = yaml.load(content) as { class: ClassData };
+        const classData = parsed.class;
+        
+        if (classData && classData.abilities && classData.abilities.length > 0) {
+          const classAbilities = classData.abilities.map(ability => ({
+            ability,
+            className: classData.name,
+            classId: classData.id
+          }));
+          
+          abilities.push(...classAbilities);
+          console.log(`Added ${classAbilities.length} abilities from ${classData.name}`);
+        }
+      } catch (err) {
+        console.error(`Error processing ${filename}:`, err);
+      }
+    }
+    
+    console.log(`Total abilities loaded: ${abilities.length} from ${new Set(abilities.map(a => a.className)).size} classes`);
+    return abilities;
+  } catch (error) {
+    console.error('Error loading abilities directly:', error);
+    return [];
+  }
+}
+
+// Get unique keywords from abilities
+function getAllKeywords(abilities: { ability: ClassAbility; className: string; classId: string }[]) {
+  const keywords = new Set<string>();
+  
+  abilities.forEach(({ ability }) => {
+    if (ability.keywords) {
+      ability.keywords.forEach(keyword => keywords.add(keyword));
+    }
+  });
+  
+  return Array.from(keywords).sort();
+}
+
+// Get unique ranges from abilities
+function getAllRanges(abilities: { ability: ClassAbility; className: string; classId: string }[]) {
+  const ranges = new Set<string>();
+  
+  abilities.forEach(({ ability }) => {
+    if (ability.range) ranges.add(ability.range);
+  });
+  
+  return Array.from(ranges).sort();
+}
+
+// Get unique ability types
+function getAllAbilityTypes(abilities: { ability: ClassAbility; className: string; classId: string }[]) {
+  const types = new Set<string>();
+  
+  abilities.forEach(({ ability }) => {
+    if (ability.type) types.add(ability.type);
+  });
+  
+  return Array.from(types).sort();
+}
+
+export default async function AbilitiesPage() {
+  console.log('Rendering abilities page...');
+  
+  try {
+    // Load abilities directly without using API routes
+    const allAbilities = await getAbilitiesDirectly();
+    console.log(`Rendering with ${allAbilities.length} abilities`);
     
     // Get ability metadata for filters
     const keywords = getAllKeywords(allAbilities);
