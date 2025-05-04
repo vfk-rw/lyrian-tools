@@ -1,4 +1,4 @@
-import { ClassAbility, getAllClasses } from "./class-utils";
+import { ClassAbility, ClassData, getAllClasses } from "./class-utils";
 
 export interface AbilitySearchParams {
   search?: string;
@@ -14,12 +14,65 @@ export interface AbilitySearchParams {
  * Get all abilities from all classes
  */
 export async function getAllAbilities(): Promise<{ ability: ClassAbility; className: string; classId: string }[]> {
-  // For server-side builds, we'll use direct access to class data
-  // This ensures abilities are available during the build process on Vercel
   console.log('Loading abilities from classes...');
   
   try {
-    // Get all classes (with our improved build-time loading)
+    // For server-side builds and Vercel deployments, use direct file access instead of API
+    if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+      console.log('Using direct file access to load abilities during build...');
+      try {
+        // Dynamically import modules needed for file access
+        const { readFileSync, existsSync } = await import('fs');
+        const { join } = await import('path');
+        const yaml = await import('js-yaml');
+        
+        // Try to read the class list JSON file
+        const classListPath = join(process.cwd(), 'public/data/class-list.json');
+        if (existsSync(classListPath)) {
+          // Get the list of class files
+          const classFiles = JSON.parse(readFileSync(classListPath, 'utf8'));
+          console.log(`Found ${classFiles.length} class files to load abilities from`);
+          
+          const allAbilities: { ability: ClassAbility; className: string; classId: string }[] = [];
+          
+          // Loop through each class file and extract abilities
+          for (const filename of classFiles) {
+            try {
+              const yamlPath = join(process.cwd(), 'public/data/classes', filename);
+              if (existsSync(yamlPath)) {
+                const content = readFileSync(yamlPath, 'utf8');
+                const parsed = yaml.load(content) as { class: ClassData };
+                const classData = parsed.class;
+                
+                if (classData && classData.abilities && classData.abilities.length > 0) {
+                  const classAbilities = classData.abilities.map(ability => ({
+                    ability,
+                    className: classData.name,
+                    classId: classData.id
+                  }));
+                  
+                  allAbilities.push(...classAbilities);
+                  console.log(`Loaded ${classAbilities.length} abilities from ${classData.name}`);
+                }
+              }
+            } catch (err) {
+              console.error(`Error loading abilities from class file ${filename}:`, err);
+            }
+          }
+          
+          console.log(`Extracted a total of ${allAbilities.length} abilities from all classes`);
+          return allAbilities;
+        } else {
+          console.error('Class list file not found at:', classListPath);
+        }
+      } catch (err) {
+        console.error('Failed to load abilities directly from files:', err);
+        // Fall back to API approach if direct loading fails
+      }
+    }
+    
+    // Standard approach - get abilities from classes
+    console.log('Getting abilities through getAllClasses...');
     const classes = await getAllClasses();
     
     console.log(`Found ${classes.length} classes to extract abilities from`);
