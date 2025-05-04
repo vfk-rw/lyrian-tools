@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import LCToolsSidebarClient from "@/components/lctools-sidebar-client";
 import { AbilitySearchClient } from "./abilities-search-client";
-import { ClassAbility, ClassData } from "@/lib/classes/class-utils";
+import { ClassData, ClassProgression } from "@/lib/classes/class-utils";
+import { AbilityWithMetadata } from "@/lib/classes/ability-utils";
 import fs from "fs";
 import path from "path";
 import yaml from "js-yaml";
@@ -14,6 +15,25 @@ export const metadata: Metadata = {
 
 // Don't cache this page
 export const revalidate = 0;
+
+// Find the level at which an ability is gained from class progression
+function findAbilityLevel(progression: ClassProgression[], abilityId: string): number {
+  // Default to level 1 if we can't find it in progression
+  let level = 1;
+  
+  for (const prog of progression) {
+    const hasBenefit = prog.benefits.some(benefit => 
+      benefit.type === 'ability' && benefit.value === abilityId
+    );
+    
+    if (hasBenefit) {
+      level = prog.level;
+      break;
+    }
+  }
+  
+  return level;
+}
 
 // Directly load abilities from class files without using API routes
 async function getAbilitiesDirectly() {
@@ -36,7 +56,7 @@ async function getAbilitiesDirectly() {
     }
     
     // Process all class files and extract abilities
-    const abilities: { ability: ClassAbility; className: string; classId: string }[] = [];
+    const abilities: AbilityWithMetadata[] = [];
     
     for (const filename of classFiles) {
       try {
@@ -48,11 +68,17 @@ async function getAbilitiesDirectly() {
         const classData = parsed.class;
         
         if (classData && classData.abilities && classData.abilities.length > 0) {
-          const classAbilities = classData.abilities.map(ability => ({
-            ability,
-            className: classData.name,
-            classId: classData.id
-          }));
+          const classAbilities = classData.abilities.map(ability => {
+            // Find the level at which this ability is gained
+            const level = findAbilityLevel(classData.progression, ability.id);
+            
+            return {
+              ability,
+              className: classData.name,
+              classId: classData.id,
+              level
+            };
+          });
           
           abilities.push(...classAbilities);
           console.log(`Added ${classAbilities.length} abilities from ${classData.name}`);
@@ -71,7 +97,7 @@ async function getAbilitiesDirectly() {
 }
 
 // Get unique keywords from abilities
-function getAllKeywords(abilities: { ability: ClassAbility; className: string; classId: string }[]) {
+function getAllKeywords(abilities: AbilityWithMetadata[]) {
   const keywords = new Set<string>();
   
   abilities.forEach(({ ability }) => {
@@ -84,7 +110,7 @@ function getAllKeywords(abilities: { ability: ClassAbility; className: string; c
 }
 
 // Get unique ranges from abilities
-function getAllRanges(abilities: { ability: ClassAbility; className: string; classId: string }[]) {
+function getAllRanges(abilities: AbilityWithMetadata[]) {
   const ranges = new Set<string>();
   
   abilities.forEach(({ ability }) => {
@@ -95,7 +121,7 @@ function getAllRanges(abilities: { ability: ClassAbility; className: string; cla
 }
 
 // Get unique ability types
-function getAllAbilityTypes(abilities: { ability: ClassAbility; className: string; classId: string }[]) {
+function getAllAbilityTypes(abilities: AbilityWithMetadata[]) {
   const types = new Set<string>();
   
   abilities.forEach(({ ability }) => {
@@ -103,6 +129,17 @@ function getAllAbilityTypes(abilities: { ability: ClassAbility; className: strin
   });
   
   return Array.from(types).sort();
+}
+
+// Get unique levels
+function getAllLevels(abilities: AbilityWithMetadata[]) {
+  const levels = new Set<number>();
+  
+  abilities.forEach(({ level }) => {
+    levels.add(level);
+  });
+  
+  return Array.from(levels).sort((a, b) => a - b);
 }
 
 export default async function AbilitiesPage() {
@@ -117,8 +154,9 @@ export default async function AbilitiesPage() {
     const keywords = getAllKeywords(allAbilities);
     const ranges = getAllRanges(allAbilities);
     const types = getAllAbilityTypes(allAbilities);
+    const levels = getAllLevels(allAbilities);
     
-    console.log(`Found ${keywords.length} keywords, ${ranges.length} ranges, and ${types.length} ability types`);
+    console.log(`Found ${keywords.length} keywords, ${ranges.length} ranges, ${levels.length} levels, and ${types.length} ability types`);
     
     return (
       <SidebarProvider>

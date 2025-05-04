@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { ClassAbility } from "@/lib/classes/class-utils";
-import { AbilitySearchParams, searchAbilities } from "@/lib/classes/ability-utils";
+import { AbilitySearchParams, AbilityWithMetadata, searchAbilities, getAllClasses, getAllLevels } from "@/lib/classes/ability-utils";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,7 +25,7 @@ import {
 } from "@/components/ui/table";
 
 interface AbilitySearchClientProps {
-  initialAbilities: { ability: ClassAbility; className: string; classId: string }[];
+  initialAbilities: AbilityWithMetadata[];
   keywords: string[];
   ranges: string[];
 }
@@ -37,8 +36,14 @@ export function AbilitySearchClient({
   ranges
 }: AbilitySearchClientProps) {
   const [searchParams, setSearchParams] = useState<AbilitySearchParams>({});
-  const [filteredAbilities, setFilteredAbilities] = useState<{ ability: ClassAbility; className: string; classId: string }[]>(initialAbilities);
+  const [filteredAbilities, setFilteredAbilities] = useState<AbilityWithMetadata[]>(initialAbilities);
   const [expandedAbility, setExpandedAbility] = useState<string | null>(null);
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
+  
+  // Get unique classes from abilities
+  const classes = getAllClasses(initialAbilities);
+  // Get unique levels from abilities
+  const levels = getAllLevels(initialAbilities);
 
   // Handle search text change
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,6 +78,17 @@ export function AbilitySearchClient({
     setFilteredAbilities(searchAbilities(initialAbilities, newParams));
   };
 
+  // Handle level filter change
+  const handleLevelChange = (value: string) => {
+    const newParams = {
+      ...searchParams,
+      level: value === "all" ? undefined : parseInt(value)
+    };
+    
+    setSearchParams(newParams);
+    setFilteredAbilities(searchAbilities(initialAbilities, newParams));
+  };
+
   // Handle cost filter changes
   const handleCostFilterChange = (key: 'hasMana' | 'hasRP' | 'hasAP', checked: boolean) => {
     const newParams = {
@@ -84,9 +100,31 @@ export function AbilitySearchClient({
     setFilteredAbilities(searchAbilities(initialAbilities, newParams));
   };
 
+  // Handle class filter changes
+  const handleClassFilterChange = (classId: string, checked: boolean) => {
+    let newSelectedClasses: string[];
+    
+    if (checked) {
+      newSelectedClasses = [...selectedClasses, classId];
+    } else {
+      newSelectedClasses = selectedClasses.filter(id => id !== classId);
+    }
+    
+    setSelectedClasses(newSelectedClasses);
+    
+    const newParams = {
+      ...searchParams,
+      classIds: newSelectedClasses.length > 0 ? newSelectedClasses : undefined
+    };
+    
+    setSearchParams(newParams);
+    setFilteredAbilities(searchAbilities(initialAbilities, newParams));
+  };
+
   // Reset all filters
   const resetFilters = () => {
     setSearchParams({});
+    setSelectedClasses([]);
     setFilteredAbilities(initialAbilities);
   };
 
@@ -111,7 +149,7 @@ export function AbilitySearchClient({
             </div>
 
             {/* Filters grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Keyword filter */}
               <div className="space-y-2">
                 <Label htmlFor="keyword-filter">Keyword</Label>
@@ -145,6 +183,25 @@ export function AbilitySearchClient({
                     <SelectItem value="all">All Ranges</SelectItem>
                     {ranges.map(range => (
                       <SelectItem key={range} value={range}>{range}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Level filter */}
+              <div className="space-y-2">
+                <Label htmlFor="level-filter">Level</Label>
+                <Select 
+                  onValueChange={handleLevelChange} 
+                  value={searchParams.level?.toString() || 'all'}
+                >
+                  <SelectTrigger id="level-filter">
+                    <SelectValue placeholder="All Levels" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Levels</SelectItem>
+                    {levels.map(level => (
+                      <SelectItem key={`level-${level}`} value={level.toString()}>Level {level}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -184,6 +241,25 @@ export function AbilitySearchClient({
                 <Label htmlFor="ap-filter">Has AP Cost</Label>
               </div>
             </div>
+
+            {/* Class filter */}
+            <div className="space-y-2">
+              <Label>Classes ({selectedClasses.length} selected)</Label>
+              <div className="border rounded-md p-4 max-h-48 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                {classes.map((classItem) => (
+                  <div key={classItem.id} className="flex items-center space-x-2">
+                    <Checkbox 
+                      id={`class-filter-${classItem.id}`}
+                      checked={selectedClasses.includes(classItem.id)}
+                      onCheckedChange={(checked) => 
+                        handleClassFilterChange(classItem.id, checked as boolean)
+                      }
+                    />
+                    <Label htmlFor={`class-filter-${classItem.id}`} className="cursor-pointer">{classItem.name}</Label>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </CardContent>
         <CardFooter>
@@ -211,18 +287,19 @@ export function AbilitySearchClient({
                 <TableHead>Keywords</TableHead>
                 <TableHead>Range</TableHead>
                 <TableHead>Class</TableHead>
+                <TableHead className="text-center">Level</TableHead>
                 <TableHead>Costs</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredAbilities.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8">
+                  <TableCell colSpan={6} className="text-center py-8">
                     No abilities found matching your filters.
                   </TableCell>
                 </TableRow>
               ) : (
-                filteredAbilities.map(({ ability, className, classId }) => (
+                filteredAbilities.map(({ ability, className, classId, level }) => (
                   <TableRow 
                     key={`${classId}-${ability.id}`}
                     className="cursor-pointer hover:bg-muted/50"
@@ -238,6 +315,9 @@ export function AbilitySearchClient({
                     </TableCell>
                     <TableCell>{ability.range}</TableCell>
                     <TableCell>{className}</TableCell>
+                    <TableCell className="text-center">
+                      <Badge variant="secondary">{level}</Badge>
+                    </TableCell>
                     <TableCell>
                       <div className="flex flex-wrap gap-1">
                         {ability.costs?.mana && <Badge>Mana: {ability.costs.mana}</Badge>}
@@ -254,7 +334,7 @@ export function AbilitySearchClient({
       </Card>
 
       {/* Expanded abilities */}
-      {filteredAbilities.map(({ ability, className, classId }) => {
+      {filteredAbilities.map(({ ability, className, classId, level }) => {
         const uniqueKey = `${classId}-${ability.id}`;
         if (uniqueKey === expandedAbility) {
           return (
@@ -265,7 +345,7 @@ export function AbilitySearchClient({
                   <Button variant="outline" onClick={() => setExpandedAbility(null)}>Close</Button>
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Class: {className} • Range: {ability.range}
+                  Class: {className} • Level: {level} • Range: {ability.range}
                 </div>
               </CardHeader>
               <CardContent>

@@ -1,4 +1,4 @@
-import { ClassAbility, ClassData, getAllClasses } from "./class-utils";
+import { ClassAbility, ClassData, ClassProgression, getAllClasses as fetchAllClasses } from "./class-utils";
 
 export interface AbilitySearchParams {
   search?: string;
@@ -8,12 +8,21 @@ export interface AbilitySearchParams {
   hasMana?: boolean;
   hasRP?: boolean;
   hasAP?: boolean;
+  classIds?: string[];
+  level?: number;
+}
+
+export interface AbilityWithMetadata {
+  ability: ClassAbility;
+  className: string;
+  classId: string;
+  level: number;
 }
 
 /**
  * Get all abilities from all classes
  */
-export async function getAllAbilities(): Promise<{ ability: ClassAbility; className: string; classId: string }[]> {
+export async function getAllAbilities(): Promise<AbilityWithMetadata[]> {
   console.log('Loading abilities from classes...');
   
   try {
@@ -33,7 +42,7 @@ export async function getAllAbilities(): Promise<{ ability: ClassAbility; classN
           const classFiles = JSON.parse(readFileSync(classListPath, 'utf8'));
           console.log(`Found ${classFiles.length} class files to load abilities from`);
           
-          const allAbilities: { ability: ClassAbility; className: string; classId: string }[] = [];
+          const allAbilities: AbilityWithMetadata[] = [];
           
           // Loop through each class file and extract abilities
           for (const filename of classFiles) {
@@ -45,11 +54,17 @@ export async function getAllAbilities(): Promise<{ ability: ClassAbility; classN
                 const classData = parsed.class;
                 
                 if (classData && classData.abilities && classData.abilities.length > 0) {
-                  const classAbilities = classData.abilities.map(ability => ({
-                    ability,
-                    className: classData.name,
-                    classId: classData.id
-                  }));
+                  const classAbilities = classData.abilities.map(ability => {
+                    // Find the level at which this ability is gained
+                    const level = findAbilityLevel(classData.progression, ability.id);
+                    
+                    return {
+                      ability,
+                      className: classData.name,
+                      classId: classData.id,
+                      level
+                    };
+                  });
                   
                   allAbilities.push(...classAbilities);
                   console.log(`Loaded ${classAbilities.length} abilities from ${classData.name}`);
@@ -73,7 +88,7 @@ export async function getAllAbilities(): Promise<{ ability: ClassAbility; classN
     
     // Standard approach - get abilities from classes
     console.log('Getting abilities through getAllClasses...');
-    const classes = await getAllClasses();
+    const classes = await fetchAllClasses();
     
     console.log(`Found ${classes.length} classes to extract abilities from`);
     
@@ -82,11 +97,17 @@ export async function getAllAbilities(): Promise<{ ability: ClassAbility; classN
       const classAbilities = classData.abilities || [];
       console.log(`Class ${classData.name} has ${classAbilities.length} abilities`);
       
-      return classAbilities.map(ability => ({
-        ability,
-        className: classData.name,
-        classId: classData.id
-      }));
+      return classAbilities.map(ability => {
+        // Find the level at which this ability is gained
+        const level = findAbilityLevel(classData.progression, ability.id);
+        
+        return {
+          ability,
+          className: classData.name,
+          classId: classData.id,
+          level
+        };
+      });
     });
     
     console.log(`Extracted a total of ${allAbilities.length} abilities from all classes`);
@@ -98,13 +119,34 @@ export async function getAllAbilities(): Promise<{ ability: ClassAbility; classN
 }
 
 /**
+ * Find the level at which an ability is gained from class progression
+ */
+function findAbilityLevel(progression: ClassProgression[], abilityId: string): number {
+  // Default to level 1 if we can't find it in progression
+  let level = 1;
+  
+  for (const prog of progression) {
+    const hasBenefit = prog.benefits.some(benefit => 
+      benefit.type === 'ability' && benefit.value === abilityId
+    );
+    
+    if (hasBenefit) {
+      level = prog.level;
+      break;
+    }
+  }
+  
+  return level;
+}
+
+/**
  * Search abilities based on given parameters
  */
 export function searchAbilities(
-  abilities: { ability: ClassAbility; className: string; classId: string }[],
+  abilities: AbilityWithMetadata[],
   params: AbilitySearchParams
-): { ability: ClassAbility; className: string; classId: string }[] {
-  return abilities.filter(({ ability }) => {
+): AbilityWithMetadata[] {
+  return abilities.filter(({ ability, classId, level }) => {
     // Text search
     if (params.search) {
       const searchLower = params.search.toLowerCase();
@@ -119,6 +161,16 @@ export function searchAbilities(
       );
       
       if (!matchesSearch) return false;
+    }
+    
+    // Class filter
+    if (params.classIds && params.classIds.length > 0) {
+      if (!params.classIds.includes(classId)) return false;
+    }
+    
+    // Level filter
+    if (params.level !== undefined) {
+      if (level !== params.level) return false;
     }
     
     // Type filter
@@ -169,7 +221,7 @@ export function searchAbilities(
  * Get all unique ability types across all abilities
  */
 export function getAllAbilityTypes(
-  abilities: { ability: ClassAbility; className: string; classId: string }[]
+  abilities: AbilityWithMetadata[]
 ): string[] {
   const types = new Set<string>();
   
@@ -184,7 +236,7 @@ export function getAllAbilityTypes(
  * Get all unique keywords across all abilities
  */
 export function getAllKeywords(
-  abilities: { ability: ClassAbility; className: string; classId: string }[]
+  abilities: AbilityWithMetadata[]
 ): string[] {
   const keywords = new Set<string>();
   
@@ -201,7 +253,7 @@ export function getAllKeywords(
  * Get all unique ranges across all abilities
  */
 export function getAllRanges(
-  abilities: { ability: ClassAbility; className: string; classId: string }[]
+  abilities: AbilityWithMetadata[]
 ): string[] {
   const ranges = new Set<string>();
   
@@ -210,4 +262,38 @@ export function getAllRanges(
   });
   
   return Array.from(ranges).sort();
+}
+
+/**
+ * Get all unique classes across all abilities
+ */
+export function getAllClasses(
+  abilities: AbilityWithMetadata[]
+): { id: string; name: string }[] {
+  const classMap = new Map<string, string>();
+  
+  abilities.forEach(({ className, classId }) => {
+    if (!classMap.has(classId)) {
+      classMap.set(classId, className);
+    }
+  });
+  
+  return Array.from(classMap.entries())
+    .map(([id, name]) => ({ id, name }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ * Get all unique levels across all abilities
+ */
+export function getAllLevels(
+  abilities: AbilityWithMetadata[]
+): number[] {
+  const levels = new Set<number>();
+  
+  abilities.forEach(({ level }) => {
+    levels.add(level);
+  });
+  
+  return Array.from(levels).sort((a, b) => a - b);
 }
