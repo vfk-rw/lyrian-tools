@@ -1,4 +1,4 @@
-# Angel's Sword TTRPG Class Specification
+# Angel's Sword TTRPG Data Specification
 
 This document provides a specification for representing class data from the Angel's Sword TTRPG in a structured YAML format.
 
@@ -12,7 +12,6 @@ class:
   difficulty: integer        # 1-5 typically
   main_role: string          # Primary role (striker, controller, artisan, etc.)
   secondary_role: string     # Secondary role (or null)
-  image_url: string          # URL to class image
 
   # Requirements can be complex with AND/OR logic
   requirements:
@@ -20,7 +19,7 @@ class:
     conditions:              # List of conditions that must be satisfied
       - type: string         # Type of requirement
         # Types include:
-        # - class_mastery (specific class or any)
+        # - class_mastery (specific class, tier of class, or any)
         # - element_mastery
         # - weapon_proficiency (can specify options)
         # - armor_proficiency
@@ -36,7 +35,7 @@ class:
         options: list        # For weapon/armor proficiency, list of valid options
         points: integer      # For skill/expertise requirements, minimum points needed
 
-  # Progression is a list of level benefits
+  # Progression is a list of level benefits. can have multiple benefits per level (usually with level 1)
   progression:
     - level: integer
       benefits:
@@ -44,10 +43,9 @@ class:
           # Types include:
           # - ability (grants a specific ability)
           # - skills (grants skill points to distribute)
-          # - attribute (grants a fixed attribute bonus)
-          # - attribute_choice (choice between attribute bonuses)
+          # - attribute_choice (choice between attribute bonuses. a single +1 attribute is just attribute_choice with a single option.)
           # - expertise_points (grants expertise points)
-          # - proficiency (grants a proficiency)
+          # - proficiency (grants a proficiency. can be specific, or a group (common, melee, ranged, specialized, channeling))
           # - element_mastery (grants mastery of an element)
           
           # Fields for specific benefit types:
@@ -76,12 +74,10 @@ ability:
   name: string               # Display name
   type: string               # Type of ability
     # Types include:
-    # - passive (permanent effects, no activation)
+    # - passive (permanent effects, no activation / has no cost)
     # - combat_action (used in combat)
     # - crafting_action (used during crafting)
     # - interlude_action (used during interludes)
-    # - encounter_start (used at start of encounter)
-    # - encounter_conclusion (used at end of encounter)
   
   keywords: list             # List of keywords
   range: string | null       # Range of the ability
@@ -97,7 +93,7 @@ ability:
   costs:
     ap: integer | null
     rp: integer | null
-    mana: integer | null
+    mp: integer | null
     interlude_point: integer | null
   
   # For passive abilities
@@ -230,4 +226,41 @@ progression:
         expert_knowledge_needs_approval: true
         can_convert_to_expertise: true
         conversion_ratio: 2
+```
+
+# Angel's Sword TTRPG Race Specification
+
+This document provides a specification for representing race data from the Angel's Sword TTRPG in a structured YAML format.
+
+## Race Structure
+
+```yaml
+race:
+  id: string                 # Unique identifier (usually snake_case of name)
+  name: string               # Display name of the race
+  type: string               # "primary" or "subrace"
+  primary_race: string?      # Only for subraces, references the primary race
+  description: string
+  benefits:
+    - type: string       # Type of benefit
+      # Types include:
+      # - ability (grants a specific ability)
+      # - skills (grants skill points to distribute)
+      # - attribute_choice (choice between attribute bonuses. a single +1 attribute is just attribute_choice with a single option.)
+      # - expertise_points (grants expertise points)
+      # - proficiency (grants a proficiency. can be specific, or a group (common, melee, ranged, specialized, channeling))
+      # - element_mastery (grants mastery of an element)
+      
+      # Fields for specific benefit types:
+      value: string      # ID of the ability, element, etc.
+      points: integer    # Number of points for skills/expertise
+      attribute: string  # For fixed attribute bonuses - Focus, Agility, Toughness, Power, Fitness, Reason, Awareness, Presence, Cunning
+      eligible_skills: list  # List of skills that can receive points
+      can_convert_to_expertise: boolean  # Whether skill points can be converted
+      conversion_ratio: integer  # Ratio for conversion to expertise points
+      
+      # For attribute_choice
+      choose: integer    # Number of options to choose
+      options: list      # List of options
+        # Each option is: { attribute: string, value: integer }
 ```
