@@ -234,19 +234,31 @@ export default function CensusClient({
       {/* Chart toggles */}
       <div className="flex gap-2 justify-center mb-4">
         <button
-          className={`px-3 py-1 rounded border ${showRaceChart ? 'bg-blue-100' : 'bg-gray-100'}`}
+          className={`px-3 py-1 rounded border transition-colors ${
+            showRaceChart 
+              ? 'bg-primary/10 border-primary/50 text-primary dark:bg-primary/20' 
+              : 'bg-muted border-muted-foreground/20 text-muted-foreground hover:bg-muted/80'
+          }`}
           onClick={() => setShowRaceChart((v) => !v)}
         >
           Race Distribution
         </button>
         <button
-          className={`px-3 py-1 rounded border ${showSpiritChart ? 'bg-blue-100' : 'bg-gray-100'}`}
+          className={`px-3 py-1 rounded border transition-colors ${
+            showSpiritChart 
+              ? 'bg-primary/10 border-primary/50 text-primary dark:bg-primary/20' 
+              : 'bg-muted border-muted-foreground/20 text-muted-foreground hover:bg-muted/80'
+          }`}
           onClick={() => setShowSpiritChart((v) => !v)}
         >
           Spirit Core Histogram
         </button>
         <button
-          className={`px-3 py-1 rounded border ${showClassChart ? 'bg-blue-100' : 'bg-gray-100'}`}
+          className={`px-3 py-1 rounded border transition-colors ${
+            showClassChart 
+              ? 'bg-primary/10 border-primary/50 text-primary dark:bg-primary/20' 
+              : 'bg-muted border-muted-foreground/20 text-muted-foreground hover:bg-muted/80'
+          }`}
           onClick={() => setShowClassChart((v) => !v)}
         >
           Class Distribution
