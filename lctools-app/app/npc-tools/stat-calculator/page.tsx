@@ -96,7 +96,7 @@ export default function StatCalculatorPage() {
     Movement: `${movement}ft`,
     "Save Bonus": toughness,
     "Light attack": `+${focus} Accuracy, 1d4+${power}`,
-    "Heavy attack": `+${focus} Accuracy, 2d6+${power}`,
+    "Heavy attack": `+${focus} Accuracy, 2d6+${power * 2}`,
   }), [focus, power, agility, toughness, ap, movement, equipmentPenalty, equipmentDefense, activeDefense]);
 
   const formulas: Record<string,string> = {
