@@ -89,6 +89,11 @@ const navItems = [
     ],
   },
   {
+    title: "Gathering",
+    url: "/gathering",
+    icon: Hammer, // You can choose a more appropriate icon if desired
+  },
+  {
     title: "Mirane",
     url: "/mirane",
     icon: Map,
@@ -112,6 +117,18 @@ const navItems = [
         title: "Manage Sheets",
         url: "/mirane/census/manage-sheets",
         icon: FileSpreadsheet,
+      },
+    ],
+  },
+  {
+    title: "NPC Tools",
+    url: "/npc-tools",
+    icon: FileSpreadsheet,
+    items: [
+      {
+        title: "Stat Calculator",
+        url: "/npc-tools/stat-calculator",
+        icon: ChevronRight,
       },
     ],
   },
