@@ -1,0 +1,143 @@
+[
+  {
+    "id": "explosive",
+    "name": "Explosive Node",
+    "description": "If you do not complete the NP requirement, the rock explodes and you are inflicted by an injury.",
+    "roll_range": [1, 1],
+    "modifiers": {
+      "is_explosive": true
+    }
+  },
+  {
+    "id": "hazardous",
+    "name": "Hazard Node",
+    "description": "Every mining action deals 1d4 damage to you.",
+    "roll_range": [2, 2],
+    "modifiers": {
+      "is_hazardous": true
+    }
+  },
+  {
+    "id": "barren",
+    "name": "Barren Node",
+    "description": "There is no Rare Yield for this node.",
+    "roll_range": [3, 3],
+    "modifiers": {
+      "is_barren": true,
+      "lucky_yield_multiplier": 0
+    }
+  },
+  {
+    "id": "obscured",
+    "name": "Obscured Node",
+    "description": "-1 Dice.",
+    "roll_range": [4, 4],
+    "modifiers": {
+      "dice_modifier": -1
+    }
+  },
+  {
+    "id": "muddy",
+    "name": "Muddy Node",
+    "description": "-1 Dice, all other gathering dice are upgraded to d20.",
+    "roll_range": [5, 5],
+    "modifiers": {
+      "dice_modifier": -1,
+      "is_muddy": true
+    }
+  },
+  {
+    "id": "arcane",
+    "name": "Arcane Node",
+    "description": "Abilities that grant LP now give NP, abilities that grant NP now grant LP.",
+    "roll_range": [6, 6],
+    "modifiers": {
+      "is_arcane": true
+    }
+  },
+  {
+    "id": "volatile",
+    "name": "Volatile Node",
+    "description": "Rolls 1-5 are now 1. Rolls 6-10 are now 10.",
+    "roll_range": [7, 7],
+    "modifiers": {
+      "is_volatile": true
+    }
+  },
+  {
+    "id": "normal",
+    "name": "Normal Node",
+    "description": "No changes.",
+    "roll_range": [8, 13],
+    "modifiers": {}
+  },
+  {
+    "id": "deep",
+    "name": "Deep Node",
+    "description": "The last HP of the outcrop grants rare yield for both NP and LP values. However all other HP has only normal materials for both NP and LP Values.",
+    "roll_range": [14, 14],
+    "modifiers": {
+      "is_deep": true
+    },
+    "effect_code": "if (state.nodeHP === 1) { return { ...state, luckyYield: state.luckyYield * 2 }; } else { return state; }"
+  },
+  {
+    "id": "hardened",
+    "name": "Hardened Node",
+    "description": "Tool bonuses are doubled.",
+    "roll_range": [15, 15],
+    "modifiers": {
+      "is_hardened": true
+    }
+  },
+  {
+    "id": "alloy",
+    "name": "Alloy Node",
+    "description": "This node has half normal yield, but grants two different rare yield materials.",
+    "roll_range": [16, 16],
+    "modifiers": {
+      "is_alloy": true,
+      "yield_multiplier": 0.5,
+      "lucky_yield_multiplier": 2
+    }
+  },
+  {
+    "id": "hardened2",
+    "name": "Hardened Node",
+    "description": "Tool bonuses are doubled.",
+    "roll_range": [17, 17],
+    "modifiers": {
+      "is_hardened": true
+    }
+  },
+  {
+    "id": "exposed",
+    "name": "Exposed Node",
+    "description": "+1 Dice.",
+    "roll_range": [18, 18],
+    "modifiers": {
+      "dice_modifier": 1
+    }
+  },
+  {
+    "id": "rich",
+    "name": "Rich Node",
+    "description": "Yield and Rare Yield are doubled.",
+    "roll_range": [19, 19],
+    "modifiers": {
+      "yield_multiplier": 2,
+      "lucky_yield_multiplier": 2
+    }
+  },
+  {
+    "id": "exposed_rich",
+    "name": "Exposed Rich Node",
+    "description": "+1 Dice and Yield and Rare Yield are doubled.",
+    "roll_range": [20, 20],
+    "modifiers": {
+      "dice_modifier": 1,
+      "yield_multiplier": 2,
+      "lucky_yield_multiplier": 2
+    }
+  }
+]

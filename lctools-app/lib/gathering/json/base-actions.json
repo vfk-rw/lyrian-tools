@@ -1,0 +1,193 @@
+[
+  {
+    "id": "basic-strike",
+    "name": "Basic Strike",
+    "cost_text": "Rapid. 1 Strike Dice.",
+    "dice_cost": 1,
+    "node_points_cost": 0,
+    "lucky_points_cost": 0,
+    "is_rapid": true,
+    "requires_prerequisite": false,
+    "description": "You add a gathering check to the node points of the target node.",
+    "effects": [
+      {
+        "type": "roll",
+        "dice": {
+          "sides": 10,
+          "count": 1
+        },
+        "store_as": "roll"
+      },
+      {
+        "type": "calculate",
+        "formula": "{roll[0]} + gatheringSkill + expertise + toolBonus + ironFocusBonus",
+        "store_as": "result"
+      },
+      {
+        "type": "modify",
+        "target": "currentNP",
+        "operation": "add",
+        "value": "{result}"
+      },
+      {
+        "type": "log",
+        "message": "Used Basic Strike. Rolled {roll[0]}. Added {result} to Node Points."
+      }
+    ]
+  },
+  {
+    "id": "lucky-strike",
+    "name": "Lucky Strike",
+    "cost_text": "Rapid. 1 Strike Dice, 10 Node Points.",
+    "dice_cost": 1,
+    "node_points_cost": 10,
+    "lucky_points_cost": 0,
+    "is_rapid": true,
+    "requires_prerequisite": true,
+    "description": "You add a gathering check to the lucky points of the target node. This strike has a +10 bonus.",
+    "conditions": [
+      {
+        "type": "has_enough_np",
+        "amount": 10
+      }
+    ],
+    "effects": [
+      {
+        "type": "roll",
+        "dice": {
+          "sides": 10,
+          "count": 1
+        },
+        "store_as": "roll"
+      },
+      {
+        "type": "calculate",
+        "formula": "{roll[0]} + gatheringSkill + expertise + toolBonus + ironFocusBonus + 10",
+        "store_as": "result"
+      },
+      {
+        "type": "modify",
+        "target": "currentLP",
+        "operation": "add",
+        "value": "{result}"
+      },
+      {
+        "type": "log",
+        "message": "Used Lucky Strike. Rolled {roll[0]}. Added {result} to Lucky Points with +10 bonus."
+      }
+    ]
+  },
+  {
+    "id": "novices-perseverance",
+    "name": "Novice's Perseverance",
+    "cost_text": "1 Strike Dice.",
+    "dice_cost": 1,
+    "node_points_cost": 0,
+    "lucky_points_cost": 0,
+    "is_rapid": false,
+    "requires_prerequisite": false,
+    "description": "You do not add your gathering skill to the check, but you roll two d10s and pick the highest. Can be used against either NP or LP.",
+    "effects": [
+      {
+        "type": "roll",
+        "dice": {
+          "sides": 10,
+          "count": 2
+        },
+        "store_as": "rolls"
+      },
+      {
+        "type": "calculate",
+        "formula": "Math.max({rolls[0]}, {rolls[1]})",
+        "store_as": "highRoll"
+      },
+      {
+        "type": "calculate",
+        "formula": "{highRoll} + expertise + toolBonus + ironFocusBonus",
+        "store_as": "result"
+      },
+      {
+        "type": "modify",
+        "target": "currentNP",
+        "operation": "add",
+        "value": "{result}"
+      },
+      {
+        "type": "log",
+        "message": "Used Novice's Perseverance. Rolled {rolls[0]} and {rolls[1]}. Using {highRoll}, added {result} to Node Points."
+      }
+    ]
+  },
+  {
+    "id": "back-to-basics",
+    "name": "Back To Basics",
+    "cost_text": "2 Strike Dice.",
+    "dice_cost": 2,
+    "node_points_cost": 0,
+    "lucky_points_cost": 0,
+    "is_rapid": false,
+    "requires_prerequisite": false,
+    "description": "Convert all LP up to a maximum of 60 to NP.",
+    "effects": [
+      {
+        "type": "convert_points",
+        "from": "lp",
+        "to": "np",
+        "amount": "all",
+        "max": 60
+      },
+      {
+        "type": "log",
+        "message": "Used Back To Basics. Converted {pointsConverted} Lucky Points to Node Points."
+      }
+    ]
+  },
+  {
+    "id": "iron-focus",
+    "name": "Iron Focus",
+    "cost_text": "1 Strike Dice, 5 Lucky Points.",
+    "dice_cost": 1,
+    "node_points_cost": 0,
+    "lucky_points_cost": 5,
+    "is_rapid": false,
+    "requires_prerequisite": true,
+    "description": "Make a gathering check. Afterwards, you gain a +5 bonus to all gathering checks for the rest of this gathering session.",
+    "conditions": [
+      {
+        "type": "has_enough_lp",
+        "amount": 5
+      }
+    ],
+    "effects": [
+      {
+        "type": "roll",
+        "dice": {
+          "sides": 10,
+          "count": 1
+        },
+        "store_as": "roll"
+      },
+      {
+        "type": "calculate",
+        "formula": "{roll[0]} + gatheringSkill + expertise + toolBonus",
+        "store_as": "result"
+      },
+      {
+        "type": "modify",
+        "target": "currentNP",
+        "operation": "add",
+        "value": "{result}"
+      },
+      {
+        "type": "modify",
+        "target": "bonuses",
+        "operation": "add",
+        "value": "Iron Focus"
+      },
+      {
+        "type": "log",
+        "message": "Used Iron Focus. Rolled {roll[0]}. Added {result} to Node Points and gained +5 to all future gathering checks."
+      }
+    ]
+  }
+]

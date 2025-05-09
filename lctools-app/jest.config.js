@@ -4,7 +4,8 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   testMatch: [
     '<rootDir>/lib/crafting/**/__tests__/**/*.(ts|tsx|js)',
-    '<rootDir>/lib/classes/**/__tests__/**/*.(ts|tsx|js)'
+    '<rootDir>/lib/classes/**/__tests__/**/*.(ts|tsx|js)',
+    '<rootDir>/lib/gathering/**/__tests__/**/*.(ts|tsx|js)'
   ],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest'
