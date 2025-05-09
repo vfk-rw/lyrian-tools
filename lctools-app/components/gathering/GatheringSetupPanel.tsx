@@ -33,9 +33,10 @@ const jsonNodeVariations: Record<string, { id: string; name: string; description
 
 interface GatheringSetupPanelProps {
   setGatheringState: React.Dispatch<React.SetStateAction<GatheringState>>;
+  isStarted: boolean;
 }
 
-const GatheringSetupPanel: React.FC<GatheringSetupPanelProps> = ({ setGatheringState }) => {
+const GatheringSetupPanel: React.FC<GatheringSetupPanelProps> = ({ setGatheringState, isStarted }) => {
   const [nodeName, setNodeName] = useState<string>("Generic Node");
   const [nodeType, setNodeType] = useState<string>("ore");
   const [nodeHP, setNodeHP] = useState<number>(3);
@@ -171,7 +172,7 @@ const GatheringSetupPanel: React.FC<GatheringSetupPanelProps> = ({ setGatheringS
             </div>
           </div>
         </div>
-        <Button onClick={handleStartGathering} className="w-full md:w-auto">
+        <Button onClick={handleStartGathering} disabled={isStarted} className="w-full md:w-auto">
           Start Gathering Session
         </Button>
       </CardContent>
