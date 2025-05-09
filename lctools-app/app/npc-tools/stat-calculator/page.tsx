@@ -73,7 +73,7 @@ export default function StatCalculatorPage() {
   const [agility, setAgility] = useState(4);
   const [toughness, setToughness] = useState(4);
   const [ap, setAp] = useState(4);
-  const [movement, setMovement] = useState(0);
+  const [movement, setMovement] = useState(20);
   const [armor, setArmor] = useState<keyof typeof armorMap>("none");
   const [shield, setShield] = useState<keyof typeof shieldMap>("none");
 
