@@ -8,25 +8,28 @@ import { loadNodeVariationsFromJson } from './interpreters/node-interpreter';
 
 // Import JSON data
 import baseActionsJson from './json/base-actions.json';
+import classActionsJson from './json/class-actions.json';
 import nodeVariationsJson from './json/node-variations.json';
 
 // Convert JSON to string for our loader functions
 const baseActionsString = JSON.stringify(baseActionsJson);
+const classActionsString = JSON.stringify(classActionsJson);
 const nodeVariationsString = JSON.stringify(nodeVariationsJson);
 
 // Parse and convert data into executable structures
-export const jsonGatheringActions: GatheringActions = loadActionsFromJson(baseActionsString);
+const baseActions = loadActionsFromJson(baseActionsString);
+const classActions = loadActionsFromJson(classActionsString);
+// Merge base and class-specific actions
+export const jsonGatheringActions: GatheringActions = { ...baseActions, ...classActions };
 export const jsonNodeVariations: NodeVariations = loadNodeVariationsFromJson(nodeVariationsString);
 
 // Prepare for class-specific action files in future
 const classActionFiles = [
-  { name: 'base', data: baseActionsJson }
-  // Will add miner and forager actions later
-  // { name: 'miner', data: minerActionsJson },
-  // { name: 'forager', data: foragerActionsJson },
+  { name: 'base', data: baseActionsJson },
+  { name: 'class', data: classActionsJson }
 ];
 
-/**
+/**0
  * Get actions for a specific class
  */
 export function getActionsForClass(className: string): GatheringActions {

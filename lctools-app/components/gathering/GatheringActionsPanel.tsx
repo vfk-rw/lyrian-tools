@@ -1,7 +1,8 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -16,6 +17,7 @@ interface GatheringActionsPanelProps {
 }
 
 const GatheringActionsPanel: React.FC<GatheringActionsPanelProps> = ({ state, setState, isStarted }) => {
+  const [useStoredRoll, setUseStoredRoll] = useState(false);
   
   const isActionUsable = (action: GatheringAction): boolean => {
     if (!action) return false;
@@ -37,8 +39,12 @@ const GatheringActionsPanel: React.FC<GatheringActionsPanelProps> = ({ state, se
     const action = jsonGatheringActions[actionId];
     if (action && isActionUsable(action)) {
       if (typeof action.effect === 'function') {
-        const newState = action.effect(state, state.perseveranceTarget);
+        const newState = action.effect(
+          state,
+          useStoredRoll ? { overrideRoll: state.storedRoll } : undefined
+        );
         setState(newState);
+        setUseStoredRoll(false);
       } else {
         console.error(`Action ${actionId} does not have a valid effect function.`);
       }
@@ -54,17 +60,24 @@ const GatheringActionsPanel: React.FC<GatheringActionsPanelProps> = ({ state, se
       </CardHeader>
       <CardContent className="space-y-2">
         <TooltipProvider>
+          <ToggleGroup type="single" value={state.perseveranceTarget} onValueChange={value => setState(prev => ({ ...prev, perseveranceTarget: value as 'NP' | 'LP' }))} className="mb-2">
+            <ToggleGroupItem value="NP">NP</ToggleGroupItem>
+            <ToggleGroupItem value="LP">LP</ToggleGroupItem>
+          </ToggleGroup>
+  {state.storedRoll !== undefined && (
+    <div className="mb-2 flex items-center">
+      <Checkbox
+        checked={useStoredRoll}
+        onCheckedChange={checked => setUseStoredRoll(checked as boolean)}
+      >
+        Use stored roll ({state.storedRoll})
+      </Checkbox>
+    </div>
+  )}
           {Object.values(actionsToDisplay).map((action: GatheringAction) => (
             <Tooltip key={action.id} delayDuration={300}>
               <TooltipTrigger asChild>
                 <div className="w-full mb-2 flex items-center space-x-2">
-                  {/* Show toggle only for Novice's Perseverance */}
-                  {action.id === 'novices-perseverance' && (
-                    <ToggleGroup type="single" value={state.perseveranceTarget} onValueChange={value => setState(prev => ({ ...prev, perseveranceTarget: value as 'NP' | 'LP' }))} className="flex-shrink-0">
-                      <ToggleGroupItem value="NP">NP</ToggleGroupItem>
-                      <ToggleGroupItem value="LP">LP</ToggleGroupItem>
-                    </ToggleGroup>
-                  )}
                   <Button
                     variant="outline"
                     className="flex-1 justify-start"

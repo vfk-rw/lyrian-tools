@@ -168,8 +168,8 @@ export function canUseAction(
     return false;
   }
   
-  // Check if the action has already been used (for non-rapid actions)
-  if (!isRapid && state.usedActions.includes(actionId)) {
+  // Block reuse only for Novice's Perseverance
+  if (!isRapid && actionId === 'novices-perseverance' && state.usedActions.includes(actionId)) {
     return false;
   }
   

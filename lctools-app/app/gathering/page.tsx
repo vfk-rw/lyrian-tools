@@ -142,10 +142,10 @@ export default function GatheringPage() {
           <div className="col-span-1 space-y-4">
             <GatheringStatusPanel state={gatheringState} />
             <GatheringResultsPanel state={gatheringState} setState={setGatheringState} isStarted={isStarted} isEnded={isEnded} />
+            <GatheringLogPanel log={gatheringState.log} />
           </div>
           <div className="col-span-2 space-y-4">
             <GatheringActionsPanel state={gatheringState} setState={setGatheringState} isStarted={isStarted} />
-            <GatheringLogPanel log={gatheringState.log} />
           </div>
         </div>
       </SidebarInset>

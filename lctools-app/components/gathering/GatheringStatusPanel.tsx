@@ -55,6 +55,11 @@ const GatheringStatusPanel: React.FC<GatheringStatusPanelProps> = ({ state }) =>
         <div>
           <p className="text-sm font-medium">Dice Remaining: {diceRemaining ?? 'N/A'}</p>
         </div>
+        {state.storedRoll !== undefined && (
+          <div>
+            <p className="text-sm font-medium">Stored Roll: {state.storedRoll}</p>
+          </div>
+        )}
         {bonuses && bonuses.length > 0 && (
           <div>
             <p className="text-sm font-medium">Active Bonuses:</p>

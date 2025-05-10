@@ -5,8 +5,10 @@
 import type { GatheringState, GatheringAction, GatheringActions } from '../types';
 import type { DeclarativeGatheringAction } from '../schemas/action-schema';
 import { executeEffects } from './effect-interpreter';
+import { rollD10 } from '../utils';
 import { evaluateConditions } from './condition-interpreter';
 import { executeGatheringAction } from '../utils';
+import { logMessage } from '../state';
 
 /**
  * Convert a declarative action into an executable action
@@ -51,6 +53,7 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
       // Execute declared effects
       const initialNP = afterCost.currentNP;
       const afterEffects = executeEffects(declarativeAction.effects, afterCost);
+      let finalState = afterEffects;
       // Arcane Node variation: swap NP and LP gains
       if (state.variations?.includes('arcane')) {
         const beforeNP = afterCost.currentNP;
@@ -66,7 +69,7 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
                 .replace(/<TMP>/g, 'Lucky Points')
             : msg
         );
-        return {
+        finalState = {
           ...afterEffects,
           currentNP: beforeNP + deltaLP,
           currentLP: beforeLP + deltaNP,
@@ -79,7 +82,7 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
         afterEffects.perseveranceTarget === 'LP'
       ) {
         const added = afterEffects.currentNP - initialNP;
-        return {
+        finalState = {
           ...afterEffects,
           currentNP: initialNP,
           currentLP: afterEffects.currentLP + added,
@@ -90,7 +93,23 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
           )
         };
       }
-      return afterEffects;
+      // Custom effect code for branch logic if provided
+      if (declarativeAction.effect_code) {
+        try {
+          // Wrap the arrow function code and execute it
+          const fn = new Function(
+            'state',
+            'utils',
+            'logMessage',
+            `return (${declarativeAction.effect_code})(state, utils, logMessage);`
+          );
+          const resultState = fn(finalState, { rollD10, executeGatheringAction }, logMessage);
+          if (resultState) finalState = resultState;
+        } catch (err) {
+          console.error(`Error executing effect_code for action ${declarativeAction.id}:`, err);
+        }
+      }
+      return finalState;
     }
   };
 }

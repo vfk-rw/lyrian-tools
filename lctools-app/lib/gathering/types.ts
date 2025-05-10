@@ -57,6 +57,8 @@ export interface GatheringState {
    * Which pool Novice's Perseverance should apply to: 'NP' (node points) or 'LP' (lucky points)
    */
   perseveranceTarget: 'NP' | 'LP';
+  // Stored roll for Memory of the Grove and Stalks of Comparison
+  storedRoll?: number;
   
   // Result tracking
   success: boolean;

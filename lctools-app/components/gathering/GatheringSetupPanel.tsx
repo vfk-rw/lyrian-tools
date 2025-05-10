@@ -82,7 +82,6 @@ const GatheringSetupPanel: React.FC<GatheringSetupPanelProps> = ({ setGatheringS
                 ))}
               </SelectContent>
             </Select>
-            {/* Description for selected variation */}
             {jsonNodeVariations[variation] && (
               <p className="text-sm text-muted-foreground mt-1">
                 {jsonNodeVariations[variation].description}
@@ -98,7 +97,6 @@ const GatheringSetupPanel: React.FC<GatheringSetupPanelProps> = ({ setGatheringS
               onChange={e => setNodeHP(Number(e.target.value))}
             />
           </div>
-
           <div>
             <Label htmlFor="nodePoints">Node Points (NP)</Label>
             <Input
@@ -117,7 +115,6 @@ const GatheringSetupPanel: React.FC<GatheringSetupPanelProps> = ({ setGatheringS
               onChange={e => setLuckyPoints(Number(e.target.value))}
             />
           </div>
-            <div />
           <div>
             <Label htmlFor="gatheringSkill">Gathering Skill</Label>
             <Input

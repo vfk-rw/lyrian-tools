@@ -39,3 +39,33 @@ Description
 
 Requirement
 Costs 1 strike dice.
+
+Forager lvl 6
+○ Divining Petalfall
+Keywords
+--
+Description
+ Make a gathering check with a +5 bonus. If the final result is even, add it to Node Points. If it’s odd, add it to Lucky Points.
+
+Requirement
+Costs 1 strike dice.
+
+Botanist lvl 2
+○ Memory of the Grove
+Keywords
+--
+Description
+ After making a gathering check, you may choose to reroll the die. If you do, store the original die result. You may replace a future gathering die result (before bonus) with the stored value.
+
+Requirement
+Usable after making a gathering a check.
+
+Botanist lv 6
+○ Stalks of Comparison
+Keywords
+--
+Description
+Make a gathering check and apply it to either Node Points or Lucky Points. If the result of this check (before bonuses) is higher than your previous roll this session, gain a bonus to the result equal to your Foraging skill (max +10).
+
+Requirement
+Costs 1 Strike Dice

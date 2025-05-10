@@ -327,6 +327,261 @@ describe('Gathering Simulator Integration Tests', () => {
     expect(updatedExp.diceRemaining).toBe(initialGatheringState.diceRemaining + 1);
   });
 
+  // Class-specific gathering actions tests
+  describe('Class-specific actions', () => {
+    it('Power Rock Strike adds half of bonus to NP and LP', () => {
+      jest.spyOn(utils, 'rollD10').mockReturnValue(6);
+      const state = createGatheringState({
+        name: 'Test Node', type: 'ore', hp: 3,
+        nodePoints: 40, luckyPoints: 15,
+        yield: 100, yieldType: 'item',
+        luckyYield: 50, luckyYieldType: 'rare',
+        variations: []
+      });
+      state.currentNP = 0;
+      state.currentLP = 0;
+      const beforeDice = state.diceRemaining;
+      const after = jsonGatheringActions['power-rock-strike'].effect(state);
+      const halfBonus = Math.floor((state.gatheringSkill + state.expertise + state.toolBonus) / 2);
+      const expected = 6 + halfBonus;
+      expect(after.currentNP).toBe(expected);
+      expect(after.currentLP).toBe(expected);
+      expect(after.diceRemaining).toBe(beforeDice - 1);
+      expect(after.log).toEqual(
+        expect.arrayContaining([
+          expect.stringContaining('Used Power Rock Strike. Rolled 6. Added ' + expected)
+        ])
+      );
+    });
+
+    it('Efficient Strike converts overflow NP into LP', () => {
+      jest.spyOn(utils, 'rollD10').mockReturnValue(10);
+      const nodePoints = 40;
+      const state = createGatheringState({
+        name: 'Test Node', type: 'ore', hp: 3,
+        nodePoints: nodePoints, luckyPoints: 15,
+        yield: 100, yieldType: 'item',
+        luckyYield: 50, luckyYieldType: 'rare',
+        variations: []
+      });
+      // Leave 2 NP to clear
+      state.currentNP = nodePoints - 2;
+      state.currentLP = 0;
+      const beforeDice = state.diceRemaining;
+      const after = jsonGatheringActions['efficient-strike'].effect(state);
+      // roll=10, total bonus = 10 + skill(5)
+      const totalBonus = 10 + state.gatheringSkill + state.expertise + state.toolBonus;
+      expect(after.currentNP).toBe(nodePoints);
+      expect(after.currentLP).toBe(totalBonus - 2);
+      expect(after.diceRemaining).toBe(beforeDice - 1);
+      expect(after.log).toEqual(
+        expect.arrayContaining([
+          expect.stringContaining('Used Efficient Strike. Rolled 10. Added 2 to NP and ' + (totalBonus - 2) + ' to LP.')
+        ])
+      );
+    });
+  });
+
+  describe('Additional class-specific actions', () => {
+    it('Focused Detonation consumes a die and logs roll', () => {
+      jest.spyOn(utils, 'rollD10').mockReturnValue(7);
+      const state = createGatheringState({
+        name: 'Test Node', type: 'ore', hp: 3,
+        nodePoints: 20, luckyPoints: 10,
+        yield: 50, yieldType: 'item',
+        luckyYield: 25, luckyYieldType: 'rare',
+        variations: []
+      });
+      const beforeDice = state.diceRemaining;
+      const after = jsonGatheringActions['focused-detonation'].effect(state);
+      expect(after.diceRemaining).toBe(beforeDice - 1);
+      expect(after.log).toEqual(
+        expect.arrayContaining([
+          expect.stringContaining('Used Focused Detonation. Rolled 7.')
+        ])
+      );
+    });
+
+    it('Take It Easy consumes a die and logs bonus collection', () => {
+      const state = createGatheringState({
+        name: 'Test Node', type: 'ore', hp: 3,
+        nodePoints: 20, luckyPoints: 10,
+        yield: 80, yieldType: 'item',
+        luckyYield: 30, luckyYieldType: 'rare',
+        variations: []
+      });
+      const beforeDice = state.diceRemaining;
+      const after = jsonGatheringActions['take-it-easy'].effect(state);
+      expect(after.diceRemaining).toBe(beforeDice - 1);
+      expect(after.log).toEqual(
+        expect.arrayContaining([
+          expect.stringContaining('Used Take It Easy. Collected 25% bonus yield.')
+        ])
+      );
+    });
+
+    it('Divining Petalfall rolls with +5 bonus and logs total', () => {
+      jest.spyOn(utils, 'rollD10').mockReturnValue(4);
+      const state = createGatheringState({
+        name: 'Test Node', type: 'herb', hp: 2,
+        nodePoints: 15, luckyPoints: 5,
+        yield: 30, yieldType: 'herb',
+        luckyYield: 10, luckyYieldType: 'rare herb',
+        variations: []
+      });
+      const beforeDice = state.diceRemaining;
+      const after = jsonGatheringActions['divining-petalfall'].effect(state);
+      // roll=4, bonus+5 => total=4+skill(5)+5 = 14
+      const expectedTotal = 4 + state.gatheringSkill + state.expertise + state.toolBonus + 5;
+      expect(after.diceRemaining).toBe(beforeDice - 1);
+      expect(after.log).toEqual(
+        expect.arrayContaining([
+          expect.stringContaining(`Used Divining Petalfall. Total result ${expectedTotal}.`)
+        ])
+      );
+    });
+
+    it('Memory of the Grove consumes a die and logs roll', () => {
+      jest.spyOn(utils, 'rollD10').mockReturnValue(2);
+      const state = createGatheringState({
+        name: 'Test Node', type: 'wood', hp: 4,
+        nodePoints: 25, luckyPoints: 8,
+        yield: 60, yieldType: 'wood',
+        luckyYield: 20, luckyYieldType: 'rare wood',
+        variations: []
+      });
+      const beforeDice = state.diceRemaining;
+      const after = jsonGatheringActions['memory-of-the-grove'].effect(state);
+      expect(after.diceRemaining).toBe(beforeDice - 1);
+      expect(after.log).toEqual(
+        expect.arrayContaining([
+          expect.stringContaining('Used Memory of the Grove. Rolled 2.')
+        ])
+      );
+    });
+
+    it('Stalks of Comparison consumes a die and logs roll', () => {
+      jest.spyOn(utils, 'rollD10').mockReturnValue(9);
+      const state = createGatheringState({
+        name: 'Test Node', type: 'herb', hp: 3,
+        nodePoints: 18, luckyPoints: 6,
+        yield: 40, yieldType: 'herb',
+        luckyYield: 15, luckyYieldType: 'rare herb',
+        variations: []
+      });
+      const beforeDice = state.diceRemaining;
+      const after = jsonGatheringActions['stalks-of-comparison'].effect(state);
+      expect(after.diceRemaining).toBe(beforeDice - 1);
+      expect(after.log).toEqual(
+        expect.arrayContaining([
+          expect.stringContaining('Used Stalks of Comparison. Rolled 9.')
+        ])
+      );
+    });
+  });
+
+  describe('Additional class-specific actions behavior', () => {
+    it('Focused Detonation adds properly or caps to 1 with dice refund', () => {
+      jest.spyOn(utils, 'rollD10').mockReturnValue(10);
+      const state = createGatheringState({
+        name: 'Test Outcrop', type: 'ore', hp: 3,
+        nodePoints: 10, luckyPoints: 5,
+        yield: 50, yieldType: 'item',
+        luckyYield: 20, luckyYieldType: 'rare',
+        variations: []
+      });
+      state.currentNP = 8;
+      const initialDice = state.diceRemaining;
+      const result = jsonGatheringActions['focused-detonation'].effect(state);
+      // 8 + (10+skill5) >= 10, so should cap to 1 and refund 1 die
+      expect(result.currentNP).toBe(1);
+      expect(result.diceRemaining).toBe(initialDice);
+
+      // Now test under threshold
+      jest.spyOn(utils, 'rollD10').mockReturnValue(1);
+      const state2 = { ...state, currentNP: 0, diceRemaining: initialDice };
+      const result2 = jsonGatheringActions['focused-detonation'].effect(state2);
+      // 0 + (1+skill5)=6 <10, so NP increases by 6, dice remaining decreases by 1
+      expect(result2.currentNP).toBe(6);
+      expect(result2.diceRemaining).toBe(initialDice - 1);
+    });
+
+    it('Take It Easy collects 25% bonus without NP/LP change', () => {
+      const state = createGatheringState({
+        name: 'Test Outcrop', type: 'ore', hp: 3,
+        nodePoints: 20, luckyPoints: 5,
+        yield: 80, yieldType: 'item',
+        luckyYield: 30, luckyYieldType: 'rare',
+        variations: []
+      });
+      const initialNP = state.currentNP;
+      const initialLP = state.currentLP;
+      const initialDice = state.diceRemaining;
+      const result = jsonGatheringActions['take-it-easy'].effect(state);
+      expect(result.currentNP).toBe(initialNP);
+      expect(result.currentLP).toBe(initialLP);
+      expect(result.diceRemaining).toBe(initialDice - 1);
+    });
+
+    it('Divining Petalfall adds even total to NP or odd total to LP', () => {
+      jest.spyOn(utils, 'rollD10').mockReturnValue(4);
+      const state = createGatheringState({
+        name: 'Herb Patch', type: 'herb', hp: 2,
+        nodePoints: 15, luckyPoints: 5,
+        yield: 30, yieldType: 'herb',
+        luckyYield: 10, luckyYieldType: 'rare herb',
+        variations: []
+      });
+      state.expertise = 0;
+      state.toolBonus = 0;
+      const initialDice = state.diceRemaining;
+      const resEven = jsonGatheringActions['divining-petalfall'].effect(state);
+      // total = 4 + skill5 + bonus5 =14 even, goes to NP
+      expect(resEven.currentNP).toBe(state.currentNP + 14);
+      expect(resEven.currentLP).toBe(state.currentLP);
+      expect(resEven.diceRemaining).toBe(initialDice - 1);
+
+      jest.spyOn(utils, 'rollD10').mockReturnValue(3);
+      const resOdd = jsonGatheringActions['divining-petalfall'].effect(state);
+      expect(resOdd.currentLP).toBe(state.currentLP + 3 + state.gatheringSkill + 5);
+    });
+
+    it('Memory of the Grove stores rolled value for future use', () => {
+      jest.spyOn(utils, 'rollD10').mockReturnValue(7);
+      const state = createGatheringState({
+        name: 'Wooden Stump', type: 'wood', hp: 4,
+        nodePoints: 20, luckyPoints: 5,
+        yield: 60, yieldType: 'wood',
+        luckyYield: 15, luckyYieldType: 'rare wood',
+        variations: []
+      });
+      const res = jsonGatheringActions['memory-of-the-grove'].effect(state);
+      expect(res.storedRoll).toBe(7);
+      expect(res.diceRemaining).toBe(state.diceRemaining - 1);
+    });
+
+    it('Stalks of Comparison grants bonus when roll > previous', () => {
+      jest.spyOn(utils, 'rollD10').mockReturnValue(5);
+      let state = createGatheringState({
+        name: 'Flower Patch', type: 'herb', hp: 3,
+        nodePoints: 18, luckyPoints: 6,
+        yield: 40, yieldType: 'herb',
+        luckyYield: 15, luckyYieldType: 'rare herb',
+        variations: []
+      });
+      // first use stores roll
+      state = jsonGatheringActions['stalks-of-comparison'].effect(state);
+      expect(state.storedRoll).toBe(5);
+      const prevNP = state.currentNP;
+      // Next roll higher
+      jest.spyOn(utils, 'rollD10').mockReturnValue(9);
+      const res2 = jsonGatheringActions['stalks-of-comparison'].effect(state);
+      const bonus = Math.min(state.gatheringSkill, 10);
+      expect(res2.currentNP).toBe(prevNP + bonus);
+      expect(res2.storedRoll).toBe(9);
+    });
+  });
+
   describe('Complete gathering scenario', () => {
     // Test a full gathering sequence
     it('completes a successful node gathering with NP and LP', () => {

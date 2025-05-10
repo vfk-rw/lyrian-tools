@@ -28,6 +28,12 @@ export interface DeclarativeGatheringAction {
   effects: Effect[];
   conditions?: Condition[];
   
+  // Custom code for branching logic
+  effect_code?: string;
+  // Class-specific metadata
+  class?: string;
+  level?: number;
+
   // Optional properties
   class_name?: string;
   class_level?: number;
