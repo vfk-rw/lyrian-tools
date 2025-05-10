@@ -190,10 +190,11 @@ export function executeGatheringAction(
   actionId: string,
   diceCost: number,
   npCost: number,
-  lpCost: number
+  lpCost: number,
+  isRapid: boolean
 ): GatheringState {
   // Check if the action can be used
-  if (!canUseAction(state, actionId, diceCost, npCost, lpCost, false)) {
+  if (!canUseAction(state, actionId, diceCost, npCost, lpCost, isRapid)) {
     return state;
   }
   

@@ -9,7 +9,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import {
   SidebarInset,
@@ -120,28 +119,20 @@ export default function GatheringPage() {
             </p>
           )}
         </div>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <Card>
-            <CardHeader>
-              <CardTitle>Gathering Simulator</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">
-                Welcome to the Gathering Simulator. Configure your node and gatherer, then begin your session.
-              </p>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <GatheringSetupPanel setGatheringState={setGatheringState} isStarted={isStarted} />
-                  <GatheringStatusPanel state={gatheringState} />
-                  <GatheringResultsPanel state={gatheringState} setState={setGatheringState} />
-                </div>
-                <div className="space-y-4">
-                  <GatheringActionsPanel state={gatheringState} setState={setGatheringState} />
-                  <GatheringLogPanel log={gatheringState.log} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Setup row */}
+        <div className="p-4">
+          <GatheringSetupPanel setGatheringState={setGatheringState} />
+        </div>
+        {/* Status / Actions & Log rows */}
+        <div className="grid grid-cols-3 gap-4 p-4">
+          <div className="col-span-1 space-y-4">
+            <GatheringStatusPanel state={gatheringState} />
+            <GatheringResultsPanel state={gatheringState} setState={setGatheringState} />
+          </div>
+          <div className="col-span-2 space-y-4">
+            <GatheringActionsPanel state={gatheringState} setState={setGatheringState} />
+            <GatheringLogPanel log={gatheringState.log} />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>

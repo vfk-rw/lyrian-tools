@@ -45,7 +45,8 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
         declarativeAction.id,
         diceCost,
         nodePointsCost,
-        luckyPointsCost
+        luckyPointsCost,
+        declarativeAction.is_rapid
       );
       
       // Check if the action was actually executed (costs were applied)
