@@ -204,7 +204,129 @@ describe('Gathering Simulator Integration Tests', () => {
     expect(updatedState.normalYield).toBe(1000); // 500 * 2
     expect(updatedState.luckyYield).toBe(1000); // 500 * 2
   });
-  
+
+  // Specific node variation tests
+  it('applies Barren Node variation to remove rare yield', () => {
+    const barrenState = createGatheringState({
+      name: 'Barren Test Node', type: 'ore', hp: 3,
+      nodePoints: 40, luckyPoints: 15,
+      yield: 100, yieldType: 'item',
+      luckyYield: 50, luckyYieldType: 'rare',
+      variations: ['barren']
+    });
+    const barrenVar = jsonNodeVariations['barren'];
+    const updated = barrenVar.applyEffect(barrenState);
+    expect(updated.luckyYield).toBe(0);
+    expect(updated.normalYield).toBe(barrenState.normalYield);
+  });
+
+  it('Arcane Node swaps NP and LP gains for Basic Strike', () => {
+    jest.spyOn(utils, 'rollD10').mockReturnValue(4);
+    const arcaneState = createGatheringState({
+      name: 'Arcane Test Node', type: 'ore', hp: 3,
+      nodePoints: 40, luckyPoints: 15,
+      yield: 100, yieldType: 'item',
+      luckyYield: 50, luckyYieldType: 'rare',
+      variations: ['arcane']
+    });
+    arcaneState.currentNP = 0;
+    arcaneState.currentLP = 0;
+    const after = jsonGatheringActions['basic-strike'].effect(arcaneState);
+    // Should add to LP instead of NP
+    expect(after.currentLP).toBe(4 + arcaneState.gatheringSkill);
+    expect(after.currentNP).toBe(0);
+  });
+
+  it('Volatile Node clamps rolls: 1-5 to 1, 6-10 to 10 on Basic Strike', () => {
+    // Roll 3 -> becomes 1
+    jest.spyOn(utils, 'rollD10').mockReturnValueOnce(3);
+    let volState = createGatheringState({
+      name: 'Volatile Test Node', type: 'ore', hp: 3,
+      nodePoints: 40, luckyPoints: 15,
+      yield: 100, yieldType: 'item',
+      luckyYield: 50, luckyYieldType: 'rare',
+      variations: ['volatile']
+    });
+    const afterLow = jsonGatheringActions['basic-strike'].effect(volState);
+    expect(afterLow.currentNP).toBe(1 + volState.gatheringSkill);
+    // Roll 8 -> becomes 10
+    jest.spyOn(utils, 'rollD10').mockReturnValueOnce(8);
+    volState = createGatheringState({ ...volState, currentNP: 0 });
+    const afterHigh = jsonGatheringActions['basic-strike'].effect(volState);
+    expect(afterHigh.currentNP).toBe(10 + volState.gatheringSkill);
+  });
+
+  it('Deep Node doubles lucky yield only on last HP', () => {
+    const deepVar = jsonNodeVariations['deep'];
+    const base = createGatheringState({
+      name: 'Deep Test Node', type: 'ore', hp: 2,
+      nodePoints: 40, luckyPoints: 15,
+      yield: 100, yieldType: 'item',
+      luckyYield: 50, luckyYieldType: 'rare',
+      variations: ['deep']
+    });
+    // Not last HP
+    base.nodeHP = 2;
+    const notLast = deepVar.applyEffect(base);
+    expect(notLast.luckyYield).toBe(50);
+    // Last HP
+    base.nodeHP = 1;
+    const last = deepVar.applyEffect(base);
+    expect(last.luckyYield).toBe(50 * 2);
+  });
+
+  it('Hardened Node doubles tool bonus', () => {
+    const hardState = createGatheringState({
+      name: 'Hardened Test Node', type: 'ore', hp: 3,
+      nodePoints: 40, luckyPoints: 15,
+      yield: 100, yieldType: 'item',
+      luckyYield: 50, luckyYieldType: 'rare',
+      variations: ['hardened']
+    });
+    hardState.toolBonus = 3;
+    const updated = jsonNodeVariations['hardened'].applyEffect(hardState);
+    expect(updated.toolBonus).toBe(6);
+  });
+
+  it('Alloy Node adjusts yields as specified', () => {
+    const allyState = createGatheringState({
+      name: 'Alloy Test Node', type: 'ore', hp: 3,
+      nodePoints: 40, luckyPoints: 15,
+      yield: 200, yieldType: 'item',
+      luckyYield: 100, luckyYieldType: 'rare',
+      variations: ['alloy']
+    });
+    const updated = jsonNodeVariations['alloy'].applyEffect(allyState);
+    expect(updated.normalYield).toBe(200 * 0.5);
+    expect(updated.luckyYield).toBe(100 * 2);
+  });
+
+  it('Obscured Node variation reduces available dice by 1', () => {
+    const obsState = createGatheringState({
+      name: 'Obscured Test Node', type: 'ore', hp: 3,
+      nodePoints: 40, luckyPoints: 15,
+      yield: 100, yieldType: 'item',
+      luckyYield: 50, luckyYieldType: 'rare',
+      variations: ['obscured']
+    });
+    const obscured = jsonNodeVariations['obscured'];
+    const updated = obscured.applyEffect(obsState);
+    expect(updated.diceRemaining).toBe(initialGatheringState.diceRemaining - 1);
+  });
+
+  it('Exposed Node variation increases available dice by 1', () => {
+    const expState = createGatheringState({
+      name: 'Exposed Test Node', type: 'ore', hp: 3,
+      nodePoints: 40, luckyPoints: 15,
+      yield: 100, yieldType: 'item',
+      luckyYield: 50, luckyYieldType: 'rare',
+      variations: ['exposed']
+    });
+    const exposedVar = jsonNodeVariations['exposed'];
+    const updatedExp = exposedVar.applyEffect(expState);
+    expect(updatedExp.diceRemaining).toBe(initialGatheringState.diceRemaining + 1);
+  });
+
   describe('Complete gathering scenario', () => {
     // Test a full gathering sequence
     it('completes a successful node gathering with NP and LP', () => {

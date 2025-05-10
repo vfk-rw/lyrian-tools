@@ -51,6 +51,28 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
       // Execute declared effects
       const initialNP = afterCost.currentNP;
       const afterEffects = executeEffects(declarativeAction.effects, afterCost);
+      // Arcane Node variation: swap NP and LP gains
+      if (state.variations?.includes('arcane')) {
+        const beforeNP = afterCost.currentNP;
+        const beforeLP = afterCost.currentLP;
+        const deltaNP = afterEffects.currentNP - beforeNP;
+        const deltaLP = afterEffects.currentLP - beforeLP;
+        // Swap the points
+        const swappedLog = afterEffects.log.map(msg =>
+          msg.includes('Node Points') || msg.includes('Lucky Points')
+            ? msg
+                .replace(/Node Points/g, '<TMP>')
+                .replace(/Lucky Points/g, 'Node Points')
+                .replace(/<TMP>/g, 'Lucky Points')
+            : msg
+        );
+        return {
+          ...afterEffects,
+          currentNP: beforeNP + deltaLP,
+          currentLP: beforeLP + deltaNP,
+          log: swappedLog
+        };
+      }
       // Novice's Perseverance: redirect to LP if toggled
       if (
         declarativeAction.id === 'novices-perseverance' &&
