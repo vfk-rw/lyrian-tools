@@ -7,6 +7,7 @@ import type { DeclarativeGatheringAction } from '../schemas/action-schema';
 import { executeEffects } from './effect-interpreter';
 import { evaluateConditions } from './condition-interpreter';
 import { executeGatheringAction } from '../utils';
+import { completeGathering } from '../state';
 
 /**
  * Convert a declarative action into an executable action
@@ -36,11 +37,13 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
     
     // Create the effect function
     effect: (state: GatheringState) => {
-      // Prevent any actions after gathering ended
-      if (state.diceRemaining <= 0) return state;
+      // If no dice remain, finalize gathering immediately
+      if (state.diceRemaining <= 0) {
+        return completeGathering(state);
+      }
       
       // Apply costs and track action usage
-      const newState = executeGatheringAction(
+      const afterCost = executeGatheringAction(
         state,
         declarativeAction.id,
         diceCost,
@@ -49,11 +52,20 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
         declarativeAction.is_rapid
       );
       
-      // Check if the action was actually executed (costs were applied)
-      if (state === newState) return state;
+      // If action didn't apply, return unchanged
+      if (afterCost === state) {
+        return state;
+      }
       
-      // Execute effects
-      return executeEffects(declarativeAction.effects, newState);
+      // Execute any effects on the state
+      const afterEffects = executeEffects(declarativeAction.effects, afterCost);
+      
+      // If this was the last die, finalize gathering
+      if (afterEffects.diceRemaining <= 0) {
+        return completeGathering(afterEffects);
+      }
+      
+      return afterEffects;
     }
   };
 }
