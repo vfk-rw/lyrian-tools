@@ -52,6 +52,17 @@ export default function GatheringPage() {
     }
   }
 
+  // End the gathering attempt manually
+  function endGathering() {
+    if (isStarted && !isEnded) {
+      setGatheringState(prev => ({
+        ...prev,
+        log: [...prev.log, "Gathering ended."]
+      }));
+      setIsEnded(true);
+    }
+  }
+
   useEffect(() => {
     if (isStarted && !isEnded && gatheringState.diceRemaining <= 0) {
       setGatheringState(prev => ({
@@ -113,6 +124,9 @@ export default function GatheringPage() {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
+          <Button onClick={endGathering} disabled={!isStarted || isEnded} size="lg" className="gap-2">
+            End Gathering Attempt
+          </Button>
           {!isSetupValid && !isStarted && (
             <p className="text-sm text-amber-500 flex items-center ml-2">
               Please complete the setup before starting gathering.
@@ -127,10 +141,10 @@ export default function GatheringPage() {
         <div className="grid grid-cols-3 gap-4 p-4">
           <div className="col-span-1 space-y-4">
             <GatheringStatusPanel state={gatheringState} />
-            <GatheringResultsPanel state={gatheringState} setState={setGatheringState} />
+            <GatheringResultsPanel state={gatheringState} setState={setGatheringState} isStarted={isStarted} isEnded={isEnded} />
           </div>
           <div className="col-span-2 space-y-4">
-            <GatheringActionsPanel state={gatheringState} setState={setGatheringState} />
+            <GatheringActionsPanel state={gatheringState} setState={setGatheringState} isStarted={isStarted} />
             <GatheringLogPanel log={gatheringState.log} />
           </div>
         </div>

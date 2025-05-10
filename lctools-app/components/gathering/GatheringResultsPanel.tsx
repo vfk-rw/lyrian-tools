@@ -4,14 +4,16 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GatheringState } from '@/lib/gathering/types'; // Actual import
-import { initialGatheringState, completeGathering } from '@/lib/gathering/state'; // Actual imports
+import { initialGatheringState } from '@/lib/gathering/state'; // Actual imports
 
 interface GatheringResultsPanelProps {
   state: GatheringState;
-  setState: React.Dispatch<React.SetStateAction<GatheringState>>; 
+  setState: React.Dispatch<React.SetStateAction<GatheringState>>;
+  isStarted: boolean;
+  isEnded: boolean;
 }
 
-const GatheringResultsPanel: React.FC<GatheringResultsPanelProps> = ({ state, setState }) => {
+const GatheringResultsPanel: React.FC<GatheringResultsPanelProps> = ({ state, setState, isStarted, isEnded }) => {
   const { 
     success, 
     luckySuccess, 
@@ -23,13 +25,11 @@ const GatheringResultsPanel: React.FC<GatheringResultsPanelProps> = ({ state, se
     nodeHP
   } = state;
 
-  // Session is over if no dice, node HP depleted, or gathering was successful.
-  const isSessionOverOrSuccessful = diceRemaining <= 0 || nodeHP <= 0 || success; 
+  // Only show results after session has started and ended
+  if (!isStarted || !isEnded) {
+    return null;
+  }
 
-  const handleCompleteAttempt = () => {
-    const finalState = completeGathering(state); 
-    setState(finalState); 
-  };
 
   const handleResetSession = () => {
     // If node still has HP and wasn't successful, allow gathering again from the same node state (partially depleted)
@@ -46,22 +46,8 @@ const GatheringResultsPanel: React.FC<GatheringResultsPanelProps> = ({ state, se
         setState(initialGatheringState);
     }
   };
-  
-  // Show "End Gathering Attempt" button only if the session is ongoing and not yet successful.
-  if (!isSessionOverOrSuccessful) {
-    return (
-        <div className="mt-4">
-             <Button 
-                onClick={handleCompleteAttempt} 
-                className="w-full md:w-auto"
-            >
-                End Gathering Attempt
-            </Button>
-        </div>
-    );
-  }
 
-  // If the session is over (or was manually completed), show results.
+  // Once ended, show results.
   return (
     <Card className="mt-4">
       <CardHeader>

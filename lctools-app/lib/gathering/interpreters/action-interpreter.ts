@@ -7,7 +7,6 @@ import type { DeclarativeGatheringAction } from '../schemas/action-schema';
 import { executeEffects } from './effect-interpreter';
 import { evaluateConditions } from './condition-interpreter';
 import { executeGatheringAction } from '../utils';
-import { completeGathering } from '../state';
 
 /**
  * Convert a declarative action into an executable action
@@ -21,28 +20,23 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
     id: declarativeAction.id,
     name: declarativeAction.name,
     costText: declarativeAction.cost_text,
-    className: declarativeAction.class_name,
-    classLevel: declarativeAction.class_level,
-    diceCost: diceCost,
-    nodePointsCost: nodePointsCost,
-    luckyPointsCost: luckyPointsCost,
+    diceCost,
+    nodePointsCost,
+    luckyPointsCost,
     isRapid: declarativeAction.is_rapid,
     requiresPrerequisite: declarativeAction.requires_prerequisite,
     description: declarativeAction.description,
     
-    // Create the prerequisite function if needed
-    prerequisite: declarativeAction.conditions 
+    prerequisite: declarativeAction.conditions
       ? (state: GatheringState) => evaluateConditions(declarativeAction.conditions || [], state)
       : undefined,
-    
-    // Create the effect function
+
     effect: (state: GatheringState) => {
-      // If no dice remain, finalize gathering immediately
+      // Do nothing if out of dice
       if (state.diceRemaining <= 0) {
-        return completeGathering(state);
+        return state;
       }
-      
-      // Apply costs and track action usage
+      // Apply costs
       const afterCost = executeGatheringAction(
         state,
         declarativeAction.id,
@@ -51,20 +45,29 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
         luckyPointsCost,
         declarativeAction.is_rapid
       );
-      
-      // If action didn't apply, return unchanged
       if (afterCost === state) {
         return state;
       }
-      
-      // Execute any effects on the state
+      // Execute declared effects
+      const initialNP = afterCost.currentNP;
       const afterEffects = executeEffects(declarativeAction.effects, afterCost);
-      
-      // If this was the last die, finalize gathering
-      if (afterEffects.diceRemaining <= 0) {
-        return completeGathering(afterEffects);
+      // Novice's Perseverance: redirect to LP if toggled
+      if (
+        declarativeAction.id === 'novices-perseverance' &&
+        afterEffects.perseveranceTarget === 'LP'
+      ) {
+        const added = afterEffects.currentNP - initialNP;
+        return {
+          ...afterEffects,
+          currentNP: initialNP,
+          currentLP: afterEffects.currentLP + added,
+          log: afterEffects.log.map(msg =>
+            msg.includes("Used Novice's Perseverance")
+              ? msg.replace('Node Points', 'Lucky Points')
+              : msg
+          )
+        };
       }
-      
       return afterEffects;
     }
   };
@@ -73,13 +76,13 @@ export function createExecutableAction(declarativeAction: DeclarativeGatheringAc
 /**
  * Convert an array of declarative actions into executable actions
  */
-export function createExecutableActions(declarativeActions: DeclarativeGatheringAction[]): GatheringActions {
+export function createExecutableActions(
+  declarativeActions: DeclarativeGatheringAction[]
+): GatheringActions {
   const result: GatheringActions = {};
-  
-  for (const declarativeAction of declarativeActions) {
-    result[declarativeAction.id] = createExecutableAction(declarativeAction);
+  for (const action of declarativeActions) {
+    result[action.id] = createExecutableAction(action);
   }
-  
   return result;
 }
 
@@ -90,22 +93,7 @@ export function loadActionsFromJson(json: string): GatheringActions {
   try {
     const declarativeActions = JSON.parse(json) as DeclarativeGatheringAction[];
     return createExecutableActions(declarativeActions);
-  } catch (error) {
-    console.error('Error loading actions from JSON:', error);
-    return {};
-  }
-}
-
-/**
- * Load actions from a JSON file
- */
-export async function loadActionsFromFile(path: string): Promise<GatheringActions> {
-  try {
-    const response = await fetch(path);
-    const json = await response.text();
-    return loadActionsFromJson(json);
-  } catch (error) {
-    console.error(`Error loading actions from file ${path}:`, error);
+  } catch {
     return {};
   }
 }

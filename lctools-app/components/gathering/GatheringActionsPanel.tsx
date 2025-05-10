@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -11,9 +12,10 @@ import { jsonGatheringActions } from '@/lib/gathering/data-loader'; // Actual im
 interface GatheringActionsPanelProps {
   state: GatheringState;
   setState: React.Dispatch<React.SetStateAction<GatheringState>>;
+  isStarted: boolean;
 }
 
-const GatheringActionsPanel: React.FC<GatheringActionsPanelProps> = ({ state, setState }) => {
+const GatheringActionsPanel: React.FC<GatheringActionsPanelProps> = ({ state, setState, isStarted }) => {
   
   const isActionUsable = (action: GatheringAction): boolean => {
     if (!action) return false;
@@ -30,16 +32,15 @@ const GatheringActionsPanel: React.FC<GatheringActionsPanelProps> = ({ state, se
   };
 
   const handleActionClick = (actionId: string) => {
+    // ignore clicks before session starts
+    if (!isStarted) return;
     const action = jsonGatheringActions[actionId];
     if (action && isActionUsable(action)) {
-      // The 'effect' function on the action object should return the new state
       if (typeof action.effect === 'function') {
-        const newState = action.effect(state);
+        const newState = action.effect(state, state.perseveranceTarget);
         setState(newState);
       } else {
         console.error(`Action ${actionId} does not have a valid effect function.`);
-        // Fallback or error state update if needed
-        // For now, just log and don't update state
       }
     }
   };
@@ -56,14 +57,23 @@ const GatheringActionsPanel: React.FC<GatheringActionsPanelProps> = ({ state, se
           {Object.values(actionsToDisplay).map((action: GatheringAction) => (
             <Tooltip key={action.id} delayDuration={300}>
               <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start mb-2"
-                  onClick={() => handleActionClick(action.id)}
-                  disabled={!isActionUsable(action)}
-                >
-                  {action.name} ({action.costText})
-                </Button>
+                <div className="w-full mb-2 flex items-center space-x-2">
+                  {/* Show toggle only for Novice's Perseverance */}
+                  {action.id === 'novices-perseverance' && (
+                    <ToggleGroup type="single" value={state.perseveranceTarget} onValueChange={value => setState(prev => ({ ...prev, perseveranceTarget: value as 'NP' | 'LP' }))} className="flex-shrink-0">
+                      <ToggleGroupItem value="NP">NP</ToggleGroupItem>
+                      <ToggleGroupItem value="LP">LP</ToggleGroupItem>
+                    </ToggleGroup>
+                  )}
+                  <Button
+                    variant="outline"
+                    className="flex-1 justify-start"
+                    onClick={() => handleActionClick(action.id)}
+                    disabled={!isStarted || !isActionUsable(action)}
+                  >
+                    {action.name} ({action.costText})
+                  </Button>
+                </div>
               </TooltipTrigger>
               <TooltipContent side="right">
                 <p>{action.description}</p>

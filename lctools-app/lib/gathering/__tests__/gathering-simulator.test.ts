@@ -1,6 +1,7 @@
 import { jsonGatheringActions, jsonNodeVariations } from '../data-loader';
 import { initialGatheringState, createGatheringState, completeGathering } from '../state';
 import * as utils from '../utils';
+import type { GatheringState } from '../types';
 
 describe('Gathering Simulator Integration Tests', () => {
   beforeEach(() => {
@@ -118,6 +119,32 @@ describe('Gathering Simulator Integration Tests', () => {
     // Can't use it twice
     const result = actions['novices-perseverance'].effect(state);
     expect(result.usedActions).toContain('novices-perseverance');
+  });
+
+  it('Novice\'s Perseverance applies to Lucky Points when toggled to LP', () => {
+    // Mock rollD10 to return 3 then 8
+    jest.spyOn(utils, 'rollD10')
+      .mockReturnValueOnce(3)
+      .mockReturnValueOnce(8);
+
+    const actions = jsonGatheringActions;
+    let state: GatheringState = {
+      ...initialGatheringState,
+      expertise: 2,
+      toolBonus: 1,
+      perseveranceTarget: 'LP'
+    };
+
+    state = actions['novices-perseverance'].effect(state);
+
+    // With highRoll=8 + expertise + toolBonus => 8 + 2 + 1 = 11 LP
+    expect(state.currentLP).toBe(11);
+    expect(state.currentNP).toBe(0);
+    expect(state.log).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining("Used Novice's Perseverance")
+      ])
+    );
   });
   
   it('Back To Basics converts LP to NP up to the max', () => {

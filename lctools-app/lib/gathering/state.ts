@@ -29,6 +29,7 @@ export const initialGatheringState: GatheringState = {
   variations: [],
   bonuses: [],
   log: [],
+  perseveranceTarget: 'NP',
   
   // Result tracking
   success: false,
@@ -65,6 +66,7 @@ export function createGatheringState(node: ResourceNode, skill: number = 5, expe
     variations: node.variations || [],
     bonuses: [],
     log: [],
+    perseveranceTarget: 'NP',
     
     // Result tracking
     success: false,

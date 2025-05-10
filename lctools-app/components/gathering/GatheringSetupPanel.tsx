@@ -82,6 +82,12 @@ const GatheringSetupPanel: React.FC<GatheringSetupPanelProps> = ({ setGatheringS
                 ))}
               </SelectContent>
             </Select>
+            {/* Description for selected variation */}
+            {jsonNodeVariations[variation] && (
+              <p className="text-sm text-muted-foreground mt-1">
+                {jsonNodeVariations[variation].description}
+              </p>
+            )}
           </div>
           <div>
             <Label htmlFor="nodeHP">Node HP</Label>

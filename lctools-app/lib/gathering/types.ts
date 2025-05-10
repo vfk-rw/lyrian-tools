@@ -53,6 +53,10 @@ export interface GatheringState {
   variations: string[];
   bonuses: string[];
   log: string[];
+  /**
+   * Which pool Novice's Perseverance should apply to: 'NP' (node points) or 'LP' (lucky points)
+   */
+  perseveranceTarget: 'NP' | 'LP';
   
   // Result tracking
   success: boolean;
