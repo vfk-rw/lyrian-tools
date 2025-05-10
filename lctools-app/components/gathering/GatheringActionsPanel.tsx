@@ -60,11 +60,18 @@ const GatheringActionsPanel: React.FC<GatheringActionsPanelProps> = ({ state, se
       </CardHeader>
       <CardContent className="space-y-2">
         <TooltipProvider>
-          <ToggleGroup type="single" value={state.perseveranceTarget} onValueChange={value => setState(prev => ({ ...prev, perseveranceTarget: value as 'NP' | 'LP' }))} className="mb-2">
-            <ToggleGroupItem value="NP">NP</ToggleGroupItem>
-            <ToggleGroupItem value="LP">LP</ToggleGroupItem>
-          </ToggleGroup>
-  {state.storedRoll !== undefined && (
+          <div className="mb-2 flex items-center space-x-2">
+            <span className="text-sm text-muted-foreground">For skills with NP/LP options</span>
+            <ToggleGroup
+              type="single"
+              value={state.perseveranceTarget}
+              onValueChange={value => setState(prev => ({ ...prev, perseveranceTarget: value as 'NP' | 'LP' }))}
+            >
+              <ToggleGroupItem value="NP">NP</ToggleGroupItem>
+              <ToggleGroupItem value="LP">LP</ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+          {state.storedRoll !== undefined && (
     <div className="mb-2 flex items-center">
       <Checkbox
         checked={useStoredRoll}

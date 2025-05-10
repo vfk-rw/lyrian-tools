@@ -28,6 +28,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 import { PlayIcon, RefreshCcwIcon } from "lucide-react";
+import { jsonNodeVariations } from "@/lib/gathering/data-loader";
 
 export default function GatheringPage() {
   const [gatheringState, setGatheringState] = useState<GatheringState>(initialGatheringState);
@@ -44,11 +45,19 @@ export default function GatheringPage() {
 
   function startGathering() {
     if (!isStarted) {
-      setIsStarted(true);
-      setGatheringState(prev => ({
-        ...prev,
-        log: [...prev.log, "Gathering began."]
-      }));
+        setIsStarted(true);
+        setGatheringState(prev => {
+            // Log gathering start
+            let newState = { ...prev, log: [...prev.log, "Gathering began."] };
+            // Apply node variation effects
+            for (const variationId of prev.variations) {
+                const variation = jsonNodeVariations[variationId];
+                if (variation) {
+                    newState = variation.applyEffect(newState);
+                }
+            }
+            return newState;
+        });
     }
   }
 
