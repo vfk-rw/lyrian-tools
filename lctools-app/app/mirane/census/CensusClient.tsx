@@ -1,10 +1,7 @@
 'use client'
 import React, { useState, useMemo, useEffect } from 'react'
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartLegend,
-} from '@/components/ui/chart'
+import { Badge } from '@/components/ui/badge'
+import { ChartContainer, ChartTooltip, ChartLegend } from '@/components/ui/chart'
 import {
   PieChart,
   Pie,
@@ -24,475 +21,240 @@ import {
   TableCell,
 } from '@/components/ui/table'
 import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { FileSpreadsheet } from 'lucide-react'
 
 const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#64748B']
 
-export default function CensusClient({
-  data,
-}: {
-  data: Array<{
-    id: string
-    name: string
-    race: string
-    subRace: string
-    spiritCore: number
-    status: string
-    sheetUrl: string
-    classes: { class_name: string; class_level: number }[]
-  }>
-}) {
+interface ClassInfo {
+  name: string
+  tier: number
+}
+
+interface Row {
+  id: string
+  name: string
+  race: string
+  subRace: string
+  spiritCore: number
+  sheetUrl: string
+  classes: ClassInfo[]
+}
+
+export default function CensusClient({ data }: { data: Row[] }) {
   const [nameFilter, setNameFilter] = useState('')
   const [raceFilter, setRaceFilter] = useState('all')
-  const [drillRace, setDrillRace] = useState<string | null>(null)
+  const [classFilter, setClassFilter] = useState<string[]>([])
   const [showRaceChart, setShowRaceChart] = useState(true)
   const [showSpiritChart, setShowSpiritChart] = useState(true)
-  const [showClassChart, setShowClassChart] = useState(true)
-  const [classLevelClass, setClassLevelClass] = useState('all')
-  const [classLevelOp, setClassLevelOp] = useState('>')
-  const [classLevelValue, setClassLevelValue] = useState('')
 
-  // Load chart visibility from localStorage
   useEffect(() => {
-    setShowRaceChart(localStorage.getItem('census_showRaceChart') !== 'false')
-    setShowSpiritChart(localStorage.getItem('census_showSpiritChart') !== 'false')
-    setShowClassChart(localStorage.getItem('census_showClassChart') !== 'false')
+    const sr = localStorage.getItem('census_showRaceChart')
+    const ss = localStorage.getItem('census_showSpiritChart')
+    if (sr !== null) setShowRaceChart(sr === 'true')
+    if (ss !== null) setShowSpiritChart(ss === 'true')
   }, [])
 
-  // Persist chart visibility to localStorage
   useEffect(() => {
     localStorage.setItem('census_showRaceChart', showRaceChart ? 'true' : 'false')
-  }, [showRaceChart])
-  useEffect(() => {
     localStorage.setItem('census_showSpiritChart', showSpiritChart ? 'true' : 'false')
-  }, [showSpiritChart])
-  useEffect(() => {
-    localStorage.setItem('census_showClassChart', showClassChart ? 'true' : 'false')
-  }, [showClassChart])
+  }, [showRaceChart, showSpiritChart])
 
-  // Helper to normalize blank/null values
   function safe(val: unknown, fallback = 'Unknown'): string {
-    if (val === null || val === undefined || (typeof val === 'string' && val.trim() === '')) return fallback
+    if (val == null || (typeof val === 'string' && !val.trim())) return fallback
     return String(val)
   }
 
-  // For class-level filtering, get all unique class names
-  const allClassNames = useMemo(() => Array.from(new Set(data.flatMap((d) => d.classes.map((c) => c.class_name)))), [data])
-
-  // Filtering logic
-  const filtered = useMemo(() =>
-    data.filter((d) => {
-      const nameMatch = safe(d.name, '').toLowerCase().includes(nameFilter.toLowerCase())
-      const raceMatch = raceFilter !== 'all' ? safe(d.race) === raceFilter : true
-      // Old class filter (by name only)
-      const classNameMatch = true
-      // New class level filter
-      let classLevelMatch = true
-      if (classLevelClass !== 'all' && classLevelValue !== '') {
-        const classObj = d.classes.find((c) => c.class_name === classLevelClass)
-        if (!classObj) return false
-        const val = parseInt(classLevelValue)
-        if (isNaN(val)) return false
-        if (classLevelOp === '>') classLevelMatch = classObj.class_level > val
-        else if (classLevelOp === '<') classLevelMatch = classObj.class_level < val
-        else classLevelMatch = classObj.class_level === val
-      }
-      return nameMatch && raceMatch && classNameMatch && classLevelMatch
-    }),
-    [data, nameFilter, raceFilter, classLevelClass, classLevelOp, classLevelValue]
+  const allClasses = useMemo(
+    () => Array.from(new Set(data.flatMap((d) => d.classes.map((c) => c.name)))).sort((a, b) => a.localeCompare(b)),
+    [data]
   )
 
-  const statusCounts = useMemo(
-    () =>
-      Object.entries(
-        filtered.reduce((acc, d) => {
-          acc[d.status] = (acc[d.status] || 0) + 1
-          return acc
-        }, {} as Record<string, number>)
-      ),
+  const filtered = useMemo(() => {
+    return data.filter((d) => {
+      const nameMatch = safe(d.name).toLowerCase().includes(nameFilter.toLowerCase())
+      const raceMatch = raceFilter === 'all' || d.race === raceFilter
+      const classMatch =
+        classFilter.length === 0 ||
+        d.classes.some((c) => classFilter.includes(c.name))
+      return nameMatch && raceMatch && classMatch
+    })
+  }, [data, nameFilter, raceFilter, classFilter])
+
+  const raceCounts = useMemo(() =>
+    Object.entries(
+      filtered.reduce((acc, d) => {
+        acc[d.race] = (acc[d.race] || 0) + 1
+        return acc
+      }, {} as Record<string, number>)
+    ),
     [filtered]
   )
 
-  const raceCounts = useMemo(
-    () =>
-      Object.entries(
-        filtered.reduce((acc, d) => {
-          acc[d.race] = (acc[d.race] || 0) + 1
-          return acc
-        }, {} as Record<string, number>)
-      ),
-    [filtered]
-  )
-
-  const subRaceCounts = useMemo(() => {
-    if (!drillRace) return []
-    return Object.entries(
-      filtered
-        .filter((d) => d.race === drillRace)
-        .reduce((acc, d) => {
-          acc[d.subRace] = (acc[d.subRace] || 0) + 1
-          return acc
-        }, {} as Record<string, number>)
-    )
-  }, [filtered, drillRace])
-
-  // Spirit core histogram binning: bins of 100, from 800 to 2000
-  const spiritBins = Array.from({ length: ((2000 - 800) / 100) + 1 }, (_, i) => 800 + i * 100)
-  const spiritCountsBinned = spiritBins.map((binStart) => {
-    const binEnd = binStart + 99
-    const count = filtered.filter(d => d.spiritCore >= binStart && d.spiritCore <= binEnd).length
-    return { bin: `${binStart}-${binEnd}`, count }
-  })
-
-  // Reverse cumulative spirit core chart data
-  const spiritThresholds = [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000]
-  const spiritReverseCumulative = useMemo(() => {
-    const under1000 = filtered.filter(d => d.spiritCore < 1000).length
-    const result = [
-      { label: '<1000', count: under1000 }
-    ]
-    for (const threshold of spiritThresholds) {
-      result.push({
-        label: `≥${threshold}`,
-        count: filtered.filter(d => d.spiritCore >= threshold).length
-      })
-    }
-    return result
+  const spiritHistogram = useMemo(() => {
+    const bins = Array.from({ length: 12 }, (_, i) => 800 + i * 100)
+    return bins.map((start) => {
+      const end = start + 99
+      const count = filtered.filter((d) => d.spiritCore >= start && d.spiritCore <= end).length
+      return { bin: `${start}-${end}`, count }
+    })
   }, [filtered])
 
-  const allClasses = useMemo(() => filtered.flatMap((d) => d.classes), [filtered])
-  const classCounts = useMemo(
-    () =>
-      Object.entries(
-        allClasses.reduce((acc, c) => {
-          acc[c.class_name] = (acc[c.class_name] || 0) + 1
-          return acc
-        }, {} as Record<string, number>)
-      ),
-    [allClasses]
-  )
+  const uniqueRaces = Array.from(new Set(data.map((d) => d.race)))
 
-  const races = Array.from(new Set(data.map((d) => safe(d.race)))).filter(Boolean)
+  const [sortBy, setSortBy] = useState<keyof Row>('name')
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
 
-  // Sorting state
-  const [sortBy, setSortBy] = useState<'name'|'race'|'subRace'|'spiritCore'|'status'|'classes'>("name")
-  const [sortDir, setSortDir] = useState<'asc'|'desc'>("asc")
-
-  // Sorting handler
-  function handleSort(col: typeof sortBy) {
-    if (sortBy === col) {
-      setSortDir((prev) => (prev === 'asc' ? 'desc' : 'asc'))
-    } else {
-      setSortBy(col)
-      setSortDir('asc')
-    }
-  }
-
-  // Fix type for aVal and bVal
   const sorted = useMemo(() => {
-    const sortedData = [...filtered]
-    sortedData.sort((a, b) => {
-      let aVal: string | number | undefined, bVal: string | number | undefined
-      switch (sortBy) {
-        case 'name': aVal = a.name; bVal = b.name; break;
-        case 'race': aVal = a.race; bVal = b.race; break;
-        case 'subRace': aVal = a.subRace; bVal = b.subRace; break;
-        case 'spiritCore': aVal = a.spiritCore; bVal = b.spiritCore; break;
-        case 'status': aVal = a.status; bVal = b.status; break;
-        case 'classes':
-          aVal = a.classes.map(c => c.class_name).join(', ')
-          bVal = b.classes.map(c => c.class_name).join(', ')
-          break;
-        default: aVal = a.name; bVal = b.name
+    const arr = [...filtered]
+    arr.sort((a, b) => {
+      let v: number
+      if (sortBy === 'spiritCore') {
+        v = a.spiritCore - b.spiritCore
+      } else if (sortBy === 'classes') {
+        v = a.classes.map((c) => c.name).join(', ').localeCompare(b.classes.map((c) => c.name).join(', '))
+      } else {
+        v = String(a[sortBy]).localeCompare(String(b[sortBy]))
       }
-      if (aVal == null) return 1
-      if (bVal == null) return -1
-      if (typeof aVal === 'number' && typeof bVal === 'number') {
-        return sortDir === 'asc' ? aVal - bVal : bVal - aVal
-      }
-      return sortDir === 'asc' ? String(aVal).localeCompare(String(bVal)) : String(bVal).localeCompare(String(aVal))
+      return sortDir === 'asc' ? v : -v
     })
-    return sortedData
+    return arr
   }, [filtered, sortBy, sortDir])
 
   return (
-    <div className="space-y-8 p-4">
-      {/* Status counts summary */}
-      <div className="flex flex-wrap gap-6 items-center justify-center mb-4">
-        {statusCounts.map(([status, count]) => (
-          <div key={status} className="px-4 py-2 rounded bg-muted border text-base font-medium">
-            <span className="capitalize">{status}</span>: {count}
-          </div>
-        ))}
-      </div>
-      {/* Chart toggles */}
-      <div className="flex gap-2 justify-center mb-4">
+    <div className="space-y-6 p-4">
+      <div className="flex gap-2">
         <button
-          className={`px-3 py-1 rounded border transition-colors ${
-            showRaceChart 
-              ? 'bg-primary/10 border-primary/50 text-primary dark:bg-primary/20' 
-              : 'bg-muted border-muted-foreground/20 text-muted-foreground hover:bg-muted/80'
-          }`}
+          className={`px-3 py-1 border rounded ${showRaceChart ? 'bg-primary/10' : 'bg-muted'}`}
           onClick={() => setShowRaceChart((v) => !v)}
         >
-          Race Distribution
+          Race
         </button>
         <button
-          className={`px-3 py-1 rounded border transition-colors ${
-            showSpiritChart 
-              ? 'bg-primary/10 border-primary/50 text-primary dark:bg-primary/20' 
-              : 'bg-muted border-muted-foreground/20 text-muted-foreground hover:bg-muted/80'
-          }`}
+          className={`px-3 py-1 border rounded ${showSpiritChart ? 'bg-primary/10' : 'bg-muted'}`}
           onClick={() => setShowSpiritChart((v) => !v)}
         >
-          Spirit Core Histogram
-        </button>
-        <button
-          className={`px-3 py-1 rounded border transition-colors ${
-            showClassChart 
-              ? 'bg-primary/10 border-primary/50 text-primary dark:bg-primary/20' 
-              : 'bg-muted border-muted-foreground/20 text-muted-foreground hover:bg-muted/80'
-          }`}
-          onClick={() => setShowClassChart((v) => !v)}
-        >
-          Class Distribution
+          Spirit
         </button>
       </div>
-      {/* Responsive grid for charts - auto-fit, minmax for expansion */}
-      <div
-        className="grid gap-8 w-full max-w-7xl mx-auto mb-8"
-        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}
-      >
+      <div className="flex gap-4">
         {showRaceChart && (
-          <Card className="border shadow w-full min-w-[350px]">
-            <div className="aspect-[16/9] flex flex-col">
-              <CardHeader>
-                <CardTitle>Race Distribution</CardTitle>
-              </CardHeader>
-              <CardContent className="flex-1 flex flex-col justify-center" style={{ minHeight: 0 }}>
-                <div className="flex-1 flex flex-row" style={{ height: '100%' }}>
-                  <ChartContainer id="race" config={{}}>
-                    <PieChart width={undefined} height={undefined} style={{ width: '100%', height: '100%' }}>
-                      <Pie
-                        data={
-                          !drillRace
-                            ? raceCounts.map(([name, value]) => ({ name, value }))
-                            : subRaceCounts.map(([name, value]) => ({ name, value }))
-                        }
-                        dataKey="value"
-                        nameKey="name"
-                        innerRadius={40}
-                        outerRadius={80}
-                        label
-                        onClick={(entry) => {
-                          if (!drillRace) setDrillRace(entry.name)
-                        }}
-                      >
-                        {( !drillRace ? raceCounts : subRaceCounts ).map((_, i) => (
-                          <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <ChartTooltip />
-                      <ChartLegend layout="vertical" align="right" verticalAlign="middle" />
-                    </PieChart>
-                  </ChartContainer>
-                  {/* Side legend, scrollable if too tall */}
-                  {/* The legend is now inside PieChart, so this div is just for spacing if needed */}
-                </div>
-                {drillRace && (
-                  <button
-                    className="text-sm text-blue-600 hover:underline mt-2"
-                    onClick={() => setDrillRace(null)}
+          <Card className="border shadow overflow-auto" style={{ resize: 'both', minWidth: '300px', minHeight: '200px' }}>
+            <CardHeader><CardTitle>Race Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <ChartContainer id="race" config={{}}>
+                <PieChart width={300} height={200}>
+                  <Pie
+                    data={raceCounts.map(([name, count]) => ({ name, value: count }))}
+                    dataKey="value"
+                    nameKey="name"
+                    innerRadius={20}
+                    outerRadius={40}
                   >
-                    Back to races
-                  </button>
-                )}
-              </CardContent>
-            </div>
+                    {raceCounts.map((_, i) => (
+                      <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <ChartTooltip />
+                  <ChartLegend />
+                </PieChart>
+              </ChartContainer>
+            </CardContent>
           </Card>
         )}
         {showSpiritChart && (
-          <Card className="border shadow w-full min-w-[350px]">
-            <div className="aspect-[16/9] flex flex-col">
-              <CardHeader>
-                <CardTitle>Spirit Core Histogram</CardTitle>
-              </CardHeader>
-              <CardContent className="flex-1 flex flex-col justify-center" style={{ minHeight: 0 }}>
-                <div className="flex-1" style={{ height: '100%' }}>
-                  <ChartContainer id="spirit" config={{}}>
-                    <BarChart data={spiritCountsBinned} width={undefined} height={undefined} style={{ width: '100%', height: '100%' }}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="bin" label={{ value: 'Spirit Core', position: 'insideBottom', offset: -5 }} />
-                      <YAxis allowDecimals={false} label={{ value: 'Count', angle: -90, position: 'insideLeft' }} />
-                      <Bar dataKey="count" fill={COLORS[1]} />
-                      <ChartTooltip />
-                    </BarChart>
-                  </ChartContainer>
-                </div>
-                {/* Reverse cumulative bar chart */}
-                <div className="flex-1 mt-8" style={{ height: '100%' }}>
-                  <ChartContainer id="spirit-cumulative" config={{}}>
-                    <BarChart data={spiritReverseCumulative} width={undefined} height={220} style={{ width: '100%' }}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="label" label={{ value: 'Spirit Core', position: 'insideBottom', offset: -5 }} />
-                      <YAxis allowDecimals={false} label={{ value: 'Count', angle: -90, position: 'insideLeft' }} />
-                      <Bar dataKey="count" fill={COLORS[2]} />
-                      <ChartTooltip />
-                    </BarChart>
-                  </ChartContainer>
-                </div>
-              </CardContent>
-            </div>
-          </Card>
-        )}
-        {showClassChart && (
-          <Card className="border shadow w-full min-w-[350px]">
-            <div className="aspect-[16/9] flex flex-col">
-              <CardHeader>
-                <CardTitle>Class Distribution</CardTitle>
-              </CardHeader>
-              <CardContent className="flex-1 flex flex-col justify-center" style={{ minHeight: 0 }}>
-                <div className="flex-1 flex flex-row" style={{ height: '100%' }}>
-                  <ChartContainer id="class" config={{}}>
-                    <PieChart width={undefined} height={undefined} style={{ width: '100%', height: '100%' }}>
-                      <Pie
-                        data={classCounts.map(([name, value]) => ({ name, value }))}
-                        dataKey="value"
-                        nameKey="name"
-                        innerRadius={40}
-                        outerRadius={80}
-                        label
-                      >
-                        {classCounts.map((_, i) => (
-                          <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <ChartTooltip />
-                      <ChartLegend layout="vertical" align="right" verticalAlign="middle" wrapperStyle={{ maxHeight: '80%', overflowY: 'auto', minWidth: 120 }} />
-                    </PieChart>
-                  </ChartContainer>
-                </div>
-              </CardContent>
-            </div>
+          <Card className="border shadow overflow-auto" style={{ resize: 'both', minWidth: '300px', minHeight: '200px' }}>
+            <CardHeader><CardTitle>Spirit Core Histogram</CardTitle></CardHeader>
+            <CardContent>
+              <ChartContainer id="spirit" config={{}}>
+                <BarChart data={spiritHistogram} width={300} height={200}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="bin" />
+                  <YAxis allowDecimals={false} />
+                  <Bar dataKey="count" fill={COLORS[1]} />
+                  <ChartTooltip />
+                </BarChart>
+              </ChartContainer>
+            </CardContent>
           </Card>
         )}
       </div>
-      {/* Filters and Data Table */}
-      <div className="space-y-4">
-        <div className="flex items-center space-x-4">
-          <Input
-            placeholder="Filter by name"
-            value={nameFilter}
-            onChange={(e) => setNameFilter(e.target.value)}
-          />
-          <Select value={raceFilter} onValueChange={setRaceFilter}>
-            <SelectTrigger className="w-40">
-              {raceFilter === 'all' ? 'All races' : raceFilter}
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              {races.filter(Boolean).map((r) => (
-                <SelectItem key={r} value={r}>
-                  {r}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          {/* Class Level Filter UI */}
-          <Select value={classLevelClass} onValueChange={setClassLevelClass}>
-            <SelectTrigger className="w-40">
-              {classLevelClass === 'all' ? 'Class (exp filter)' : classLevelClass}
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Class (exp filter)</SelectItem>
-              {allClassNames.map((c) => (
-                <SelectItem key={c} value={c}>{c}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select value={classLevelOp} onValueChange={setClassLevelOp}>
-            <SelectTrigger className="w-20">{classLevelOp}</SelectTrigger>
-            <SelectContent>
-              <SelectItem value=">">&gt;</SelectItem>
-              <SelectItem value="=">=</SelectItem>
-              <SelectItem value="<">&lt;</SelectItem>
-            </SelectContent>
-          </Select>
-          <Input
-            type="number"
-            placeholder="Exp"
-            className="w-24"
-            value={classLevelValue}
-            onChange={e => setClassLevelValue(e.target.value)}
-            min={0}
-          />
-        </div>
-
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>
-                <button className="flex items-center gap-1" onClick={() => handleSort('name')}>
-                  Name
-                  {sortBy==='name' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
+      <div className="flex flex-wrap gap-2">
+        <Input
+          placeholder="Filter by name"
+          value={nameFilter}
+          onChange={(e) => setNameFilter(e.target.value)}
+        />
+        <select
+          className="border rounded px-2"
+          value={raceFilter}
+          onChange={(e) => setRaceFilter(e.target.value)}
+        >
+          <option value="all">All races</option>
+          {uniqueRaces.map((r) => (
+            <option key={r} value={r}>{r}</option>
+          ))}
+        </select>
+      </div>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {allClasses.map((cn) => (
+          <Badge
+            key={cn}
+            variant={classFilter.includes(cn) ? 'secondary' : 'outline'}
+            onClick={() =>
+              setClassFilter((prev) =>
+                prev.includes(cn) ? prev.filter((c) => c !== cn) : [...prev, cn]
+              )
+            }
+            className="cursor-pointer"
+          >
+            {cn}
+          </Badge>
+        ))}
+      </div>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            {(['Name','Race','Sub-race','Spirit','Classes'] as const).map((col, idx) => (
+              <TableHead key={idx}>
+                <button onClick={() => {
+                  const keys: Array<keyof Row> = ['name','race','subRace','spiritCore','classes']
+                  const key = keys[idx]
+                  if (sortBy === key) setSortDir((d) => (d==='asc'?'desc':'asc'))
+                  else {
+                    setSortBy(key)
+                    setSortDir('asc')
+                  }
+                }}>
+                  {col} {sortBy===(['name','race','subRace','spiritCore','classes'] as const)[idx] && (sortDir==='asc'?'▲':'▼')}
                 </button>
               </TableHead>
-              <TableHead>
-                <button className="flex items-center gap-1" onClick={() => handleSort('race')}>
-                  Race
-                  {sortBy==='race' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
-                </button>
-              </TableHead>
-              <TableHead>
-                <button className="flex items-center gap-1" onClick={() => handleSort('subRace')}>
-                  Sub-race
-                  {sortBy==='subRace' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
-                </button>
-              </TableHead>
-              <TableHead>
-                <button className="flex items-center gap-1" onClick={() => handleSort('spiritCore')}>
-                  Spirit Core
-                  {sortBy==='spiritCore' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
-                </button>
-              </TableHead>
-              <TableHead>
-                <button className="flex items-center gap-1" onClick={() => handleSort('status')}>
-                  Status
-                  {sortBy==='status' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
-                </button>
-              </TableHead>
-              <TableHead>
-                <button className="flex items-center gap-1" onClick={() => handleSort('classes')}>
-                  Classes
-                  {sortBy==='classes' && (sortDir==='asc' ? <span>▲</span> : <span>▼</span>)}
-                </button>
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {sorted.map((d) => (
-              <TableRow
-                key={d.id}
-                onClick={() => window.open(d.sheetUrl, '_blank')}
-                className="cursor-pointer hover:bg-gray-100"
-              >
-                <TableCell>{safe(d.name)}</TableCell>
-                <TableCell>{safe(d.race)}</TableCell>
-                <TableCell>{safe(d.subRace)}</TableCell>
-                <TableCell>{d.spiritCore ?? 'Unknown'}</TableCell>
-                <TableCell>{safe(d.status)}</TableCell>
-                <TableCell>{Array.isArray(d.classes) && d.classes.length > 0 ? d.classes.filter(Boolean).map((c) => `${safe(c.class_name)} (exp ${c.class_level})`).join(', ') : 'Unknown'}</TableCell>
-              </TableRow>
             ))}
-          </TableBody>
-        </Table>
-      </div>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {sorted.map((d) => (
+            <TableRow key={d.id} className="hover:bg-muted-foreground/10">
+              <TableCell>
+                <div className="flex items-center gap-1">
+                  <FileSpreadsheet className="w-4 h-4 text-blue-500" />
+                  <a href={d.sheetUrl} target="_blank" rel="noopener noreferrer">{d.name}</a>
+                </div>
+              </TableCell>
+              <TableCell>{d.race}</TableCell>
+              <TableCell>{d.subRace}</TableCell>
+              <TableCell>{d.spiritCore}</TableCell>
+              <TableCell className="flex flex-wrap gap-1">
+                {d.classes.map((c) => (
+                  <Badge key={c.name} variant={c.tier===2?'destructive':'secondary'}>
+                    {c.name}
+                  </Badge>
+                ))}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   )
 }

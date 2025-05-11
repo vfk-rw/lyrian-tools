@@ -113,11 +113,6 @@ const navItems = [
         url: "/mirane/calendar",
         icon: CalendarDays,
       },
-      {
-        title: "Manage Sheets",
-        url: "/mirane/census/manage-sheets",
-        icon: FileSpreadsheet,
-      },
     ],
   },
   {

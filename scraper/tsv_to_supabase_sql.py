@@ -39,23 +39,36 @@ def escape(s):
 def generate_sql(rows, class_map):
     stmts = []
     # DDL
-    stmts.append("CREATE TABLE classes(id SERIAL PRIMARY KEY, name TEXT UNIQUE NOT NULL, tier INT NOT NULL);")
-    stmts.append("CREATE TABLE characters(id SERIAL PRIMARY KEY, created_at TIMESTAMP NOT NULL DEFAULT now(), player_name TEXT, adventurer_name TEXT, adventurer_url TEXT, spirit_core_current INT, race TEXT, sub_race TEXT, expedition_departure DATE, expedition_return DATE, ip_lockout_end DATE);")
-    stmts.append("CREATE TABLE character_classes(character_id INT REFERENCES characters(id), class_id INT REFERENCES classes(id), PRIMARY KEY(character_id, class_id));")
+    stmts.append("CREATE TABLE census_classes(id SERIAL PRIMARY KEY, name TEXT UNIQUE NOT NULL, tier INT NOT NULL);")
+    stmts.append("CREATE TABLE census_characters(id SERIAL PRIMARY KEY, created_at TIMESTAMP NOT NULL DEFAULT now(), player_name TEXT, adventurer_name TEXT, adventurer_url TEXT, spirit_core_current INT, race TEXT, sub_race TEXT, expedition_departure DATE, expedition_return DATE, ip_lockout_end DATE);")
+    stmts.append("CREATE TABLE census_character_classes(character_id INT REFERENCES census_characters(id), class_id INT REFERENCES census_classes(id), PRIMARY KEY(character_id, class_id));")
     # insert classes
-    stmts.append("\n-- insert classes")
+    stmts.append("\n-- insert census_classes")
     for name, tier in class_map.items():
-        stmts.append(f"INSERT INTO classes(name,tier) VALUES('{escape(name)}',{tier});")
+        stmts.append(f"INSERT INTO census_classes(name,tier) VALUES('{escape(name)}',{tier});")
     # insert characters
     stmts.append("\n-- insert characters and relationships")
     for idx, row in enumerate(rows, 1):
+        # handle shifted columns for missing spirit core
+        raw_spirit = row.get('Spirit Core (Current)', '').strip()
+        raw_race = row.get('Race', '').strip()
+        raw_sub = row.get('Sub-Race', '').strip()
+        raw_t1 = row.get('Tier 1 Class', '').strip()
+        if not raw_spirit and raw_race.isdigit():
+            spirit_val = raw_race
+            race_val = raw_sub
+            sub_val = raw_t1
+        else:
+            spirit_val = raw_spirit or None
+            race_val = raw_race
+            sub_val = raw_sub
         vals = {
             'player': escape(row.get('Player Name','')),
             'adv': escape(row.get('Adventurer Name','')),
             'url': escape(row.get('Adventurer URL','')),
-            'spirit': row.get('Spirit Core (Current)','') or None,
-            'race': escape(row.get('Race','')),
-            'sub': escape(row.get('Sub-Race','')),
+            'spirit': spirit_val,
+            'race': escape(race_val),
+            'sub': escape(sub_val),
             'dep': row.get('Exepdition Departure','') or None,
             'ret': row.get('Expedition Return','') or None,
             'lock': row.get('IP Lockout End','') or None,
@@ -66,7 +79,7 @@ def generate_sql(rows, class_map):
         lock = f"'{vals['lock']}'" if vals['lock'] else 'NULL'
         stmts.append(f"-- row {idx}")
         stmts.append("WITH c AS ("
-                     f"INSERT INTO characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('"+
+                     f"INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('"+
                      f"{vals['player']}','{vals['adv']}','{vals['url']}',{spirit},'"+f"{vals['race']}','{vals['sub']}',{dep},{ret},{lock}) RETURNING id)"
                     )
         # relationship
@@ -77,7 +90,7 @@ def generate_sql(rows, class_map):
                 if cname and cname in VALID_CLASSES:
                     class_list.append(cname)
         names = ",".join(f"'{escape(c)}'" for c in class_list)
-        stmts.append(f"INSERT INTO character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, classes cl WHERE cl.name IN ({names});")
+        stmts.append(f"INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ({names});")
     return "\n".join(stmts)
 
 def main():

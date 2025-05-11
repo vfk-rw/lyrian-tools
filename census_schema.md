@@ -4,14 +4,14 @@ This document outlines the structure of the database used to store the Mirane ce
 
 ## Tables
 
-### classes
+### census_classes
 Stores each unique class with its tier level.
 
 - **id** (SERIAL PRIMARY KEY): Unique identifier for the class.  
 - **name** (TEXT UNIQUE NOT NULL): Name of the class (e.g., "Mage", "Fighter").  
 - **tier** (INT NOT NULL): Tier level of the class, as defined in class_list.yaml.
 
-### characters
+### census_characters
 Stores each individual character entry including timestamps and metadata.
 
 - **id** (SERIAL PRIMARY KEY): Unique identifier for the character.  
@@ -26,7 +26,7 @@ Stores each individual character entry including timestamps and metadata.
 - **expedition_return** (DATE): Return date for the current expedition.  
 - **ip_lockout_end** (DATE): Date when IP lockout expires.
 
-### character_classes
+### census_character_classes
 Join table mapping characters to their multiple classes.
 
 - **character_id** (INT REFERENCES characters(id)): Foreign key to characters.  
@@ -37,7 +37,7 @@ Join table mapping characters to their multiple classes.
 
 - **One-to-Many**: Each character can have zero or more class assignments.  
 - **Many-to-One**: Each class may be assigned to multiple characters.  
-- Implemented via the `character_classes` join table for a many-to-many relationship.
+- Implemented via the `census_character_classes` join table for a many-to-many relationship.
 
 ---
 
