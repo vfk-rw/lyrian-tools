@@ -47,6 +47,40 @@ export default function CensusClient({ data }: { data: Row[] }) {
   const [classFilter, setClassFilter] = useState<string[]>([])
   const [showRaceChart, setShowRaceChart] = useState(true)
   const [showSpiritChart, setShowSpiritChart] = useState(true)
+  const [chartSize, setChartSize] = useState({ width: 0, height: 0 })
+
+  // Reference for chart container div to measure its size
+  const raceChartRef = React.useRef<HTMLDivElement>(null)
+  const spiritChartRef = React.useRef<HTMLDivElement>(null)
+
+  // Update chart size when container dimensions change
+  useEffect(() => {
+    const updateChartSize = () => {
+      if (raceChartRef.current) {
+        const width = raceChartRef.current.clientWidth - 40 // Subtract padding
+        const height = raceChartRef.current.clientHeight - 80 // Subtract header height and padding
+        setChartSize({ width: Math.max(width, 200), height: Math.max(height, 200) })
+      }
+    }
+
+    // Initial size update
+    updateChartSize()
+
+    // Add resize listener
+    const resizeObserver = new ResizeObserver(updateChartSize)
+    if (raceChartRef.current) {
+      resizeObserver.observe(raceChartRef.current)
+    }
+    if (spiritChartRef.current) {
+      resizeObserver.observe(spiritChartRef.current)
+    }
+
+    window.addEventListener('resize', updateChartSize)
+    return () => {
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', updateChartSize)
+    }
+  }, [showRaceChart, showSpiritChart])
 
   useEffect(() => {
     const sr = localStorage.getItem('census_showRaceChart')
@@ -137,44 +171,63 @@ export default function CensusClient({ data }: { data: Row[] }) {
           Spirit
         </button>
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         {showRaceChart && (
-          <Card className="border shadow overflow-auto" style={{ resize: 'both', minWidth: '300px', minHeight: '200px' }}>
+          <Card 
+            ref={raceChartRef}
+            className="border shadow overflow-auto flex-1" 
+            style={{ resize: 'both', minWidth: '300px', minHeight: '300px', height: '400px' }}
+          >
             <CardHeader><CardTitle>Race Distribution</CardTitle></CardHeader>
-            <CardContent>
-              <ChartContainer id="race" config={{}}>
-                <PieChart width={300} height={200}>
-                  <Pie
-                    data={raceCounts.map(([name, count]) => ({ name, value: count }))}
-                    dataKey="value"
-                    nameKey="name"
-                    innerRadius={20}
-                    outerRadius={40}
-                  >
-                    {raceCounts.map((_, i) => (
-                      <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <ChartTooltip />
-                  <ChartLegend />
-                </PieChart>
-              </ChartContainer>
+            <CardContent className="h-full">
+              {chartSize.width > 0 && chartSize.height > 0 && (
+                <ChartContainer id="race" config={{}}>
+                  <PieChart width={chartSize.width} height={chartSize.height}>
+                    <Pie
+                      data={raceCounts.map(([name, count]) => ({ name, value: count }))}
+                      dataKey="value"
+                      nameKey="name"
+                      innerRadius={chartSize.height * 0.1}
+                      outerRadius={chartSize.height * 0.3}
+                      cx="50%"
+                      cy="50%"
+                    >
+                      {raceCounts.map((_, i) => (
+                        <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <ChartTooltip />
+                    <ChartLegend />
+                  </PieChart>
+                </ChartContainer>
+              )}
             </CardContent>
           </Card>
         )}
         {showSpiritChart && (
-          <Card className="border shadow overflow-auto" style={{ resize: 'both', minWidth: '300px', minHeight: '200px' }}>
+          <Card 
+            ref={spiritChartRef}
+            className="border shadow overflow-auto flex-1" 
+            style={{ resize: 'both', minWidth: '300px', minHeight: '300px', height: '400px' }}
+          >
             <CardHeader><CardTitle>Spirit Core Histogram</CardTitle></CardHeader>
-            <CardContent>
-              <ChartContainer id="spirit" config={{}}>
-                <BarChart data={spiritHistogram} width={300} height={200}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="bin" />
-                  <YAxis allowDecimals={false} />
-                  <Bar dataKey="count" fill={COLORS[1]} />
-                  <ChartTooltip />
-                </BarChart>
-              </ChartContainer>
+            <CardContent className="h-full">
+              {chartSize.width > 0 && chartSize.height > 0 && (
+                <ChartContainer id="spirit" config={{}}>
+                  <BarChart 
+                    data={spiritHistogram} 
+                    width={chartSize.width} 
+                    height={chartSize.height}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 30 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="bin" angle={-45} textAnchor="end" height={50} />
+                    <YAxis allowDecimals={false} />
+                    <Bar dataKey="count" fill={COLORS[1]} />
+                    <ChartTooltip />
+                  </BarChart>
+                </ChartContainer>
+              )}
             </CardContent>
           </Card>
         )}
