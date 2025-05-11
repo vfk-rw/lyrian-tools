@@ -231,37 +231,40 @@ export default function CensusClient({ data }: { data: Row[] }) {
 
   return (
     <div className="space-y-6 p-4">
-      <div className="flex gap-2">
-        <button
-          className={`px-3 py-1 border rounded ${showRaceChart ? 'bg-primary/10' : 'bg-muted'}`}
-          onClick={() => setShowRaceChart((v) => !v)}
-        >
-          Race
-        </button>
-        <button
-          className={`px-3 py-1 border rounded ${showSpiritChart ? 'bg-primary/10' : 'bg-muted'}`}
-          onClick={() => setShowSpiritChart((v) => !v)}
-        >
-          Spirit
-        </button>
-        <button
-          className={`px-3 py-1 border rounded ${showCumulativeSpiritChart ? 'bg-primary/10' : 'bg-muted'}`}
-          onClick={() => setShowCumulativeSpiritChart((v) => !v)}
-        >
-          Cumulative Spirit
-        </button>
-        <button
-          className={`px-3 py-1 border rounded ${showTier1ClassChart ? 'bg-primary/10' : 'bg-muted'}`}
-          onClick={() => setShowTier1ClassChart((v) => !v)}
-        >
-          Tier 1 Classes
-        </button>
-        <button
-          className={`px-3 py-1 border rounded ${showTier2ClassChart ? 'bg-primary/10' : 'bg-muted'}`}
-          onClick={() => setShowTier2ClassChart((v) => !v)}
-        >
-          Tier 2 Classes
-        </button>
+      <div className="flex justify-between items-center">
+        <div className="text-lg font-medium">Characters: {filtered.length}</div>
+        <div className="flex gap-2">
+          <button
+            className={`px-3 py-1 border rounded ${showRaceChart ? 'bg-primary/10' : 'bg-muted'}`}
+            onClick={() => setShowRaceChart((v) => !v)}
+          >
+            Race
+          </button>
+          <button
+            className={`px-3 py-1 border rounded ${showSpiritChart ? 'bg-primary/10' : 'bg-muted'}`}
+            onClick={() => setShowSpiritChart((v) => !v)}
+          >
+            Spirit
+          </button>
+          <button
+            className={`px-3 py-1 border rounded ${showCumulativeSpiritChart ? 'bg-primary/10' : 'bg-muted'}`}
+            onClick={() => setShowCumulativeSpiritChart((v) => !v)}
+          >
+            Cumulative Spirit
+          </button>
+          <button
+            className={`px-3 py-1 border rounded ${showTier1ClassChart ? 'bg-primary/10' : 'bg-muted'}`}
+            onClick={() => setShowTier1ClassChart((v) => !v)}
+          >
+            Tier 1 Classes
+          </button>
+          <button
+            className={`px-3 py-1 border rounded ${showTier2ClassChart ? 'bg-primary/10' : 'bg-muted'}`}
+            onClick={() => setShowTier2ClassChart((v) => !v)}
+          >
+            Tier 2 Classes
+          </button>
+        </div>
       </div>
       <div className="flex flex-col md:flex-row gap-4">
         {showRaceChart && (
@@ -289,7 +292,7 @@ export default function CensusClient({ data }: { data: Row[] }) {
                       ))}
                     </Pie>
                     <ChartTooltip />
-                    <ChartLegend />
+                    <ChartLegend layout="vertical" align="right" verticalAlign="middle" />
                   </PieChart>
                 </ChartContainer>
               )}
@@ -378,7 +381,7 @@ export default function CensusClient({ data }: { data: Row[] }) {
                       ))}
                     </Pie>
                     <ChartTooltip />
-                    <ChartLegend />
+                    <ChartLegend layout="vertical" align="right" verticalAlign="middle" />
                   </PieChart>
                 </ChartContainer>
               )}
@@ -411,7 +414,7 @@ export default function CensusClient({ data }: { data: Row[] }) {
                       ))}
                     </Pie>
                     <ChartTooltip />
-                    <ChartLegend />
+                    <ChartLegend layout="vertical" align="right" verticalAlign="middle" />
                   </PieChart>
                 </ChartContainer>
               )}
