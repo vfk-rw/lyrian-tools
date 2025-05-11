@@ -48,12 +48,16 @@ export default function CensusClient({ data }: { data: Row[] }) {
   const [showRaceChart, setShowRaceChart] = useState(true)
   const [showSpiritChart, setShowSpiritChart] = useState(true)
   const [showCumulativeSpiritChart, setShowCumulativeSpiritChart] = useState(true)
+  const [showTier1ClassChart, setShowTier1ClassChart] = useState(true)
+  const [showTier2ClassChart, setShowTier2ClassChart] = useState(true)
   const [chartSize, setChartSize] = useState({ width: 0, height: 0 })
 
   // Reference for chart container div to measure its size
   const raceChartRef = React.useRef<HTMLDivElement>(null)
   const spiritChartRef = React.useRef<HTMLDivElement>(null)
   const cumulativeSpiritChartRef = React.useRef<HTMLDivElement>(null)
+  const tier1ClassChartRef = React.useRef<HTMLDivElement>(null)
+  const tier2ClassChartRef = React.useRef<HTMLDivElement>(null)
 
   // Update chart size when container dimensions change
   useEffect(() => {
@@ -79,28 +83,40 @@ export default function CensusClient({ data }: { data: Row[] }) {
     if (cumulativeSpiritChartRef.current) {
       resizeObserver.observe(cumulativeSpiritChartRef.current)
     }
+    if (tier1ClassChartRef.current) {
+      resizeObserver.observe(tier1ClassChartRef.current)
+    }
+    if (tier2ClassChartRef.current) {
+      resizeObserver.observe(tier2ClassChartRef.current)
+    }
 
     window.addEventListener('resize', updateChartSize)
     return () => {
       resizeObserver.disconnect()
       window.removeEventListener('resize', updateChartSize)
     }
-  }, [showRaceChart, showSpiritChart, showCumulativeSpiritChart])
+  }, [showRaceChart, showSpiritChart, showCumulativeSpiritChart, showTier1ClassChart, showTier2ClassChart])
 
   useEffect(() => {
     const sr = localStorage.getItem('census_showRaceChart')
     const ss = localStorage.getItem('census_showSpiritChart')
     const scs = localStorage.getItem('census_showCumulativeSpiritChart')
+    const st1c = localStorage.getItem('census_showTier1ClassChart')
+    const st2c = localStorage.getItem('census_showTier2ClassChart')
     if (sr !== null) setShowRaceChart(sr === 'true')
     if (ss !== null) setShowSpiritChart(ss === 'true')
     if (scs !== null) setShowCumulativeSpiritChart(scs === 'true')
+    if (st1c !== null) setShowTier1ClassChart(st1c === 'true')
+    if (st2c !== null) setShowTier2ClassChart(st2c === 'true')
   }, [])
 
   useEffect(() => {
     localStorage.setItem('census_showRaceChart', showRaceChart ? 'true' : 'false')
     localStorage.setItem('census_showSpiritChart', showSpiritChart ? 'true' : 'false')
     localStorage.setItem('census_showCumulativeSpiritChart', showCumulativeSpiritChart ? 'true' : 'false')
-  }, [showRaceChart, showSpiritChart, showCumulativeSpiritChart])
+    localStorage.setItem('census_showTier1ClassChart', showTier1ClassChart ? 'true' : 'false')
+    localStorage.setItem('census_showTier2ClassChart', showTier2ClassChart ? 'true' : 'false')
+  }, [showRaceChart, showSpiritChart, showCumulativeSpiritChart, showTier1ClassChart, showTier2ClassChart])
 
   function safe(val: unknown, fallback = 'Unknown'): string {
     if (val == null || (typeof val === 'string' && !val.trim())) return fallback
@@ -158,6 +174,40 @@ export default function CensusClient({ data }: { data: Row[] }) {
     });
   }, [filtered]);
 
+  const tier1ClassCounts = useMemo(() => {
+    // Count all tier 1 classes across all filtered characters
+    const counts: Record<string, number> = {};
+    filtered.forEach(character => {
+      character.classes
+        .filter(c => c.tier === 1)
+        .forEach(c => {
+          counts[c.name] = (counts[c.name] || 0) + 1;
+        });
+    });
+    
+    // Sort by count (descending)
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, count]) => ({ name, count }));
+  }, [filtered]);
+
+  const tier2ClassCounts = useMemo(() => {
+    // Count all tier 2 classes across all filtered characters
+    const counts: Record<string, number> = {};
+    filtered.forEach(character => {
+      character.classes
+        .filter(c => c.tier === 2)
+        .forEach(c => {
+          counts[c.name] = (counts[c.name] || 0) + 1;
+        });
+    });
+    
+    // Sort by count (descending)
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, count]) => ({ name, count }));
+  }, [filtered]);
+
   const uniqueRaces = Array.from(new Set(data.map((d) => d.race)))
 
   const [sortBy, setSortBy] = useState<keyof Row>('name')
@@ -199,6 +249,18 @@ export default function CensusClient({ data }: { data: Row[] }) {
           onClick={() => setShowCumulativeSpiritChart((v) => !v)}
         >
           Cumulative Spirit
+        </button>
+        <button
+          className={`px-3 py-1 border rounded ${showTier1ClassChart ? 'bg-primary/10' : 'bg-muted'}`}
+          onClick={() => setShowTier1ClassChart((v) => !v)}
+        >
+          Tier 1 Classes
+        </button>
+        <button
+          className={`px-3 py-1 border rounded ${showTier2ClassChart ? 'bg-primary/10' : 'bg-muted'}`}
+          onClick={() => setShowTier2ClassChart((v) => !v)}
+        >
+          Tier 2 Classes
         </button>
       </div>
       <div className="flex flex-col md:flex-row gap-4">
@@ -289,6 +351,75 @@ export default function CensusClient({ data }: { data: Row[] }) {
           </CardContent>
         </Card>
       )}
+      
+      <div className="flex flex-col md:flex-row gap-4">
+        {showTier1ClassChart && (
+          <Card 
+            ref={tier1ClassChartRef}
+            className="border shadow overflow-auto flex-1" 
+            style={{ resize: 'both', minWidth: '300px', minHeight: '300px', height: '400px' }}
+          >
+            <CardHeader><CardTitle>Tier 1 Class Distribution</CardTitle></CardHeader>
+            <CardContent className="h-full">
+              {chartSize.width > 0 && chartSize.height > 0 && (
+                <ChartContainer id="tier1Classes" config={{}}>
+                  <PieChart width={chartSize.width} height={chartSize.height}>
+                    <Pie
+                      data={tier1ClassCounts}
+                      dataKey="count"
+                      nameKey="name"
+                      innerRadius={chartSize.height * 0.1}
+                      outerRadius={chartSize.height * 0.3}
+                      cx="50%"
+                      cy="50%"
+                    >
+                      {tier1ClassCounts.map((_, i) => (
+                        <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <ChartTooltip />
+                    <ChartLegend />
+                  </PieChart>
+                </ChartContainer>
+              )}
+            </CardContent>
+          </Card>
+        )}
+        
+        {showTier2ClassChart && (
+          <Card 
+            ref={tier2ClassChartRef}
+            className="border shadow overflow-auto flex-1" 
+            style={{ resize: 'both', minWidth: '300px', minHeight: '300px', height: '400px' }}
+          >
+            <CardHeader><CardTitle>Tier 2 Class Distribution</CardTitle></CardHeader>
+            <CardContent className="h-full">
+              {chartSize.width > 0 && chartSize.height > 0 && (
+                <ChartContainer id="tier2Classes" config={{}}>
+                  <PieChart width={chartSize.width} height={chartSize.height}>
+                    <Pie
+                      data={tier2ClassCounts}
+                      dataKey="count"
+                      nameKey="name"
+                      innerRadius={chartSize.height * 0.1}
+                      outerRadius={chartSize.height * 0.3}
+                      cx="50%"
+                      cy="50%"
+                    >
+                      {tier2ClassCounts.map((_, i) => (
+                        <Cell key={i} fill={COLORS[(i + 3) % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <ChartTooltip />
+                    <ChartLegend />
+                  </PieChart>
+                </ChartContainer>
+              )}
+            </CardContent>
+          </Card>
+        )}
+      </div>
+      
       <div className="flex flex-wrap gap-2">
         <Input
           placeholder="Filter by name"
