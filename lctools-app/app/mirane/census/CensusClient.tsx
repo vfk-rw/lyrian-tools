@@ -47,11 +47,13 @@ export default function CensusClient({ data }: { data: Row[] }) {
   const [classFilter, setClassFilter] = useState<string[]>([])
   const [showRaceChart, setShowRaceChart] = useState(true)
   const [showSpiritChart, setShowSpiritChart] = useState(true)
+  const [showCumulativeSpiritChart, setShowCumulativeSpiritChart] = useState(true)
   const [chartSize, setChartSize] = useState({ width: 0, height: 0 })
 
   // Reference for chart container div to measure its size
   const raceChartRef = React.useRef<HTMLDivElement>(null)
   const spiritChartRef = React.useRef<HTMLDivElement>(null)
+  const cumulativeSpiritChartRef = React.useRef<HTMLDivElement>(null)
 
   // Update chart size when container dimensions change
   useEffect(() => {
@@ -74,25 +76,31 @@ export default function CensusClient({ data }: { data: Row[] }) {
     if (spiritChartRef.current) {
       resizeObserver.observe(spiritChartRef.current)
     }
+    if (cumulativeSpiritChartRef.current) {
+      resizeObserver.observe(cumulativeSpiritChartRef.current)
+    }
 
     window.addEventListener('resize', updateChartSize)
     return () => {
       resizeObserver.disconnect()
       window.removeEventListener('resize', updateChartSize)
     }
-  }, [showRaceChart, showSpiritChart])
+  }, [showRaceChart, showSpiritChart, showCumulativeSpiritChart])
 
   useEffect(() => {
     const sr = localStorage.getItem('census_showRaceChart')
     const ss = localStorage.getItem('census_showSpiritChart')
+    const scs = localStorage.getItem('census_showCumulativeSpiritChart')
     if (sr !== null) setShowRaceChart(sr === 'true')
     if (ss !== null) setShowSpiritChart(ss === 'true')
+    if (scs !== null) setShowCumulativeSpiritChart(scs === 'true')
   }, [])
 
   useEffect(() => {
     localStorage.setItem('census_showRaceChart', showRaceChart ? 'true' : 'false')
     localStorage.setItem('census_showSpiritChart', showSpiritChart ? 'true' : 'false')
-  }, [showRaceChart, showSpiritChart])
+    localStorage.setItem('census_showCumulativeSpiritChart', showCumulativeSpiritChart ? 'true' : 'false')
+  }, [showRaceChart, showSpiritChart, showCumulativeSpiritChart])
 
   function safe(val: unknown, fallback = 'Unknown'): string {
     if (val == null || (typeof val === 'string' && !val.trim())) return fallback
@@ -134,6 +142,22 @@ export default function CensusClient({ data }: { data: Row[] }) {
     })
   }, [filtered])
 
+  const cumulativeSpiritHistogram = useMemo(() => {
+    // Define thresholds starting with <1000, then >=1000, >=1100, etc. up to >=2000
+    const thresholds = [
+      { label: '<1000', min: 0, max: 999 },
+      ...Array.from({ length: 11 }, (_, i) => {
+        const value = 1000 + i * 100;
+        return { label: `≥${value}`, min: value, max: 9999 }; // 9999 as arbitrary upper limit
+      })
+    ];
+
+    return thresholds.map(({ label, min, max }) => {
+      const count = filtered.filter((d) => d.spiritCore >= min && d.spiritCore <= max).length;
+      return { bin: label, count };
+    });
+  }, [filtered]);
+
   const uniqueRaces = Array.from(new Set(data.map((d) => d.race)))
 
   const [sortBy, setSortBy] = useState<keyof Row>('name')
@@ -169,6 +193,12 @@ export default function CensusClient({ data }: { data: Row[] }) {
           onClick={() => setShowSpiritChart((v) => !v)}
         >
           Spirit
+        </button>
+        <button
+          className={`px-3 py-1 border rounded ${showCumulativeSpiritChart ? 'bg-primary/10' : 'bg-muted'}`}
+          onClick={() => setShowCumulativeSpiritChart((v) => !v)}
+        >
+          Cumulative Spirit
         </button>
       </div>
       <div className="flex flex-col md:flex-row gap-4">
@@ -232,6 +262,33 @@ export default function CensusClient({ data }: { data: Row[] }) {
           </Card>
         )}
       </div>
+      {showCumulativeSpiritChart && (
+        <Card 
+          ref={cumulativeSpiritChartRef}
+          className="border shadow overflow-auto flex-1" 
+          style={{ resize: 'both', minWidth: '300px', minHeight: '300px', height: '400px' }}
+        >
+          <CardHeader><CardTitle>Cumulative Spirit Core Distribution</CardTitle></CardHeader>
+          <CardContent className="h-full">
+            {chartSize.width > 0 && chartSize.height > 0 && (
+              <ChartContainer id="cumulativeSpirit" config={{}}>
+                <BarChart 
+                  data={cumulativeSpiritHistogram} 
+                  width={chartSize.width} 
+                  height={chartSize.height}
+                  margin={{ top: 10, right: 30, left: 0, bottom: 30 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="bin" angle={-45} textAnchor="end" height={50} />
+                  <YAxis allowDecimals={false} />
+                  <Bar dataKey="count" fill={COLORS[2]} />
+                  <ChartTooltip />
+                </BarChart>
+              </ChartContainer>
+            )}
+          </CardContent>
+        </Card>
+      )}
       <div className="flex flex-wrap gap-2">
         <Input
           placeholder="Filter by name"
