@@ -39,17 +39,20 @@ interface Row {
   spiritCore: number
   sheetUrl: string
   classes: ClassInfo[]
+  expeditionDeparture?: string
+  expeditionReturn?: string
+  ipLockoutEnd?: string
 }
 
 export default function CensusClient({ data }: { data: Row[] }) {
   const [nameFilter, setNameFilter] = useState('')
   const [raceFilter, setRaceFilter] = useState('all')
   const [classFilter, setClassFilter] = useState<string[]>([])
-  const [showRaceChart, setShowRaceChart] = useState(true)
-  const [showSpiritChart, setShowSpiritChart] = useState(true)
-  const [showCumulativeSpiritChart, setShowCumulativeSpiritChart] = useState(true)
-  const [showTier1ClassChart, setShowTier1ClassChart] = useState(true)
-  const [showTier2ClassChart, setShowTier2ClassChart] = useState(true)
+  const [showRaceChart, setShowRaceChart] = useState(false)
+  const [showSpiritChart, setShowSpiritChart] = useState(false)
+  const [showCumulativeSpiritChart, setShowCumulativeSpiritChart] = useState(false)
+  const [showTier1ClassChart, setShowTier1ClassChart] = useState(false)
+  const [showTier2ClassChart, setShowTier2ClassChart] = useState(false)
   const [chartSize, setChartSize] = useState({ width: 0, height: 0 })
 
   // Reference for chart container div to measure its size
@@ -459,10 +462,10 @@ export default function CensusClient({ data }: { data: Row[] }) {
       <Table>
         <TableHeader>
           <TableRow>
-            {(['Name','Race','Sub-race','Spirit','Classes'] as const).map((col, idx) => (
+            {(['Name','Race','Sub-race','Spirit','Expedition Departure','Expedition Return','IP Lockout','Classes'] as const).map((col, idx) => (
               <TableHead key={idx}>
                 <button onClick={() => {
-                  const keys: Array<keyof Row> = ['name','race','subRace','spiritCore','classes']
+                  const keys: Array<keyof Row> = ['name','race','subRace','spiritCore','expeditionDeparture','expeditionReturn','ipLockoutEnd','classes']
                   const key = keys[idx]
                   if (sortBy === key) setSortDir((d) => (d==='asc'?'desc':'asc'))
                   else {
@@ -470,7 +473,7 @@ export default function CensusClient({ data }: { data: Row[] }) {
                     setSortDir('asc')
                   }
                 }}>
-                  {col} {sortBy===(['name','race','subRace','spiritCore','classes'] as const)[idx] && (sortDir==='asc'?'▲':'▼')}
+                  {col} {sortBy===(['name','race','subRace','spiritCore','expeditionDeparture','expeditionReturn','ipLockoutEnd','classes'] as const)[idx] && (sortDir==='asc'?'▲':'▼')}
                 </button>
               </TableHead>
             ))}
@@ -488,6 +491,9 @@ export default function CensusClient({ data }: { data: Row[] }) {
               <TableCell>{d.race}</TableCell>
               <TableCell>{d.subRace}</TableCell>
               <TableCell>{d.spiritCore}</TableCell>
+              <TableCell>{d.expeditionDeparture || '-'}</TableCell>
+              <TableCell>{d.expeditionReturn || '-'}</TableCell>
+              <TableCell>{d.ipLockoutEnd || '-'}</TableCell>
               <TableCell className="flex flex-wrap gap-1">
                 {d.classes.map((c) => (
                   <Badge key={c.name} variant={c.tier===2?'destructive':'secondary'}>

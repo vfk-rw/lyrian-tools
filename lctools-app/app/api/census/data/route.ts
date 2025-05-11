@@ -17,6 +17,9 @@ export async function GET() {
         race,
         sub_race,
         spirit_core_current,
+        expedition_departure,
+        expedition_return,
+        ip_lockout_end,
       census_character_classes (
         census_classes ( name, tier )
       )
@@ -62,6 +65,9 @@ export async function GET() {
       race: row.race,
       subRace: row.sub_race,
       spiritCore: row.spirit_core_current,
+      expeditionDeparture: row.expedition_departure,
+      expeditionReturn: row.expedition_return,
+      ipLockoutEnd: row.ip_lockout_end,
       classes: Array.isArray(row.census_character_classes)
         ? row.census_character_classes.map((cc: any) => ({
             name: cc.census_classes.name,

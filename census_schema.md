@@ -26,6 +26,7 @@ Stores each individual character entry including timestamps and metadata.
 - **expedition_return** (DATE): Return date for the current expedition.  
 - **ip_lockout_end** (DATE): Date when IP lockout expires.
 
+
 ### census_character_classes
 Join table mapping characters to their multiple classes.
 
