@@ -1,0 +1,65 @@
+name: Deathcap Mushroom
+image_url: https://cdn.angelssword.com/ttrpg/assets/4a225dbd-f575-47c4-bc96-423ac66dc75c-Deathcap_Mushroom_raw.lg.webp
+type: Heroic Plant
+danger_level: E
+lore: "-" # Lore seems empty or placeholder
+
+stats:
+  hp: 67
+  ap: 4
+  rp: 7
+  mana: 1
+  initiative: "+5"
+  focus: 5
+  power: 7
+  agility: 5
+  toughness: 5
+  evasion: 12/25
+  guard: 2/5
+  movement_speed: 20ft
+  notable_skills: Perception+9
+  light_attack: "+5 Accuracy, 1d4+7"
+  heavy_attack: "+5 Accuracy, 2d6+14"
+  strong_against: Melee heavy parties, tight spaces
+  weak_against: Ranged attacks, Pyromancers
+  fitness: 3
+  cunning: 4
+  reason: 3
+  awareness: 4
+  presence: 3
+  appearance: "-" # Appearance seems empty or placeholder
+  habitat: Found in damp, dark places.
+
+abilities:
+  - name: Fire Weakness
+    description: You take double damage from Fire damage.
+  - name: Earth Immunity
+    description: You take no damage from Earth damage.
+
+actions:
+  - name: Poison Spore
+    keywords: [Poison, Full Pierce]
+    range: Self
+    description: |
+      You release poisonous spores in a 5ft radius around you that last until the start of your next turn.
+      Any creature that ends their turn inside the spores takes full pierce Earth(Poison) damage equal to your Power.
+      Poison Spores from multiple mushrooms can stack.
+    requirement: You took damage.
+    rp_cost: 0 RP
+  - name: Spore Launch
+    keywords: [Poison]
+    range: 40ft
+    description: |
+      You fire poisonous spores towards an area. All within a 15x15ft area must make a save or take
+      Power full pierce poison damage and become poisoned. The deathcap poison makes the target Sickened while it lasts.
+    mana_cost: 1 MP
+    ap_cost: 1 AP
+
+strategy: |
+  The deathcap mushroom will start the fight by using Spore Launch at the largest group of enemies it can reach.
+  After that, it will fight normally. When it takes damage, it will use Poison Spore as a reaction.
+
+running_the_monster: |
+  Two deathcap mushrooms or a deathcap mushroom combined with several amanita mushrooms can provide a suitable threat
+  for a group of adventurers. A deathcap mushroom can provide a lasting debuff to a party that does not have ways
+  to remove poison.

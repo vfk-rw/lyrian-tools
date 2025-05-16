@@ -1,0 +1,94 @@
+name: Crystal Behemoth
+image_url: https://cdn.angelssword.com/ttrpg/assets/2a0b2e40-04b6-431d-bbd1-e1448dbf31d7-Crystal Eater.lg.webp
+type: Boss Fiend
+danger_level: D
+lore: A large fiend that feeds on the purple crystals that are embedded in its skin.
+
+stats:
+  hp: 155
+  ap: 4
+  rp: 5
+  mana: 5
+  initiative: "+3"
+  focus: 4
+  power: 6
+  agility: 3
+  toughness: 6
+  evasion: 10/21
+  guard: 4/16
+  movement_speed: 20ft
+  notable_skills: Athletics+18
+  light_attack: "+4 Accuracy, 1d4+6"
+  heavy_attack: "+4 Accuracy, 2d6+12"
+  strong_against: Physical only parties.
+  weak_against: The elemental races that absorb damage.
+  fitness: 8
+  cunning: 3
+  reason: 5
+  awareness: 5
+  presence: 3
+  appearance: A large gray fiend with purple crystals embedded into its skin.
+  habitat: The Corwood in the astra line.
+
+abilities:
+  - name: Medium Fiend Regeneration
+    description: You heal for Toughness x 2 HP at the start of your turn.
+  - name: Aurasense
+    description: You can perfectly detect any creature within 120ft with a spirit core higher than 100.
+  - name: Absorb Magic
+    description: |
+      When you take Arcane, Fire, Water, Wind, Earth, Holy or Dark damage or any of its subtypes,
+      you charge your crystals. Your next Crystal Stomp does additional damage equal to the
+      Power of the attacker and the damage type of it changes to the type you took. Does not stack.
+
+actions:
+  - name: Rock Crunching Bite
+    keywords: [Full Pierce]
+    range: 5ft
+    description: You make a Heavy attack against the target. You don’t add your focus to this roll.
+    ap_cost: 1 AP
+  - name: Crystal Barrier
+    keywords: [Shield]
+    range: Self
+    description: You reduce the damage you take by 5 until the start of your next turn.
+    requirement: May not have used Crystal Stomp your last turn.
+    rp_cost: 0 RP
+  - name: Crystal Burst
+    keywords: [Sure Hit]
+    range: 120ft
+    description: |
+      You make a Light attack that deals Astra damage to all enemies in range. You also take that
+      amount of true damage and your max HP is lowered by that amount. If this reduces your mana to 0,
+      you explode and deal an additional Sure Hit & Full Pierce heavy damage to all enemies in range,
+      after which you die. When you die in this way, you do not drop a fiend core.
+    requirement: Your absorb magic did not trigger since the end of your last turn.
+    mana_cost: 1 MP
+    ap_cost: 0 AP
+  - name: Crystal Stomp
+    keywords: []
+    range: 120ft
+    description: You stomp the ground and create a shockwave, making a Light attack against all enemies in range.
+    requirement: Your Absorb Magic triggered.
+    ap_cost: 0 AP
+  - name: Astra Beams
+    keywords: []
+    range: 720ft
+    description: |
+      You make X separate Light attacks that deal Astra damage against the target. If your Absorb Magic
+      trait is active, you gain the Power bonus for each of these attacks and the element changes to
+      that of the magic absorbed.
+    ap_cost: X AP
+
+strategy: |
+  The crystal behemoth automatically reacts with Crystal Barrier when targeted with an attack if it can.
+  If it can use Crystal Burst, it will. Otherwise, it will use Crystal Stomp.
+  If it's close to an enemy, it will use Rock Crunching Bite and a mix of Light and Heavy attacks.
+  If it struggles to reach an enemy, it will instead use Astra Beams spending all its AP on it.
+  If it identifies a silver weapon threat, it will try to focus that enemy.
+
+running_the_monster: |
+  The crystal behemoth is a suitable threat to a party. It can be defeated in two ways, either by
+  draining its mana to 0 by letting it use crystal burst or by defeating it the normal way.
+  The crystal burst way ensures even parties without magic users can defeat it, though they it will
+  most likely not be a great fight for them.
+  Note that it will not drop a core if it kills itself with crystal burst.

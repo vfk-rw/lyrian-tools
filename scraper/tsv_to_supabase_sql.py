@@ -39,6 +39,9 @@ def escape(s):
 def generate_sql(rows, class_map):
     stmts = []
     # DDL
+    stmts.append("DROP TABLE IF EXISTS census_character_classes CASCADE;")
+    stmts.append("DROP TABLE IF EXISTS census_classes CASCADE;")
+    stmts.append("DROP TABLE IF EXISTS census_characters CASCADE;")
     stmts.append("CREATE TABLE census_classes(id SERIAL PRIMARY KEY, name TEXT UNIQUE NOT NULL, tier INT NOT NULL);")
     stmts.append("CREATE TABLE census_characters(id SERIAL PRIMARY KEY, created_at TIMESTAMP NOT NULL DEFAULT now(), player_name TEXT, adventurer_name TEXT, adventurer_url TEXT, spirit_core_current INT, race TEXT, sub_race TEXT, expedition_departure DATE, expedition_return DATE, ip_lockout_end DATE);")
     stmts.append("CREATE TABLE census_character_classes(character_id INT REFERENCES census_characters(id), class_id INT REFERENCES census_classes(id), PRIMARY KEY(character_id, class_id));")
