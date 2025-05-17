@@ -122,6 +122,14 @@
                 <input type="number" name="attr_guard" value="floor(@{equipment_value_passive}+(@{toughness}/2))" disabled="true">
             </div>
             <div>
+                <label>Block Value:</label>
+                <input type="number" name="attr_block_value" disabled="true">
+            </div>
+            <div>
+                <label>Dodge Value:</label>
+                <input type="number" name="attr_dodge_value" disabled="true">
+            </div>
+            <div>
                 <label>Save Bonus:</label>
                 <input type="number" name="attr_save_bonus" value="@{toughness}" disabled="true">
                 <button type="roll" name="roll_save" value="&{template:default} {{name=@{character_name} - Save}} {{result=[[1d20+@{save_bonus}]]}}">Roll</button>
