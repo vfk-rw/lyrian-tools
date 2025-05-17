@@ -1,0 +1,203 @@
+<!-- WEAPON CRIT LOGIC EXAMPLE - SIMPLIFIED -->
+<div class="sheet-wrapper">
+    <!-- CORE ATTRIBUTES (Minimal for calculations) -->
+    <div class="sheet-attributes">
+        <label>Power: <input type="number" name="attr_power" value="5"></label>
+        <label>Focus: <input type="number" name="attr_focus" value="4"></label>
+    </div>
+    
+    <!-- WEAPONS SECTION -->
+    <div class="sheet-section">
+        <h3>Weapons (Simplified)</h3>
+        <div class="sheet-repeating-weapons">
+            <fieldset class="repeating_weapons">
+                <div class="sheet-weapon-row">
+                    <div class="sheet-weapon-header">
+                        <div class="sheet-name-and-bonuses">
+                            <input type="text" name="attr_weapon_name" placeholder="Weapon Name">
+                            <div class="sheet-inline-bonuses">
+                                <span>+P</span>
+                                <input type="number" name="attr_weapon_power_bonus" value="0" class="sheet-tiny-input">
+                                <span>+F</span>
+                                <input type="number" name="attr_weapon_focus_bonus" value="0" class="sheet-tiny-input">
+                            </div>
+                        </div>
+                        <select name="attr_weapon_group" class="sheet-dropdown-narrow">
+                            <option value="none">Standard</option>
+                            <option value="small">Small</option>
+                            <option value="polearm">Polearm</option>
+                            <option value="light_sword">Light Sword</option>
+                            <option value="longsword">Longsword</option>
+                            <option value="dueling">Dueling</option>
+                            <option value="axe">Axe</option>
+                            <option value="bludgeoning">Bludgeon</option>
+                            <option value="katana">Katana</option>
+                            <option value="heavy_blade">Heavy Blade</option>
+                            <option value="thrown">Thrown</option>
+                            <option value="missile">Missile</option>
+                            <option value="bow">Bow</option>
+                            <option value="crossbow">Crossbow</option>
+                            <option value="musket">Musket</option>
+                            <!-- Specialty weapons -->
+                            <option value="pistol">Pistol</option>
+                            <option value="shotgun">Shotgun</option>
+                            <option value="sniper">Sniper Rifle</option>
+                            <option value="thread_dagger">Thread Dagger</option>
+                            <!-- Channeling weapons -->
+                            <option value="wand">Wand</option>
+                            <option value="staff">Magic Staff</option>
+                        </select>
+                        <select name="attr_weapon_size" class="sheet-dropdown-narrow">
+                            <option value="light">Light</option>
+                            <option value="heavy">Heavy</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sheet-weapon-buttons">
+                        <button type="roll" name="roll_weapon_light" value="&{template:default} {{name=@{weapon_name} (@{weapon_group}) Light Attack}} {{attack=[[1d20+@{focus}+@{weapon_focus_bonus}]]}} {{damage=[[1d4+@{power}+@{weapon_power_bonus}]]}} {{Special=@{weapon_special_rules}}}">Light</button>
+                        <button type="roll" name="roll_weapon_heavy" value="&{template:default} {{name=@{weapon_name} (@{weapon_group}) Heavy Attack}} {{attack=[[1d20+@{focus}+@{weapon_focus_bonus}]]}} {{damage=[[@{heavy_dice}+((@{power}+@{weapon_power_bonus})*2)]]}} {{Special=@{weapon_special_rules}}}">Heavy</button>
+                        <button type="roll" name="roll_weapon_precise" value="&{template:default} {{name=@{weapon_name} (@{weapon_group}) Precise Attack}} {{attack=[[1d20+((@{focus}+@{weapon_focus_bonus})*2)]]}} {{damage=[[1d4+@{power}+@{weapon_power_bonus}]]}} {{Special=@{weapon_special_rules}}}">Precise</button>
+                    </div>
+                    
+                    <div class="sheet-weapon-special-div">
+                        <span class="sheet-weapon-special">Special: </span><input type="text" name="attr_weapon_special_rules" readonly class="sheet-special-rules">
+                    </div>
+                    <input type="hidden" name="attr_heavy_dice" value="2d6">
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<script type="text/worker">
+    // Listen for changes to relevant attributes
+    on("change:repeating_weapons:weapon_group change:repeating_weapons:weapon_size change:repeating_weapons:weapon_power_bonus change:repeating_weapons:weapon_focus_bonus sheet:opened", function(eventInfo) {
+        // Get the relevant weapon ID from the event
+        const sourceAttribute = eventInfo.sourceAttribute || "";
+        let weaponId = null;
+        
+        if (sourceAttribute.includes("repeating_weapons")) {
+            weaponId = sourceAttribute.split("_")[2];
+        } else if (eventInfo.triggerName && eventInfo.triggerName.includes("repeating_weapons")) {
+            weaponId = eventInfo.triggerName.split("_")[2];
+        } else {
+            // For the sheet:opened event, iterate all weapons
+            getSectionIDs("repeating_weapons", function(ids) {
+                ids.forEach(id => updateWeaponInfo(id));
+            });
+            return;
+        }
+        
+        if (weaponId) {
+            updateWeaponInfo(weaponId);
+        }
+    });
+    
+    function updateWeaponInfo(weaponId) {
+        const prefix = `repeating_weapons_${weaponId}_`;
+        
+        getAttrs([
+            `${prefix}weapon_group`, 
+            `${prefix}weapon_size`, 
+            `${prefix}weapon_power_bonus`,
+            `${prefix}weapon_focus_bonus`
+        ], function(values) {
+            const group = values[`${prefix}weapon_group`] || "none";
+            const size = values[`${prefix}weapon_size`] || "light";
+            const powerBonus = parseInt(values[`${prefix}weapon_power_bonus`]) || 0;
+            const focusBonus = parseInt(values[`${prefix}weapon_focus_bonus`]) || 0;
+            
+            // Determine if the weapon uses 2d8 for heavy attacks instead of 2d6
+            const isHeavyMelee = size === "heavy" && !["none", "thrown", "missile", "bow", "crossbow", "musket", "pistol", "shotgun", "sniper", "wand"].includes(group);
+            const heavyDice = isHeavyMelee ? "2d8" : "2d6";
+            
+            // Special rules text
+            let specialRules = "";
+            
+            // Set weapon special rules based on group
+            switch(group) {
+                case "small":
+                    specialRules = "Hidden Weapon: Draw for 0 AP. First attack gains Trick Attack.";
+                    break;
+                case "polearm":
+                    specialRules = "Polearm: +5ft range, threatened range 5-10ft.";
+                    break;
+                case "light_sword":
+                    specialRules = "Nimble: Move 5ft after light attack.";
+                    break;
+                case "longsword":
+                    specialRules = "Versatile: Treat as light or heavy. Heavy: +1d4 damage on crit.";
+                    critBonusHeavy = size === "heavy" ? "On crit, roll +1d4 damage." : "";
+                    break;
+                case "dueling":
+                    specialRules = "Dueling: After 3 attacks on same enemy, get 0 RP Dodge/Block vs. them.";
+                    break;
+                case "axe":
+                    specialRules = "Wild Swing: Deal 2 (light) or 4 (heavy) dmg on miss.";
+                    break;
+                case "bludgeoning":
+                    specialRules = "Hollow Blow: Always deal at least 2 (light) or 4 (heavy) dmg.";
+                    break;
+                case "katana":
+                    specialRules = "Keen: Crit on 19-20.";
+                    break;
+                case "heavy_blade":
+                    specialRules = "Overpower: +1d4 (light) or +1d12 (heavy) damage on crit.";
+                    break;
+                case "thrown":
+                    specialRules = "Thrown: 20ft (light) or 40ft (heavy) range.";
+                    break;
+                case "missile":
+                    specialRules = "Set of Missiles: 30ft range, draw for 0 AP, stealth attacks.";
+                    break;
+                case "bow":
+                    specialRules = "Bow: 240ft range, height advantage vs. cover.";
+                    break;
+                case "crossbow":
+                    specialRules = size === "light" ? "Armor Pierce: -1 Guard within 30ft." : "Armor Pierce: -2 Guard within 30ft.";
+                    break;
+                case "musket":
+                    specialRules = "Armor Pierce: -1 Guard.";
+                    break;
+                    
+                // Specialty Weapons
+                case "pistol":
+                    specialRules = "Two-Handed Grip: Draw for 0 AP, +1/+2 accuracy with two hands.";
+                    break;
+                case "shotgun":
+                    specialRules = size === "light" ? "Shotgun: 15ft range, use in melee." : "Shotgun: 30ft range, use in melee.";
+                    break;
+                case "sniper":
+                    specialRules = "Snipe: 720ft range, +10 Perception beyond 60ft.";
+                    break;
+                case "thread_dagger":
+                    specialRules = "Wired Weapon: Draw/sheath for 0 AP, throw 20ft, recall for 0 AP.";
+                    break;
+                    
+                // Channeling Weapons
+                case "wand":
+                    specialRules = "Magic Blast: Change damage type for 0 AP.";
+                    break;
+                case "staff":
+                    specialRules = "Push: Spend 1 mana on hit to push 5ft.";
+                    break;
+                default:
+                    specialRules = "";
+            }
+            
+            // Add weapon bonus info to special rules if applicable
+            if (powerBonus > 0) {
+                specialRules += (specialRules ? " " : "") + `+${powerBonus} Power.`;
+            }
+            if (focusBonus > 0) {
+                specialRules += (specialRules ? " " : "") + `+${focusBonus} Focus.`;
+            }
+            
+            // Update attributes
+            setAttrs({
+                [`${prefix}weapon_special_rules`]: specialRules,
+                [`${prefix}heavy_dice`]: heavyDice
+            });
+        });
+    }
+</script>
