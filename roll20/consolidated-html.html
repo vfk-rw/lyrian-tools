@@ -77,12 +77,6 @@
                 <label>Equipment Penalty:</label>
                 <input type="number" name="attr_equipment_penalty" value="0">
             </div>
-            <div>
-                <label>Burden:</label>
-                <input type="number" name="attr_burden" value="0">
-                <span>/</span>
-                <input type="number" name="attr_burden_max" value="10" disabled="true">
-            </div>
         </div>
         
         <div class="sheet-combat-stats">
@@ -90,13 +84,23 @@
                 <label>HP:</label>
                 <input type="number" name="attr_hp">
                 <span>/</span>
-                <input type="number" name="attr_hp_max" value="(@{toughness}*5)+20" disabled="true">
+                <input type="number" name="attr_hp_max" value="(@{toughness}*5)+20+@{hp_bonus}" disabled="true">
+                <span>+</span>
+                <input type="number" name="attr_temp_hp" value="0" title="Temporary HP (shields)">
+            </div>
+            <div>
+                <label>HP Bonus:</label>
+                <input type="number" name="attr_hp_bonus" value="0" title="Bonus HP from class features">
             </div>
             <div>
                 <label>Mana:</label>
                 <input type="number" name="attr_mana">
                 <span>/</span>
-                <input type="number" name="attr_mana_max" value="(@{power})+6" disabled="true">
+                <input type="number" name="attr_mana_max" value="(@{power})+6+@{mp_bonus}" disabled="true">
+            </div>
+            <div>
+                <label>MP Bonus:</label>
+                <input type="number" name="attr_mp_bonus" value="0" title="Bonus MP from class features">
             </div>
             <div>
                 <label>RP:</label>
@@ -115,7 +119,7 @@
             </div>
             <div>
                 <label>Guard:</label>
-                <input type="number" name="attr_guard" value="(@{equipment_value_passive})+(@{toughness}/2)" disabled="true">
+                <input type="number" name="attr_guard" value="floor(@{equipment_value_passive}+(@{toughness}/2))" disabled="true">
             </div>
             <div>
                 <label>Save Bonus:</label>
@@ -134,8 +138,16 @@
         
         <!-- BASIC COMBAT ACTIONS -->
         <div class="sheet-combat-actions">
-            <button type="roll" name="roll_block" value="&{template:default} {{name=@{character_name} - Block (1 RP)}} {{Guard=[[@{block_value}]]}}">Block (1 RP)</button>
+            <button type="roll" name="roll_passive_defensives" value="&{template:default} {{name=@{character_name} - Passive Defensives}} {{Guard=@{guard}}} {{Evasion=@{evasion}}}">Passive Defensives</button>
+            <button type="roll" name="roll_block" value="&{template:default} {{name=@{character_name} - Block (1 RP)}} {{Guard=[[@{block_value}]]}} {{Effect=Damage can be reduced to 0. Cannot be critically hit.}}">Block (1 RP)</button>
             <button type="roll" name="roll_dodge" value="&{template:default} {{name=@{character_name} - Dodge (1 RP)}} {{Evasion=[[@{dodge_value}]]}}">Dodge (1 RP)</button>
+            <button type="roll" name="roll_aurasense" value="&{template:default} {{name=@{character_name} - Aurasense (0 AP)}} {{Effect=You check the aura of an enemy within 120ft, letting you know if they are a heroic unit or not. An enemy in presence concealment always shows as non-heroic.}}">Aurasense (0 AP)</button>
+            <button type="roll" name="roll_crawl" value="&{template:default} {{name=@{character_name} - Crawl (2 AP)}} {{Effect=You move up to 5ft while Prone. Can be used while Downed.}}">Crawl (2 AP)</button>
+            <button type="roll" name="roll_defend" value="&{template:default} {{name=@{character_name} - Defend (3 AP)}} {{Effect=Your next basic Dodge or Block costs 0 RP.}}">Defend (3 AP)</button>
+            <button type="roll" name="roll_disengage" value="&{template:default} {{name=@{character_name} - Disengage (2 AP)}} {{Effect=Your movement does not trigger attacks of opportunity until the start of your next turn.}}">Disengage (2 AP)</button>
+            <button type="roll" name="roll_hide" value="&{template:default} {{name=@{character_name} - Hide (2 AP)}} {{Effect=You attempt to hide, rolling a stealth or cunning check. Hidden targets cannot be the target of an attack. Taking any offensive action or ending movement within line of sight reveals you.}}">Hide (2 AP)</button>
+            <button type="roll" name="roll_hunker" value="&{template:default} {{name=@{character_name} - Hunker Down (2 AP)}} {{Effect=You hunker down, treating a low cover you're next to as high cover until the start of your next turn.}}">Hunker Down (2 AP)</button>
+            <button type="roll" name="roll_stand" value="&{template:default} {{name=@{character_name} - Stand (1 AP)}} {{Effect=Removes the Prone condition.}}">Stand (1 AP)</button>
         </div>
     </div>
     
@@ -189,9 +201,9 @@
                     </div>
                     
                     <div class="sheet-weapon-buttons">
-                        <button type="roll" name="roll_weapon_light" value="&{template:default} {{name=@{character_name} - @{weapon_name} Light Attack}} {{attack=[[1d20+@{focus}+@{weapon_focus_bonus}]]}} {{damage=[[1d4+(@{power}+@{weapon_power_bonus})@{weapon_light_bonus}]]}}{{#^{weapon_enchant_text} Enchantments=@{weapon_enchant_text}}}{{Special=@{weapon_special_rules}}}">Light Attack</button>
-                        <button type="roll" name="roll_weapon_heavy" value="&{template:default} {{name=@{character_name} - @{weapon_name} Heavy Attack}} {{attack=[[1d20+@{focus}+@{weapon_focus_bonus}]]}} {{damage=[[@{weapon_heavy_dice}+((@{power}+@{weapon_power_bonus})*2)@{weapon_heavy_bonus}]]}}{{#^{weapon_enchant_text} Enchantments=@{weapon_enchant_text}}}{{Special=@{weapon_special_rules}}}">Heavy Attack</button>
-                        <button type="roll" name="roll_weapon_precise" value="&{template:default} {{name=@{character_name} - @{weapon_name} Precise Attack}} {{attack=[[1d20+((@{focus}+@{weapon_focus_bonus})*2)]]}} {{damage=[[1d4+(@{power}+@{weapon_power_bonus})]]}} {{Special=@{weapon_special_rules}}}">Precise Attack</button>
+                        <button type="roll" name="roll_weapon_light" value="&{template:default} {{name=@{character_name} - @{weapon_name} Light Attack}} {{attack=[[1d20+@{focus}+@{weapon_focus_bonus}]]}} {{damage=[[1d4+(@{power}+@{weapon_power_bonus})@{weapon_light_bonus}]]}} {{special=@{weapon_special_rules}}}">Light Attack</button>
+                        <button type="roll" name="roll_weapon_heavy" value="&{template:default} {{name=@{character_name} - @{weapon_name} Heavy Attack}} {{attack=[[1d20+@{focus}+@{weapon_focus_bonus}]]}} {{damage=[[@{weapon_heavy_dice}+((@{power}+@{weapon_power_bonus})*2)@{weapon_heavy_bonus}]]}} {{special=@{weapon_special_rules}}}">Heavy Attack</button>
+                        <button type="roll" name="roll_weapon_precise" value="&{template:default} {{name=@{character_name} - @{weapon_name} Precise Attack}} {{attack=[[1d20+((@{focus}+@{weapon_focus_bonus})*2)]]}} {{damage=[[1d4+(@{power}+@{weapon_power_bonus})]]}} {{special=@{weapon_special_rules}}}">Precise Attack</button>
                     </div>
                     <div class="sheet-weapon-special-div">
                         <span class="sheet-weapon-special">Special: </span><span name="attr_weapon_special_rules"></span>
@@ -409,8 +421,8 @@
 <!-- SHEET WORKERS -->
 <script type="text/worker">
     // Listen for changes to stats that affect derived values
-    on("change:toughness change:power change:agility change:focus change:fitness change:cunning change:reason change:awareness change:presence change:equipment_value_passive change:equipment_value_active change:equipment_penalty sheet:opened", function() {
-        getAttrs(["toughness", "power", "agility", "focus", "fitness", "cunning", "reason", "awareness", "presence", "equipment_value_passive", "equipment_value_active", "equipment_penalty"], function(values) {
+    on("change:toughness change:power change:agility change:focus change:fitness change:cunning change:reason change:awareness change:presence change:equipment_value_passive change:equipment_value_active change:equipment_penalty change:hp_bonus change:mp_bonus sheet:opened", function() {
+        getAttrs(["toughness", "power", "agility", "focus", "fitness", "cunning", "reason", "awareness", "presence", "equipment_value_passive", "equipment_value_active", "equipment_penalty", "hp_bonus", "mp_bonus"], function(values) {
             let toughness = parseInt(values.toughness) || 0;
             let power = parseInt(values.power) || 0;
             let agility = parseInt(values.agility) || 0;
@@ -423,18 +435,20 @@
             let equipValuePassive = parseInt(values.equipment_value_passive) || 0;
             let equipValueActive = parseInt(values.equipment_value_active) || 0;
             let equipPenalty = parseInt(values.equipment_penalty) || 0;
+            let hpBonus = parseInt(values.hp_bonus) || 0;
+            let mpBonus = parseInt(values.mp_bonus) || 0;
             
             // Equipment penalty affects all Agility-derived stats
             let effectiveAgility = Math.max(0, agility - equipPenalty);
             
-            let hp_max = (toughness * 5) + 20;
-            let mana_max = power + 6;
+            let hp_max = (toughness * 5) + 20 + hpBonus;
+            let mana_max = power + 6 + mpBonus;
             let rp_max = effectiveAgility + 2;
             let initiative = effectiveAgility;
             let evasion = effectiveAgility + 7;
             
             // Ensure guard and other values are always integers, rounded down
-            let guard = Math.floor(equipValuePassive + Math.floor(toughness / 2));
+            let guard = Math.floor(equipValuePassive + (toughness / 2));
             let block = Math.floor(toughness + equipValuePassive + equipValueActive);
             let dodge = Math.floor(15 + (effectiveAgility * 2));
             let potency = Math.floor(10 + focus);
@@ -656,19 +670,12 @@
                         specialRules = "";
                 }
                 
-                // Create enchantment text
-                let enchantText = "";
-                if (powerBonus !== 0 || focusBonus !== 0) {
-                    if (powerBonus !== 0) {
-                        enchantText += `+${powerBonus} Power`;
-                    }
-                    
-                    if (focusBonus !== 0) {
-                        if (enchantText !== "") {
-                            enchantText += ", ";
-                        }
-                        enchantText += `+${focusBonus} Focus`;
-                    }
+                // Add weapon bonus info to special rules if applicable
+                if (powerBonus > 0) {
+                    specialRules += (specialRules ? " " : "") + `+${powerBonus} Power.`;
+                }
+                if (focusBonus > 0) {
+                    specialRules += (specialRules ? " " : "") + `+${focusBonus} Focus.`;
                 }
                 
                 // Update attributes
@@ -677,7 +684,6 @@
                     [`${prefix}weapon_light_bonus`]: lightBonus,
                     [`${prefix}weapon_heavy_bonus`]: heavyBonus,
                     [`${prefix}weapon_heavy_dice`]: heavyDice,
-                    [`${prefix}weapon_enchant_text`]: enchantText
                 });
             });
         }
