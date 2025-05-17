@@ -9,48 +9,6 @@
         </div>
     </div>
     
-    <!-- CHARACTER INFO SECTION -->
-    <div class="sheet-section">
-        <h3>Character Information</h3>
-        <div class="sheet-char-info-grid">
-            <div class="sheet-char-info-col">
-                <div class="sheet-char-info-row">
-                    <label>Race:</label>
-                    <input type="text" name="attr_race">
-                </div>
-                <div class="sheet-char-info-row">
-                    <label>Subrace:</label>
-                    <input type="text" name="attr_subrace">
-                </div>
-                <div class="sheet-char-info-row">
-                    <label>Exp:</label>
-                    <input type="number" name="attr_exp" value="0">
-                </div>
-                <div class="sheet-char-info-row">
-                    <label>Spirit Core:</label>
-                    <input type="number" name="attr_spirit_core" value="0">
-                </div>
-            </div>
-            <div class="sheet-char-info-col">
-                <div class="sheet-char-info-row">
-                    <label>Nation:</label>
-                    <input type="text" name="attr_nation">
-                </div>
-                <div class="sheet-char-info-row">
-                    <label>Profession:</label>
-                    <input type="text" name="attr_profession">
-                </div>
-                <div class="sheet-char-info-row">
-                    <label>Clim:</label>
-                    <input type="number" name="attr_clim" value="0">
-                </div>
-                <div class="sheet-char-info-row">
-                    <label>Interlude Pts:</label>
-                    <input type="number" name="attr_interlude_points" value="0">
-                </div>
-            </div>
-        </div>
-    </div>
     
     <!-- MAIN & SUB STATS COMPACT TABLE -->
     <div class="sheet-section">
@@ -477,7 +435,7 @@
             
             // Ensure guard and other values are always integers, rounded down
             let guard = Math.floor(equipValuePassive + Math.floor(toughness / 2));
-            let block = Math.floor(toughness + equipValuePassive);
+            let block = Math.floor(toughness + equipValuePassive + equipValueActive);
             let dodge = Math.floor(15 + (effectiveAgility * 2));
             let potency = Math.floor(10 + focus);
             
