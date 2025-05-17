@@ -178,8 +178,6 @@
         <div class="sheet-combat-actions">
             <button type="roll" name="roll_block" value="&{template:default} {{name=@{character_name} - Block (1 RP)}} {{Guard=[[@{block_value}]]}}">Block (1 RP)</button>
             <button type="roll" name="roll_dodge" value="&{template:default} {{name=@{character_name} - Dodge (1 RP)}} {{Evasion=[[@{dodge_value}]]}}">Dodge (1 RP)</button>
-            <button type="roll" name="roll_skill_check" value="&{template:default} {{name=@{character_name} - ?{Skill|Acrobatics|Athletics|Riding|Deception|Roguecraft|Stealth|Artifice|Appraise|Common Knowledge|Flight|History|Magic|Medicine|Religion|Animal Husbandry|Insight|Perception|Survival|Art|Intimidation|Negotiation} Check}} {{result=[[1d20+@{?{Skill|Acrobatics|Athletics|Riding|Deception|Roguecraft|Stealth|Artifice|Appraise|Common Knowledge|Flight|History|Magic|Medicine|Religion|Animal Husbandry|Insight|Perception|Survival|Art|Intimidation|Negotiation}_total}]]}}">Skill Check</button>
-            <button type="roll" name="roll_custom_roll" value="&{template:default} {{name=@{character_name} - ?{What are you rolling?|Custom Roll}}} {{result=[[?{Dice formula|1d20}]]}}">Custom Roll</button>
         </div>
     </div>
     
@@ -235,6 +233,7 @@
                     <div class="sheet-weapon-buttons">
                         <button type="roll" name="roll_weapon_light" value="&{template:default} {{name=@{character_name} - @{weapon_name} Light Attack}} {{attack=[[1d20+@{focus}+@{weapon_focus_bonus}]]}} {{damage=[[1d4+(@{power}+@{weapon_power_bonus})@{weapon_light_bonus}]]}}{{#^{weapon_enchant_text} Enchantments=@{weapon_enchant_text}}}{{Special=@{weapon_special_rules}}}">Light Attack</button>
                         <button type="roll" name="roll_weapon_heavy" value="&{template:default} {{name=@{character_name} - @{weapon_name} Heavy Attack}} {{attack=[[1d20+@{focus}+@{weapon_focus_bonus}]]}} {{damage=[[@{weapon_heavy_dice}+((@{power}+@{weapon_power_bonus})*2)@{weapon_heavy_bonus}]]}}{{#^{weapon_enchant_text} Enchantments=@{weapon_enchant_text}}}{{Special=@{weapon_special_rules}}}">Heavy Attack</button>
+                        <button type="roll" name="roll_weapon_precise" value="&{template:default} {{name=@{character_name} - @{weapon_name} Precise Attack}} {{attack=[[1d20+((@{focus}+@{weapon_focus_bonus})*2)]]}} {{damage=[[1d4+(@{power}+@{weapon_power_bonus})]]}} {{Special=@{weapon_special_rules}}}">Precise Attack</button>
                     </div>
                     <div class="sheet-weapon-special-div">
                         <span class="sheet-weapon-special">Special: </span><span name="attr_weapon_special_rules"></span>

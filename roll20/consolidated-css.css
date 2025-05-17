@@ -1,0 +1,305 @@
+.sheet-wrapper {
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
+/* HEADER */
+.sheet-header {
+    text-align: center;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+}
+
+.sheet-header h1 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 4px 0;
+}
+
+.sheet-character-name {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    width: 60% !important;
+    margin: 0 auto !important;
+    display: block;
+}
+
+/* CHARACTER INFO */
+.sheet-char-info-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.sheet-char-info-col {
+    width: 48%;
+}
+
+.sheet-char-info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.sheet-char-info-row label {
+    width: 100px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.sheet-char-info-row input {
+    flex: 1;
+}
+
+/* SECTIONS */
+.sheet-section {
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+.sheet-section h3 {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+}
+
+/* STAT TABLES - More compact */
+.sheet-stat-tables {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.sheet-stat-table {
+    width: 48%;
+}
+
+.sheet-stat-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sheet-stat-table table td {
+    padding: 2px;
+}
+
+.sheet-stat-table input[type="number"] {
+    width: 36px;
+    text-align: center;
+}
+
+.sheet-stat-table label {
+    font-weight: bold;
+    text-align: right;
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+}
+
+/* COMBAT STATS - More compact grid */
+.sheet-equipment-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.sheet-equipment-row > div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.sheet-equipment-row label {
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.sheet-combat-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.sheet-combat-stats div {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.sheet-combat-stats label {
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.sheet-combat-stats input[type="number"] {
+    width: 32px;
+    text-align: center;
+}
+
+.sheet-combat-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+}
+
+/* WEAPONS - More compact */
+.sheet-weapon-row {
+    padding: 4px;
+    margin-bottom: 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.sheet-weapon-header {
+    display: flex; /* changed from grid */
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.sheet-name-and-bonuses {
+    flex-grow: 1;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.sheet-name-and-bonuses > input[type="text"][name$="_weapon_name"] {
+    flex-grow: 1;
+    min-width: 80px;
+}
+
+.sheet-inline-bonuses {
+    margin-left: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.sheet-weapon-header > select.sheet-dropdown-narrow {
+    flex-shrink: 0;
+}
+
+.sheet-weapon-buttons {
+    display: flex; /* changed from grid */
+    gap: 3px;
+    margin: 5px 0;
+    flex-wrap: nowrap;
+}
+
+.sheet-weapon-header input[type="text"] {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.sheet-weapon-enchant {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+}
+
+.sheet-weapon-bonus {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 48%;
+}
+
+.sheet-weapon-bonus label {
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.sheet-weapon-bonus input[type="number"] {
+    width: 36px;
+    text-align: center;
+}
+
+.sheet-weapon-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin: 4px 0;
+}
+
+.sheet-weapon-special-div {
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.sheet-weapon-special {
+    font-weight: bold;
+}
+
+/* SKILLS - More compact grid */
+.sheet-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+/* Reason skills have more entries, give them more space */
+.sheet-skill-category:nth-child(3) {
+    grid-column: span 2;
+}
+
+.sheet-skill-category h4 {
+    font-weight: bold;
+    margin: 0 0 4px 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2px;
+    font-size: 13px;
+}
+
+.sheet-skill {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 2px;
+}
+
+.sheet-skill label {
+    width: 70px;
+    font-size: 11px;
+}
+
+.sheet-skill input[type="number"] {
+    width: 26px;
+    text-align: center;
+}
+
+.sheet-skill button[type="roll"] {
+    padding: 1px 3px;
+    font-size: 10px;
+}
+
+/* BUTTONS */
+button[type="roll"] {
+    text-align: center;
+    font-size: 11px;
+    padding: 2px 4px;
+}
+
+/* GENERAL INPUTS */
+input, select, textarea {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+input[disabled] {
+    cursor: not-allowed;
+    background-color: #f0f0f0;
+}
