@@ -35,23 +35,6 @@ Three attack types are available for each weapon:
 - **Heavy Attack**: Powerful attack with 2d6 (or 2d8 for heavy melee weapons) + (Power×2) damage
 - **Precise Attack**: Focused attack with doubled Focus but standard damage
 
-### Weapon Groups
-
-Each weapon group provides unique special abilities:
-
-| Weapon Group | Special Ability |
-|--------------|-----------------|
-| Small | Hidden Weapon: Draw for 0 AP. First attack gains Trick Attack. |
-| Polearm | +5ft range, threatened range 5-10ft. |
-| Light Sword | Nimble: Move 5ft after light attack. |
-| Longsword | Versatile: Treat as light or heavy. |
-| Dueling | After 3 attacks on same enemy, get 0 RP Dodge/Block vs. them. |
-| Axe | Wild Swing: Deal 2 (light) or 4 (heavy) dmg on miss. |
-| Bludgeoning | Hollow Blow: Always deal at least 2 (light) or 4 (heavy) dmg. |
-| Katana | Keen: Crit on 19-20. |
-| Heavy Blade | Overpower: Basic weapon effects apply. |
-
-Plus ranged and specialty weapons with additional abilities.
 
 ## How to Use (Current Implementation)
 
