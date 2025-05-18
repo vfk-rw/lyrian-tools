@@ -166,6 +166,7 @@
             <fieldset class="repeating_weapons">
                 <div class="sheet-weapon-row">
                     <div class="sheet-weapon-header">
+                        <button class="btn repcontrol_del" title="Delete Weapon" style="display: inline-block; float: right; margin: 2px;">&#215;</button>
                         <input type="text" name="attr_weapon_name" placeholder="Weapon Name">
                         <select name="attr_weapon_group">
                             <option value="none">Select Weapon Group</option>
@@ -214,7 +215,7 @@
                         <button type="roll" name="roll_weapon_precise" value="&{template:default} {{name=@{character_name} - @{weapon_name} Precise Attack}} {{attack=[[1d20+((@{focus}+@{weapon_focus_bonus})*2)]]}} {{damage=[[1d4+(@{power}+@{weapon_power_bonus})]]}} {{special=@{weapon_special_rules}}}">Precise Attack</button>
                     </div>
                     <div class="sheet-weapon-special-div">
-                        <span class="sheet-weapon-special">Special: </span><span name="attr_weapon_special_rules"></span>
+                        <span class="sheet-weapon-special">Special: </span><span data-i18n-attr="title" title="Special Properties" class="sheet-weapon-special-text">@{weapon_special_rules}</span>
                     </div>
                     <input type="hidden" name="attr_weapon_light_bonus">
                     <input type="hidden" name="attr_weapon_heavy_bonus">
@@ -228,7 +229,7 @@
     
     <!-- SKILLS SECTION -->
     <div class="sheet-section">
-        <h3>Skills</h3>
+        <h3>Skills (Points + Expertise, don't add your stats!)</h3>
         <div class="sheet-skills-grid">
             <!-- FITNESS SKILLS -->
             <div class="sheet-skill-category">
@@ -457,7 +458,7 @@
             
             // Ensure guard and other values are always integers, rounded down
             let guard = Math.floor(equipValuePassive + (toughness / 2));
-            let block = Math.floor(toughness + equipValuePassive + equipValueActive);
+            let block = Math.floor(toughness + equipValueActive);
             let dodge = Math.floor(15 + (effectiveAgility * 2));
             let potency = Math.floor(10 + focus);
             
