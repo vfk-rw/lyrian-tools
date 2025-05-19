@@ -195,6 +195,13 @@
                             <option value="thread_dagger">Saboteur Thread Daggers</option>
                             <option value="wand">Wand</option>
                             <option value="staff">Magic Staff</option>
+                            <option value="sling">Sling</option>
+                            <option value="chainsaw">Chainsaw</option>
+                            <option value="whip">Whip</option>
+                            <option value="scythe">Scythe</option>
+                            <option value="pickaxe">Pickaxe</option>
+                            <option value="lance">Lance</option>
+                            <option value="giant_scissors">Giant Scissors</option>
                         </select>
                         <select name="attr_weapon_size">
                             <option value="light">Light</option>
@@ -686,6 +693,27 @@
                         break;
                     case "staff":
                         specialRules = "Push: Spend 1 mana on hit to push 5ft.";
+                        break;
+                    case "sling":
+                        specialRules = "Giant Killer: Cannot be dual wielded with another sling. You can overcharge your basic heavy attack for 1 AP to deal 6 extra damage.";
+                        break;
+                    case "chainsaw":
+                        specialRules = "Let it rip: After making an attack with this weapon, subsequent attacks with this weapon deal +1 damage. You may consume 1 shell to empower the artifice until the end of your turn. While empowered, the damage bonus of subsequent attacks stacks.";
+                        break;
+                    case "whip":
+                        specialRules = "Whip Crack: You gain +5ft range on your weapon attacks. Weapon attacks made at exactly 10ft range gain +1 damage. Your threatened range is still 5ft.";
+                        break;
+                    case "scythe":
+                        specialRules = "Sweeping Arc: Once per turn, when you make a Heavy attack against a target, you may make a Light attack against a different enemy within your range.";
+                        break;
+                    case "pickaxe":
+                        specialRules = "Superior Armor Pierce: Treats the enemy's Guard as if it was 1 lower.";
+                        break;
+                    case "lance":
+                        specialRules = "Charger Weapon: Can only be used while mounted. Counts as a polearm weapon and has all the same properties of one. Attacks made with this weapon after moving at least 20ft deal maximum damage instead of rolling.";
+                        break;
+                    case "giant_scissors":
+                        specialRules = "Shearing: You deal +1 damage against unarmored targets.";
                         break;
                     default:
                         specialRules = "";
