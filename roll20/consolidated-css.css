@@ -154,26 +154,7 @@
     gap: 4px;
 }
 
-/* NPC MODE TOGGLE */
-.sheet-npc-mode-toggle {
-    text-align: center;
-    margin: 5px 0;
-    font-weight: bold;
-}
 
-/* Hide NPC mode fields by default (PC mode) */
-.sheet-npc-mode {
-    display: none;
-}
-
-/* When NPC mode is checked, show NPC fields and hide PC fields */
-input[name="attr_npc_mode"]:checked ~ .sheet-section .sheet-npc-mode {
-    display: inline-block;
-}
-
-input[name="attr_npc_mode"]:checked ~ .sheet-section .sheet-pc-mode {
-    display: none;
-}
 
 /* WEAPONS - More compact */
 .sheet-weapon-row {
