@@ -7,6 +7,10 @@
             <!-- Token linking suggestion for GMs -->
             <p class="sheet-note">Recommended token settings: Bar 1 = HP, Bar 2 = Mana, Bar 3 = RP</p>
         </div>
+        <!-- NPC Mode Toggle -->
+        <div class="sheet-npc-mode-toggle">
+            <label><input type="checkbox" name="attr_npc_mode" value="1"> NPC Mode (Override Auto-Calculations)</label>
+        </div>
     </div>
     
     
@@ -84,7 +88,8 @@
                 <label>HP:</label>
                 <input type="number" name="attr_hp">
                 <span>/</span>
-                <input type="number" name="attr_hp_max" value="(@{toughness}*5)+20+@{hp_bonus}" disabled="true">
+                <input type="number" name="attr_hp_max" value="(@{toughness}*5)+20+@{hp_bonus}" disabled="true" class="sheet-pc-mode">
+                <input type="number" name="attr_hp_max_override" value="0" class="sheet-npc-mode" title="NPC HP Maximum">
                 <span>+</span>
                 <input type="number" name="attr_temp_hp" value="0" title="Temporary HP (shields)">
             </div>
@@ -96,7 +101,8 @@
                 <label>Mana:</label>
                 <input type="number" name="attr_mana">
                 <span>/</span>
-                <input type="number" name="attr_mana_max" value="(@{power})+6+@{mp_bonus}" disabled="true">
+                <input type="number" name="attr_mana_max" value="(@{power})+6+@{mp_bonus}" disabled="true" class="sheet-pc-mode">
+                <input type="number" name="attr_mana_max_override" value="0" class="sheet-npc-mode" title="NPC Mana Maximum">
             </div>
             <div>
                 <label>MP Bonus:</label>
@@ -106,32 +112,39 @@
                 <label>RP:</label>
                 <input type="number" name="attr_rp">
                 <span>/</span>
-                <input type="number" name="attr_rp_max" value="(@{agility})-(@{equipment_penalty})+2" disabled="true">
+                <input type="number" name="attr_rp_max" value="(@{agility})-(@{equipment_penalty})+2" disabled="true" class="sheet-pc-mode">
+                <input type="number" name="attr_rp_max_override" value="0" class="sheet-npc-mode" title="NPC RP Maximum">
             </div>
             <div>
                 <label>Initiative:</label>
-                <input type="number" name="attr_initiative" value="(@{agility})-(@{equipment_penalty})" disabled="true">
+                <input type="number" name="attr_initiative" value="(@{agility})-(@{equipment_penalty})" disabled="true" class="sheet-pc-mode">
+                <input type="number" name="attr_initiative_override" value="0" class="sheet-npc-mode" title="NPC Initiative">
                 <button type="roll" name="roll_initiative" value="&{template:default} {{name=@{character_name} - Initiative}} {{result=[[1d4+@{initiative}&{tracker}]]}}">Roll</button>
             </div>
             <div>
                 <label>Evasion:</label>
-                <input type="number" name="attr_evasion" value="(@{agility})-(@{equipment_penalty})+7" disabled="true">
+                <input type="number" name="attr_evasion" value="(@{agility})-(@{equipment_penalty})+7" disabled="true" class="sheet-pc-mode">
+                <input type="number" name="attr_evasion_override" value="0" class="sheet-npc-mode" title="NPC Evasion">
             </div>
             <div>
                 <label>Guard:</label>
-                <input type="number" name="attr_guard" value="floor(@{equipment_value_passive}+(@{toughness}/2))" disabled="true">
+                <input type="number" name="attr_guard" value="floor(@{equipment_value_passive}+(@{toughness}/2))" disabled="true" class="sheet-pc-mode">
+                <input type="number" name="attr_guard_override" value="0" class="sheet-npc-mode" title="NPC Guard">
             </div>
             <div>
                 <label>Block Value:</label>
-                <input type="number" name="attr_block_value" value="@{toughness}+@{equipment_value_passive}+@{equipment_value_active}" disabled="true">
+                <input type="number" name="attr_block_value" value="@{toughness}+@{equipment_value_passive}+@{equipment_value_active}" disabled="true" class="sheet-pc-mode">
+                <input type="number" name="attr_block_value_override" value="0" class="sheet-npc-mode" title="NPC Block Value">
             </div>
             <div>
                 <label>Dodge Value:</label>
-                <input type="number" name="attr_dodge_value" value="15+((@{agility}-@{equipment_penalty})*2)" disabled="true">
+                <input type="number" name="attr_dodge_value" value="15+((@{agility}-@{equipment_penalty})*2)" disabled="true" class="sheet-pc-mode">
+                <input type="number" name="attr_dodge_value_override" value="0" class="sheet-npc-mode" title="NPC Dodge Value">
             </div>
             <div>
                 <label>Save Bonus:</label>
-                <input type="number" name="attr_save_bonus" value="@{toughness}" disabled="true">
+                <input type="number" name="attr_save_bonus" value="@{toughness}" disabled="true" class="sheet-pc-mode">
+                <input type="number" name="attr_save_bonus_override" value="0" class="sheet-npc-mode" title="NPC Save Bonus">
                 <button type="roll" name="roll_save" value="&{template:default} {{name=@{character_name} - Save}} {{result=[[1d20+@{save_bonus}]]}}">Roll</button>
             </div>
             <div>
@@ -140,13 +153,14 @@
             </div>
             <div>
                 <label>Potency:</label>
-                <input type="number" name="attr_potency" value="(@{focus})+10" disabled="true">
+                <input type="number" name="attr_potency" value="(@{focus})+10" disabled="true" class="sheet-pc-mode">
+                <input type="number" name="attr_potency_override" value="0" class="sheet-npc-mode" title="NPC Potency">
             </div>
         </div>
         
         <!-- BASIC COMBAT ACTIONS -->
         <div class="sheet-combat-actions">
-            <button type="roll" name="roll_passive_defensives" value="&{template:default} {{name=@{character_name} - Passive Defensives}} {{Guard=@{guard}}} {{Evasion=@{evasion}}}">Passive Defensives</button>
+            <button type="roll" name="roll_passive_defensives" value="&{template:default} {{name=@{character_name} - Passive Defensives}} {{Guard=[[@{guard}]]}} {{Evasion=[[@{evasion}]]}}">Passive Defensives</button>
             <button type="roll" name="roll_block" value="&{template:default} {{name=@{character_name} - Block (1 RP)}} {{Guard=[[@{block_value}]]}} {{Effect=Damage can be reduced to 0. Cannot be critically hit.}}">Block (1 RP)</button>
             <button type="roll" name="roll_dodge" value="&{template:default} {{name=@{character_name} - Dodge (1 RP)}} {{Evasion=[[@{dodge_value}]]}}">Dodge (1 RP)</button>
             <button type="roll" name="roll_aurasense" value="&{template:default} {{name=@{character_name} - Aurasense (0 AP)}} {{Effect=You check the aura of an enemy within 120ft, letting you know if they are a heroic unit or not. An enemy in presence concealment always shows as non-heroic.}}">Aurasense (0 AP)</button>
@@ -166,7 +180,9 @@
             <fieldset class="repeating_weapons">
                 <div class="sheet-weapon-row">
                     <div class="sheet-weapon-header">
-                        <button class="btn repcontrol_del" title="Delete Weapon" style="display: inline-block; float: right; margin: 2px;">&#215;</button>
+                        <div class="repcontrol">
+                            <button class="btn repcontrol_del" type="button">Delete</button>
+                        </div>
                         <input type="text" name="attr_weapon_name" placeholder="Weapon Name">
                         <select name="attr_weapon_group">
                             <option value="none">Select Weapon Group</option>
@@ -458,7 +474,7 @@
             
             // Ensure guard and other values are always integers, rounded down
             let guard = Math.floor(equipValuePassive + (toughness / 2));
-            let block = Math.floor(toughness + equipValueActive);
+            let block = Math.floor(toughness + equipValuePassive);
             let dodge = Math.floor(15 + (effectiveAgility * 2));
             let potency = Math.floor(10 + focus);
             
@@ -528,7 +544,182 @@
         });
     });
     
-    // Additional listener for changes to skill values
+    // Additional listener for changes to NPC mode toggle
+    on("change:npc_mode sheet:opened", function() {
+        getAttrs(["npc_mode"], function(values) {
+            const npcMode = parseInt(values.npc_mode) || 0;
+            
+            // Get all the override values and regular values
+            getAttrs([
+                "hp_max", "hp_max_override",
+                "mana_max", "mana_max_override",
+                "rp_max", "rp_max_override",
+                "initiative", "initiative_override",
+                "evasion", "evasion_override",
+                "guard", "guard_override",
+                "block_value", "block_value_override",
+                "dodge_value", "dodge_value_override",
+                "save_bonus", "save_bonus_override",
+                "potency", "potency_override"
+            ], function(stats) {
+                let updates = {};
+                
+                // If NPC mode is active, use override values where available
+                if (npcMode) {
+                    // Copy override values to the main attributes if they have been set
+                    if (parseInt(stats.hp_max_override) > 0) 
+                        updates.hp_max = stats.hp_max_override;
+                    if (parseInt(stats.mana_max_override) > 0) 
+                        updates.mana_max = stats.mana_max_override;
+                    if (parseInt(stats.rp_max_override) > 0) 
+                        updates.rp_max = stats.rp_max_override;
+                    if (parseInt(stats.initiative_override) > 0) 
+                        updates.initiative = stats.initiative_override;
+                    if (parseInt(stats.evasion_override) > 0) 
+                        updates.evasion = stats.evasion_override;
+                    if (parseInt(stats.guard_override) > 0) 
+                        updates.guard = stats.guard_override;
+                    if (parseInt(stats.block_value_override) > 0) 
+                        updates.block_value = stats.block_value_override;
+                    if (parseInt(stats.dodge_value_override) > 0) 
+                        updates.dodge_value = stats.dodge_value_override;
+                    if (parseInt(stats.save_bonus_override) > 0) 
+                        updates.save_bonus = stats.save_bonus_override;
+                    if (parseInt(stats.potency_override) > 0) 
+                        updates.potency = stats.potency_override;
+                }
+                
+                // Update the attributes
+                setAttrs(updates);
+            });
+        });
+    });
+    
+    // Listen for changes to override values in NPC mode
+    on("change:hp_max_override change:mana_max_override change:rp_max_override change:initiative_override change:evasion_override change:guard_override change:block_value_override change:dodge_value_override change:save_bonus_override change:potency_override", function(eventInfo) {
+        getAttrs(["npc_mode"], function(values) {
+            const npcMode = parseInt(values.npc_mode) || 0;
+            if (npcMode) {
+                // If in NPC mode, apply the changed override value to the corresponding attribute
+                const statName = eventInfo.sourceAttribute.replace("_override", "");
+                const updates = {};
+                
+                getAttrs([eventInfo.sourceAttribute], function(overrideVal) {
+                    updates[statName] = overrideVal[eventInfo.sourceAttribute];
+                    setAttrs(updates);
+                });
+            }
+        });
+    });
+    
+    // Listen for changes to stats that affect derived values
+    on("change:toughness change:power change:agility change:focus change:fitness change:cunning change:reason change:awareness change:presence change:equipment_value_passive change:equipment_value_active change:equipment_penalty change:hp_bonus change:mp_bonus sheet:opened", function() {
+        getAttrs(["npc_mode", "toughness", "power", "agility", "focus", "fitness", "cunning", "reason", "awareness", "presence", "equipment_value_passive", "equipment_value_active", "equipment_penalty", "hp_bonus", "mp_bonus"], function(values) {
+            // Skip automatic calculation if in NPC mode
+            const npcMode = parseInt(values.npc_mode) || 0;
+            if (npcMode) return;
+            
+            let toughness = parseInt(values.toughness) || 0;
+            let power = parseInt(values.power) || 0;
+            let agility = parseInt(values.agility) || 0;
+            let focus = parseInt(values.focus) || 0;
+            let fitness = parseInt(values.fitness) || 0;
+            let cunning = parseInt(values.cunning) || 0;
+            let reason = parseInt(values.reason) || 0;
+            let awareness = parseInt(values.awareness) || 0;
+            let presence = parseInt(values.presence) || 0;
+            let equipValuePassive = parseInt(values.equipment_value_passive) || 0;
+            let equipValueActive = parseInt(values.equipment_value_active) || 0;
+            let equipPenalty = parseInt(values.equipment_penalty) || 0;
+            let hpBonus = parseInt(values.hp_bonus) || 0;
+            let mpBonus = parseInt(values.mp_bonus) || 0;
+            
+            // Equipment penalty affects all Agility-derived stats
+            let effectiveAgility = Math.max(0, agility - equipPenalty);
+            
+            let hp_max = (toughness * 5) + 20 + hpBonus;
+            let mana_max = power + 6 + mpBonus;
+            let rp_max = effectiveAgility + 2;
+            let initiative = effectiveAgility;
+            let evasion = effectiveAgility + 7;
+            
+            // Ensure guard and other values are always integers, rounded down
+            let guard = Math.floor(equipValuePassive + (toughness / 2));
+            let block = Math.floor(toughness + equipValuePassive + equipValueActive);
+            let dodge = Math.floor(15 + (effectiveAgility * 2));
+            let potency = Math.floor(10 + focus);
+            
+            // Create an object to hold all the attributes we want to set
+            let attributes = {
+                hp_max: hp_max,
+                mana_max: mana_max,
+                rp_max: rp_max,
+                initiative: initiative,
+                evasion: evasion,
+                guard: guard,
+                save_bonus: toughness,
+                potency: potency,
+                dodge_value: dodge,
+                block_value: block
+            };
+            
+            // Set all skill total attributes based on substats - only if not in NPC mode
+            if (!npcMode) {
+                // FITNESS SKILLS
+                getAttrs(["acrobatics", "acrobatics_expertise", "athletics", "athletics_expertise", "riding", "riding_expertise"], function(skillValues) {
+                    attributes["acrobatics_total"] = Math.floor(fitness + (parseInt(skillValues.acrobatics) || 0) + (parseInt(skillValues.acrobatics_expertise) || 0) - equipPenalty);
+                    attributes["athletics_total"] = Math.floor(fitness + (parseInt(skillValues.athletics) || 0) + (parseInt(skillValues.athletics_expertise) || 0) - equipPenalty);
+                    attributes["riding_total"] = Math.floor(fitness + (parseInt(skillValues.riding) || 0) + (parseInt(skillValues.riding_expertise) || 0) - equipPenalty);
+                    
+                    // CUNNING SKILLS
+                    getAttrs(["deception", "deception_expertise", "roguecraft", "roguecraft_expertise", "stealth", "stealth_expertise"], function(cunningValues) {
+                        attributes["deception_total"] = Math.floor(cunning + (parseInt(cunningValues.deception) || 0) + (parseInt(cunningValues.deception_expertise) || 0));
+                        attributes["roguecraft_total"] = Math.floor(cunning + (parseInt(cunningValues.roguecraft) || 0) + (parseInt(cunningValues.roguecraft_expertise) || 0));
+                        attributes["stealth_total"] = Math.floor(cunning + (parseInt(cunningValues.stealth) || 0) + (parseInt(cunningValues.stealth_expertise) || 0));
+                        
+                        // REASON SKILLS
+                        getAttrs(["artifice", "artifice_expertise", "appraise", "appraise_expertise", "common_knowledge", "common_knowledge_expertise", 
+                                "flight", "flight_expertise", "history", "history_expertise", "magic", "magic_expertise", 
+                                "medicine", "medicine_expertise", "religion", "religion_expertise"], function(reasonValues) {
+                            attributes["artifice_total"] = Math.floor(reason + (parseInt(reasonValues.artifice) || 0) + (parseInt(reasonValues.artifice_expertise) || 0));
+                            attributes["appraise_total"] = Math.floor(reason + (parseInt(reasonValues.appraise) || 0) + (parseInt(reasonValues.appraise_expertise) || 0));
+                            attributes["common_knowledge_total"] = Math.floor(reason + (parseInt(reasonValues.common_knowledge) || 0) + (parseInt(reasonValues.common_knowledge_expertise) || 0));
+                            attributes["flight_total"] = Math.floor(reason + (parseInt(reasonValues.flight) || 0) + (parseInt(reasonValues.flight_expertise) || 0));
+                            attributes["history_total"] = Math.floor(reason + (parseInt(reasonValues.history) || 0) + (parseInt(reasonValues.history_expertise) || 0));
+                            attributes["magic_total"] = Math.floor(reason + (parseInt(reasonValues.magic) || 0) + (parseInt(reasonValues.magic_expertise) || 0));
+                            attributes["medicine_total"] = Math.floor(reason + (parseInt(reasonValues.medicine) || 0) + (parseInt(reasonValues.medicine_expertise) || 0));
+                            attributes["religion_total"] = Math.floor(reason + (parseInt(reasonValues.religion) || 0) + (parseInt(reasonValues.religion_expertise) || 0));
+                            
+                            // AWARENESS SKILLS
+                            getAttrs(["animal_husbandry", "animal_husbandry_expertise", "insight", "insight_expertise", 
+                                    "perception", "perception_expertise", "survival", "survival_expertise"], function(awarenessValues) {
+                                attributes["animal_husbandry_total"] = Math.floor(awareness + (parseInt(awarenessValues.animal_husbandry) || 0) + (parseInt(awarenessValues.animal_husbandry_expertise) || 0));
+                                attributes["insight_total"] = Math.floor(awareness + (parseInt(awarenessValues.insight) || 0) + (parseInt(awarenessValues.insight_expertise) || 0));
+                                attributes["perception_total"] = Math.floor(awareness + (parseInt(awarenessValues.perception) || 0) + (parseInt(awarenessValues.perception_expertise) || 0));
+                                attributes["survival_total"] = Math.floor(awareness + (parseInt(awarenessValues.survival) || 0) + (parseInt(awarenessValues.survival_expertise) || 0));
+                                
+                                // PRESENCE SKILLS
+                                getAttrs(["art", "art_expertise", "intimidation", "intimidation_expertise", 
+                                        "negotiation", "negotiation_expertise"], function(presenceValues) {
+                                    attributes["art_total"] = Math.floor(presence + (parseInt(presenceValues.art) || 0) + (parseInt(presenceValues.art_expertise) || 0));
+                                    attributes["intimidation_total"] = Math.floor(presence + (parseInt(presenceValues.intimidation) || 0) + (parseInt(presenceValues.intimidation_expertise) || 0));
+                                    attributes["negotiation_total"] = Math.floor(presence + (parseInt(presenceValues.negotiation) || 0) + (parseInt(presenceValues.negotiation_expertise) || 0));
+                                    
+                                    // Now set all attributes at once
+                                    setAttrs(attributes);
+                                });
+                            });
+                        });
+                    });
+                });
+            } else {
+                // In NPC mode, just update the base stats without recalculating skills
+                setAttrs(attributes);
+            }
+        });
+    });
+    
+    // Additional listener for changes to skill values - same check for NPC mode
     on("change:acrobatics change:acrobatics_expertise change:athletics change:athletics_expertise change:riding change:riding_expertise " +
        "change:deception change:deception_expertise change:roguecraft change:roguecraft_expertise change:stealth change:stealth_expertise " +
        "change:artifice change:artifice_expertise change:appraise change:appraise_expertise change:common_knowledge change:common_knowledge_expertise " +
@@ -538,55 +729,61 @@
        "change:perception change:perception_expertise change:survival change:survival_expertise " +
        "change:art change:art_expertise change:intimidation change:intimidation_expertise " +
        "change:negotiation change:negotiation_expertise", function(eventInfo) {
-            // Extract the skill name from the event
-            const skillName = eventInfo.sourceAttribute.split("_expertise")[0];
-            let attrToGet = ["fitness", "cunning", "reason", "awareness", "presence", "equipment_penalty"];
-            
-            // Add the skill and expertise values
-            attrToGet.push(skillName);
-            attrToGet.push(`${skillName}_expertise`);
-            
-            getAttrs(attrToGet, function(values) {
-                let fitness = parseInt(values.fitness) || 0;
-                let cunning = parseInt(values.cunning) || 0;
-                let reason = parseInt(values.reason) || 0;
-                let awareness = parseInt(values.awareness) || 0;
-                let presence = parseInt(values.presence) || 0;
-                let equipPenalty = parseInt(values.equipment_penalty) || 0;
+            // Check if in NPC mode first
+            getAttrs(["npc_mode"], function(values) {
+                const npcMode = parseInt(values.npc_mode) || 0;
+                if (npcMode) return; // Skip calculations in NPC mode
                 
-                let skillValue = parseInt(values[skillName]) || 0;
-                let expertiseValue = parseInt(values[`${skillName}_expertise`]) || 0;
+                // Extract the skill name from the event
+                const skillName = eventInfo.sourceAttribute.split("_expertise")[0];
+                let attrToGet = ["fitness", "cunning", "reason", "awareness", "presence", "equipment_penalty"];
                 
-                let subStat = 0;
-                let totalValue = 0;
+                // Add the skill and expertise values
+                attrToGet.push(skillName);
+                attrToGet.push(`${skillName}_expertise`);
                 
-                // Determine which sub-stat to use based on the skill
-                if (["acrobatics", "athletics", "riding"].includes(skillName)) {
-                    subStat = fitness;
-                    // Apply equipment penalty to fitness skills
-                    totalValue = subStat + skillValue + expertiseValue - equipPenalty;
-                } else if (["deception", "roguecraft", "stealth"].includes(skillName)) {
-                    subStat = cunning;
-                    totalValue = subStat + skillValue + expertiseValue;
-                } else if (["artifice", "appraise", "common_knowledge", "flight", "history", "magic", "medicine", "religion"].includes(skillName)) {
-                    subStat = reason;
-                    totalValue = subStat + skillValue + expertiseValue;
-                } else if (["animal_husbandry", "insight", "perception", "survival"].includes(skillName)) {
-                    subStat = awareness;
-                    totalValue = subStat + skillValue + expertiseValue;
-                } else if (["art", "intimidation", "negotiation"].includes(skillName)) {
-                    subStat = presence;
-                    totalValue = subStat + skillValue + expertiseValue;
-                }
-                
-                // Update the total
-                let update = {};
-                update[`${skillName}_total`] = Math.floor(totalValue);
-                setAttrs(update);
+                getAttrs(attrToGet, function(values) {
+                    let fitness = parseInt(values.fitness) || 0;
+                    let cunning = parseInt(values.cunning) || 0;
+                    let reason = parseInt(values.reason) || 0;
+                    let awareness = parseInt(values.awareness) || 0;
+                    let presence = parseInt(values.presence) || 0;
+                    let equipPenalty = parseInt(values.equipment_penalty) || 0;
+                    
+                    let skillValue = parseInt(values[skillName]) || 0;
+                    let expertiseValue = parseInt(values[`${skillName}_expertise`]) || 0;
+                    
+                    let subStat = 0;
+                    let totalValue = 0;
+                    
+                    // Determine which sub-stat to use based on the skill
+                    if (["acrobatics", "athletics", "riding"].includes(skillName)) {
+                        subStat = fitness;
+                        // Apply equipment penalty to fitness skills
+                        totalValue = subStat + skillValue + expertiseValue - equipPenalty;
+                    } else if (["deception", "roguecraft", "stealth"].includes(skillName)) {
+                        subStat = cunning;
+                        totalValue = subStat + skillValue + expertiseValue;
+                    } else if (["artifice", "appraise", "common_knowledge", "flight", "history", "magic", "medicine", "religion"].includes(skillName)) {
+                        subStat = reason;
+                        totalValue = subStat + skillValue + expertiseValue;
+                    } else if (["animal_husbandry", "insight", "perception", "survival"].includes(skillName)) {
+                        subStat = awareness;
+                        totalValue = subStat + skillValue + expertiseValue;
+                    } else if (["art", "intimidation", "negotiation"].includes(skillName)) {
+                        subStat = presence;
+                        totalValue = subStat + skillValue + expertiseValue;
+                    }
+                    
+                    // Update the total
+                    let update = {};
+                    update[`${skillName}_total`] = Math.floor(totalValue);
+                    setAttrs(update);
+                });
             });
     });
     
-    // Handle weapon special rules and enchantments
+    // Handle weapon special rules and enchantments - no need to change this one
     on("change:repeating_weapons:weapon_group change:repeating_weapons:weapon_size change:repeating_weapons:weapon_power_bonus change:repeating_weapons:weapon_focus_bonus sheet:opened", function(eventInfo) {
         const sourceAttribute = eventInfo.sourceAttribute || "";
         const weaponId = sourceAttribute.includes("repeating_weapons") ? 

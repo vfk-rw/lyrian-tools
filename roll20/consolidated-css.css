@@ -154,12 +154,43 @@
     gap: 4px;
 }
 
+/* NPC MODE TOGGLE */
+.sheet-npc-mode-toggle {
+    text-align: center;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+/* Hide NPC mode fields by default (PC mode) */
+.sheet-npc-mode {
+    display: none;
+}
+
+/* When NPC mode is checked, show NPC fields and hide PC fields */
+input[name="attr_npc_mode"]:checked ~ .sheet-section .sheet-npc-mode {
+    display: inline-block;
+}
+
+input[name="attr_npc_mode"]:checked ~ .sheet-section .sheet-pc-mode {
+    display: none;
+}
+
 /* WEAPONS - More compact */
 .sheet-weapon-row {
     padding: 4px;
     margin-bottom: 6px;
     border: 1px solid #ccc;
     border-radius: 3px;
+}
+
+/* Hide default Roll20 modify controls for weapons */
+.repcontainer .repitem .repcontrol {
+    display: none !important;
+}
+
+/* Make sure our custom delete button is visible */
+.repcontainer .repitem .btn.repcontrol_del {
+    display: inline-block !important;
 }
 
 .sheet-weapon-header {
