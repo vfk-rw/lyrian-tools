@@ -1,3 +1,4 @@
+<input type="checkbox" name="attr_dark_mode" value="1" class="sheet-dark-mode" style="display: none;">
 <div class="sheet-wrapper">
     <!-- HEADER -->
     <div class="sheet-header">
@@ -7,8 +8,13 @@
             <!-- Token linking suggestion for GMs -->
             <p class="sheet-note">Recommended token settings: Bar 1 = HP, Bar 2 = Mana, Bar 3 = RP</p>
         </div>
-        <div class="sheet-npc-mode-toggle">
-            <label><input type="checkbox" name="attr_npc_mode" value="0"> NPC Mode (Disable Auto-Calculations)</label>
+        <div class="sheet-mode-toggles">
+            <div class="sheet-npc-mode-toggle">
+                <label><input type="checkbox" name="attr_npc_mode" value="1"> NPC Mode (Disable Auto-Calculations)</label>
+            </div>
+            <div class="sheet-dark-mode-toggle">
+                <label><input type="checkbox" name="attr_dark_mode" value="1"> Dark Mode</label>
+            </div>
         </div>
     </div>
     
@@ -748,6 +754,18 @@
                     toughness: getAttrByName("character_id", "toughness")
                 });
             }
+        });
+    });
+    
+    // Dark mode toggle handler
+    on("change:dark_mode sheet:opened", function() {
+        getAttrs(["dark_mode"], function(values) {
+            console.log("Dark mode: " + values.dark_mode);
+            // Ensure checkbox at the top of the sheet has the same value as the visible checkbox
+            // This keeps both checkboxes in sync
+            setAttrs({
+                dark_mode: values.dark_mode
+            });
         });
     });
 </script>
