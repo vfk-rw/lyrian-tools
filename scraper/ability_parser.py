@@ -5,6 +5,55 @@ import argparse
 from bs4 import BeautifulSoup
 import os
 
+def parse_individual_crafting_ability(ability_text, ability_name):
+    """Parse a single crafting ability from its text block"""
+    crafting_ability = {
+        'name': ability_name,
+        'id': sanitize_ability_id(ability_name),
+        'type': 'crafting_ability'
+    }
+    
+    # Extract cost - look for "Cost:" followed by the cost value, stopping at "Description:" or newline
+    cost_match = re.search(r'Cost:\s*([^:\n]+?)(?:Description:|$)', ability_text, re.IGNORECASE)
+    if cost_match:
+        cost_text = cost_match.group(1).strip()
+        if cost_text and cost_text not in ['-', '--']:
+            crafting_ability['cost'] = cost_text
+    
+    # Extract keywords if present (though crafting abilities usually don't have them)
+    keywords_match = re.search(r'Keywords:\s*([^\n]+?)(?:\n|$)', ability_text, re.IGNORECASE)
+    if keywords_match:
+        keywords_text = keywords_match.group(1).strip()
+        if keywords_text and keywords_text not in ['-', '--']:
+            keywords = [kw.strip() for kw in re.split(r'[,;]', keywords_text) if kw.strip()]
+            crafting_ability['keywords'] = keywords
+    
+    # Extract description - look for "Description:" followed by the description
+    desc_match = re.search(r'Description:\s*(.+?)(?=\n\s*\*\*[^*]+\*\*|$)', ability_text, re.IGNORECASE | re.DOTALL)
+    if desc_match:
+        description = desc_match.group(1).strip()
+        # Clean up any remaining HTML-like artifacts
+        description = re.sub(r'&nbsp;', ' ', description)
+        description = re.sub(r'\s+', ' ', description)
+        crafting_ability['description'] = description
+    elif not cost_match:
+        # If no description section found and no cost, treat the whole text as description
+        crafting_ability['description'] = ability_text.strip()
+    
+    # Check if this is a co-craft ability and add keyword
+    description = crafting_ability.get('description', '')
+    if description.lower().startswith('co-craft'):
+        # Initialize keywords if not present
+        if 'keywords' not in crafting_ability:
+            crafting_ability['keywords'] = []
+        # Add co-craft keyword if not already present
+        if 'co-craft' not in crafting_ability['keywords']:
+            crafting_ability['keywords'].append('co-craft')
+    
+    return crafting_ability
+
+
+
 def sanitize_ability_id(name):
     """Create a consistent ability ID from the name"""
     # Remove leading/trailing whitespace and convert to lowercase
@@ -64,18 +113,18 @@ def parse_crafting_abilities(description_text, ability_name):
     """Parse crafting abilities from complex description text"""
     crafting_abilities = []
     
-    # Split by ability names (look for patterns like "NameCost:" or "NameKeywords:")
-    # This regex looks for a word/phrase followed by "Cost:" or "Keywords:"
-    ability_pattern = r'([A-Z][a-zA-Z\s]+?)(?:Cost:|Keywords:|Description:)'
+    # Look for ability patterns: Word/phrase followed by "Cost:" at start of line or after newline
+    # This is more conservative - looks for clear ability starts
+    ability_pattern = r'(?:^|\n\n)([A-Z][a-zA-Z\s&\']+?)(?=Cost:)'
     
     # Find all potential ability starts
-    matches = list(re.finditer(ability_pattern, description_text))
+    matches = list(re.finditer(ability_pattern, description_text, re.MULTILINE))
     
-    if not matches:
-        # If no clear crafting abilities found, return as single crafting ability
+    if len(matches) < 2:
+        # If we don't find at least 2 clear abilities, don't split
         return [{
             'name': ability_name,
-            'type': 'crafting',
+            'type': 'crafting_ability',
             'description': description_text.strip()
         }]
     
@@ -92,46 +141,24 @@ def parse_crafting_abilities(description_text, ability_name):
         
         ability_text = description_text[start_pos:end_pos].strip()
         
+        # Skip if this looks like it's just a fragment
+        if len(ability_text) < 20:
+            continue
+            
         # Parse the individual crafting ability
         crafting_ability = parse_individual_crafting_ability(ability_text, ability_name_match)
-        if crafting_ability:
+        if crafting_ability and crafting_ability.get('name'):
             crafting_abilities.append(crafting_ability)
     
+    # If we didn't get good results, fall back to single ability
+    if len(crafting_abilities) < 2:
+        return [{
+            'name': ability_name,
+            'type': 'crafting_ability', 
+            'description': description_text.strip()
+        }]
+    
     return crafting_abilities
-
-def parse_individual_crafting_ability(ability_text, ability_name):
-    """Parse a single crafting ability from its text block"""
-    crafting_ability = {
-        'name': ability_name,
-        'type': 'crafting'
-    }
-    
-    # Extract cost
-    cost_match = re.search(r'Cost:\s*([^\n]+?)(?:Description:|$)', ability_text, re.IGNORECASE)
-    if cost_match:
-        cost_text = cost_match.group(1).strip()
-        if cost_text and cost_text not in ['-', '--']:
-            crafting_ability['cost'] = cost_text
-    
-    # Extract keywords
-    keywords_match = re.search(r'Keywords:\s*([^\n]+?)(?:Cost:|Description:|$)', ability_text, re.IGNORECASE)
-    if keywords_match:
-        keywords_text = keywords_match.group(1).strip()
-        if keywords_text and keywords_text not in ['-', '--']:
-            # Split keywords by common separators
-            keywords = [kw.strip() for kw in re.split(r'[,;]', keywords_text) if kw.strip()]
-            crafting_ability['keywords'] = keywords
-    
-    # Extract description
-    desc_match = re.search(r'Description:\s*(.+?)(?:[A-Z][a-zA-Z\s]+?(?:Cost:|Keywords:|Description:)|$)', ability_text, re.IGNORECASE | re.DOTALL)
-    if desc_match:
-        description = desc_match.group(1).strip()
-        crafting_ability['description'] = description
-    elif not cost_match:
-        # If no description section found and no cost, treat the whole text as description
-        crafting_ability['description'] = ability_text.strip()
-    
-    return crafting_ability
 
 def should_parse_as_crafting(ability_data, class_roles=None):
     """Determine if an ability should be parsed as crafting abilities"""
@@ -143,17 +170,26 @@ def should_parse_as_crafting(ability_data, class_roles=None):
     # Look for crafting indicators
     crafting_indicators = [
         'crafting points', 'crafting check', 'crafting session', 'crafting dice',
-        'errand', 'interlude point', 'IP', 'co-craft',
-        'cost:', 'description:', 'cost:1', 'cost:2', 'cost:3'
+        'interlude point', 'IP', 'co-craft'
     ]
     
     has_crafting_indicators = any(indicator.lower() in description.lower() for indicator in crafting_indicators)
     
-    # Look for multiple cost/description blocks
-    cost_pattern = r'cost:\s*[^\n]+.*?description:'
-    has_multiple_blocks = len(re.findall(cost_pattern, description, re.IGNORECASE | re.DOTALL)) > 1
+    # Look for multiple ability blocks that start with a name and have Cost:/Description:
+    ability_block_pattern = r'(?:^|\n\n)([A-Z][a-zA-Z\s&\']+?)Cost:[^\n]+.*?Description:'
+    ability_blocks = re.findall(ability_block_pattern, description, re.IGNORECASE | re.DOTALL)
     
-    return (is_artisan_class and has_crafting_indicators) or has_multiple_blocks
+    has_multiple_blocks = len(ability_blocks) >= 2
+    
+    # Check for strong Co-Craft indicators - multiple Co-Craft abilities with clear structure
+    co_craft_count = description.lower().count('co-craft')
+    has_strong_co_craft_pattern = co_craft_count >= 2 and has_multiple_blocks
+    
+    # Split if:
+    # 1. Traditional case: Artisan class with crafting indicators and multiple blocks, OR
+    # 2. Strong Co-Craft pattern: Multiple Co-Craft abilities with clear block structure
+    return (is_artisan_class and has_crafting_indicators and has_multiple_blocks) or \
+           (has_strong_co_craft_pattern and has_crafting_indicators)
 
 def extract_requirements(ability_data):
     """Extract and structure requirement information"""
@@ -434,14 +470,28 @@ def main():
     args = parser.parse_args()
 
     all_abilities = []
+    global_seen_ids = set()  # Track IDs across all files
     class_roles = args.class_roles or []
+    
+    def add_abilities_with_dedup(abilities_list, file_type):
+        """Add abilities to all_abilities while deduplicating across files"""
+        added_count = 0
+        for ability in abilities_list:
+            if ability and 'id' in ability:
+                if ability['id'] not in global_seen_ids:
+                    all_abilities.append(ability)
+                    global_seen_ids.add(ability['id'])
+                    added_count += 1
+                else:
+                    print(f"  ⚠️  Skipping cross-file duplicate: {ability['name']} ({ability['id']}) in {file_type}")
+        return added_count
     
     # Process true abilities if provided
     if args.true_abilities:
         if os.path.exists(args.true_abilities):
             true_abilities = process_html_file(args.true_abilities, class_roles)
-            all_abilities.extend(true_abilities)
-            print(f"Processed {len(true_abilities)} true abilities.")
+            added = add_abilities_with_dedup(true_abilities, "true abilities")
+            print(f"Processed {len(true_abilities)} true abilities, added {added} unique abilities.")
         else:
             print(f"Warning: True abilities file not found: {args.true_abilities}")
     
@@ -449,8 +499,8 @@ def main():
     if args.key_abilities:
         if os.path.exists(args.key_abilities):
             key_abilities = process_html_file(args.key_abilities, class_roles)
-            all_abilities.extend(key_abilities)
-            print(f"Processed {len(key_abilities)} key abilities.")
+            added = add_abilities_with_dedup(key_abilities, "key abilities")
+            print(f"Processed {len(key_abilities)} key abilities, added {added} unique abilities.")
         else:
             print(f"Warning: Key abilities file not found: {args.key_abilities}")
 
@@ -463,15 +513,15 @@ def main():
         # Check if files exist and process them
         if os.path.exists(true_abilities_path):
             true_abilities = process_html_file(true_abilities_path, class_roles)
-            all_abilities.extend(true_abilities)
-            print(f"Processed {len(true_abilities)} true abilities from default path.")
+            added = add_abilities_with_dedup(true_abilities, "true abilities")
+            print(f"Processed {len(true_abilities)} true abilities from default path, added {added} unique abilities.")
         else:
             print(f"Default true abilities file not found: {true_abilities_path}")
         
         if os.path.exists(key_abilities_path):
             key_abilities = process_html_file(key_abilities_path, class_roles)
-            all_abilities.extend(key_abilities)
-            print(f"Processed {len(key_abilities)} key abilities from default path.")
+            added = add_abilities_with_dedup(key_abilities, "key abilities")
+            print(f"Processed {len(key_abilities)} key abilities from default path, added {added} unique abilities.")
         else:
             print(f"Default key abilities file not found: {key_abilities_path}")
 

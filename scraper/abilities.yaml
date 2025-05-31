@@ -1,19 +1,3 @@
-- name: A Small Bit of Creation
-  type: crafting
-  description: You deconstruct and reconstruct the structure of an harvested alchemy
-    herb.  By lowering its energy level you attune an herb to another element.  Choose
-    one herb and lower its rarity by one step and then change its element into the
-    element of your choice.
-  id: transmuter_tricks_a_small_bit_of_creation
-  keywords: &id023 []
-- name: A Small Bit of Creation
-  type: crafting
-  description: You deconstruct and reconstruct the structure of an harvested alchemy
-    herb.  By lowering its energy level you attune an herb to another element.  Choose
-    one herb and lower its rarity by one step and then change its element into the
-    element of your choice.
-  id: transmutation_tricks_a_small_bit_of_creation
-  keywords: &id024 []
 - name: Absorb Ice
   id: absorb_ice
   type: true_ability
@@ -66,18 +50,59 @@
   costs:
     mana: 2
     rp: 1
-- name: Advanced Melding
-  type: crafting
-  description: You expertly create the artifice hookup, reducing the artifice weight
-    burden by 1 to a minimum of 0.5.
-  id: artificer_basics_advanced_melding
-  keywords: &id001 []
-- name: Advanced Melding
-  type: crafting
-  description: You expertly create the artifice hookup, reducing the artifice weight
-    burden by 1 to a minimum of 0.5.
-  id: artificer_basics_advanced_melding
-  keywords: &id002 []
+- name: Advanced Artificing
+  id: advanced_artificing
+  type: true_ability
+  keywords: []
+  description: 'Skeleton WeldingCost:30 crafting points
+
+
+    Description:
+
+
+    You expertly create the artifice hookup, reducing the artifice weight burden by
+    a further 1 to a total minimum of 0.5.
+
+
+    Artifice Modification BCost:30 crafting points
+
+
+    Description:
+
+
+    You add a B-Type modification to an artifice.  See the individual artifice to
+    see if modifications are available.
+
+
+    Artifice Modification A2Cost:30 crafting points
+
+
+    Description:
+
+
+    You add a second A-Type modification to an artifice.  See the individual artifice
+    to see if modifications are available.
+
+
+    RiflingCost:30 crafting points
+
+
+    Description:
+
+
+    A firearm or artifice weapon with a +1 Focus Artisan Bonus upgrades into a +2
+    Focus Artisan Bonus.
+
+
+    Match-Grade BarrelCost:30 crafting points
+
+
+    Description:
+
+
+    A firearm or artifice weapon with a +1 Power Artisan Bonus upgrades into a +2
+    Power Artisan Bonus.'
+  range: null
 - name: Adventurer Essentials
   id: adventurer_essentials
   type: key_ability
@@ -193,16 +218,37 @@
     a tier 1 ward.
   costs:
     mana: 1
+- name: Alchemeister Core Crafting
+  id: alchemeister_core_crafting
+  type: true_ability
+  keywords: []
+  description: 'Masterful DilutionCost:30 Crafting PointsDescription:By diluting the
+    contents to the perfect required amounts, you gain an additional Elixir, Potion,
+    Flask or Salve upon crafting success. Stacks with Efficient Dilution.
+
+
+    DistillationCost:30 Crafting PointsDescription:You extract the highest quality
+    healing materials from herbs, granting Healing +5 to a Potion with a heal effect.
+
+
+    Explosive LiningCost:15 Crafting PointsDescription:You carefully add an alchemical
+    compound to a pressurized Flask. If the Flask has an area of effect, increases
+    the area by another 5ft (example a 10ft radius becomes 15ft radius).
+
+
+    Purify ElixirCost:30 Crafting PointsDescription:You reduce the toxicity of an
+    Elixir that has been detoxified while still maintaining its effect, reducing the
+    damage from taking an Elixir by an additional 3.'
+  range: null
 - name: Alchemic Catch
-  type: crafting
-  cost: 200u of
   id: transmutation_basics_alchemic_catch
-  keywords: &id003 []
-- name: Alchemic Catch
   type: crafting
-  cost: 200u of
-  id: transmutation_basics_alchemic_catch
-  keywords: &id004 []
+  cost: 200u of Matching Raw Material
+  description: Co-Craft. Use a hasty transmutation to attempt to fix a crafting error.
+    You may reroll a crafting dice after already determining the result. You must
+    keep the second number. Cannot be used for the last crafting dice.
+  keywords:
+  - co-craft
 - name: Alchemical Detonation
   id: alchemical_detonation
   type: true_ability
@@ -217,6 +263,36 @@
     action to move 5ft into the space where the wall was.
   costs:
     ap: 1
+- name: Alchemist Core Crafting
+  id: alchemist_core_crafting
+  type: true_ability
+  keywords: []
+  description: 'Efficient DilutionCost:15 Crafting PointsDescription:By diluting the
+    contents to the perfect required amounts, you gain an additional Elixir, Potion,
+    Flask or Salve upon crafting success.
+
+
+    Stone GrindingCost:15 Crafting PointsDescription:You extract the highest quality
+    healing materials from herbs, granting Healing +3 to a Potion with a heal effect.
+
+
+    PressurizationCost:15 Crafting PointsDescription:You pressurize a Flask carefully. If
+    the Flask has an area of effect, increases the area by 5ft (example a 10ft radius
+    becomes 15ft radius).
+
+
+    Volatile FlaskCost:15 Crafting PointsDescription:You overload the active ingredients
+    on a Flask, giving it a +3 damage to its damaging effects.
+
+
+    Detoxify ElixirCost:15 Crafting PointsDescription:You reduce the toxicity of an
+    Elixir while still maintaining its effect, reducing the damage from taking an
+    Elixir by 2.
+
+
+    Create Oil CoatingCost:ErrandDescription:You create an Oil Coating from Carpenter
+    materials.  See Items:  Carpenter Materials'
+  range: null
 - name: Amoxicillin
   id: amoxicillin
   type: true_ability
@@ -415,36 +491,90 @@
   - You are considered proficient with every melee weapon you wield (This does not
     count as being proficient for class requirements).
   keywords: []
-- name: Artifice Modification A
-  type: crafting
-  description: You add an A-Type modification to an artifice.  See the individual
-    artifice to see if modifications are available.
-  id: artificer_basics_artifice_modification_a
-  keywords: *id001
-- name: Artifice Modification A
-  type: crafting
-  description: You add an A-Type modification to an artifice.  See the individual
-    artifice to see if modifications are available.
-  id: artificer_basics_artifice_modification_a
-  keywords: *id002
-- name: Artifice Modification B
-  type: crafting
-  description: 'You add a B-Type modification to an artifice.  See the individual
-    artifice to see if modifications are available.
+- name: Artificer Basics
+  id: artificer_basics
+  type: true_ability
+  keywords: []
+  description: 'Advanced MeldingCost:15 crafting points
 
 
-    Artifice Modification A2Cost:30'
-  id: advanced_artificing_artifice_modification_b
-  keywords: &id017 []
-- name: Artifice Modification B
-  type: crafting
-  description: 'You add a B-Type modification to an artifice.  See the individual
-    artifice to see if modifications are available.
+    Description:
 
 
-    Artifice Modification A2Cost:30'
-  id: advanced_artificing_artifice_modification_b
-  keywords: &id018 []
+    You expertly create the artifice hookup, reducing the artifice weight burden by
+    1 to a minimum of 0.5.
+
+
+    Double BarrelCost:15 crafting points
+
+
+    Description:
+
+
+    Can hold up to 2 shells.  You still reload 1 shell at a time.
+
+
+    Artifice Modification ACost:15 crafting points
+
+
+    Description:
+
+
+    You add an A-Type modification to an artifice.  See the individual artifice to
+    see if modifications are available.
+
+
+    Grip DesignCost:15 crafting points
+
+
+    Description:
+
+
+    A firearm or artifice weapon gains +1 Focus Artisan Bonus. Only works with actual
+    weapons, not attachments.
+
+
+    Barrel Length OptimizationCost:15 crafting points
+
+
+    Description:
+
+
+    A firearm or artifice weapon gains +1 Power Artisan Bonus. Only works with actual
+    weapons, not attachments.
+
+
+    Attach/Detach ArtificeCost:Errand
+
+
+    Description:
+
+
+    You spend some time connecting the artifice to a weapon with an open artifice
+    slot.
+
+
+    Craft Fuel ShellsCost:Errand
+
+
+    Description:
+
+
+    You craft up to 5 small shells.  You can instead craft a medium shell instead
+    of 2 small shells.  Small shells require 50 magical fuel, medium shells require
+    200 magical fuel.
+
+
+    Craft Artifice PartsCost:Errand
+
+
+    Description:
+
+
+    You create up to 3000u of artifice parts of the same type of blacksmithing material
+    used to make them at a 1:1 rate. (3000u of Iron Creates 3000u of Iron Artifice
+    Parts.)  See Items:  Blacksmithing Materials, Artificer Materials.'
+  range: null
 - name: Assign Decoy
   id: assign_decoy
   type: true_ability
@@ -580,24 +710,6 @@
     to half the damage dealt.
   costs:
     ap: 1
-- name: Barrel Length Optimization
-  type: crafting
-  description: 'A firearm or artifice weapon gains +1 Power Artisan Bonus. Only works
-    with actual weapons, not attachments.
-
-
-    Attach/'
-  id: artificer_basics_barrel_length_optimization
-  keywords: *id001
-- name: Barrel Length Optimization
-  type: crafting
-  description: 'A firearm or artifice weapon gains +1 Power Artisan Bonus. Only works
-    with actual weapons, not attachments.
-
-
-    Attach/'
-  id: artificer_basics_barrel_length_optimization
-  keywords: *id002
 - name: Battle Cast
   id: battle_cast
   type: true_ability
@@ -642,6 +754,29 @@
   costs:
     ap: 1
     other: 1 Small Shell
+- name: Blacksmith Core Crafting
+  id: blacksmith_core_crafting
+  type: true_ability
+  keywords: []
+  description: 'Blacksmith’s DesignCost:15 Crafting PointsDescription:The smithing
+    tool gains a +1 Crafting or Gathering Artisan Bonus.
+
+
+    Sharpening and ReinforcingCost:15 Crafting PointsDescription:The smithing weapon
+    gains a +1 Power Artisan Bonus.
+
+
+    Weight BalancingCost:15 Crafting PointsDescription:The smithing weapon gains a
+    +1 Focus Artisan Bonus.
+
+
+    Weapon AlloyCost:X Crafting PointsDescription:You mix a special material into
+    the smithing weapon. Each material has its own crafting point cost.
+
+
+    Create IngotCost:ErrandDescription:You create an ingot from blacksmithing base
+    materials or from blacksmithing special materials.  See Item: Blacksmithing Materials.'
+  range: null
 - name: Blast Away
   id: blast_away
   type: true_ability
@@ -793,41 +928,12 @@
   requirements:
   - Improvised weapon only.
 - name: Bouncing Ideas
-  type: crafting
-  cost: Description:Co-Craft Only.  You assist with crafting adding 1d4 crafting points
-    to the current craft.
-  description: Co-Craft Only.  You assist with crafting adding 1d4 crafting points
-    to the current craft.
   id: transmutation_basics_bouncing_ideas
-  keywords: *id003
-- name: Bouncing Ideas
   type: crafting
-  cost: Description:Co-Craft Only.  You assist with crafting adding 1d4 crafting points
+  description: Co-Craft Only. You assist with crafting adding 1d4 crafting points
     to the current craft.
-  description: Co-Craft Only.  You assist with crafting adding 1d4 crafting points
-    to the current craft.
-  id: transmutation_basics_bouncing_ideas
-  keywords: *id004
-- name: Bountiful Harvest
-  type: crafting
-  description: 'Bountiful HarvestKeywords:'
-  id: farming_basics_bountiful_harvest
-  keywords: &id021 []
-- name: Bountiful Harvest
-  type: crafting
-  description: 'Bountiful HarvestKeywords:'
-  id: farming_basics_bountiful_harvest
-  keywords: &id022 []
-- name: Bountiful Harvest II
-  type: crafting
-  description: 'Bountiful Harvest IIKeywords:'
-  id: expert_farmer_bountiful_harvest_ii
-  keywords: &id019 []
-- name: Bountiful Harvest II
-  type: crafting
-  description: 'Bountiful Harvest IIKeywords:'
-  id: expert_farmer_bountiful_harvest_ii
-  keywords: &id020 []
+  keywords:
+  - co-craft
 - name: Brace
   id: brace
   type: key_ability
@@ -916,60 +1022,29 @@
     ap: 0
   requirements:
   - Must be mounted and can be used immediately after making a weapon attack.
-- name: 'Carpenter Materials
+- name: Carpenter Basics
+  id: carpenter_basics
+  type: true_ability
+  keywords: []
+  description: 'Carving and CuttingCost:15 Crafting PointsDescription:The carpentry
+    weapon gains a +1 Power Artisan Bonus.
 
 
-    Create Artifice Parts'
-  type: crafting
-  description: 'Carpenter Materials
+    Polishing and SandingCost:15 Crafting PointsDescription:The carpentry weapon gains
+    a +1 Focus Artisan Bonus.
 
 
-    Create Artifice PartsCost:'
-  id: transmutation_basics_carpenter_materials_create_artifice_parts
-  keywords: *id003
-- name: 'Carpenter Materials
+    Joining and AssemblingCost:X Crafting PointsDescription:You mix a special material
+    into the carpentry project. Each material has its own crafting point cost.Create
+    Oil CoatingCost:ErrandDescription:You create an Oil Coating from Carpenter materials.
+     See Items: Carpenter Materials.Create Wood BlockCost:ErrandDescription:You create
+    a Wood Block from Carpenter materials.  See Items: Carpenter Materials.
 
 
-    Create Artifice Parts'
-  type: crafting
-  description: 'Carpenter Materials
-
-
-    Create Artifice PartsCost:'
-  id: transmutation_basics_carpenter_materials_create_artifice_parts
-  keywords: *id004
-- name: 'Carpenter Materials
-
-
-    Create Wood Block'
-  type: crafting
-  description: 'Carpenter Materials
-
-
-    Create Wood BlockCost:'
-  id: transmutation_basics_carpenter_materials_create_wood_block
-  keywords: *id003
-- name: 'Carpenter Materials
-
-
-    Create Wood Block'
-  type: crafting
-  description: 'Carpenter Materials
-
-
-    Create Wood BlockCost:'
-  id: transmutation_basics_carpenter_materials_create_wood_block
-  keywords: *id004
-- name: Carving and Cutting
-  type: crafting
-  cost: '15'
-  id: carpenter_basics_carving_and_cutting
-  keywords: &id005 []
-- name: Carving and Cutting
-  type: crafting
-  cost: '15'
-  id: carpenter_basics_carving_and_cutting
-  keywords: &id006 []
+    Infuse WandCost:5 Crafting PointsDescription:You add a drop of Oil Coating into
+    a wand, changing the built in damage type to the element of the oil. Does not
+    consume the oil.'
+  range: null
 - name: Cat Form
   id: cat_form
   type: true_ability
@@ -1363,16 +1438,6 @@
     rp: variable
   requirements:
   - An enemy casts a spell within range
-- name: Craft Artifice Parts
-  type: crafting
-  description: 'Craft Artifice PartsCost:'
-  id: artificer_basics_craft_artifice_parts
-  keywords: *id001
-- name: Craft Artifice Parts
-  type: crafting
-  description: 'Craft Artifice PartsCost:'
-  id: artificer_basics_craft_artifice_parts
-  keywords: *id002
 - name: Craft Artificer's Glove
   id: craft_artificers_glove
   type: true_ability
@@ -1399,16 +1464,6 @@
     you, granting you +10 to jumping.'
   costs:
     other: 1 IP
-- name: Craft Fuel Shells
-  type: crafting
-  description: 'Craft Fuel ShellsCost:'
-  id: artificer_basics_craft_fuel_shells
-  keywords: *id001
-- name: Craft Fuel Shells
-  type: crafting
-  description: 'Craft Fuel ShellsCost:'
-  id: artificer_basics_craft_fuel_shells
-  keywords: *id002
 - name: Craft Pemmican
   id: craft_pemmican
   type: true_ability
@@ -1418,144 +1473,58 @@
     about the same as Military Rations but they are wrapped by special leaves that
     deter pests—useful and consistent adventure food.
   range: null
-- name: Crafting Dice
+- name: Craft Weapons
+  id: craft_weapons
+  type: key_ability
+  keywords: []
+  description: 'Blacksmith’s DesignCost:15 Crafting PointsDescription:The smithing
+    tool gains a +1 Crafting or Gathering Artisan Bonus.
+
+
+    Sharpening and ReinforcingCost:15 Crafting PointsDescription:The smithing weapon
+    gains a +1 Power Artisan Bonus.
+
+
+    Weight BalancingCost:15 Crafting PointsDescription:The smithing weapon gains a
+    +1 Focus Artisan Bonus.
+
+
+    Weapon AlloyCost:X Crafting PointsDescription:You mix a special material into
+    the smithing weapon. Each material has its own crafting point cost.
+
+
+    Create IngotCost:ErrandDescription:You create an ingot from blacksmithing base
+    materials or from blacksmithing special materials.  See Item: Blacksmithing Materials.'
+  benefits:
+  - You gain Blacksmith Core Crafting Abilities.
+  - You can craft using non-advanced materials and base materials.
+  - You can use a Blacksmith’s Hammer as a crafting tool for blacksmithing crafts.
+    You may also use it as a Light Bludgeoning weapon in which you are proficient.
+  associated_abilities:
+  - name: Blacksmith Core Crafting
+    id: blacksmith_core_crafting
+- name: Create Artifice Parts
+  id: transmutation_basics_create_artifice_parts
   type: crafting
-  description: Co-Craft. Only usable once per crafting IP.  Destroy the uncrafted
-    item and all materials invested into the craft.  You may immediately start another
-    crafting session.  If you use this as a Co-Craft it requires 1 crafting dice from
-    the main crafter.
-  id: transmutation_basics_crafting_dice
-  keywords: *id003
-- name: Crafting Dice
-  type: crafting
-  description: Co-Craft. Only usable once per crafting IP.  Destroy the uncrafted
-    item and all materials invested into the craft.  You may immediately start another
-    crafting session.  If you use this as a Co-Craft it requires 1 crafting dice from
-    the main crafter.
-  id: transmutation_basics_crafting_dice
-  keywords: *id004
-- name: Crafting Points
-  type: crafting
-  description: By diluting the contents to the perfect required amounts, you gain
-    an additional Elixir, Potion, Flask or Salve upon crafting success. Stacks with
-    Efficient Dilution.
-  id: alchemeister_core_crafting_crafting_points
-  keywords: &id013 []
-- name: Crafting Points
-  type: crafting
-  description: By diluting the contents to the perfect required amounts, you gain
-    an additional Elixir, Potion, Flask or Salve upon crafting success.
-  id: alchemist_core_crafting_crafting_points
-  keywords: &id009 []
-- name: Crafting Points
-  type: crafting
-  description: The smithing tool gains a +1 Crafting or Gathering Artisan Bonus.
-  id: blacksmith_core_crafting_crafting_points
-  keywords: &id007 []
-- name: Crafting Points
-  type: crafting
-  description: The carpentry weapon gains a +1 Power Artisan Bonus.
-  id: carpenter_basics_crafting_points
-  keywords: *id005
-- name: Crafting Points
-  type: crafting
-  description: The smithing tool with a +1 Crafting Artisan Bonus upgrades into a
-    +2 Crafting Artisan Bonus or from a +1 Gathering Artisan Bonus into a +2 Gathering
-    Artisan Bonus.
-  id: forgemaster_core_crafting_crafting_points
-  keywords: &id015 []
-- name: Crafting Points
-  type: crafting
-  description: The facility with a +1 Crafting Artisan Bonus upgrades into a +2 Crafting
-    Artisan Bonus.
-  id: timberwrights_core_crafting_crafting_points
-  keywords: &id011 []
-- name: Crafting Points
-  type: crafting
-  description: The carpentry weapon gains a +1 Power Artisan Bonus.
-  id: carpenter_basics_crafting_points
-  keywords: *id006
-- name: Crafting Points
-  type: crafting
-  description: The smithing tool gains a +1 Crafting or Gathering Artisan Bonus.
-  id: craft_weapons_crafting_points
-  keywords: &id008 []
-- name: Crafting Points
-  type: crafting
-  description: By diluting the contents to the perfect required amounts, you gain
-    an additional Elixir, Potion, Flask or Salve upon crafting success. Stacks with
-    Efficient Dilution.
-  id: expert_alchemist_crafting_points
-  keywords: &id014 []
-- name: Crafting Points
-  type: crafting
-  description: The smithing tool with a +1 Crafting Artisan Bonus upgrades into a
-    +2 Crafting Artisan Bonus or from a +1 Gathering Artisan Bonus into a +2 Gathering
-    Artisan Bonus.
-  id: focused_weapons_crafting_points
-  keywords: &id016 []
-- name: Crafting Points
-  type: crafting
-  description: By diluting the contents to the perfect required amounts, you gain
-    an additional Elixir, Potion, Flask or Salve upon crafting success.
-  id: the_alchemist_crafting_points
-  keywords: &id010 []
-- name: Crafting Points
-  type: crafting
-  description: The facility with a +1 Crafting Artisan Bonus upgrades into a +2 Crafting
-    Artisan Bonus.
-  id: timberwrights_core_crafting_crafting_points
-  keywords: &id012 []
+  cost: Errand
+  description: 'You create up to 3000u of artifice parts of the same type of blacksmithing
+    material used to make them at a 1:1 rate. (3000u of Iron Creates 3000u of Iron
+    Artifice Parts.) See Items: Blacksmithing Materials, Artificer Materials.'
+  keywords: &id001 []
 - name: Create Ingot
-  type: crafting
-  description: 'Create IngotCost:'
-  id: blacksmith_core_crafting_create_ingot
-  keywords: *id007
-- name: Create Ingot
-  type: crafting
-  description: 'Create IngotCost:'
   id: transmutation_basics_create_ingot
-  keywords: *id003
-- name: Create Ingot
   type: crafting
-  description: 'Create IngotCost:'
-  id: craft_weapons_create_ingot
-  keywords: *id008
-- name: Create Ingot
-  type: crafting
-  description: 'Create IngotCost:'
-  id: transmutation_basics_create_ingot
-  keywords: *id004
+  cost: Errand
+  description: 'You create an ingot from blacksmithing base materials or from blacksmithing
+    special materials. See Item: Blacksmithing Materials.'
+  keywords: *id001
 - name: Create Oil Coating
-  type: crafting
-  description: 'Create Oil CoatingCost:'
-  id: alchemist_core_crafting_create_oil_coating
-  keywords: *id009
-- name: Create Oil Coating
-  type: crafting
-  description: 'Create Oil CoatingCost:'
-  id: carpenter_basics_create_oil_coating
-  keywords: *id005
-- name: Create Oil Coating
-  type: crafting
-  description: 'Create Oil CoatingCost:'
   id: transmutation_basics_create_oil_coating
-  keywords: *id003
-- name: Create Oil Coating
   type: crafting
-  description: 'Create Oil CoatingCost:'
-  id: carpenter_basics_create_oil_coating
-  keywords: *id006
-- name: Create Oil Coating
-  type: crafting
-  description: 'Create Oil CoatingCost:'
-  id: the_alchemist_create_oil_coating
-  keywords: *id010
-- name: Create Oil Coating
-  type: crafting
-  description: 'Create Oil CoatingCost:'
-  id: transmutation_basics_create_oil_coating
-  keywords: *id004
+  cost: Errand
+  description: 'You create an Oil Coating from Carpenter materials. See Items: Carpenter
+    Materials'
+  keywords: *id001
 - name: Create Talisman
   id: create_talisman
   type: true_ability
@@ -1577,15 +1546,12 @@
     Crafting a talisman costs 100 calligraphy units per AP and Mana of the spell.
     A spell with no AP or Mana costs 50 units.'
 - name: Create Wood Block
+  id: transmutation_basics_create_wood_block
   type: crafting
-  description: 'Create Wood BlockCost:'
-  id: carpenter_basics_create_wood_block
-  keywords: *id005
-- name: Create Wood Block
-  type: crafting
-  description: 'Create Wood BlockCost:'
-  id: carpenter_basics_create_wood_block
-  keywords: *id006
+  cost: Errand
+  description: 'You create a Wood Block from Carpenter materials. See Items: Carpenter
+    Materials'
+  keywords: *id001
 - name: Crescent Sweep
   id: crescent_sweep
   type: true_ability
@@ -1701,21 +1667,6 @@
   costs:
     mana: 1
     ap: 0
-- name: Death Perception
-  id: death_perception
-  type: key_ability
-  keywords:
-  - Mystic Eye
-  range: Sight
-  description: You can assess the approximate HP percentage of all living units within
-    range until the end of combat. (The DM should enable health bars for the unit).
-    Only affects unit in your line of sight when you use this ability, if more enemies
-    join the fight later they are not affected until you use this ability again.
-  benefits:
-  - You may use Death Perception.
-  costs:
-    mana: 1
-    ap: 0
 - name: Decipher Magic
   id: decipher_magic
   type: true_ability
@@ -1802,26 +1753,6 @@
   costs:
     mana: 1
     rp: 0
-- name: Design
-  type: crafting
-  cost: '15'
-  id: blacksmith_core_crafting_design
-  keywords: *id007
-- name: Design
-  type: crafting
-  cost: '15'
-  id: craft_weapons_design
-  keywords: *id008
-- name: Design II
-  type: crafting
-  cost: '30'
-  id: timberwrights_core_crafting_design_ii
-  keywords: *id011
-- name: Design II
-  type: crafting
-  cost: '30'
-  id: timberwrights_core_crafting_design_ii
-  keywords: *id012
 - name: Destroy Ground
   id: destroy_ground
   type: true_ability
@@ -1853,16 +1784,6 @@
   costs:
     mana: 2
     ap: 4
-- name: Detach Artifice
-  type: crafting
-  description: 'Detach ArtificeCost:'
-  id: artificer_basics_detach_artifice
-  keywords: *id001
-- name: Detach Artifice
-  type: crafting
-  description: 'Detach ArtificeCost:'
-  id: artificer_basics_detach_artifice
-  keywords: *id002
 - name: Detailed Finish
   id: detailed_finish
   type: true_ability
@@ -1871,16 +1792,6 @@
   requirements:
   - This is your last crafting dice. Costs 1 Crafting Dice.
   range: null
-- name: Detoxify Elixir
-  type: crafting
-  cost: '15'
-  id: alchemist_core_crafting_detoxify_elixir
-  keywords: *id009
-- name: Detoxify Elixir
-  type: crafting
-  cost: '15'
-  id: the_alchemist_detoxify_elixir
-  keywords: *id010
 - name: Deus Vult
   id: deus_vult
   type: true_ability
@@ -2051,16 +1962,6 @@
     had chosen to drop it.
   costs:
     ap: 2
-- name: Distillation
-  type: crafting
-  cost: '30'
-  id: alchemeister_core_crafting_distillation
-  keywords: *id013
-- name: Distillation
-  type: crafting
-  cost: '30'
-  id: expert_alchemist_distillation
-  keywords: *id014
 - name: Divine Guard
   id: divine_guard
   type: true_ability
@@ -2189,16 +2090,6 @@
   range: 30ft
   description: You draw and either drink a Potion or Elixir, or throw one to a willing
     ally within 30ft who immediately drinks it.
-- name: Double Barrel
-  type: crafting
-  description: Can hold up to 2 shells.  You still reload 1 shell at a time.
-  id: artificer_basics_double_barrel
-  keywords: *id001
-- name: Double Barrel
-  type: crafting
-  description: Can hold up to 2 shells.  You still reload 1 shell at a time.
-  id: artificer_basics_double_barrel
-  keywords: *id002
 - name: Double Elements
   id: double_elements
   type: true_ability
@@ -2322,18 +2213,6 @@
   costs:
     mana: 1
     ap: 0
-- name: Draw Elements
-  id: draw_elements
-  type: key_ability
-  keywords: []
-  range: null
-  description: You may choose an element. Until the start of your next turn, you are
-    considered to have mastered that element.
-  benefits:
-  - You may use Draw Elements.
-  costs:
-    mana: 1
-    ap: 0
 - name: Draw Elements II
   id: draw_elements_ii
   type: true_ability
@@ -2342,18 +2221,6 @@
   range: Self
   description: You may choose an element. Until the start of your next turn, you are
     considered to have mastered that element.
-  costs:
-    ap: 0
-- name: Draw Elements II
-  id: draw_elements_ii
-  type: key_ability
-  keywords:
-  - Quick
-  range: Self
-  description: You may choose an element. Until the start of your next turn, you are
-    considered to have mastered that element.
-  benefits:
-  - You may use Draw Elements II.
   costs:
     ap: 0
 - name: Draw-In
@@ -2436,16 +2303,6 @@
     Silentium at any point during the movement, gaining the Combo bonus.
   costs:
     ap: 2
-- name: Efficient Dilution
-  type: crafting
-  cost: '15'
-  id: alchemist_core_crafting_efficient_dilution
-  keywords: *id009
-- name: Efficient Dilution
-  type: crafting
-  cost: '15'
-  id: the_alchemist_efficient_dilution
-  keywords: *id010
 - name: Efficient Strike
   id: efficient_strike
   type: true_ability
@@ -2578,19 +2435,6 @@
     rp: 0
   requirements:
   - You failed a saving throw.
-- name: Empty Body
-  id: empty_body
-  type: key_ability
-  keywords: []
-  range: Self
-  description: You may reroll the failed saving throw and must accept the new result.
-  benefits:
-  - You may use Empty Body.
-  costs:
-    mana: 2
-    rp: 0
-  requirements:
-  - You failed a saving throw.
 - name: Enduring Warmth
   id: enduring_warmth
   type: true_ability
@@ -2598,76 +2442,6 @@
   description: You can emit comforting heat within 30feet that counters the effects
     of most cold weather. You can activate or deactivate this heat every 1 second.
   range: null
-- name: Ergonomics
-  type: crafting
-  cost: '30'
-  id: forgemaster_core_crafting_ergonomics
-  keywords: *id015
-- name: Ergonomics
-  type: crafting
-  cost: '30'
-  id: focused_weapons_ergonomics
-  keywords: *id016
-- name: Errand
-  type: crafting
-  description: 'You create an Oil Coating from Carpenter materials.  See Items:  Carpenter
-    Materials'
-  id: alchemist_core_crafting_errand
-  keywords: *id009
-- name: Errand
-  type: crafting
-  description: You spend some time connecting the artifice to a weapon with an open
-    artifice slot.
-  id: artificer_basics_errand
-  keywords: *id001
-- name: Errand
-  type: crafting
-  description: 'You create an ingot from blacksmithing base materials or from blacksmithing
-    special materials.  See Item: Blacksmithing Materials.'
-  id: blacksmith_core_crafting_errand
-  keywords: *id007
-- name: Errand
-  type: crafting
-  description: 'You create an Oil Coating from Carpenter materials.  See Items: Carpenter
-    Materials.'
-  id: carpenter_basics_errand
-  keywords: *id005
-- name: Errand
-  type: crafting
-  description: 'You create an ingot from blacksmithing base materials or from blacksmithing
-    special materials.  See Item:  Blacksmithing Materials.'
-  id: transmutation_basics_errand
-  keywords: *id003
-- name: Errand
-  type: crafting
-  description: You spend some time connecting the artifice to a weapon with an open
-    artifice slot.
-  id: artificer_basics_errand
-  keywords: *id002
-- name: Errand
-  type: crafting
-  description: 'You create an Oil Coating from Carpenter materials.  See Items: Carpenter
-    Materials.'
-  id: carpenter_basics_errand
-  keywords: *id006
-- name: Errand
-  type: crafting
-  description: 'You create an ingot from blacksmithing base materials or from blacksmithing
-    special materials.  See Item: Blacksmithing Materials.'
-  id: craft_weapons_errand
-  keywords: *id008
-- name: Errand
-  type: crafting
-  description: 'You create an Oil Coating from Carpenter materials.  See Items:  Carpenter
-    Materials'
-  id: the_alchemist_errand
-  keywords: *id010
-- name: Errand
-  type: crafting
-  description: 'You create an ingot from blacksmithing base materials or from blacksmithing
-    special materials.  See Item:  Blacksmithing Materials.'
-  id: transmutation_basics_errand
-  keywords: *id004
 - name: Escape Artist
   id: escape_artist
   type: true_ability
@@ -2709,26 +2483,6 @@
     rp: 0
   requirements:
   - Use when an ally attack would kill a target and target is not an ally.
-- name: Eternal Mirane Cage
-  id: eternal_mirane_cage
-  type: key_ability
-  keywords:
-  - Frost
-  - Spell
-  range: Sight
-  description: Instead of killing the target, they are reduced to negative their Max
-    HP +1. The target is encased in Magical Ice for 10 years, rooted on the location
-    and cannot be moved.  The Ice never melts despite temperature and can only be
-    dispelled by Higher Order Magic (such as a Divine Arms), or by you. The Spell
-    effect ends if you die. You can extend the duration of the Frost by 10 years for
-    every 2 mana spent.
-  benefits:
-  - You may use Eternal Mirane Cage.
-  costs:
-    mana: 1
-    rp: 0
-  requirements:
-  - Use when an ally attack would kill a target and target is not an ally.
 - name: Evasive Maneuver
   id: evasive_maneuver
   type: true_ability
@@ -2765,6 +2519,61 @@
   benefits:
   - You may spend 1 mana with using Summon Animal to choose which animal you summon.
   keywords: []
+- name: Expert Alchemist
+  id: expert_alchemist
+  type: key_ability
+  keywords: []
+  description: 'Masterful DilutionCost:30 Crafting PointsDescription:By diluting the
+    contents to the perfect required amounts, you gain an additional Elixir, Potion,
+    Flask or Salve upon crafting success. Stacks with Efficient Dilution.
+
+
+    DistillationCost:30 Crafting PointsDescription:You extract the highest quality
+    healing materials from herbs, granting Healing +5 to a Potion with a heal effect.
+
+
+    Explosive LiningCost:15 Crafting PointsDescription:You carefully add an alchemical
+    compound to a pressurized Flask. If the Flask has an area of effect, increases
+    the area by another 5ft (example a 10ft radius becomes 15ft radius).
+
+
+    Purify ElixirCost:30 Crafting PointsDescription:You reduce the toxicity of an
+    Elixir that has been detoxified while still maintaining its effect, reducing the
+    damage from taking an Elixir by an additional 3.'
+  benefits:
+  - You gain Alchemeister Core Crafting Abilities.
+  associated_abilities:
+  - name: Alchemeister Core Crafting
+    id: alchemeister_core_crafting
+- name: Expert Farmer
+  id: expert_farmer
+  type: true_ability
+  keywords: []
+  description: 'Greater Infuse QiKeywords:Rapid
+
+
+    Cost:-
+
+
+    Description:
+
+
+    You infuse one of the planted herbs with Qi, upgrading it from rare to mystic
+    and adding 20 to its difficulty.
+
+
+    Bountiful Harvest IIKeywords:Rapid
+
+
+    Cost:-
+
+
+    Description:
+
+
+    You bless one of the planted seeds that grants Food units or Alchemy materials.
+    It grants 4 times that amount and you add 12 to its difficulty. Does not stack.'
+  range: null
 - name: Expert Scribe
   id: expert_scribe
   type: key_ability
@@ -2795,16 +2604,6 @@
   description: You gain 4 Expertise Points in 3 different carpentry crafts.  You also
     gain wielding proficiency in one carpentry weapon of your choice or artifice chainsaws.
   range: null
-- name: Explosive Lining
-  type: crafting
-  cost: '15'
-  id: alchemeister_core_crafting_explosive_lining
-  keywords: *id013
-- name: Explosive Lining
-  type: crafting
-  cost: '15'
-  id: expert_alchemist_explosive_lining
-  keywords: *id014
 - name: Explosive Ward
   id: explosive_ward
   type: true_ability
@@ -3015,6 +2814,80 @@
     also gain the light blades' Nimble ability, even if not wielding or proficient
     with light blades.
   keywords: []
+- name: Farming Basics
+  id: farming_basics
+  type: true_ability
+  keywords: []
+  description: 'Spiritual GroundCost:1 Interlude Point
+
+
+    Description:
+
+
+    You infuse the land with your spiritual energy, creating up to 10 plots of land
+    suitable for farming. These plots of lands can grow food and herbs at an accelerated
+    rate and allow the planting of tier 1 rare herbs.
+
+
+    All plots of land must be filled with seeds before they begin growing.
+
+
+    After creating a spiritual ground, you may immediately use Sow Seeds in it for
+    0 IP.
+
+
+    You can only have 1 spiritual ground at the same time.
+
+
+    Sow SeedsCost:1 Interlude Point
+
+
+    Description:
+
+
+    You may plant seeds in plots of land. You may plant 1 set of seeds in each plot
+    of land you can work.
+
+
+    HarvestCost:1 Interlude Point
+
+
+    Description:
+
+
+    You harvest the planted seeds or take care of the plants not ready to be harvested
+    yet. Do a crafting session. Your crafting score is the total value of seeds you
+    can harvest or take care of.
+
+
+    If your crafting score is not high enough to harvest or take care of all seeds
+    you planted, you must give up on some of the seeds. Starting from the seed with
+    the highest difficulty, you drop seeds until your total crafting score matches
+    or exceeds the total difficulty of the seeds.Infuse QiKeywords:Rapid
+
+
+    Cost:-
+
+
+    Description:
+
+
+    You infuse one of the planted herbs with Qi, upgrading it from common to rare
+    and adding 15 to its difficulty.
+
+
+    Bountiful HarvestKeywords:Rapid
+
+
+    Cost:-
+
+
+    Description:
+
+
+    You bless one of the planted seeds that grants Food units or Alchemy materials.
+    It grants double that amount and you add 6 to its difficulty. Does not stack.'
+  range: null
 - name: Fast Dimensional Equip
   id: fast_dimensional_equip
   type: true_ability
@@ -3441,6 +3314,26 @@
   requirements:
   - Must in a gathering session. Costs 1 strike dice.
   range: null
+- name: Focused Weapons
+  id: focused_weapons
+  type: key_ability
+  keywords: []
+  description: 'Blacksmith’s ErgonomicsCost:30 Crafting PointsDescription:The smithing
+    tool with a +1 Crafting Artisan Bonus upgrades into a +2 Crafting Artisan Bonus
+    or from a +1 Gathering Artisan Bonus into a +2 Gathering Artisan Bonus.
+
+
+    TemperingCost:30 Crafting PointsDescription:The smithing weapon with a +1 Power
+    Artisan Bonus upgrades into a +2 Power Artisan Bonus.
+
+
+    Grip ErgonomicsCost:30 Crafting PointsDescription:The smithing weapon with a +1
+    Focus Artisan Bonus upgrades into a +2 Focus Artisan Bonus.'
+  benefits:
+  - You gain Forgemaster Core Crafting Abilities.
+  associated_abilities:
+  - name: Forgemaster Core Crafting
+    id: forgemaster_core_crafting
 - name: Forager's Path
   id: foragers_path
   type: key_ability
@@ -3504,6 +3397,22 @@
     mana: 2
   requirements:
   - You or an ally hit with a weapon you smithed.
+- name: Forgemaster Core Crafting
+  id: forgemaster_core_crafting
+  type: true_ability
+  keywords: []
+  description: 'Blacksmith’s ErgonomicsCost:30 Crafting PointsDescription:The smithing
+    tool with a +1 Crafting Artisan Bonus upgrades into a +2 Crafting Artisan Bonus
+    or from a +1 Gathering Artisan Bonus into a +2 Gathering Artisan Bonus.
+
+
+    TemperingCost:30 Crafting PointsDescription:The smithing weapon with a +1 Power
+    Artisan Bonus upgrades into a +2 Power Artisan Bonus.
+
+
+    Grip ErgonomicsCost:30 Crafting PointsDescription:The smithing weapon with a +1
+    Focus Artisan Bonus upgrades into a +2 Focus Artisan Bonus.'
+  range: null
 - name: Forked Lightning
   id: forked_lightning
   type: true_ability
@@ -3757,18 +3666,6 @@
 
     This uses up your own encounter conclusion action.'
   range: null
-- name: Grade Barrel
-  type: crafting
-  description: A firearm or artifice weapon with a +1 Power Artisan Bonus upgrades
-    into a +2 Power Artisan Bonus.
-  id: advanced_artificing_grade_barrel
-  keywords: *id017
-- name: Grade Barrel
-  type: crafting
-  description: A firearm or artifice weapon with a +1 Power Artisan Bonus upgrades
-    into a +2 Power Artisan Bonus.
-  id: advanced_artificing_grade_barrel
-  keywords: *id018
 - name: Gravitational Ki
   id: gravitational_ki
   type: true_ability
@@ -3792,16 +3689,6 @@
   costs:
     mana: 1
     ap: 1
-- name: Greater Infuse Qi
-  type: crafting
-  description: 'Greater Infuse QiKeywords:'
-  id: expert_farmer_greater_infuse_qi
-  keywords: *id019
-- name: Greater Infuse Qi
-  type: crafting
-  description: 'Greater Infuse QiKeywords:'
-  id: expert_farmer_greater_infuse_qi
-  keywords: *id020
 - name: Greatshield Master
   id: greatshield_master
   type: key_ability
@@ -3809,28 +3696,6 @@
   - You gain proficiency in Greatshields. While wearing a Greatshield, any ally standing
     behind you that is the target of a ranged attack may treat you as high cover.
   keywords: []
-- name: Grip Design
-  type: crafting
-  description: A firearm or artifice weapon gains +1 Focus Artisan Bonus. Only works
-    with actual weapons, not attachments.
-  id: artificer_basics_grip_design
-  keywords: *id001
-- name: Grip Design
-  type: crafting
-  description: A firearm or artifice weapon gains +1 Focus Artisan Bonus. Only works
-    with actual weapons, not attachments.
-  id: artificer_basics_grip_design
-  keywords: *id002
-- name: Grip Ergonomics
-  type: crafting
-  cost: '30'
-  id: forgemaster_core_crafting_grip_ergonomics
-  keywords: *id015
-- name: Grip Ergonomics
-  type: crafting
-  cost: '30'
-  id: focused_weapons_grip_ergonomics
-  keywords: *id016
 - name: Guard Dog
   id: guard_dog
   type: true_ability
@@ -3900,16 +3765,6 @@
     rp: 1
   requirements:
   - An ally dealt damage to a target that didn't take a defense action.
-- name: Harvest
-  type: crafting
-  cost: '1'
-  id: farming_basics_harvest
-  keywords: *id021
-- name: Harvest
-  type: crafting
-  cost: '1'
-  id: farming_basics_harvest
-  keywords: *id022
 - name: Harvest Moon
   id: harvest_moon
   type: true_ability
@@ -4051,22 +3906,6 @@
     as a target to use an offensive ability. If you make an attack of opportunity
     against your Holy Order, or if they move away from you, you can Sidestep up to
     twice your Speed towards them for 0 RP after their movement finishes.
-  costs:
-    ap: 0
-- name: Holy Orders
-  id: holy_orders
-  type: key_ability
-  keywords:
-  - Sidestep
-  range: 60ft
-  description: You target an enemy unit within range, causing the target to become
-    your Holy Order until the start of your next turn. While active, only your Holy
-    Order may be chosen as the target for any offensive ability, or must be included
-    as a target to use an offensive ability. If you make an attack of opportunity
-    against your Holy Order, or if they move away from you, you can Sidestep up to
-    twice your Speed towards them for 0 RP after their movement finishes.
-  benefits:
-  - You may use Holy Orders.
   costs:
     ap: 0
 - name: Holy Shield
@@ -4412,26 +4251,6 @@
     rp: 0
   requirements:
   - You are using Throw Potion.
-- name: Infuse Qi
-  type: crafting
-  description: 'Infuse QiKeywords:'
-  id: farming_basics_infuse_qi
-  keywords: *id021
-- name: Infuse Qi
-  type: crafting
-  description: 'Infuse QiKeywords:'
-  id: farming_basics_infuse_qi
-  keywords: *id022
-- name: Infuse Wand
-  type: crafting
-  cost: '5'
-  id: carpenter_basics_infuse_wand
-  keywords: *id005
-- name: Infuse Wand
-  type: crafting
-  cost: '5'
-  id: carpenter_basics_infuse_wand
-  keywords: *id006
 - name: Inspired Finish
   id: inspired_finish
   type: true_ability
@@ -4482,40 +4301,6 @@
     rp: 1
   requirements:
   - Must be mounted and an ally is the target of an attack.
-- name: Interlude Point
-  type: crafting
-  description: 'You infuse the land with your spiritual energy, creating up to 10
-    plots of land suitable for farming. These plots of lands can grow food and herbs
-    at an accelerated rate and allow the planting of tier 1 rare herbs.
-
-
-    All plots of land must be filled with seeds before they begin growing.
-
-
-    After creating a spiritual ground, you may immediately use Sow Seeds in it for
-    0 IP.
-
-
-    You can only have 1 spiritual ground at the same time.'
-  id: farming_basics_interlude_point
-  keywords: *id021
-- name: Interlude Point
-  type: crafting
-  description: 'You infuse the land with your spiritual energy, creating up to 10
-    plots of land suitable for farming. These plots of lands can grow food and herbs
-    at an accelerated rate and allow the planting of tier 1 rare herbs.
-
-
-    All plots of land must be filled with seeds before they begin growing.
-
-
-    After creating a spiritual ground, you may immediately use Sow Seeds in it for
-    0 IP.
-
-
-    You can only have 1 spiritual ground at the same time.'
-  id: farming_basics_interlude_point
-  keywords: *id022
 - name: Into the Fray
   id: into_the_fray
   type: true_ability
@@ -4530,16 +4315,6 @@
     Can only be used on your turn.'
   costs:
     rp: 1
-- name: Joining and Assembling
-  type: crafting
-  description: 'Joining and AssemblingCost:'
-  id: carpenter_basics_joining_and_assembling
-  keywords: *id005
-- name: Joining and Assembling
-  type: crafting
-  description: 'Joining and AssemblingCost:'
-  id: carpenter_basics_joining_and_assembling
-  keywords: *id006
 - name: Jump
   id: jump
   type: true_ability
@@ -4549,20 +4324,6 @@
   range: null
   description: You leap up to 30ft into the air and then Sidestep up to twice your
     Speed. You may use Skydive at any point during this movement.
-  costs:
-    ap: 2
-- name: Jump
-  id: jump
-  type: key_ability
-  keywords:
-  - Jump
-  - Sidestep
-  range: null
-  description: You leap up to 30ft into the air and then Sidestep up to twice your
-    Speed. You may use Skydive at any point during this movement.
-  benefits:
-  - When using an ability with the Jump keyword, you do not take fall damage.
-  - You may use Jump.
   costs:
     ap: 2
 - name: Jump Back
@@ -4901,14 +4662,6 @@
     Wind(Lightning) Damage instead of its normal damage type. You must declare you
     chosen damage type before making the accuracy roll.
   range: null
-- name: Lightning Weapon
-  id: lightning_weapon
-  type: key_ability
-  benefits:
-  - When attacking with a weapon, you may choose to have the weapon deal Wind(Lightning)
-    Damage instead of its normal damage type. You must declare you chosen damage type
-    before making the accuracy roll.
-  keywords: []
 - name: Line of Death
   id: line_of_death
   type: true_ability
@@ -5106,18 +4859,6 @@
     end of combat. (The DM should enable mana bar for the unit).
   costs:
     ap: 0
-- name: Mana Sight
-  id: mana_sight
-  type: key_ability
-  keywords:
-  - Quick
-  range: Sight
-  description: You can assess the approximate mana percentage of a unit until the
-    end of combat. (The DM should enable mana bar for the unit).
-  benefits:
-  - You may use Mana Sight.
-  costs:
-    ap: 0
 - name: Mark of Justice
   id: mark_of_justice
   type: true_ability
@@ -5156,42 +4897,6 @@
   requirements:
   - You have at least 5 skill points in the called for skill. Use when you need to
     roll a skill check.
-- name: Masterful Dilution
-  type: crafting
-  cost: '30'
-  id: alchemeister_core_crafting_masterful_dilution
-  keywords: *id013
-- name: Masterful Dilution
-  type: crafting
-  cost: '30'
-  id: expert_alchemist_masterful_dilution
-  keywords: *id014
-- name: Matching Material
-  type: crafting
-  description: Co-Craft. Use a transmutation that stabilizes the material, making
-    it easier to work with.  The next crafting check cannot roll lower than a 6.
-  id: transmuter_tricks_matching_material
-  keywords: *id023
-- name: Matching Material
-  type: crafting
-  description: Co-Craft. Use a transmutation that stabilizes the material, making
-    it easier to work with.  The next crafting check cannot roll lower than a 6.
-  id: transmutation_tricks_matching_material
-  keywords: *id024
-- name: Matching Raw Material
-  type: crafting
-  description: Co-Craft. Use a hasty transmutation to attempt to fix a crafting error. 
-    You may reroll a crafting dice after already determining the result.  You must
-    keep the second number.  Cannot be used for the last crafting dice.
-  id: transmutation_basics_matching_raw_material
-  keywords: *id003
-- name: Matching Raw Material
-  type: crafting
-  description: Co-Craft. Use a hasty transmutation to attempt to fix a crafting error. 
-    You may reroll a crafting dice after already determining the result.  You must
-    keep the second number.  Cannot be used for the last crafting dice.
-  id: transmutation_basics_matching_raw_material
-  keywords: *id004
 - name: Memory of the Grove
   id: memory_of_the_grove
   type: true_ability
@@ -5340,16 +5045,6 @@
     ap: 2
   requirements:
   - Longsword, Heavy Blades and Bludgeoning weapons only.
-- name: Mortise and Tenon
-  type: crafting
-  cost: '30'
-  id: timberwrights_core_crafting_mortise_and_tenon
-  keywords: *id011
-- name: Mortise and Tenon
-  type: crafting
-  cost: '30'
-  id: timberwrights_core_crafting_mortise_and_tenon
-  keywords: *id012
 - name: Mountain Slayer
   id: mountain_slayer
   type: true_ability
@@ -5534,16 +5229,6 @@
     rp: 0
   requirements:
   - Only usable when you would be able to make an attack of opportunity.
-- name: Oil and Lacquer
-  type: crafting
-  cost: '30'
-  id: timberwrights_core_crafting_oil_and_lacquer
-  keywords: *id011
-- name: Oil and Lacquer
-  type: crafting
-  cost: '30'
-  id: timberwrights_core_crafting_oil_and_lacquer
-  keywords: *id012
 - name: On my terms
   id: on_my_terms
   type: key_ability
@@ -5848,16 +5533,6 @@
   costs:
     ap: 2
     rp: 1
-- name: Polishing and Sanding
-  type: crafting
-  cost: '15'
-  id: carpenter_basics_polishing_and_sanding
-  keywords: *id005
-- name: Polishing and Sanding
-  type: crafting
-  cost: '15'
-  id: carpenter_basics_polishing_and_sanding
-  keywords: *id006
 - name: Power Jump
   id: power_jump
   type: true_ability
@@ -6012,16 +5687,6 @@
   costs:
     mana: 3
     ap: 0
-- name: Pressurization
-  type: crafting
-  cost: '15'
-  id: alchemist_core_crafting_pressurization
-  keywords: *id009
-- name: Pressurization
-  type: crafting
-  cost: '15'
-  id: the_alchemist_pressurization
-  keywords: *id010
 - name: Prone Cover
   id: prone_cover
   type: true_ability
@@ -6090,16 +5755,6 @@
   costs:
     mana: 1
     ap: 1
-- name: Purify Elixir
-  type: crafting
-  cost: '30'
-  id: alchemeister_core_crafting_purify_elixir
-  keywords: *id013
-- name: Purify Elixir
-  type: crafting
-  cost: '30'
-  id: expert_alchemist_purify_elixir
-  keywords: *id014
 - name: Quick Artifice Reload
   id: quick_artifice_reload
   type: true_ability
@@ -6187,15 +5842,15 @@
     mana: 6
     ap: 2
 - name: Rage Quit
-  type: crafting
-  cost: '1'
   id: transmutation_basics_rage_quit
-  keywords: *id003
-- name: Rage Quit
   type: crafting
-  cost: '1'
-  id: transmutation_basics_rage_quit
-  keywords: *id004
+  cost: 1 Crafting Dice
+  description: Co-Craft. Only usable once per crafting IP. Destroy the uncrafted item
+    and all materials invested into the craft. You may immediately start another crafting
+    session. If you use this as a Co-Craft it requires 1 crafting dice from the main
+    crafter.
+  keywords:
+  - co-craft
 - name: Rage Stance
   id: rage_stance
   type: true_ability
@@ -6242,36 +5897,6 @@
     ap: 2
   requirements:
   - Target must be a dead humanoid.
-- name: Raise Undead
-  id: raise_undead
-  type: key_ability
-  keywords:
-  - Summon
-  range: 30ft
-  description: 'You raise the target corpse as a basic undead, such as a zombie. This
-    zombie is treated as a non-heroic unit that you can command directly. You can
-    have multiple zombies under your command, up to your Necromancer level + 1. However,
-    the zombies act as a group under the same token rather than having an individual
-    token. The group acts on your Initiative.
-
-
-    Each zombie has a single point of HP and immediately dies, but you only lose 1
-    zombie per attack the group takes, including AoE attacks that do not deal Holy
-    Damage. The zombie group has a focus and power of 3 + 1 for every 3 zombies, rounded
-    down. They have an Agility of 2 and Toughness equal to 4. They have access to
-    all basic actions, but otherwise have no special abilities. As a non-heroic entity,
-    they only have access to a single RP. Because they are undead, they are immune
-    to all mind-affecting effects.
-
-
-    A raised undead lasts until the end of the arc or until killed, after which the
-    corpse cannot be raised again in any way.'
-  benefits:
-  - You may use Raise Undead.
-  costs:
-    ap: 2
-  requirements:
-  - Target must be a dead humanoid.
 - name: Ranger's Journey
   id: rangers_journey
   type: key_ability
@@ -6295,30 +5920,6 @@
     id: status_assessment
   costs:
     ap: 0
-- name: Rapid
-  type: crafting
-  description: You infuse one of the planted herbs with Qi, upgrading it from rare
-    to mystic and adding 20 to its difficulty.
-  id: expert_farmer_rapid
-  keywords: *id019
-- name: Rapid
-  type: crafting
-  description: You infuse one of the planted herbs with Qi, upgrading it from common
-    to rare and adding 15 to its difficulty.
-  id: farming_basics_rapid
-  keywords: *id021
-- name: Rapid
-  type: crafting
-  description: You infuse one of the planted herbs with Qi, upgrading it from rare
-    to mystic and adding 20 to its difficulty.
-  id: expert_farmer_rapid
-  keywords: *id020
-- name: Rapid
-  type: crafting
-  description: You infuse one of the planted herbs with Qi, upgrading it from common
-    to rare and adding 15 to its difficulty.
-  id: farming_basics_rapid
-  keywords: *id022
 - name: Rapid Blasts
   id: rapid_blasts
   type: key_ability
@@ -6359,20 +5960,6 @@
     no questions.  You then receive a vision on the answers from an unknown entity.  The
     DM chooses the information you receive.  You regain the use of Receive Oracle
     after a rest.
-  costs:
-    ap: 4
-- name: Receive Oracle
-  id: receive_oracle
-  type: key_ability
-  keywords:
-  - Divination
-  range: Self
-  description: You seek divine knowledge on a topic and can ask up to three yes or
-    no questions.  You then receive a vision on the answers from an unknown entity.  The
-    DM chooses the information you receive.  You regain the use of Receive Oracle
-    after a rest.
-  benefits:
-  - You may use Receive Oracle.
   costs:
     ap: 4
 - name: Reckless Strike
@@ -6489,19 +6076,6 @@
     ap: 4
   requirements:
   - Not in Sheathed state.
-- name: Resheathe
-  id: resheathe
-  type: key_ability
-  keywords: []
-  range: Self
-  description: You regain the Sheathed state. In addition, your next Iai strike this
-    encounter gains Full Pierce.
-  benefits:
-  - You may use Resheathe.
-  costs:
-    ap: 4
-  requirements:
-  - Not in Sheathed state.
 - name: Reverse Polarity
   id: reverse_polarity
   type: true_ability
@@ -6529,24 +6103,6 @@
   description: While you are mounted and not flying you may re-direct any attack against
     your mount that does not include you as the target against you. You may still
     dodge these attacks like normal.
-- name: Rifling
-  type: crafting
-  description: 'A firearm or artifice weapon with a +1 Focus Artisan Bonus upgrades
-    into a +2 Focus Artisan Bonus.
-
-
-    Match-'
-  id: advanced_artificing_rifling
-  keywords: *id017
-- name: Rifling
-  type: crafting
-  description: 'A firearm or artifice weapon with a +1 Focus Artisan Bonus upgrades
-    into a +2 Focus Artisan Bonus.
-
-
-    Match-'
-  id: advanced_artificing_rifling
-  keywords: *id018
 - name: Riposte
   id: riposte
   type: true_ability
@@ -7804,16 +7360,6 @@
     rp: 1
   requirements:
   - Must be mounted and you and your mount are the target of an attack.
-- name: Sharpening and Reinforcing
-  type: crafting
-  cost: '15'
-  id: blacksmith_core_crafting_sharpening_and_reinforcing
-  keywords: *id007
-- name: Sharpening and Reinforcing
-  type: crafting
-  cost: '15'
-  id: craft_weapons_sharpening_and_reinforcing
-  keywords: *id008
 - name: Shatter
   id: shatter
   type: true_ability
@@ -7958,18 +7504,6 @@
     be affected by this ability once per encounter.
   costs:
     ap: 3
-- name: Skeleton Welding
-  type: crafting
-  description: You expertly create the artifice hookup, reducing the artifice weight
-    burden by a further 1 to a total minimum of 0.5.
-  id: advanced_artificing_skeleton_welding
-  keywords: *id017
-- name: Skeleton Welding
-  type: crafting
-  description: You expertly create the artifice hookup, reducing the artifice weight
-    burden by a further 1 to a total minimum of 0.5.
-  id: advanced_artificing_skeleton_welding
-  keywords: *id018
 - name: Skillfull Blow
   id: skillfull_blow
   type: true_ability
@@ -8146,16 +7680,6 @@
   costs:
     mana: 1
     ap: 2
-- name: Sow Seeds
-  type: crafting
-  cost: '1'
-  id: farming_basics_sow_seeds
-  keywords: *id021
-- name: Sow Seeds
-  type: crafting
-  cost: '1'
-  id: farming_basics_sow_seeds
-  keywords: *id022
 - name: Speak with dead
   id: speak_with_dead
   type: true_ability
@@ -8310,16 +7834,6 @@
   description: When you are under the effect of Tipsy, you gain a Spirited Bravado
     which grants +1 Power.
   range: null
-- name: Spiritual Ground
-  type: crafting
-  cost: '1'
-  id: farming_basics_spiritual_ground
-  keywords: *id021
-- name: Spiritual Ground
-  type: crafting
-  cost: '1'
-  id: farming_basics_spiritual_ground
-  keywords: *id022
 - name: Spiritual Sync
   id: spiritual_sync
   type: true_ability
@@ -8364,22 +7878,6 @@
     more than 240 feet away from you, the Spore Symbiote ends.
   costs:
     ap: 0
-- name: Spore Symbiote
-  id: spore_symbiote
-  type: key_ability
-  keywords:
-  - Quick
-  range: 60ft
-  description: You send a Spore Symbiote to an ally or yourself.  The Spore Symbiote
-    lasts until the end of combat, or you move it to another target (You can only
-    have one Spore Symbiote active at a time).  If the host of Spore Symbiote moves
-    more than 240 feet away from you, the Spore Symbiote ends.
-  benefits:
-  - You can use Spore Symbiote.
-  - You gain Earth Elemental Mastery.
-  - You can create a cute mushroom cap hat to wear.
-  costs:
-    ap: 0
 - name: Squadsight
   id: squadsight
   type: true_ability
@@ -8406,16 +7904,6 @@
     ap: 3
   requirements:
   - Throwing Weapon, Set of Missiles or Thrown attack only.
-- name: Stabilize Matter
-  type: crafting
-  cost: 200u of
-  id: transmuter_tricks_stabilize_matter
-  keywords: *id023
-- name: Stabilize Matter
-  type: crafting
-  cost: 200u of
-  id: transmutation_tricks_stabilize_matter
-  keywords: *id024
 - name: Stable Foundation
   id: stable_foundation
   type: true_ability
@@ -8505,22 +7993,6 @@
     if any.
   costs:
     ap: 0
-- name: Status Assessment II
-  id: status_assessment_ii
-  type: key_ability
-  keywords:
-  - Analyze
-  - Quick
-  range: Sight
-  description: You can assess the approximate HP percentage of a unit until the end
-    of combat. (The DM should enable health bars for the unit). You can also assess
-    any damage type weaknesses and strengths that the enemy has at the current time.
-    You can also determine which parts of a creature can be targeted and destroyed,
-    if any.
-  benefits:
-  - You may use Status Assessment II.
-  costs:
-    ap: 0
 - name: Status Assessment III
   id: status_assessment_iii
   type: true_ability
@@ -8576,32 +8048,12 @@
   costs:
     mana: 2
     rp: 0
-- name: Stone Grinding
-  type: crafting
-  cost: '15'
-  id: alchemist_core_crafting_stone_grinding
-  keywords: *id009
-- name: Stone Grinding
-  type: crafting
-  cost: '15'
-  id: the_alchemist_stone_grinding
-  keywords: *id010
 - name: Store Time
   id: store_time
   type: true_ability
   keywords: []
   range: Self
   description: You store time, granting you 1 extra AP at the start of your next turn.
-  costs:
-    ap: 1
-- name: Store Time
-  id: store_time
-  type: key_ability
-  keywords: []
-  range: Self
-  description: You store time, granting you 1 extra AP at the start of your next turn.
-  benefits:
-  - You can use Store Time.
   costs:
     ap: 1
 - name: Store/Consume Item
@@ -8707,31 +8159,6 @@
 
     The pool of creatures that can be summoned is the following: Wolf, Boar, Giant
     Spider.'
-  costs:
-    ap: 1
-- name: Summon Animal
-  id: summon_animal
-  type: key_ability
-  keywords:
-  - Summon
-  range: 40ft
-  description: 'You summon a randomly chosen animal to a location you can see within
-    range. The summon does not act by itself, but you may spend AP to make it act.
-    The AP cost for these actions is the same as they would be for you taking the
-    basic actions. (Example, you can spend 2 AP to make the summon do a Heavy attack).
-
-
-    The summon also gains access to the abilities the summoned creature normally has.
-    The costs for these have to be paid by you, same as they would be for basic actions.
-    Any attacks it makes are made with its own stats. When an animal summoned through
-    this ability dies, you cannot use this ability again until the end of the encounter.
-    You can undo the summoning manually for 0 AP.
-
-
-    The pool of creatures that can be summoned is the following: Wolf, Boar, Giant
-    Spider.'
-  benefits:
-  - You may use Summon Animal.
   costs:
     ap: 1
 - name: Summon Lesser Eidolon
@@ -8889,25 +8316,14 @@
   requirements:
   - Object is in a room affected by Psychometry
 - name: Temperature Shock
-  type: crafting
-  cost: 200u of
   id: transmutation_basics_temperature_shock
-  keywords: *id003
-- name: Temperature Shock
   type: crafting
-  cost: 200u of
-  id: transmutation_basics_temperature_shock
-  keywords: *id004
-- name: Tempering
-  type: crafting
-  cost: '30'
-  id: forgemaster_core_crafting_tempering
-  keywords: *id015
-- name: Tempering
-  type: crafting
-  cost: '30'
-  id: focused_weapons_tempering
-  keywords: *id016
+  cost: 200u of Matching Raw Material
+  description: Co-Craft. Can be used immediately after the result of a roll is determined.
+    The previous action has no effect and instead gain a +10 to your next crafting
+    action.
+  keywords:
+  - co-craft
 - name: Tempestuous Fire Stance
   id: tempestuous_fire_stance
   type: true_ability
@@ -8987,6 +8403,44 @@
     the target back, you may knock the target back for an equal distance again.
   costs:
     ap: 3
+- name: The Alchemist
+  id: the_alchemist
+  type: key_ability
+  keywords: []
+  description: 'Efficient DilutionCost:15 Crafting PointsDescription:By diluting the
+    contents to the perfect required amounts, you gain an additional Elixir, Potion,
+    Flask or Salve upon crafting success.
+
+
+    Stone GrindingCost:15 Crafting PointsDescription:You extract the highest quality
+    healing materials from herbs, granting Healing +3 to a Potion with a heal effect.
+
+
+    PressurizationCost:15 Crafting PointsDescription:You pressurize a Flask carefully. If
+    the Flask has an area of effect, increases the area by 5ft (example a 10ft radius
+    becomes 15ft radius).
+
+
+    Volatile FlaskCost:15 Crafting PointsDescription:You overload the active ingredients
+    on a Flask, giving it a +3 damage to its damaging effects.
+
+
+    Detoxify ElixirCost:15 Crafting PointsDescription:You reduce the toxicity of an
+    Elixir while still maintaining its effect, reducing the damage from taking an
+    Elixir by 2.
+
+
+    Create Oil CoatingCost:ErrandDescription:You create an Oil Coating from Carpenter
+    materials.  See Items:  Carpenter Materials'
+  benefits:
+  - You gain Alchemist Core Crafting Abilities, and proficiency in 1 basic weapon.
+  - You can craft using non-advanced materials and base materials.
+  - You can now craft Elixirs, Potions, Flasks and Salves.
+  - You craft 3 of the same Elixir, Potion, Flask or Salve when using an interlude
+    point instead of 1. You only need to pay the listed cost once.
+  associated_abilities:
+  - name: Alchemist Core Crafting
+    id: alchemist_core_crafting
 - name: Thefts of the past
   id: thefts_of_the_past
   type: key_ability
@@ -9037,6 +8491,48 @@
     from above the target rather than from your path to the target.
   costs:
     ap: 4
+- name: Timberwright's Core Crafting
+  id: timberwrights_core_crafting
+  type: true_ability
+  keywords: []
+  description: 'Woodcrafter’s Design II
+
+
+    Cost: 30 Crafting Points
+
+
+    Description:
+
+
+    The facility with a +1 Crafting Artisan Bonus upgrades into a +2 Crafting Artisan
+    Bonus.
+
+
+    Mortise and Tenon
+
+
+    Cost: 30 Crafting Points
+
+
+    Description:
+
+
+    The carpentry weapon with a +1 Power Artisan Bonus upgrades into a +2 Power Artisan
+    Bonus.
+
+
+    Oil and Lacquer
+
+
+    Cost: 30 Crafting Points
+
+
+    Description:
+
+
+    The carpentry weapon with a +1 Focus Artisan Bonus upgrades into a +2 Focus Artisan
+    Bonus.'
+  range: null
 - name: Tiny Pixie
   id: tiny_pixie
   type: true_ability
@@ -9134,6 +8630,43 @@
     This HP loss cannot be mitigated in any way and ignores temporary HP.'
   costs:
     ap: 0
+- name: Transmutation Tricks
+  id: transmutation_tricks
+  type: key_ability
+  keywords: []
+  description: 'Stabilize MatterCost:200u of Matching Material
+
+
+    Description:
+
+
+    Co-Craft. Use a transmutation that stabilizes the material, making it easier to
+    work with.  The next crafting check cannot roll lower than a 6.
+
+
+    A Small Bit of Creation
+
+
+    Cost:one herb.
+
+
+    Description:
+
+
+    You deconstruct and reconstruct the structure of an harvested alchemy herb.  By
+    lowering its energy level you attune an herb to another element.  Choose one herb
+    and lower its rarity by one step and then change its element into the element
+    of your choice.'
+  benefits:
+  - For 1 AP, You can create small items using transmuting to provide temporary comforts
+    and curiosities— a cup to drink out of, a chair to sit down on, a figurine etc.  These
+    items cannot have significant gameplay factors (such as a key or a tool).  If
+    you’d like to create something small to give away or sell, you must utilize x
+    amount of commodities of whatever quantity and type the GM decides.
+  - 'You may use the following abilities:'
+  associated_abilities:
+  - name: Transmuter Tricks
+    id: transmuter_tricks
 - name: Transmute Effective Implement
   id: transmute_effective_implement
   type: true_ability
@@ -9209,6 +8742,34 @@
     ap: 1
   requirements:
   - There is suitable material available. (GM decides)
+- name: Transmuter Tricks
+  id: transmuter_tricks
+  type: true_ability
+  keywords: []
+  description: 'Stabilize MatterCost:200u of Matching Material
+
+
+    Description:
+
+
+    Co-Craft. Use a transmutation that stabilizes the material, making it easier to
+    work with.  The next crafting check cannot roll lower than a 6.
+
+
+    A Small Bit of Creation
+
+
+    Cost:one herb.
+
+
+    Description:
+
+
+    You deconstruct and reconstruct the structure of an harvested alchemy herb.  By
+    lowering its energy level you attune an herb to another element.  Choose one herb
+    and lower its rarity by one step and then change its element into the element
+    of your choice.'
+  range: null
 - name: Tremorsense
   id: tremorsense
   type: true_ability
@@ -9221,24 +8782,6 @@
 
     Overcharge: You may spend extra mana to increase the range by an additional 40ft
     per mana spent.'
-  costs:
-    mana: 1
-    ap: 1
-- name: Tremorsense
-  id: tremorsense
-  type: key_ability
-  keywords:
-  - Overcharge
-  range: 40ft
-  description: 'You become aware of the presence and exact location of any creature
-    within range that is touching the ground until the end of your turn.
-
-
-    Overcharge: You may spend extra mana to increase the range by an additional 40ft
-    per mana spent.'
-  benefits:
-  - You gain Earth Mastery.
-  - You may use Tremorsense
   costs:
     mana: 1
     ap: 1
@@ -9611,16 +9154,6 @@
   requirements:
   - Giant Scissors or Chainsaw only. Target is affected by Expose, is a grunt, and
     has 0 RP.
-- name: Volatile Flask
-  type: crafting
-  cost: '15'
-  id: alchemist_core_crafting_volatile_flask
-  keywords: *id009
-- name: Volatile Flask
-  type: crafting
-  cost: '15'
-  id: the_alchemist_volatile_flask
-  keywords: *id010
 - name: Volley
   id: volley
   type: true_ability
@@ -9648,16 +9181,6 @@
   costs:
     mana: 2
     ap: 0
-- name: Weapon Alloy
-  type: crafting
-  description: 'Weapon AlloyCost:'
-  id: blacksmith_core_crafting_weapon_alloy
-  keywords: *id007
-- name: Weapon Alloy
-  type: crafting
-  description: 'Weapon AlloyCost:'
-  id: craft_weapons_weapon_alloy
-  keywords: *id008
 - name: Weapon Maintenance
   id: weapon_maintenance
   type: true_ability
@@ -9695,16 +9218,6 @@
   description: You get a +5 Expertise bonus to insight checks when looking to discern
     if someone is lying to you.
   range: null
-- name: Weight Balancing
-  type: crafting
-  cost: '15'
-  id: blacksmith_core_crafting_weight_balancing
-  keywords: *id007
-- name: Weight Balancing
-  type: crafting
-  cost: '15'
-  id: craft_weapons_weight_balancing
-  keywords: *id008
 - name: White Thunder
   id: white_thunder
   type: true_ability
@@ -9918,30 +9431,6 @@
     ap: 1
   requirements:
   - Scythe only
-- name: X Crafting Points
-  type: crafting
-  description: You mix a special material into the smithing weapon. Each material
-    has its own crafting point cost.
-  id: blacksmith_core_crafting_x_crafting_points
-  keywords: *id007
-- name: X Crafting Points
-  type: crafting
-  description: You mix a special material into the carpentry project. Each material
-    has its own crafting point cost.
-  id: carpenter_basics_x_crafting_points
-  keywords: *id005
-- name: X Crafting Points
-  type: crafting
-  description: You mix a special material into the carpentry project. Each material
-    has its own crafting point cost.
-  id: carpenter_basics_x_crafting_points
-  keywords: *id006
-- name: X Crafting Points
-  type: crafting
-  description: You mix a special material into the smithing weapon. Each material
-    has its own crafting point cost.
-  id: craft_weapons_x_crafting_points
-  keywords: *id008
 - name: X-Attack
   id: x_attack
   type: true_ability
@@ -9973,10 +9462,3 @@
   description: When you move toward an enemy as part of a Bajiquan ability, your attack
     deals two extra points of damage for every 5ft moved.
   range: null
-- name: Zhen Jiao
-  id: zhen_jiao
-  type: key_ability
-  benefits:
-  - When you move toward an enemy as part of a Bajiquan ability, your attack deals
-    two  extra points of damage for every 5ft moved.
-  keywords: []
