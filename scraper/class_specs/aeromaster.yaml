@@ -1,0 +1,96 @@
+class:
+  id: aeromaster
+  name: Aeromaster
+  tier: 3
+  difficulty: 3
+  main_role: Striker
+  secondary_role: Controller
+  image_url: https://cdn.angelssword.com/ttrpg/assets/231e02f8-2265-4012-8b75-f907a52d99e0-Aeromaster_1.2_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Aeromancer mastered.
+  description: The Aeromaster has taken their abilities to the next level, becoming
+    a master of air magic. They are able to wield powerful and destructive spells,
+    using their control over the air to unleash devastating storms and gales upon
+    their enemies.
+  guide: 'The Aeromaster gains increased control over their displacements ability
+    through their key ability. This helps them position the enemies they push to set
+    them up for their allies.
+
+    Wind Blast II is a more versatile version of Wind Blast, most importantly letting
+    you do a precise attack for an almost guaranteed knockback.
+
+    Downburst II allows the aeromaster to punish flying enemies even when its not
+    their turn. It has the same properties as the normal downburst otherwise.
+
+    Cyclone is primarily a control tool used for knocking enemies prone that does
+    a slight amount of damage. It can also be combo''d into Downburst II, though the
+    RP cost may be too high to do it a lot.
+
+    Their Secret Art: Razor Hurricane is another mix of control and damage. The large
+    size of it makes it good for locking down areas. It also cannot be destroyed like
+    wall type blockades and even if they can take the damage, the knockback is still
+    a problem. If you don''t need to seal off an area, you can move it into enemies
+    for some extra damage.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: controlled_wind
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: wind_blast_ii
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: cyclone
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: downburst_ii
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_razor_hurricane
+  ability_references:
+  - id: controlled_wind
+    name: Controlled Wind
+    type: key_ability
+  - id: wind_blast_ii
+    name: Wind Blast II
+    type: regular_ability
+  - id: cyclone
+    name: Cyclone
+    type: regular_ability
+  - id: downburst_ii
+    name: Downburst II
+    type: regular_ability
+  - id: secret_art__razor_hurricane
+    name: 'Secret Art: Razor Hurricane'
+    type: regular_ability

@@ -1,0 +1,107 @@
+class:
+  id: onmyoji
+  name: Onmyoji
+  tier: 2
+  difficulty: 3
+  main_role: Utility
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/bdcf3d10-67e9-4375-8451-28043a79b7f3-Onmyoji_v1_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered.
+  description: Scribes who use magic paper and ink to create magic talismans imbued
+    with spells.
+  guide: 'The Onmyoji is a utility class that focuses on using talismans, scrolls
+    or similar items. They can either create their own or use those created by others.
+    Buying talismans from others is an excellent way to increase your versatility
+    in combat or plug the gaps in your party composition.
+
+    Create Talisman lets you make your own talismans. The main benefit of this is
+    that it lets you prepare expensive spells in advance, allowing you to pay the
+    mana cost at a point where you don''t care about it instead of in the middle of
+    combat. You can also possibly prepare certain buff spells for your allies, though
+    they will have to pay the mana cost again themselves if they aren''t also an Onmyoji.
+
+    Secret Talisman is an ability that just lets you use a Secret Art that''s on a
+    talisman. Secret Arts are normally limited to once per encounter, so being able
+    to use two can be quite the power boost.
+
+    Sealing Talisman is a powerful CC, but it comes at the cost of having to prepare
+    the talisman beforehand. Grunts have little counterplay against it, but even against
+    heroics you can force them to waste quite a bit of AP for no AP cost of your own.
+
+    Preparedness gives you a bit more flexibility and options in what you can bring.
+    Overall, Onmyoji is very reliant on either outside sources of talismans or in
+    having strong classes to complement it to really shine. It is not recommended
+    to take the class without taking some other classes beforehand or having a clear
+    goal in mind.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: expert_scribe
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: create_talisman
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: preparedness
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: sealing_talisman
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_talisman
+  ability_references:
+  - id: expert_scribe
+    name: Expert Scribe
+    type: key_ability
+  - id: create_talisman
+    name: Create Talisman
+    type: regular_ability
+  - id: preparedness
+    name: Preparedness
+    type: regular_ability
+  - id: sealing_talisman
+    name: Sealing Talisman
+    type: regular_ability
+  - id: secret_talisman
+    name: Secret Talisman
+    type: regular_ability

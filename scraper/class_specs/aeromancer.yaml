@@ -1,0 +1,110 @@
+class:
+  id: aeromancer
+  name: Aeromancer
+  tier: 2
+  difficulty: 3
+  main_role: Striker
+  secondary_role: Controller
+  image_url: https://cdn.angelssword.com/ttrpg/assets/98143839-09e9-46f8-9409-7144c54627b2-aeromancer.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered or Wind mastered.
+  description: 'The first Aeromancer corps were born in Northi, created as a direct
+    response to Sorthen''s formidable Ace Aerial Mage squads. While the Catfolk had
+    a stronghold on the ground with their incredible speed, the Fae and Sorthen flyers
+    posed a constant threat from above. That is, until a cunning Catfolk mage named
+    Nicole Mimi changed the game.
+
+    Mimi took a magical art that was once considered weak, Aeromancy, and turned it
+    into a force to be reckoned with. By destabilizing the air itself, she crafted
+    powerful gales and sudden downbursts, effectively disrupting air superiority.
+    What was once seen as a lesser magic became a devastating weapon under her mastery.
+
+    To this day, Aeromancers from all corners of the world study Mimi''s tomes, learning
+    to command the sky just as she did. They''ve turned Aeromancy into an art of its
+    own, capable of twisting the winds and reshaping the battlefield.'
+  guide: 'Aeromancers take on a more controllery striker role, displacing enemies
+    while attacking them. They are very dangerous when near cliffs or other hazards.
+    Their difficulty lies in the importance of their positioning. Knockbacks do damage
+    if the target can not be moved the full distance, so knocking enemies into walls
+    can add a decent amount of damage.
+
+    Wind Blast is a low investment ability that provides significant displacement.
+    While using it near hazards is the obvious choice, it can also be used to free
+    up space for allies or to push the enemy closer to your allies so they can spend
+    more AP on attacking instead of moving.
+
+    Wind Scatter is an almost pure disruption tool. It makes further AoE''s impossible,
+    so careful use is required to not disrupt your allies. A good Wind Scatter however,
+    can put significant distance between the front most and backmost enemy of a formation,
+    which allows for targets to be isolated and picked off.
+
+    Wind Buffet is a more defensive knockback, forcing enemies away from you. Be careful,
+    as it provokes attacks of opportunities and can hit allies.
+
+    Downburst is a simple, but extremely powerful anti-air tool. With high range and
+    lock-on, an aeromancer is a aerial mage or flying monster''s worst nightmare.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: wind_master
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: wind_blast
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: downburst
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: wind_scatter
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: wind_buffet
+  ability_references:
+  - id: wind_master
+    name: Wind Master
+    type: key_ability
+  - id: wind_blast
+    name: Wind Blast
+    type: regular_ability
+  - id: downburst
+    name: Downburst
+    type: regular_ability
+  - id: wind_scatter
+    name: Wind Scatter
+    type: regular_ability
+  - id: wind_buffet
+    name: Wind Buffet
+    type: regular_ability

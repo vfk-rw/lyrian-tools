@@ -1,0 +1,133 @@
+class:
+  id: transmuter
+  name: Transmuter
+  tier: 1
+  difficulty: 2
+  main_role: Artisan
+  secondary_role: Utility
+  image_url: https://cdn.angelssword.com/ttrpg/assets/b5e7f318-8648-4bb2-b8d2-ac761893a7ac-Transmuter_-_Copy.sm.webp
+  requirements:
+    type: none
+  description: 'In the dust of an artisan''s workshop or in the open clearings of
+    a logging company, the hum and chirps of transmutation can be heard.  Transmutation
+    is an art, a magic as ancient as Lyr.  Long before the shadows of the great calamity,
+    Transmuters were scholars who questioned the very nature of existence.  This pursuit
+    led to a mastery over both destruction and creation, spinning the threads of reality
+    itself into a tapestry.
+
+    Transmutation is the second branch of alchemy and created a revolution in society.
+     It replaced primitive methods such as smelting and manual refinement—which previously
+    had artisans sweating over blazing crucibles into the dark hours of the night.
+     It isn''t uncommon for master craftsmen to have a Transmuter in their employ
+    or as a partner, processing material in the atelier or even helping with the crafting
+    itself.  In fact, nowadays there is rarely a town across Lyr without at least
+    one person versed in the basics of this ancient art.
+
+    Transmuters manipulate matter at its core, unraveling its threads and rebuilding
+    them into entire new forms.  They can shatter stone into dust, or create small
+    figurines from blocks of wood.  The control of Transmutation is only limited by
+    skill and imagination. Transmutation is the second branch of Alchemy, which itself
+    is one of the great pillars of Arcane Magic.
+
+    Yet with great power comes great peril.  Those who understand Transmutation know
+    that creation and destruction are two sides of the same coin.  It requires a sound
+    mind and body to walk the delicate balance, making Transmuters some of the most
+    respected Artisans in any community they are in.'
+  guide: 'Transmuter is a class that helps crafting for other classes and provided
+    utility in combat.
+
+    Transmute weapon is a simple ability that lets you create a weapon for yourself
+    or ally. While you probably don''t want to rely entirely on this for your equipment
+    as it costs mana and may not always work, it''s good for providing an emergency
+    backup or if there happens to be special material nearby.
+
+    Transmute wall is a reactionary defense against a ranged attack. Because you''ll
+    be able to see the damage you''re about to take in most cases, it will be easy
+    to judge how much mana you should spend on this. Because it''s a wall and not
+    you blocking, this can help you defend against full pierce type of attacks.
+
+    Transmute terrain is a versatile ability that lets you create walls, bridges,
+    ledges and other terrain. You can spend a lot of mana on this at once, allowing
+    for some creative use such as completely boxing in a character, pushing yourself
+    60ft into the air for a sniper position, pushing enemies off a cliff and much
+    more.
+
+    Deconstruct is an interlude ability that lets you recycle useless items into usable
+    material. Best to use it when you have a large amount of things piled up.
+
+    In crafting, you have a few unique abilities as well as the ability to co-craft.
+    This costs you nothing to do by default, so use it whenever you can. Two of your
+    co-craft abilities do have a cost and you can also use them in your own crafts.
+    Temperature Shock is useful early when you roll poorly to have a guaranteed number
+    to your next roll. Once your bonus grows higher or if you need to gamble, Alchemic
+    catch will be better as it uses the full bonus you have. If you''re co crafting
+    and don''t want to spend money, you can just use bouncing ideas for a free small
+    bonus. Finally ragequit is useful if you don''t care about profit by itself and
+    only want to make something big. You do lose a lot when using this, so avoid it
+    unless you know what you''re doing.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: transmutation_basics
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: transmute_weapon
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: transmute_wall
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason and +5 expertise points
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: deconstruction
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness. In addition
+        value: 1
+      - attribute: as an errandyou can use Co-Craft
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: transmute_terrain
+  ability_references:
+  - id: transmutation_basics
+    name: Transmutation Basics
+    type: key_ability
+  - id: transmute_weapon
+    name: Transmute Weapon
+    type: regular_ability
+  - id: transmute_wall
+    name: Transmute Wall
+    type: regular_ability
+  - id: deconstruction
+    name: Deconstruction
+    type: regular_ability
+  - id: transmute_terrain
+    name: Transmute Terrain
+    type: regular_ability

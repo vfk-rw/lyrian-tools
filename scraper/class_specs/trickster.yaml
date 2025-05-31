@@ -1,0 +1,97 @@
+class:
+  id: trickster
+  name: Trickster
+  tier: 3
+  difficulty: 3
+  main_role: Support
+  secondary_role: Utility
+  image_url: https://cdn.angelssword.com/ttrpg/assets/625344e9-b3cf-4451-84fe-7a6a21f576fc-Trickster_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Two classes mastered, of which 1 must be a tier 2 class.
+  description: Tricksters are a support class that cause chaos on the battlefield.
+     The world is a stage.
+  guide: 'The trickster is a support class that provides weird and unique benefits
+    to the team.
+
+    Assign Decoy gives the unique ability to taunt an enemy by an ally that would
+    normally have no access to it. It can be used to temporarily make an enemy switch
+    targets or if in a party without a tank, can be used to set up a sort of tank
+    rotation.
+
+    Swap gives the Trickster high control over the battlefield. They can walk near
+    the edge of a clif, then swap an enemy next to it. Forcefully group enemies to
+    setup for a teammates AoE attack. Swap an ally out of danger and much more. Extremely
+    versatile and due to its Rapid nature and low cost can easily be spammed.
+
+    Misdirected Blow has some conditions for it to be good, but it can turn enemies
+    against each other. Most effective on tricksters with high agility, as it can
+    let you evade blows that will hit most other targets.
+
+    The Secret Art Grand Theater allows the trickster to set up a magnificent performance.
+    They can force enemies to hit each other and give allies free actions. They just
+    need to be careful, because even their allies are forced to attack and careless
+    use may force them to attack an ally.
+
+    Their perfect mimicry has little combat potential, but it allows a trickster to
+    truly infiltrate a place and sow chaos.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: perfect_mimicry
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: assign_decoy
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: swap
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Cunning
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: misdirected_blow
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Agility
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_the_grand_theater
+  ability_references:
+  - id: perfect_mimicry
+    name: Perfect Mimicry
+    type: key_ability
+  - id: assign_decoy
+    name: Assign Decoy
+    type: regular_ability
+  - id: swap
+    name: Swap
+    type: regular_ability
+  - id: misdirected_blow
+    name: Misdirected Blow
+    type: regular_ability
+  - id: secret_art__the_grand_theater
+    name: 'Secret Art: The Grand Theater'
+    type: regular_ability

@@ -1,0 +1,108 @@
+class:
+  id: warding_mage
+  name: Warding Mage
+  tier: 2
+  difficulty: 3
+  main_role: Utility
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/a57e99e0-1fed-45b6-bcd2-2b9a4d6b782c-warding-mage.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Mage mastered.
+  description: Warding Mages focus on creating bounded fields that ward off intruders.
+  guide: 'The warding mage is a utility class that relies on setting up defensive
+    barriers. It is unsuited for many normal campaigns, due to the long casting time
+    and only working when enemies come to you. In a campaign focused more around intrigue
+    or where action takes place around a single place, they can provide peace of mind
+    and creates a zone where enemies will struggle to fight in.
+
+    Maintaining bounded fields reduces your maximum mana, but they last forever. Maintain
+    the ones you need to and cancel fields once they have exhausted their use.
+
+    Alarm Ward is the first field you get. It simply warns you (and others) when someone
+    unwanted enters it. Many vaults, treasure rooms or other rooms containing important
+    goodds or information will contain some form of an Alarm Ward.
+
+    Explosive Ward is your second available field. It is usually placed on containers
+    containing papers with sensitive information on it. If anybody tries to steal
+    it, the papers will be destroyed even if the thief manages to get away.
+
+    Sapping Ward is your final ward and one that greatly reduces the combat potential
+    of any enemies entering it. The weakened condition is already bad enough, but
+    grunts become stunned as well. Because a stunned target has no AP or RP, they
+    will never be able to escape the ward while it lasts, essentially permanently
+    disabling them for the encounter.
+
+    Through hidden wards, you are able to hide your fields. With Disable Magic, you
+    are able to disable other fields making Warding Mages good for infiltration as
+    well.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: disable_magic
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: alarm_ward
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: hidden_wards
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Cunning
+        value: 1
+      - attribute: Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: explosive_ward
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: sapping_ward
+  ability_references:
+  - id: disable_magic
+    name: Disable Magic
+    type: key_ability
+  - id: alarm_ward
+    name: Alarm Ward
+    type: regular_ability
+  - id: hidden_wards
+    name: Hidden Wards
+    type: regular_ability
+  - id: explosive_ward
+    name: Explosive Ward
+    type: regular_ability
+  - id: sapping_ward
+    name: Sapping Ward
+    type: regular_ability

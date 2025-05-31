@@ -1,0 +1,100 @@
+class:
+  id: shield_paladin
+  name: Shield Paladin
+  tier: 2
+  difficulty: 2
+  main_role: Defender
+  secondary_role: Support
+  image_url: https://cdn.angelssword.com/ttrpg/assets/02ca3b00-c94f-4a5e-91d8-84952f8c25f9-Shield_Paladin_Clean.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Human, proficient with shields and medium armor.
+  description: Paladins are powerful warriors who receive their powers from their
+    god. Shield paladins are frontline defenders and healers who can keep their weaker
+    allies safe.
+  guide: 'The shield paladin is a tank that focuses on blocking and temporary HP.
+
+    Through their Aura of Protection, they allow their allies to block against attacks
+    even if their Block is normally too low to be usable. This does cost mana and
+    it requires your ally to block, so communication with your allies is key.
+
+    With Holy Shield, you can convert AP into defense, gaining both a high Block potentially
+    allowing you to block even heavy attacks and a decent check of temporary HP. You
+    do give up damage by using too much AP on this, so it is not always the best option
+    to dump all your AP into it.
+
+    Divine Smite is a more offensive way to gain temporary hit points. It does require
+    landing the heavy attack, but it can be used both on yourself or an ally.
+
+    Shield paladins can also heal themselves or ally through their Lay on Hands ability.
+    It''s efficient both mana and AP wise, with the only drawback being that it only
+    has a touch range. It does not provoke attacks of opportunity however, so you
+    don''t need to worry about disengaging from the fight before healing.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: holy_weapon
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: lay_on_hands
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: aura_of_protection
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: holy_shield
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: divine_smite_ii
+  ability_references:
+  - id: holy_weapon
+    name: Holy Weapon
+    type: key_ability
+  - id: lay_on_hands
+    name: Lay on Hands
+    type: regular_ability
+  - id: aura_of_protection
+    name: Aura of Protection
+    type: regular_ability
+  - id: holy_shield
+    name: Holy Shield
+    type: regular_ability
+  - id: divine_smite_ii
+    name: Divine Smite II
+    type: regular_ability

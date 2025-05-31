@@ -1,0 +1,113 @@
+class:
+  id: assassin
+  name: Assassin
+  tier: 3
+  difficulty: 3
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/0afd4445-076a-4bf7-b888-f0533aaed670-Assassin_1_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Rogue mastered, any tier 2 class mastered.
+  description: 'Assassins trace their origins back to the lawless city of Telsin,
+    deep in the Southern Desert. With little military power of their own and relying
+    mostly on the harsh desert environment for protection, the people of Telsin developed
+    less conventional methods of defense. Assassins emerged from this need, honing
+    their skills in reconnaissance and studying their targets with meticulous care,
+    mentally preparing themselves before executing the perfect kill.
+
+    Their reputation for precision and effectiveness quickly spread, becoming so legendary
+    that other nations started to take notice. Before long, these nations began hiring
+    assassins of their own, both to eliminate key targets and to counter the deadly
+    expertise of other assassins.'
+  guide: 'The assassin functions best when they get the jump on the enemy. Their Inconspicuous
+    key ability is key for this, as it lets them get a surprise attack even if the
+    rest of the party isn''t quite as sneaky.
+
+    When they get the surprise, they can use their Death Mark ability. It gives them
+    a small benefit on killing the target, but the real use is opening up the target
+    to their other abilities.
+
+    Devastating Strike IV is the first of those abilities. Similar to the normal devastating
+    strike, but it does guaranteed maximum damage.
+
+    Their Secret Art: Assassinate is the second of those abilities. While a sure-hit
+    and full pierce heavy attack is already strong by itself, it shows its true potential
+    against enemies who are unaware of you. Due to this nature, it is a rare secret
+    art ability that must be activated in the first round or lose power.
+
+    Study Target has minor issues in a direct fight, though getting a lock-on heavy
+    attack for 4 combined AP is not bad against dodgy enemies. When there''s a temporary
+    lull in the action, for example through an acolyte sanctuary barrier, setting
+    up a study target before hand will give you an edge when the fighting resumes.
+    It can also be used to force a Death Mark onto an enemy if you were unable to
+    get the surprise round before. However, this is very AP inefficient so it should
+    most likely be avoided in most cases.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: inconspicuous
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: death_mark
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: study_target
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: devastating_strike_iv
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_assassinate
+  ability_references:
+  - id: inconspicuous
+    name: Inconspicuous
+    type: key_ability
+  - id: death_mark
+    name: Death Mark
+    type: regular_ability
+  - id: study_target
+    name: Study Target
+    type: regular_ability
+  - id: devastating_strike_iv
+    name: Devastating Strike IV
+    type: regular_ability
+  - id: secret_art__assassinate
+    name: 'Secret Art: Assassinate'
+    type: regular_ability

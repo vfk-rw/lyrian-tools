@@ -1,0 +1,96 @@
+class:
+  id: sword_saint
+  name: Sword Saint
+  tier: 3
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/ad77fd9a-c4d8-4f97-8525-56d47ccc3532-Sword_Saint_New_1_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Iaido style mastered.
+  description: A warrior with peerless skill in swordsmanship.
+  guide: 'The Sword Saint has further mastered Iaido. Resheathe allows them to regain
+    the Sheathed state during combat without relying on a kiri-tsuke killing blow.
+    The AP cost is high though and it should only be used during a lull in combat.
+
+    Kiri-tsuke II is an upgrade from the normal kiri-tsuke that combos of Iai strike,
+    saving you some AP.
+
+    Chiburi Noto II is also a straight upgrade from Chiburi Noto, adding full pierce
+    on top of the previous benefit.
+
+    Flash Cut is a mana intensive attack that does unavoidable heavy damage. It requires
+    you to be in the sheathed state, which makes it only really an option in the beginning
+    of the fight. Flash Cut into Iai strike into Kiri-tsuke II is a very dangerous
+    combo.
+
+    The Secret Art: Tsubame Gaeshi has high potential damage, but also does some guaranteed
+    damage. You are guaranteed at least 1 hit, most likely a second and a third if
+    you''re lucky or if the target is out of RP. You can use this even early in the
+    fight, especially if you''ve already softened up an enemy through your other attacks
+    with sure hit and lock on.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: resheathe
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: kiri-tsuke_ii
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: flash_cut
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Awareness
+        value: 1
+      - attribute: Fitness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: chiburi_noto_ii
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_tsubame_gaeshi
+  ability_references:
+  - id: resheathe
+    name: Resheathe
+    type: key_ability
+  - id: kiri-tsuke_ii
+    name: Kiri-tsuke II
+    type: regular_ability
+  - id: flash_cut
+    name: Flash Cut
+    type: regular_ability
+  - id: chiburi_noto_ii
+    name: Chiburi Noto II
+    type: regular_ability
+  - id: secret_art__tsubame_gaeshi
+    name: 'Secret Art: Tsubame Gaeshi'
+    type: regular_ability

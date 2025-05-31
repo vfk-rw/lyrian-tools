@@ -1,0 +1,104 @@
+class:
+  id: flash_star_blade_style
+  name: Flash Star Blade Style
+  tier: 2
+  difficulty: 3
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/4e03d9a8-6c1b-4208-965e-ff7bb5ad5ed0-Flash_Star_Blade_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered. Proficiency in one of light blades, longsword
+        or katana.
+  description: A blade style originating from Raijin swordmasters.  A notable practicioner
+    of Flash Star Blade Style is Rin Tatsugami of Madeline.
+  guide: 'The Flash Star Style is a sword style originating from the Raijin that requires
+    precise positioning. Photon Line moves you exactly 25ft, not up to 25ft. This
+    can make it difficult to use against a single target, since you''ll often dash
+    past the target and be unable to attack them without moving. Using it as a retreating
+    option is a valid choice as you force the enemy to move to attack you.
+
+    If you do manage to line up the perfect Photon Line on the offense, you can combo
+    it into Thunderbolt Slash. Thunderbolt Slash is 3 light attacks for the cost of
+    2 AP. With its mana cost reduced by the combo effect, it lines up perfectly for
+    a 4 AP turn that doesn''t cost any mana.
+
+    Starlight Crescent Reversal is a safe mana dump each turn, allowing for a cheap
+    Light attack.
+
+    The Secret Art: Twin Nova Pursuit is an engagement and isolation tool. You are
+    able to move a target 25ft or 50ft, depending on how they react, which can let
+    you get a 1v1 when you remove an enemy from a melee brawl. It can also be used
+    to engage and knock an enemy into your own allies, allowing them to pile on without
+    having to move and most likely dragging that enemy out of range of any support
+    abilities.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: lightning_weapon
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: flash_star_style_photon_line
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: flash_star_style_thunderbolt_slash
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: flash_star_style_starlight_crescent_reversal
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: flash_star_style_secret_art_twin_nova_pursuit
+  ability_references:
+  - id: lightning_weapon
+    name: Lightning Weapon
+    type: key_ability
+  - id: flash_star_style__photon_line
+    name: 'Flash Star Style: Photon Line'
+    type: regular_ability
+  - id: flash_star_style__thunderbolt_slash
+    name: 'Flash Star Style: Thunderbolt Slash'
+    type: regular_ability
+  - id: flash_star_style__starlight_crescent_reversal
+    name: 'Flash Star Style: Starlight Crescent Reversal'
+    type: regular_ability
+  - id: flash_star_style_secret_art__twin_nova_pursuit
+    name: 'Flash Star Style Secret Art: Twin Nova Pursuit'
+    type: regular_ability

@@ -1,0 +1,108 @@
+class:
+  id: chronomancer
+  name: Chronomancer
+  tier: 2
+  difficulty: 2
+  main_role: Support
+  secondary_role: Controller
+  image_url: https://cdn.angelssword.com/ttrpg/assets/f8703c41-8630-43de-83af-b3f389976afa-Chronomancer_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: One class mastered
+  description: 'Chronomancers are rare mages who wield the mysterious power of time
+    itself. They can slow down moments, speed them up, or even rewind them, turning
+    the tide of battle in ways that few can predict or understand. In a world where
+    such magic is almost unheard of, Chronomancers stand out as an often feared force.
+
+    Their magic traces back to one source: Chroma-Daria Lichtvog, a wandering Witch
+    and Thaumaturge who’s been around for over a thousand years—at least, that’s what
+    the stories say. Daria teaches her craft on a whim, picking students when it suits
+    her. Most Chronomancers have either learned directly from her or stumbled across
+    her ancient writings, devoting their lives to uncovering the secrets within.
+
+    Running into a Chronomancer means you’re up against someone who can twist the
+    flow of time itself. Whether they’ve been taught by the Witch herself or have
+    painstakingly studied her elusive texts, their powers are as astonishing as they
+    are unsettling.'
+  guide: 'Chronomancers are all about controlling the battlefield, and their abilities
+    make them a vital part of any team. When you’re not sure what move to make, use
+    Store Time to bank it for later.  Having one extra action the next turn can open
+    up powerful combinations, or help to strike during a more opportune time.
+
+    Slow is a go-to for dealing with those quick and slippery foes. It never misses,
+    so you can lock them down or force them to waste their precious resources on defense.
+    Accelerando is a lifesaver for a teammate who got a bad roll on initiative or
+    just needs a speed boost to make an important move.
+
+    The heart of a Chronomancer’s toolkit is Haste. This ability lets your ally get
+    the most out of their buffs or strike during a crucial moment. In a pinch, Galaxy
+    Stop is your trump card. It time stops all the grunt enemies on the battlefield,
+    giving your party the breathing room to either regroup or take out a few foes
+    while they’re defenseless.
+
+    While a Chronomancer is great at supporting and controlling the flow of battle,
+    they don’t do so well on their own. They shine best when they’re working in tandem
+    with their allies in nearly any party setup, using their versatile abilities to
+    keep momentum.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: store_time
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: slow
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: accelerando
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+      - attribute: Cunning
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: haste
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Agility
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_galaxy_stop
+  ability_references:
+  - id: store_time
+    name: Store Time
+    type: key_ability
+  - id: slow
+    name: Slow
+    type: regular_ability
+  - id: accelerando
+    name: Accelerando
+    type: regular_ability
+  - id: haste
+    name: Haste
+    type: regular_ability
+  - id: secret_art__galaxy_stop
+    name: 'Secret Art: Galaxy Stop'
+    type: regular_ability

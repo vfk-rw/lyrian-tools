@@ -1,0 +1,127 @@
+class:
+  id: vampire_lord
+  name: Vampire Lord
+  tier: 2
+  difficulty: 3
+  main_role: Specialist
+  secondary_role: Striker
+  image_url: https://cdn.angelssword.com/ttrpg/assets/0ffe625b-5805-4e86-99b4-0ed9ecdc7906-Vampire_Tier_2_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Vampire mastered.
+  description: 'Vampire Lords drift through the pages of history like living shadows—accursed
+    souls chained to undeath by the very forces that empower them. In dimly lit taverns,
+    alongside whispered tales of Dragons and other legendary horrors, travelers speak
+    of eerie encounters and boast of glimpses caught at the corner of a moonlit eye.
+    Whether these sightings are truth or fancy, one thing is certain: the name Vampire
+    Lord stirs fear and fascination in equal measure.
+
+    Unlike lesser Vampires who lose themselves to bloodlust or despair, Vampire Lords
+    have embraced their curse, searching its depths to forge a power all their own.
+    They understand their twisted existence at a level few can rival, developing uncanny
+    resistances to the sun’s harsh sting and other infamous banes of their kind. Yet
+    what truly sets them apart is their mastery over the delicate threads connecting
+    the Arcane, Faith, and Astra—allowing them to skirt the borders of Higher Order
+    Magic. Their Vampiric Domination arises from this warped interplay of energies,
+    a distant, corrupted echo of the Mystic Eye once claimed by the fabled Aseria
+    clan of Sorthen.
+
+    That unholy gift grants them the power to ensnare weaker minds, exerting a terrible
+    control that echoes across dark corridors and silent chambers. Even so, few mortals
+    have battled a Vampire Lord and returned with their lives, for these lords of
+    night prefer to move in secrecy. Outwardly, they can seem disarmingly regal—yet
+    beneath that lies a being forever dancing on the razor’s edge between life and
+    the endless darkness. Should you cross paths with a Vampire Lord, know this—their
+    secrets run deeper than any mortal can fathom, and their hunger, while tempered,
+    still seeks knowledge and power in their cursed existence.'
+  guide: 'A lot of the vampire lord builds on what the vampire does.
+
+    Feeding Frenzy gives you a free bite whenever you down someone while in Blood
+    Frenzy, allowing you to regain 1 mana. If fighting a lot of grunts you can reliably
+    kill, this can effectively half the upkeep cost of Blood Frenzy.
+
+    Vampiric Domination is a stronger version of the fascination. You can choose to
+    have a permanent servant, or you can use it more situationally such as to dominate
+    enemies to extract information from them, dominate people of import to have them
+    aid you. They will know what you did afterwards, so it''s recommended not to stay
+    around when you''re done with them.
+
+    Bloodbolt is a simple ranged option that can be lacking as a normal vampire. You
+    can invest HP into it for extra damage, but this might not be worth doing in most
+    cases unless you plan to Blood Frenzy shortly after.
+
+    Your Secret Art: Bloody Ritual is a powerful AoE ability. The damage is guaranteed
+    unless the tether is broken and if you can hit enough enemies with the ability,
+    you can even refund the mana you spent on it. Due to the range on the ability
+    and the slowing effect, it can be a powerful zoning tool even if enemies do manage
+    to break it.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: lord_s_dominion
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: bloodbolt
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: feeding_frenzy
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: vampiric_domination
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_bloody_ritual
+  ability_references:
+  - id: lord_s_dominion
+    name: Lord's Dominion
+    type: key_ability
+  - id: bloodbolt
+    name: Bloodbolt
+    type: regular_ability
+  - id: feeding_frenzy
+    name: Feeding Frenzy
+    type: regular_ability
+  - id: vampiric_domination
+    name: Vampiric Domination
+    type: regular_ability
+  - id: secret_art__bloody_ritual
+    name: 'Secret Art: Bloody Ritual'
+    type: regular_ability

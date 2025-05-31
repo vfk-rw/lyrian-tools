@@ -1,0 +1,94 @@
+class:
+  id: pyromaster
+  name: Pyromaster
+  tier: 3
+  difficulty: 3
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/1f5a483d-fdb9-41e3-aaf7-616e4cdf375d-pyromaster.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Pyromancer mastered.
+  description: Fire mages who have reached the pinnacle of fire control.
+  guide: 'The Pyromaster is AoE striker that deals fire damage. Their Eternal Flames
+    ability heavily punishes people who don''t immediately remove the burns they inflict,
+    all but ensuring they will die eventually. They rely on the pyromancer''s ignite
+    for many of their burning needs.
+
+    Fireball II is their one ability that inflicts Burning without the need of ignite.
+    This makes it more mana and action efficient than a normal fireball. If needed,
+    the size of it can also be increased by spending more mana. Good for those situations
+    where a few enemies are barely out of range.
+
+    Blast Wave is a self peel tool. It also knocks back allies, so be mindful of your
+    positioning.
+
+    Fireball Barrage lets you pelt an entire battlefield with fireballs. Very likely
+    to be useful at the start of a fight where enemies are not yet clustered into
+    one position.
+
+    The Climax Art: Meteor is a sure hit attack that can only be avoided by walking
+    out of the area before it lands. The damage potential of this ability when overcharged
+    to the maximum is insane, though you are unlikely to be able to do so. Even when
+    used at just 4 AP, the damage is high. You will need to rely on your teammates
+    or terrain to keep enemies inside the strike radius however.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: eternal_flames
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: blast_wave
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: fireball_ii
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: fireball_barrage
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_meteor
+  ability_references:
+  - id: eternal_flames
+    name: Eternal Flames
+    type: key_ability
+  - id: blast_wave
+    name: Blast Wave
+    type: regular_ability
+  - id: fireball_ii
+    name: Fireball II
+    type: regular_ability
+  - id: fireball_barrage
+    name: Fireball Barrage
+    type: regular_ability
+  - id: secret_art__meteor
+    name: 'Secret Art: Meteor'
+    type: regular_ability

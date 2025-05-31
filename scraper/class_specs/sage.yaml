@@ -1,0 +1,104 @@
+class:
+  id: sage
+  name: Sage
+  tier: 2
+  difficulty: 3
+  main_role: Utility
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/a6460ce9-10da-4be1-826d-8f29a6de175a-Sage_Clean.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Mage mastered.
+  description: Sages are spellcasters that excel in augmenting spells.
+  guide: 'Sage is an utility class that amplifies other spells you already know. Thus,
+    it is best to only take sage if you already have some spells from other classes.
+
+    Increased Reach is a situational, but useful tool to make those spells that have
+    a low range easier to use.
+
+    With selective casting, AoE abilities that can also hit allies before a lot easier
+    to use. Even something like a meteor is now perfectly safe to stand in for your
+    allies.
+
+    Lengthened Incantation can be used to increase the damage your spells deal. It
+    is most effective when used with AoE attacks, as the damage bonus would be effective
+    against all enemies hit. You can also use it to gather damage for 1 big attack
+    when dealing with high guard enemies.
+
+    Dualcast effectively allows you to give a spell the rapid keyword for a turn,
+    though with some more restrictions. There are many potential ways to use it. The
+    low mana cost makes it easy to use it even for things like tossing two fireballs.
+    Lengthened Incantation can provide a similar amount of damage, but dualcast has
+    the advantage of being able to see the results of your action before you commit
+    to casting it again.
+
+    Secret Art: Overcharge can be seen as a free 3 mana once per encounter, at the
+    cost of using your secret art. It does require a high mana spell to get maximum
+    use out of, but unless you have another secret art it competes with, it''s worth
+    using every fight.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: augmented_casting_-_increased_reach
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: lengthened_incantation
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: selective_casting
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: dualcast
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_overcharge
+  ability_references:
+  - id: augmented_casting_-_increased_reach
+    name: Augmented Casting - Increased Reach
+    type: key_ability
+  - id: lengthened_incantation
+    name: Lengthened Incantation
+    type: regular_ability
+  - id: selective_casting
+    name: Selective Casting
+    type: regular_ability
+  - id: dualcast
+    name: Dualcast
+    type: regular_ability
+  - id: secret_art__overcharge
+    name: 'Secret Art: Overcharge'
+    type: regular_ability

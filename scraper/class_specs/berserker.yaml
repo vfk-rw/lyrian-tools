@@ -1,0 +1,94 @@
+class:
+  id: berserker
+  name: Berserker
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3f8720bb-0c18-4924-8873-b8d69866f550-berserker.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered.
+  description: Berserkers are aggressive fighters that almost completely ignore defense
+    in exchange for more offense.
+  guide: 'Berserkers are highly aggresive fighters that rely on allies to keep them
+    alive. They are centered around their rage stance, which gives them 2 bonus AP
+    in exchange for disabling RP abilities. A person without RP is extremely vulnerable,
+    so you will need allies to cast thing like the acolyte''s Angel''s Embrace on
+    you for protection. Alternatively, you can wait with using it until you are have
+    burned through some RP already. You will lose out on some power, but it may be
+    better than going down.
+
+    Both Break Free and Fallen Friend fit the playstyle of waiting with Rage Stance
+    instead of using it immediately. Break Free especially is powerful against enemies
+    with heavy CC effects.
+
+    Into the fray is a gap closer that lets you approach an enemy without spending
+    AP, allowing for a maximum amount of attacks after. The RP cost makes it so its
+    best used when already in rage stance where your RP is less useful.
+
+    The same applies to Reckless Strike. Normally trading 1 RP for 1 AP is not worth
+    it, but when you can''t use your RP anyway, it is a good way to get some extra
+    damage in.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: fallen_friend
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: rage_stance
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: into_the_fray
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Fitness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: break_free
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Power
+        value: 1
+      - attribute: Focus
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: reckless_strike
+  ability_references:
+  - id: fallen_friend
+    name: Fallen Friend
+    type: key_ability
+  - id: rage_stance
+    name: Rage Stance
+    type: regular_ability
+  - id: into_the_fray
+    name: Into the Fray
+    type: regular_ability
+  - id: break_free
+    name: Break Free
+    type: regular_ability
+  - id: reckless_strike
+    name: Reckless Strike
+    type: regular_ability

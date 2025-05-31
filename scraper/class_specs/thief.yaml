@@ -1,0 +1,97 @@
+class:
+  id: thief
+  name: Thief
+  tier: 2
+  difficulty: 2
+  main_role: Utility
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/952bccdd-f80b-4d8d-a3ea-2bd3cbe20196-20250508_1436_Rabbitfolk
+    Thief Adventure_simple_compose_01jtqy7tmhee9tdcp6wvpcw6cc.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Rogue mastered, must possess Decipher Magic ability.
+  description: Pickpockets and scallywags.
+  guide: 'The thief is a class that steals things, whether it''s small objects, magic
+    or a grand robbery.
+
+    Their infiltrate ability lets them sneak into magically guarded places without
+    raising any suspicion.
+
+    With Quick Getaway, you are able to escape from pursuers when you use it after
+    Feint or Disengage. If used after feint, you can effectively more for 5 AP in
+    1 turn which lets you move faster than the enemy. Even against groups, they will
+    never be able to catch up and attack in the same turn without movement abilities
+    of their own.
+
+    Fast Hands can also help with escaping, allowing you to open or close doors without
+    using AP on them. It can also just let you draw a weapon or consumable.
+
+    Snatch is a situational ability that makes it impossible for enemies to use consumables
+    against you when you are close to them. If you are able to close in on an enemy
+    before they can draw their weapon, you can even steal that.
+
+    Spellsteal is another situational ability that lets you steal a buff from the
+    enemy. It removes the buff from the enemy, so even if you can''t use it very well
+    it may still be worth using.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: infiltrate
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: fast_hands
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: snatch
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: quick_getaway
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: You gain +1 Agility
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: spellsteal
+  ability_references:
+  - id: infiltrate
+    name: Infiltrate
+    type: key_ability
+  - id: fast_hands
+    name: Fast Hands
+    type: regular_ability
+  - id: snatch
+    name: Snatch
+    type: regular_ability
+  - id: quick_getaway
+    name: Quick Getaway
+    type: regular_ability
+  - id: spellsteal
+    name: Spellsteal
+    type: regular_ability

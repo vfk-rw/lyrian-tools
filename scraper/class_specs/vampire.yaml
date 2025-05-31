@@ -1,0 +1,117 @@
+class:
+  id: vampire
+  name: Vampire
+  tier: 1
+  difficulty: 3
+  main_role: Specialist
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/268b5d58-6a06-4c47-93db-49c80cf52af7-Vampire_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Must have the Curse of Vampirism breakthrough.
+  description: Vampires are those who are cursed, using their cursed abilities to
+    their advantage.
+  guide: 'Vampires are a versatile class with a slight focus on unarmed combat.
+
+    Vampire Bite is the only way that vampires can regenerate mana and using it whenever
+    possible is required to keep your mana high. The high AP cost makes it hard to
+    use in a straight up battle. You can combine it with Vampiric Fascination to remove
+    one enemy from the battle. The chosen target will move towards you and you can
+    easily follow it up with your bite on the next turn, dealing guaranteed full pierce
+    damage. Action economy wise, this is still not very efficient though. In harder
+    fights, it may be more worthwhile to fight normally at the start and only start
+    looking for enemies to drain near the end of a fight.
+
+    Cloak of Bats is a manaless teleport that can also be used offensively. The RP
+    cost on it is higher than that of a basic defense, but the teleport lets you potentially
+    avoid attacks that are undodgeable. Whether you''re stuck in bad terrain, about
+    to get hit by an AoE effect or you need to get behind cover, Cloak of Bats will
+    get you out of almost any bad situation.
+
+    Blood Frenzy is your last resort move. While it lasts you become very difficult
+    to kill, especially if enemies are low on RP and can''t avoid your attacks to
+    prevent you from regaining health. It does however, lock you into a very specific
+    set of actions. You can''t regain mana through vampire bite or switch to a ranged
+    weapon to hit an enemy that''s far away. You also cannot turn it off manually,
+    which may lead you to losing all your mana even when you no longer need the healing
+    effect. This is especially devastating for a vampire, since mana regeneration
+    is a problem for them.
+
+    Vampire Shapeshift is a cheap utility tool that can be useful for infiltration
+    and sneaking. Shapeshifting into a bat is also an easy way to gain access to flight
+    to reach high ground.
+
+    The last thing to keep in mind as a vampire is that your vampire bite is not just
+    a combat ability. You are able to use it on willing targets without hurting them,
+    though they still lose mana. You will have to convince them first though, someone
+    charmed by Vampiric Fascination does not count as a willing person.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: vampiric_strength
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: vampiric_fascination
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: vampire_shapeshift
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: cloak_of_bats
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: blood_frenzy
+  ability_references:
+  - id: vampiric_strength
+    name: Vampiric Strength
+    type: key_ability
+  - id: vampiric_fascination
+    name: Vampiric Fascination
+    type: regular_ability
+  - id: vampire_shapeshift
+    name: Vampire Shapeshift
+    type: regular_ability
+  - id: cloak_of_bats
+    name: Cloak of Bats
+    type: regular_ability
+  - id: blood_frenzy
+    name: Blood Frenzy
+    type: regular_ability

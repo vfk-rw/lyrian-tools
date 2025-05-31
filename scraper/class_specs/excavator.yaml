@@ -1,0 +1,188 @@
+class:
+  id: excavator
+  name: Excavator
+  tier: 2
+  difficulty: 2
+  main_role: Gatherer
+  secondary_role: Striker
+  image_url: https://cdn.angelssword.com/ttrpg/assets/2dcdd39c-4265-49ed-b5db-fefb45858bf5-Excavator.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Miner mastered
+  description: 'From a collection of well preserved and maintained Recorder Orbs in
+    the mining town of Caernelli, located at the base of the Tuagledd Mountains and
+    south east of Mt. Merlin itself.
+
+    An image wavered to life, revealing a pair of rugged boots scuffing into the ground.
+    Sound, slightly distorted, played of the dirt crunching and loud cloth rustling
+    before the image swung wildly in a blur. When it steadied, the freckled face of
+    a young ratfolk girl smiled and a hand came up to ruffle her windblown hair into
+    some semblance of order.
+
+    “Oh, it’s working now! Uh…uh…right! Hi! I’m Dina Awbrey, senior apprentice to
+    Master Oric Carew of the
+
+    Caernelli Mining Institute
+
+    .”
+
+    The view suddenly panned to show a sweeping image of a distant town and quarry
+    nestled against the base of the mountains. By the angle, Dina was hundreds of
+    feet up the mountain above the town. A gloved hand came into view, pointing at
+    one of the distant buildings.
+
+    “Right down there.”
+
+    The image panned again with the sound of rustling cloth and the slight creak of
+    well worn leather. By the time the view settled, Dina was making final adjustments
+    of the straps of a bulky pack. A compact shovel, a pickaxe, spare boots, some
+    metal contraptions, and a significant amount of rope were all easily visible.
+    She clapped her hands together and gave the recorder orb a thumbs up.
+
+    “Ready to go! I’ll prove to old dog Carew that there’s more to this mountain than
+    the stone and iron in the quarry!” She pointed dramatically up at the mountain
+    peaks just as the orb gave an alarming warble. “Oops, time’s u--”
+
+    The recording cut off suddenly.
+
+    Several following recordings chronicled Dina’s journey up the mountain and some
+    of her…interesting attempts at cooking while camping. The next interesting recording
+    was much more harrowing.
+
+    “Woooah! O-ooooh! Uh--okay! I’m OKAY!”
+
+    Wind hissed across the sheer cliff face and snapped at loose clothing. The image
+    wobbled for a moment before it stabilized, showing an impossible angle of Dina
+    clinging to the cliff with both hands and her boots sporting attached climbing
+    cleats. She was holding the recorder orb with her tail. Rope dangled beneath her
+    down a hundred foot drop, secured in place by the occasional piton.
+
+    “Almost fell there!”
+
+    Dina shouted over the wind with a laugh.
+
+    “UH…I’m about halfway up this cliff now and my boots are working GREAT! Really
+    gonna need to thank Patrick for them. And these new pitons! They don’t budge at
+    all!”
+
+    She demonstrated by leaning back and tugging aggressively at the rope securing
+    her to the cliff face.
+
+    “Anyway! Right up there is the cave I spotted yesterday. The one with that glint.”
+
+    Still leaning out, Dina pointed above her and stretched her tail out for a better
+    angle. The very faintest impression of a shadowed outcropping could be seen.
+
+    “I should be up there in time for lunch--”
+
+    A gust of wind swung Dina and she scrambled for a good hold on the cliff.
+
+    “If this wind doesn’t knock me down first!”
+
+    The orb’s view swung and then suddenly darkened with a cacophony of rustling before
+    the recording stopped.
+
+    The next recording began with Dina grinning and tapping a vein of metal glistening
+    in the sunlight.
+
+    “I knew it. Orichalcum, it has to be.”
+
+    There was a snap and hum of an artifice device activating and a bright light shone
+    down into the cave. More lines of mineral gleamed. The light shifted sharply as
+    Dina moved the source into view. It was a leather cap with what looked like the
+    barest bones of a Northi Lantern attached to it. She tapped the top and the dull
+    sound of metal covered in leather echoed.
+
+    “Patrick called this a ‘hard hat’. He’s thinking of trying to get all the miners
+    to wear them, but it’s not really working out. He did manage to fit a lantern
+    on it though, kinda heavy, but being able to see with hands and tail free is great!
+    Anyway, I’m gonna get a couple samples of this near the entrance and see what
+    else I can find deeper in!”
+
+    The image cut off.
+
+    There were no further recordings but there was a collection of custom made tools
+    and various samples displayed. A folding shovel, a reinforced pickaxe, the climbing
+    spike attachments for her boots, the self expanding pitons, and the hard hat with
+    the mounted lamp. Refined versions of them could be purchased at the Institute
+    to support more Excavator activity in the mountains, led and taught by Master
+    Dina Awbrey.'
+  guide: 'The excavator is the continuation of miner and is also a striker role in
+    combat. Mountain Slayer has a limited use case, only being usable against shielded
+    targets, but becomes very powerful when you get to use it doing almost Heavy attack
+    level damage with full pierce on it.
+
+    Cave Raider is another ability with situational use, but it can be useful in caves
+    where you can now easily move around.
+
+    For gathering, Focused Detonation is great against both node points and lucky
+    points. Either way you use it, Lucky Strike can help you top off afterwards. Take
+    it easy is not an ability you want to use against every node, but if you''re doing
+    easier nodes that you can clear even with limited dice, take it easy is a great
+    way to get some additional materials.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: ore_hunter
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: focused_detonation
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - Mining
+      can_convert_to_expertise: false
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: mountain_slayer
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: cave_raider
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: take_it_easy
+  ability_references:
+  - id: ore_hunter
+    name: Ore Hunter
+    type: key_ability
+  - id: focused_detonation
+    name: Focused Detonation
+    type: regular_ability
+  - id: mountain_slayer
+    name: Mountain Slayer
+    type: regular_ability
+  - id: cave_raider
+    name: Cave Raider
+    type: regular_ability
+  - id: take_it_easy
+    name: Take it easy
+    type: regular_ability

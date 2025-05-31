@@ -1,0 +1,136 @@
+class:
+  id: hussar
+  name: Hussar
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/505f45c1-4dc5-43ba-bccb-5c36c77b0861-Hussar_-_Raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Cavalier mastered.
+  description: 'The romantic image of cavalry often brought to mind knights in gleaming
+    plate armor, resplendent in heraldry, astride a powerful steed. Lances, spears,
+    and longswords held aloft, ready to ride nobly into the fray. Ready to rescue
+    princesses, slay dragons, and dispatch dishonorable knaves. While many knights
+    struggle to live up to that image, the origin of those lofty traits could be found
+    in the Hussars.
+
+    Named after the light cavalry unit raised from the nobles and knights of Macaron
+    in Dacquoise, the Macaron Hussars set a standard for both chivalry and battlefield
+    prowess that has remained largely unchallenged even into the modern day. While
+    the individual knights may have their betters in swordsmanship or as riders, the
+    combined unit has been considered the premier elite light cavalry force since
+    its creation across all of Lyr. Sworn directly to the King of Dacquoise, the honor
+    within the ranks of the Macaron Hussars is such that there has never been a recorded
+    or rumored instance of betrayal of their oaths, even during the rare instances
+    of attempted usurpation of the Line of the King. They have never failed to follow
+    the rightful King or Heir of Dacquoise.
+
+    Their metal was tested in recent memory at the Battle of Nuren Crossing where
+    the combined forces of the Nuren Guard and a small adventuring party held a critical
+    bridge crossing against Northi invasion during the Four Swords War. The Northi
+    commanders, intent to utilize Dacquoise’s roads to move rapidly into a flanking
+    position against Mothergreen, attempted to take the northernmost bridge crossing
+    of the Nuren river. When they were unable to capture the bridge with their scouts,
+    the Northi force was pinned against the river by Lamian elements of the Nuren
+    Guard. Before they were able to withdraw and regroup, the hammer of the Macaron
+    Hussars smashed them against the Lamian anvil, having used a risky ford miles
+    downstream. With their support elements gutted, supplies captured, and further
+    Dacquoise reinforcements incoming, the invading force surrendered and were permitted
+    to withdraw back to Northi.
+
+    Hussars around the world have strived to live up to the gallantry and reputation
+    of their namesakes, always chasing that seemingly distant goal. And while more
+    renegade knights have taken up the skills of mobility and devastatingly powerful
+    charges that the Hussars are known for, many still believe that the embodiment
+    of the knight as demonstrated by the Macaron Hussars was a goal worth striving
+    for.'
+  guide: 'The hussar is a mounted class that overwhelms the enemy with devastating
+    charges.
+
+    Cavalry charge is a movement ability that boosts your trample. It has no additional
+    cost over normal movement, so you should always use this if you''re planning to
+    trample enemies over moving normally. Any non-heroic enemy with your trample also
+    becomes Shaken, which basically makes them useless on their next turn.
+
+    Momentum is an ability that you can use after you''ve moved in range of the enemy
+    with your charging attack, as it can gain a large damage boost. Another option
+    is to strike at a non-heroic enemy that used their RP to dodge your trample. They''ll
+    now have no RP left and your momentum boosted attack is likely to one shot them,
+    especially if using a lance.
+
+    Break Away is the ability you use to move away from the enemy to prepare for another
+    trampling charge attack. The mana cost is relatively high, so ideally you don''t
+    want to be in a position where you have to use it.
+
+    Secret Art: Override is a powerful secret art that relies heavily on enemies being
+    in a line to get maximum value out of. Be careful when using this against rogues,
+    their evasive maneuvers ability can force you to end your override early by creating
+    an empty space.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: terrifying_charge
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: cavalry_charge
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: break_away
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: momentum
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_override
+  ability_references:
+  - id: terrifying_charge
+    name: Terrifying Charge
+    type: key_ability
+  - id: cavalry_charge
+    name: Cavalry Charge
+    type: regular_ability
+  - id: break_away
+    name: Break Away
+    type: regular_ability
+  - id: momentum
+    name: Momentum
+    type: regular_ability
+  - id: secret_art__override
+    name: 'Secret Art: Override'
+    type: regular_ability

@@ -1,0 +1,101 @@
+class:
+  id: mycomancer
+  name: Mycomancer
+  tier: 2
+  difficulty: 2
+  main_role: Healer
+  secondary_role: Striker
+  image_url: https://cdn.angelssword.com/ttrpg/assets/73382576-e975-4d2e-baeb-5f0284ebdfcc-Mycomancer_Clean.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Mage mastered or Earth Mastery
+  description: Mycomancers are powerful mages that harness the power of fungi to heal
+    allies and destroy enemies. They try to understand death through mycology.
+  guide: 'Mycomancers are a unique healer that relies on dealing damage to heal their
+    allies. The only target they can heal is their Spore Symbiote.
+
+    Once it is placed, you can use Saprophytic Bolt to heal your target. Grunts may
+    react to it even if its a light attack, so burning their RP first may be advised
+    so you don''t waste it.
+
+    Destroying Angel is a bigger heal and also comes with the benefit of instantly
+    killing the target when used against grunts. It is not worth using against non-grunts
+    however.
+
+    Poison Spore is the last ability that can center around the spore symbiote. It
+    can be used as a zoning tool of sorts, but be aware that your allies are not immune
+    to the poison. One of the better uses is placing it around yourself or the symbiote
+    if they are a more vulnerable target and using the spore as a deterrent to any
+    assassin type enemies that might threaten the backline.
+
+    Amoxicillin is a simple disease removal spell. The cast time makes it unusable
+    in battle and you are required to identify the disease first, but it''s a free
+    removal once you do.
+
+    As a mycomancer, it is recommended you heal early rather than late. Your healing
+    can be unreliable and you don''t want your allies to drop low, only for you to
+    miss a crucial a heal and watch them go down.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: spore_symbiote
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: saprophytic_bolt
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: poison_spore
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Awareness
+        value: 1
+      - attribute: Cunning
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: amoxicillin
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Power
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: destroying_angel
+  ability_references:
+  - id: spore_symbiote
+    name: Spore Symbiote
+    type: key_ability
+  - id: saprophytic_bolt
+    name: Saprophytic Bolt
+    type: regular_ability
+  - id: poison_spore
+    name: Poison Spore
+    type: regular_ability
+  - id: amoxicillin
+    name: Amoxicillin
+    type: regular_ability
+  - id: destroying_angel
+    name: Destroying Angel
+    type: regular_ability

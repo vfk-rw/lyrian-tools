@@ -1,0 +1,142 @@
+class:
+  id: alkahest
+  name: Alkahest
+  tier: 2
+  difficulty: 2
+  main_role: Artisan
+  secondary_role: Utility
+  image_url: https://cdn.angelssword.com/ttrpg/assets/6cd14d04-04a1-4475-88de-718ecff3e465-Transmute_Master_2_-_Copy.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Transmuter mastered
+  description: 'While Transmuters provide foundations for everyday life and artisan
+    work, Alkahests are those who are obsessed with the subtleties of matter and creation.
+     Alkahests are the experts in the fields of Transmutational Alchemy, quickly altering
+    reality with precision and artistic flair.  They''re able to immediately concept
+    and transmute just the right tool for any situation.
+
+    Historically, one Alkahest above all others was a pioneer in her field.  She remains
+    celebrated across Lyr to this day—Etoile Dacquoise.  While her best friend and
+    rival, Riannon Aquanas, focused on the art of core Alchemy, Etoile dedicated her
+    life to mastering the complexities of Transmutation.  In the atelier together,
+    these pioneers had opened an often historically referenced shop in the Kingdom
+    of Mothergreen—and became the foundation of innovation during Lyr''s darkest hours.
+
+    Historical word of mouth speaks of Etoile''s contributions from behind the scenes
+    in the battle against Heira, the Goddess of Evil.  Although she never wielded
+    a sword on the front lines, her mastery of transmutation alongside Riannon''s
+    expertise in alchemical creations created the tools and solutions needed by their
+    friends that did.  The members of those legendary heroes helped create that shop
+    themselves, as the procurement arm of the business.  Etoile''s legacy is still
+    immortalized to this day behind the statues of Riannon and the other heroes:
+
+    Elly, The Hero
+
+    Uruka, The Sylph
+
+    Signum, The Heretic
+
+    Leaflit, The Pixie
+
+    Brynhildr, The Dragon
+
+    Basalt, The Dwarf
+
+    Today''s Alkahests follow in Etoile''s footsteps and in her teachings, fulfilling
+    their roles as vital supporters and adventurers, heroes and innovators alike.
+     They sometimes provide assistance from the sidelines, demonstrating that heroism
+    is not only about direct confrontation but also wits, innovation and dedication
+    to a future victory.'
+  guide: 'The Alkahest is a crafter and utility class with very limited combat potential.
+
+    Your best combat ability is your Secret Art: Transmute Proto Armatae. While it
+    costs a fair bit of mana, you can view the armatae''s HP as getting a ton of bonus
+    HP that stacks with temporary HP. In addition, you get to make a free attack each
+    turn. It doesn''t increase your damage output much (or at all), but it''s good
+    defensively. You can use it defensively by spending RP and absorb a hit with the
+    free 20 HP shield it comes with.
+
+    Alchemical Detonation is your other ability that can be used in combat, although
+    it is situational. Strong when you''re against enemies that use wall creation.
+    It also has strong out of combat benefits, allowing you enter virtually any building
+    at little cost.
+
+    Transmute Effective Implement is another out of combat tool that can grant you
+    a massive bonus to a skill check. If you''re willing to spend enough mana, you
+    can succeed at almost any check if you want to.
+
+    Siphon Materials costs an interlude point, but it lets you extract valuable materials
+    that might otherwise be wasted in an item you can''t use. You could extract the
+    silver from a katana to have a blacksmith make it into a dagger for example.
+
+    Finally, stabilize matter is another co crafting ability. It statistically beats
+    out the other options, though you do have to precast it instead of using it after
+    you see the roll. A small bit of creation lets you convert a herb to one of a
+    different element at the cost of reducing the rarity. Using this reduces the value
+    of herb, so it should only be done if you desperately need the herb.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: transmutation_tricks
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: transmute_effective_implement
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: alchemical_detonation
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: siphon_material
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_transmute_proto_armatae
+  ability_references:
+  - id: transmutation_tricks
+    name: Transmutation Tricks
+    type: key_ability
+  - id: transmute_effective_implement
+    name: Transmute Effective Implement
+    type: regular_ability
+  - id: alchemical_detonation
+    name: Alchemical Detonation
+    type: regular_ability
+  - id: siphon_material
+    name: Siphon Material
+    type: regular_ability
+  - id: secret_art__transmute_proto_armatae
+    name: 'Secret Art: Transmute Proto Armatae'
+    type: regular_ability

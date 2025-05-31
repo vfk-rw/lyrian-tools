@@ -1,0 +1,118 @@
+class:
+  id: necromancer
+  name: Necromancer
+  tier: 2
+  difficulty: 3
+  main_role: Specialist
+  secondary_role: Striker
+  image_url: https://cdn.angelssword.com/ttrpg/assets/171937da-45b7-42a3-b52a-e0cde3834c83-Necromancer_Clean.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered.
+  description: Necromancers manipulate the dead. Feared and hated by most people,
+    and often justifiably so.
+  guide: 'Necromancers are a special class that has a focus on raising undead to fight
+    for them. These undead, zombies or skeletons, are not strong by themselves but
+    can be a threat once they gather. The undead they raise do not stay after an arc
+    is finished. This means that necromancer starts an arc of weak until they find
+    an opportunity to raise some.
+
+    The undead group themselves can be used in multiple ways. They add free damage
+    while they are alive, so keeping them that way is good. At the same time, they
+    can also be used as disposable creatures that can be used to hold off a powerful
+    enemy to buy yourself team to heal or retreat. They are also pretty hard to fully
+    kill off, but keep them away from multi-hit attacks and AoE holy damage.
+
+    Raise Undead can be used either during combat to get a group going, or you can
+    chain cast it once a combat is over. Soulreap combines the raising of the undead
+    with a heavy attack, allowing you to build up your forces without wasting AP or
+    letting you get two active in 1 turn, provided there''s already a corpse somewhere.
+
+    Corpse Explosion uses your raised undead as a resource. It is a powerful aoe for
+    the cost which can be further empowered by using more corpses. This trades long
+    term fight potential for a quick gain and it may not be worth blowing too many
+    zombies on if you can''t restock afterwards.
+
+    Corpse Domination lets you raise an enemy you killed to help you in the fight.
+    It''s not worth using unless it''s on a heroic target, but adding another body
+    to the battlefield on your side can swing the battle in your favor. It''s powerful
+    in fights against multiple heroic enemies.
+
+    Speak with dead is an out of combat utility ability. The usefulness on it depends
+    heavily on the situation, as well as the GM.
+
+    One last thing to keep in mind as a necromancer player is that most people are
+    not fond of zombies and skeletons. If you stroll into town with a small undead
+    army behind you, don''t expect a warm welcome in most places.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: raise_undead
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: soulreap
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: speak_with_dead
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+      - attribute: Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: corpse_explosion
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: corpse_domination
+  ability_references:
+  - id: raise_undead
+    name: Raise Undead
+    type: key_ability
+  - id: soulreap
+    name: Soulreap
+    type: regular_ability
+  - id: speak_with_dead
+    name: Speak with dead
+    type: regular_ability
+  - id: corpse_explosion
+    name: Corpse Explosion
+    type: regular_ability
+  - id: corpse_domination
+    name: Corpse Domination
+    type: regular_ability

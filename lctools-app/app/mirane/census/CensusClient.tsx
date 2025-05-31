@@ -496,7 +496,14 @@ export default function CensusClient({ data }: { data: Row[] }) {
               <TableCell>{d.ipLockoutEnd || '-'}</TableCell>
               <TableCell className="flex flex-wrap gap-1">
                 {d.classes.map((c) => (
-                  <Badge key={c.name} variant={c.tier===2?'destructive':'secondary'}>
+                  <Badge 
+                    key={c.name} 
+                    variant={
+                      c.tier === 3 ? 'outline' : 
+                      c.tier === 2 ? 'destructive' : 
+                      'secondary'
+                    }
+                  >
                     {c.name}
                   </Badge>
                 ))}

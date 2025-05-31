@@ -1,0 +1,113 @@
+class:
+  id: abjurer
+  name: Abjurer
+  tier: 2
+  difficulty: 3
+  main_role: Defender
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3ee50da0-1baa-4f48-ab15-eb9e24f45e9c-abjurer.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Arcane Barrier learned, must possess at least 1 spell that deals
+        damage.
+  description: 'Every initiate mage learns early on that the first fundamental of
+    magic is defense. But for Abjurers, this lesson became their mantra. These Mages
+    took their masters'' teachings to heart and mastered the art of defensive magic.
+
+    Abjurers are incredibly durable, and they don''t just keep that strength to themselves—they
+    can extend it to their allies, making everyone around them tougher in battle.
+    Their focus is unmatched, allowing them to control space and protect others, even
+    without relying on weapons.
+
+    Despite their power, Abjurers are often underestimated. But when the heat of battle
+    comes, they prove their worth, showing remarkable resilience under fire. It''s
+    this unshakeable defense that makes them indispensable in the chaos of war.'
+  guide: 'Abjurer''s are frontline spellcasters that oftentimes don''t wear armor.
+    To help with the durability, you have Mana Shield. Mana Shield gives you a small
+    amount of temporary HP every turn. It''s good for reducing a small amount of damage
+    every turn, but will not protect from a large burst turn.
+
+    If you expect to take a lot of damage, you can however use Empower Mana Shield.
+    This lets you trade mana for temporary HP is an efficient way, however it only
+    lasts for a short time so the timing is crucial.
+
+    Mana Shield also lets you cast spells while engaged by enemies if they are challenged
+    by you, which can be accomplished by the Spell Challenge key ability. AoE spells
+    can be used to inflict Challenge on many enemies, though they won''t apply it
+    if they miss or are fully blocked as many of them do not target the enemy, but
+    an area. Single target spells will always apply it however.
+
+    To protect your allies and disrupt enemies that go for them, you have Arcane Pull.
+    Arcane Pull is effective in keeping your backline safe from melee enemies, but
+    it can be useless if there''s not enough distance between you and your allies.
+
+    Finally, Arcane Barrier II is a simple upgrade on the normal arcane barrier, letting
+    you add your guard to the guard of the barrier.
+
+    Positioning and choosing how and who to Challenge is key for an Abjurer. Once
+    enemies are upon you, you may find it hard to safely apply Spell Challenge if
+    not done in advance.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: spell_challenge
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: arcane_barrier_ii
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: mana_shield
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: empower_mana_shield
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: arcane_pull
+  ability_references:
+  - id: spell_challenge
+    name: Spell Challenge
+    type: key_ability
+  - id: arcane_barrier_ii
+    name: Arcane Barrier II
+    type: regular_ability
+  - id: mana_shield
+    name: Mana Shield
+    type: regular_ability
+  - id: empower_mana_shield
+    name: Empower Mana Shield
+    type: regular_ability
+  - id: arcane_pull
+    name: Arcane Pull
+    type: regular_ability

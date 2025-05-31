@@ -1,0 +1,106 @@
+class:
+  id: cryomancer
+  name: Cryomancer
+  tier: 2
+  difficulty: 2
+  main_role: Controller
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3f1620da-f20b-4357-a152-7f1260610bd3-Hoarfrost_1_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Any class mastered or Frost mastery.
+  description: 'Masters of frost, the Cryomancers weave the raw, chilling power of
+    ice into an art form. Theirs is a domain of control, using their wintry gifts
+    not for sheer damage, but to manipulate the battlefield and dictate the flow of
+    combat.
+
+
+    Cryomancers thrive in battlefield control where their icy enchantments can wreak
+    the most havoc. With a wave of their hand, they can transform the ground to ice,
+    halting an enemy advane, or encase foes in blocks of solid frost, taking them
+    out of the fight completely. Their chilling spells can slow even the most agile
+    opponent, leaving them vulnerable to attacks.
+
+
+    Don''t let their cold demeanor fool you - beneath the icy exterior lies a burning
+    resolve. To be a Cryomancer is to understand that the battlefield is a canvas,
+    and with the power of frost at their fingertips, they are the artists, painting
+    a portrait of control and chaos in equal measure.'
+  guide: 'The combination of Icicle Nail, Sheet Ice and Glacial wall are a hat-trick
+    of battlefield control, both creating cover, halting enemy advances and slowing
+    front line enemy units.  As a pure controller, Sheet Ice can be used freely and
+    at minimal cost to block chokepoints or to funnel enemies.  It can also be used
+    to hinder the movement of units by casting it into an enemy.
+
+
+    Glacial wall can create cover from nothing, quickly subverting a strategic advantage
+    the enemy might have or bolstering your own.
+
+
+    Lastly in a pinch, the Cyromancer can devastate low level enemies with Frost Coffin,
+    immediately eliminating a threat from the battlefield and also creating cover
+    for your team.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: ice_cold
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: icicle_nail
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: sheet_ice
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: glacial_wall
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: your Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: frost_coffin
+  ability_references:
+  - id: ice_cold
+    name: Ice Cold
+    type: key_ability
+  - id: icicle_nail
+    name: Icicle Nail
+    type: regular_ability
+  - id: sheet_ice
+    name: Sheet Ice
+    type: regular_ability
+  - id: glacial_wall
+    name: Glacial Wall
+    type: regular_ability
+  - id: frost_coffin
+    name: Frost Coffin
+    type: regular_ability

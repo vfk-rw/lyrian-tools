@@ -1,0 +1,98 @@
+class:
+  id: alchemeister
+  name: Alchemeister
+  tier: 2
+  difficulty: 2
+  main_role: Artisan
+  secondary_role: Healer
+  image_url: https://cdn.angelssword.com/ttrpg/assets/65cc1b57-8729-404b-8410-f2f53a303059-Alchemiester_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Alchemist mastered.
+  description: Researchers who have come to understand the nature of objects and energy.
+  guide: 'The Alchemeister is an alchemist that is more skilled at crafting and using
+    the items they craft. Detailed Finish is a good final action when crafting, giving
+    you a higher average at no cost.
+
+    With Infuse Potion you are able to heal with potions without requiring your allies
+    to drain their own mana, making you a lot more effective as a healer. You don''t
+    have to use it every time either, allowing you to make others pay with their mana
+    when yours is running low.
+
+    With Counter-Potion you are able to use an alchemy item as a reaction, allowing
+    you to do a variety of powerful things. You can toss a flashbang to interrupt
+    an action by lowering their AP, toss a slowing flask when an enemy is about to
+    approach your ally or toss a molly when they''ve finished moving to make them
+    take guaranteed damage. Combine this with Quickdraw Alchemy from alchemist and
+    you don''t even need to prepare this action in advance. At any point you can quickdraw
+    what you need and toss it.
+
+    Secret Art: All of Creation is a situational ability. Changing the damage type
+    will not always be useful, but it can really help amplify damage dealt when against
+    an enemy with a vulnerability or weakness. It is also completely free, apart from
+    taking up your one secret art per encounter. Special Mention goes to Alchemist
+    belonging to a race that can absorb a certain elemental damage, such as Salamander.
+    A Salamander alchemist can force any big attack about to hit them to be fire damage,
+    which they can easily absorb and turn into healing ofr themselves.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: expert_alchemist
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: infuse_potion
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: counter-potion
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: detailed_finish
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_all_of_creation
+  ability_references:
+  - id: expert_alchemist
+    name: Expert Alchemist
+    type: key_ability
+  - id: infuse_potion
+    name: Infuse Potion
+    type: regular_ability
+  - id: counter-potion
+    name: Counter-Potion
+    type: regular_ability
+  - id: detailed_finish
+    name: Detailed Finish
+    type: regular_ability
+  - id: secret_art__all_of_creation
+    name: 'Secret Art: All of Creation'
+    type: regular_ability

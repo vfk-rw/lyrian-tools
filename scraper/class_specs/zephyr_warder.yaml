@@ -1,0 +1,97 @@
+class:
+  id: zephyr_warder
+  name: Zephyr Warder
+  tier: 2
+  difficulty: 2
+  main_role: Support
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/a9e0b062-436a-4886-9713-d106121720c9-Zephyr_Ward_Master_2.2_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Mage mastered or Wind mastered.
+  description: A supportive wind user that can protect against and help with ranged
+    attacks.
+  guide: 'The Zephyr Warder specializes in ranged combat, helping both allies hit
+    targets and preventing enemy archers from hitting.
+
+    Wind Infusion can be cast on every ally over the course of a battle and gives
+    them not only an evasion bonus against ranged attacks, but also damage resistance
+    against wind attacks. Worth using immediately when facing those types of enemies.
+
+    Wind Shield completely shuts down an enemy ranged attack, granting your ally such
+    a huge bonus along with removing the lock-on and sure hit that the attack is sure
+    to miss.
+
+    Wind Wall has to be cast in advance, but it can cover a wide chokepoint and removes
+    all keywords that lets them ignore Dodge or Block. The range decrease can also
+    matter a lot, especially if enemies are only using light ranged weapons. The mana
+    cost isn''t too bad either.
+
+    Wind-Empowered Aim buffs all your (heroic) ranged allies, giving a decent bonus
+    to their accuracy rolls. Worth using if you have a lot of ranged attackers in
+    your party or if you get into a shootout. With this buffs and all the anti-ranged
+    buffs you have, you''re sure to win a shooting battle.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: wind_master
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: wind_infusion
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: wind_wall
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Reason
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: wind-empowered_aim
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Agility
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: wind_shield
+  ability_references:
+  - id: wind_master
+    name: Wind Master
+    type: key_ability
+  - id: wind_infusion
+    name: Wind Infusion
+    type: regular_ability
+  - id: wind_wall
+    name: Wind Wall
+    type: regular_ability
+  - id: wind-empowered_aim
+    name: Wind-Empowered Aim
+    type: regular_ability
+  - id: wind_shield
+    name: Wind Shield
+    type: regular_ability

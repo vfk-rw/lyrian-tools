@@ -1,0 +1,87 @@
+class:
+  id: wildheart
+  name: Wildheart
+  tier: 3
+  difficulty: 3
+  main_role: Specialist
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/46de5ec2-1f11-4e78-833f-e32abc67298a-WildHeart_raw.sm.webp
+  requirements:
+    type: and
+    conditions:
+    - type: text
+      description: Animal summoner mastered.
+  description: A better animal summoner.
+  guide: Soon.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: expanded_menagerie
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: x-attack
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      eligible_skills:
+      - any
+      can_convert_to_expertise: true
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: quick_revive
+  - level: 5
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Fitness
+        value: 1
+      - attribute: Cunning
+        value: 1
+      - attribute: Reason
+        value: 1
+      - attribute: Awareness
+        value: 1
+      - attribute: Presence
+        value: 1
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: leashing
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - attribute: Focus
+        value: 1
+      - attribute: Power
+        value: 1
+      - attribute: Agility
+        value: 1
+      - attribute: Toughness
+        value: 1
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_bestial_wrath
+  ability_references:
+  - id: expanded_menagerie
+    name: Expanded Menagerie
+    type: key_ability
+  - id: x-attack
+    name: X-Attack
+    type: regular_ability
+  - id: quick_revive
+    name: Quick Revive
+    type: regular_ability
+  - id: leashing
+    name: Leashing
+    type: regular_ability
+  - id: secret_art__bestial_wrath
+    name: 'Secret Art: Bestial Wrath'
+    type: regular_ability
