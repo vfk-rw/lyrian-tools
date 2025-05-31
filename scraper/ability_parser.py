@@ -115,10 +115,18 @@ def parse_crafting_abilities(description_text, ability_name):
     
     # Look for ability patterns: Word/phrase followed by "Cost:" at start of line or after newline
     # This is more conservative - looks for clear ability starts
-    ability_pattern = r'(?:^|\n\n)([A-Z][a-zA-Z\s&\']+?)(?=Cost:)'
+    # Updated pattern to handle missing spaces between ability name and "Cost:"
+    ability_pattern = r'(?:^|\n)([A-Z][a-zA-Z\s&\']*?)(?=Cost:)'
+    
+    # DEBUG: Print what the regex actually finds
+    print(f"    🔍 DEBUG parse_crafting_abilities: Looking for pattern in text:")
+    print(f"      First 200 chars: '{description_text[:200]}...'")
     
     # Find all potential ability starts
     matches = list(re.finditer(ability_pattern, description_text, re.MULTILINE))
+    print(f"    🔍 DEBUG parse_crafting_abilities: Found {len(matches)} matches")
+    for i, match in enumerate(matches):
+        print(f"      {i+1}. '{match.group(1)}' at position {match.start()}-{match.end()}")
     
     if len(matches) < 2:
         # If we don't find at least 2 clear abilities, don't split
@@ -162,10 +170,14 @@ def parse_crafting_abilities(description_text, ability_name):
 
 def should_parse_as_crafting(ability_data, class_roles=None):
     """Determine if an ability should be parsed as crafting abilities"""
+    print(f"  🔍 DEBUG: Checking if '{ability_data.get('name', 'Unknown')}' should be parsed as crafting")
+    
     description = ability_data.get('description', '')
+    print(f"    → Description start: '{description[:100]}...'")
     
     # Check if class has Artisan role
     is_artisan_class = class_roles and ('Artisan' in class_roles)
+    print(f"    → Is Artisan class: {is_artisan_class}")
     
     # Look for crafting indicators
     crafting_indicators = [
@@ -174,22 +186,48 @@ def should_parse_as_crafting(ability_data, class_roles=None):
     ]
     
     has_crafting_indicators = any(indicator.lower() in description.lower() for indicator in crafting_indicators)
+    print(f"    → Has crafting indicators: {has_crafting_indicators}")
     
-    # Look for multiple ability blocks that start with a name and have Cost:/Description:
-    ability_block_pattern = r'(?:^|\n\n)([A-Z][a-zA-Z\s&\']+?)Cost:[^\n]+.*?Description:'
-    ability_blocks = re.findall(ability_block_pattern, description, re.IGNORECASE | re.DOTALL)
+    # Look for multiple ability blocks that start with a name and have Cost:
+    # Use the same pattern as parse_crafting_abilities for consistency
+    ability_block_pattern = r'(?:^|\n)([A-Z][a-zA-Z\s&\']*?)(?=Cost:)'
+    ability_blocks = re.findall(ability_block_pattern, description, re.MULTILINE)
     
     has_multiple_blocks = len(ability_blocks) >= 2
+    print(f"    → Has multiple blocks: {has_multiple_blocks} (found {len(ability_blocks)} blocks)")
+    if ability_blocks:
+        print(f"    → Found blocks: {ability_blocks}")
     
     # Check for strong Co-Craft indicators - multiple Co-Craft abilities with clear structure
     co_craft_count = description.lower().count('co-craft')
     has_strong_co_craft_pattern = co_craft_count >= 2 and has_multiple_blocks
+    print(f"    → Co-Craft count: {co_craft_count}, strong pattern: {has_strong_co_craft_pattern}")
     
     # Split if:
     # 1. Traditional case: Artisan class with crafting indicators and multiple blocks, OR
     # 2. Strong Co-Craft pattern: Multiple Co-Craft abilities with clear block structure
-    return (is_artisan_class and has_crafting_indicators and has_multiple_blocks) or \
+    result = (is_artisan_class and has_crafting_indicators and has_multiple_blocks) or \
            (has_strong_co_craft_pattern and has_crafting_indicators)
+    print(f"    → Final result: {result}")
+    return result
+
+def should_parse_as_gathering(ability_data):
+    """Determine if an ability should be marked as a gathering ability"""
+    # Check requirements for gathering session indicators
+    requirements = ability_data.get('requirements', [])
+    if requirements:
+        for req in requirements:
+            if req and 'gathering session' in req.lower():
+                return True
+    
+    # Also check description for gathering indicators
+    description = ability_data.get('description', '')
+    gathering_indicators = [
+        'gathering session', 'gathering check', 'node points', 'lucky points',
+        'foraging skill', 'strike dice'
+    ]
+    
+    return any(indicator.lower() in description.lower() for indicator in gathering_indicators)
 
 def extract_requirements(ability_data):
     """Extract and structure requirement information"""
@@ -344,8 +382,12 @@ def parse_ability(panel, class_roles=None):
         description = ability_data.get('description', '')
         if description:
             crafting_abilities = parse_crafting_abilities(description, ability_data['name'])
-            # If we got multiple crafting abilities, return them as a list
-            if len(crafting_abilities) > 1:
+            print(f"  🔍 DEBUG: Found {len(crafting_abilities)} crafting abilities from: {ability_data['name']}")
+            for i, ca in enumerate(crafting_abilities):
+                print(f"    {i+1}. {ca.get('name', 'Unknown')}")
+            
+            # If we got crafting abilities, return them as a list
+            if len(crafting_abilities) >= 1:
                 print(f"  ⚡ Parsed {len(crafting_abilities)} crafting abilities from: {ability_data['name']}")
                 # Update each crafting ability with the base ability data
                 for craft_ability in crafting_abilities:
@@ -357,6 +399,10 @@ def parse_ability(panel, class_roles=None):
     # Post-process the ability data
     extract_costs(ability_data)
     extract_requirements(ability_data)
+    
+    # Check if this should be marked as a gathering ability (after requirements are processed)
+    if should_parse_as_gathering(ability_data):
+        ability_data['type'] = 'gathering_ability'
     
     # Set default values for missing fields
     if 'keywords' not in ability_data:
@@ -449,12 +495,16 @@ def validate_abilities(abilities):
     # Summary
     key_abilities = [a for a in abilities if a['type'] == 'key_ability']
     true_abilities = [a for a in abilities if a['type'] == 'true_ability']
+    crafting_abilities = [a for a in abilities if a['type'] == 'crafting_ability']
+    gathering_abilities = [a for a in abilities if a['type'] == 'gathering_ability']
     unknown_abilities = [a for a in abilities if a['type'] == 'unknown']
     
     print(f"\n📊 Summary:")
     print(f"   Total abilities: {len(abilities)}")
     print(f"   Key abilities: {len(key_abilities)}")
     print(f"   True abilities: {len(true_abilities)}")
+    print(f"   Crafting abilities: {len(crafting_abilities)}")
+    print(f"   Gathering abilities: {len(gathering_abilities)}")
     print(f"   Unknown type: {len(unknown_abilities)}")
     
     if unknown_abilities:
@@ -506,9 +556,9 @@ def main():
 
     # If no input files were specified, use default paths
     if not (args.true_abilities or args.key_abilities):
-        version_dir = 'version/0.9.12'
-        true_abilities_path = f"{version_dir}/true_abilities.html"
-        key_abilities_path = f"{version_dir}/key_abilities.html"
+        version_dir = 'version/0.10.1'
+        true_abilities_path = f"{version_dir}/true.html"
+        key_abilities_path = f"{version_dir}/key.html"
         
         # Check if files exist and process them
         if os.path.exists(true_abilities_path):

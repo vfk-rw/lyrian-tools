@@ -4,3 +4,4 @@ notes/Daimus CharacterCore.csv
 **/*_debug.json
 scraper/debug_output
 scraper/.venv
+**/__pycache__

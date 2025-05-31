@@ -242,7 +242,7 @@
   range: null
 - name: Alchemic Catch
   id: transmutation_basics_alchemic_catch
-  type: crafting
+  type: crafting_ability
   cost: 200u of Matching Raw Material
   description: Co-Craft. Use a hasty transmutation to attempt to fix a crafting error.
     You may reroll a crafting dice after already determining the result. You must
@@ -929,7 +929,7 @@
   - Improvised weapon only.
 - name: Bouncing Ideas
   id: transmutation_basics_bouncing_ideas
-  type: crafting
+  type: crafting_ability
   description: Co-Craft Only. You assist with crafting adding 1d4 crafting points
     to the current craft.
   keywords:
@@ -1505,7 +1505,7 @@
     id: blacksmith_core_crafting
 - name: Create Artifice Parts
   id: transmutation_basics_create_artifice_parts
-  type: crafting
+  type: crafting_ability
   cost: Errand
   description: 'You create up to 3000u of artifice parts of the same type of blacksmithing
     material used to make them at a 1:1 rate. (3000u of Iron Creates 3000u of Iron
@@ -1513,14 +1513,14 @@
   keywords: &id001 []
 - name: Create Ingot
   id: transmutation_basics_create_ingot
-  type: crafting
+  type: crafting_ability
   cost: Errand
   description: 'You create an ingot from blacksmithing base materials or from blacksmithing
     special materials. See Item: Blacksmithing Materials.'
   keywords: *id001
 - name: Create Oil Coating
   id: transmutation_basics_create_oil_coating
-  type: crafting
+  type: crafting_ability
   cost: Errand
   description: 'You create an Oil Coating from Carpenter materials. See Items: Carpenter
     Materials'
@@ -1547,7 +1547,7 @@
     A spell with no AP or Mana costs 50 units.'
 - name: Create Wood Block
   id: transmutation_basics_create_wood_block
-  type: crafting
+  type: crafting_ability
   cost: Errand
   description: 'You create a Wood Block from Carpenter materials. See Items: Carpenter
     Materials'
@@ -2075,13 +2075,12 @@
     ap: 2
 - name: Divining Petalfall
   id: divining_petalfall
-  type: true_ability
+  type: gathering_ability
   keywords: []
   description: Make a gathering check with a +5 bonus. If the final result is even,
     add it to Node Points. If it’s odd, add it to Lucky Points.
   requirements:
   - Must in a gathering session. Costs 1 strike dice.
-  range: null
 - name: Doctor Jekyll
   id: doctor_jekyll
   type: true_ability
@@ -2305,13 +2304,12 @@
     ap: 2
 - name: Efficient Strike
   id: efficient_strike
-  type: true_ability
+  type: gathering_ability
   keywords: []
   description: Make a gathering check.  If this maxes node points, all overflow is
     converted into lucky points.
   requirements:
   - Must in a gathering session. Costs 1 strike dice.
-  range: null
 - name: Elbow Uppercut
   id: elbow_uppercut
   type: true_ability
@@ -3306,14 +3304,13 @@
   - Must have hit a target with Ki Blast in the previous action.
 - name: Focused Detonation
   id: focused_detonation
-  type: true_ability
+  type: gathering_ability
   keywords: []
   description: Make a gathering check against either Node or Lucky points. If this
     strike would max out it out, you may instead leave it at 1 and you gain +1 Strike
     Dice
   requirements:
   - Must in a gathering session. Costs 1 strike dice.
-  range: null
 - name: Focused Weapons
   id: focused_weapons
   type: key_ability
@@ -4899,14 +4896,13 @@
     roll a skill check.
 - name: Memory of the Grove
   id: memory_of_the_grove
-  type: true_ability
+  type: gathering_ability
   keywords: []
   description: After making a gathering check, you may choose to reroll the die. If
     you do, store the original die result. You may replace a future gathering die
     result (before bonus) with the stored value.
   requirements:
   - Usable after making a gathering a check.
-  range: null
 - name: Mighty Leap
   id: mighty_leap
   type: true_ability
@@ -5554,13 +5550,12 @@
     ap: 0
 - name: Power Rock Strike
   id: power_rock_strike
-  type: true_ability
+  type: gathering_ability
   keywords: []
   description: Make a gathering check at only half of your gathering bonus (rounded
     down) add the rolled amount to both node and lucky points.
   requirements:
   - Must in a gathering session. Costs 1 strike dice.
-  range: null
 - name: Power Strike
   id: power_strike
   type: true_ability
@@ -5843,7 +5838,7 @@
     ap: 2
 - name: Rage Quit
   id: transmutation_basics_rage_quit
-  type: crafting
+  type: crafting_ability
   cost: 1 Crafting Dice
   description: Co-Craft. Only usable once per crafting IP. Destroy the uncrafted item
     and all materials invested into the craft. You may immediately start another crafting
@@ -7915,7 +7910,7 @@
   range: null
 - name: Stalks of Comparison
   id: stalks_of_comparison
-  type: true_ability
+  type: gathering_ability
   keywords: []
   description: Make a gathering check and apply it to either Node Points or Lucky
     Points. If the result of this check (before bonuses) is higher than your previous
@@ -7923,7 +7918,6 @@
     +10).
   requirements:
   - Must be in a gathering session. Costs 1 Strike Dice
-  range: null
 - name: Start Dash
   id: start_dash
   type: true_ability
@@ -8291,14 +8285,13 @@
     ap: 1
 - name: Take it easy
   id: take_it_easy
-  type: true_ability
+  type: gathering_ability
   keywords: []
   description: Do not make a gathering check. Instead, immediately collect 25% of
     the Outcrop’s base material as a bonus (doesn’t affect material totals), but no
     Node or Lucky progress is made.
   requirements:
   - Must in a gathering session. Costs 1 strike dice.
-  range: null
 - name: Tap Cracker
   id: tap_cracker
   type: true_ability
@@ -8317,7 +8310,7 @@
   - Object is in a room affected by Psychometry
 - name: Temperature Shock
   id: transmutation_basics_temperature_shock
-  type: crafting
+  type: crafting_ability
   cost: 200u of Matching Raw Material
   description: Co-Craft. Can be used immediately after the result of a roll is determined.
     The previous action has no effect and instead gain a +10 to your next crafting
@@ -9073,14 +9066,13 @@
   - Your VIP was attacked last turn or your VIP is downed.
 - name: Verdant Instinct
   id: verdant_instinct
-  type: true_ability
+  type: gathering_ability
   keywords: []
   description: Make a gathering check. After rolling, roll two more dice that will
     be used as your next 2 strike dice values. You may reorder them or replace one
     with a 5.
   requirements:
   - Must be in a gathering session.
-  range: null
 - name: Versatile Range
   id: versatile_range
   type: key_ability
