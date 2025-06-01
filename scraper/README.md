@@ -45,7 +45,26 @@ scraper/
 ├── fetchers/       # HTML fetching modules
 ├── parsers/        # HTML parsing modules
 ├── schemas/        # Data validation schemas
-└── scraped_html/   # Raw HTML storage (versioned)
+├── scraped_html/   # Raw HTML storage (versioned)
+└── parsed_data/    # Structured YAML/JSON output (versioned)
+```
+
+### Version-Aware Directory Structure
+
+The scraper uses a clean, version-aware directory structure:
+
+```
+scraped_html/           # Raw HTML from fetchers
+├── 0.10.1/
+│   ├── classes/
+│   └── abilities/
+└── latest -> 0.10.1    # Symlink to newest version
+
+parsed_data/            # Structured YAML/JSON from parsers  
+├── 0.10.1/
+│   ├── classes/
+│   └── abilities/
+└── latest -> 0.10.1    # Symlink to newest version
 ```
 
 ### Key Design Principles
@@ -54,6 +73,7 @@ scraper/
 2. **Version Support**: Data is organized by game version (e.g., `0.10.1` or `latest`)
 3. **Reusability**: Common patterns are extracted into base classes
 4. **Offline Processing**: HTML can be saved and parsed later
+5. **Version Management**: Automatic symlink updates for latest version
 
 ## Usage
 
@@ -104,6 +124,16 @@ fetcher = ClassFetcher(version="0.10.1")
 fetcher.fetch_all()
 ```
 
+### Output Formats
+
+```bash
+# Output as JSON instead of YAML
+python -m parsers.class_parser scraped_html/0.10.1/classes --version 0.10.1 --format json
+
+# Use custom output directory
+python -m parsers.class_parser scraped_html/0.10.1/classes --output-dir custom_output --version 0.10.1
+```
+
 ### Ability Scraper Details
 
 The ability scraper handles the complex two-tab interface and four distinct ability types:
@@ -119,6 +149,18 @@ Features:
 - Structured cost parsing (mana, AP, RP, variable costs)
 - Secret Art ID normalization (`secret_art__name` pattern)
 - Comprehensive ability index generation
+
+## Data Quality Improvements
+
+The improved parser fixes 5 critical issues identified in systematic analysis:
+
+1. ✅ **Heart attribute parsing**: Now extracts actual attributes (Fitness, Reason, etc.)
+2. ✅ **Secret Art ID normalization**: Consistent `secret_art__name` format  
+3. ✅ **Structured skills data**: Includes eligible_skills, conversion rules, etc.
+4. ✅ **Structured attribute choices**: Uses `{attribute: "X", value: 1}` objects
+5. ✅ **Requirements handling**: Proper empty arrays for Tier 1 classes
+
+All 116 classes parse successfully with zero errors.
 
 ## Adding New Data Types
 
