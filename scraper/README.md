@@ -57,13 +57,18 @@ The scraper uses a clean, version-aware directory structure:
 scraped_html/           # Raw HTML from fetchers
 ├── 0.10.1/
 │   ├── classes/
-│   └── abilities/
+│   ├── abilities/
+│   └── races/
 └── latest -> 0.10.1    # Symlink to newest version
 
 parsed_data/            # Structured YAML/JSON from parsers  
 ├── 0.10.1/
 │   ├── classes/
-│   └── abilities/
+│   ├── abilities/
+│   └── races/
+│       ├── primary/    # 5 primary races
+│       ├── sub/        # 30 sub-races
+│       └── races_index.yaml
 └── latest -> 0.10.1    # Symlink to newest version
 ```
 
@@ -97,6 +102,15 @@ python -m fetchers.ability_fetcher --version latest
 
 # Parse ability HTML to YAML (handles all 4 ability types)
 python -m parsers.ability_parser scraped_html/0.10.1/abilities --version 0.10.1
+```
+
+#### Races
+```bash
+# Fetch race HTML (both primary races and sub-races tabs)
+python -m fetchers.race_fetcher --version latest
+
+# Parse race HTML to YAML  
+python -m parsers.race_parser --version 0.10.1
 ```
 
 ### Python API
@@ -149,6 +163,22 @@ Features:
 - Structured cost parsing (mana, AP, RP, variable costs)
 - Secret Art ID normalization (`secret_art__name` pattern)
 - Comprehensive ability index generation
+
+### Race Scraper Details
+
+The race scraper handles the two-tab interface for races and sub-races:
+
+1. **Primary Races** (5) - Human, Fae, Demon, Chimera, Youkai
+2. **Sub-races** (30) - Including Catfolk, Kitsune, Centaur, Phoenix, etc.
+
+Features:
+- Tab navigation between primary races and sub-races
+- Individual detail page fetching for complete benefit data
+- Structured benefit parsing (attributes, skills, abilities, proficiencies)
+- Automatic type detection (primary vs sub-race)
+- Proper parent race tracking for sub-races
+- Comprehensive race index generation
+- Skill list cleaning (removes trailing punctuation)
 
 ## Data Quality Improvements
 

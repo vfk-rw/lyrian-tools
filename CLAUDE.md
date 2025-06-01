@@ -251,7 +251,7 @@ The scraper is being refactored to support multiple data types with a clean sepa
 
 - **Classes** ✅ (completed - 116 classes with improved parsing)
 - **Abilities** ✅ (completed - 758 abilities with advanced subdivisions)
-- **Races/Subraces** 📋 (planned)
+- **Races/Subraces** ✅ (completed - 35 races: 5 primary, 30 sub-races)
 - **Items** 📋 (planned)
 - **Monsters** 📋 (planned)
 - **Monster Abilities** 📋 (planned)
@@ -292,6 +292,18 @@ fetcher.fetch_all()  # Handles True/Key ability tabs
 # Parse abilities with advanced subdivision
 parser = AbilityParser(version="0.10.1")
 parser.parse_directory("scraped_html/0.10.1/abilities")
+
+# Races (Completed)
+from fetchers.race_fetcher import RaceFetcher
+from parsers.race_parser import RaceParser
+
+# Fetch races from two-tab interface
+fetcher = RaceFetcher(version="latest")
+fetcher.fetch_all()  # Handles Primary/Sub-race tabs + detail pages
+
+# Parse races with benefit extraction
+parser = RaceParser(version="0.10.1")
+results = parser.parse_and_save_all()  # Creates organized structure
 ```
 
 ## Ability Scraper Implementation ✅ COMPLETED
@@ -459,6 +471,58 @@ python -m parsers.ability_parser scraped_html/0.10.1/abilities --version 0.10.1 
 ```
 
 This implementation will preserve all sophisticated parsing logic from the existing 713-line ability parser while modernizing it to fit the new modular architecture and maintaining compatibility with the existing 747-ability dataset.
+
+## Race Scraper Implementation ✅ COMPLETED
+
+### Overview
+The race scraper successfully extends the modular architecture to handle races and sub-races with complete benefit extraction.
+
+### Architecture
+
+```
+scraper/
+├── fetchers/
+│   └── race_fetcher.py          # Navigate tabs, fetch detail pages
+├── parsers/
+│   └── race_parser.py           # Parse benefits, organize by type 
+└── parsed_data/
+    └── {version}/
+        └── races/
+            ├── primary/         # 5 primary race files
+            ├── sub/            # 30 sub-race files  
+            └── races_index.yaml # Complete index
+```
+
+### Features Implemented
+
+1. **Tab Navigation**: Handles Primary Races and Sub-races tabs
+2. **Detail Page Fetching**: Navigates to individual race pages for complete data
+3. **Benefit Parsing**:
+   - Attribute choices with structured options
+   - Skill points with eligible skill lists
+   - Racial abilities by name/ID reference
+   - Proficiencies (weapons, languages)
+   - Special abilities (e.g., Human's Ambition)
+4. **Type Detection**: Automatically determines primary vs sub-race
+5. **Parent Race Tracking**: Sub-races maintain primary_race reference
+6. **Data Cleaning**: Removes trailing punctuation from skill lists
+
+### Data Summary
+
+- **Total Races**: 35 (5 primary, 30 sub-races)
+- **Primary Races**: Human, Fae, Demon, Chimera, Youkai
+- **Popular Sub-races**: Catfolk, Kitsune, Phoenix, Centaur, Dullahan
+- **Benefit Types**: attribute_choice, skills, ability, proficiency, special
+
+### Command-Line Usage
+
+```bash
+# Fetch all races
+python -m fetchers.race_fetcher --version latest
+
+# Parse races  
+python -m parsers.race_parser --version 0.10.1
+```
 
 ## Future Improvements
 
