@@ -415,11 +415,12 @@ def main():
     
     parser = argparse.ArgumentParser(description='Parse class HTML files')
     parser.add_argument('input_dir', help='Directory containing HTML files to parse')
-    parser.add_argument('--output-dir', default='parsed_classes', help='Output directory')
+    parser.add_argument('--output-dir', default='parsed_data', help='Output directory base')
+    parser.add_argument('--version', default='0.10.1', help='Version identifier for output organization')
     parser.add_argument('--format', choices=['yaml', 'json'], default='yaml', help='Output format')
     args = parser.parse_args()
     
-    parser = ClassParser(output_dir=args.output_dir)
+    parser = ClassParser(output_dir=args.output_dir, version=args.version)
     parser.parse_directory(args.input_dir, output_format=args.format)
 
 

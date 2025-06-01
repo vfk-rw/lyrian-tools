@@ -22,16 +22,31 @@ class BaseParser(ABC):
     - Common HTML element extraction patterns
     """
     
-    def __init__(self, output_dir: str = "parsed_data"):
+    def __init__(self, output_dir: str = "parsed_data", version: str = "0.10.1"):
         """
         Initialize the parser.
         
         Args:
-            output_dir: Directory for saving parsed YAML files
+            output_dir: Base directory for saving parsed files
+            version: Version identifier for organizing output
         """
-        self.output_dir = Path(output_dir) / self.get_data_type()
+        self.version = version
+        self.base_output_dir = Path(output_dir)
+        self.output_dir = self.base_output_dir / version / self.get_data_type()
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create/update latest symlink if this is the newest version
+        latest_link = self.base_output_dir / "latest"
+        version_dir = self.base_output_dir / version
+        
+        if not latest_link.exists() or self._should_update_latest(version):
+            if latest_link.is_symlink() or latest_link.exists():
+                latest_link.unlink()
+            latest_link.symlink_to(version_dir.name)
+            logger.info(f"Updated 'latest' symlink to point to {version}")
+        
         logger.info(f"Initialized {self.__class__.__name__}")
+        logger.info(f"Version: {self.version}")
         logger.info(f"Output directory: {self.output_dir}")
     
     @abstractmethod
@@ -168,6 +183,42 @@ class BaseParser(ABC):
         
         logger.info(f"Successfully parsed {len(results)} files")
         return results
+    
+    def _should_update_latest(self, version: str) -> bool:
+        """
+        Determine if the latest symlink should be updated to point to this version.
+        
+        Args:
+            version: Version to check
+            
+        Returns:
+            True if latest should be updated
+        """
+        latest_link = self.base_output_dir / "latest"
+        
+        if not latest_link.exists():
+            return True
+        
+        try:
+            current_latest = latest_link.readlink().name
+            # Simple version comparison - assumes format like "0.10.1"
+            current_parts = [int(x) for x in current_latest.split('.')]
+            new_parts = [int(x) for x in version.split('.')]
+            
+            # Compare version parts
+            for i in range(max(len(current_parts), len(new_parts))):
+                current_val = current_parts[i] if i < len(current_parts) else 0
+                new_val = new_parts[i] if i < len(new_parts) else 0
+                
+                if new_val > current_val:
+                    return True
+                elif new_val < current_val:
+                    return False
+            
+            return False  # Versions are equal
+        except (ValueError, OSError):
+            # If version parsing fails or symlink is broken, update it
+            return True
     
     # Common parsing utilities
     
