@@ -18,14 +18,16 @@ logger = logging.getLogger(__name__)
 class ClassFetcher(BaseFetcher):
     """Fetches class data from the Lyrian Chronicles website."""
     
-    def __init__(self, version: str = "latest"):
+    def __init__(self, version: str = "latest", output_base_dir: str = "scraped_html"):
         """Initialize the class fetcher.
         
         Args:
             version: The game version to fetch (e.g., "latest", "0.10.1")
+            output_base_dir: Base directory for output (defaults to "scraped_html")
         """
         self.data_type = "classes"
-        super().__init__(version=version)
+        self.output_base_dir = output_base_dir
+        super().__init__(version=version, output_base_dir=output_base_dir)
     
     def get_data_type(self) -> str:
         """Return the data type this fetcher handles."""
@@ -123,6 +125,30 @@ class ClassFetcher(BaseFetcher):
                 EC.presence_of_element_located((By.CSS_SELECTOR, "app-class-card"))
             )
             logger.debug("Class cards loaded")
+            
+            # If we used "latest", detect the actual version from the URL after redirect
+            if self.version == "latest":
+                current_url = self.driver.current_url
+                logger.debug(f"Current URL after redirect: {current_url}")
+                
+                # Extract version from URL like: https://rpg.angelssword.com/game/0.10.1/classes
+                import re
+                version_match = re.search(r'/game/([^/]+)/', current_url)
+                if version_match:
+                    actual_version = version_match.group(1)
+                    if actual_version != "latest":
+                        logger.info(f"Detected actual version: {actual_version} (redirected from 'latest')")
+                        
+                        # Update our version and output directory
+                        self.version = actual_version
+                        self.base_url = f"https://rpg.angelssword.com/game/{actual_version}"
+                        
+                        # Update output directory
+                        from pathlib import Path
+                        self.output_dir = Path(self.output_base_dir) / actual_version / self.get_data_type()
+                        self.output_dir.mkdir(parents=True, exist_ok=True)
+                        logger.info(f"Updated output directory to: {self.output_dir}")
+            
         except TimeoutException:
             logger.warning("Timeout waiting for class cards, proceeding anyway")
     
