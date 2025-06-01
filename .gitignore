@@ -5,3 +5,8 @@ notes/Daimus CharacterCore.csv
 scraper/debug_output
 scraper/.venv
 **/__pycache__
+
+# Scraper output directories
+scraper/scraped_html/
+scraper/parsed_data/
+scraper/test_output/
