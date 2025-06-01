@@ -1,0 +1,20 @@
+# Python dependencies for Lyrian Chronicles scraper
+# Install with: uv pip install -r requirements.txt
+
+# Web scraping
+beautifulsoup4>=4.12.0
+selenium>=4.0.0
+requests>=2.31.0
+
+# Data serialization
+PyYAML>=6.0
+
+# Development tools (optional)
+pytest>=7.0.0
+black>=23.0.0
+flake8>=6.0.0
+
+# Type checking (optional)
+mypy>=1.0.0
+types-PyYAML>=6.0.0
+types-requests>=2.31.0
