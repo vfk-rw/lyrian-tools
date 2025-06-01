@@ -193,37 +193,52 @@ class ClassParser(BaseParser):
         benefits = []
         
         if "Key Ability" in label or "Ability" in label:
-            # Just store the ability reference
-            ability_id = sanitize_id(value)
+            # Normalize ability IDs, especially for Secret Arts
+            ability_id = self._normalize_ability_id(value)
             benefits.append({
                 "type": "ability",
                 "ability_id": ability_id
             })
         
         elif "Skills" in label:
-            # Parse skill benefits
-            benefits.append({
-                "type": "skills",
-                "points": 5,  # Usually 5 points
-                "description": value
-            })
+            # Parse skill benefits with structured data extraction
+            skill_data = self._parse_skills_from_description(value, 5)
+            benefits.append(skill_data)
         
         elif "Heart" in label:
-            # Heart attribute bonus
-            benefits.append({
-                "type": "attribute",
-                "attribute": "heart",
-                "description": value
-            })
+            # Parse actual attribute from description instead of using "heart"
+            actual_attribute = self._parse_attribute_from_description(value)
+            if actual_attribute:
+                benefits.append({
+                    "type": "attribute",
+                    "attribute": actual_attribute,
+                    "description": value
+                })
+            else:
+                # Fallback to attribute choice if multiple attributes mentioned
+                attributes = self._extract_attribute_options(value)
+                if len(attributes) > 1:
+                    benefits.append({
+                        "type": "attribute_choice",
+                        "choose": 1,
+                        "options": self._create_structured_attribute_options(attributes, value),
+                        "description": value
+                    })
+                else:
+                    # Keep original broken format for debugging
+                    benefits.append({
+                        "type": "attribute",
+                        "attribute": "heart",
+                        "description": value
+                    })
         
         elif "Soul" in label:
             # Soul attribute choice
-            # Try to extract the specific attributes mentioned
             attributes = self._extract_attribute_options(value)
             benefits.append({
                 "type": "attribute_choice",
                 "choose": 1,
-                "options": attributes,
+                "options": self._create_structured_attribute_options(attributes, value),
                 "description": value
             })
         
@@ -287,7 +302,7 @@ class ClassParser(BaseParser):
             
             # Clean the ability name
             ability_name = ability_name.replace('○', '').strip()
-            ability_id = sanitize_id(ability_name)
+            ability_id = self._normalize_ability_id(ability_name)
             
             # Skip if we've already seen this ability
             if ability_id in seen_abilities:
@@ -308,6 +323,90 @@ class ClassParser(BaseParser):
             logger.debug(f"Found ability reference: {ability_name} ({'key' if is_key else 'regular'})")
         
         return ability_refs
+    
+    def _parse_attribute_from_description(self, description: str) -> Optional[str]:
+        """Parse actual attribute name from description text."""
+        # Look for patterns like "You gain +1 Reason"
+        attributes = ["Focus", "Agility", "Toughness", "Power", "Fitness", "Reason", "Awareness", "Presence", "Cunning"]
+        
+        for attr in attributes:
+            if re.search(rf'\+\d+\s+{attr}', description, re.IGNORECASE):
+                return attr
+        
+        # Look for other patterns like "gain +1 to X"
+        match = re.search(r'gain \+\d+ (?:to )?(Focus|Agility|Toughness|Power|Fitness|Reason|Awareness|Presence|Cunning)', description, re.IGNORECASE)
+        if match:
+            return match.group(1)
+        
+        return None
+    
+    def _parse_skills_from_description(self, description: str, points: int) -> Dict[str, Any]:
+        """Extract structured skills data from description."""
+        result = {
+            "type": "skills",
+            "points": points,
+            "description": description
+        }
+        
+        # Extract eligible skills using common patterns
+        skill_patterns = [
+            r'skill points (?:to spend )?(?:on|in) ([^.]+?)(?:\.|,|$)',
+            r'points in ([^.]+?)(?:\.|,| or )',
+            r'\+\d+ skill points in ([^.]+?)(?:\.|,| You)',
+        ]
+        
+        eligible_skills = []
+        for pattern in skill_patterns:
+            match = re.search(pattern, description, re.IGNORECASE)
+            if match:
+                skills_text = match.group(1)
+                # Parse comma-separated skills
+                skills = [s.strip() for s in re.split(r',| or ', skills_text)]
+                eligible_skills.extend(skills)
+                break
+        
+        if eligible_skills:
+            result["eligible_skills"] = eligible_skills
+        
+        # Check for expertise conversion
+        if "exchange" in description.lower() and "expertise" in description.lower():
+            result["can_convert_to_expertise"] = True
+            # Extract conversion ratio
+            ratio_match = re.search(r'(\d+)\s+expertise\s+points', description)
+            if ratio_match:
+                result["conversion_ratio"] = int(ratio_match.group(1))
+        
+        # Check for DM approval requirements
+        if "dm approval" in description.lower() or "approval" in description.lower():
+            result["expert_knowledge_needs_approval"] = True
+        
+        return result
+    
+    def _create_structured_attribute_options(self, options_list: List[str], description: str) -> List[Dict[str, Any]]:
+        """Create structured attribute choice options."""
+        structured_options = []
+        
+        # Extract value from description (usually +1)
+        value_match = re.search(r'\+(\d+)', description)
+        value = int(value_match.group(1)) if value_match else 1
+        
+        for option in options_list:
+            structured_options.append({
+                "attribute": option,
+                "value": value
+            })
+        
+        return structured_options
+    
+    def _normalize_ability_id(self, name: str) -> str:
+        """Create normalized ability ID with consistent Secret Art handling."""
+        if name.startswith("Secret Art:"):
+            # Remove "Secret Art:" and normalize the rest
+            art_name = name.replace("Secret Art:", "").strip()
+            art_id = sanitize_id(art_name)
+            return f"secret_art__{art_id}"  # Double underscore
+        else:
+            return sanitize_id(name)
 
 
 def main():
