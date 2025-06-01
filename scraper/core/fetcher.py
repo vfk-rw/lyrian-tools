@@ -105,6 +105,12 @@ class BaseFetcher(ABC):
             self.driver.quit()
             logger.info("WebDriver closed")
     
+    def cleanup(self):
+        """Explicitly clean up resources."""
+        if hasattr(self, 'driver'):
+            self.driver.quit()
+            logger.info("WebDriver closed via cleanup()")
+    
     def fetch_list_page(self) -> List[Dict[str, Any]]:
         """
         Fetch the main list page and extract items to scrape.
