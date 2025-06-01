@@ -1,0 +1,81 @@
+class:
+  id: wave_palm_style
+  name: Wave Palm Style
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/b0563c6c-db04-4445-b987-83783a4c0f35-wave-palm-style.sm.webp
+  description: The Wave Palm style does not strike with force, but disrupts the enemies
+    internal lifeforce.
+  requirements:
+  - Martial Artist mastered.
+  guide: The Wave Palm style focuses on disrupting enemy mana usage. Mana Sight lets
+    you see the mana of all enemies. This will let you make better choices on who
+    to attack. Two Point Strike is a light attack that applies the Wave Palm effect,
+    which increases the enemies mana costs. It follows into Four Point Strike, which
+    has greatly reduced costs and appiles a stronger debuff if combo'd. Against many
+    normal monsters, the detonation effect for when your stacks exceed their maximum
+    mana will happen quickly due to their low mana pools. This can potentially shut
+    down powerful abilites they might have. The Mystic Eyes of Light Perception lets
+    you see all HP and Mana, but more importantly it lets you see through cover and
+    you automatically detect all hidden creatures. Very useful when you're under attack
+    by rogues or other stealthy characters. Disrupt Ki is used against mages who are
+    concentrating on spells to make them drop it.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: mana_sight
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: two_point_strike
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend on Athletics, Acrobatics, Negotiation,
+        Perception, Common Knowledge or a relevant Expert Knowledge skill (By DM Approval).
+        You can exchange any skill point for 2 expertise points, but must spend them
+        in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: mystic_eyes_of_light_perception
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 Fitness or Presence.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: disrupt_ki
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Focus
+      description: You gain +1 Focus.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: four_point_strike
+  ability_references:
+  - id: mana_sight
+    name: Mana Sight
+    type: key_ability
+  - id: two_point_strike
+    name: Two Point Strike
+    type: ability
+  - id: mystic_eyes_of_light_perception
+    name: Mystic Eyes of Light Perception
+    type: ability
+  - id: disrupt_ki
+    name: Disrupt Ki
+    type: ability
+  - id: four_point_strike
+    name: Four Point Strike
+    type: ability

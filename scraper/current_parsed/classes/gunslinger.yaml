@@ -1,0 +1,85 @@
+class:
+  id: gunslinger
+  name: Gunslinger
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/477feb6b-a1e6-4788-b945-ad8511a9d585-gunslinger.sm.webp
+  description: The Gunslinger is a ranged combat specialist who excels in the use
+    of firearms, particularly pistols. They are skilled marksmen, able to hit their
+    targets with deadly accuracy and speed.
+  requirements:
+  - Any class mastered.
+  guide: 'The gunslinger takes control of the fight from the start with their Quickdraw
+    ability. It''s only a light attack, but it''s a free attack that can''t be reacted
+    to, so it''s free early damage. Because it''s an encounter start ability, it is
+    one of the few things that lets you act before enemy with ‘First Shot’ initiative
+    bonus can take their action. Ricochet is a simple attack that can be used to bypass
+    light cover. If an enemy is using light cover, there''s little reason not to use
+    it. Warning Shot costs a fair bit of mana, but gaining Trick Attack can help you
+    secure hits. Grunts are unable to react to them, so you can snipe one hiding behind
+    cover with a warning shot + ricochet combo. For their Secret Art: Fan the hammer
+    you''ll probably want to bring a spare pistol. It is a relatively close range
+    ability and the high AP cost makes it hard to move and shoot if you don''t get
+    extra AP from somewhere, but it can do a large amount of damage. A single reaction
+    will affect all 4 shots, so its something only to be used against a target that
+    has exhausted their RP.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: gunslingers_agility
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: ricochet
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend on Acrobatics, Stealth, Perception,
+        Insight, Survival, Intimidation, Common Knowledge or a relevant Expert Knowledge
+        skill (By DM Approval). You can exchange any skill point for 2 expertise points,
+        but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: warning_shot
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness, Cunning, Awareness or Presence.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: quickdraw
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      description: You gain +1 to Focus or Power.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_fan_the_hammer
+  ability_references:
+  - id: gunslingers_agility
+    name: Gunslinger's Agility
+    type: key_ability
+  - id: ricochet
+    name: Ricochet
+    type: ability
+  - id: warning_shot
+    name: Warning Shot
+    type: ability
+  - id: quickdraw
+    name: Quickdraw
+    type: ability
+  - id: secret_art_fan_the_hammer
+    name: 'Secret Art: Fan the hammer'
+    type: ability

@@ -1,0 +1,119 @@
+class:
+  id: cultivator
+  name: Cultivator
+  tier: 2
+  difficulty: 2
+  main_role: Artisan
+  secondary_role: Controller
+  image_url: https://cdn.angelssword.com/ttrpg/assets/e5ade026-f280-4c7e-9858-a89661924cae-Farmer2.sm.webp
+  description: “Thank you, Sister Yselwen. We thank Kari’s Light for guiding you to
+    us in our hour of need.” Yselwen gave the Elder a smile and a bow, resisting the
+    urge to correct him. She wasn’t a Sister of his faith. But she held her tongue
+    and turned away from the gathered villagers and the settlement. Once over the
+    hill and fully out of sight, her shoulders drooped and her smile dropped. Rubbing
+    a few frustrated circles on her forehead in an attempt to dispel the headache
+    of dealing with the religiously righteous and ignorant, she turned from the packed
+    dirt path and out into the wild fields. She took deep breaths as the scents of
+    nature washed away the cloying dregs of the human settlement that seemed determined
+    to cling to her. “Yggdrasil nerth iy thoir,” she prayed, fingers brushing against
+    the stalks of wild wheat as she passed. She needed all the strength Yggdrasil
+    could grant her after dealing with the Karites. At least the farmers had taken
+    her teachings and blessings to heart. Not parroted like so many in recent days,
+    but an actual understanding of the connection they were calling upon. It wasn’t
+    enough to bring Yggdrasil to prominence, even if she could spread that same message
+    to a thousand farmers across Westria, but it did sustain Her. Normally, she didn’t
+    stray far from the borders of Easter, content to spread the Blessings of Yggdrasil
+    where it was more accepted. But with a famine tearing its way across Lyr, she
+    felt it was a ripe opportunity to help some people and spread Yggdrasil’s teachings
+    a little wider. With a huff, she spun back toward her next destination, having
+    not noticed she’d stopped to stare toward that stupid village with its stupid
+    elder. They wouldn’t starve come winter and that was more important than a silly
+    man pushing his faith on her. And so it went, village after village, town after
+    town. Meetings with priests, elders, mayors, and farmers. Dealing with the initial
+    distrust of her skin, the color of oak leaves in the autumn, or the claims of
+    heresy at her words. But they all wanted to live, wanted to eat. So she taught
+    and blessed and spoke to those that would listen. “Bennachd na Yggdrasil ar talah
+    se,” would be repeated in broken, Westrian accents with earnest intent. “Gabthasinn
+    a toirt Yggdrasil don tiodlac seo,” some would say on her departure, clutching
+    at crudely woven tree effigies. For decades, Priestess Yselwen wandered the lands
+    of Axia, Westria, and Northi. Where she tred, the famine faded. Her blessings
+    and the teachings of Yggdrasil took root in small villages and in farmers’ hearts.
+    The Dryad of the Fall became a myth and a legend, invoked in the same blessings
+    she once taught. Some say that she still wanders the fields near Easter to this
+    day, blessing those in need.
+  requirements:
+  - Farmer mastered
+  guide: The cultivator uses their scythe more in combat compared to the farmer, though
+    they retain their controller nature. Separate wheat from chaff is a large AoE
+    attack with a knockback attached to it. Great for when you're surrounded and want
+    to force grunts to spend more AP on movement. If you land a kill with this ability,
+    then it becomes even more potent and could potentially deny a grunt of being able
+    to do anything for a turn. Terracing is a reverse hole creation. You raise up
+    the ground around yourself to force enemies to make athletics checks to get up
+    to you. At 10ft high, you may be unable to strike back against an enemy unless
+    you bring a range weapon, but it can still help in separating enemy formations.
+    Harvest Moon is a powerful effect that costs a bit of mana to activate. The healing
+    effect on it isn't very mana efficient, effectively just a healing potion, but
+    it is free action wise. The slowing effect is large control effect that remains
+    active, but upkeep cost can add up over time. If none of your allies need the
+    healing, it may be smart end it early with the free heavy attack and look to regain
+    some of the mana spent on it. On the crafting side, Four Field System is an ability
+    you want to use at the start of your crafting basically every time. With Four
+    Field System, even actions like Steady Craft become better than just doing a basic
+    craft and it becomes better the more other crafting abilities you have.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: expert_farmer
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: separate_wheat_from_chaff
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend on Farming. You can exchange
+        any skill point for 2 expertise points, but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: terracing
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness or Awareness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: four_field_system
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Focus
+      - Toughness
+      description: You gain +1 to Focus or Toughness.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: harvest_moon
+  ability_references:
+  - id: expert_farmer
+    name: Expert Farmer
+    type: key_ability
+  - id: separate_wheat_from_chaff
+    name: Separate wheat from chaff
+    type: ability
+  - id: terracing
+    name: Terracing
+    type: ability
+  - id: four_field_system
+    name: Four Field System
+    type: ability
+  - id: harvest_moon
+    name: Harvest Moon
+    type: ability

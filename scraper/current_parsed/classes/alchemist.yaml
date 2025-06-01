@@ -1,0 +1,83 @@
+class:
+  id: alchemist
+  name: Alchemist
+  tier: 1
+  difficulty: 2
+  main_role: Artisan
+  secondary_role: Healer
+  image_url: https://cdn.angelssword.com/ttrpg/assets/2500094c-dbfe-437a-99cf-bc178a219633-Alchemist_Raw.sm.webp
+  description: Researchers and chemists who try to understand what composes the world.
+  requirements:
+  - None.
+  guide: Alchemist is a crafting class that can use the consumables they craft to
+    great effect. With Light Work you can craft tons of items at the same time, though
+    you still have to pay material costs as normal. As you go through a lot of items,
+    being able to double what you craft in 1 point is still valuable. Throw Potion
+    lets you function as a healer for a party. Your healing will be fairly AP efficient,
+    but it can be dangerous to rely on an alchemist healer as the person receiving
+    the potion has to pay the mana cost. In a party where other people may want to
+    use their mana for their own abilities, it may be impossible to heal as the fight
+    drags on. Doctor Jekyll lets you or an ally drink a potion or elixir when the
+    combat start. In most cases this will be an elixir, allowing you to get a boost
+    without having to spend an action on it. Quickdraw Alchemy lets you take out an
+    alchemy item at any time, even when it's not your turn. Most of the time this
+    property will not come into play, as you can't use it when it's not your turn
+    yet, but you could prepare a flask that an ally can take off your hands when it
+    is their turn. Of course, you will most likely just want to use it to not have
+    to spend your AP to draw them before using them yourself.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: the_alchemist
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: throw_potion
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points in Alchemy. You can exchange any skill
+        point for 2 expertise points, but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: doctor_jekyll
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Reason.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: light_work
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Focus
+      - Toughness
+      description: You gain +1 to Focus or Toughness.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: quickdraw_alchemy
+  ability_references:
+  - id: the_alchemist
+    name: The Alchemist
+    type: key_ability
+  - id: throw_potion
+    name: Throw Potion
+    type: ability
+  - id: doctor_jekyll
+    name: Doctor Jekyll
+    type: ability
+  - id: light_work
+    name: Light Work
+    type: ability
+  - id: quickdraw_alchemy
+    name: Quickdraw Alchemy
+    type: ability

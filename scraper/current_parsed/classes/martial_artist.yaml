@@ -1,0 +1,92 @@
+class:
+  id: martial_artist
+  name: Martial Artist
+  tier: 1
+  difficulty: 1
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3cbdbd65-5ec6-4ee6-baa5-73508e2263c8-Martial_Artist_Portrait_Final.sm.webp
+  description: Martial Artists are fighters who’ve turned their bodies into finely
+    tuned weapons. All across the world of Lyr, you can find them practicing different
+    arts and styles. The true might of the Martial Artist is their mastery of Zaipher,
+    the skill of tapping into their internal mana to heal themselves and deal devastating
+    magic-enhanced blows. Zaipher doesn't have the raw power of Arcane magic, but
+    what it lacks in volume, it makes up for in blazing speed. Martial Artists utilize
+    quick, sudden bursts of energy that can take an enemy by surprise.
+  requirements:
+  - None.
+  guide: Martial Artists are strikers with a simple standard combo. Leg Sweep is the
+    combo starter. Being knocked prone is already bad normally, but especially so
+    against a martial artist. You should expect most enemies to attempt to react to
+    a leg sweep. If they don't, or if you hit anyway, you can follow up with a Rushing
+    Knee Drop. Rushing Knee Drop is guaranteed to hit and can be used with both AP
+    and RP. The RP version is less efficient, but it can allow for a higher damage
+    turn. Rushing Knee Drop can also be used when its not your turn, if an ally is
+    able to render an opponent Prone. Because this is not on your turn, this version
+    always costs an RP and can't be used with just an AP. The final part of the combo
+    is Double Punch. This ability is good even by itself, paying 1 mana for an extra
+    light attack. The mana cost does mean you can't simply use it every turn, but
+    it's low enough that you should consider it on most turns. Their single non-damaging
+    combat ability is Vital Drive. Vital Drive isn't very mana efficient, but it takes
+    no action and you can potentially spend a lot of mana on it to heal for a large
+    amount. Unarmed abilities only require a single free hand, so keeping an utility
+    item in your offhand for quick use is possible.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: martial_artists_journey
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: leg_sweep
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend in Acrobatics, Perception, Insight,
+        Medicine, Intimidation, Common Knowledge or a relevant Expert Knowledge skill
+        (By DM approval). You can exchange any skill point for 2 expertise points,
+        but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: vital_drive
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: rushing_knee_drop
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Focus
+      - Agility
+      - Toughness
+      description: You gain +1 to Focus, Agility or Toughness.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: double_punch
+  ability_references:
+  - id: martial_artists_journey
+    name: Martial Artist's Journey
+    type: key_ability
+  - id: leg_sweep
+    name: Leg Sweep
+    type: ability
+  - id: vital_drive
+    name: Vital Drive
+    type: ability
+  - id: rushing_knee_drop
+    name: Rushing Knee Drop
+    type: ability
+  - id: double_punch
+    name: Double Punch
+    type: ability

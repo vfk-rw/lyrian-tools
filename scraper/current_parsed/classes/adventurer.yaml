@@ -1,0 +1,114 @@
+class:
+  id: adventurer
+  name: Adventurer
+  tier: 1
+  difficulty: 1
+  main_role: Striker
+  secondary_role: Utility
+  image_url: https://cdn.angelssword.com/ttrpg/assets/b387a097-6f4b-4f85-87dc-7d85bf97b6bb-Adventurer_Plus_-_raw.sm.webp
+  description: 'Legends have it that Fayto Zhelti was the first true adventurer, a
+    spirited young girl from a humble town in the Kingdom of Alpinum. Her Father was
+    an explorer and Fayto dreamed of following in his footsteps. Yet, as childhood
+    began to fade away, a painful realization crawled within her heart: the incredibly
+    physical feats of strength her father effortlessly performed always lay just beyond
+    grasp. No amount of blood, sweat or tears could overcome the anguish of her physical
+    reality. She watched her younger brothers surpass her in strength, joining their
+    father on this expeditions she yearned for. Loneliness began to infect her heart
+    that ached for adventure, but fate had cruelly denied her that path. Still she
+    persisted, even in her pain... tirelessly striking the same tree day after day
+    for years. Humans barely had the lifespan to master the arcane arts—which at the
+    time were incredibly complex without shortcuts. Her Mother, an arcane practitioner,
+    taught her daughter the methods of utilizing magic for mundane tasks: heating
+    water kettles and stirring up a gentle whirlpool to do laundry. While practicing
+    these humble homecrafts, Fayto remembered that feeling, the tingling surge that
+    ran through her limbs. One day, as she swung her dulled blade against that ancient
+    tree, she poured every ounce of her yearning and willpower into her strike. The
+    familiar surge ran through her as the explosive energy flooded her body, exactly
+    as it had done alongside her Mother. In a thunderous crash, the mighty tree toppled.
+    From that day forward, she pursued that elusive feeling. She trained relentlessly
+    until she mastered the art of "internal magic" which would be known later as ki.
+    Soon after that she joined her father''s adventures at last, growing and developing
+    until she embarked on her own journeys, making a name for herself wherever she
+    went "Fayto, the female adventurer." To this day, adventurers still practice the
+    skills Fayto Zhelti perfected long ago—a martial art born of determination and
+    control of ones self, leveling the playing field for all who practice it. Following
+    Fayto''s example, Adventurers continue to train—leaping to extraordinary heights,
+    molding mana to extend their reach, projecting their aura like iron... all while
+    maintaining perfect composure. Although the ancient martial art remains nameless,
+    its teaches are diligently passed down to every aspiring adventurer, serving as
+    a solid foundation for future development.'
+  requirements: []
+  guide: 'The adventurer is a generalist class that has a bit of everything. One of
+    the main draws of the adventurer is their options in picking their proficiencies,
+    being the only tier 1 class that can choose a specialized weapon and heavy armor.
+    Power Jump is an anti-air tool that lets you hit enemies in the air even if you
+    only have melee weapons. It is even better if you can fly, as you can use power
+    jump as a cheap way to gain altitude. Mana Razor gives you increased range on
+    your attacks. If you''re using a melee weapon with this, you''ll need to be aware
+    that turning your attacks into ranged attacks does mean you''ll provoke attacks
+    of opportunity. It may also disable the use of abilities with a range of “Melee
+    Weapon Range” Steel Aura is a defensive tool that can be very powerful when attacked
+    by a large group of grunts. With 3 additional guard, you will most likely take
+    only 1 damage from light attacks from those enemies, though you''ll still need
+    to be wary of heavy attacks. Your Secret Art: Efficient Spirit Control is a simple
+    mana reduction ability. If you do not have any other secret arts yet, then don''t
+    be afraid to use this whenever you would spend 2 or more mana on something.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: adventurer_essentials
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: power_jump
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend on any non crafting skill.  You
+        can exchange any skill point for 2 expertise points, but must spend them in
+        these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: mana_razor
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness, Cunning, Reason, Awareness or Presence.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: steel_aura
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      - Agility
+      - Toughness
+      description: You gain +1 to Focus, Power, Agility or Toughness.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_efficient_spirit_control
+  ability_references:
+  - id: adventurer_essentials
+    name: Adventurer Essentials
+    type: key_ability
+  - id: power_jump
+    name: Power Jump
+    type: ability
+  - id: mana_razor
+    name: Mana Razor
+    type: ability
+  - id: steel_aura
+    name: Steel Aura
+    type: ability
+  - id: secret_art_efficient_spirit_control
+    name: 'Secret Art: Efficient Spirit Control'
+    type: ability

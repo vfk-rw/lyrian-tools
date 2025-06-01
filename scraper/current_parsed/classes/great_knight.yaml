@@ -1,0 +1,123 @@
+class:
+  id: great_knight
+  name: Great Knight
+  tier: 2
+  difficulty: 3
+  main_role: Defender
+  secondary_role: Support
+  image_url: https://cdn.angelssword.com/ttrpg/assets/9d70a3c3-6431-4581-af15-635f18ac2bee-Great_Knight_-_Raw.sm.webp
+  description: 'First fielded by Northi not long after Hussars were becoming common
+    on the battlefield, the Great Knight represented the quintessential heavy cavalry.
+    With knight and mount both clad in heavy armor, the Great Knight was made to be
+    a mobile barrier. Able to interpose their armored bulk for their allies and even
+    project that protection into an aura around them, Great Knights were able to push
+    through even the most heavily contested battlefields for their allies. And while
+    there were countless stories throughout the ages of heavily armored knights turning
+    the tides of battle, there were none as debated as the story of Sir Owain Morgan
+    and Dame Madeline Benoit. As told and accepted by Northi historians, Sir Owain
+    Morgan was a dogfolk Great Knight without peer. Honorable beyond reproach and
+    an unstoppable juggernaut on the battlefield, he had a list of successful battles
+    attributed to him that stretched the imagination. In fact, detractors of Sir Owain’s
+    tale would often point out that he must have surely known teleportation and time
+    travel magics to be at so many battles at once. What could not be disputed was
+    that Sir Owain certainly existed, his name recorded in the annals of the Bastion
+    Knights. But his most debated feat was one that involved a Westrian knight, Dame
+    Madeline Benoit, and the proliferation of Mage Knights into Northi’s military.
+    While there were many versions of the tale, the most accepted one in Northi followed
+    a series of reasonably set in stone facts. During one of the many border skirmishes
+    common between Northi and Westria as they vied for control over the Nuren Plains,
+    it was said that Sir Owain led a counter attack against a Westrian skirmishing
+    force. He led his men to victory and successfully captured many knights to ransom
+    back to Westria, including Dame Madeline Benoit. While most of the knights and
+    men at arms were released back to their homes, Dame Madeline was kept for one
+    very important reason: to teach Northi the art of the Mage Knight. Historians
+    for the Era of Knights could often be incited into argument around the idea as
+    there were as many accounts for how Northi gained access to the skills of Westria’s
+    holy knights as there were historians to argue about them. But what was almost
+    universally accepted as the truth was that Sir Owain, disgusted with his peers
+    and superiors'' lack of any decency to release Dame Madeline back to her family,
+    took it upon himself to free the woman. There was little historical accounting
+    of where they went or what they did but there were legends of a pair of knights
+    wandering Lyr and helping those in need. And while those actions had never definitively
+    been attributed to Sir Owain and Dame Madeline, what couldn’t be denied was when
+    they both turned back up in solid historical record. They would found Morgan Ranch
+    in what would later become Dacquoise, near the future site of the city of Madeline.
+    It was there that the retired knights, happily married for an unclear amount of
+    time, had begun taking on students and ranch hands to teach the art of horsemanship,
+    knighthood, and magic. While the ranch itself did not last into modern times,
+    the house itself was maintained and the legacy of chivalry was upheld by the descendants
+    of those students. Collectively, and informally, they called themselves the Knights
+    of Morgan and dedicated themselves to helping those in need whenever and wherever
+    they were found.'
+  requirements:
+  - Cavalier mastered.
+  guide: 'The great knight is a mounted tank class that excels in fights with many
+    different engagements. Intercept is your main tool in getting around the battlefield,
+    allowing you to ride to an allies aid. If you move to an ally far away enough,
+    you can even use Trample and do some damage with it. Note that your movement is
+    not a sidestep, you do provoke attacks of opportunity with it. Rescue & Drop lets
+    you save an ally from a bad situation and ride them out to safety. You can also
+    drop them immediately to another square nearby to break them free from being surrounded
+    or to let them move away without provoking. Your Secret Art: Moving Castle is
+    an aura that reduces damage by 3 in a small aura around you. This can be massive
+    when fighting against a group of non-heroic enemies, reducing the damage your
+    allies take by a large amount. You can also move for free once per turn to reposition
+    and potentially help allies in two completely different positions at the same
+    time. Shared Defense is a simple tool that helps you protect your mount from AoE
+    attacks.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: heavy_cavalry
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: rescue_drop
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend in Athletics, Animal Husbandry,
+        Riding, Intimidation, Perception or Common Knowledge. You can exchange any
+        skill point for 2 expertise points, but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: intercept
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness, Awareness or Presence.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: shared_defense
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Toughness
+      description: You gain +1 to Toughness.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_moving_castle
+  ability_references:
+  - id: heavy_cavalry
+    name: Heavy Cavalry
+    type: key_ability
+  - id: rescue_drop
+    name: Rescue & Drop
+    type: ability
+  - id: intercept
+    name: Intercept
+    type: ability
+  - id: shared_defense
+    name: Shared Defense
+    type: ability
+  - id: secret_art_moving_castle
+    name: 'Secret Art: Moving Castle'
+    type: ability

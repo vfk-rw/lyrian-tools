@@ -1,0 +1,89 @@
+class:
+  id: true_shinigami_eyes
+  name: True Shinigami Eyes
+  tier: 3
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Utility
+  image_url: https://cdn.angelssword.com/ttrpg/assets/c8105e37-6ac8-4a36-8b28-b16e2251eb01-True_Shinigami_Eyes_raw.sm.webp
+  description: Wielders of the shinigami eyes, rare as they are, have the ability
+    to perceive the death of living things. For most of them, that is where it ends.
+    However, there are those who over time grow an even deeper understanding of death.
+    They can see the death not just of living things, but also of objects and even
+    non-physical things such as magic. This enhanced perception has given those wielders
+    the name of the ‘True Shinigami Eyes’.
+  requirements:
+  - Shinigami Eyes mastered.
+  guide: 'Wielders of the True Shinigami Eyes bring some personal defense and utility
+    to the table. Failing a save can be devastating, but Cut Away gives them an extremely
+    high chance to succeed as most of them possess high Focus. The high focus also
+    helps them with Cut Magic, allowing them to potentially break barriers and other
+    magic effects at little cost. Barriers are the most obvious thing, but even things
+    like Glittershards are considered temporary magic effects. Point of Death II is
+    an upgrade of the original Point of Death ability. Its primary use is to finish
+    off high toughness enemies, but the AP refund makes it a tempting choice against
+    any weak foe. Their key ability allows them to kill non-living things as well
+    as they do living things, and lets them build up marks for their ultimate ability:
+    7 Points of Death. This Climax Art grows in power the more they attack a single
+    target. It takes several turns to build up and must be used against a weakened
+    enemy, but it has high damage potential. Similar to their previous Secret Art,
+    the damage is static so you know what to expect even if there’s a small risk of
+    missing.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: improved_death_perception
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: cut_away
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend on Acrobatics, Stealth, Medicine,
+        Perception, Insight, Common Knowledge or a relevant Expert Knowledge skill
+        (By DM Approval).  You can exchange any skill point for 2 expertise points,
+        but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: point_of_death_ii
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness, Cunning or Awareness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: cut_magic
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      description: You gain +1 to Focus or Power.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_7_points_of_death
+  ability_references:
+  - id: improved_death_perception
+    name: Improved Death Perception
+    type: key_ability
+  - id: cut_away
+    name: Cut Away
+    type: ability
+  - id: point_of_death_ii
+    name: Point of Death II
+    type: ability
+  - id: cut_magic
+    name: Cut Magic
+    type: ability
+  - id: secret_art_7_points_of_death
+    name: 'Secret Art: 7 Points of Death'
+    type: ability

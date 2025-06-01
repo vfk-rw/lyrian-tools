@@ -1,0 +1,113 @@
+class:
+  id: aetherie
+  name: Aetherie
+  tier: 2
+  difficulty: 2
+  main_role: Utility
+  secondary_role: Support
+  image_url: https://cdn.angelssword.com/ttrpg/assets/0b85ebb8-94f8-4b17-ab1f-03514968a6af-Aetherie_Raw.sm.webp
+  description: 'The Four Swords War pushed the boundaries of artifice and magic in
+    the way only a continent spanning conflict can. Entire schools of magic were created
+    and artifice technology raced forward at breakneck speed. The Aetherie were but
+    one of those desperate developments. Founded from the study of the genius work
+    of a Lu Clan demon by Axian and Sorthen researchers, the brief life of the namesake
+    of the magical discipline is inescapably entwined with the art of Mind Connection.
+    Aetherie Lu’Pana earned her right as a master of magic in the middle of her own
+    apprenticeship as the war with Westria and Northi pushed into Sorthen’s borders.
+    After reading through the requests passed to her master for a method to counter
+    or break through Northi artifice communications jamming, Aetherie offered up her
+    own research project: a mind/mana connection technique. It didn’t take long after
+    successfully demonstrating the new magic that her preliminary plans for an amplifying
+    artifice was put into the prototype stage. She and the prototype were rushed toward
+    the rapidly collapsing front where she was able to establish communications between
+    General Ar’Golan and his battalion commanders, using herself as a conduit. This
+    ability to coordinate in real time using the eyes of his own commanders allowed
+    the Sorthen Rear Guard to briefly hold the invading armies at the Battle of Three
+    Passes for the critical weeks needed for their remaining forces and critical civilians
+    to be evacuated to Marlone. Unfortunately, the defense collapsed when Aetherie
+    Lu’Pana, pushed beyond her limits by the strain of upkeeping her Mind Connection
+    using the prototype sensory station, died from the strain. Her notes and the testimony
+    of the one surviving commander from Three Passes that had been Mind Connected
+    was studied carefully and the “Aetherie Mind Connect” school of magic was codified
+    shortly after the war. Aetherie are a rare breed of mage. The mental fortitude
+    required to process multiple viewpoints and even spread their influence out from
+    those they’re connected with does not come easily and there are whispered stories
+    of would-be Aetherie losing their minds in the ebb and flow of magic. But a well
+    practiced Aetherie, with proper support and equipment, can bring unprecedented
+    support and coordination to any group.'
+  requirements:
+  - Any class mastered.
+  guide: The Aetherie is a long range utility and support class. While it can function
+    at close range, the main draw is to use Mind Connection to set up a telepathic
+    link and work off your allies while you remain somewhere else. This range is further
+    boosted if you can afford the sensory mage suit, so you should invest in that
+    if you plan to play this way. Psychometry is a free or almost free scouting ability
+    that is very valuable in dungeons or other indoor explorations. It can let your
+    party properly prepare before entering dangerous room. Conduit is what lets you
+    use abilities from other classes while playing from long range. There are still
+    some restrictions on what you can do, so picking classes that synergize well with
+    this ability is important. Tap Cracker lets you open doors from a distance, which
+    can be useful in avoiding traps. You can also unlock doors, allowing you to fulfill
+    a niche without having to invest many skill points into it. Spirit Circuit Crash
+    is a powerful ability that removes a targets ability to use mana without any roll
+    or save. Because it doesn't have a mana cost, you can effectively keep a target
+    from using a mana ability the entire fight unless they choose to take the damage.
+    But be aware that not every enemy will have or use mana.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: mission_control
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: psychometry
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend on Magic, Artifice, Perception,
+        Insight, Stealth or Common Knowledge.  You can exchange any skill point for
+        2 expertise points, but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: conduit
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Reason or Awareness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: tap_cracker
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      - Agility
+      description: You gain +1 to Focus, Power or Agility.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: spirit_circuit_crash
+  ability_references:
+  - id: mission_control
+    name: Mission Control
+    type: key_ability
+  - id: psychometry
+    name: Psychometry
+    type: ability
+  - id: conduit
+    name: Conduit
+    type: ability
+  - id: tap_cracker
+    name: Tap Cracker
+    type: ability
+  - id: spirit_circuit_crash
+    name: Spirit Circuit Crash
+    type: ability

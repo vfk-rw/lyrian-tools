@@ -1,0 +1,98 @@
+class:
+  id: miner
+  name: Miner
+  tier: 1
+  difficulty: 2
+  main_role: Gatherer
+  secondary_role: Striker
+  image_url: https://cdn.angelssword.com/ttrpg/assets/ce994ee6-b138-49fd-b9d8-67bb06ca9add-Miner_New_-_Copy.sm.webp
+  description: The advent of the Adventurer and the use of internal magic began an
+    age of heroes. Of feats great and small immortalized in legends and small tavern
+    tales. But quietly, beyond the glory of heroes, the same power that let them set
+    their names ablaze in history gave rise to something more modest. The crunch of
+    a shovel slicing into the ground or the ring of the pickaxe against stone were
+    not the sounds of heroes, but to the humble Miner, they represented greatness.
+    Utilizing their own internal mana to augment their strength and precision, individual
+    Miners were able to gather on a scale that used to take teams of a dozen or more
+    to match. Be it stone for roads and castle walls or rare metals to be forged into
+    legendary weapons, Miners represented the bedrock of architects and smiths the
+    world over. While Mining Guilds obviously emerged to organize and regulate rich
+    mining opportunities, solitary Miners were still common in villages and the frontiers
+    of society. A single Miner with an abundant area to gather from could easily support
+    an entire town’s needs for stone and metal. And while it was common for Miners
+    to have hired protectors, especially within the guilds, it was a foolish attacker
+    that believed them to be easy targets. That same power and precision that allowed
+    a Miner to shatter rock with ease and peel raw ore from the earth was just as
+    easily turned toward their defense. It was a foolish bandit or adventurer that
+    underestimated the rending power of a Miner’s pickaxe.
+  requirements: []
+  guide: Miner is a gatherer and striker class that functions like an anti-tank character
+    in combat. Rock Fang reduces the target's guard by 2, which can be massive boost
+    in damage even against non-tanks. Especially if you have allies that are dual
+    wielding. It's best used against elites, as grunts will most likely die too fast
+    for the debuff to matter. Excavation Crash is best used when an enemy is surrounded
+    by your allies. The enemy may choose to move to avoid your Heavy attack, but doing
+    so DOES provoke attacks of opportunity from your allies which might result in
+    it taking even more damage. For gathering, Power Rock Strike is a great opener
+    especially once you get more points in mining. Efficient strike can be to ensure
+    you don't waste any points on your node point total and can get the maximum lucky
+    value. It's best to use this as late as possible, in case you still need to use
+    abilities that may drain your node points.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: rock_and_stone
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: power_rock_strike
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend on Mining.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: excavation_crash
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness or Awareness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: efficient_strike
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      - Toughness
+      description: 'You gain +1 to Focus, Power or Toughness. In addition your Pickaxe
+        proficiency gains: Superior Armor Pierce: Treats the enemy’s Guard as if it
+        was 1 lower.'
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: rock_fang
+  ability_references:
+  - id: rock_and_stone
+    name: Rock and Stone
+    type: key_ability
+  - id: power_rock_strike
+    name: Power Rock Strike
+    type: ability
+  - id: excavation_crash
+    name: Excavation Crash
+    type: ability
+  - id: efficient_strike
+    name: Efficient Strike
+    type: ability
+  - id: rock_fang
+    name: Rock Fang
+    type: ability

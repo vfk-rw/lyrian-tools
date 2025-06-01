@@ -1,0 +1,87 @@
+class:
+  id: sniper
+  name: Sniper
+  tier: 3
+  difficulty: 3
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/00da1f57-8c94-4a83-9c60-b31a62a61299-sniper.sm.webp
+  description: Snipers are expert marksmen that use sniper rifles to devastating effect.
+  requirements:
+  - Marksman mastered.
+  guide: The sniper uses sniper rifles to fire at enemies from far beyond a range
+    in which they can counter. It will be rare to get these extreme range fight, but
+    you should always look to play as far back as possible. Ideally, you want to move
+    as little as possible to get the accuracy bonus from Snipe. Positioning well early
+    in the fight will keep paying off as it goes on. Penetrating Shot allows you to
+    remain stationary without having to care about the cover the enemy has. Check
+    with the GM if their cover can be penetrated before using it. With Concealed Shot,
+    you are able to keep entering stealth after firing make your attacks impossible
+    to react to. The RP cost may not be an issue either as long as you can stay far
+    enough away from the fighting that you do not take counterattacks. Aimed Shot
+    is a lock-on Heavy attack that can punish dodge users. Stealthed attacks can do
+    the same, but you won't alway have that option. Killshot is the opening move of
+    the sniper, provided you are able to remain hidden from the enemies before the
+    fight starts. Normally high AP abilities do not gain the benefit of being a hidden
+    attacker, but Killshot is an exception to this if used in the first round. This
+    lets a sniper do huge damage right from the start. You can combine it with the
+    ranger's guided aim ability for an almost certain hit that cannot be reacted to
+    in any way.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: snipe
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: penetrating_shot
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: 'You gain 5 points in one of the following:  Athletics, Stealth,
+        Medicine, Perception, Survival, Animal Husbandry or a relevant Expert Knowledge
+        skill (By DM approval). You can exchange any skill point for 2 expertise points,
+        but must spend them in these skills.'
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: concealed_shot
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Cunning or Awareness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: aimed_shot
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      description: You gain +1 to Focus or Power.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: killshot
+  ability_references:
+  - id: snipe
+    name: Snipe
+    type: key_ability
+  - id: penetrating_shot
+    name: Penetrating Shot
+    type: ability
+  - id: concealed_shot
+    name: Concealed Shot
+    type: ability
+  - id: aimed_shot
+    name: Aimed Shot
+    type: ability
+  - id: killshot
+    name: Killshot
+    type: ability

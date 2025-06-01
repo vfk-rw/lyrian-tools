@@ -1,0 +1,90 @@
+class:
+  id: bard
+  name: Bard
+  tier: 2
+  difficulty: 3
+  main_role: Support
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3588e085-fa8f-46f8-82ad-a63df6a44fe4-bard.sm.webp
+  description: Bards are the storytellers, entertainers, and actors of the world,
+    hailing from all sorts of disciplines. Whether they're performing in a bustling
+    tavern for a handful of tips or captivating a crowd in the town square, Bards
+    bring life and joy wherever they go. They're the ones who immortalize the tales
+    of adventuring parties, ensuring that no deed, whether noble or notorious, goes
+    unheard. In a party, Bards play a crucial role by inspiring their allies to achieve
+    greatness. With their music, they can lift spirits and hype up their companions,
+    turning the tide of battle with a well-timed tune.
+  requirements:
+  - Have at least 5 skill points in the Art (Singing) expertise or at least 5 points
+    in an Art expertise of an instrument.
+  guide: The bard is a support class primarily focused around their Inspiring Song
+    and Dirge of Despair. Inspiring Song gives every ally a 1d4 bonus to a roll once
+    per round. It may not seem much, but it can be used to push a barely missed attack
+    into hitting. Dirge of Despair is the opposite, affecting enemies instead. Due
+    to allowing a save, it's a bit less reliable but a lot of fights may have more
+    enemies than allies on the battlefield. Because both of these are songs and cannot
+    be used at the same time, the bard has to choose which one they want to use. In
+    general, Inspiring Song is more offensive while Dirge of Despair is a more defensive
+    song. Their other support ability is Siren Song. It also cannot be used with the
+    other two songs, but it can be a powerful CC against grunts. Because they spend
+    the AP on their turn, their movement provokes attacks of opportunities and even
+    if they are broken free, their spent AP remains lost. Their last combat ability
+    is Shatter, which is a good follow up after luring enemies closer with Siren Song.
+    The AP cost makes it usable even when keeping up Inspiring Song or Dirge of Despair
+    as well.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: toss_a_coin
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: inspiring_song
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points in Art, Negotiation, Common Knowledge
+        or a relevant Expert Knowledge skill (By DM approval). You can exchange any
+        skill point for 2 expertise points, but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: dirge_of_despair
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Presence.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: shatter
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Focus
+      description: You gain +1 to Focus.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: siren_song
+  ability_references:
+  - id: toss_a_coin
+    name: Toss a coin
+    type: key_ability
+  - id: inspiring_song
+    name: Inspiring Song
+    type: ability
+  - id: dirge_of_despair
+    name: Dirge of Despair
+    type: ability
+  - id: shatter
+    name: Shatter
+    type: ability
+  - id: siren_song
+    name: Siren Song
+    type: ability

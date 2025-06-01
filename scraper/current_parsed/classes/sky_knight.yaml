@@ -1,0 +1,114 @@
+class:
+  id: sky_knight
+  name: Sky Knight
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Utility
+  image_url: https://cdn.angelssword.com/ttrpg/assets/ea296223-3876-4707-adb9-aa09eca420e0-Sky_Knight_-_Raw.sm.webp
+  description: As was common with most innovations that made radical leaps, the history
+    of the Sky Knights was steeped in warfare. Like the development of the Cavalier,
+    learning to take to the sky on the backs of winged mounts stemmed from a need
+    to counter a threat. Aerial Mages from Sorthen had long since, and in some cases
+    continue, dominated the skies as scouts, couriers, and as untouchable bombardment
+    specialists. With no modern airships to deter them and no Aeromancers to threaten
+    them, both Northi and Westria searched for a solution. Nearly simultaneously,
+    the two countries developed their own methods. From the mountains and hills near
+    Mount Merlin, Northi tamed the wild pegasi. Harpy hunters were the first to capture
+    and tame the wild flying horses and harpy run ranches continue to produce the
+    highest quality mounts with specialized breeds tailored for various tasks. A pegasus’s
+    agility and speed in the air let the chimeran knights of Northi put up a challenge
+    to Sorthen aerial units in terms of scouting, but their limited endurance and
+    fragile wings made them less suited as couriers and frontline combatants. Westria
+    took a nuisance that plagued their southeastern border along the mountains near
+    Jav and turned it into a solution. Wyverns roosting in the mountains and forests
+    were regularly dealt with by adventurers and knights but some enterprising (and
+    foolhardy) beast tamers decided to attempt to tame newly hatched wyverns as companions.
+    With some false starts, they succeeded and it wasn’t long before an interest in
+    training them as mounts emerged. Slower and less nimble in the air than their
+    pegasi counterparts, a wyvern’s thick scales and devastating Reginleiv made them
+    much more suitable as flying heavy cavalry. To this day, there is little overlap
+    in the Sky Knight forces of Northi and Westria. While each side failed to deploy
+    units that could directly counter Aerial Mages, their arrival on the battlefield
+    removed Sorthen’s complete dominance of the air. Modern Sky Knight adventurers
+    utilize whatever type of mount that suits their style (or that they can afford)
+    and continue to fill their historical roles as scouts, couriers, and aerial cavalry.
+  requirements:
+  - Cavalier mastered.
+  guide: 'The sky knight is a class that focuses on flying mounts. It is vulnerable
+    to ranged attacks, but it has excellent target access. Despite being a tier 2
+    class, it may not be accessible for everyone due to the high cost of pegasi and
+    wyverns. A pegasus is faster, but wyverns are a lot more durable and with some
+    offensive power. Air Stability helps manage the durability issues of the pegasus,
+    allowing you to re-direct attacks like normal. The flight rules of you losing
+    altitude still apply though. Aerial Loop can also help with this. It can be used
+    if either you or your mount become the target and it affects both of you, useful
+    for avoiding AoE attacks. Aerial Crashdown is your main tool of attacking the
+    backline, moving you to the target and allowing your mount to make a heavy attack
+    for just 2 AP. Be careful of getting stuck on the ground against melee enemies
+    however, as you can''t canter of your mounts attack. If you don''t want to commit
+    to an engagement, you can use Flyby attack. This, like Aerial Crashdown, also
+    works with Trample, though getting trample value is harder with a flying mount.
+    Your Secret Art: Mythical Awakening varies based on the type of flying mount you
+    use. The pegasus one can be used both offensively to just deal damage, but also
+    defensively if you''re scared of being forced to the ground by arrows. You can
+    just bellorophon to attack and move low enough that you won''t get shot down.
+    The wyvern''s reginliev is best used on the same elevation as the enemy, as it
+    will be hard to hit many targets with the line attack otherwise.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: air_stability
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: aerial_crashdown
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend in Athletics, Animal Husbandry,
+        Riding, Flight, Intimidation, Perception or Common Knowledge. You can exchange
+        any skill point for 2 expertise points, but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: aerial_loop
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness, Awareness or Presence.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: flyby_attack
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      description: You gain +1 to Focus or Power
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_mythical_awakening
+  ability_references:
+  - id: air_stability
+    name: Air Stability
+    type: key_ability
+  - id: aerial_crashdown
+    name: Aerial Crashdown
+    type: ability
+  - id: aerial_loop
+    name: Aerial Loop
+    type: ability
+  - id: flyby_attack
+    name: Flyby Attack
+    type: ability
+  - id: secret_art_mythical_awakening
+    name: 'Secret Art: Mythical Awakening'
+    type: ability

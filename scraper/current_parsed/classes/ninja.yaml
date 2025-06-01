@@ -1,0 +1,87 @@
+class:
+  id: ninja
+  name: Ninja
+  tier: 2
+  difficulty: 3
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/5da29e42-dbe5-4d49-b26a-5172dc26718a-ninja.sm.webp
+  description: Kiraran rogues who use a mix of physical prowess and magical arts to
+    slay their enemies in the darkness.
+  requirements:
+  - Rogue mastered.
+  guide: The ninja is a slippery ranged class that uses throwing weapons. Their first
+    ranged option is the Kibaku Fuda Shuriken. It's a fairly AP efficient attack,
+    even if used against just a single target, but it is of course ideally tossed
+    into a group of enemies. The Kage Shuriken no Jutsu is used against single targets.
+    Unless they target chooses to block the first one, you are guaranteed that at
+    least one of the attacks hits, making it good against dodgy targets. A lot of
+    power of the ninja comes from their Bunshin Tai no Jutsu. It creates a copy that
+    shares everything with the original body. It can be used in many different ways.
+    For example, you can use the body double to threaten enemy ranged attackers. You
+    don't need to worry about overextending too much. If the enemy decides to retreat
+    and collapse on you, you can simply dismiss the copy and escape from harm. You
+    can also use it to flank enemies and hit them from where cover won't protect them.
+    The important here to keep in mind that is that you are never overextended with
+    a clone. If you feel you are in danger, simply dismiss it. Another powerful defensive
+    tool Ninjas have is Kawarimi no Jutsu. The RP cost is higher than normal, but
+    it protects even against sure hit attacks and because you can hide and move, you
+    are also safe from any future follow up attacks.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: ninja_style
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: kibaku_fuda_shuriken
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend in Acrobatics, Stealth, Deception,
+        Roguecraft, Perception, Insight, Negotiation, Intimidation, Common Knowledge
+        or a relevant Expert Knowledge skill (By DM approval). You can exchange any
+        skill point for 2 expertise points, but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: kawarimi_no_jutsu
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 Cunning.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: bunshin_tai_no_jutsu
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Focus
+      - Agility
+      description: You gain +1 Focus or Agility.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: kage_shuriken_no_jutsu
+  ability_references:
+  - id: ninja_style
+    name: Ninja Style
+    type: key_ability
+  - id: kibaku_fuda_shuriken
+    name: Kibaku Fuda Shuriken
+    type: ability
+  - id: kawarimi_no_jutsu
+    name: Kawarimi no Jutsu
+    type: ability
+  - id: bunshin_tai_no_jutsu
+    name: Bunshin Tai no Jutsu
+    type: ability
+  - id: kage_shuriken_no_jutsu
+    name: Kage Shuriken no Jutsu
+    type: ability

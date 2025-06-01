@@ -1,0 +1,69 @@
+class:
+  id: spell_blademaster
+  name: Spell Blademaster
+  tier: 3
+  difficulty: 2
+  main_role: Striker
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/5e2d5055-b3d4-4cbd-b53c-908c31a46b70-Spell_Blademaster_raw.sm.webp
+  description: Spellblades that have mastered their art.
+  requirements:
+  - Spellblade mastered.
+  guide: '-'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: draw_elements_ii
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: spellblades_preparation
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points in Athletics, Acrobatics, Intimidation,
+        Magic, History, Flight, Artifice, Common Knowledge or a relevant Expert Knowledge
+        Skill (DM Approval).  You can exchange any skill point for 2 expertise points,
+        but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: elemental_sweep
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 Fitness or Reason.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: double_elements
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Focus
+      description: You gain +1 Focus.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_spectrum_blade
+  ability_references:
+  - id: draw_elements_ii
+    name: Draw Elements II
+    type: key_ability
+  - id: spellblades_preparation
+    name: Spellblade's Preparation
+    type: ability
+  - id: elemental_sweep
+    name: Elemental Sweep
+    type: ability
+  - id: double_elements
+    name: Double Elements
+    type: ability
+  - id: secret_art_spectrum_blade
+    name: 'Secret Art: Spectrum Blade'
+    type: ability

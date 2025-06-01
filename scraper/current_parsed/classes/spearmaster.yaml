@@ -1,0 +1,84 @@
+class:
+  id: spearmaster
+  name: Spearmaster
+  tier: 3
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Controller
+  image_url: https://cdn.angelssword.com/ttrpg/assets/540ced99-01ef-4236-b0d5-e29b7496973a-Spearmaster_Lamia_raw.sm.webp
+  description: An expert spear fighter.
+  requirements:
+  - Lancer mastered.
+  guide: The spearmaster combines the damage dealing capabilities of the lancer and
+    improves on them, adding some controlling power to the mix. Versatile range allows
+    you to manipulate your own threatened range. This is useful in spread out melee
+    fights where enemies may have too much freedom to move away from you otherwise.
+    Draw-In can either be used as a tool to help position enemies for your allies
+    or it can be combined with Lunge to draw an enemy far away into the range of your
+    polearm. Spear Charge is effectively an upgraded version of the basic Charge that
+    the fighter class has. It gives you a small damage bonus, but you are limited
+    to a single attack even if you spend 4 AP. You can also combine it with Wild Thrusts.
+    Wild Thrusts is an AoE attack that leads into a zone denial. The box it strikes
+    in is fairly small, so it is most powerful in tight spaces. It disables your other
+    attacks of opportunity, but you may cancel it when an enemy is about to provoke
+    to attack them. The secret art Gae Bolg is a fairly simple move. With a relatively
+    low cost for a secret art, it's a guaranteed hit with a heavy attack unless fate
+    decides otherwise. It doesn't add any extra damage, so against Block type defenders
+    it may not be worth the mana cost.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: versatile_range
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: draw_in
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend on Acrobatics, Athletics, Riding,
+        Intimidation, Perception or Common Knowledge. You can exchange any skill point
+        for 2 expertise points, but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: wild_thrusts
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: spear_charge
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      description: You gain +1 to Focus or Power.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_gae_bolg
+  ability_references:
+  - id: versatile_range
+    name: Versatile Range
+    type: key_ability
+  - id: draw_in
+    name: Draw-In
+    type: ability
+  - id: wild_thrusts
+    name: Wild Thrusts
+    type: ability
+  - id: spear_charge
+    name: Spear Charge
+    type: ability
+  - id: secret_art_gae_bolg
+    name: 'Secret Art: Gae Bolg'
+    type: ability

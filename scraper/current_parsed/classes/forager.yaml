@@ -1,0 +1,101 @@
+class:
+  id: forager
+  name: Forager
+  tier: 1
+  difficulty: 2
+  main_role: Gatherer
+  secondary_role: Utility
+  image_url: https://cdn.angelssword.com/ttrpg/assets/3afb7d03-ea1f-43fd-84b1-b5755aab95c7-Forager_New_-_Copy.sm.webp
+  description: 'From the lively activity of the deep forest to the serene stillness
+    of the snowy tundra, a Forager was most at home wandering places no one has traveled
+    through in decades (if ever). To take only what was needed, to preserve the beauty
+    of what was; that was the motto of many Foragers. An ideal that caused natural
+    tension between Foragers and Farmers but even the most steadfast Forager would
+    admit that their ways wouldn’t be able to support the growing population of Lyr.
+    A true Forager could be recognized by their unique gathering tool: giant scissors.
+    Named so due to their general construction of two handles with paired blades connected
+    to a pivot point, the giant scissors were reinforced survival multi-tools. Designed
+    for the specific needs of each Forager, the scissors often had blades large enough
+    to cut a tree in half (or a man) and most came with sharpened tips that could
+    be used like a spear when the tool was closed. Serrated or sharpened outer edges
+    could allow for sawing and chopping wood, while the handles would sometimes have
+    hooks to aid in pulling things down into easy reach. A difficult tool to master
+    just for harvesting, those Foragers that trained to fight with them were unpredictable
+    dervishes that utilized their unconventional weapon’s quirks to their advantage.
+    With a deep connection to the natural world around them and experience born from
+    time in the wilderness, Foragers were never truly in danger of running out of
+    even the most basic of supplies. Be it food and water or torches, ropes, and even
+    shelters, a Forager could often find or fashion some manner of natural replacement.
+    With a sharp eye for details honed by spotting tiny gatherable herbs and mushrooms
+    (and identifying their properties at a glance), their versatility in supplies,
+    and even their strange combat style, any adventure or expedition would do well
+    to consider bringing a Forager along.'
+  requirements: []
+  guide: The forager is a gatherer and utility class. Their primary use in combat
+    is to use Lifebeat Sense to gather information on the HP status of enemies, as
+    well as making them easier to be critically hit. This does cost mana, so be careful
+    about overusing this. Their second combat ability is vivisect, which is an instakill
+    ability with severeal requirements to it. While it may look hard to use because
+    of that, in practice you can get this off pretty reliably. Simply use Lifebeat
+    Sense on a grunt you know is RP exhausted, and you can immediately Vivisect them
+    after. The combo isn't cheap action or mana wise, but it cannot miss which is
+    nice. For gathering, you have Verdant Instinct and Divining Petalfall. These are
+    best used together. An early Verdant Instinct can give you the information you
+    need, then you can replace one with a 5 if needed which allows you to guarantee
+    a Divining Petalfall for Lucky Points.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: foragers_path
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: verdant_instinct
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend on Foraging.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: lifebeat_sense
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness, Reason or Awareness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: divining_petalfall
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Focus
+      - Agility
+      - Toughness
+      description: You gain +1 to Focus, Toughness or Agility.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: vivisect
+  ability_references:
+  - id: foragers_path
+    name: Forager's Path
+    type: key_ability
+  - id: verdant_instinct
+    name: Verdant Instinct
+    type: ability
+  - id: lifebeat_sense
+    name: Lifebeat Sense
+    type: ability
+  - id: divining_petalfall
+    name: Divining Petalfall
+    type: ability
+  - id: vivisect
+    name: Vivisect
+    type: ability

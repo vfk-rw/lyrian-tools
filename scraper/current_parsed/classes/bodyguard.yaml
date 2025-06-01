@@ -1,0 +1,85 @@
+class:
+  id: bodyguard
+  name: Bodyguard
+  tier: 2
+  difficulty: 2
+  main_role: Defender
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/885ca336-701e-4ba7-9439-458eb1abb74f-bodyguard.sm.webp
+  description: Bodyguards specialize in protecting a single person.
+  requirements:
+  - Fighter mastered.
+  guide: The bodyguard is focused around protecting a single target. You can choose
+    who this target is with VIP Protection. They are well-suited to escort and protection
+    missions, but even in normal ones they synergize well with squishy melee allies.
+    Since they automatically get hit and can't react when using the redirect part
+    of VIP Protection, having high Toughness and wearing armor is recommended. With
+    Temporary Protection, the bodyguard can pay a heavy mana cost to protect another
+    ally. It should only be used in emergencies, but using it on a low health ally
+    can keep them in the fight without them having to play super defensive. Shelter
+    is a more limited, but powerful version of the re-direct of the key ability. Heavy
+    Attacks will do a lot of damage if you take them without reacting, so Shelter
+    is best saved for those attacks. At your side helps you with positioning. It can
+    save your VIP target when they do something stupid or if they get forcefully moved,
+    but it can also be used offensively to teleport next to them when they charge
+    ahead. Vengeance is a cheaper heavy attack that can be used if your VIP target
+    was attacked. If the condition is met, there's rarely a reason not to use it.
+    It becomes even more powerful if your VIP target is below 0 HP, though you obviously
+    do not want that situation to happen to begin with.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: vip_protection
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: shelter
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend in Athletics, Riding, Intimidation,
+        Perception, Common Knowledge or a relevant Expert Knowledge skill (By DM approval).
+        You can exchange any skill point for 2 expertise points, but must spend them
+        in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: temporary_protection
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 Fitness or Awareness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: vengeance
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Toughness
+      description: You gain +1 Toughness.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: at_your_side
+  ability_references:
+  - id: vip_protection
+    name: VIP Protection
+    type: key_ability
+  - id: shelter
+    name: Shelter
+    type: ability
+  - id: temporary_protection
+    name: Temporary Protection
+    type: ability
+  - id: vengeance
+    name: Vengeance
+    type: ability
+  - id: at_your_side
+    name: At your side
+    type: ability

@@ -1,0 +1,80 @@
+class:
+  id: saboteur
+  name: Saboteur
+  tier: 2
+  difficulty: 2
+  main_role: Support
+  secondary_role: Utility
+  image_url: https://cdn.angelssword.com/ttrpg/assets/4ec3a44e-eac1-4679-8836-1428cf92dd98-Saboteur_v3.sm.webp
+  description: Rogues that create opportunities for their teammates, breaking through
+    and creating their own entrances while hindering the enemy.
+  requirements:
+  - Rogue mastered.
+  guide: Saboteurs combine scouting tools with some gadgets and explosives they can
+    use in combat. Presence Concealment protects you from certain magical tracking
+    tools. Scouting Ahead is useful when sneakily trying to move through a dungeon
+    or other dangerous place, allowing your group to move stealthily even when not
+    everyone in the group has put points into stealth. Chemical Explosive is a bomb
+    that can be used to blow up many different things. Blowing a hole through a wall,
+    or just blowing up a house straight up are both possible. You can only use it
+    once per arc, so you do need to put in a bit of thought before committing to it.
+    It can deal a lot of damage if it hits a person, but the detonation time is too
+    long for it to see use in combat. Flash Bomb is effectively a free flashbang flask
+    that allows a save. Daze is pretty powerful when you can inflict it on multiple
+    people, tossing a flash bomb every turn can be worth it, even against just a single
+    enemy. Wire Sweep is another potentially powerful CC tool. Because it is a save
+    instead of an attack, enemies with low toughness may find it hard to defend against.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: saboteur
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: flash_bomb
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill in Stealth or Stealth Expertise
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: scouting_ahead
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Awareness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: wire_sweep
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Agility
+      description: You gain +1 Agility.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: chemical_explosive
+  ability_references:
+  - id: saboteur
+    name: Saboteur
+    type: key_ability
+  - id: flash_bomb
+    name: Flash Bomb
+    type: ability
+  - id: scouting_ahead
+    name: Scouting Ahead
+    type: ability
+  - id: wire_sweep
+    name: Wire Sweep
+    type: ability
+  - id: chemical_explosive
+    name: Chemical Explosive
+    type: ability

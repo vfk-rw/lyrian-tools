@@ -320,8 +320,8 @@ def main():
     parser.add_argument('--format', choices=['yaml', 'json'], default='yaml', help='Output format')
     args = parser.parse_args()
     
-    parser = ClassParser()
-    parser.parse_directory(args.input_dir, args.output_dir, output_format=args.format)
+    parser = ClassParser(output_dir=args.output_dir)
+    parser.parse_directory(args.input_dir, output_format=args.format)
 
 
 if __name__ == "__main__":

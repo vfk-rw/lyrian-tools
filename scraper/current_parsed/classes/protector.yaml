@@ -1,0 +1,87 @@
+class:
+  id: protector
+  name: Protector
+  tier: 3
+  difficulty: 2
+  main_role: Defender
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/85486e44-7060-48d9-a098-9a52b582c062-protector.sm.webp
+  description: Heavily armored warriors with large shields that protect their allies.
+  requirements:
+  - Guardian mastered.
+  guide: 'The protector gains access to greatshield to help in their tanking. Like
+    heavy armor, equipping a greatshield may be overkill on the defensive front. However,
+    it comes with the benefit of letting your allies use you as cover, so greatshield
+    + medium armor is better than normal shield + heavy armor if you have to choose
+    between them. With no getting past!, ignoring the protector''s attacks of opportunities
+    is basically impossible. It has sure hit and applies a slow at the minimum, so
+    unless the target has high block there''s little chance they can move at full
+    speed away from a protector. The option to use a heavy attack exists as well.
+    While a sure hit heavy attack is normally really strong, due to your heavy armor
+    you probably do not have the RP to spare on it. Provoke II is a fire and forget
+    challenge ability that keeps an enemy taunted for the entire fight. You don''t
+    want to keep switching this around since the AP cost is too high for it, so just
+    put it on the most dangerous enemy and leave it there. Bullet Magnet is a tool
+    for protecting your allies from ranged attacks. You have to use it on your turn,
+    so you have to be aware of when enemy archers are in position to shoot your allies.
+    It is a great ability to help win ranged battles, especially if you can find low
+    or even high cover to hide behind. The Secret Art: Shield Wall is effectively
+    a party wide invulnerability against a single ability. The mana cost is very high,
+    but this can save everyone''s life when used against a powerful AoE attack.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: greatshield_master
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: no_getting_past
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend in Athletics, Riding, Intimidation,
+        Perception, Common Knowledge or a relevant Expert Knowledge skill (By DM approval).
+        You can exchange any skill point for 2 expertise points, but must spend them
+        in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: provoke_ii
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 Fitness, Awareness or Presence.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: bullet_magnet
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Toughness
+      description: You gain +1 Toughness.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_shield_wall
+  ability_references:
+  - id: greatshield_master
+    name: Greatshield Master
+    type: key_ability
+  - id: no_getting_past
+    name: No getting past!
+    type: ability
+  - id: provoke_ii
+    name: Provoke II
+    type: ability
+  - id: bullet_magnet
+    name: Bullet Magnet
+    type: ability
+  - id: secret_art_shield_wall
+    name: 'Secret Art: Shield Wall'
+    type: ability

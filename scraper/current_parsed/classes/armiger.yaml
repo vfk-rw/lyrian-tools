@@ -1,0 +1,110 @@
+class:
+  id: armiger
+  name: Armiger
+  tier: 2
+  difficulty: 3
+  main_role: Utility
+  secondary_role: null
+  image_url: https://cdn.angelssword.com/ttrpg/assets/c3544fc3-9c01-425e-b3d6-7045eb1c702e-Weapon_Change_Class_2_raw.sm.webp
+  description: Armigers are those who follow a lesser-known path of the Wandering
+    Witch, Chroma-Daria Lichtvog—a discipline cloaked in the folds of space rather
+    than time. They are said to draw upon hidden realms between the mortal world and
+    the heavens, forging tiny pockets of reality where their relics lie waiting. While
+    others try to replicate this inter-dimensional craft through mere artificing,
+    the mimicry cannot begin to understand the true nature of the world beyond the
+    veil. Stories speak of Armigers phantom thieves, making valuables disappear in
+    the blink of an eye with sleight of hand. But in reality they carve out their
+    vault in the emptiness between planes, shaping that space with will and technique.
+    To the untrained eye, an Armiger seems to summon weapons out of thin air—one moment,
+    their hands are empty; the next, they brandish whatever blade suits the situation.
+    Scholars debate whether these conjurations come from raw sorcery or from the Witch’s
+    ancient teachings, locked away in scrolls that vanish just as quickly as the vaults
+    themselves. Facing an Armiger in combat can be jarring, for they never truly run
+    out of options. One weapon broken, another materializes. An opponent thinks them
+    cornered—yet the Armiger draws forth an entire arsenal from nowhere, their weapons
+    gleaming in starlight and swirling dust. In a single, fluid motion, they swap
+    armaments as easily as drawing a breath. An attack with a mace to break armor
+    could suddenly become the pointed tip of a spear—a confusing dance that keeps
+    opponents constantly on the defensive. The best among them often walk unarmed
+    with a calm confidence, knowing that whatever threat appears, they carry an arsenal
+    in the blink of an eye. And though some see the Armigers’ ability as merely convenient,
+    rumors persist of deeper secrets hidden in those dimensional pockets. For Armigers,
+    it’s not just about storing trinkets—it’s about understanding the distance between
+    worlds, that tenuous thread of reality and emptiness. No Armiger is ever truly
+    disarmed—and perhaps thats what makes them fearsome.
+  requirements:
+  - Any class mastered.
+  guide: An armiger's primary strength in combat lies in their versatility through
+    the items stored in their Dimensional Armory. As such, the most difficult part
+    of being an Armiger comes before the battle starts in how you fill it up. The
+    dimensional armory gives a lot of extra burden you can work with, allowing you
+    to retrieve them quickly through Fast Dimensional Equip. This does cost either
+    mana or RP, both valuable combat resources. Using it with RP allows you to change
+    the weapon midattack, giving you options such as changing to a different damage
+    type or swapping to a katana for the extra crit. The 0 AP swap can also be helpful
+    in letting you alternate between melee and ranged combat without losing any AP.
+    With Full Dimensional Equip, you can change your armor easily alongside your weapon.
+    This gives an Armiger an unusual advantage in being able to swap their armor to
+    fit the situation, where normal people are stuck with their choice even if it's
+    less optimal. Armiger's out of combat utility comes from Send To Armory. The armory
+    can hold any sort of item, allowing you to steal or hide things with no risk of
+    what you took ever being found. It has little use in combat, though if an enemy
+    ever drops a weapon to switch to a different one, you can ensure they can't pick
+    it back up.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: dimensional_armory
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: send_to_armory
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend on Artifice, Magic, Stealth,
+        Athletics or Art.  You can exchange any skill point for 2 expertise points
+        but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: fast_dimensional_equip
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness, Cunning, Reason, Awareness or Presence.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: dimensional_armory_expansion
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Agility
+      - Toughness
+      description: You gain +1 to Agility or Toughness.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: full_dimensional_equip
+  ability_references:
+  - id: dimensional_armory
+    name: Dimensional Armory
+    type: key_ability
+  - id: send_to_armory
+    name: Send To Armory
+    type: ability
+  - id: fast_dimensional_equip
+    name: Fast Dimensional Equip
+    type: ability
+  - id: dimensional_armory_expansion
+    name: Dimensional Armory Expansion
+    type: ability
+  - id: full_dimensional_equip
+    name: Full Dimensional Equip
+    type: ability

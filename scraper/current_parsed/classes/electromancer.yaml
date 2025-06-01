@@ -1,0 +1,90 @@
+class:
+  id: electromancer
+  name: Electromancer
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Controller
+  image_url: https://cdn.angelssword.com/ttrpg/assets/1bda8b53-7d9b-4f5b-81e7-350249c2de63-Electromaster_raw.sm.webp
+  description: Spellcasters that cast lightning spells.
+  requirements:
+  - Any class mastered or have Lightning element mastered.
+  guide: Electromancers excel in fighting against enemies in water. Their superconductor
+    ability applies two powerful keywords all lightning attacks for free. This applies
+    even to attacks made with channeling weapons, not just the Electromancer abilities.
+    Zap is an ability with a high chance to apply static. Static is the main debuff
+    of the electromancer and what gives them the controller status. It does not damage
+    the person who has it, but it forces them to position carefully to not hit their
+    allies with it. Your allies are immune to the effect, so you don't need to worry
+    about the enemies hitting them with your static. Static is most effective if combined
+    with roots, such as a netting flask or against enemies already engaged in melee
+    combat, where moving to an isolated spot becomes more difficult. Bolting is a
+    long range strike with a small benefit of potentially ignoring cover. The nature
+    of the attack means it cannot be used indoors however. When not using it as a
+    snipe attack, it's most useful for being a Heavy attack that also applies Static.
+    Forked Lightning is their only way to apply static without using mana. It requires
+    there to be two targets, but static is useless without at least two targets anyway.
+    The static value is lower than on the other attacks is lower to compensate for
+    this lack of mana cost. Chain Lightning can decimate entire groups, provided that
+    their RP has been burned beforehand and you don't get unlucky with rolls. Only
+    use it when at least two people have 0 RP or otherwise cannot react to your attack,
+    otherwise it's not worth the cost.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: superconductor
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: zap
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points in Medicine, Magic, Religion, History,
+        Flight, Artifice, Common Knowledge or a relevant Expert Knowledge Skill (DM
+        Approval). You can exchange any skill point for 2 expertise points, but must
+        spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: bolting
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 Reason.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: forked_lightning
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      - Agility
+      description: You gain +1 Focus, Power or Agility.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: chain_lightning
+  ability_references:
+  - id: superconductor
+    name: Superconductor
+    type: key_ability
+  - id: zap
+    name: Zap
+    type: ability
+  - id: bolting
+    name: Bolting
+    type: ability
+  - id: forked_lightning
+    name: Forked Lightning
+    type: ability
+  - id: chain_lightning
+    name: Chain Lightning
+    type: ability

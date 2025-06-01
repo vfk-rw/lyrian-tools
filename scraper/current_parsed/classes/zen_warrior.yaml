@@ -1,0 +1,88 @@
+class:
+  id: zen_warrior
+  name: Zen Warrior
+  tier: 3
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Defender
+  image_url: https://cdn.angelssword.com/ttrpg/assets/b1147ad8-bb1b-47e5-9f74-d2d33e19b84e-Zen_Warrior_raw.sm.webp
+  description: Zen Warriors are mobile monks with both offensive and defensive capabilities.
+  requirements:
+  - Monk mastered.
+  guide: 'The Zen Warrior follows up from the monk and gives them some much needed
+    mobility. Walking away from the Serene Water Stance will no longer instantly save
+    you. Ki Blast II gives you the option to use a Light or Precise attack. This is
+    useful when already in Serene Water stance, since you can follow it up with Flying
+    Kick. Flying Kick can be used immediately after a Ki Blast has hit and places
+    you next to the target. Because it then reduces the AP cost of Strike of Still
+    Water by 1, you can do a Precise Ki Blast→Flying Kick→Strike of Still Water combo.
+    Ki Burst is a damage increase that can be used after you''ve hit an enemy with
+    an attack. Mostly used for adding small points of damage when an enemy barely
+    survives. Redirected Force takes advantage of the high dodge you will have in
+    serene water stance. You can turn heavy attacks that miss you into attacks the
+    enemy must respond to, or may be completely unable to avoid even when reacting
+    to it. Secret Art: True Serenity is basically a guaranteed dodge for an entire
+    turn unless the enemy uses sure hit attacks. Due to the +17 bonus that applies
+    even when not dodging, even lock-on attacks will find it near impossible to hit
+    you. As a bonus, you also enter Serene Water Stance from it. Best used when you
+    about to take a lot of attacks in a single turn.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: rapid_blasts
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: flying_kick
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend in Acrobatics, Perception, Insight,
+        Medicine, Intimidation, Common Knowledge or a relevant Expert Knowledge skill
+        (By DM approval). You can exchange any skill point for 2 expertise points,
+        but must spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: ki_burst
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 Fitness or Awareness.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: redirected_force
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      - Agility
+      - Toughness
+      description: You gain +1 Focus, Power, Agility or Toughness.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_true_serenity
+  ability_references:
+  - id: rapid_blasts
+    name: Rapid Blasts
+    type: key_ability
+  - id: flying_kick
+    name: Flying Kick
+    type: ability
+  - id: ki_burst
+    name: Ki Burst
+    type: ability
+  - id: redirected_force
+    name: Redirected Force
+    type: ability
+  - id: secret_art_true_serenity
+    name: 'Secret Art: True Serenity'
+    type: ability

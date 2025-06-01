@@ -1,0 +1,83 @@
+class:
+  id: flame_sentinel
+  name: Flame Sentinel
+  tier: 2
+  difficulty: 2
+  main_role: Support
+  secondary_role: Controller
+  image_url: https://cdn.angelssword.com/ttrpg/assets/dc8461ae-d5fe-4235-ad63-d1a304089d1b-Inferno_Blessing_Technique_raw.sm.webp
+  description: A supportive fire magic user that can buff their allies and zone away
+    enemies.
+  requirements:
+  - Mage mastered or Fire mastery.
+  guide: Flame Sentinels support their allies primarily through offense. Flame Weapon
+    grants a small power boost to a weapon of an ally and lets them deal fire damage,
+    which may be important against some enemies. Controlled Blaze will not prevent
+    your allies from setting things on fire, so be careful when giving it out when
+    flameable material is around. Flame Shield allows you to do damage after an ally
+    takes damage. It costs 1 RP, but its fully unavoidable and full pierce damage.
+    If you hang out in the back and don't have much use for your RP, this can be an
+    excellent way to spend it. Flame Infusion is a situational ability. Against certain
+    enemies it's extremely powerful and against others, its a detriment. Flame Wall
+    is a strong zoning tool, able to cut off a large portion of a fight. You can also
+    use it as a damage tool, dropping it right on top of enemies to force them to
+    use an RP. If they choose not to do so, or if they have no more RP to spent, then
+    it is effectively a Sure Hit attack once their turn starts.
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: controlled_blaze
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: flame_infusion
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points in Medicine, Magic, Religion, History,
+        Flight, Artifice, Common Knowledge or a relevant Expert Knowledge Skill (DM
+        Approval). You can exchange any skill point for 2 expertise points, but must
+        spend them in these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: flame_shield
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 Reason.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: flame_weapon
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Toughness
+      description: You gain +1 Power or Toughness.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: flame_wall
+  ability_references:
+  - id: controlled_blaze
+    name: Controlled Blaze
+    type: key_ability
+  - id: flame_infusion
+    name: Flame Infusion
+    type: ability
+  - id: flame_shield
+    name: Flame Shield
+    type: ability
+  - id: flame_weapon
+    name: Flame Weapon
+    type: ability
+  - id: flame_wall
+    name: Flame Wall
+    type: ability

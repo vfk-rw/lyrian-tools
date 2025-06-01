@@ -1,0 +1,127 @@
+class:
+  id: nomad
+  name: Nomad
+  tier: 2
+  difficulty: 2
+  main_role: Striker
+  secondary_role: Support
+  image_url: https://cdn.angelssword.com/ttrpg/assets/e508ffce-deea-4990-99c0-8c1b080a13be-Nomad_-_Raw.sm.webp
+  description: 'It was difficult to pin down the origins of anything throughout history.
+    Plenty of ideas and methods were known to crop up simultaneously among completely
+    isolated groups by simple happenstance. However, it was largely accepted that
+    the idea of modern cavalry began with the arrival of nomadic human tribes from
+    the north east of Lyr. Masters of their stocky, resilient horses, they migrated
+    south west out of the tundra and steppe due to extremely harsh seasons and famine.
+    Forced to avoid the forests of Easter to the south and pushed away from the budding
+    kingdoms in Northi to the west, the nomadic humans settled in the lush plains
+    of Axia and Nuren. Their art of mounted archery gave them unparalleled hunting
+    abilities and made them maddeningly difficult to chase down, even from the fleet
+    footed catfolk and rabbitfolk. For a time, the Nomads roamed plains, breeding
+    ever stronger horses and leading a relatively simple life. They didn’t know that
+    their presence forced the kingdoms of Northi to push their influence west into
+    Susururu Forest, displacing wolf-folk and lamiafolk, and to the selkies of Houkaina
+    on the coast. But eventually, with nowhere to continue expanding aside from the
+    frigid north, Northi returned its attention to the plains. Utilizing enslaved
+    centaurs as mounts, the catfolk hoped to narrow the mobility gap and to be able
+    to finally hunt down the annoying humans. But without any static settlements and
+    their mastery of the plains, the Nomads were still able to control the pace of
+    any battles or hunts. Simultaneous to the more concentrated efforts from Northi,
+    humans from Westria began to treat with the nomadic tribes of the Nuren Plains.
+    They traded for horses, for trainers, and offered riches beyond the nomadic tribes’
+    wildest dreams for empty land. Northi wasn’t alone in dreaming of securing the
+    plains for their potential wealth of farmland, but the humans from the south recognized
+    that the Nomads had completely stalled chimeran expansion with their mastery of
+    horses and Westria had long been praying for something that would let them protect
+    themselves from the chimera and fae. Humans had a long history of domesticating
+    animals to help balance the strengths of their neighbors: dogs for hunting, oxen
+    for burden…the introduction of horses was simply another method to overcome their
+    weaknesses. With a combination of various deals with the nomads and utilizing
+    their own methods against them, Westria was finally able to push its borders to
+    the edge of the forest and the Nuren River. Their actions unfortunately displaced
+    or eradicated tribes of nomads that resisted the territorial grab. Some historians
+    believe that ancient, bad blood was one of the larger factors for the rise of
+    independent nations along Westria’s north eastern border. Many humans from the
+    plains regions could still claim ancestors from those nomadic tribes and while
+    there was no official animosity, some were convinced there was an overarching
+    reason they had carved out their independence from both Northi and Westria.'
+  requirements:
+  - Cavalier mastered.
+  guide: 'The nomad is a ranged cavalry class that can be nearly impossible to catch.
+    As a nomad, you excel in fights where you have a lot of space to run around it.
+    Your light cavalry key ability makes you able to fight at maximum potential even
+    in terrain that would normally be unfavorable for you, allowing you to keep your
+    full mobility. Hit & Run is an ability that can either be used with a melee or
+    ranged weapon. With a melee weapon, it does provoke an attack but it lets you
+    move away from the enemy while dealing damage. With a ranged weapon it allows
+    an essentialy free reposition and enables you to keep your distance from the enemy.
+    It also allows you to use Running Shot. Runing Shot is a 1 RP cost ability that
+    lets you make a Heavy attack. It does require you to move before you can use it,
+    but Nomad has several ways of doing that. The RP cost is normally a big risk for
+    a character to spend on offensive abilities, but as a nomad you have enough mobility
+    and range that you can afford to spend some of it on doing more damage. Trailblazer
+    is an utility ability that helps your allies get across difficult terrain. It
+    can also be used to help them get into the fray faster, though it does cost them
+    some RP. Your Secret Art: Chase the Horizon is the ultimate kiting tool against
+    a single enemy. It has a steep mana cost for the duration, but it ensures the
+    target you pick cannot catch you while its active and you can punish them if they
+    do move. It''s best used when kiting a boss or when a melee enemy is far away
+    from anything to attack. If they are forced to spend 4 AP on movement to do anything,
+    then you get 4 attacks which is not bad for the cost.'
+  progression:
+  - level: 1
+    benefits:
+    - type: ability
+      ability_id: light_cavalry
+  - level: 2
+    benefits:
+    - type: ability
+      ability_id: hit_run
+  - level: 3
+    benefits:
+    - type: skills
+      points: 5
+      description: You gain +5 skill points to spend in Athletics, Animal Husbandry,
+        Riding, Flight, Intimidation, Perception, Insight or Common Knowledge. You
+        can exchange any skill point for 2 expertise points, but must spend them in
+        these skills.
+  - level: 4
+    benefits:
+    - type: ability
+      ability_id: running_shot
+  - level: 5
+    benefits:
+    - type: attribute
+      attribute: heart
+      description: You gain +1 to Fitness, Awareness or Presence.
+  - level: 6
+    benefits:
+    - type: ability
+      ability_id: trailblazer
+  - level: 7
+    benefits:
+    - type: attribute_choice
+      choose: 1
+      options:
+      - Power
+      - Focus
+      description: You gain +1 to Focus or Power.
+  - level: 8
+    benefits:
+    - type: ability
+      ability_id: secret_art_chase_the_horizon
+  ability_references:
+  - id: light_cavalry
+    name: Light Cavalry
+    type: key_ability
+  - id: hit_run
+    name: Hit & Run
+    type: ability
+  - id: running_shot
+    name: Running Shot
+    type: ability
+  - id: trailblazer
+    name: Trailblazer
+    type: ability
+  - id: secret_art_chase_the_horizon
+    name: 'Secret Art: Chase the Horizon'
+    type: ability
