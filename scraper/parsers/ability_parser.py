@@ -21,8 +21,9 @@ logger = logging.getLogger(__name__)
 class AbilityParser(BaseParser):
     """Parser for ability HTML files"""
     
-    def __init__(self, version: str = "latest", output_base_dir: str = "parsed_data"):
-        self.data_type = "abilities"
+    def __init__(self, version: str = "latest", output_base_dir: str = "parsed_data", monster: bool = False):
+        self.monster = monster
+        self.data_type = "monster-abilities" if monster else "abilities"
         super().__init__(output_base_dir, version)
     
     def get_data_type(self) -> str:
@@ -99,29 +100,44 @@ class AbilityParser(BaseParser):
         logger.debug(f"Parsing ability: {ability_name}")
         
         # Check for ability type components
-        true_ability = panel.select_one('app-true-ability')
-        key_ability = panel.select_one('app-key-ability')
-        
-        # Determine base ability type
-        if key_ability:
-            ability_type = 'key_ability'
-            ability_data = self._parse_key_ability(key_ability, ability_name)
-        elif true_ability:
-            ability_type = 'true_ability'
-            ability_data = self._parse_true_ability(true_ability, ability_name)
+        if self.monster:
+            monster_ability = panel.select_one('app-monster-ability')
+            monster_active_action = panel.select_one('app-monster-active-action')
+            
+            if monster_ability:
+                ability_type = 'monster_ability'
+                ability_data = self._parse_monster_ability(monster_ability, ability_name)
+            elif monster_active_action:
+                ability_type = 'monster_active_action'
+                ability_data = self._parse_monster_active_action(monster_active_action, ability_name)
+            else:
+                logger.warning(f"Unknown monster ability type for: {ability_name}")
+                return None
         else:
-            logger.warning(f"Unknown ability type for: {ability_name}")
-            return None
+            true_ability = panel.select_one('app-true-ability')
+            key_ability = panel.select_one('app-key-ability')
+            
+            # Determine base ability type
+            if key_ability:
+                ability_type = 'key_ability'
+                ability_data = self._parse_key_ability(key_ability, ability_name)
+            elif true_ability:
+                ability_type = 'true_ability'
+                ability_data = self._parse_true_ability(true_ability, ability_name)
+            else:
+                logger.warning(f"Unknown ability type for: {ability_name}")
+                return None
         
         if not ability_data:
             return None
         
-        # Check for specialized ability types that override the base type
-        if self._should_parse_as_crafting(ability_data):
-            return self._parse_crafting_abilities(ability_data)
-        elif self._should_parse_as_gathering(ability_data):
-            ability_data['type'] = 'gathering_ability'
-            self._parse_gathering_specifics(ability_data)
+        # Check for specialized ability types that override the base type (only for regular abilities)
+        if not self.monster:
+            if self._should_parse_as_crafting(ability_data):
+                return self._parse_crafting_abilities(ability_data)
+            elif self._should_parse_as_gathering(ability_data):
+                ability_data['type'] = 'gathering_ability'
+                self._parse_gathering_specifics(ability_data)
         
         return ability_data
     
@@ -223,6 +239,67 @@ class AbilityParser(BaseParser):
         description = self._extract_description_from_key_ability(key_ability)
         if description:
             ability_data['description'] = description
+        
+        return ability_data
+    
+    def _parse_monster_ability(self, monster_ability: BeautifulSoup, ability_name: str) -> Optional[Dict[str, Any]]:
+        """Parse app-monster-ability content"""
+        ability_data = {
+            'id': self._normalize_ability_id(ability_name),
+            'name': ability_name,
+            'type': 'monster_ability'
+        }
+        
+        # Extract description from the linkify div
+        description_elem = monster_ability.select_one('div[linkify]')
+        if description_elem:
+            ability_data['description'] = self._extract_description(description_elem)
+        else:
+            logger.warning(f"No description found for monster ability: {ability_name}")
+            ability_data['description'] = ""
+        
+        return ability_data
+    
+    def _parse_monster_active_action(self, monster_active_action: BeautifulSoup, ability_name: str) -> Optional[Dict[str, Any]]:
+        """Parse app-monster-active-action content"""
+        ability_data = {
+            'id': self._normalize_ability_id(ability_name),
+            'name': ability_name,
+            'type': 'monster_active_action',
+            'keywords': []
+        }
+        
+        # Extract information from mat-card content (similar to true abilities)
+        content_area = monster_active_action.select_one('.mat-mdc-card-content')
+        if not content_area:
+            logger.warning(f"No card content found for monster active action: {ability_name}")
+            return ability_data
+        
+        # Process each list item in the content
+        for li in content_area.select('li.d-flex'):
+            title_div = li.select_one('.title.fs-6')
+            value_div = li.select_one('.flex-fill.fs-6')
+            
+            if not title_div or not value_div:
+                continue
+            
+            title = title_div.get_text(strip=True)
+            
+            if title == 'Keywords':
+                ability_data['keywords'] = extract_keywords(value_div)
+            elif title == 'Range':
+                ability_data['range'] = self._extract_text_value(value_div)
+            elif title == 'Description':
+                ability_data['description'] = self._extract_description(value_div)
+            elif title == 'Requirement':
+                req_text = self._extract_text_value(value_div)
+                if req_text:
+                    ability_data['requirements'] = [req_text]
+            elif title == 'AP Cost':
+                cost_text = value_div.get_text(strip=True)
+                if 'costs' not in ability_data:
+                    ability_data['costs'] = {}
+                ability_data['costs']['ap'] = cost_text
         
         return ability_data
     
@@ -562,6 +639,7 @@ def main():
     parser.add_argument("html_dir", help="Directory containing HTML files")
     parser.add_argument("--version", default="latest", help="Game version")
     parser.add_argument("--output-dir", default="parsed_data", help="Output directory")
+    parser.add_argument("--monster", action="store_true", help="Parse monster abilities instead of regular abilities")
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     
     args = parser.parse_args()
@@ -574,7 +652,7 @@ def main():
     )
     
     # Create parser
-    ability_parser = AbilityParser(version=args.version, output_base_dir=args.output_dir)
+    ability_parser = AbilityParser(version=args.version, output_base_dir=args.output_dir, monster=args.monster)
     
     # Parse directory
     html_dir = Path(args.html_dir)
@@ -585,7 +663,8 @@ def main():
     # Parse all HTML files in directory
     results = ability_parser.parse_directory(html_dir)
     
-    logger.info(f"Parsing complete: {len(results)} abilities processed")
+    ability_type = "monster abilities" if args.monster else "abilities"
+    logger.info(f"Parsing complete: {len(results)} {ability_type} processed")
 
 
 if __name__ == "__main__":

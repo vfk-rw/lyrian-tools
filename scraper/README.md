@@ -58,6 +58,7 @@ scraped_html/           # Raw HTML from fetchers
 ├── 0.10.1/
 │   ├── classes/
 │   ├── abilities/
+│   ├── monster-abilities/
 │   ├── races/
 │   ├── items/
 │   ├── keywords/
@@ -68,6 +69,7 @@ parsed_data/            # Structured YAML/JSON from parsers
 ├── 0.10.1/
 │   ├── classes/
 │   ├── abilities/
+│   ├── monster-abilities/  # 252 monster abilities with index
 │   ├── races/
 │   │   ├── primary/    # 5 primary races
 │   │   ├── sub/        # 30 sub-races
@@ -109,6 +111,15 @@ python -m fetchers.ability_fetcher --version latest
 
 # Parse ability HTML to YAML (handles all 4 ability types)
 python -m parsers.ability_parser scraped_html/0.10.1/abilities --version 0.10.1
+```
+
+#### Monster Abilities
+```bash
+# Fetch monster ability HTML (both Abilties and Active Actions tabs)
+python -m fetchers.ability_fetcher --monster --version latest
+
+# Parse monster ability HTML to YAML
+python -m parsers.ability_parser scraped_html/0.10.1/monster-abilities --version 0.10.1 --monster
 ```
 
 #### Races
@@ -259,6 +270,25 @@ Features:
 - Race/class/level requirement detection
 - Individual YAML files per breakthrough
 - Comprehensive index with cost summary and requirement statistics
+
+### Monster Abilities Scraper Details
+
+The monster abilities scraper extends the existing ability scraper to handle monster-specific abilities:
+
+- **Total Monster Abilities** (252) - All monster passive abilities and active actions
+- **Two-Tab Design** - "Abilties" (passive) and "Active Actions" (active) tabs
+- **Two Ability Types**: 
+  - **monster_ability** (116) - Simple passive abilities with descriptions only
+  - **monster_active_action** (136) - Complex active abilities with keywords, costs, requirements
+
+Features:
+- Reuses existing ability fetcher/parser architecture with `--monster` flag
+- Tab navigation between passive abilities and active actions
+- Handles two distinct component types (`app-monster-ability` vs `app-monster-active-action`)
+- Structured data extraction for active actions (keywords, range, AP costs, requirements)
+- Simple description extraction for passive abilities
+- Individual YAML files per ability with comprehensive index
+- Type-aware parsing that maintains data consistency
 
 ## Data Quality Improvements
 

@@ -256,7 +256,7 @@ The scraper is being refactored to support multiple data types with a clean sepa
 - **Keywords** ✅ (completed - 57 keywords with automatic type categorization)
 - **Breakthroughs** ✅ (completed - 68 breakthroughs with cost/requirement parsing)
 - **Monsters** 📋 (planned)
-- **Monster Abilities** 📋 (planned)
+- **Monster Abilities** ✅ (completed - 252 abilities: 116 passive, 136 active actions)
 
 ### Common Patterns
 
@@ -330,6 +330,18 @@ fetcher.fetch_all()  # Expands all breakthrough panels
 # Parse breakthroughs with cost/requirement extraction
 parser = BreakthroughParser(version="0.10.1")
 results = parser.parse_and_save_all()  # Creates individual breakthrough files
+
+# Monster Abilities (Completed)
+from fetchers.ability_fetcher import AbilityFetcher
+from parsers.ability_parser import AbilityParser
+
+# Fetch monster abilities from two-tab interface
+fetcher = AbilityFetcher(version="latest", monster=True)
+fetcher.fetch_all()  # Handles "Abilties" and "Active Actions" tabs
+
+# Parse monster abilities with two distinct types
+parser = AbilityParser(version="0.10.1", monster=True)
+results = parser.parse_directory("scraped_html/0.10.1/monster-abilities")
 ```
 
 ## Ability Scraper Implementation ✅ COMPLETED

@@ -19,14 +19,16 @@ logger = logging.getLogger(__name__)
 class AbilityFetcher(BaseFetcher):
     """Fetches ability data from the Lyrian Chronicles website."""
     
-    def __init__(self, version: str = "latest", output_base_dir: str = "scraped_html"):
+    def __init__(self, version: str = "latest", output_base_dir: str = "scraped_html", monster: bool = False):
         """Initialize the ability fetcher.
         
         Args:
             version: The game version to fetch (e.g., "latest", "0.10.1")
             output_base_dir: Base directory for output (defaults to "scraped_html")
+            monster: If True, fetch monster abilities instead of regular abilities
         """
-        self.data_type = "abilities"
+        self.monster = monster
+        self.data_type = "monster-abilities" if monster else "abilities"
         self.output_base_dir = output_base_dir
         super().__init__(version=version, output_base_dir=output_base_dir)
     
@@ -36,7 +38,10 @@ class AbilityFetcher(BaseFetcher):
     
     def get_list_url(self) -> str:
         """Get the URL for the abilities page."""
-        return f"{self.base_url}/abilities"
+        if self.monster:
+            return f"{self.base_url}/monster-abilities"
+        else:
+            return f"{self.base_url}/abilities"
     
     def extract_list_items(self, soup: BeautifulSoup) -> List[Dict[str, Any]]:
         """Extract ability tabs from the abilities page.
@@ -50,24 +55,41 @@ class AbilityFetcher(BaseFetcher):
         Returns:
             List of dictionaries containing tab information
         """
-        # For abilities, we need to handle two tabs: True Abilities and Key Abilities
-        # This method returns metadata about what we need to fetch
-        tabs = [
-            {
-                'id': 'true_abilities',
-                'name': 'True Abilities',
-                'tab_index': 0,
-                'url': self.get_list_url()  # Same URL, different tab
-            },
-            {
-                'id': 'key_abilities', 
-                'name': 'Key Abilities',
-                'tab_index': 1,
-                'url': self.get_list_url()  # Same URL, different tab
-            }
-        ]
+        if self.monster:
+            # For monster abilities: "Abilties" and "Active Actions" tabs
+            tabs = [
+                {
+                    'id': 'monster_abilities',
+                    'name': 'Abilties',  # Note: typo exists on actual site
+                    'tab_index': 0,
+                    'url': self.get_list_url()
+                },
+                {
+                    'id': 'active_actions',
+                    'name': 'Active Actions',
+                    'tab_index': 1,
+                    'url': self.get_list_url()
+                }
+            ]
+        else:
+            # For regular abilities: True Abilities and Key Abilities
+            tabs = [
+                {
+                    'id': 'true_abilities',
+                    'name': 'True Abilities',
+                    'tab_index': 0,
+                    'url': self.get_list_url()  # Same URL, different tab
+                },
+                {
+                    'id': 'key_abilities', 
+                    'name': 'Key Abilities',
+                    'tab_index': 1,
+                    'url': self.get_list_url()  # Same URL, different tab
+                }
+            ]
         
-        logger.info(f"Prepared {len(tabs)} ability tabs for fetching")
+        ability_type = "monster ability" if self.monster else "ability"
+        logger.info(f"Prepared {len(tabs)} {ability_type} tabs for fetching")
         return tabs
     
     def _wait_for_list_page(self):
@@ -328,6 +350,7 @@ def main():
     parser = argparse.ArgumentParser(description='Fetch ability data from Lyrian Chronicles')
     parser.add_argument('--version', default='latest', help='Game version to fetch')
     parser.add_argument('--output-dir', default='scraped_html', help='Output directory base')
+    parser.add_argument('--monster', action='store_true', help='Fetch monster abilities instead of regular abilities')
     parser.add_argument('--debug', action='store_true', help='Enable debug logging')
     args = parser.parse_args()
     
@@ -339,12 +362,13 @@ def main():
         handlers=[logging.StreamHandler()]
     )
     
-    fetcher = AbilityFetcher(version=args.version, output_base_dir=args.output_dir)
+    fetcher = AbilityFetcher(version=args.version, output_base_dir=args.output_dir, monster=args.monster)
     
     try:
         # Fetch all ability tabs
         results = fetcher.fetch_all()
-        logger.info(f"Ability fetching completed successfully: {list(results.keys())}")
+        ability_type = "Monster ability" if args.monster else "Ability"
+        logger.info(f"{ability_type} fetching completed successfully: {list(results.keys())}")
     except Exception as e:
         logger.error(f"Error during fetching: {e}")
         raise
