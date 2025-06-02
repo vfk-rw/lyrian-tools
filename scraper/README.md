@@ -59,7 +59,8 @@ scraped_html/           # Raw HTML from fetchers
 │   ├── classes/
 │   ├── abilities/
 │   ├── races/
-│   └── items/
+│   ├── items/
+│   └── keywords/
 └── latest -> 0.10.1    # Symlink to newest version
 
 parsed_data/            # Structured YAML/JSON from parsers  
@@ -70,7 +71,8 @@ parsed_data/            # Structured YAML/JSON from parsers
 │   │   ├── primary/    # 5 primary races
 │   │   ├── sub/        # 30 sub-races
 │   │   └── races_index.yaml
-│   └── items/          # 166 items with index
+│   ├── items/          # 166 items with index
+│   └── keywords/       # 57 keywords with index
 └── latest -> 0.10.1    # Symlink to newest version
 ```
 
@@ -123,6 +125,15 @@ python -m fetchers.item_fetcher --version latest
 
 # Parse item HTML to YAML
 python -m parsers.item_parser scraped_html/0.10.1/items --version 0.10.1
+```
+
+#### Keywords
+```bash
+# Fetch keyword HTML (single page with all keywords)
+python -m fetchers.keyword_fetcher --version latest
+
+# Parse keyword HTML to YAML
+python -m parsers.keyword_parser scraped_html/0.10.1/keywords --version 0.10.1
 ```
 
 ### Python API
@@ -206,6 +217,21 @@ Features:
 - Consistent null value usage instead of dashes
 - HTML tag stripping from descriptions
 - Comprehensive item index generation with type/subtype statistics
+
+### Keyword Scraper Details
+
+The keyword scraper handles the game's keyword system from a single comprehensive page:
+
+- **Single Page Design** - All keywords are on one page with expansion panels
+- **Keyword Types**: Timing, Element, Status, Combat, Weapon, Movement, Spell, Defense, General
+
+Features:
+- Automatic keyword type categorization based on name and description patterns
+- Variable value (X) detection and explanation extraction
+- Related keyword extraction from description text
+- Individual YAML files per keyword with structured data
+- Comprehensive keyword index with type statistics
+- No tab navigation needed (simpler than abilities)
 
 ## Data Quality Improvements
 

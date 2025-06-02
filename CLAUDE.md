@@ -253,6 +253,7 @@ The scraper is being refactored to support multiple data types with a clean sepa
 - **Abilities** ✅ (completed - 758 abilities with advanced subdivisions)
 - **Races/Subraces** ✅ (completed - 35 races: 5 primary, 30 sub-races)
 - **Items** ✅ (completed - 166 items with consistent null handling)
+- **Keywords** ✅ (completed - single page with all game keywords)
 - **Monsters** 📋 (planned)
 - **Monster Abilities** 📋 (planned)
 
@@ -304,6 +305,18 @@ fetcher.fetch_all()  # Handles Primary/Sub-race tabs + detail pages
 # Parse races with benefit extraction
 parser = RaceParser(version="0.10.1")
 results = parser.parse_and_save_all()  # Creates organized structure
+
+# Keywords (Completed)
+from fetchers.keyword_fetcher import KeywordFetcher
+from parsers.keyword_parser import KeywordParser
+
+# Fetch keywords from single page
+fetcher = KeywordFetcher(version="latest")
+fetcher.fetch_all()  # Expands all keyword panels
+
+# Parse keywords with type categorization
+parser = KeywordParser(version="0.10.1")
+results = parser.parse_and_save_all()  # Creates individual keyword files
 ```
 
 ## Ability Scraper Implementation ✅ COMPLETED
