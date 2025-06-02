@@ -58,17 +58,19 @@ scraped_html/           # Raw HTML from fetchers
 ├── 0.10.1/
 │   ├── classes/
 │   ├── abilities/
-│   └── races/
+│   ├── races/
+│   └── items/
 └── latest -> 0.10.1    # Symlink to newest version
 
 parsed_data/            # Structured YAML/JSON from parsers  
 ├── 0.10.1/
 │   ├── classes/
 │   ├── abilities/
-│   └── races/
-│       ├── primary/    # 5 primary races
-│       ├── sub/        # 30 sub-races
-│       └── races_index.yaml
+│   ├── races/
+│   │   ├── primary/    # 5 primary races
+│   │   ├── sub/        # 30 sub-races
+│   │   └── races_index.yaml
+│   └── items/          # 166 items with index
 └── latest -> 0.10.1    # Symlink to newest version
 ```
 
@@ -79,6 +81,7 @@ parsed_data/            # Structured YAML/JSON from parsers
 3. **Reusability**: Common patterns are extracted into base classes
 4. **Offline Processing**: HTML can be saved and parsed later
 5. **Version Management**: Automatic symlink updates for latest version
+6. **Consistent Data Format**: All optional fields use `null` instead of dashes for consistency
 
 ## Usage
 
@@ -111,6 +114,15 @@ python -m fetchers.race_fetcher --version latest
 
 # Parse race HTML to YAML  
 python -m parsers.race_parser --version 0.10.1
+```
+
+#### Items
+```bash
+# Fetch item HTML
+python -m fetchers.item_fetcher --version latest
+
+# Parse item HTML to YAML
+python -m parsers.item_parser scraped_html/0.10.1/items --version 0.10.1
 ```
 
 ### Python API
@@ -179,6 +191,21 @@ Features:
 - Proper parent race tracking for sub-races
 - Comprehensive race index generation
 - Skill list cleaning (removes trailing punctuation)
+
+### Item Scraper Details
+
+The item scraper handles the complete item catalog from the LC website:
+
+- **Total Items** (166) - All equipment, crafting materials, mounts, and special items
+- **Item Types**: Equipment (54), Artifice (40), Alchemy (40), Adventuring Essentials (16), Mount (6), Crafting (6), Divine Arms (1), Astra Relic (2), Talisman (1)
+
+Features:
+- Simplified wait logic for better performance
+- Automatic property extraction (cost, burden, activation cost, etc.)
+- Optional field handling (shell size, fuel usage, crafting points)
+- Consistent null value usage instead of dashes
+- HTML tag stripping from descriptions
+- Comprehensive item index generation with type/subtype statistics
 
 ## Data Quality Improvements
 

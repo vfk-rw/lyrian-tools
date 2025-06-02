@@ -252,7 +252,7 @@ The scraper is being refactored to support multiple data types with a clean sepa
 - **Classes** ✅ (completed - 116 classes with improved parsing)
 - **Abilities** ✅ (completed - 758 abilities with advanced subdivisions)
 - **Races/Subraces** ✅ (completed - 35 races: 5 primary, 30 sub-races)
-- **Items** 📋 (planned)
+- **Items** ✅ (completed - 166 items with consistent null handling)
 - **Monsters** 📋 (planned)
 - **Monster Abilities** 📋 (planned)
 
@@ -523,6 +523,223 @@ python -m fetchers.race_fetcher --version latest
 # Parse races  
 python -m parsers.race_parser --version 0.10.1
 ```
+
+## Item Scraper Implementation ✅ COMPLETED
+
+### Overview
+The item scraper successfully extends the modular architecture to handle all items from the LC website with 166 total items across 9 distinct types.
+
+### Architecture
+
+```
+scraper/
+├── fetchers/
+│   └── item_fetcher.py          # Navigate list and detail pages
+├── parsers/
+│   └── item_parser.py           # Parse with null value handling
+├── schemas/
+│   └── item_schema.py           # Pydantic models with optional fields
+└── parsed_data/
+    └── {version}/
+        └── items/
+            ├── {item_id}.yaml   # 166 individual files
+            └── items_index.yaml # Summary and statistics
+```
+
+### Data Model (Based on Parsed 166 Items)
+
+**Nine Item Types:**
+1. **Equipment** (54 items, 32.5%) - Weapons, armor, and tools
+   - Subtypes: Weapon (21), Specialized Weapon (13), Armor (10), Channeling Weapon (4), Crafting (4), Shield (2)
+
+2. **Artifice** (40 items, 24.1%) - Technological/magical devices
+   - Subtypes: Assist (19), Weapon (12), Basic (7), Airship (1), Fuel (1)
+
+3. **Alchemy** (40 items, 24.1%) - Consumable items
+   - Subtypes: Elixir (16), Flask (12), Potion (12)
+
+4. **Adventuring Essentials** (16 items, 9.6%) - Basic adventuring gear
+   - Subtypes: Kit (9), Storage (4), Basic (3)
+
+5. **Mount** (6 items, 3.6%) - Rideable creatures and vehicles
+
+6. **Crafting** (6 items, 3.6%) - Materials and components
+   - Subtypes: Materials (5), (empty) (1)
+
+7. **Divine Arms** (1 item) - Legendary divine weapons
+8. **Astra Relic** (2 items) - Ancient powerful weapons  
+9. **Talisman** (1 item) - Magical binding items
+
+### Key Implementation Features ✅
+
+**1. Consistent Null Handling**
+- All dash values (`"-"`) converted to proper `null`
+- Optional fields properly typed in Pydantic schema
+- Clean data format throughout
+
+**2. Simplified Wait Logic**  
+- Reduced timeout from 40/60/30 seconds to just 10 seconds
+- Matches successful pattern from class/ability fetchers
+- Proceeds on timeout rather than failing
+
+**3. Robust Property Extraction**
+- Handles all item properties (cost, burden, activation cost, etc.)
+- Optional fields (shell_size, fuel_usage, crafting_points, crafting_type)
+- HTML tag stripping from descriptions
+
+**4. Parser Improvements**
+- Fixed `int(None)` error for items without crafting_points
+- Proper metadata handling without `_extract_basic_metadata`
+- Comprehensive index generation with type/subtype statistics
+
+### Command-Line Usage
+
+```bash
+# Fetch items from latest version
+python -m fetchers.item_fetcher --version latest
+
+# Parse items from saved HTML
+python -m parsers.item_parser scraped_html/0.10.1/items --version 0.10.1
+
+# Test single item (for debugging)
+python -m fetchers.item_fetcher --test axe--light-
+```
+
+## Angular SPA Scraping - Critical Debugging Guide 🚨
+
+**IMPORTANT**: When implementing new fetchers for Angular single-page applications, you MUST override specific base fetcher methods to handle proper content loading. The default base fetcher methods are insufficient for Angular apps.
+
+### The Problem
+
+The base `BaseFetcher` class has a basic `_wait_for_detail_page()` method that only waits for the `<body>` element to load:
+
+```python
+def _wait_for_detail_page(self):
+    """Wait for detail page to load. Override in subclasses for specific wait conditions."""
+    # Default: wait for body to be present
+    WebDriverWait(self.driver, 10).until(
+        EC.presence_of_element_located((By.TAG_NAME, "body"))
+    )
+```
+
+This causes fetchers to save **loading pages** instead of actual content because:
+1. The `<body>` loads immediately even on loading pages
+2. Angular content loads asynchronously after initial page load
+3. The main `fetch_all()` loop calls `fetch_detail_page()` → `_wait_for_detail_page()`
+
+### The Solution ✅
+
+For any Angular SPA fetcher, you MUST override both methods:
+
+#### 1. Override `_wait_for_detail_page()` with Angular-specific waits:
+
+```python
+def _wait_for_detail_page(self):
+    """Override base fetcher method with proper Angular waiting."""
+    try:
+        # Wait for Angular component to load
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "app-item-detail"))
+        )
+        
+        # Wait for specific content elements 
+        WebDriverWait(self.driver, 30).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "div.d-flex.justify-content-between"))
+        )
+        
+        # Wait for actual content patterns in page source
+        WebDriverWait(self.driver, 10).until(
+            lambda driver: (
+                'Type: </label>' in driver.page_source and
+                'Description:</mat-card-title>' in driver.page_source and
+                'linkify' in driver.page_source and
+                "Loading: Angel's Sword Studios" not in driver.page_source[:1000] and
+                len(driver.page_source) > 60000
+            )
+        )
+        
+        time.sleep(2)  # Final rendering wait
+        
+    except TimeoutException as e:
+        logger.warning(f"Timeout waiting for content: {e}")
+        time.sleep(10)  # Last ditch effort
+```
+
+#### 2. Override `fetch_detail_page()` with validation:
+
+```python
+def fetch_detail_page(self, url: str, item_id: str, metadata: Optional[Dict] = None) -> str:
+    """Override base fetcher method to add validation."""
+    logger.info(f"Fetching detail page for {item_id}: {url}")
+    
+    try:
+        self.driver.get(url)
+        self._wait_for_detail_page()
+        self._expand_all_panels()
+        
+        html = self.driver.page_source
+        
+        # CRITICAL: Validate content before saving
+        has_description = 'Description:</mat-card-title>' in html
+        has_loading = "Loading: Angel's Sword Studios" in html[:1000]
+        has_structure = 'Type: </label>' in html  # Use actual HTML patterns!
+        
+        if has_loading or not has_description or not has_structure:
+            error_msg = f"Failed to load content for {item_id}:"
+            if has_loading: error_msg += " Still on loading page."
+            if not has_description: error_msg += " Missing Description."
+            if not has_structure: error_msg += " Missing structure."
+            logger.error(error_msg)
+            raise Exception(error_msg)
+        
+        # Save HTML
+        html_path = self.output_dir / f"{item_id}.html"
+        with open(html_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+        logger.info(f"Successfully saved {len(html)} chars for {item_id}")
+        
+        return str(html_path)
+        
+    except Exception as e:
+        logger.error(f"Error fetching detail page for {item_id}: {e}")
+        raise
+```
+
+### Key Debugging Insights
+
+1. **Check actual HTML patterns**: Use single-item test mode to verify exact HTML structure:
+   ```bash
+   python -m fetchers.item_fetcher --single-url "/game/0.10.1/items/axe--heavy-"
+   ```
+
+2. **File size differences**: 
+   - Loading pages: ~74,873 bytes
+   - Real content: ~157,000+ bytes
+
+3. **HTML title indicators**:
+   - Loading page: `<title>Loading: Angel's Sword Studios</title>`
+   - Real content: `<title>Classes/Item Name | The Lyrian Chronicles...</title>`
+
+4. **Angular HTTP wait may fail**: The `angular.element('body').injector().get('$http')` pattern may not work but content still loads properly
+
+5. **Pattern matching**: Use exact HTML patterns from actual content:
+   - ❌ `">Type:<"` (wrong)
+   - ✅ `"Type: </label>"` (correct)
+
+### Command-Line Testing
+
+Add single-item test mode to all fetchers:
+
+```python
+parser.add_argument("--single-url", help="Test mode: fetch single item by URL")
+
+if args.single_url:
+    fetcher.test_single_item(args.single_url)
+else:
+    fetcher.fetch_all()
+```
+
+This allows iterative debugging of wait conditions without processing all items.
 
 ## Future Improvements
 
