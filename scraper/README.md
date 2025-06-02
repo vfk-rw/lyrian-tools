@@ -60,7 +60,8 @@ scraped_html/           # Raw HTML from fetchers
 │   ├── abilities/
 │   ├── races/
 │   ├── items/
-│   └── keywords/
+│   ├── keywords/
+│   └── breakthroughs/
 └── latest -> 0.10.1    # Symlink to newest version
 
 parsed_data/            # Structured YAML/JSON from parsers  
@@ -72,7 +73,8 @@ parsed_data/            # Structured YAML/JSON from parsers
 │   │   ├── sub/        # 30 sub-races
 │   │   └── races_index.yaml
 │   ├── items/          # 166 items with index
-│   └── keywords/       # 57 keywords with index
+│   ├── keywords/       # 57 keywords with index
+│   └── breakthroughs/  # 68 breakthroughs with index
 └── latest -> 0.10.1    # Symlink to newest version
 ```
 
@@ -134,6 +136,15 @@ python -m fetchers.keyword_fetcher --version latest
 
 # Parse keyword HTML to YAML
 python -m parsers.keyword_parser scraped_html/0.10.1/keywords --version 0.10.1
+```
+
+#### Breakthroughs
+```bash
+# Fetch breakthrough HTML (single page with all breakthroughs)
+python -m fetchers.breakthrough_fetcher --version latest
+
+# Parse breakthrough HTML to YAML
+python -m parsers.breakthrough_parser scraped_html/0.10.1/breakthroughs --version 0.10.1
 ```
 
 ### Python API
@@ -232,6 +243,22 @@ Features:
 - Individual YAML files per keyword with structured data
 - Comprehensive keyword index with type statistics
 - No tab navigation needed (simpler than abilities)
+
+### Breakthrough Scraper Details
+
+The breakthrough scraper handles character advancement options from a single page:
+
+- **Total Breakthroughs** (68) - Special character advancement options
+- **Single Page Design** - All breakthroughs on one page with expansion panels
+- **Cost Types**: All currently have numeric costs (100-500 XP range)
+
+Features:
+- Structured cost and requirements extraction from HTML lists
+- Multi-paragraph description preservation
+- Requirements parsing with support for multiple conditions
+- Race/class/level requirement detection
+- Individual YAML files per breakthrough
+- Comprehensive index with cost summary and requirement statistics
 
 ## Data Quality Improvements
 

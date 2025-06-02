@@ -253,7 +253,8 @@ The scraper is being refactored to support multiple data types with a clean sepa
 - **Abilities** ✅ (completed - 758 abilities with advanced subdivisions)
 - **Races/Subraces** ✅ (completed - 35 races: 5 primary, 30 sub-races)
 - **Items** ✅ (completed - 166 items with consistent null handling)
-- **Keywords** ✅ (completed - single page with all game keywords)
+- **Keywords** ✅ (completed - 57 keywords with automatic type categorization)
+- **Breakthroughs** ✅ (completed - 68 breakthroughs with cost/requirement parsing)
 - **Monsters** 📋 (planned)
 - **Monster Abilities** 📋 (planned)
 
@@ -317,6 +318,18 @@ fetcher.fetch_all()  # Expands all keyword panels
 # Parse keywords with type categorization
 parser = KeywordParser(version="0.10.1")
 results = parser.parse_and_save_all()  # Creates individual keyword files
+
+# Breakthroughs (Completed)
+from fetchers.breakthrough_fetcher import BreakthroughFetcher
+from parsers.breakthrough_parser import BreakthroughParser
+
+# Fetch breakthroughs from single page
+fetcher = BreakthroughFetcher(version="latest")
+fetcher.fetch_all()  # Expands all breakthrough panels
+
+# Parse breakthroughs with cost/requirement extraction
+parser = BreakthroughParser(version="0.10.1")
+results = parser.parse_and_save_all()  # Creates individual breakthrough files
 ```
 
 ## Ability Scraper Implementation ✅ COMPLETED
