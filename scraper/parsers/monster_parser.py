@@ -286,7 +286,7 @@ class MonsterParser(BaseParser):
                     metadata = json.load(f)
             
             # Parse the monster file
-            monster_data = self.parse_file(html_file, metadata)
+            monster_data = self.parse_file(str(html_file), str(meta_file) if meta_file.exists() else None)
             
             if monster_data:
                 all_monsters.append(monster_data)
