@@ -279,11 +279,6 @@ class MonsterParser(BaseParser):
         for html_file in html_files:
             # Check for corresponding metadata file
             meta_file = html_file.with_suffix('.meta.json')
-            metadata = None
-            if meta_file.exists():
-                import json
-                with open(meta_file, 'r', encoding='utf-8') as f:
-                    metadata = json.load(f)
             
             # Parse the monster file
             monster_data = self.parse_file(str(html_file), str(meta_file) if meta_file.exists() else None)
