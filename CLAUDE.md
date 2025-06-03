@@ -255,7 +255,7 @@ The scraper is being refactored to support multiple data types with a clean sepa
 - **Items** ✅ (completed - 166 items with consistent null handling)
 - **Keywords** ✅ (completed - 57 keywords with automatic type categorization)
 - **Breakthroughs** ✅ (completed - 68 breakthroughs with cost/requirement parsing)
-- **Monsters** 📋 (planned)
+- **Monsters** ✅ (completed - 70+ monsters with stat blocks and ability references)
 - **Monster Abilities** ✅ (completed - 252 abilities: 116 passive, 136 active actions)
 
 ### Common Patterns
@@ -828,3 +828,40 @@ When contributing to this project:
 - Game data is sourced from the official Lyrian Chronicles website
 - The codebase prioritizes extensibility for new game features
 - Performance is optimized for desktop browsers
+- Python cache files (__pycache__, *.pyc) are already in .gitignore - no need to clean them up before commits
+
+## Angular SPA Scraping Patterns
+
+### Waiting for List Pages
+When scraping Angular list pages (classes, monsters, etc.), wait for the specific Angular component rather than generic elements:
+
+```python
+# Good - wait for Angular component
+WebDriverWait(self.driver, 10).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, "app-monster-card"))
+)
+
+# Bad - generic mat-card might appear before content loads
+WebDriverWait(self.driver, 10).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, "mat-card"))
+)
+```
+
+### Component Naming Pattern
+The LC website follows a consistent pattern for list page components:
+- Classes: `app-class-card`
+- Monsters: `app-monster-card`
+- Items: Check for `app-item-card` or similar
+- Abilities: Different structure (uses mat-expansion-panel)
+
+### Version Detection from URL
+When using "latest" version, detect the actual version from URL redirect:
+
+```python
+if self.version == "latest":
+    current_url = self.driver.current_url
+    version_match = re.search(r'/game/([^/]+)/', current_url)
+    if version_match:
+        actual_version = version_match.group(1)
+        # Update version and paths accordingly
+```

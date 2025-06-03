@@ -62,7 +62,8 @@ scraped_html/           # Raw HTML from fetchers
 │   ├── races/
 │   ├── items/
 │   ├── keywords/
-│   └── breakthroughs/
+│   ├── breakthroughs/
+│   └── monsters/
 └── latest -> 0.10.1    # Symlink to newest version
 
 parsed_data/            # Structured YAML/JSON from parsers  
@@ -76,7 +77,8 @@ parsed_data/            # Structured YAML/JSON from parsers
 │   │   └── races_index.yaml
 │   ├── items/          # 166 items with index
 │   ├── keywords/       # 57 keywords with index
-│   └── breakthroughs/  # 68 breakthroughs with index
+│   ├── breakthroughs/  # 68 breakthroughs with index
+│   └── monsters/       # Individual monster files with index
 └── latest -> 0.10.1    # Symlink to newest version
 ```
 
@@ -156,6 +158,18 @@ python -m fetchers.breakthrough_fetcher --version latest
 
 # Parse breakthrough HTML to YAML
 python -m parsers.breakthrough_parser scraped_html/0.10.1/breakthroughs --version 0.10.1
+```
+
+#### Monsters
+```bash
+# Fetch monster HTML (list page + individual detail pages)
+python -m fetchers.monster_fetcher --version latest
+
+# Parse monster HTML to YAML
+python -m parsers.monster_parser scraped_html/0.10.1/monsters --version 0.10.1
+
+# Test single monster (for debugging)
+python -m fetchers.monster_fetcher --test-monster bandersnatch
 ```
 
 ### Python API
@@ -289,6 +303,27 @@ Features:
 - Simple description extraction for passive abilities
 - Individual YAML files per ability with comprehensive index
 - Type-aware parsing that maintains data consistency
+
+### Monster Scraper Details
+
+The monster scraper handles complete monster stat blocks and ability references from individual monster pages:
+
+- **Navigation Architecture** - Fetches from main monsters list and individual detail pages
+- **Complete Stat Blocks** - HP, AP, RP, mana, evasion, guard, movement, attacks, attributes
+- **Ability References** - Simple name/ID references to abilities (detailed data parsed separately by monster ability scraper)
+- **Rich Metadata** - Danger level, type, lore, strategy, running notes, harvestable materials
+
+Features:
+- List page navigation to discover all available monsters
+- Detail page fetching with Angular SPA wait logic
+- Automatic expansion panel handling for abilities/actions
+- Comprehensive stat extraction (25+ different stats and properties)
+- Lightweight ability references (avoids duplicating ability data)
+- Image URL and descriptive content preservation
+- Individual YAML files per monster with summary index
+- Pydantic schema validation for data consistency
+
+**Note**: The monster scraper only extracts ability names/IDs as references. The detailed ability data (keywords, costs, descriptions, etc.) is handled by the separate monster ability scraper to avoid duplication.
 
 ## Data Quality Improvements
 
