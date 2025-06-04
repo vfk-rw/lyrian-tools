@@ -368,3 +368,67 @@ flake8 .
 ```bash
 mypy .
 ```
+
+## Google Sheets Export and Demo
+
+The scraper includes Google Sheets export functionality with a working demo spreadsheet that showcases IMPORTRANGE functionality.
+
+### Google Sheets Exporter
+
+Export scraped data to Google Sheets for easy sharing and collaboration:
+
+```bash
+# Export classes to Google Sheets (creates new spreadsheet)
+python -m exporters.sheets.export_classes --version 0.10.1
+
+# Export specific ability types
+python -m exporters.sheets.export_abilities --version 0.10.1 --ability-types true key
+```
+
+### Demo Spreadsheet with IMPORTRANGE
+
+Create or update a demo spreadsheet that demonstrates how to use IMPORTRANGE to pull data from your main export:
+
+```bash
+# Create/update demo spreadsheet with working dropdowns
+python create_demo_sheet.py
+
+# Setup dropdown validation using helper sheets
+python setup_demo_dropdowns.py
+```
+
+#### Demo Features
+
+The demo spreadsheet includes:
+
+1. **Helper Sheets Approach**: Uses `_ClassList` and `_AbilityList` helper sheets containing IMPORTRANGE formulas for dropdown validation
+2. **Working Dropdowns**: Class and ability dropdowns that pull live data from your main export
+3. **Auto-Population**: Select a class/ability and watch related data auto-populate using INDEX/MATCH formulas
+4. **IMPORTRANGE Permissions**: Automatically grants necessary permissions using Google's undocumented API endpoint
+
+#### Demo Structure
+
+- **Instructions Sheet**: Explains how to use the demo and copy the patterns
+- **Class Lookup**: Dropdown to select class with auto-populated tier, difficulty, roles, and requirements
+- **Ability Lookup**: Dropdown to select ability with auto-populated type, keywords, range, costs, and description
+- **Helper Sheets**: `_ClassList` and `_AbilityList` contain IMPORTRANGE data for validation
+
+#### Configuration
+
+Demo spreadsheet IDs are saved in `.sheets_config.json` to enable updating the same spreadsheet instead of creating new ones:
+
+```json
+{
+  "demo": {
+    "spreadsheet_id": "1abc123...",
+    "last_updated": "2025-06-04T03:20:08.935067"
+  }
+}
+```
+
+#### Technical Implementation
+
+- **Dropdown Validation**: Uses Google Sheets data validation with ONE_OF_RANGE type
+- **Helper Sheet Pattern**: Avoids direct IMPORTRANGE in validation by using intermediate sheets
+- **Permission Granting**: Uses Stack Overflow solution for automatic IMPORTRANGE permission granting
+- **Formula Execution**: Writes formulas using Google Sheets API updateCells with formulaValue

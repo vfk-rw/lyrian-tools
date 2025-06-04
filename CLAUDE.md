@@ -779,6 +779,100 @@ else:
 
 This allows iterative debugging of wait conditions without processing all items.
 
+## Google Sheets Export and Demo Integration ✅ COMPLETED
+
+### Overview
+The scraper includes Google Sheets export functionality with a working demo spreadsheet that showcases IMPORTRANGE functionality for end users.
+
+### Demo Spreadsheet Features
+
+The demo system creates and maintains a single demonstration spreadsheet showing how to use IMPORTRANGE to pull data from exported game data:
+
+1. **Config-Based Management**: Uses `.sheets_config.json` to save demo spreadsheet ID, preventing creation of new demos each run
+2. **Helper Sheets Pattern**: Uses `_ClassList` and `_AbilityList` hidden sheets containing IMPORTRANGE formulas for dropdown validation
+3. **Working Dropdowns**: Class and ability dropdowns that pull live data from the main export spreadsheet
+4. **Auto-Population**: Select items from dropdowns and watch related data auto-populate using INDEX/MATCH formulas
+5. **IMPORTRANGE Permissions**: Automatically grants necessary permissions using Google's undocumented API endpoint
+
+### Demo Architecture
+
+```
+Demo Spreadsheet Structure:
+├── Instructions          # How to use and copy patterns
+├── Class Lookup         # Class dropdown with auto-populated data
+├── Ability Lookup       # Ability dropdown with auto-populated data
+├── _ClassList          # Hidden helper sheet with IMPORTRANGE class data
+└── _AbilityList        # Hidden helper sheet with IMPORTRANGE ability data
+```
+
+### Implementation Details
+
+**Key Technical Solutions:**
+- **Helper Sheet Approach**: Avoids direct IMPORTRANGE in data validation by using intermediate sheets
+- **Permission Granting**: Uses Stack Overflow solution with undocumented Google API endpoint for IMPORTRANGE permissions
+- **Formula Execution**: Writes formulas using Google Sheets API `updateCells` with `formulaValue`
+- **Configuration Management**: JSON config file stores spreadsheet IDs for reuse
+
+**Command Usage:**
+```bash
+# Create/update demo spreadsheet with working dropdowns
+python create_demo_sheet.py
+
+# Setup dropdown validation using helper sheets
+python setup_demo_dropdowns.py
+```
+
+**Configuration File (`.sheets_config.json`):**
+```json
+{
+  "demo": {
+    "spreadsheet_id": "1jIgr8ICRJl-jCY_TWvaIbekGFCzWxl3cMkB2C9wnlNU",
+    "last_updated": "2025-06-04T03:20:08.935067"
+  },
+  "0.10.1": {
+    "spreadsheet_id": "1l_IhI6LaEW7eqISHoK2bUYLlMvb9a37JbPhoI-vuXq0",
+    "last_updated": "2025-06-04T02:02:54.366952"
+  }
+}
+```
+
+### Demo Functionality
+
+**Class Lookup Demo:**
+- Dropdown populated from IMPORTRANGE of Classes sheet
+- Auto-populates: Tier, Difficulty, Main Role, Secondary Role, Requirements
+- Uses INDEX/MATCH formulas to cross-reference selected class
+
+**Ability Lookup Demo:**
+- Dropdown populated from IMPORTRANGE of All Abilities sheet  
+- Auto-populates: Type, Keywords, Range, Requirements, Mana, AP, RP, Description
+- Demonstrates complex cross-sheet lookups with live data
+
+**Instructions Sheet:**
+- Explains the technical implementation
+- Shows users how to copy the patterns to their own sheets
+- Documents the V3 improvements and helper sheet approach
+
+### Problem Solving Journey
+
+The implementation solved several critical Google Sheets API challenges:
+
+1. **IMPORTRANGE Text Display Issue**: Fixed by properly writing formulas instead of text
+2. **Data Validation API Structure**: Corrected to use string format `'=_ClassList!A2:A200'` instead of object format
+3. **IMPORTRANGE Permissions**: Implemented undocumented API endpoint solution from Stack Overflow
+4. **Formula Execution**: Used `updateCells` with `formulaValue` for proper formula writing
+5. **Demo Reuse**: Config-based ID storage prevents creating new demos each run
+
+### Integration with Main Export
+
+The demo spreadsheet references the main export spreadsheet created by the class/ability exporters:
+- Source spreadsheet contains complete game data in structured sheets
+- Demo spreadsheet uses IMPORTRANGE to pull specific columns for dropdowns
+- Users can copy the demo patterns to create their own custom tools
+- Live data updates when source export is refreshed
+
+This provides a complete end-to-end solution from web scraping to shareable, interactive Google Sheets demos.
+
 ## Future Improvements
 
 1. **API Refactoring**:

@@ -127,6 +127,48 @@ python export_to_sheets.py --private
 - Preserves the URL so bookmarks continue to work
 - Removes old data and replaces with fresh exports
 
+## IMPORTRANGE Demo
+
+See a live example of how to use the exported data in other spreadsheets:
+
+**📊 Demo Spreadsheet**: https://docs.google.com/spreadsheets/d/1jIgr8ICRJl-jCY_TWvaIbekGFCzWxl3cMkB2C9wnlNU
+
+This demo shows:
+- **Class Dropdown**: Select a class and auto-populate tier, difficulty, roles
+- **Ability Dropdown**: Select an ability and auto-populate type, costs, keywords, description
+- **IMPORTRANGE Formulas**: Copy-paste examples for your own sheets
+
+### Key Formulas Used:
+
+**Class Lookup**:
+```
+=IMPORTRANGE("1l_IhI6LaEW7eqISHoK2bUYLlMvb9a37JbPhoI-vuXq0", "Classes!B2:B")
+=INDEX(IMPORTRANGE("...", "Classes!C2:C"), MATCH(A6, IMPORTRANGE("...", "Classes!B2:B"), 0))
+```
+
+**Ability Lookup**:
+```
+=IMPORTRANGE("1l_IhI6LaEW7eqISHoK2bUYLlMvb9a37JbPhoI-vuXq0", "All Abilities!B2:B")
+=INDEX(IMPORTRANGE("...", "All Abilities!C2:C"), MATCH(A6, IMPORTRANGE("...", "All Abilities!B2:B"), 0))
+```
+
+### Creating/Updating Demo
+
+To create or update the demo spreadsheet:
+
+```bash
+# Create/update demo spreadsheet
+python create_demo_sheet.py
+
+# Set up dropdowns (run after creating demo)
+python setup_demo_dropdowns.py
+```
+
+The demo creation is now managed via config file:
+- First run creates a new demo spreadsheet and saves ID to `.sheets_config.json`
+- Subsequent runs update the same spreadsheet instead of creating new ones
+- The demo URL remains consistent for bookmarks and sharing
+
 ## Output
 
 The script creates a Google Spreadsheet with:
