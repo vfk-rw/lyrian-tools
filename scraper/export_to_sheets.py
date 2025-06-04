@@ -7,6 +7,7 @@ containing all the game data for easy browsing and sharing.
 """
 
 import argparse
+import json
 import logging
 import sys
 from datetime import datetime
@@ -28,6 +29,51 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+def save_spreadsheet_id(spreadsheet_id: str, version: str):
+    """Save the spreadsheet ID to a config file for future use."""
+    try:
+        config_file = Path(__file__).parent / ".sheets_config.json"
+        
+        # Load existing config or create new
+        config = {}
+        if config_file.exists():
+            with open(config_file, 'r') as f:
+                config = json.load(f)
+        
+        # Save the spreadsheet ID for this version
+        config[version] = {
+            'spreadsheet_id': spreadsheet_id,
+            'last_updated': datetime.now().isoformat()
+        }
+        
+        # Save config
+        with open(config_file, 'w') as f:
+            json.dump(config, f, indent=2)
+            
+        logger.info(f"Saved spreadsheet ID to {config_file}")
+        
+    except Exception as e:
+        logger.warning(f"Failed to save spreadsheet ID: {e}")
+
+
+def load_spreadsheet_id(version: str) -> str:
+    """Load the saved spreadsheet ID for a version."""
+    try:
+        config_file = Path(__file__).parent / ".sheets_config.json"
+        
+        if not config_file.exists():
+            return None
+            
+        with open(config_file, 'r') as f:
+            config = json.load(f)
+            
+        return config.get(version, {}).get('spreadsheet_id')
+        
+    except Exception as e:
+        logger.warning(f"Failed to load spreadsheet ID: {e}")
+        return None
+
+
 def main():
     """Main export function."""
     parser = argparse.ArgumentParser(
@@ -46,6 +92,15 @@ def main():
         "--title",
         default=None,
         help="Title for the spreadsheet (default: auto-generated)"
+    )
+    parser.add_argument(
+        "--spreadsheet-id",
+        help="Existing spreadsheet ID to update (creates new if not provided)"
+    )
+    parser.add_argument(
+        "--update",
+        action="store_true",
+        help="Automatically update the last used spreadsheet for this version"
     )
     parser.add_argument(
         "--data-types",
@@ -73,6 +128,14 @@ def main():
     
     args = parser.parse_args()
     
+    # Handle --update flag
+    if args.update and not args.spreadsheet_id:
+        args.spreadsheet_id = load_spreadsheet_id(args.version)
+        if args.spreadsheet_id:
+            logger.info(f"Using saved spreadsheet ID for version {args.version}: {args.spreadsheet_id}")
+        else:
+            logger.info(f"No saved spreadsheet found for version {args.version}, creating new one")
+    
     # Determine if spreadsheet should be public
     make_public = args.public and not args.private
     
@@ -93,9 +156,15 @@ def main():
             version=args.version
         )
         
-        # Create the spreadsheet
-        spreadsheet_id = main_exporter.create_spreadsheet(args.title, public=make_public)
-        logger.info(f"Created spreadsheet with ID: {spreadsheet_id}")
+        # Create or update the spreadsheet
+        spreadsheet_id = main_exporter.create_or_update_spreadsheet(
+            title=args.title, 
+            spreadsheet_id=args.spreadsheet_id,
+            public=make_public
+        )
+        
+        action = "Updated" if args.spreadsheet_id else "Created"
+        logger.info(f"{action} spreadsheet with ID: {spreadsheet_id}")
         
         # Create summary sheet first
         main_exporter.create_summary_sheet()
@@ -118,10 +187,16 @@ def main():
         else:
             export_selected_data(exporters, args.data_types, args.detailed)
         
+        # Save spreadsheet ID for future use
+        save_spreadsheet_id(spreadsheet_id, args.version)
+        
         logger.info("Export completed successfully!")
         logger.info(f"Spreadsheet URL: https://docs.google.com/spreadsheets/d/{spreadsheet_id}")
         print(f"\n✅ Export completed!")
         print(f"📊 Spreadsheet URL: https://docs.google.com/spreadsheets/d/{spreadsheet_id}")
+        print(f"🔗 Spreadsheet ID: {spreadsheet_id}")
+        print(f"\n💡 To update this same spreadsheet next time, use:")
+        print(f"   python export_to_sheets.py --spreadsheet-id {spreadsheet_id}")
         
         if make_public:
             print(f"\n💡 Note: If the spreadsheet remains private, you may need to enable the Google Drive API")

@@ -5,19 +5,29 @@ This module provides tools to export parsed TTRPG data to Google Sheets for easy
 ## Features
 
 - **Comprehensive Export**: All game data types (classes, abilities, items, races, keywords, breakthroughs, monsters)
+- **Update Same Spreadsheet**: Automatically reuse the same spreadsheet for ongoing updates
 - **Multiple Sheets**: Each data type gets its own tab in the spreadsheet
+- **Public Sharing**: Spreadsheets are automatically made publicly viewable
 - **Detailed Breakdowns**: Optional detailed sheets (e.g., abilities by type, items by type)
 - **Formatted Output**: Headers are bold and frozen, columns auto-resize
 - **Summary Sheet**: Overview with counts and export metadata
+- **Rate Limiting**: Built-in retry logic and delays to handle Google API limits
+- **No Sheet1**: Automatically removes the default empty Sheet1
 
 ## Quick Start
 
 ```bash
-# Export all data to Google Sheets
+# Export all data to Google Sheets (creates new spreadsheet)
 python export_to_sheets.py
 
-# Export specific data types
+# Update the same spreadsheet (automatically uses saved ID)
+python export_to_sheets.py --update
+
+# Export specific data types to new spreadsheet
 python export_to_sheets.py --data-types classes abilities items
+
+# Update existing spreadsheet with specific ID
+python export_to_sheets.py --spreadsheet-id 1ABC123... --data-types classes
 
 # Export with detailed breakdowns
 python export_to_sheets.py --detailed
@@ -86,15 +96,36 @@ exporters/
 ## Usage Examples
 
 ```bash
-# Full export with all bells and whistles
+# Full export with all bells and whistles (creates new spreadsheet)
 python export_to_sheets.py --detailed --title "Complete LC Database"
+
+# Update the same spreadsheet with new data
+python export_to_sheets.py --update
 
 # Quick classes and abilities export
 python export_to_sheets.py --data-types classes abilities
 
+# Update specific spreadsheet ID with items
+python export_to_sheets.py --spreadsheet-id 1ABC123... --data-types items
+
 # Export specific version with custom credentials
 python export_to_sheets.py --version 0.9.5 --credentials /path/to/creds.json
+
+# Create private spreadsheet (not publicly viewable)
+python export_to_sheets.py --private
 ```
+
+## Workflow Recommendations
+
+**For Regular Updates:**
+1. First export: `python export_to_sheets.py` (creates new public spreadsheet)
+2. Future updates: `python export_to_sheets.py --update` (reuses same spreadsheet)
+
+**The tool automatically:**
+- Saves the spreadsheet ID for each game version
+- Updates the same spreadsheet when using `--update`
+- Preserves the URL so bookmarks continue to work
+- Removes old data and replaces with fresh exports
 
 ## Output
 

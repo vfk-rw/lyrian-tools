@@ -80,17 +80,27 @@ class BaseSheetsExporter:
             logger.error(f"Failed to initialize Google services: {e}")
             raise
     
-    def create_spreadsheet(self, title: str, public: bool = True) -> str:
+    def create_or_update_spreadsheet(self, title: str, spreadsheet_id: str = None, public: bool = True) -> str:
         """
-        Create a new Google Spreadsheet.
+        Create a new Google Spreadsheet or update an existing one.
         
         Args:
             title: Title for the spreadsheet
+            spreadsheet_id: Existing spreadsheet ID to update (if None, creates new)
             public: Whether to make the spreadsheet publicly viewable
             
         Returns:
             Spreadsheet ID
         """
+        if spreadsheet_id:
+            # Update existing spreadsheet
+            return self._update_existing_spreadsheet(spreadsheet_id, title, public)
+        else:
+            # Create new spreadsheet
+            return self._create_new_spreadsheet(title, public)
+    
+    def _create_new_spreadsheet(self, title: str, public: bool) -> str:
+        """Create a new spreadsheet."""
         try:
             spreadsheet = {
                 'properties': {
@@ -106,6 +116,9 @@ class BaseSheetsExporter:
             logger.info(f"Created spreadsheet: {title} (ID: {self.spreadsheet_id})")
             logger.info(f"URL: https://docs.google.com/spreadsheets/d/{self.spreadsheet_id}")
             
+            # Remove default Sheet1
+            self._remove_default_sheet()
+            
             # Make it publicly viewable if requested
             if public:
                 self.make_public()
@@ -115,6 +128,80 @@ class BaseSheetsExporter:
         except HttpError as e:
             logger.error(f"Failed to create spreadsheet: {e}")
             raise
+    
+    def _update_existing_spreadsheet(self, spreadsheet_id: str, title: str, public: bool) -> str:
+        """Update an existing spreadsheet."""
+        try:
+            self.spreadsheet_id = spreadsheet_id
+            
+            # Update title
+            self.service.spreadsheets().batchUpdate(
+                spreadsheetId=self.spreadsheet_id,
+                body={
+                    'requests': [{
+                        'updateSpreadsheetProperties': {
+                            'properties': {
+                                'title': title
+                            },
+                            'fields': 'title'
+                        }
+                    }]
+                }
+            ).execute()
+            
+            logger.info(f"Updated spreadsheet: {title} (ID: {self.spreadsheet_id})")
+            logger.info(f"URL: https://docs.google.com/spreadsheets/d/{self.spreadsheet_id}")
+            
+            # Clear all existing sheets except summary
+            self._clear_all_sheets_except_summary()
+            
+            # Make it publicly viewable if requested
+            if public:
+                self.make_public()
+            
+            return self.spreadsheet_id
+            
+        except HttpError as e:
+            logger.error(f"Failed to update spreadsheet: {e}")
+            raise
+    
+    def _remove_default_sheet(self):
+        """Remove the default 'Sheet1' that gets created, but only after adding other sheets."""
+        # We'll remove Sheet1 later after we've added our sheets
+        # For now, just log that we'll handle it later
+        logger.info("Will remove default Sheet1 after adding our sheets")
+    
+    def _clear_all_sheets_except_summary(self):
+        """Clear all sheets except Summary, or delete them entirely."""
+        try:
+            spreadsheet = self.service.spreadsheets().get(
+                spreadsheetId=self.spreadsheet_id
+            ).execute()
+            
+            requests = []
+            for sheet in spreadsheet['sheets']:
+                sheet_title = sheet['properties']['title']
+                sheet_id = sheet['properties']['sheetId']
+                
+                if sheet_title != 'Summary':
+                    # Delete non-Summary sheets
+                    requests.append({
+                        'deleteSheet': {
+                            'sheetId': sheet_id
+                        }
+                    })
+            
+            if requests:
+                self.service.spreadsheets().batchUpdate(
+                    spreadsheetId=self.spreadsheet_id,
+                    body={'requests': requests}
+                ).execute()
+                
+                logger.info(f"Deleted {len(requests)} existing sheets")
+                
+        except HttpError as e:
+            logger.warning(f"Failed to clear existing sheets: {e}")
+            # Don't raise, we'll just overwrite them
     
     def make_public(self):
         """Make the spreadsheet publicly viewable (read-only)."""
@@ -386,6 +473,9 @@ class BaseSheetsExporter:
         self.write_data("Summary", summary_data)
         self.format_headers("Summary", 3)
         self.auto_resize_columns("Summary")
+        
+        # Clean up any default Sheet1 that might still exist
+        self._cleanup_default_sheet()
     
     def _execute_with_retry(self, operation, max_retries=3, base_delay=60):
         """
@@ -411,3 +501,41 @@ class BaseSheetsExporter:
                         raise
                 else:
                     raise
+    
+    def _cleanup_default_sheet(self):
+        """Clean up the default 'Sheet1' if it still exists and we have other sheets."""
+        try:
+            spreadsheet = self.service.spreadsheets().get(
+                spreadsheetId=self.spreadsheet_id
+            ).execute()
+            
+            sheets = spreadsheet['sheets']
+            sheet1_id = None
+            has_other_sheets = False
+            
+            # Check what sheets we have
+            for sheet in sheets:
+                title = sheet['properties']['title']
+                if title == 'Sheet1':
+                    sheet1_id = sheet['properties']['sheetId']
+                else:
+                    has_other_sheets = True
+            
+            # Only delete Sheet1 if we have other sheets
+            if sheet1_id is not None and has_other_sheets:
+                self.service.spreadsheets().batchUpdate(
+                    spreadsheetId=self.spreadsheet_id,
+                    body={
+                        'requests': [{
+                            'deleteSheet': {
+                                'sheetId': sheet1_id
+                            }
+                        }]
+                    }
+                ).execute()
+                
+                logger.info("Removed default Sheet1")
+                
+        except HttpError as e:
+            logger.warning(f"Failed to cleanup default sheet: {e}")
+            # Don't raise, this is not critical

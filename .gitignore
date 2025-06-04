@@ -10,3 +10,6 @@ scraper/.venv
 scraper/scraped_html
 scraper/parsed_data
 scraper/test_output
+
+# Google Sheets export config
+scraper/.sheets_config.json
