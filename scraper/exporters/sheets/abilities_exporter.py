@@ -33,7 +33,7 @@ class AbilitiesExporter(BaseSheetsExporter):
         all_data = []
         headers = [
             "ID", "Name", "Type", "Keywords", "Range", "Description",
-            "Requirements", "Mana Cost", "AP Cost", "RP Cost", "Other Costs",
+            "Requirements", "Combined Costs", "Mana Cost", "AP Cost", "RP Cost", "Other Costs",
             "Benefits", "Associated Abilities", "Parent Ability", "Subdivision Index",
             "Gathering Cost", "Gathering Bonus"
         ]
@@ -75,6 +75,7 @@ class AbilitiesExporter(BaseSheetsExporter):
         
         # Costs
         costs = ability_data.get('costs', {})
+        row.append(self._format_combined_costs(costs))  # New combined costs column
         row.extend([
             str(costs.get('mana', '')),
             str(costs.get('ap', '')),
@@ -101,6 +102,30 @@ class AbilitiesExporter(BaseSheetsExporter):
         if not items:
             return ""
         return ", ".join(str(item) for item in items)
+    
+    def _format_combined_costs(self, costs: Dict[str, Any]) -> str:
+        """Format all costs into a single readable string like 'AP: 2 MP: 4 RP: 1'."""
+        if not costs:
+            return ""
+        
+        cost_parts = []
+        
+        # Standard costs in preferred order
+        if costs.get('ap'):
+            cost_parts.append(f"AP: {costs['ap']}")
+        if costs.get('mana'):
+            cost_parts.append(f"MP: {costs['mana']}")
+        if costs.get('rp'):
+            cost_parts.append(f"RP: {costs['rp']}")
+        
+        # Other costs
+        for key, value in costs.items():
+            if key not in ['mana', 'ap', 'rp'] and value:
+                # Format key nicely (e.g., "other" -> "Other")
+                formatted_key = key.replace('_', ' ').title()
+                cost_parts.append(f"{formatted_key}: {value}")
+        
+        return " ".join(cost_parts)
     
     def _format_other_costs(self, costs: Dict[str, Any]) -> str:
         """Format non-standard costs."""
@@ -184,7 +209,7 @@ class AbilitiesExporter(BaseSheetsExporter):
         
         if ability_type == "true_ability":
             return base_headers + [
-                "Range", "Requirements", "Mana Cost", "AP Cost", "RP Cost", "Other Costs"
+                "Range", "Requirements", "Combined Costs", "Mana Cost", "AP Cost", "RP Cost", "Other Costs"
             ]
         elif ability_type == "key_ability":
             return base_headers + [
@@ -202,7 +227,7 @@ class AbilitiesExporter(BaseSheetsExporter):
             # Unknown type, use all headers
             return [
                 "ID", "Name", "Type", "Keywords", "Range", "Description",
-                "Requirements", "Mana Cost", "AP Cost", "RP Cost", "Other Costs",
+                "Requirements", "Combined Costs", "Mana Cost", "AP Cost", "RP Cost", "Other Costs",
                 "Benefits", "Associated Abilities", "Parent Ability", "Subdivision Index",
                 "Gathering Cost", "Gathering Bonus"
             ]
@@ -221,6 +246,7 @@ class AbilitiesExporter(BaseSheetsExporter):
             return base_row + [
                 ability_data.get('range', ''),
                 self._format_list(ability_data.get('requirements', [])),
+                self._format_combined_costs(costs),
                 str(costs.get('mana', '')),
                 str(costs.get('ap', '')),
                 str(costs.get('rp', '')),

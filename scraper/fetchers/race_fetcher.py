@@ -2,10 +2,11 @@
 
 import logging
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from bs4 import BeautifulSoup
 from core.fetcher import BaseFetcher
 from core.utils import sanitize_id
@@ -61,100 +62,34 @@ class RaceFetcher(BaseFetcher):
         
         return races
         
-    def fetch_detail(self, identifier: str, metadata: Dict[str, Any]) -> Path:
-        """Fetch individual race detail page."""
-        relative_url = metadata.get('url', '')
-        race_name = metadata.get('name', identifier)
-        
-        # Construct full URL from relative URL
-        if relative_url.startswith('/'):
-            url = f"https://rpg.angelssword.com{relative_url}"
-        else:
-            url = relative_url
-        
-        logger.info(f"Fetching detail page for {race_name}: {url}")
-        
-        try:
-            self.driver.get(url)
-            time.sleep(5)  # Wait longer for page load
-            
-            # Wait for the race content to load - look for actual race content
-            try:
-                # Wait for Angular content to load - look for race-specific elements
-                logger.info(f"Waiting for race content to load for {race_name}...")
-                WebDriverWait(self.driver, 30).until(
-                    lambda driver: (
-                        "Attributes:" in driver.page_source or 
-                        "Proficiencies:" in driver.page_source or
-                        "mat-expansion-panel" in driver.page_source or
-                        len(driver.page_source) > 50000  # Fallback if content is large
-                    )
-                )
-                logger.info(f"Race content loaded for {race_name}")
-                time.sleep(5)  # Additional wait for all panels to load
-            except Exception as e:
-                logger.warning(f"Timeout waiting for race content: {e}")
-                # Still try to get what we have
-                time.sleep(10)  # Last ditch effort
-            
-            # Expand all panels on the detail page
-            self._expand_all_panels()
-            time.sleep(2)  # Wait for expansion
-            
-            # Get final HTML
-            html = self.driver.page_source
-            
-            # Check if we got actual content
-            if len(html) < 1000:  # Very small HTML suggests incomplete load
-                logger.warning(f"Suspiciously small HTML ({len(html)} chars) for {race_name}")
-            else:
-                logger.info(f"Successfully loaded {len(html)} chars for {race_name}")
-            
-            # Save HTML
-            html_path = self.output_dir / f"{identifier}.html"
-            with open(html_path, 'w', encoding='utf-8') as f:
-                f.write(html)
-            logger.info(f"Saved HTML to {html_path}")
-            
-            # Save metadata
-            if metadata:
-                metadata_path = self.output_dir / f"{identifier}.meta.json"
-                import json
-                with open(metadata_path, 'w', encoding='utf-8') as f:
-                    json.dump(metadata, f, indent=2, ensure_ascii=False)
-                logger.debug(f"Saved metadata to {metadata_path}")
-            
-            return html_path
-            
-        except Exception as e:
-            logger.error(f"Error fetching detail page for {identifier}: {e}")
-            return None
             
     def fetch_list_page(self) -> List[Dict[str, Any]]:
         """Fetch the races list page and extract race URLs from both tabs."""
-        races_url = f"{self.base_url}/races"
+        races_url = self.get_list_url()
         logger.info(f"Fetching races list from {races_url}")
         
         self.driver.get(races_url)
-        time.sleep(3)
-        
-        # Wait for tabs to load
-        try:
-            WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "[role='tab']"))
-            )
-        except Exception as e:
-            logger.warning(f"Tab elements not found: {e}")
+        self._wait_for_list_page()
         
         all_races = []
         
-        # Get races from first tab (primary races)
-        logger.info("Extracting primary races...")
-        soup = BeautifulSoup(self.driver.page_source, 'html.parser')
-        primary_races = self.extract_list_items(soup)
-        all_races.extend(primary_races)
+        # Primary races are not listed on the website but exist as direct URLs
+        # Add them manually based on known primary races from the game system
+        logger.info("Adding known primary races...")
+        primary_race_names = ['Human', 'Fae', 'Demon', 'Chimera', 'Youkai']
         
-        # Click on Sub-Races tab
+        for race_name in primary_race_names:
+            race_id = sanitize_id(race_name)
+            primary_race = {
+                'id': race_id,
+                'name': race_name,
+                'url': f'/game/{self.version}/races/primary/{race_id}',
+                'is_sub_race': False
+            }
+            all_races.append(primary_race)
+            logger.info(f"Added primary race: {race_name}")
+        
+        # Click on Sub-Races tab to get sub-races (they should be on the second tab)
         try:
             logger.info("Clicking on Sub-Races tab...")
             sub_races_tab = self.driver.find_element(By.XPATH, "//div[@role='tab'][contains(.,'Sub-Races')]")
@@ -165,6 +100,7 @@ class RaceFetcher(BaseFetcher):
             logger.info("Extracting sub-races...")
             soup = BeautifulSoup(self.driver.page_source, 'html.parser')
             sub_races = self.extract_list_items(soup)
+            logger.info(f"Found {len(sub_races)} sub-races")
             all_races.extend(sub_races)
             
         except Exception as e:
@@ -172,6 +108,123 @@ class RaceFetcher(BaseFetcher):
         
         logger.info(f"Found {len(all_races)} total races/sub-races")
         return all_races
+    
+    def _wait_for_list_page(self):
+        """Wait for races list page to load."""
+        try:
+            # Wait for tabs to load
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "[role='tab']"))
+            )
+        except Exception as e:
+            logger.warning(f"Tab elements not found: {e}")
+    
+    def _wait_for_detail_page(self):
+        """Override base fetcher method with proper Angular waiting for race pages."""
+        try:
+            # First wait for basic page structure
+            WebDriverWait(self.driver, 20).until(
+                EC.presence_of_element_located((By.TAG_NAME, "body"))
+            )
+            
+            # Wait for the page title to change away from loading
+            WebDriverWait(self.driver, 30).until(
+                lambda driver: "Loading: Angel's Sword Studios" not in driver.title
+            )
+            
+            # Wait for actual race content patterns to appear in page source
+            WebDriverWait(self.driver, 30).until(
+                lambda driver: (
+                    # Ensure we have actual content, not just HTML structure
+                    len(driver.page_source) > 50000 and
+                    # Look for race-specific content patterns that indicate data has loaded
+                    ("Primary race:" in driver.page_source or 
+                     "You gain +" in driver.page_source or  # Attribute benefits
+                     "You can speak" in driver.page_source or  # Proficiency benefits
+                     "Points:" in driver.page_source) and  # Skills points
+                    # Double-check not on loading page
+                    "Loading: Angel's Sword Studios" not in driver.page_source[:2000]
+                )
+            )
+            
+            # Additional wait for all content to render
+            time.sleep(5)
+            
+        except TimeoutException as e:
+            logger.warning(f"Timeout waiting for race content: {e}")
+            # Last ditch effort - wait longer and check what we have
+            time.sleep(15)
+            page_source = self.driver.page_source
+            logger.debug(f"Page source length: {len(page_source)}")
+            logger.debug(f"Page title: {self.driver.title}")
+            logger.debug(f"Has loading text: {'Loading: Angel' in page_source[:2000]}")
+            logger.debug(f"Has You gain: {'You gain +' in page_source}")
+            logger.debug(f"Has Primary race: {'Primary race:' in page_source}")
+    
+    def fetch_detail_page(self, url: str, item_id: str, metadata: Optional[Dict] = None) -> str:
+        """Override base fetcher method to add validation for race pages."""
+        logger.info(f"Fetching detail page for {item_id}: {url}")
+        
+        try:
+            self.driver.get(url)
+            self._wait_for_detail_page()
+            self._expand_all_panels()
+            
+            html = self.driver.page_source
+            
+            # CRITICAL: Validate content before saving - look for actual content data
+            has_race_content = any(marker in html for marker in [
+                "Primary race:", "You gain +", "You can speak", "Points:"
+            ])
+            has_loading = "Loading: Angel's Sword Studios" in html[:2000]
+            is_sufficient_size = len(html) > 50000  # Back to original size check
+            
+            if has_loading or not has_race_content or not is_sufficient_size:
+                error_msg = f"Failed to load content for {item_id}:"
+                if has_loading: 
+                    error_msg += " Still on loading page."
+                if not has_race_content: 
+                    error_msg += " Missing race content markers."
+                if not is_sufficient_size: 
+                    error_msg += f" Insufficient content size ({len(html)} bytes)."
+                logger.error(error_msg)
+                logger.debug(f"Page source snippet: {html[:500]}...")
+                raise Exception(error_msg)
+            
+            # Save HTML
+            html_path = self.output_dir / f"{item_id}.html"
+            with open(html_path, 'w', encoding='utf-8') as f:
+                f.write(html)
+            logger.info(f"Successfully saved {len(html)} chars for {item_id}")
+            
+            # Save metadata if provided
+            if metadata:
+                metadata_path = self.output_dir / f"{item_id}.meta.json"
+                import json
+                with open(metadata_path, 'w', encoding='utf-8') as f:
+                    json.dump(metadata, f, indent=2, ensure_ascii=False)
+            
+            return str(html_path)
+            
+        except Exception as e:
+            logger.error(f"Error fetching detail page for {item_id}: {e}")
+            raise
+
+
+    def test_single_race(self, race_url: str):
+        """Test fetching a single race for debugging."""
+        logger.info(f"Testing single race: {race_url}")
+        
+        if not race_url.startswith('http'):
+            race_url = f"https://rpg.angelssword.com{race_url}"
+        
+        race_id = race_url.split('/')[-1].split(';')[0]
+        
+        try:
+            html_path = self.fetch_detail_page(race_url, race_id)
+            logger.info(f"Successfully fetched race to {html_path}")
+        except Exception as e:
+            logger.error(f"Failed to fetch race: {e}")
 
 
 if __name__ == "__main__":
@@ -179,16 +232,24 @@ if __name__ == "__main__":
     
     # Configure logging
     logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        level=logging.INFO,  # Reduced verbosity
+        format='%(asctime)s - %(levelname)s - %(message)s'
     )
+    
+    # Suppress selenium debug logs
+    logging.getLogger('selenium').setLevel(logging.WARNING)
+    logging.getLogger('urllib3').setLevel(logging.WARNING)
     
     parser = argparse.ArgumentParser(description="Fetch LC races data")
     parser.add_argument("--version", default="latest", help="Game version to fetch")
+    parser.add_argument("--test-race", help="Test mode: fetch single race by URL")
     args = parser.parse_args()
     
     fetcher = RaceFetcher(version=args.version)
     try:
-        fetcher.fetch_all()
+        if args.test_race:
+            fetcher.test_single_race(args.test_race)
+        else:
+            fetcher.fetch_all()
     finally:
         fetcher.cleanup()

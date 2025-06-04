@@ -23,7 +23,12 @@ class RaceParser(BaseParser):
         self.input_dir = self.input_base_dir / self.input_version / self.data_type
         # Always use real version number for output
         if version == "latest":
-            version = "0.10.1"
+            # Try to resolve from symlink
+            latest_path = Path("scraped_html/latest")
+            if latest_path.is_symlink():
+                version = latest_path.resolve().name
+            else:
+                version = "0.10.1"  # fallback
         super().__init__(output_dir=output_dir, version=version)
     
     def get_data_type(self) -> str:
