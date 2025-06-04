@@ -13,6 +13,18 @@ This repository contains tools for the Lyrian Chronicles tabletop role-playing g
 - The backend architecture needs refactoring for better organization and maintainability
 - The project is actively used for the Mirane server community
 
+## ⚠️ CRITICAL: External Resource Guidelines
+
+**NEVER run scripts that modify external resources without explicit user permission!**
+
+Scripts that require permission before execution:
+- `export_to_sheets.py` - Modifies Google Sheets used by multiple people
+- `create_demo_sheet.py` - Creates/updates demo spreadsheets  
+- Any database migration scripts that write to production systems
+- Any script that uploads, publishes, or shares data externally
+
+**Always ask first** before running these commands. The user should explicitly request the action or give permission. These resources are shared and incomplete exports can disrupt other users' work.
+
 ## Tech Stack
 
 ### Frontend

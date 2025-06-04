@@ -110,17 +110,17 @@ class AbilitiesExporter(BaseSheetsExporter):
         
         cost_parts = []
         
-        # Standard costs in preferred order
-        if costs.get('ap'):
+        # Standard costs in preferred order - check if key exists and value is not None
+        if 'ap' in costs and costs['ap'] is not None:
             cost_parts.append(f"AP: {costs['ap']}")
-        if costs.get('mana'):
+        if 'mana' in costs and costs['mana'] is not None:
             cost_parts.append(f"MP: {costs['mana']}")
-        if costs.get('rp'):
+        if 'rp' in costs and costs['rp'] is not None:
             cost_parts.append(f"RP: {costs['rp']}")
         
         # Other costs
         for key, value in costs.items():
-            if key not in ['mana', 'ap', 'rp'] and value:
+            if key not in ['mana', 'ap', 'rp'] and value is not None and value != "":
                 # Format key nicely (e.g., "other" -> "Other")
                 formatted_key = key.replace('_', ' ').title()
                 cost_parts.append(f"{formatted_key}: {value}")

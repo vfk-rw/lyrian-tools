@@ -294,43 +294,45 @@ def create_ability_lookup_demo_v3(exporter):
     
     # Headers and initial setup - NO FORMULAS in the data
     demo_data = [
-        ["Ability Lookup Demo (V3)", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", ""],
-        ["Instructions: Select an ability from the dropdown and see all details populate!", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", ""],
-        ["Select Ability", "Type", "Keywords", "Range", "Requirements", "Mana", "AP", "RP", "Description"],
-        ["", "", "", "", "", "", "", "", ""],  # Row 6 - dropdown row
-        ["", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", ""],
-        ["Formula Reference:", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", ""],
-        ["Data Validation (A6):", "Range from _AbilityList helper sheet", "", "", "", "", "", "", ""],
-        ["Type Formula (B6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", ""],
-        ["Keywords Formula (C6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", ""],
-        ["Range Formula (D6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", ""],
-        ["Requirements Formula (E6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", ""],
-        ["Mana Formula (F6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", ""],
-        ["AP Formula (G6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", ""],
-        ["RP Formula (H6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", ""],
-        ["Description Formula (I6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", ""],
+        ["Ability Lookup Demo (V3)", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["Instructions: Select an ability from the dropdown and see all details populate!", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["Select Ability", "Type", "Keywords", "Range", "Requirements", "Combined Costs", "Mana", "AP", "RP", "Description"],
+        ["", "", "", "", "", "", "", "", "", ""],  # Row 6 - dropdown row
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["Formula Reference:", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", ""],
+        ["Data Validation (A6):", "Range from _AbilityList helper sheet", "", "", "", "", "", "", "", ""],
+        ["Type Formula (B6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", "", ""],
+        ["Keywords Formula (C6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", "", ""],
+        ["Range Formula (D6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", "", ""],
+        ["Requirements Formula (E6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", "", ""],
+        ["Combined Costs Formula (F6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", "", ""],
+        ["Mana Formula (G6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", "", ""],
+        ["AP Formula (H6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", "", ""],
+        ["RP Formula (I6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", "", ""],
+        ["Description Formula (J6):", "=IFERROR(INDEX(...), \"\")", "", "", "", "", "", "", "", ""],
     ]
     
     exporter.add_sheet("Ability Lookup")
     exporter.write_data("Ability Lookup", demo_data)
     
-    # Now write the actual formulas to row 6
+    # Now write the actual formulas to row 6 (updated column references)
     formulas = {
-        'B6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!C2:C"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',
-        'C6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!D2:D"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',
-        'D6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!E2:E"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',
-        'E6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!G2:G"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',
-        'F6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!H2:H"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',
-        'G6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!I2:I"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',
-        'H6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!J2:J"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',
-        'I6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!F2:F"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")'
+        'B6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!C2:C"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',   # Type
+        'C6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!D2:D"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',   # Keywords
+        'D6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!E2:E"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',   # Range
+        'E6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!G2:G"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',   # Requirements
+        'F6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!H2:H"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',   # Combined Costs (NEW)
+        'G6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!I2:I"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',   # Mana
+        'H6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!J2:J"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',   # AP
+        'I6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!K2:K"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")',   # RP
+        'J6': f'=IFERROR(INDEX(IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!F2:F"),MATCH(A6,IMPORTRANGE("{SOURCE_SPREADSHEET_ID}","All Abilities!B2:B"),0)),"")'    # Description
     }
     
     write_formulas_to_cells(exporter, "Ability Lookup", formulas)
