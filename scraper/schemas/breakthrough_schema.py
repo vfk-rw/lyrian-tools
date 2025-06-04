@@ -11,10 +11,7 @@ class Breakthrough(BaseModel):
     
     name: str = Field(..., description="The breakthrough name")
     id: str = Field(..., description="Unique identifier (sanitized name)")
-    cost: Optional[Union[int, Literal["variable"]]] = Field(
-        None, 
-        description="XP cost of the breakthrough (number or 'variable')"
-    )
+    cost: int = Field(..., description="XP cost of the breakthrough (0-600)")
     requirements: List[str] = Field(
         default_factory=list, 
         description="List of requirements to take this breakthrough"
@@ -45,14 +42,12 @@ class Breakthrough(BaseModel):
         return v.strip()
     
     @field_validator('cost')
-    def validate_cost(cls, v: Optional[Union[int, str]]) -> Optional[Union[int, str]]:
+    def validate_cost(cls, v: int) -> int:
         """Validate cost value."""
-        if v is None:
-            return v
-        if isinstance(v, str) and v != "variable":
-            raise ValueError("String cost must be 'variable'")
-        if isinstance(v, int) and v < 0:
-            raise ValueError("Numeric cost cannot be negative")
+        if v < 0:
+            raise ValueError("Cost cannot be negative")
+        if v > 1000:  # Reasonable upper bound
+            raise ValueError("Cost seems unreasonably high")
         return v
 
 
@@ -61,7 +56,7 @@ class BreakthroughIndexEntry(BaseModel):
     
     id: str = Field(..., description="Breakthrough ID")
     name: str = Field(..., description="Breakthrough name")
-    cost: Optional[Union[int, Literal["variable"]]] = Field(None, description="XP cost")
+    cost: int = Field(..., description="XP cost")
     has_requirements: Optional[bool] = Field(None, description="Whether breakthrough has requirements")
 
 
@@ -102,25 +97,25 @@ class BreakthroughIndex(BaseModel):
 if __name__ == "__main__":
     # Example breakthrough data
     example_breakthrough = {
-        "name": "Blend In",
-        "id": "blend_in",
-        "cost": 300,
-        "requirements": ["Must be a Slimefolk."],
-        "description": "You disguise your appearance using magic to be that of another race. This skill does not allow you to change your appearance at will, but instead lets you appear as you would as a different race."
+        "name": "Powerful Ki",
+        "id": "powerful_ki",
+        "cost": 200,
+        "requirements": ["Must be an Oni"],
+        "description": "When using Gravitational Ki, the range increases by 30ft. The push and pull distance increases by up to 10ft."
     }
     
     # Validate
     breakthrough = Breakthrough(**example_breakthrough)
     print(f"Valid breakthrough: {breakthrough.name} (Cost: {breakthrough.cost})")
     
-    # Example with variable cost
-    variable_breakthrough = {
-        "name": "Advanced Training",
-        "id": "advanced_training",
-        "cost": "variable",
+    # Example with no requirements
+    no_req_breakthrough = {
+        "name": "Bully",
+        "id": "bully",
+        "cost": 100,
         "requirements": [],
-        "description": "Gain additional training in a skill of your choice. The cost varies based on the skill level."
+        "description": "You gain +2 to intimidation rolls and can intimidate as a free action once per turn."
     }
     
-    breakthrough2 = Breakthrough(**variable_breakthrough)
-    print(f"Variable cost breakthrough: {breakthrough2.name} - Cost: {breakthrough2.cost}")
+    breakthrough2 = Breakthrough(**no_req_breakthrough)
+    print(f"No requirement breakthrough: {breakthrough2.name} - Cost: {breakthrough2.cost}")

@@ -9,12 +9,11 @@ Breakthroughs are special character advancement options that provide unique abil
 ## Breakthrough Structure
 
 ```yaml
-breakthrough:
-  name: string              # Display name (e.g., "Blend In", "Adamantine Body")
-  id: string                # Unique identifier (sanitized name)
-  cost: integer | "variable" | null  # XP cost (typically 100-500, or "variable")
-  requirements: list[string]         # List of prerequisites (can be empty)
-  description: string       # Full description of the breakthrough's effects
+name: string              # Display name (e.g., "Powerful Ki", "Blend In")
+id: string                # Unique identifier (sanitized name)
+cost: integer             # XP cost (typically 0-600)
+requirements: list[string] | empty  # List of prerequisites (can be empty list)
+description: string       # Full description of the breakthrough's effects
 ```
 
 ## Fields
@@ -23,10 +22,10 @@ breakthrough:
 The display name of the breakthrough as shown in the game.
 
 Examples:
+- "Powerful Ki"
 - "Blend In"
-- "Adamantine Body"
-- "Awakened Spellcasting"
-- "Blood of the Progenitor"
+- "8 Eyes"
+- "Angelblooded"
 
 ### ID
 A sanitized version of the name suitable for file names and references.
@@ -35,49 +34,48 @@ A sanitized version of the name suitable for file names and references.
 - Special characters removed
 
 Examples:
+- `powerful_ki`
 - `blend_in`
-- `adamantine_body`
-- `awakened_spellcasting`
-- `blood_of_the_progenitor`
+- `8_eyes`
+- `angelblooded`
 
 ### Cost
-The XP cost required to purchase the breakthrough.
+The XP cost required to purchase the breakthrough. All costs are integers.
 
-Types:
-- **Numeric**: Most breakthroughs have fixed costs (e.g., 100, 200, 300, 500)
-- **Variable**: Some breakthroughs have costs that depend on other factors
-- **None/null**: Rare cases where cost is not specified or not applicable
+Common cost ranges:
+- **0**: Free breakthroughs (e.g., "Angelblooded", "Elixir Addict")
+- **25-100**: Low-cost training breakthroughs
+- **150-300**: Mid-range breakthroughs
+- **400-600**: High-cost powerful breakthroughs
 
 ```yaml
-# Fixed cost
-cost: 300
+# Free breakthrough
+cost: 0
 
-# Variable cost
-cost: "variable"
+# Low cost training
+cost: 25
 
-# No cost specified
-cost: null
+# High cost powerful ability
+cost: 600
 ```
 
 ### Requirements
-Prerequisites that must be met before taking the breakthrough.
+Prerequisites that must be met before taking the breakthrough. Can be an empty list.
 
 Common requirement types:
-- **Race Requirements**: "Must be a Slimefolk.", "Must be a Demon."
-- **Class Requirements**: "Must have levels in Mage.", "Must be a Warrior."
-- **Ability Requirements**: "Must know at least 3 Fire spells."
-- **Level Requirements**: "Must be level 10 or higher."
+- **Race Requirements**: "Must be an Oni", "Must be a Demon."
+- **Class Requirements**: "Must have levels in Mage."
 - **Other Requirements**: Various specific conditions
 
 ```yaml
 # Single requirement
 requirements:
-  - "Must be a Slimefolk."
+- Must be an Oni
 
 # Multiple requirements
 requirements:
-  - "Must be level 5 or higher."
-  - "Must have the Spellcasting feature."
+- Must be level 5 or higher
+- Must have the Spellcasting feature
 
 # No requirements
 requirements: []
@@ -98,72 +96,62 @@ The breakthrough index provides a summary of all breakthroughs:
 
 ```yaml
 # breakthroughs_index.yaml
-total_count: 150
+total_count: 68
 version: "0.10.1"
-generated_at: "2025-01-06T12:00:00Z"
+generated_at: "2025-06-02T15:38:03.207196"
 cost_summary:
-  numeric: 120      # Breakthroughs with fixed numeric costs
-  variable: 10      # Breakthroughs with variable costs
-  none: 20          # Breakthroughs with no specified cost
-with_requirements: 100
-without_requirements: 50
+  numeric: 68       # All breakthroughs have numeric costs
+  variable: 0       # No variable costs
+  none: 0           # No missing costs
+with_requirements: 49
+without_requirements: 19
 breakthroughs:
-  - id: "adamantine_body"
-    name: "Adamantine Body"
-    cost: 200
+  - id: "8_eyes"
+    name: "8 Eyes"
+    cost: 100
     has_requirements: true
-  - id: "blend_in"
-    name: "Blend In"
-    cost: 300
+  - id: "powerful_ki"
+    name: "Powerful Ki"
+    cost: 200
     has_requirements: true
   # ... more breakthroughs
 ```
 
 ## Usage Examples
 
-### Simple Breakthrough
+### Simple Breakthrough (No Requirements)
 ```yaml
-name: "Toughness"
-id: "toughness"
+name: Bully
+id: bully
 cost: 100
 requirements: []
-description: "You gain +10 maximum HP."
+description: You gain +2 to intimidation rolls and can intimidate as a free action once per turn.
 ```
 
 ### Breakthrough with Race Requirement
 ```yaml
-name: "Blend In"
-id: "blend_in"
-cost: 300
+name: Powerful Ki
+id: powerful_ki
+cost: 200
 requirements:
-  - "Must be a Slimefolk."
-description: "You disguise your appearance using magic to be that of another race. This skill does not allow you to change your appearance at will, but instead lets you appear as you would as a different race. You choose this race when this breakthrough is picked up and cannot change it.\n\nIn addition, the first time you're attacked in combat while disguised in this way, you can use Slime Body for 0 RP. This effect does not work if the attacker knows that you are a Slimefolk."
+- Must be an Oni
+description: When using Gravitational Ki, the range increases by 30ft. The push and pull distance increases by up to 10ft.
 ```
 
-### Breakthrough with Variable Cost
+### Free Breakthrough
 ```yaml
-name: "Extra Training"
-id: "extra_training"
-cost: "variable"
-requirements: []
-description: "Gain additional skill points in a skill of your choice. The cost depends on your current skill level."
-```
-
-### Breakthrough with Multiple Requirements
-```yaml
-name: "Arcane Mastery"
-id: "arcane_mastery"
-cost: 500
+name: Angelblooded
+id: angelblooded
+cost: 0
 requirements:
-  - "Must be level 10 or higher."
-  - "Must have at least 20 Intelligence."
-  - "Must know at least 10 different spells."
-description: "Your mastery of the arcane arts grants you exceptional power. All your spells gain +2 to their save DC and you gain +1 spell slot of each level you can cast."
+- Must be descended from an angel
+description: You gain resistance to radiant damage and can cast light as a cantrip.
 ```
 
 ## Implementation Notes
 
-1. **Cost Parsing**: The parser attempts to extract numeric values from cost text, but falls back to "variable" for non-numeric costs
-2. **Requirement Parsing**: Requirements are split by newlines, semicolons, or "and" keywords
+1. **Cost Parsing**: All costs are numeric integers (0-600 range)
+2. **Requirement Parsing**: Requirements are split by newlines and cleaned
 3. **Description Formatting**: Preserves paragraph breaks from the original HTML
 4. **ID Generation**: Automatically generated from names using standard sanitization
+5. **Actual Data**: Currently 68 breakthroughs total, with 49 having requirements and 19 without

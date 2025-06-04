@@ -25,7 +25,6 @@ class Keyword(BaseModel):
     
     description: str = Field(..., description="Full description of the keyword's effect")
     variable_info: Optional[str] = Field(None, description="Explanation of X or variable values if used")
-    related_keywords: List[str] = Field(default_factory=list, description="Related or similar keywords")
     
     @field_validator('id')
     def validate_id(cls, v: str) -> str:
@@ -92,8 +91,7 @@ if __name__ == "__main__":
         "name": "Rapid",
         "id": "rapid",
         "type": "timing",
-        "description": "This ability can be used as a reaction when its requirements are met.",
-        "related_keywords": ["Counter", "Encounter Start"]
+        "description": "This ability can be used more than once per turn."
     }
     
     # Validate

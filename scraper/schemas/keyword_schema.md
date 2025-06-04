@@ -9,128 +9,65 @@ Keywords are standardized tags that modify ability behavior and provide consiste
 ## Keyword Structure
 
 ```yaml
-keyword:
-  name: string              # Display name (e.g., "Rapid", "Burning")
-  id: string                # Unique identifier (sanitized name)
-  type: string              # Keyword category - see below for types
-  description: string       # Full description of the keyword's effect
-  variable_info: string     # Optional: Explanation of X or variable values
-  related_keywords: list    # Optional: List of related keyword names
+name: string              # Display name (e.g., "Rapid", "Burning")
+id: string                # Unique identifier (sanitized name)
+type: string              # Keyword category - see below for types
+description: string       # Full description of the keyword's effect
+variable_info: string     # Optional: Explanation of X or variable values (only if description contains "X")
 ```
 
 ## Keyword Types
 
-Keywords are categorized into the following types:
+Based on the actual parsed data, keywords are categorized into the following types:
 
-### 1. Timing (`type: "timing"`)
+### 1. General (`type: "general"`)
+Default category for most keywords that don't fit specialized types. This includes most game mechanics.
+
+Examples: Aid, Artillery, Blinded, Broken, Challenge, Combo, Concentration, Disarm, Enchantment, Esoteric Art, Expose, Full Pierce, Guard Crush, Half Pierce, Immovable, Instant, Killing Blow, Lock On, Miracle, Mystic Eye, Ninjutsu, Overcharge, Pass, Presence Concealment, Prone, Quick, Rage, Root, Secret Art, Setup, Shaken, Sickened, Sidestep, Slow, Song, Sound, Stance, Stun, Summon, Sunder, Sure Hit, Transformation, Unbalanced, Upkeep, Weakened
+
+### 2. Timing (`type: "timing"`)
 Keywords that affect when abilities can be used.
 
-Examples:
-- **Rapid**: Can be used as a reaction
-- **Counter**: Triggered in response to attacks
-- **Encounter Start**: Activates at beginning of combat
-- **Turn End**: Triggers at end of turn
-
-### 2. Element (`type: "element"`)
-Elemental damage types and resistances.
-
-Examples:
-- **Fire**: Fire damage/resistance
-- **Water**: Water damage/resistance
-- **Frost**: Ice/cold subtype of Water
-- **Lightning**: Electrical damage
-- **Holy**: Divine/radiant damage
-- **Dark**: Shadow/necrotic damage
+Examples: Daze, Rapid, Static
 
 ### 3. Status (`type: "status"`)
 Conditions and debuffs that affect characters.
 
-Examples:
-- **Burning**: Takes X damage per turn
-- **Bleeding**: Ongoing physical damage
-- **Stunned**: Cannot act
-- **Frozen**: Movement restricted
-- **Poisoned**: Various negative effects
-- **Cursed**: Magical affliction
+Examples: Burning
 
-### 4. Combat (`type: "combat"`)
+### 4. Element (`type: "element"`)
+Elemental damage types.
+
+Examples: Fire
+
+### 5. Combat (`type: "combat"`)
 Combat mechanics and action types.
 
-Examples:
-- **Strike**: Physical attack modifier
-- **Attack**: General attack keyword
-- **Shield**: Defensive action
-- **Parry**: Counter-attack defense
-- **Aid**: Support action
+Examples: Shieldbreaker, Soaked, Trick Attack, Unarmed Strike
 
-### 5. Weapon (`type: "weapon"`)
-Weapon categories and restrictions.
-
-Examples:
-- **Light Blade**: Daggers, shortswords
-- **Heavy Blade**: Longswords, greatswords
-- **Bow**: Ranged weapons
-- **Unarmed Strike**: Natural weapons
-- **Staff**: Magical implements
-
-### 6. Movement (`type: "movement"`)
-Movement and positioning keywords.
-
-Examples:
-- **Teleport**: Instant movement
-- **Flight**: Aerial movement
-- **Speed**: Movement distance modifier
-
-### 7. Spell (`type: "spell"`)
+### 6. Spell (`type: "spell"`)
 Magic and spellcasting keywords.
 
-Examples:
-- **Spell**: Indicates magical ability
-- **Arcane**: Wizard-type magic
-- **Bounded Field**: Area effect magic
-- **Concentration**: Requires focus
+Examples: Spell
 
-### 8. Defense (`type: "defense"`)
-Defensive and resistance keywords.
+### 7. Movement (`type: "movement"`)
+Movement and positioning keywords.
 
-Examples:
-- **Resistance**: Damage reduction
-- **Immunity**: Complete protection
-- **Absorb**: Convert damage to healing
-
-### 9. General (`type: "general"`)
-Default category for keywords that don't fit other types.
+Examples: Teleport
 
 ## Variable Values
 
 Some keywords use variable values, typically represented as "X":
 
 ```yaml
-keyword:
-  name: "Burning"
-  description: "A Burning character takes X damage at the end of their turn..."
-  variable_info: "Variable value (context-dependent)"
+name: "Burning"
+id: "burning"
+type: "status"
+description: "A Burning character takes X damage at the end of their turn. They may spend 1 AP to remove this effect."
+variable_info: "Variable value (context-dependent)"
 ```
 
-Common variable patterns:
-- **X damage**: Variable damage amount
-- **X rounds**: Variable duration
-- **X feet**: Variable distance
-- **X targets**: Variable number of targets
-
-## Related Keywords
-
-Keywords can reference other related keywords:
-
-```yaml
-keyword:
-  name: "Rapid"
-  related_keywords:
-    - "Counter"
-    - "Encounter Start"
-```
-
-This helps players understand keyword interactions and find similar mechanics.
+The `variable_info` field is only present when the description contains variable values like "X".
 
 ## Index File Structure
 
@@ -138,19 +75,17 @@ The keyword index provides a summary of all keywords:
 
 ```yaml
 # keywords_index.yaml
-total_count: 150
+total_count: 57
 version: "0.10.1"
-generated_at: "2025-01-06T12:00:00Z"
+generated_at: "2025-06-02T14:58:34.352097"
 by_type:
-  timing: 12
-  element: 15
-  status: 20
-  combat: 25
-  weapon: 18
-  movement: 8
-  spell: 22
-  defense: 10
-  general: 20
+  general: 46
+  status: 1
+  timing: 3
+  element: 1
+  combat: 4
+  spell: 1
+  movement: 1
 keywords:
   - id: "rapid"
     name: "Rapid"
@@ -166,33 +101,32 @@ keywords:
 
 ### Simple Keyword
 ```yaml
-name: "Rapid"
-id: "rapid"
-type: "timing"
-description: "This ability can be used as a reaction when its requirements are met."
+name: Rapid
+id: rapid
+type: timing
+description: This ability can be used more than once per turn.
 ```
 
 ### Status Effect with Variable
 ```yaml
-name: "Burning"
-id: "burning"
-type: "status"
-description: "A Burning character takes X damage at the end of their turn. They may spend 1 AP to remove this effect."
-variable_info: "Variable value (context-dependent)"
+name: Burning
+id: burning
+type: status
+description: A Burning character takes X damage at the end of their turn. They may spend 1 AP to remove this effect.
+variable_info: Variable value (context-dependent)
 ```
 
-### Element with Related Keywords
+### Element Keyword
 ```yaml
-name: "Fire"
-id: "fire"
-type: "element"
-description: "This ability deals fire damage. Fire damage is super effective against ice-based enemies."
-related_keywords: ["Burning", "Heat", "Flame"]
+name: Fire
+id: fire
+type: element
+description: This damage type represents fire-based attacks and is often used for burning or heat-based effects.
 ```
 
 ## Implementation Notes
 
 1. **ID Generation**: IDs are created by converting names to lowercase and replacing spaces/special characters with underscores
-2. **Type Detection**: The parser attempts to automatically categorize keywords based on name and description patterns
-3. **Variable Detection**: The parser looks for "X" in descriptions and attempts to extract explanations
-4. **Related Keywords**: Extracted from description text using patterns like "similar to", "like", "see also"
+2. **Type Detection**: The parser attempts to automatically categorize keywords based on name and description patterns, with most falling into the "general" category
+3. **Variable Detection**: The parser looks for "X" in descriptions and adds variable_info field when found
+4. **Actual Data**: Currently 57 keywords total, with 46 in "general" category
