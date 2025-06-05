@@ -104,6 +104,10 @@ class YamlToSupabaseMigrator:
         
         logger.info(f"\n✅ Migration files generated in: {self.output_dir}")
         logger.info("Upload these files to Supabase in order: schema → data → relationships → indexes")
+        logger.info("\nTo deploy using Supabase CLI:")
+        logger.info("  - For local dev: python deploy_to_supabase.py --local")
+        logger.info("  - For remote: python deploy_to_supabase.py --project-ref <ref> --db-password <password>")
+        logger.info("  - Or use: ./deploy.sh [options]")
         
     def _generate_relationships_sql(self) -> str:
         """Generate SQL for populating relationship tables."""
