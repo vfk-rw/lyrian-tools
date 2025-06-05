@@ -61,6 +61,9 @@ class YamlToSupabaseMigrator:
             'monster-abilities': MonsterAbilityConverter()
         }
         
+        # Store all relationship SQL from converters
+        self.all_relationship_sql = []
+        
     def generate_all(self):
         """Generate SQL files for all data types."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -114,17 +117,22 @@ class YamlToSupabaseMigrator:
         sql_lines = [
             "-- Populate relationship tables",
             "-- This file should be run after all data is loaded",
-            "",
-            "-- Class-Ability relationships",
-            "-- These will be populated based on class YAML files that list abilities",
-            "-- For now, we'll need to manually map these or enhance the converters",
-            "",
-            "-- Monster-Ability relationships", 
-            "-- Similarly, these come from monster YAML files",
-            "",
-            "-- TODO: Implement relationship extraction from YAML files",
             ""
         ]
+        
+        # Collect relationships from all converters
+        for data_type, converter in self.converters.items():
+            if hasattr(converter, '_generate_relationship_sql'):
+                relationship_sql = converter._generate_relationship_sql()
+                if relationship_sql:
+                    sql_lines.append(f"-- {data_type} relationships")
+                    sql_lines.extend(relationship_sql)
+                    sql_lines.append("")
+        
+        if len(sql_lines) == 3:  # Only header lines
+            sql_lines.append("-- No relationships found in converters")
+            sql_lines.append("-- Make sure to run the data generation first")
+        
         return '\n'.join(sql_lines)
         
     def _generate_indexes_sql(self) -> str:

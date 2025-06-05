@@ -26,44 +26,36 @@ class ClassConverter(BaseConverter):
         
         class_id = data.get('id')
         
-        # Extract ability relationships from skills
-        if 'skills' in data and isinstance(data['skills'], dict):
-            # Extract key abilities (level 1 abilities)
-            key_abilities = data['skills'].get('key_abilities', [])
-            if isinstance(key_abilities, list):
-                for ability in key_abilities:
-                    if isinstance(ability, dict) and 'id' in ability:
-                        self.class_key_abilities.append({
-                            'class_id': class_id,
-                            'key_ability_id': ability['id']
-                        })
-                    elif isinstance(ability, str):
-                        # Sometimes it's just an ID string
-                        self.class_key_abilities.append({
-                            'class_id': class_id,
-                            'key_ability_id': ability
-                        })
-                        
-            # Extract level abilities if they exist
-            level_abilities = data['skills'].get('level_abilities', [])
-            if isinstance(level_abilities, list):
-                for level_data in level_abilities:
-                    if isinstance(level_data, dict):
-                        level = level_data.get('level', 1)
-                        abilities = level_data.get('abilities', [])
-                        for ability in abilities:
-                            if isinstance(ability, dict) and 'id' in ability:
-                                self.class_abilities.append({
-                                    'class_id': class_id,
-                                    'ability_id': ability['id'],
-                                    'level_gained': level
-                                })
-                            elif isinstance(ability, str):
-                                self.class_abilities.append({
-                                    'class_id': class_id,
-                                    'ability_id': ability,
-                                    'level_gained': level
-                                })
+        # Extract ability relationships from progression
+        if 'progression' in data and isinstance(data['progression'], list):
+            for level_data in data['progression']:
+                if isinstance(level_data, dict):
+                    level = level_data.get('level', 1)
+                    benefits = level_data.get('benefits', [])
+                    
+                    for benefit in benefits:
+                        if isinstance(benefit, dict) and benefit.get('type') == 'ability':
+                            ability_id = benefit.get('ability_id')
+                            if ability_id:
+                                # Check if it's a key ability by looking in ability_references
+                                is_key_ability = False
+                                if 'ability_references' in data:
+                                    for ref in data['ability_references']:
+                                        if ref.get('id') == ability_id and ref.get('type') == 'key_ability':
+                                            is_key_ability = True
+                                            break
+                                
+                                if is_key_ability:
+                                    self.class_key_abilities.append({
+                                        'class_id': class_id,
+                                        'key_ability_id': ability_id
+                                    })
+                                else:
+                                    self.class_abilities.append({
+                                        'class_id': class_id,
+                                        'ability_id': ability_id,
+                                        'level_gained': level
+                                    })
         
         return {
             'id': class_id,
