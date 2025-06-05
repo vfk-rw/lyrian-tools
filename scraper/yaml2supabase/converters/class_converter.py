@@ -20,6 +20,10 @@ class ClassConverter(BaseConverter):
     def convert_record(self, data: Dict[str, Any], version: str) -> Dict[str, Any]:
         """Convert a class record and extract ability relationships."""
         
+        # Handle nested structure - extract class data from 'class' key if present
+        if 'class' in data:
+            data = data['class']
+        
         class_id = data.get('id')
         
         # Extract ability relationships from skills
