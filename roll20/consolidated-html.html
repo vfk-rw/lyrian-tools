@@ -1,0 +1,771 @@
+<input type="checkbox" name="attr_dark_mode" value="1" class="sheet-dark-mode" style="display: none;">
+<div class="sheet-wrapper">
+    <!-- HEADER -->
+    <div class="sheet-header">
+        <h1>Lyrian Chronicles</h1>
+        <input type="text" name="attr_character_name" placeholder="Character Name" class="sheet-character-name">
+        <div class="sheet-gm-info">
+            <!-- Token linking suggestion for GMs -->
+            <p class="sheet-note">Recommended token settings: Bar 1 = HP, Bar 2 = Mana, Bar 3 = RP</p>
+        </div>
+        <div class="sheet-mode-toggles">
+            <div class="sheet-npc-mode-toggle">
+                <label><input type="checkbox" name="attr_npc_mode" value="1"> NPC Mode (Disable Auto-Calculations)</label>
+            </div>
+            <div class="sheet-dark-mode-toggle">
+                <label><input type="checkbox" name="attr_dark_mode" value="1"> Dark Mode</label>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- MAIN & SUB STATS COMPACT TABLE -->
+    <div class="sheet-section">
+        <div class="sheet-stat-tables">
+            <!-- MAIN STATS -->
+            <div class="sheet-stat-table">
+                <h3>Main Stats</h3>
+                <table>
+                    <tr>
+                        <td><label>Power:</label></td>
+                        <td><input type="number" name="attr_power" value="3"></td>
+                        <td><label>Focus:</label></td>
+                        <td><input type="number" name="attr_focus" value="3"></td>
+                    </tr>
+                    <tr>
+                        <td><label>Agility:</label></td>
+                        <td><input type="number" name="attr_agility" value="3"></td>
+                        <td><label>Toughness:</label></td>
+                        <td><input type="number" name="attr_toughness" value="3"></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- SUB STATS -->
+            <div class="sheet-stat-table">
+                <h3>Sub Stats</h3>
+                <table>
+                    <tr>
+                        <td><label>Fitness:</label></td>
+                        <td><input type="number" name="attr_fitness" value="3"></td>
+                        <td><label>Cunning:</label></td>
+                        <td><input type="number" name="attr_cunning" value="3"></td>
+                    </tr>
+                    <tr>
+                        <td><label>Reason:</label></td>
+                        <td><input type="number" name="attr_reason" value="3"></td>
+                        <td><label>Awareness:</label></td>
+                        <td><input type="number" name="attr_awareness" value="3"></td>
+                    </tr>
+                    <tr>
+                        <td><label>Presence:</label></td>
+                        <td><input type="number" name="attr_presence" value="3"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- COMBAT STATS -->
+    <div class="sheet-section">
+        <h3>Combat Stats</h3>
+        
+        <!-- EQUIPMENT VALUES -->
+        <div class="sheet-equipment-row">
+            <div>
+                <label>Equipment Value (Passive):</label>
+                <input type="number" name="attr_equipment_value_passive" value="0">
+            </div>
+            <div>
+                <label>Equipment Value (Active):</label>
+                <input type="number" name="attr_equipment_value_active" value="0">
+            </div>
+            <div>
+                <label>Equipment Penalty:</label>
+                <input type="number" name="attr_equipment_penalty" value="0">
+            </div>
+        </div>
+        
+        <div class="sheet-combat-stats">
+            <div>
+                <label>HP:</label>
+                <input type="number" name="attr_hp">
+                <span>/</span>
+                <input type="number" name="attr_hp_max" value="(@{toughness}*5)+20+@{hp_bonus}">
+                <span>+</span>
+                <input type="number" name="attr_temp_hp" value="0" title="Temporary HP (shields)">
+            </div>
+            <div>
+                <label>HP Bonus:</label>
+                <input type="number" name="attr_hp_bonus" value="0" title="Bonus HP from class features">
+            </div>
+            <div>
+                <label>Mana:</label>
+                <input type="number" name="attr_mana">
+                <span>/</span>
+                <input type="number" name="attr_mana_max" value="(@{power})+6+@{mp_bonus}">
+            </div>
+            <div>
+                <label>MP Bonus:</label>
+                <input type="number" name="attr_mp_bonus" value="0" title="Bonus MP from class features">
+            </div>
+            <div>
+                <label>RP:</label>
+                <input type="number" name="attr_rp">
+                <span>/</span>
+                <input type="number" name="attr_rp_max" value="(@{agility})-(@{equipment_penalty})+2">
+            </div>
+            <div>
+                <label>Initiative:</label>
+                <input type="number" name="attr_initiative" value="(@{agility})-(@{equipment_penalty})">
+                <button type="roll" name="roll_initiative" value="&{template:default} {{name=@{character_name} - Initiative}} {{result=[[1d4+@{initiative}&{tracker}]]}}">Roll</button>
+            </div>
+            <div>
+                <label>Evasion:</label>
+                <input type="number" name="attr_evasion" value="(@{agility})-(@{equipment_penalty})+7">
+            </div>
+            <div>
+                <label>Guard:</label>
+                <input type="number" name="attr_guard" value="floor(@{equipment_value_passive}+(@{toughness}/2))">
+            </div>
+            <div>
+                <label>Block Value:</label>
+                <input type="number" name="attr_block_value" value="@{toughness}+@{equipment_value_active}">
+            </div>
+            <div>
+                <label>Dodge Value:</label>
+                <input type="number" name="attr_dodge_value" value="15+((@{agility}-@{equipment_penalty})*2)">
+            </div>
+            <div>
+                <label>Save Bonus:</label>
+                <input type="number" name="attr_save_bonus" value="@{toughness}">
+                <button type="roll" name="roll_save" value="&{template:default} {{name=@{character_name} - Save}} {{result=[[1d20+@{save_bonus}]]}}">Roll</button>
+            </div>
+            <div>
+                <label>Speed:</label>
+                <input type="number" name="attr_speed" value="20">
+            </div>
+            <div>
+                <label>Potency:</label>
+                <input type="number" name="attr_potency" value="(@{focus})+10">
+            </div>
+        </div>
+        
+        <!-- BASIC COMBAT ACTIONS -->
+        <div class="sheet-combat-actions">
+            <button type="roll" name="roll_passive_defensives" value="&{template:default} {{name=@{character_name} - Passive Defensives}} {{Guard=[[@{guard}]]}} {{Evasion=[[@{evasion}]]}}">Passive Defensives</button>
+            <button type="roll" name="roll_block" value="&{template:default} {{name=@{character_name} - Block (1 RP)}} {{Guard=[[@{block_value}]]}} {{Effect=Damage can be reduced to 0. Cannot be critically hit.}}">Block (1 RP)</button>
+            <button type="roll" name="roll_dodge" value="&{template:default} {{name=@{character_name} - Dodge (1 RP)}} {{Evasion=[[@{dodge_value}]]}}">Dodge (1 RP)</button>
+            <button type="roll" name="roll_aurasense" value="&{template:default} {{name=@{character_name} - Aurasense (0 AP)}} {{Effect=You check the aura of an enemy within 120ft, letting you know if they are a heroic unit or not. An enemy in presence concealment always shows as non-heroic.}}">Aurasense (0 AP)</button>
+            <button type="roll" name="roll_crawl" value="&{template:default} {{name=@{character_name} - Crawl (2 AP)}} {{Effect=You move up to 5ft while Prone. Can be used while Downed.}}">Crawl (2 AP)</button>
+            <button type="roll" name="roll_defend" value="&{template:default} {{name=@{character_name} - Defend (3 AP)}} {{Effect=Your next basic Dodge or Block costs 0 RP.}}">Defend (3 AP)</button>
+            <button type="roll" name="roll_disengage" value="&{template:default} {{name=@{character_name} - Disengage (2 AP)}} {{Effect=Your movement does not trigger attacks of opportunity until the start of your next turn.}}">Disengage (2 AP)</button>
+            <button type="roll" name="roll_hide" value="&{template:default} {{name=@{character_name} - Hide (2 AP)}} {{Effect=You attempt to hide, rolling a stealth or cunning check. Hidden targets cannot be the target of an attack. Taking any offensive action or ending movement within line of sight reveals you.}}">Hide (2 AP)</button>
+            <button type="roll" name="roll_hunker" value="&{template:default} {{name=@{character_name} - Hunker Down (2 AP)}} {{Effect=You hunker down, treating a low cover you're next to as high cover until the start of your next turn.}}">Hunker Down (2 AP)</button>
+            <button type="roll" name="roll_stand" value="&{template:default} {{name=@{character_name} - Stand (1 AP)}} {{Effect=Removes the Prone condition.}}">Stand (1 AP)</button>
+        </div>
+    </div>
+    
+    <!-- WEAPONS -->
+    <div class="sheet-section">
+        <h3>Weapons</h3>
+        <div class="sheet-repeating-weapons">
+            <fieldset class="repeating_weapons">
+                <div class="sheet-weapon-row">
+                    <div class="sheet-weapon-header">
+                        <div class="repcontrol">
+                            <button class="btn repcontrol_del" type="button">Delete</button>
+                        </div>
+                        <input type="text" name="attr_weapon_name" placeholder="Weapon Name">
+                        <select name="attr_weapon_group">
+                            <option value="none">Select Weapon Group</option>
+                            <option value="small">Small Weapons</option>
+                            <option value="polearm">Polearms</option>
+                            <option value="light_sword">Light Swords</option>
+                            <option value="longsword">Longsword</option>
+                            <option value="dueling">Dueling Weapons</option>
+                            <option value="axe">Axes</option>
+                            <option value="bludgeoning">Bludgeoning Weapons</option>
+                            <option value="katana">Katana</option>
+                            <option value="heavy_blade">Heavy Blades</option>
+                            <option value="thrown">Thrown Weapons</option>
+                            <option value="missile">Set of Missiles</option>
+                            <option value="bow">Bow</option>
+                            <option value="crossbow">Crossbow</option>
+                            <option value="musket">Musket</option>
+                            <option value="pistol">Pistol</option>
+                            <option value="shotgun">Shotgun</option>
+                            <option value="sniper">Sniper Rifle</option>
+                            <option value="thread_dagger">Saboteur Thread Daggers</option>
+                            <option value="wand">Wand</option>
+                            <option value="staff">Magic Staff</option>
+                            <option value="sling">Sling</option>
+                            <option value="chainsaw">Chainsaw</option>
+                            <option value="whip">Whip</option>
+                            <option value="scythe">Scythe</option>
+                            <option value="pickaxe">Pickaxe</option>
+                            <option value="lance">Lance</option>
+                            <option value="giant_scissors">Giant Scissors</option>
+                        </select>
+                        <select name="attr_weapon_size">
+                            <option value="light">Light</option>
+                            <option value="heavy">Heavy</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Add enchantment bonuses -->
+                    <div class="sheet-weapon-enchant">
+                        <div class="sheet-weapon-bonus">
+                            <label>Power Bonus:</label>
+                            <input type="number" name="attr_weapon_power_bonus" value="0">
+                        </div>
+                        <div class="sheet-weapon-bonus">
+                            <label>Focus Bonus:</label>
+                            <input type="number" name="attr_weapon_focus_bonus" value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="sheet-weapon-buttons">
+                        <button type="roll" name="roll_weapon_light" value="&{template:default} {{name=@{character_name} - @{weapon_name} Light Attack}} {{attack=[[1d20+@{focus}+@{weapon_focus_bonus}]]}} {{damage=[[1d4+(@{power}+@{weapon_power_bonus})@{weapon_light_bonus}]]}} {{special=@{weapon_special_rules}}}">Light Attack</button>
+                        <button type="roll" name="roll_weapon_heavy" value="&{template:default} {{name=@{character_name} - @{weapon_name} Heavy Attack}} {{attack=[[1d20+@{focus}+@{weapon_focus_bonus}]]}} {{damage=[[@{weapon_heavy_dice}+((@{power}+@{weapon_power_bonus})*2)@{weapon_heavy_bonus}]]}} {{special=@{weapon_special_rules}}}">Heavy Attack</button>
+                        <button type="roll" name="roll_weapon_precise" value="&{template:default} {{name=@{character_name} - @{weapon_name} Precise Attack}} {{attack=[[1d20+((@{focus}+@{weapon_focus_bonus})*2)]]}} {{damage=[[1d4+(@{power}+@{weapon_power_bonus})]]}} {{special=@{weapon_special_rules}}}">Precise Attack</button>
+                    </div>
+                    <div class="sheet-weapon-special-div">
+                        <span class="sheet-weapon-special">Special: </span><span data-i18n-attr="title" class="sheet-weapon-special-text"><span name="attr_weapon_special_rules"></span>
+                    </div>
+                    <input type="hidden" name="attr_weapon_light_bonus">
+                    <input type="hidden" name="attr_weapon_heavy_bonus">
+                    <input type="hidden" name="attr_weapon_heavy_dice" value="2d6">
+                    <input type="hidden" name="attr_weapon_special_rules">
+                    <input type="hidden" name="attr_weapon_enchant_text">
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    
+    <!-- SKILLS SECTION -->
+    <div class="sheet-section">
+        <h3>Skills (Points + Expertise, don't add your stats!)</h3>
+        <div class="sheet-skills-grid">
+            <!-- FITNESS SKILLS -->
+            <div class="sheet-skill-category">
+                <h4>Fitness</h4>
+                <div class="sheet-skill">
+                    <label>Acrobatics:</label>
+                    <input type="number" name="attr_acrobatics" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_acrobatics_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_acrobatics_total" value="(@{fitness}+@{acrobatics}+@{acrobatics_expertise})">
+                    <button type="roll" name="roll_acrobatics" value="&{template:default} {{name=@{character_name} - Acrobatics}} {{result=[[1d20+@{fitness}+@{acrobatics}+@{acrobatics_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Athletics:</label>
+                    <input type="number" name="attr_athletics" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_athletics_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_athletics_total" value="(@{fitness}+@{athletics}+@{athletics_expertise})">
+                    <button type="roll" name="roll_athletics" value="&{template:default} {{name=@{character_name} - Athletics}} {{result=[[1d20+@{fitness}+@{athletics}+@{athletics_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Riding:</label>
+                    <input type="number" name="attr_riding" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_riding_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_riding_total" value="(@{fitness}+@{riding}+@{riding_expertise})">
+                    <button type="roll" name="roll_riding" value="&{template:default} {{name=@{character_name} - Riding}} {{result=[[1d20+@{fitness}+@{riding}+@{riding_expertise}]]}}">Roll</button>
+                </div>
+            </div>
+            
+            <!-- CUNNING SKILLS -->
+            <div class="sheet-skill-category">
+                <h4>Cunning</h4>
+                <div class="sheet-skill">
+                    <label>Deception:</label>
+                    <input type="number" name="attr_deception" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_deception_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_deception_total" value="(@{cunning}+@{deception}+@{deception_expertise})">
+                    <button type="roll" name="roll_deception" value="&{template:default} {{name=@{character_name} - Deception}} {{result=[[1d20+@{cunning}+@{deception}+@{deception_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Roguecraft:</label>
+                    <input type="number" name="attr_roguecraft" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_roguecraft_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_roguecraft_total" value="(@{cunning}+@{roguecraft}+@{roguecraft_expertise})">
+                    <button type="roll" name="roll_roguecraft" value="&{template:default} {{name=@{character_name} - Roguecraft}} {{result=[[1d20+@{cunning}+@{roguecraft}+@{roguecraft_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Stealth:</label>
+                    <input type="number" name="attr_stealth" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_stealth_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_stealth_total" value="(@{cunning}+@{stealth}+@{stealth_expertise})">
+                    <button type="roll" name="roll_stealth" value="&{template:default} {{name=@{character_name} - Stealth}} {{result=[[1d20+@{cunning}+@{stealth}+@{stealth_expertise}]]}}">Roll</button>
+                </div>
+            </div>
+            
+            <!-- REASON SKILLS -->
+            <div class="sheet-skill-category">
+                <h4>Reason</h4>
+                <div class="sheet-skill">
+                    <label>Artifice:</label>
+                    <input type="number" name="attr_artifice" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_artifice_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_artifice_total" value="(@{reason}+@{artifice}+@{artifice_expertise})">
+                    <button type="roll" name="roll_artifice" value="&{template:default} {{name=@{character_name} - Artifice}} {{result=[[1d20+@{reason}+@{artifice}+@{artifice_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Appraise:</label>
+                    <input type="number" name="attr_appraise" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_appraise_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_appraise_total" value="(@{reason}+@{appraise}+@{appraise_expertise})">
+                    <button type="roll" name="roll_appraise" value="&{template:default} {{name=@{character_name} - Appraise}} {{result=[[1d20+@{reason}+@{appraise}+@{appraise_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Common K.:</label>
+                    <input type="number" name="attr_common_knowledge" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_common_knowledge_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_common_knowledge_total" value="(@{reason}+@{common_knowledge}+@{common_knowledge_expertise})">
+                    <button type="roll" name="roll_common_knowledge" value="&{template:default} {{name=@{character_name} - Common Knowledge}} {{result=[[1d20+@{reason}+@{common_knowledge}+@{common_knowledge_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Flight:</label>
+                    <input type="number" name="attr_flight" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_flight_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_flight_total" value="(@{reason}+@{flight}+@{flight_expertise})">
+                    <button type="roll" name="roll_flight" value="&{template:default} {{name=@{character_name} - Flight}} {{result=[[1d20+@{reason}+@{flight}+@{flight_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>History:</label>
+                    <input type="number" name="attr_history" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_history_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_history_total" value="(@{reason}+@{history}+@{history_expertise})">
+                    <button type="roll" name="roll_history" value="&{template:default} {{name=@{character_name} - History}} {{result=[[1d20+@{reason}+@{history}+@{history_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Magic:</label>
+                    <input type="number" name="attr_magic" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_magic_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_magic_total" value="(@{reason}+@{magic}+@{magic_expertise})">
+                    <button type="roll" name="roll_magic" value="&{template:default} {{name=@{character_name} - Magic}} {{result=[[1d20+@{reason}+@{magic}+@{magic_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Medicine:</label>
+                    <input type="number" name="attr_medicine" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_medicine_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_medicine_total" value="(@{reason}+@{medicine}+@{medicine_expertise})">
+                    <button type="roll" name="roll_medicine" value="&{template:default} {{name=@{character_name} - Medicine}} {{result=[[1d20+@{reason}+@{medicine}+@{medicine_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Religion:</label>
+                    <input type="number" name="attr_religion" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_religion_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_religion_total" value="(@{reason}+@{religion}+@{religion_expertise})">
+                    <button type="roll" name="roll_religion" value="&{template:default} {{name=@{character_name} - Religion}} {{result=[[1d20+@{reason}+@{religion}+@{religion_expertise}]]}}">Roll</button>
+                </div>
+            </div>
+            
+            <!-- AWARENESS SKILLS -->
+            <div class="sheet-skill-category">
+                <h4>Awareness</h4>
+                <div class="sheet-skill">
+                    <label>Animal H.:</label>
+                    <input type="number" name="attr_animal_husbandry" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_animal_husbandry_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_animal_husbandry_total" value="(@{awareness}+@{animal_husbandry}+@{animal_husbandry_expertise})">
+                    <button type="roll" name="roll_animal_husbandry" value="&{template:default} {{name=@{character_name} - Animal Husbandry}} {{result=[[1d20+@{awareness}+@{animal_husbandry}+@{animal_husbandry_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Insight:</label>
+                    <input type="number" name="attr_insight" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_insight_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_insight_total" value="(@{awareness}+@{insight}+@{insight_expertise})">
+                    <button type="roll" name="roll_insight" value="&{template:default} {{name=@{character_name} - Insight}} {{result=[[1d20+@{awareness}+@{insight}+@{insight_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Perception:</label>
+                    <input type="number" name="attr_perception" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_perception_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_perception_total" value="(@{awareness}+@{perception}+@{perception_expertise})">
+                    <button type="roll" name="roll_perception" value="&{template:default} {{name=@{character_name} - Perception}} {{result=[[1d20+@{awareness}+@{perception}+@{perception_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Survival:</label>
+                    <input type="number" name="attr_survival" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_survival_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_survival_total" value="(@{awareness}+@{survival}+@{survival_expertise})">
+                    <button type="roll" name="roll_survival" value="&{template:default} {{name=@{character_name} - Survival}} {{result=[[1d20+@{awareness}+@{survival}+@{survival_expertise}]]}}">Roll</button>
+                </div>
+            </div>
+            
+            <!-- PRESENCE SKILLS -->
+            <div class="sheet-skill-category">
+                <h4>Presence</h4>
+                <div class="sheet-skill">
+                    <label>Art:</label>
+                    <input type="number" name="attr_art" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_art_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_art_total" value="(@{presence}+@{art}+@{art_expertise})">
+                    <button type="roll" name="roll_art" value="&{template:default} {{name=@{character_name} - Art}} {{result=[[1d20+@{presence}+@{art}+@{art_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Intimidation:</label>
+                    <input type="number" name="attr_intimidation" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_intimidation_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_intimidation_total" value="(@{presence}+@{intimidation}+@{intimidation_expertise})">
+                    <button type="roll" name="roll_intimidation" value="&{template:default} {{name=@{character_name} - Intimidation}} {{result=[[1d20+@{presence}+@{intimidation}+@{intimidation_expertise}]]}}">Roll</button>
+                </div>
+                <div class="sheet-skill">
+                    <label>Negotiation:</label>
+                    <input type="number" name="attr_negotiation" value="0">
+                    <span>+</span>
+                    <input type="number" name="attr_negotiation_expertise" value="0" placeholder="Exp">
+                    <input type="hidden" name="attr_negotiation_total" value="(@{presence}+@{negotiation}+@{negotiation_expertise})">
+                    <button type="roll" name="roll_negotiation" value="&{template:default} {{name=@{character_name} - Negotiation}} {{result=[[1d20+@{presence}+@{negotiation}+@{negotiation_expertise}]]}}">Roll</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SHEET WORKERS -->
+<script type="text/worker">
+    // Listen for changes to stats that affect derived values
+    on("change:toughness change:power change:agility change:focus change:fitness change:cunning change:reason change:awareness change:presence change:equipment_value_passive change:equipment_value_active change:equipment_penalty change:hp_bonus change:mp_bonus sheet:opened", function() {
+        getAttrs(["toughness", "power", "agility", "focus", "fitness", "cunning", "reason", "awareness", "presence", "equipment_value_passive", "equipment_value_active", "equipment_penalty", "hp_bonus", "mp_bonus", "npc_mode"], function(values) {
+            // Check if in NPC mode - if yes, don't auto-calculate
+            if (values.npc_mode == "1") {
+                return;
+            }
+            let toughness = parseInt(values.toughness) || 0;
+            let power = parseInt(values.power) || 0;
+            let agility = parseInt(values.agility) || 0;
+            let focus = parseInt(values.focus) || 0;
+            let fitness = parseInt(values.fitness) || 0;
+            let cunning = parseInt(values.cunning) || 0;
+            let reason = parseInt(values.reason) || 0;
+            let awareness = parseInt(values.awareness) || 0;
+            let presence = parseInt(values.presence) || 0;
+            let equipValuePassive = parseInt(values.equipment_value_passive) || 0;
+            let equipValueActive = parseInt(values.equipment_value_active) || 0;
+            let equipPenalty = parseInt(values.equipment_penalty) || 0;
+            let hpBonus = parseInt(values.hp_bonus) || 0;
+            let mpBonus = parseInt(values.mp_bonus) || 0;
+            
+            // Equipment penalty affects all Agility-derived stats
+            let effectiveAgility = Math.max(0, agility - equipPenalty);
+            
+            let hp_max = (toughness * 5) + 20 + hpBonus;
+            let mana_max = power + 6 + mpBonus;
+            let rp_max = effectiveAgility + 2;
+            let initiative = effectiveAgility;
+            let evasion = effectiveAgility + 7;
+            
+            // Ensure guard and other values are always integers, rounded down
+            let guard = Math.floor(equipValuePassive + (toughness / 2));
+            // block uses active only, not passive
+            let block = Math.floor(toughness + equipValueActive);
+            let dodge = Math.floor(15 + (effectiveAgility * 2));
+            let potency = Math.floor(10 + focus);
+            
+            // Create an object to hold all the attributes we want to set
+            let attributes = {
+                hp_max: hp_max,
+                mana_max: mana_max,
+                rp_max: rp_max,
+                initiative: initiative,
+                evasion: evasion,
+                guard: guard,
+                save_bonus: toughness,
+                potency: potency,
+                dodge_value: dodge,
+                block_value: block
+            };
+            
+            // FITNESS SKILLS
+            getAttrs(["acrobatics", "acrobatics_expertise", "athletics", "athletics_expertise", "riding", "riding_expertise"], function(skillValues) {
+                attributes["acrobatics_total"] = Math.floor(fitness + (parseInt(skillValues.acrobatics) || 0) + (parseInt(skillValues.acrobatics_expertise) || 0) - equipPenalty);
+                attributes["athletics_total"] = Math.floor(fitness + (parseInt(skillValues.athletics) || 0) + (parseInt(skillValues.athletics_expertise) || 0) - equipPenalty);
+                attributes["riding_total"] = Math.floor(fitness + (parseInt(skillValues.riding) || 0) + (parseInt(skillValues.riding_expertise) || 0) - equipPenalty);
+                
+                // CUNNING SKILLS
+                getAttrs(["deception", "deception_expertise", "roguecraft", "roguecraft_expertise", "stealth", "stealth_expertise"], function(cunningValues) {
+                    attributes["deception_total"] = Math.floor(cunning + (parseInt(cunningValues.deception) || 0) + (parseInt(cunningValues.deception_expertise) || 0));
+                    attributes["roguecraft_total"] = Math.floor(cunning + (parseInt(cunningValues.roguecraft) || 0) + (parseInt(cunningValues.roguecraft_expertise) || 0));
+                    attributes["stealth_total"] = Math.floor(cunning + (parseInt(cunningValues.stealth) || 0) + (parseInt(cunningValues.stealth_expertise) || 0));
+                    
+                    // REASON SKILLS
+                    getAttrs(["artifice", "artifice_expertise", "appraise", "appraise_expertise", "common_knowledge", "common_knowledge_expertise", 
+                             "flight", "flight_expertise", "history", "history_expertise", "magic", "magic_expertise", 
+                             "medicine", "medicine_expertise", "religion", "religion_expertise"], function(reasonValues) {
+                        attributes["artifice_total"] = Math.floor(reason + (parseInt(reasonValues.artifice) || 0) + (parseInt(reasonValues.artifice_expertise) || 0));
+                        attributes["appraise_total"] = Math.floor(reason + (parseInt(reasonValues.appraise) || 0) + (parseInt(reasonValues.appraise_expertise) || 0));
+                        attributes["common_knowledge_total"] = Math.floor(reason + (parseInt(reasonValues.common_knowledge) || 0) + (parseInt(reasonValues.common_knowledge_expertise) || 0));
+                        attributes["flight_total"] = Math.floor(reason + (parseInt(reasonValues.flight) || 0) + (parseInt(reasonValues.flight_expertise) || 0));
+                        attributes["history_total"] = Math.floor(reason + (parseInt(reasonValues.history) || 0) + (parseInt(reasonValues.history_expertise) || 0));
+                        attributes["magic_total"] = Math.floor(reason + (parseInt(reasonValues.magic) || 0) + (parseInt(reasonValues.magic_expertise) || 0));
+                        attributes["medicine_total"] = Math.floor(reason + (parseInt(reasonValues.medicine) || 0) + (parseInt(reasonValues.medicine_expertise) || 0));
+                        attributes["religion_total"] = Math.floor(reason + (parseInt(reasonValues.religion) || 0) + (parseInt(reasonValues.religion_expertise) || 0));
+                        
+                        // AWARENESS SKILLS
+                        getAttrs(["animal_husbandry", "animal_husbandry_expertise", "insight", "insight_expertise", 
+                                "perception", "perception_expertise", "survival", "survival_expertise"], function(awarenessValues) {
+                            attributes["animal_husbandry_total"] = Math.floor(awareness + (parseInt(awarenessValues.animal_husbandry) || 0) + (parseInt(awarenessValues.animal_husbandry_expertise) || 0));
+                            attributes["insight_total"] = Math.floor(awareness + (parseInt(awarenessValues.insight) || 0) + (parseInt(awarenessValues.insight_expertise) || 0));
+                            attributes["perception_total"] = Math.floor(awareness + (parseInt(awarenessValues.perception) || 0) + (parseInt(awarenessValues.perception_expertise) || 0));
+                            attributes["survival_total"] = Math.floor(awareness + (parseInt(awarenessValues.survival) || 0) + (parseInt(awarenessValues.survival_expertise) || 0));
+                            
+                            // PRESENCE SKILLS
+                            getAttrs(["art", "art_expertise", "intimidation", "intimidation_expertise", 
+                                    "negotiation", "negotiation_expertise"], function(presenceValues) {
+                                attributes["art_total"] = Math.floor(presence + (parseInt(presenceValues.art) || 0) + (parseInt(presenceValues.art_expertise) || 0));
+                                attributes["intimidation_total"] = Math.floor(presence + (parseInt(presenceValues.intimidation) || 0) + (parseInt(presenceValues.intimidation_expertise) || 0));
+                                attributes["negotiation_total"] = Math.floor(presence + (parseInt(presenceValues.negotiation) || 0) + (parseInt(presenceValues.negotiation_expertise) || 0));
+                                
+                                // Now set all attributes at once
+                                setAttrs(attributes);
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    // Additional listener for changes to skill values
+    on("change:acrobatics change:acrobatics_expertise change:athletics change:athletics_expertise change:riding change:riding_expertise " +
+       "change:deception change:deception_expertise change:roguecraft change:roguecraft_expertise change:stealth change:stealth_expertise " +
+       "change:artifice change:artifice_expertise change:appraise change:appraise_expertise change:common_knowledge change:common_knowledge_expertise " +
+       "change:flight change:flight_expertise change:history change:history_expertise change:magic change:magic_expertise " +
+       "change:medicine change:medicine_expertise change:religion change:religion_expertise " +
+       "change:animal_husbandry change:animal_husbandry_expertise change:insight change:insight_expertise " +
+       "change:perception change:perception_expertise change:survival change:survival_expertise " +
+       "change:art change:art_expertise change:intimidation change:intimidation_expertise " +
+       "change:negotiation change:negotiation_expertise", function(eventInfo) {
+        // Extract the skill name from the event
+        const skillName = eventInfo.sourceAttribute.split("_expertise")[0];
+        let attrToGet = ["fitness", "cunning", "reason", "awareness", "presence", "equipment_penalty", "npc_mode"];
+        
+        // Add the skill and expertise values
+        attrToGet.push(skillName);
+        attrToGet.push(`${skillName}_expertise`);
+        
+        getAttrs(attrToGet, function(values) {
+            // Check if in NPC mode - if yes, don't auto-calculate
+            if (values.npc_mode == "1") {
+                return;
+            }
+            let fitness = parseInt(values.fitness) || 0;
+            let cunning = parseInt(values.cunning) || 0;
+            let reason = parseInt(values.reason) || 0;
+            let awareness = parseInt(values.awareness) || 0;
+            let presence = parseInt(values.presence) || 0;
+            let equipPenalty = parseInt(values.equipment_penalty) || 0;
+            
+            let skillValue = parseInt(values[skillName]) || 0;
+            let expertiseValue = parseInt(values[`${skillName}_expertise`]) || 0;
+            
+            let subStat = 0;
+            let totalValue = 0;
+            
+            // Determine which sub-stat to use based on the skill
+            if (["acrobatics", "athletics", "riding"].includes(skillName)) {
+                subStat = fitness;
+                // Apply equipment penalty to fitness skills
+                totalValue = subStat + skillValue + expertiseValue - equipPenalty;
+            } else if (["deception", "roguecraft", "stealth"].includes(skillName)) {
+                subStat = cunning;
+                totalValue = subStat + skillValue + expertiseValue;
+            } else if (["artifice", "appraise", "common_knowledge", "flight", "history", "magic", "medicine", "religion"].includes(skillName)) {
+                subStat = reason;
+                totalValue = subStat + skillValue + expertiseValue;
+            } else if (["animal_husbandry", "insight", "perception", "survival"].includes(skillName)) {
+                subStat = awareness;
+                totalValue = subStat + skillValue + expertiseValue;
+            } else if (["art", "intimidation", "negotiation"].includes(skillName)) {
+                subStat = presence;
+                totalValue = subStat + skillValue + expertiseValue;
+            }
+            
+            // Update the total
+            let update = {};
+            update[`${skillName}_total`] = Math.floor(totalValue);
+            setAttrs(update);
+        });
+    });
+    
+    // Handle weapon special rules and enchantments
+    on("change:repeating_weapons:weapon_group change:repeating_weapons:weapon_size change:repeating_weapons:weapon_power_bonus change:repeating_weapons:weapon_focus_bonus sheet:opened", function(eventInfo) {
+        const sourceAttribute = eventInfo.sourceAttribute || "";
+        const weaponId = sourceAttribute.includes("repeating_weapons") ? 
+            sourceAttribute.split("_")[2] : 
+            eventInfo.triggerName && eventInfo.triggerName.includes("repeating_weapons") ? 
+                eventInfo.triggerName.split("_")[2] : null;
+        
+        if (weaponId) {
+            const prefix = `repeating_weapons_${weaponId}_`;
+            
+            getAttrs([`${prefix}weapon_group`, `${prefix}weapon_size`, `${prefix}weapon_power_bonus`, `${prefix}weapon_focus_bonus`], function(values) {
+                const group = values[`${prefix}weapon_group`] || "none";
+                const size = values[`${prefix}weapon_size`] || "light";
+                const powerBonus = parseInt(values[`${prefix}weapon_power_bonus`]) || 0;
+                const focusBonus = parseInt(values[`${prefix}weapon_focus_bonus`]) || 0;
+                
+                let specialRules = "";
+                let lightBonus = "";
+                let heavyBonus = "";
+                let heavyDice = (size === "heavy" && (!["crossbow", "musket", "pistol", "shotgun", "sniper", "wand", "thrown", "missile", "bow"].includes(group))) ? "2d8" : "2d6";
+                
+                // Set weapon special rules based on group
+                switch(group) {
+                    case "small":
+                        specialRules = "Hidden Weapon: Draw for 0 AP. First attack gains Trick Attack.";
+                        break;
+                    case "polearm":
+                        specialRules = "Polearm: +5ft range, threatened range 5-10ft.";
+                        break;
+                    case "light_sword":
+                        specialRules = "Nimble: Move 5ft after light attack.";
+                        break;
+                    case "longsword":
+                        specialRules = "Versatile: Treat as light or heavy. Heavy: +1d4 damage on crit.";
+                        if (size === "heavy") {
+                            heavyBonus = "+1d4[crit]";
+                        }
+                        break;
+                    case "dueling":
+                        specialRules = "Dueling: After 3 attacks on same enemy, get 0 RP Dodge/Block vs. them.";
+                        break;
+                    case "axe":
+                        specialRules = "Wild Swing: Deal 2/4 dmg on miss (light/heavy).";
+                        break;
+                    case "bludgeoning":
+                        specialRules = "Hollow Blow: Always deal at least 2/4 dmg (light/heavy).";
+                        break;
+                    case "katana":
+                        specialRules = "Keen: Crit on 19-20.";
+                        break;
+                    case "heavy_blade":
+                        specialRules = "Overpower: +1d4/+1d12 damage on crit (light/heavy).";
+                        lightBonus = "+1d4[crit]";
+                        heavyBonus = "+1d12[crit]";
+                        break;
+                    case "thrown":
+                        specialRules = "Thrown: 20ft/40ft range (light/heavy).";
+                        break;
+                    case "missile":
+                        specialRules = "Set of Missiles: 30ft range, draw for 0 AP, stealth attacks.";
+                        break;
+                    case "bow":
+                        specialRules = "Bow: 240ft range, height advantage vs. cover.";
+                        break;
+                    case "crossbow":
+                        specialRules = "Armor Pierce: -" + (size === "light" ? "1" : "2") + " Guard within 30ft.";
+                        break;
+                    case "musket":
+                        specialRules = "Armor Pierce: -1 Guard.";
+                        break;
+                    case "pistol":
+                        specialRules = "Two-Handed Grip: Draw for 0 AP, +1/+2 accuracy with two hands.";
+                        break;
+                    case "shotgun":
+                        specialRules = "Shotgun: " + (size === "light" ? "15ft" : "30ft") + " range, use in melee.";
+                        break;
+                    case "sniper":
+                        specialRules = "Snipe: 720ft range, +10 Perception beyond 60ft.";
+                        break;
+                    case "thread_dagger":
+                        specialRules = "Wired Weapon: Draw/sheath for 0 AP, throw 20ft, recall for 0 AP.";
+                        break;
+                    case "wand":
+                        specialRules = "Magic Blast: Change damage type for 0 AP.";
+                        break;
+                    case "staff":
+                        specialRules = "Push: Spend 1 mana on hit to push 5ft.";
+                        break;
+                    case "sling":
+                        specialRules = "Giant Killer: Cannot be dual wielded with another sling. You can overcharge your basic heavy attack for 1 AP to deal 6 extra damage.";
+                        break;
+                    case "chainsaw":
+                        specialRules = "Let it rip: After making an attack with this weapon, subsequent attacks with this weapon deal +1 damage. You may consume 1 shell to empower the artifice until the end of your turn. While empowered, the damage bonus of subsequent attacks stacks.";
+                        break;
+                    case "whip":
+                        specialRules = "Whip Crack: You gain +5ft range on your weapon attacks. Weapon attacks made at exactly 10ft range gain +1 damage. Your threatened range is still 5ft.";
+                        break;
+                    case "scythe":
+                        specialRules = "Sweeping Arc: Once per turn, when you make a Heavy attack against a target, you may make a Light attack against a different enemy within your range.";
+                        break;
+                    case "pickaxe":
+                        specialRules = "Superior Armor Pierce: Treats the enemy's Guard as if it was 1 lower.";
+                        break;
+                    case "lance":
+                        specialRules = "Charger Weapon: Can only be used while mounted. Counts as a polearm weapon and has all the same properties of one. Attacks made with this weapon after moving at least 20ft deal maximum damage instead of rolling.";
+                        break;
+                    case "giant_scissors":
+                        specialRules = "Shearing: You deal +1 damage against unarmored targets.";
+                        break;
+                    default:
+                        specialRules = "";
+                }
+                
+                // Add weapon bonus info to special rules if applicable
+                if (powerBonus > 0) {
+                    specialRules += (specialRules ? " " : "") + `+${powerBonus} Power.`;
+                }
+                if (focusBonus > 0) {
+                    specialRules += (specialRules ? " " : "") + `+${focusBonus} Focus.`;
+                }
+                
+                // Update attributes
+                setAttrs({
+                    [`${prefix}weapon_special_rules`]: specialRules,
+                    [`${prefix}weapon_light_bonus`]: lightBonus,
+                    [`${prefix}weapon_heavy_bonus`]: heavyBonus,
+                    [`${prefix}weapon_heavy_dice`]: heavyDice,
+                });
+            });
+        }
+    });
+    
+    // Additional listener for changes to NPC mode toggle
+    on("change:npc_mode sheet:opened", function() {
+        getAttrs(["npc_mode"], function(values) {
+            // If turning off NPC mode, recalculate all derived values
+            if (values.npc_mode != "1") {
+                // Trigger the main stats change listener to recalculate everything
+                setAttrs({
+                    toughness: getAttrByName("character_id", "toughness")
+                });
+            }
+        });
+    });
+    
+    // Dark mode toggle handler
+    on("change:dark_mode sheet:opened", function() {
+        getAttrs(["dark_mode"], function(values) {
+            console.log("Dark mode: " + values.dark_mode);
+            // Ensure checkbox at the top of the sheet has the same value as the visible checkbox
+            // This keeps both checkboxes in sync
+            setAttrs({
+                dark_mode: values.dark_mode
+            });
+        });
+    });
+</script>

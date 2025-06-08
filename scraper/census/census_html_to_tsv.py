@@ -6,17 +6,17 @@ import argparse
 from bs4 import BeautifulSoup, Tag
 
 # Column indices (0-based) from the HTML <td> elements
-COL_PLAYER_NAME = 0
-COL_ADVENTURER_NAME = 1
-COL_SPIRIT_CORE = 2
-COL_RACE = 3
-COL_SUB_RACE = 4
-COL_TIER_1_CLASS = 5
-COL_TIER_2_CLASS = 6
-COL_TIER_3_CLASS = 7
-COL_EXPEDITION_DEPARTURE = 10
-COL_EXPEDITION_RETURN = 12
-COL_IP_LOCKOUT_END = 13
+COL_PLAYER_NAME = 0         # Column A: Player
+COL_ADVENTURER_NAME = 1     # Column B: Adventurer Name  
+COL_SPIRIT_CORE = 3         # Column C: Spirit Core (skip freezebar at index 2)
+COL_RACE = 4               # Column D: Race
+COL_SUB_RACE = 5           # Column E: Sub-Race  
+COL_TIER_1_CLASS = 6       # Column F: Tier 1 Class
+COL_TIER_2_CLASS = 7       # Column G: Tier 2 Class
+COL_TIER_3_CLASS = 8       # Column H: Tier 3 Class
+COL_EXPEDITION_DEPARTURE = 10  # Column K: Expedition Departure (not 11)
+COL_EXPEDITION_RETURN = 12     # Column L: Expedition Return  
+COL_IP_LOCKOUT_END = 13        # Column M: IP Lockout End
 
 MAX_EXPECTED_CELL_INDEX = max(
     COL_PLAYER_NAME, COL_ADVENTURER_NAME, COL_SPIRIT_CORE, COL_RACE,
@@ -33,7 +33,7 @@ def get_cell_text(cell_tag: Tag | None) -> str:
     if not cell_tag:
         return ""
     span_s6 = cell_tag.find('span', class_='s6')
-    if span_s6 and span_s6.string:
+    if span_s6:
         text_content = span_s6.get_text(separator=' ', strip=True)
     else:
         text_content = cell_tag.get_text(separator=' ', strip=True)

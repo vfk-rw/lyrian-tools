@@ -1,0 +1,486 @@
+.sheet-wrapper {
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
+/* HEADER */
+.sheet-header {
+    text-align: center;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+}
+
+.sheet-header h1 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 4px 0;
+}
+
+.sheet-character-name {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    width: 60% !important;
+    margin: 0 auto !important;
+    display: block;
+}
+
+/* CHARACTER INFO */
+.sheet-char-info-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.sheet-char-info-col {
+    width: 48%;
+}
+
+.sheet-char-info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.sheet-char-info-row label {
+    width: 100px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.sheet-char-info-row input {
+    flex: 1;
+}
+
+/* SECTIONS */
+.sheet-section {
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+.sheet-section h3 {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+}
+
+/* STAT TABLES - More compact */
+.sheet-stat-tables {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.sheet-stat-table {
+    width: 48%;
+}
+
+.sheet-stat-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sheet-stat-table table td {
+    padding: 2px;
+}
+
+.sheet-stat-table input[type="number"] {
+    width: 36px;
+    text-align: center;
+}
+
+.sheet-stat-table label {
+    font-weight: bold;
+    text-align: right;
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+}
+
+/* COMBAT STATS - More compact grid */
+.sheet-equipment-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.sheet-equipment-row > div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.sheet-equipment-row label {
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.sheet-combat-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.sheet-combat-stats div {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.sheet-combat-stats label {
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.sheet-combat-stats input[type="number"] {
+    width: 32px;
+    text-align: center;
+}
+
+.sheet-combat-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+}
+
+
+
+/* WEAPONS - More compact */
+.sheet-weapon-row {
+    padding: 4px;
+    margin-bottom: 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Hide default Roll20 modify controls for weapons */
+.repcontainer .repitem .repcontrol {
+    display: none !important;
+}
+
+/* Make sure our custom delete button is visible */
+.repcontainer .repitem .btn.repcontrol_del {
+    display: inline-block !important;
+}
+
+.sheet-weapon-header {
+    display: flex; /* changed from grid */
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.sheet-name-and-bonuses {
+    flex-grow: 1;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.sheet-name-and-bonuses > input[type="text"][name$="_weapon_name"] {
+    flex-grow: 1;
+    min-width: 80px;
+}
+
+.sheet-inline-bonuses {
+    margin-left: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.sheet-weapon-header > select.sheet-dropdown-narrow {
+    flex-shrink: 0;
+}
+
+.sheet-weapon-buttons {
+    display: flex; /* changed from grid */
+    gap: 3px;
+    margin: 5px 0;
+    flex-wrap: nowrap;
+}
+
+.sheet-weapon-header input[type="text"] {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.sheet-weapon-enchant {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+}
+
+.sheet-weapon-bonus {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 48%;
+}
+
+.sheet-weapon-bonus label {
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.sheet-weapon-bonus input[type="number"] {
+    width: 36px;
+    text-align: center;
+}
+
+.sheet-weapon-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin: 4px 0;
+}
+
+.sheet-weapon-special-div {
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.sheet-weapon-special {
+    font-weight: bold;
+}
+
+/* SKILLS - More compact grid */
+.sheet-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+/* Reason skills have more entries, give them more space */
+.sheet-skill-category:nth-child(3) {
+    grid-column: span 2;
+}
+
+.sheet-skill-category h4 {
+    font-weight: bold;
+    margin: 0 0 4px 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2px;
+    font-size: 13px;
+}
+
+.sheet-skill {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 2px;
+}
+
+.sheet-skill label {
+    width: 70px;
+    font-size: 11px;
+}
+
+.sheet-skill input[type="number"] {
+    width: 26px;
+    text-align: center;
+}
+
+.sheet-skill button[type="roll"] {
+    padding: 1px 3px;
+    font-size: 10px;
+}
+
+/* BUTTONS */
+button[type="roll"] {
+    text-align: center;
+    font-size: 11px;
+    padding: 2px 4px;
+}
+
+/* GENERAL INPUTS */
+input, select, textarea {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+input[disabled] {
+    cursor: not-allowed;
+    background-color: #f0f0f0;
+}
+
+/* MODE TOGGLES */
+.sheet-mode-toggles {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.sheet-npc-mode-toggle, .sheet-dark-mode-toggle {
+    margin: 0 5px;
+}
+
+/* DARK MODE STYLING */
+.sheet-rolltemplate-default .sheet-container {
+    border-color: #444 !important;
+    background-color: #222 !important;
+}
+
+.sheet-rolltemplate-default .sheet-header {
+    background-color: #333 !important;
+    color: #ddd !important;
+}
+
+.sheet-rolltemplate-default .sheet-content {
+    background-color: #222 !important;
+    color: #ddd !important;
+}
+
+/* When dark mode is checked, apply dark theme */
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper,
+input[name="attr_dark_mode"]:checked ~ div {
+    background-color: #222 !important;
+    color: #ddd !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper .sheet-section {
+    border-color: #444 !important;
+    background-color: #333 !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper .sheet-section h3 {
+    color: #fff !important;
+    border-bottom-color: #555 !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper input,
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper select,
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper textarea {
+    background-color: #333 !important;
+    color: #ddd !important;
+    border-color: #555 !important;
+}
+
+/* Dark mode button styling - base styles for all buttons */
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper button {
+    background-color: #222 !important; /* Even darker for regular buttons */
+    color: #ddd !important;
+    border-color: #555 !important;
+}
+
+/* Standard buttons (not roll buttons) should have clear white text in dark mode */
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper button.btn {
+    background-color: #222 !important;
+    color: #000000 !important;
+    border-color: #444 !important;
+}
+
+/* Roll buttons styling in dark mode - needs higher specificity */
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper button[type="roll"] {
+    background-color: #333 !important;
+    color: #000000 !important;
+    text-shadow: 0px 0px 2px #000000 !important;
+    border-color: #555 !important;
+}
+
+/* Button hover states in dark mode */
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper button:hover {
+    background-color: #333 !important;
+}
+
+/* Roll button hover states in dark mode */
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper button[type="roll"]:hover {
+    background-color: #444 !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper input:focus,
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper select:focus,
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper textarea:focus {
+    border-color: #777 !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper input[disabled] {
+    background-color: #2a2a2a !important;
+    color: #888 !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper .sheet-weapon-row {
+    border-color: #444 !important;
+    background-color: #333 !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper .sheet-skill-category h4 {
+    border-bottom-color: #444 !important;
+}
+
+/* Additional dark mode styling for elements */
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper .sheet-note {
+    color: #bbb !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper .sheet-skill-category {
+    color: #ddd !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper .sheet-weapon-special-div {
+    color: #bbb !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper .repcontainer .repitem {
+    background-color: #333 !important;
+    border-color: #555 !important;
+}
+
+/* Special styling for the Delete button in repeating sections */
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper .repcontainer .repcontrol_del {
+    background-color: #331111 !important; /* Dark red background */
+    color: #ffffff !important;
+    border-color: #662222 !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ .sheet-wrapper .repcontainer .repcontrol_del:hover {
+    background-color: #662222 !important; /* Darker red on hover */
+}
+
+/* Roll templates - ensure roll results also follow dark theme */
+.sheet-rolltemplate-default {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+input[name="attr_dark_mode"]:checked ~ div .sheet-rolltemplate-default .sheet-container {
+    border-color: #444 !important;
+    background-color: #222 !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ div .sheet-rolltemplate-default .sheet-header {
+    background-color: #333 !important;
+    color: #ddd !important;
+}
+
+input[name="attr_dark_mode"]:checked ~ div .sheet-rolltemplate-default .sheet-content {
+    background-color: #222 !important;
+    color: #ddd !important;
+}
+
+/* This targets the roll button contents when displayed in a roll template */
+.sheet-rolltemplate-default .inlinerollresult {
+    background-color: #000000 !important; /* Roll20's default roll background */
+    color: #000000 !important; /* Make sure roll numbers are black in default mode */
+}
+
+/* Ensure dice rolls are readable in dark mode by giving them a consistent background */
+input[name="attr_dark_mode"]:checked ~ div .sheet-rolltemplate-default .inlinerollresult {
+    background-color: #000000 !important; /* Keep Roll20's default roll background */
+    color: #000000 !important; /* Keep roll numbers black for contrast */
+} 

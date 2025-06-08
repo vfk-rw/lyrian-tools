@@ -8,23 +8,28 @@ CREATE TABLE census_character_classes(character_id INT REFERENCES census_charact
 -- insert census_classes
 INSERT INTO census_classes(name,tier) VALUES('Acolyte',1);
 INSERT INTO census_classes(name,tier) VALUES('Adventurer',1);
+INSERT INTO census_classes(name,tier) VALUES('Aeromancer',2);
 INSERT INTO census_classes(name,tier) VALUES('Aetherie',2);
 INSERT INTO census_classes(name,tier) VALUES('Alchemeister',2);
 INSERT INTO census_classes(name,tier) VALUES('Alchemist',1);
 INSERT INTO census_classes(name,tier) VALUES('Alkahest',2);
 INSERT INTO census_classes(name,tier) VALUES('Animal Summoner',2);
+INSERT INTO census_classes(name,tier) VALUES('Anti-Mage',2);
 INSERT INTO census_classes(name,tier) VALUES('Archer',2);
 INSERT INTO census_classes(name,tier) VALUES('Bard',2);
 INSERT INTO census_classes(name,tier) VALUES('Battle Mage',2);
 INSERT INTO census_classes(name,tier) VALUES('Berserker',2);
 INSERT INTO census_classes(name,tier) VALUES('Blacksmith',1);
 INSERT INTO census_classes(name,tier) VALUES('Bloodbinder',2);
+INSERT INTO census_classes(name,tier) VALUES('Botanist',2);
 INSERT INTO census_classes(name,tier) VALUES('Carpenter',1);
 INSERT INTO census_classes(name,tier) VALUES('Cavalier',1);
 INSERT INTO census_classes(name,tier) VALUES('Chronomancer',2);
 INSERT INTO census_classes(name,tier) VALUES('Cryomancer',2);
+INSERT INTO census_classes(name,tier) VALUES('Cultivator',2);
 INSERT INTO census_classes(name,tier) VALUES('Curse Knight',2);
 INSERT INTO census_classes(name,tier) VALUES('Electromancer',2);
+INSERT INTO census_classes(name,tier) VALUES('Electromaster',3);
 INSERT INTO census_classes(name,tier) VALUES('Faerie Light Eyes',2);
 INSERT INTO census_classes(name,tier) VALUES('Farmer',1);
 INSERT INTO census_classes(name,tier) VALUES('Fighter',1);
@@ -32,6 +37,7 @@ INSERT INTO census_classes(name,tier) VALUES('Flash Star Blade Style',2);
 INSERT INTO census_classes(name,tier) VALUES('Forager',1);
 INSERT INTO census_classes(name,tier) VALUES('Forgemaster',2);
 INSERT INTO census_classes(name,tier) VALUES('Geomancer',2);
+INSERT INTO census_classes(name,tier) VALUES('Great Knight',2);
 INSERT INTO census_classes(name,tier) VALUES('Guardian',2);
 INSERT INTO census_classes(name,tier) VALUES('Gunslinger',2);
 INSERT INTO census_classes(name,tier) VALUES('Hussar',2);
@@ -57,6 +63,7 @@ INSERT INTO census_classes(name,tier) VALUES('Shieldwarden',2);
 INSERT INTO census_classes(name,tier) VALUES('Spellblade',2);
 INSERT INTO census_classes(name,tier) VALUES('Summoner',3);
 INSERT INTO census_classes(name,tier) VALUES('Sword Paladin',2);
+INSERT INTO census_classes(name,tier) VALUES('Tactician',2);
 INSERT INTO census_classes(name,tier) VALUES('Thief',2);
 INSERT INTO census_classes(name,tier) VALUES('Timberwright',2);
 INSERT INTO census_classes(name,tier) VALUES('Time Thief',2);
@@ -66,10 +73,10 @@ INSERT INTO census_classes(name,tier) VALUES('Windbringer',2);
 
 -- insert characters and relationships
 -- row 1
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('AShyMoth','Nia Prys','https://docs.google.com/spreadsheets/d/1qb04pLDsZNuq50Sq-tDp2sUJpRIi5afb/edit?usp=sharing&ouid=106887388069059291818&rtpof=true&sd=true',1645,'Chimera','Phoenix',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Onmyoji','Pyromancer');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('AShyMoth','Nia Prys','https://docs.google.com/spreadsheets/d/1qb04pLDsZNuq50Sq-tDp2sUJpRIi5afb/edit?usp=sharing&ouid=106887388069059291818&rtpof=true&sd=true',2345,'Chimera','Phoenix','5/8/2025','6/6/2025','6/10/2025') RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Onmyoji','Pyromancer','Faerie Light Eyes');
 -- row 2
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Sabbrewolf','Ash Avernus','https://docs.google.com/spreadsheets/d/1ojX3sOukLoDXhOyUPabbprUQRNBciDra/edit?usp=sharing&ouid=108812373200107551665&rtpof=true&sd=true',1900,'Fae','Salamander',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Sabbrewolf','Ash Avernus','https://docs.google.com/spreadsheets/d/1ojX3sOukLoDXhOyUPabbprUQRNBciDra/edit?usp=sharing&ouid=108812373200107551665&rtpof=true&sd=true',2300,'Fae','Salamander','5/8/2025','6/6/2025','6/10/2025') RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Blacksmith','Forgemaster');
 -- row 3
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Teraval','Teraval Pinecone','https://docs.google.com/spreadsheets/d/1OAo0nb-a4Gi-oCY4gYOWqhOUsuPYArMs/edit?usp=sharing&ouid=102568176268617888070&rtpof=true&sd=true',1515,'Fae','Pixie',NULL,NULL,NULL) RETURNING id)
@@ -78,10 +85,10 @@ INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id F
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Wizard of Poop','Woop','https://docs.google.com/spreadsheets/d/1lnh239BRRX4YFt2ltThsAPHjQSAIPQSH/edit?usp=sharing&ouid=112716252140882953803&rtpof=true&sd=true',1515,'Human','Light',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Ranger','Acolyte');
 -- row 5
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Beetle Swallower','Beetle Swallower','https://docs.google.com/spreadsheets/d/12kjQvC2vCo7Zym4zb8uU9zkZJ1916ejj/edit?usp=sharing&ouid=112970099103478293972&rtpof=true&sd=true',1600,'Human','Divine Protection',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Curse Knight','Necromancer','Summoner','Berserker');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Beetle Swallower','Beetle Swallower','https://docs.google.com/spreadsheets/d/12kjQvC2vCo7Zym4zb8uU9zkZJ1916ejj/edit?usp=sharing&ouid=112970099103478293972&rtpof=true&sd=true',1825,'Human','Divine Protection',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Curse Knight','Necromancer','Summoner','Berserker');
 -- row 6
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('UnluckySloth','Marcus Wi Dalen','https://docs.google.com/spreadsheets/d/1yKhTGvSvMDE569LG621mA91FMUXz2L7z/edit?usp=sharing&ouid=117534912672684778244&rtpof=true&sd=true',1330,'Demon','Wi',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('UnluckySloth','Marcus Wi Dalen','https://docs.google.com/spreadsheets/d/1yKhTGvSvMDE569LG621mA91FMUXz2L7z/edit?usp=sharing&ouid=117534912672684778244&rtpof=true&sd=true',1355,'Demon','Wi',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Ranger','Rogue','Saboteur');
 -- row 7
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Jay Spicer (Jack)','Jack','https://docs.google.com/spreadsheets/d/1W9Recbod6VIKgXjvor54IdeV65mzblbx/edit?usp=sharing&ouid=101021334597903651840&rtpof=true&sd=true',1390,'Demon','Lir',NULL,NULL,NULL) RETURNING id)
@@ -97,19 +104,19 @@ WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Rogue','Faerie Light Eyes');
 -- row 11
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Cali Bell (Feyrod)','Calia Bell','https://docs.google.com/spreadsheets/d/12iLp2YqzT4TEe_pD3jVJrgfBhnRh9KXq/edit?usp=drivesdk&ouid=118431694302210274652&rtpof=true&sd=true',1515,'Chimera','Rabbitfolk','5/12/2025','5/21/2025','5/27/2025') RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Martial Artist','Rogue','Thief');
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Martial Artist','Rogue','Adventurer','Thief');
 -- row 12
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Vim N Vigor','Pádraigín','https://docs.google.com/spreadsheets/d/1GqFLGCo-NuRpn5bmwd_AXZ96fcmmes8K/edit?usp=sharing&ouid=109138423568570624496&rtpof=true&sd=true',1375,'Fae','Gnome',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Rogue','Chronomancer');
 -- row 13
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Drogan Helmut','Drogan Helmut','https://docs.google.com/spreadsheets/d/1-QS3C7LX-UCZivvptGanaj1yh27QjlIy/edit?usp=sharing&ouid=104161008957320152258&rtpof=true&sd=true',1500,'Fae','Dullahan','5/1/2025','5/15/2025','5/20/2025') RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Drogan Helmut','Drogan Helmut','https://docs.google.com/spreadsheets/d/1-QS3C7LX-UCZivvptGanaj1yh27QjlIy/edit?usp=sharing&ouid=104161008957320152258&rtpof=true&sd=true',2000,'Fae','Dullahan','5/1/2025','5/15/2025','5/20/2025') RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Adventurer','Guardian');
 -- row 14
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Gein Hemlocke','Gein Hemlock','https://docs.google.com/spreadsheets/d/1CZ51ihYgL3y_LOLqF4hJ5gCur51is2ne/edit?gid=1997331408#gid=1997331408',2045,'Chimera','Slimefolk',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Lancer');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Gein Hemlocke','Gein Hemlock','https://docs.google.com/spreadsheets/d/1CZ51ihYgL3y_LOLqF4hJ5gCur51is2ne/edit?gid=1997331408#gid=1997331408',2070,'Chimera','Slimefolk',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Transmuter','Miner','Lancer');
 -- row 15
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Evenfall (Charre)','Evenfall','https://docs.google.com/spreadsheets/d/1yrDfMcsEzIFWPxEs7zTKxhub-lgLK45A/edit?usp=sharing&ouid=105313069251360998695&rtpof=true&sd=true',1635,'Fae','Willo Wisp',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Rogue','Faerie Light Eyes');
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Rogue','Faerie Light Eyes','Tactician');
 -- row 16
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Ruofei (Ando)','Ruofei','https://docs.google.com/spreadsheets/d/1kUKpaOaprz06bKnSEQLCwPT_DBkZp3qp/edit?usp=sharing&ouid=101529830063024907324&rtpof=true&sd=true',1000,'Chimera','Red Pandafolk',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Martial Artist','Gunslinger');
@@ -120,14 +127,14 @@ INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id F
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Ekkehard Adalwolf (Volki)','Ekkehard Adalwolf','https://docs.google.com/spreadsheets/d/1wW4hlXMfdCK_HZak2GiCpHRfPjsr7kqS0V72bK2x45M/edit?usp=sharing',1195,'Chimera','Wolf-folk',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Guardian');
 -- row 19
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Iru Alfo (Moleren)','Iru Alfo','https://docs.google.com/spreadsheets/d/1_js6-IAvFu_YU0HuvDs4uzQcitRMRXe0/edit?gid=1997331408#gid=1997331408',1890,'Youkai','Ancient Marionette','5/2/2025','5/28/2025','6/3/2025') RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Iru Alfo (Moleren)','Iru Alfo','https://docs.google.com/spreadsheets/d/1_js6-IAvFu_YU0HuvDs4uzQcitRMRXe0/edit?gid=1997331408#gid=1997331408',1810,'Youkai','Ancient Marionette','5/2/2025','5/28/2025','6/3/2025') RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Martial Artist','Ranger');
 -- row 20
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Buntaoo','Fuyuka Shimo','https://docs.google.com/spreadsheets/d/10Y8V6htFcTfB376VMgNmkd46xQgKCRxZ/edit?usp=sharing&ouid=101088453070518972549&rtpof=true&sd=true',2000,'Youkai','Yuki-onna','5/2/2025','5/28/2025','6/3/2025') RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Acolyte','Cryomancer','Geomancer');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Buntaoo','Fuyuka Shimo','https://docs.google.com/spreadsheets/d/10Y8V6htFcTfB376VMgNmkd46xQgKCRxZ/edit?usp=sharing&ouid=101088453070518972549&rtpof=true&sd=true',2050,'Youkai','Yuki-onna','5/2/2025','5/28/2025','6/3/2025') RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Acolyte','Carpenter','Cryomancer','Geomancer');
 -- row 21
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Zero Terminus (Rue)','Zero Terminus','https://docs.google.com/spreadsheets/d/1mOHejPVdEomUUHq04856H2kMwbiwHIRx/edit?usp=sharing&ouid=102703316609933324765&rtpof=true&sd=true',1665,'Human-Chimera','Phoenix',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Ranger','Rogue','Animal Summoner');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Zero Terminus (Rue)','Zero Terminus','https://docs.google.com/spreadsheets/d/1mOHejPVdEomUUHq04856H2kMwbiwHIRx/edit?usp=sharing&ouid=102703316609933324765&rtpof=true&sd=true',1765,'Human-Chimera','Phoenix',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Ranger','Rogue','Adventurer','Animal Summoner','Aetherie');
 -- row 22
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Phantomxz','Sarah','https://docs.google.com/spreadsheets/d/1u0vbL_gKOOCWjTkPmgZz4hxK5EW5B5t7/edit?gid=1997331408#gid=1997331408',1265,'Chimera','Centaur',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Martial Artist','Rogue','Cavalier');
@@ -135,44 +142,44 @@ INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id F
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Kita Ro-Ro (Azorinth)','Kita Ro-Ro','https://docs.google.com/spreadsheets/d/1u5sb8Qo2yhtxmKVSfUXGllXKyTENJVsO/edit?usp=sharing&ouid=111118343248048018516&rtpof=true&sd=true',1000,'Chimera','Dogfolk',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Guardian');
 -- row 24
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Shinraku','Shinraku','https://docs.google.com/spreadsheets/d/12uEV4okV3oKZGX_fDZ_obfk32z_GxP0v/edit?gid=1997331408#gid=1997331408',1420,'Youkai','Oni',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Shinraku','Shinraku','https://docs.google.com/spreadsheets/d/12uEV4okV3oKZGX_fDZ_obfk32z_GxP0v/edit?gid=1997331408#gid=1997331408',1490,'Youkai','Oni',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Alchemist','Alchemeister');
 -- row 25
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Rai (Alkavi)','Rai','https://docs.google.com/spreadsheets/d/1hR86tlPUVYx_Mk1ol1tXb2duFE-L9wv7/edit?usp=sharing&ouid=104187462070454197980&rtpof=true&sd=true',1820,'Youkai','Raijin',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Rai (Alkavi)','Rai','https://docs.google.com/spreadsheets/d/1hR86tlPUVYx_Mk1ol1tXb2duFE-L9wv7/edit?usp=sharing&ouid=104187462070454197980&rtpof=true&sd=true',1845,'Youkai','Raijin',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Blacksmith','Fighter','Rogue','Forgemaster');
 -- row 26
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Wahaha','Susie','https://docs.google.com/spreadsheets/d/12F862V_Pq84OV3fXpZ3L2P2YM8im5aR9/edit?usp=sharing&ouid=101100012439895691789&rtpof=true&sd=true',1390,'Youkai','Jiangshi',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Alchemist','Necromancer');
 -- row 27
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Elise (MyMemories3)','Elise Tamrei','https://docs.google.com/spreadsheets/d/1lbqYOOqu3prZRpoZr5XBjEqu0kHpegcv/edit?gid=1997331408#gid=1997331408',2020,'Fae','Gnome','5/2/2025','5/28/2025','6/3/2025') RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Faerie Light Eyes');
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Faerie Light Eyes','Aeromancer');
 -- row 28
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Draig','Draig','https://docs.google.com/spreadsheets/d/e/2PACX-1vRVZL1dBAIvyb5IqLj09Cqm3aQcIQsVpwPgEzMAjsqZT2VTjD2ZGBMjUeB5Qx4dIw/pubhtml',2035,'Human-Chimera','Phoenix',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Draig','Draig','https://docs.google.com/spreadsheets/d/e/2PACX-1vRVZL1dBAIvyb5IqLj09Cqm3aQcIQsVpwPgEzMAjsqZT2VTjD2ZGBMjUeB5Qx4dIw/pubhtml',2060,'Human-Chimera','Phoenix',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Rogue','Adventurer','Martial Artist','Ninja');
 -- row 29
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Icarus','Icarus','https://docs.google.com/spreadsheets/d/1Y0aTSQFeYDxXP_UHadCVMSj2zp8JRh-k9bu7y2Cv9gk/edit?gid=1910447226#gid=1910447226',1640,'Human','Divine Protection','5/1/2025','5/15/2025','5/20/2025') RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Bard','Shieldwarden');
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Shieldwarden','Onmyoji','Pyromancer');
 -- row 30
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Dogbert Wallmann','Dogbert Wallmann','https://docs.google.com/spreadsheets/d/1_aykjnSfgBQ2DFp5BtEkd6myvMeq3fgX/edit?gid=1997331408#gid=1997331408',1685,'Human-Chimera','Dogfolk',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Shield Paladin');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Dogbert Wallmann','Dogbert Wallmann','https://docs.google.com/spreadsheets/d/1_aykjnSfgBQ2DFp5BtEkd6myvMeq3fgX/edit?gid=1997331408#gid=1997331408',1705,'Human-Chimera','Dogfolk',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Adventurer','Shield Paladin','Guardian');
 -- row 31
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Avolthe Ar''Wrynfel (Dylons)','Avolthe Ar''Wrynfel','https://docs.google.com/spreadsheets/d/1EJzIozkUMOtv0ybZjiuF8UkvDRnzkT7U/edit?gid=1997331408#gid=1997331408',2005,'Demon','Ar',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Avolthe Ar''Wrynfel (Dylons)','Avolthe Ar''Wrynfel','https://docs.google.com/spreadsheets/d/1EJzIozkUMOtv0ybZjiuF8UkvDRnzkT7U/edit?gid=1997331408#gid=1997331408',2055,'Demon','Ar',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Bard','Chronomancer');
 -- row 32
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Turos Kensei','Leo Barrak','https://docs.google.com/spreadsheets/d/1lxtT1QTmiwZNfoa37l8F3AZASLov5hLn/edit?usp=sharing&ouid=113351362468564061511&rtpof=true&sd=true',1370,'Human','Divine Protection',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Turos Kensei','Leo Barrak','https://docs.google.com/spreadsheets/d/1lxtT1QTmiwZNfoa37l8F3AZASLov5hLn/edit?usp=sharing&ouid=113351362468564061511&rtpof=true&sd=true',1965,'Human','Divine Protection',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Acolyte','Adventurer','Fighter','Forager');
 -- row 33
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Zolong Duskblade','Zolong Duskblade','https://docs.google.com/spreadsheets/d/1dM8jz1B3DnmJ3eDO6YVzemt2jY914UeGm1Pc3FZCMPk/edit?usp=sharing',1100,'Fae','High Fae','5/12/2025','5/21/2025','5/27/2025') RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Zolong Duskblade','Zolong Duskblade','https://docs.google.com/spreadsheets/d/1dM8jz1B3DnmJ3eDO6YVzemt2jY914UeGm1Pc3FZCMPk/edit?usp=sharing',1700,'Fae','High Fae','5/12/2025','5/21/2025','5/27/2025') RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Rogue','Shadow Thief');
 -- row 34
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Sinner','"Bunny King" Maxis','https://docs.google.com/spreadsheets/d/1KwsWK0RAa9kVL5hkiYMXg7nCt1c6gyDL/edit?usp=sharing&ouid=107001843366624612417&rtpof=true&sd=true',1505,'Chimera','Rabbitfolk',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Acolyte','Battle Mage','Bloodbinder');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Sinner','"Bunny King" Maxis','https://docs.google.com/spreadsheets/d/1KwsWK0RAa9kVL5hkiYMXg7nCt1c6gyDL/edit?usp=sharing&ouid=107001843366624612417&rtpof=true&sd=true',1605,'Chimera','Rabbitfolk',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Acolyte','Fighter','Battle Mage','Bloodbinder');
 -- row 35
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Maunomau (Noar)','Noar','https://docs.google.com/spreadsheets/d/1v2_6uqWeUTcHBC1oJO93m_gBl_2upLw7/edit?usp=sharing&ouid=100349875529504309833&rtpof=true&sd=true',1400,'Human-Chimera','Dogfolk',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Bard','Shield Paladin');
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Bard','Shield Paladin','Anti-Mage');
 -- row 36
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Alaric Windhill (Taikanarri)','Alaric Windill','https://docs.google.com/spreadsheets/d/1dsOFX7YBZvpinXpqAdO3HBAWW1rzeVtd/edit?usp=sharing&ouid=100411381291678387259&rtpof=true&sd=true',1440,'Human','Divine Protection',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Windbringer','Sword Paladin','Battle Mage');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Alaric Windhill (Taikanarri)','Alaric Windill','https://docs.google.com/spreadsheets/d/1dsOFX7YBZvpinXpqAdO3HBAWW1rzeVtd/edit?usp=sharing&ouid=100411381291678387259&rtpof=true&sd=true',1815,'Human','Divine Protection',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Ranger','Windbringer','Sword Paladin','Battle Mage','Shield Paladin');
 -- row 37
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Emperor Jerod','Kuzo Yorita','https://docs.google.com/spreadsheets/d/1oTxvH4UBKkpGUzOdmzKU4UfQpDOmSd0x/edit?gid=294044971#gid=294044971',1000,'Youkai','Ancient Marionette',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Alchemist','Acolyte');
@@ -180,20 +187,20 @@ INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id F
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Vajra (mightygerm)','Vajra','https://docs.google.com/spreadsheets/d/1NQzLD5E7GzUlz7VdABewLZofzPMX-eDP/edit?gid=1997331408#gid=1997331408',1000,'Youkai','Raijin',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Electromancer','Battle Mage');
 -- row 39
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Garael Blanchweyld (PeasantKyr)','Garael Blanchweyld','https://docs.google.com/spreadsheets/d/1nZ3btPk5dfXlVl5e3_zzblg7Lsr-OVRuvpPnPq_V5Os/edit?gid=1997331408#gid=1997331408',1325,'Fae','Dullahan',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Garael Blanchweyld (PeasantKyr)','Garael Blanchweyld','https://docs.google.com/spreadsheets/d/1nZ3btPk5dfXlVl5e3_zzblg7Lsr-OVRuvpPnPq_V5Os/edit?gid=1997331408#gid=1997331408',1525,'Fae','Dullahan',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Shieldwarden');
 -- row 40
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Lunatic | Roslyn Reinhardt','Roslyn Reinhardt "Ros"','https://docs.google.com/spreadsheets/d/1Uzbpc6dqLzqya-VzJZ_ZRIlifiKnHg_X/edit?usp=sharing&ouid=115465355942803541036&rtpof=true&sd=true',1100,'Human','Divine Protection',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Adventurer','Acolyte','Shield Paladin');
 -- row 41
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Florentino','Finia Padfoot','https://docs.google.com/spreadsheets/d/1lvbm1HVZnltWn-BCNd_Rtrkb5TDDhjoC/edit?gid=1997331408#gid=1997331408',1640,'Chimera','Catfolk',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Florentino','Finia Padfoot','https://docs.google.com/spreadsheets/d/1lvbm1HVZnltWn-BCNd_Rtrkb5TDDhjoC/edit?gid=1997331408#gid=1997331408',1665,'Chimera','Catfolk',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Ranger','Acolyte','Shieldwarden');
 -- row 42
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Draco9889','Draco Kyrios','https://docs.google.com/spreadsheets/d/1cepzK9Ozhy__mn3WwtoNaKnMKaVC7Wfx/edit?gid=1997331408#gid=1997331408',1000,'Fae','Salamander',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Mage','Adventurer');
 -- row 43
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Aranea Kaminari (Day)','Aranea Kaminari','https://docs.google.com/spreadsheets/d/11jnau8uSoMt723ndZJG_PFR-0zS6_uIJDzwn422khQM/edit?usp=sharing',1400,'Youkai','Kitsune',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Electromancer');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Aranea Kaminari (Day)','Aranea Kaminari','https://docs.google.com/spreadsheets/d/1mipmPBPuvbSL8GaYKr40wb2J91QleYZq/edit?gid=1997331408#gid=1997331408',1500,'Youkai','Kitsune',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Electromancer','Electromaster');
 -- row 44
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Aoyama, Shiro (Mordivandros)','Shiro Aoyama','https://docs.google.com/spreadsheets/d/12r81xdASHuFZguOEbgDtgfGISpQapiYu/edit?usp=sharing&ouid=107540010604117561993&rtpof=true&sd=true',1225,'Youkai','Yuki-onna',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Martial Artist','Ranger','Cryomancer');
@@ -204,53 +211,53 @@ INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id F
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Hannah Suffolk (Velvet Crowe)','Hannah Suffolk','https://docs.google.com/spreadsheets/d/1lmDUJVYAb6NB_iWQEW4OpBEzzw__U1XL/edit?gid=1997331408#gid=1997331408',1300,'Chimera','Dogfolk',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Guardian');
 -- row 47
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Cendarion Ordir(Claw)','Cendarion Ordir','https://docs.google.com/spreadsheets/d/1vz4dHxdcSxHs_dyPVEYEfL9U1Y7iQlvM/edit?usp=sharing&ouid=111986131275884761407&rtpof=true&sd=true',1175,'Fae','Cait Sith',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Cendarion Ordir(Claw)','Cendarion Ordir','https://docs.google.com/spreadsheets/d/1vz4dHxdcSxHs_dyPVEYEfL9U1Y7iQlvM/edit?usp=sharing&ouid=111986131275884761407&rtpof=true&sd=true',1600,'Fae','Cait Sith','5/8/2025','6/6/2025','6/10/2025') RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Rogue','Ranger','Adventurer');
 -- row 48
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Leaflit','Queri','https://docs.google.com/spreadsheets/d/19c19pjdoyLGabkljTglQj79zCRech6Jm/edit?gid=95407551#gid=95407551',1880,'Fae','Pixie','5/2/2025','5/28/2025','6/3/2025') RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Alchemist','Transmuter','Fighter','Alkahest');
 -- row 49
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Kuroshiro (RognarB)','Kuroshiro','https://docs.google.com/spreadsheets/d/1CD5JXclbS5LAGobaZ5ZH50mfB6KUkgZz/edit?usp=sharing&ouid=101615191085713643468&rtpof=true&sd=true',1265,'Youkai','Kitsune','5/1/2025','5/15/2025','5/20/2025') RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Kuroshiro (RognarB)','Kuroshiro','https://docs.google.com/spreadsheets/d/1CD5JXclbS5LAGobaZ5ZH50mfB6KUkgZz/edit?usp=sharing&ouid=101615191085713643468&rtpof=true&sd=true',1390,'Youkai','Kitsune','5/1/2025','5/15/2025','5/20/2025') RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Rogue','Saboteur');
 -- row 50
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Gin Pakkun (ARC)','Gin Pakkun','https://docs.google.com/spreadsheets/d/1ewWCf7cuPKsBkbZ0qRiUmTVisvhHOVOS/edit?usp=sharing&ouid=114685559888350341393&rtpof=true&sd=true',1000,'Chimera','Dogfolk',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Cavalier','Fighter');
 -- row 51
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Bobo (Jack Slurpee)','Bobo','https://docs.google.com/spreadsheets/d/11m8LWzDIvC7tjDLKsoVP3YHbsQB02GP4/edit?usp=sharing&ouid=100275211249997859484&rtpof=true&sd=true',1015,'Youkai','Jiangshi','5/1/2025','5/15/2025','5/20/2025') RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Bobo (Jack Slurpee)','Bobo','https://docs.google.com/spreadsheets/d/1Zoza-2t2OKgoty1hPLXzX6HbfTX6Fweg/edit?gid=1997331408#gid=1997331408',1015,'Youkai','Jiangshi','5/1/2025','5/15/2025','5/20/2025') RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Acolyte','Shieldwarden');
 -- row 52
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Daimus D'' Phnom (mightygerm)','Daimus D'' Phnom','https://docs.google.com/spreadsheets/d/1N46iNXUJx-7qmoa0myRIRrb-3wILMHZu/edit?usp=sharing&ouid=113614747793717102959&rtpof=true&sd=true',1565,'Demon','D''',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Fighter','Spellblade');
 -- row 53
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Stout (invisi)','Stout Tou','https://docs.google.com/spreadsheets/d/e/2PACX-1vTPeg_Md6bbrpoBfp512jJ1ErXOH0PExs25M4RJaZt8X_AbZqsASOFyKMg_IVEpcA/pubhtml',1210,'Fae','Salamander',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Stout (invisi)','Stout Tou','https://docs.google.com/spreadsheets/d/e/2PACX-1vTPeg_Md6bbrpoBfp512jJ1ErXOH0PExs25M4RJaZt8X_AbZqsASOFyKMg_IVEpcA/pubhtml',1335,'Fae','Salamander',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Acolyte','Bard');
 -- row 54
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Takeshi Satoshi (John_Softpaw)','Takeshi Satoshi','https://docs.google.com/spreadsheets/d/1FiFGUCoCIULrx9Id61xaIUwTffB9vFsnYlk-7OQuJt4/edit?usp=sharing',1100,'Youkai','Oni',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Takeshi Satoshi (John_Softpaw)','Takeshi Satoshi','https://docs.google.com/spreadsheets/d/1FiFGUCoCIULrx9Id61xaIUwTffB9vFsnYlk-7OQuJt4/edit?usp=sharing',1225,'Youkai','Oni',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Martial Artist','Wave Palm Style');
 -- row 55
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('BLiNX','Hiscibus','https://docs.google.com/spreadsheets/d/1bQrCg3ZjG_NGqM-wYGlnMuU9x6LNPu_I/edit?usp=sharing&ouid=112753295979445814324&rtpof=true&sd=true',1050,'Fae','Dullahan','5/12/2025','5/21/2025','5/27/2025') RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('BLiNX','Hiscibus','https://docs.google.com/spreadsheets/d/1bQrCg3ZjG_NGqM-wYGlnMuU9x6LNPu_I/edit?usp=sharing&ouid=112753295979445814324&rtpof=true&sd=true',1220,'Fae','Dullahan','5/12/2025','5/21/2025','5/27/2025') RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Adventurer','Fighter','Shield Paladin');
 -- row 56
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Ryugo','Tenshi Mura','https://docs.google.com/spreadsheets/d/1XWNItf7QhLjTCqW2ftEfiMAoHOduKmGn/edit?gid=1997331408#gid=1997331408',1050,'Youkai','Jiangshi',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Adventurer','Iaido Style');
 -- row 57
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Synric','Synric Er''Ceidryn','https://docs.google.com/spreadsheets/d/1lFMEgace6mJBoo4_4kk3VQ29anUbeF5o/edit?gid=1997331408#gid=1997331408',1150,'Fae','Salamander',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Synric','Synric Er''Ceidryn','https://docs.google.com/spreadsheets/d/1lFMEgace6mJBoo4_4kk3VQ29anUbeF5o/edit?gid=1997331408#gid=1997331408',1490,'Fae','Salamander',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Mage','Martial Artist','Ranger','Spellblade');
 -- row 58
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Morialis_','Mori Shinsaka','https://docs.google.com/spreadsheets/d/1oyMacgT54LZW6q2Qdw77mDZ2ck3iceOi_ChdZuJwAXQ/edit?gid=1562682898#gid=1562682898',1125,'Youkai','Kitsune',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Morialis_','Mori Shinsaka','https://docs.google.com/spreadsheets/d/1oyMacgT54LZW6q2Qdw77mDZ2ck3iceOi_ChdZuJwAXQ/edit?gid=1562682898#gid=1562682898',1350,'Youkai','Kitsune',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Rogue','Time Thief');
 -- row 59
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('takurov','Vadi Strongholm','https://docs.google.com/spreadsheets/d/1wrfi_7e-tZwHI7Ux2i6GKFE8HRE97tps/edit?gid=1997331408#gid=1997331408',1225,'Human','​',NULL,NULL,NULL) RETURNING id)
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('takurov','Vadi Strongholm','https://docs.google.com/spreadsheets/d/1wrfi_7e-tZwHI7Ux2i6GKFE8HRE97tps/edit?gid=1997331408#gid=1997331408',1200,'Human','​',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Sword Paladin');
 -- row 60
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Jckun','Teo','https://docs.google.com/spreadsheets/d/1orgtsOZfprIB236XpMkM0uHXbWU8PsbG/edit?gid=1997331408#gid=1997331408',900,'Fae','Dullahan',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Cavalier');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Jckun','Teo','https://docs.google.com/spreadsheets/d/1orgtsOZfprIB236XpMkM0uHXbWU8PsbG/edit?gid=1997331408#gid=1997331408',1450,'Fae','Dullahan',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Cavalier','Adventurer');
 -- row 61
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Mr Carter','Nicholas Vi Morrow','https://docs.google.com/spreadsheets/d/1hywxBMNzGJZPsD9GNDZCYdnW1Nz-gFKF/edit?gid=1997331408#gid=1997331408',1065,'Demon','Vi',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Alchemist','Alchemeister');
 -- row 62
-WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Ayra','Rin','https://docs.google.com/spreadsheets/d/1okJw7brAsfytu9NNQLiPwDz5iQEoDJH0/edit?gid=1997331408#gid=1997331408',950,'Youkai','Tengu',NULL,NULL,NULL) RETURNING id)
-INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Farmer');
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Ayra','Rin','https://docs.google.com/spreadsheets/d/1okJw7brAsfytu9NNQLiPwDz5iQEoDJH0/edit?gid=1997331408#gid=1997331408',1530,'Youkai','Tengu',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Farmer','Fighter','Cultivator');
 -- row 63
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('truthsm','Orianne Carroll','https://docs.google.com/spreadsheets/d/1lUcmDLaQAyXqN75rTn_4lbXq1u5XJC4g/edit?gid=1997331408#gid=1997331408',1150,'Chimera','Rabbitfolk','5/12/2025','5/21/2025','5/27/2025') RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Transmuter','Bloodbinder');
@@ -287,3 +294,15 @@ INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id F
 -- row 74
 WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Ragulmadon','Crassus Wrightson','https://docs.google.com/spreadsheets/d/1UPIFpceDEj3CmknWPVMG9rGssCRTlE1j/edit?usp=drivesdk&ouid=102692799981417481776&rtpof=true&sd=true',1170,'Human','​',NULL,NULL,NULL) RETURNING id)
 INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Carpenter','Timberwright');
+-- row 75
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Zaela','Victoria Headstrong','https://docs.google.com/spreadsheets/d/1UC0Y1neMtH8sAo1xtBT7XjZwF_LcWHSY/edit?gid=1997331408#gid=1997331408',1035,'Fae','Dullahan',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Cavalier','Great Knight');
+-- row 76
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Hel','Nyanari Pinecone','https://docs.google.com/spreadsheets/d/1SGC8iZy1QVqxiEM_6aDcCfOo9E4z6Xgs/edit?gid=1997331408#gid=1997331408',1705,'Faerie-Chimera','Catfolk',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Acolyte','Forager','Botanist');
+-- row 77
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Hissrick Varny','Hissrick Varny','https://docs.google.com/spreadsheets/d/1qm-PDhfv8AQRhPDDEYL1FIEotqaDla0fqoQ76WMJTYk/edit?gid=1997331408#gid=1997331408',1060,'Chimera','Lamiafolk',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Alchemist','Curse Knight');
+-- row 78
+WITH c AS (INSERT INTO census_characters(player_name,adventurer_name,adventurer_url,spirit_core_current,race,sub_race,expedition_departure,expedition_return,ip_lockout_end) VALUES('Rags','Barnaby "Bumbles" Stoutwwhistle','https://docs.google.com/spreadsheets/d/1QIXAj3L0Zbp32HcLEmhMzW3Pc-9tnT-Z/edit?gid=1997331408#gid=1997331408',1285,'Human','Health',NULL,NULL,NULL) RETURNING id)
+INSERT INTO census_character_classes(character_id,class_id) SELECT c.id, cl.id FROM c, census_classes cl WHERE cl.name IN ('Fighter','Ranger','Shield Paladin');
