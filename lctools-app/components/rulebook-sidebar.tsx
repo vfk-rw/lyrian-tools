@@ -15,13 +15,15 @@ import {
   Sun,
   Moon,
   GraduationCap,
-  BookOpen
+  BookOpen,
+  ChevronDown
 } from "lucide-react"
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { UserProfileDialog } from "./user-profile-dialog";
 import { useTheme } from "next-themes";
 import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils";
 
 import {
   Collapsible,
@@ -43,6 +45,19 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+
+interface TocItem {
+  id: string
+  title: string
+  level: number
+  children?: TocItem[]
+}
+
+interface RulebookSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  toc: TocItem[]
+  activeSection: string
+  onSectionClick: (id: string) => void
+}
 
 const navItems = [
   {
@@ -97,7 +112,7 @@ const navItems = [
   {
     title: "Gathering",
     url: "/gathering",
-    icon: Hammer, // You can choose a more appropriate icon if desired
+    icon: Hammer,
   },
   {
     title: "Mirane",
@@ -135,7 +150,7 @@ const navItems = [
   },
 ];
 
-export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function RulebookSidebar({ toc, activeSection, onSectionClick, ...props }: RulebookSidebarProps) {
   const { data: session, status } = useSession();
   const user = session?.user;
   const { setTheme, resolvedTheme } = useTheme();
@@ -145,6 +160,54 @@ export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar
   React.useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Debug logging
+  React.useEffect(() => {
+    console.log("RulebookSidebar received TOC:", toc.length, "items");
+  }, [toc]);
+
+  const renderTocItem = (item: TocItem, depth = 0) => {
+    const hasChildren = item.children && item.children.length > 0
+    const isActive = activeSection === item.id
+    
+    return (
+      <div key={item.id} className={cn("text-sm", depth > 0 && "ml-3")}>
+        {hasChildren ? (
+          <Collapsible defaultOpen={depth < 2}>
+            <div className="flex items-center">
+              <CollapsibleTrigger 
+                className="flex items-center gap-1 hover:text-primary transition-colors py-1 px-1 rounded-md"
+              >
+                <ChevronDown className="h-3 w-3 transition-transform group-data-[state=open]:rotate-180" />
+              </CollapsibleTrigger>
+              <button
+                className={cn(
+                  "flex-1 text-left hover:text-primary transition-colors py-1 px-1 rounded-md truncate text-xs",
+                  isActive && "text-primary font-medium bg-accent"
+                )}
+                onClick={() => onSectionClick(item.id)}
+              >
+                {item.title}
+              </button>
+            </div>
+            <CollapsibleContent className="ml-2">
+              {item.children?.map(child => renderTocItem(child, depth + 1))}
+            </CollapsibleContent>
+          </Collapsible>
+        ) : (
+          <button
+            className={cn(
+              "block w-full text-left hover:text-primary transition-colors py-1 px-2 rounded-md truncate text-xs",
+              isActive && "text-primary font-medium bg-accent"
+            )}
+            onClick={() => onSectionClick(item.id)}
+          >
+            {item.title}
+          </button>
+        )}
+      </div>
+    )
+  }
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -163,7 +226,7 @@ export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar
                 <Collapsible
                   key={item.title}
                   asChild
-                  defaultOpen={true}
+                  defaultOpen={item.title === "Rulebook" ? false : true}
                   className="group/collapsible"
                 >
                   <SidebarMenuItem>
@@ -203,6 +266,16 @@ export function LCToolsSidebar({ ...props }: React.ComponentProps<typeof Sidebar
             ))}
           </SidebarMenu>
         </SidebarGroup>
+        
+        {/* Rulebook Table of Contents */}
+        {toc.length > 0 && (
+          <SidebarGroup>
+            <SidebarGroupLabel>Rulebook Contents</SidebarGroupLabel>
+            <div className="px-2 space-y-1">
+              {toc.map(item => renderTocItem(item))}
+            </div>
+          </SidebarGroup>
+        )}
       </SidebarContent>
       <SidebarFooter>
         <div className="px-2 flex items-center justify-center space-x-2">

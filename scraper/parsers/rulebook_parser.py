@@ -296,13 +296,27 @@ class RulebookParser(BaseParser):
         result = self.parse_file(str(rulebook_file), str(meta_file) if meta_file.exists() else None)
         
         if result and result.get("content"):
+            # Determine actual version from directory path if version is "latest" or "unknown"
+            version = result.get('version', 'unknown')
+            if version in ['latest', 'unknown']:
+                # Try to extract version from the path structure
+                # Look for pattern like "/scraped_html/0.10.2/rulebook/"
+                path_parts = html_path.parts
+                for i, part in enumerate(path_parts):
+                    if part == 'scraped_html' and i + 1 < len(path_parts):
+                        potential_version = path_parts[i + 1]
+                        if re.match(r'^\d+\.\d+(\.\d+)?$', potential_version):
+                            version = potential_version
+                            logger.info(f"Detected version {version} from path structure")
+                            break
+            
             # Save as markdown
             output_path = self.output_dir / "rulebook.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
             
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(f"# Lyrian Chronicles Rulebook\n\n")
-                f.write(f"*Version: {result.get('version', 'unknown')}*\n\n")
+                f.write(f"*Version: {version}*\n\n")
                 f.write(result["content"])
             
             logger.info(f"Saved rulebook to {output_path}")
