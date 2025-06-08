@@ -13,3 +13,6 @@ scraper/test_output
 
 # Google Sheets export config
 scraper/.sheets_config.json
+
+# YAML to Supabase migration output
+scraper/yaml2supabase/output

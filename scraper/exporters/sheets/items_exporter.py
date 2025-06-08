@@ -71,7 +71,7 @@ class ItemsExporter(BaseSheetsExporter):
             str(item_data.get('fuel_usage', '') or ''),
             str(item_data.get('crafting_points', '') or ''),
             str(item_data.get('crafting_type', '') or ''),
-            self._truncate_text(item_data.get('description', ''), 500),
+            self._truncate_text(item_data.get('description', ''), 30000),
             item_data.get('image_url', '')
         ]
     
@@ -139,7 +139,7 @@ class ItemsExporter(BaseSheetsExporter):
             str(item_data.get('fuel_usage', '') or ''),
             str(item_data.get('crafting_points', '') or ''),
             str(item_data.get('crafting_type', '') or ''),
-            self._truncate_text(item_data.get('description', ''), 500),
+            self._truncate_text(item_data.get('description', ''), 30000),
             item_data.get('image_url', '')
         ]
     

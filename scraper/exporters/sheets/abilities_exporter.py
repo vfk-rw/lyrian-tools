@@ -67,7 +67,7 @@ class AbilitiesExporter(BaseSheetsExporter):
             ability_data.get('type', ''),
             self._format_list(ability_data.get('keywords', [])),
             ability_data.get('range', ''),
-            self._truncate_text(ability_data.get('description', ''), 1000)
+            self._truncate_text(ability_data.get('description', ''), 30000)
         ]
         
         # Requirements
@@ -238,7 +238,7 @@ class AbilitiesExporter(BaseSheetsExporter):
             ability_data.get('id', ''),
             ability_data.get('name', ''),
             self._format_list(ability_data.get('keywords', [])),
-            self._truncate_text(ability_data.get('description', ''), 1000)
+            self._truncate_text(ability_data.get('description', ''), 30000)
         ]
         
         if ability_type == "true_ability":

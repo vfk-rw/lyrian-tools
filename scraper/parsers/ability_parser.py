@@ -580,26 +580,51 @@ class AbilityParser(BaseParser):
         # Save all abilities in different formats
         if all_abilities:
             if output_format == "yaml":
-                # Save individual YAML files for each ability
+                # Handle duplicates by preferring true abilities over key abilities
+                abilities_by_id = {}
+                
+                # First pass: collect all abilities by ID
                 for ability in all_abilities:
                     ability_id = ability.get('id', 'unknown')
+                    ability_type = ability.get('type', 'unknown')
+                    
+                    if ability_id in abilities_by_id:
+                        existing_type = abilities_by_id[ability_id].get('type', 'unknown')
+                        logger.info(f"Duplicate ability ID '{ability_id}': existing={existing_type}, new={ability_type}")
+                        
+                        # Prefer true_ability over key_ability for duplicates
+                        if ability_type == 'true_ability' and existing_type == 'key_ability':
+                            logger.info(f"  Replacing key_ability with true_ability for '{ability_id}'")
+                            abilities_by_id[ability_id] = ability
+                        elif existing_type == 'true_ability' and ability_type == 'key_ability':
+                            logger.info(f"  Keeping true_ability over key_ability for '{ability_id}'")
+                            # Keep existing true_ability, don't replace
+                        else:
+                            logger.warning(f"  Unexpected duplicate types for '{ability_id}': {existing_type} vs {ability_type}")
+                            abilities_by_id[ability_id] = ability  # Use the newer one
+                    else:
+                        abilities_by_id[ability_id] = ability
+                
+                # Second pass: save deduplicated abilities
+                for ability_id, ability in abilities_by_id.items():
                     output_path = self.to_yaml(ability, ability_id)
                     if output_path:
                         results[ability_id] = output_path
                 
-                # Also save a combined index
+                # Also save a combined index using deduplicated abilities
+                final_abilities = list(abilities_by_id.values())
                 index_data = {
-                    'total_count': len(all_abilities),
+                    'total_count': len(final_abilities),
                     'version': self.version,
                     'generated_at': self._get_timestamp(),
-                    'by_type': self._count_by_type(all_abilities),
+                    'by_type': self._count_by_type(final_abilities),
                     'abilities': [
                         {
                             'id': a.get('id'),
                             'name': a.get('name'),
                             'type': a.get('type'),
                             'keywords': a.get('keywords', [])
-                        } for a in all_abilities
+                        } for a in final_abilities
                     ]
                 }
                 index_path = self.to_yaml(index_data, "abilities_index")

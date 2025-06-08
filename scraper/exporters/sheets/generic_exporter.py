@@ -75,7 +75,7 @@ class GenericExporter(BaseSheetsExporter):
             race_data.get('id', ''),
             race_data.get('name', ''),
             race_data.get('type', ''),
-            self._truncate_text(race_data.get('description', ''), 400),
+            self._truncate_text(race_data.get('description', ''), 30000),
             race_data.get('image_url', ''),
             "; ".join(other_benefits),
             "; ".join(abilities)
@@ -111,7 +111,7 @@ class GenericExporter(BaseSheetsExporter):
             data.get('id', ''),
             data.get('name', ''),
             data.get('type', ''),
-            self._truncate_text(data.get('description', ''), 500),
+            self._truncate_text(data.get('description', ''), 30000),
             data.get('variable_value', ''),
             self._format_list(data.get('related_keywords', []))
         ]
@@ -129,7 +129,7 @@ class GenericExporter(BaseSheetsExporter):
             data.get('name', ''),
             str(data.get('cost', '')),
             self._format_list(data.get('requirements', [])),
-            self._truncate_text(data.get('description', ''), 500)
+            self._truncate_text(data.get('description', ''), 30000)
         ]
     
     def export_monsters(self, sheet_name: str = "Monsters"):
@@ -160,8 +160,8 @@ class GenericExporter(BaseSheetsExporter):
             str(data.get('evasion', '')),
             str(data.get('guard', '')),
             str(data.get('movement', '')),
-            self._truncate_text(data.get('lore', ''), 300),
-            self._truncate_text(data.get('strategy', ''), 300),
+            self._truncate_text(data.get('lore', ''), 30000),
+            self._truncate_text(data.get('strategy', ''), 30000),
             "; ".join(abilities)
         ]
     
@@ -181,7 +181,7 @@ class GenericExporter(BaseSheetsExporter):
             data.get('type', ''),
             self._format_list(data.get('keywords', [])),
             data.get('range', ''),
-            self._truncate_text(data.get('description', ''), 500),
+            self._truncate_text(data.get('description', ''), 30000),
             self._format_list(data.get('requirements', [])),
             str(costs.get('ap', '')),
             str(costs.get('rp', ''))

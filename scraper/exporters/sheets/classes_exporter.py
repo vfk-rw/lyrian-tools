@@ -72,8 +72,8 @@ class ClassesExporter(BaseSheetsExporter):
             class_data.get('secondary_role', ''),
             self._format_requirements(class_data.get('requirements', [])),
             class_data.get('image_url', ''),
-            self._truncate_text(class_data.get('description', ''), 1000),
-            self._truncate_text(class_data.get('guide', ''), 1000)
+            self._truncate_text(class_data.get('description', ''), 30000),
+            self._truncate_text(class_data.get('guide', ''), 30000)
         ]
         
         # Extract progression abilities by level (levels 1-8)
